@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 				 
-<mapper namepace="com.peterpet.demo.module.codegroup.CodeGroupDao">
+<mapper namespace="com.peterpet.demo.module.codegroup.CodeGroupDao">
 
 	<resultMap type="com.peterpet.demo.module.codegroup.CodeGroupDto" id="resultMapObj"></resultMap>
 	
-	<seect id="selectList" resultMap="resultMapObj">
+	<select id="selectList" resultMap="resultMapObj">
 		SELECT
 			cogrSeq,
 			cogrName,
@@ -20,4 +20,67 @@
 		FROM
 			codegroup
 	</select>
+	
+	<select id="selectOne" resultMap="resultMapObj">
+		SELECT
+			cogrSeq,
+			cogrName,
+			cogrNameEng,
+			cogrUseFlag,
+			cogrOrder,
+			cogrDisc,
+			cogrRegDate,
+			cogrModDate,
+			cogrDelFlag,
+			cogrNum
+		FROM
+			codegroup
+		WHERE 1=1
+			AND cogrSeq = #{cogrSeq}
+	</select>
+	
+	<select id="selectMaxSeq" resultMap="resultMapObj">
+		SELECT
+			cogrSeq,
+			cogrName,
+			cogrNameEng,
+			cogrUseFlag,
+			cogrOrder,
+			cogrDisc,
+			cogrRegDate,
+			cogrModDate,
+			cogrDelFlag,
+			cogrNum
+		FROM
+			codegroup
+		WHERE 1=1
+			AND cogrSeq = (SELECT MAX(cogrSeq) FROM codegroup)
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO codegroup (
+			cogrName,
+			cogrNameEng,
+			cogrUseFlag,
+			cogrOrder,
+			cogrDisc,
+			cogrRegDate,
+			cogrModDate,
+			cogrDelFlag,
+			cogrNum
+		) value (
+			#{cogrName},
+			#{cogrNameEng},
+			#{cogrUseFlag},
+			#{cogrOrder},
+			#{cogrDisc},
+			#{cogrRegDate},
+			#{cogrModDate},
+			0,
+			#{cogrNum}
+		)
+		<selectKey resultType="String" keyProperty="cogrSeq" order="AFTER">
+			SELECT last_insert_id()
+		</selectKey>
+	</insert>
 </mapper>

@@ -8,4 +8,7 @@ import org.springframework.stereotype.Repository;
 public interface CodeGroupDao {
 
 	public List<CodeGroupDto> selectList();
+	public CodeGroupDto selectOne(CodeGroupDto codeGroupDto);
+	public int insert(CodeGroupDto codeGroupDto);
+	public CodeGroupDto selectMaxSeq(CodeGroupDto codeGroupDto);
 }

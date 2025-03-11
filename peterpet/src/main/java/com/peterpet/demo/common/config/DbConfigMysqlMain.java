@@ -16,38 +16,38 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@MapperScan(basePackages="com.peterpet.demo.*"     						//#-->	dao 찾는 영역
-,sqlSessionFactoryRef="sqlSessionFactoryMysqlMain")         	//#-->
+@MapperScan(basePackages="com.peterpet.demo.*"     						//#-->	*dao 찾는 영역
+        ,sqlSessionFactoryRef="sqlSessionFactoryMysqlMain")         	//#-->
 @EnableTransactionManagement
 
 public class DbConfigMysqlMain {
 
 	final String datasourceName = "datasourceMysqlMain";                //#-->
-	final String prefixName = "spring.datasource.mysql.main";           //#-->
-	final String SqlSessionFactoryName = "sqlSessionFactoryMysqlMain";  //#-->
-	final String SqlSessionName = "sqlSessionMysqlMain";                //#-->
+    final String prefixName = "spring.datasource.mysql.main";           //#-->
+    final String SqlSessionFactoryName = "sqlSessionFactoryMysqlMain";  //#-->
+    final String SqlSessionName = "sqlSessionMysqlMain";                //#-->
 
-	@Primary
-	@Bean(name=datasourceName)
-	@ConfigurationProperties(prefix=prefixName)
-	public DataSource dataSource() {
-	return DataSourceBuilder.create().build();
-	}
+    @Primary
+    @Bean(name=datasourceName)
+    @ConfigurationProperties(prefix=prefixName)
+    public DataSource dataSource() {
+        return DataSourceBuilder.create().build();
+    }
 
-	@Primary
-	@Bean(name=SqlSessionFactoryName)
-	public SqlSessionFactory sqlSessionFactory(@Qualifier(datasourceName) DataSource datasource
-	, ApplicationContext applicationContext) throws Exception{
-	SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-	sqlSessionFactoryBean.setDataSource(datasource);
-	sqlSessionFactoryBean.setMapperLocations(
-	applicationContext.getResources("classpath:/mybatis/mapper/mysql/main/**/.xml"));	//#--> *mapper.xml 위치
-	return sqlSessionFactoryBean.getObject();
-	}
+    @Primary
+    @Bean(name=SqlSessionFactoryName)
+    public SqlSessionFactory sqlSessionFactory(@Qualifier(datasourceName) DataSource datasource
+            , ApplicationContext applicationContext) throws Exception{
+        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+        sqlSessionFactoryBean.setDataSource(datasource);
+        sqlSessionFactoryBean.setMapperLocations(
+                applicationContext.getResources("classpath:/mybatis/mapper/mysql/main/**/*.xml"));	//#--> *mapper.xml 위치
+        return sqlSessionFactoryBean.getObject();
+    }
 
-	@Primary
-	@Bean(name=SqlSessionName)
-	public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory){
-	return new SqlSessionTemplate(sqlSessionFactory);
-	}
+    @Primary
+    @Bean(name=SqlSessionName)
+    public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory){
+        return new SqlSessionTemplate(sqlSessionFactory);
+    }
 }
