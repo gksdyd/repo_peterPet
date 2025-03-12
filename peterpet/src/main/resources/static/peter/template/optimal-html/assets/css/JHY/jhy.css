@@ -1,0 +1,89 @@
+.text-style-center {
+    text-align: center;
+}
+.withdraw-box-style {
+    background-color: rgb(227, 188, 238);
+    width: 50%;
+    margin: 0 auto;
+}
+.withdraw-check-style {
+    background-color: rgb(235, 232, 232);
+    width: 50%;
+    height: auto;
+    margin: 0 auto;
+}
+.register-agency {
+    font-size: small;
+}
+.search-txt {
+    border: none;
+    background: none;
+    outline: none;
+    float: left;
+    padding: 0px;
+    color: #797979;
+    font-size: 1４px;
+    line-height: 30px;
+    width: 200px;
+}
+.search-btn {
+    float: right;
+    width: 40px;
+    height: 100%;
+    border-radius: 50%;
+    background: white;
+    border: none;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pet-image-check-style {
+    background-color: rgb(235, 232, 232);
+    width: 80%;
+    height: auto;
+    margin: 0 auto;
+}
+.pet-categories-font-style {
+    font-size: x-small;
+    font-weight: lighter;
+}
+.exclusive {
+    background-color:#ffffff;
+    color:#f4857b;
+    border:1px solid #ffffff;
+    border:1px solid #f4857b;
+    width: 20%;
+    text-align: center;
+}
+.strong-style {
+    font-size:18px;
+    font-weight:500;
+    line-height:1;
+    color: #f4857b;
+}
+.profile-image {
+    width: 80px;
+    height: 80px;
+    border: 1px solid;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.review-image {
+    width: 80px;
+    height: 80px;
+    border: 1px solid;
+}
+.container-checkout {
+    margin: 0 auto;
+    max-width: 800px;
+}
+.deliver-destination-card {
+    width: 100%;
+    border-color: black;
+}
+.card-discount-info {
+    color: blue;
+    border-style: hidden;
+    background: none;
+}
