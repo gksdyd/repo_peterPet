@@ -1581,6 +1581,7 @@ body.index-demo27 { font-family:'Poppins',Arial,Tahoma !important; }
 .slideshow .middle-bottom .slideshow-content-in { right: 14%; bottom: 8%; top: auto; -ms-transform: none; -webkit-transform: none; transform: none; }
 .slideshow-content-in { position:absolute; max-width:max-content; width:100%; top:50%; z-index:3; -ms-transform:translateY(-50%); -webkit-transform:translateY(-50%); transform:translateY(-50%); }
 .slideshow .wrap-caption { display:inline-block; padding:25px; }
+.slideshow--small { height: 400px; }
 .slideshow--medium { height: 600px; }
 .slideshow--large { height: 700px; }
 .slideshow--xlarge { height: 900px; }
