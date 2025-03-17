@@ -5,13 +5,15 @@ public class CodeGroupDto {
 	private String cogrSeq;
 	private String cogrName;
 	private String cogrNameEng;
-	private int cogrUseFlag;
-	private int cogrOrder;
+	private Integer cogrUseFlag;
+	private Integer cogrOrder;
 	private String cogrDisc;
 	private String cogrRegDate;
 	private String cogrModDate;
-	private int cogrDelFlag;
-	private int cogrNum;
+	private Integer cogrDelFlag;
+	private Integer cogrNum;
+	
+	private int count;
 	
 	public String getCogrSeq() {
 		return cogrSeq;
@@ -31,16 +33,16 @@ public class CodeGroupDto {
 	public void setCogrNameEng(String cogrNameEng) {
 		this.cogrNameEng = cogrNameEng;
 	}
-	public int getCogrUseFlag() {
+	public Integer getCogrUseFlag() {
 		return cogrUseFlag;
 	}
-	public void setCogrUseFlag(int cogrUseFlag) {
+	public void setCogrUseFlag(Integer cogrUseFlag) {
 		this.cogrUseFlag = cogrUseFlag;
 	}
-	public int getCogrOrder() {
+	public Integer getCogrOrder() {
 		return cogrOrder;
 	}
-	public void setCogrOrder(int cogrOrder) {
+	public void setCogrOrder(Integer cogrOrder) {
 		this.cogrOrder = cogrOrder;
 	}
 	public String getCogrDisc() {
@@ -61,16 +63,22 @@ public class CodeGroupDto {
 	public void setCogrModDate(String cogrModDate) {
 		this.cogrModDate = cogrModDate;
 	}
-	public int getCogrDelFlag() {
+	public Integer getCogrDelFlag() {
 		return cogrDelFlag;
 	}
-	public void setCogrDelFlag(int cogrDelFlag) {
+	public void setCogrDelFlag(Integer cogrDelFlag) {
 		this.cogrDelFlag = cogrDelFlag;
 	}
-	public int getCogrNum() {
+	public Integer getCogrNum() {
 		return cogrNum;
 	}
-	public void setCogrNum(int cogrNum) {
+	public void setCogrNum(Integer cogrNum) {
 		this.cogrNum = cogrNum;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
 	}
 }

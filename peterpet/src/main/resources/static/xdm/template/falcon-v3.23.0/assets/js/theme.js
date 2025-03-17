@@ -4733,7 +4733,7 @@ var searchInit = function searchInit() {
 var select2Init = function select2Init() {
   if (window.jQuery) {
     var $ = window.jQuery;
-    var select2 = $('.selectpicker');
+    var select2 = $('..css');
     select2.length && select2.each(function (index, value) {
       var $this = $(value);
       var options = $.extend({

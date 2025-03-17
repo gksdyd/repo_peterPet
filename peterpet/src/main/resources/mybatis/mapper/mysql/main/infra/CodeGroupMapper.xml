@@ -16,9 +16,15 @@
 			cogrRegDate,
 			cogrModDate,
 			cogrDelFlag,
-			cogrNum
+			cogrNum,
+			(SELECT COUNT(*)
+			FROM code
+			WHERE 1=1
+			AND codeGroup_cogrSeq = cogrSeq) AS count
 		FROM
 			codegroup
+		ORDER BY cogrSeq DESC
+		limit #{rowNumToShow} offset #{startRnumForMysql}
 	</select>
 	
 	<select id="selectOne" resultMap="resultMapObj">
@@ -41,16 +47,7 @@
 	
 	<select id="selectMaxSeq" resultMap="resultMapObj">
 		SELECT
-			cogrSeq,
-			cogrName,
-			cogrNameEng,
-			cogrUseFlag,
-			cogrOrder,
-			cogrDisc,
-			cogrRegDate,
-			cogrModDate,
-			cogrDelFlag,
-			cogrNum
+			cogrSeq
 		FROM
 			codegroup
 		WHERE 1=1
@@ -68,7 +65,7 @@
 			cogrModDate,
 			cogrDelFlag,
 			cogrNum
-		) value (
+		) VALUE (
 			#{cogrName},
 			#{cogrNameEng},
 			#{cogrUseFlag},
@@ -83,4 +80,12 @@
 			SELECT last_insert_id()
 		</selectKey>
 	</insert>
+	
+	<select id="selectOneCount" resultType="Integer">
+		SELECT COUNT(*)
+		FROM codegroup
+		WHERE 1=1
+			<!-- <if test="useFlag == 1">AND cogrUseFlag = #{cogrUseFlag}</if>
+			<if test="delFlag == 1">AND cogrDelFlag = #{cogrDelFlag}</if> -->
+	</select>
 </mapper>

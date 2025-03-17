@@ -6,19 +6,19 @@
         <form name="formList" id="formList" method="post" autocomplete="off">
           <input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>
           <input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}"/>
-          <div class="card mb-3" id="customersTable" data-list='{"valueNames":["#","use","code-group-code","code-group-name", "code-group-name-eng", "count", "order", "resist-date", "modify-date"],"page":10,"pagination":true}'>
+          <div class="card mb-3" id="customersTable" data-list='{"valueNames":["#","use","code-group-code","code-group-name", "code", "instead-code", "code-name", "code-name-eng", "order", "resist-date", "modify-date"],"page":10,"pagination":true}'>
             <div class="card-header">
               <div class="mb-2 row g-3">
-                <h1>Code Group</h1>
+                <h1>Code</h1>
                 <div class="col-4">
-                  <select class="form-select-JHY" id="cogrUseFlag" name="cogrUseFlag" aria-label="Default select example">
+                  <select class="form-select-JHY" id="codeUseFlag" name="codeUseFlag" aria-label="Default select example">
                     <option>사용 여부</option>
                     <option value="0">N</option>
                     <option value="1" selected>Y</option>
                   </select>
                 </div>
                 <div class="col-4">
-                  <select class="form-select-JHY" id="cogrDelFlag" name="cogrDelFlag" aria-label="Default select example">
+                  <select class="form-select-JHY" id="codeDelFlag" name="codeDelFlag" aria-label="Default select example">
                     <option>삭제 여부</option>
                     <option value="1">Y</option>
                     <option value="0" selected>N</option>
@@ -29,8 +29,8 @@
                 <div class="col-4">
                   <select class="form-select-JHY" aria-label="Default select example">
                     <option selected="selected">날짜</option>
-                    <option id="cogrRegDate">등록일</option>
-                    <option id="cogrModDate">수정일</option>
+                    <option id="codeRegDate">등록일</option>
+                    <option id="codeModDate">수정일</option>
                   </select>
                 </div>
                 <div class="col-4">
@@ -86,37 +86,34 @@
                       <th class="text-900 sort white-nowrap" data-sort="use">사용</th>
                       <th class="text-900 sort white-nowrap" data-sort="code-group-code">코드그룹 코드</th>
                       <th class="text-900 sort white-nowrap" data-sort="code-group-name" style="min-width: 200px;">코드그룹 이름</th>
-                      <th class="text-900 sort white-nowrap" data-sort="code-group-name-eng">코드그룹 이름(영문)</th>
-                      <th class="text-900 sort white-nowrap" data-sort="count">갯수</th>
+                      <th class="text-900 sort white-nowrap" data-sort="code">코드</th>
+                      <th class="text-900 sort white-nowrap" data-sort="instead-code">대체 코드</th>
+                      <th class="text-900 sort white-nowrap" data-sort="code-name">코드 이름</th>
+                      <th class="text-900 sort white-nowrap" data-sort="code-name-eng">코드 이름(영문)</th>
                       <th class="text-900 sort white-nowrap" data-sort="order">순서</th>
                       <th class="text-900 sort white-nowrap" data-sort="resist-date">등록일</th>
                       <th class="text-900 sort white-nowrap text-end" data-sort="modify-date">수정일</th>
                     </tr>
                   </thead>
                   <tbody class="list" id="table-customers-body">
-                    <tr th:if="${#lists.isEmpty(list)}">
-                      <td>
-                        <div class="fs-9 mb-0">
-                          There are no data!
-                        </div>
-                      </td>
-                    </tr>
-                    <tr th:if="${!#lists.isEmpty(list)}" class="btn-reveal-trigger" th:each="list : ${list}">
+                    <tr class="btn-reveal-trigger" th:each="list : ${list}">
                       <td>
                         <div class="form-check fs-9 mb-0 d-flex align-items-center">
                           <input class="form-check-input" type="checkbox" id="customer-0" data-bulk-select-row="data-bulk-select-row" />
                         </div>
                       </td>
                       <td class="#" th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}"></td>
-                      <td class="use" th:if="${list.cogrUseFlag} == '1'">Y</td>
-                      <td class="use" th:if="${list.cogrUseFlag} == '0'">N</td>
+                      <td class="use" th:if="${list.codeUseFlag}=='1'">Y</td>
+                      <td class="use" th:if="${list.codeUseFlag}=='0'">N</td>
                       <td class="code-group-code" th:text="${list.cogrNum}"></td>
-                      <td class="code-group-name"><a th:href="@{/xdm/product/ProductXdmList}" th:text="${list.cogrName}"></a></td>
-                      <td class="code-group-name-eng" th:text="${list.cogrNameEng}"></td>
-                      <td class="count" th:text="${list.count}"></td>
-                      <td class="order" th:text="${list.cogrOrder}"></td>
-                      <td class="register-date" th:text="${list.cogrRegDate}"></td>
-                      <td class="modify-date text-end" th:text="${list.cogrModDate}"></td>
+                      <td class="code-group-name" th:text="${list.cogrName}"></td>
+                      <td class="code" th:text="${list.codeNum}"></td>
+                      <td class="instead-code" th:text="${list.codeInstNum}"></td>
+                      <td class="code-name"><a href="#" th:text="${list.codeName}"></a></td>
+                      <td class="code-name-eng" th:text="${list.codeNameEng}"></td>
+                      <td class="order" th:text="${list.codeOrder}">1</td>
+                      <td class="resist-date" th:text="${list.codeRegDate}"></td>
+                      <td class="modify-date text-end" th:text="${list.codeModDate}"></td>
                     </tr>
                   </tbody>
                 </table>
@@ -125,15 +122,15 @@
             <div class="card-footer d-flex align-items-center justify-content-center">
               <ul class="pagination mb-0">
                 <li th:if="${vo.startPage gt vo.pageNumToShow}" class="page-item" style="cursor: pointer;">
-                  <a class="page-link" href="javascript:goList(${vo.startPage - 1})" th:attr="onclick=|goList('${vo.startPage - 1}', '/xdm/codegroup/CodeGroupXdmList')|">
+                  <a class="page-link" href="javascript:goList(${vo.startPage - 1})" th:attr="onclick=|goList('${vo.startPage - 1}', '/xdm/code/CodeXdmList')|">
                     <i class="fas fa-chevron-left"></i>
                   </a>
                 </li>
                 <li th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}" th:classappend="${num eq vo.thisPage} ? active : ''" class="page-item" style="cursor: pointer;">
-                  <a class="page-link" th:attr="onclick=|goList('${num}', '/xdm/codegroup/CodeGroupXdmList')|" th:text="${num}"></a>
+                  <a class="page-link" th:attr="onclick=|goList('${num}', '/xdm/code/CodeXdmList')|" th:text="${num}"></a>
                 </li>
                 <li th:if="${vo.endPage ne vo.totalPages}" class="page-item" style="cursor: pointer;">
-                  <a class="page-link" th:attr="onclick=|goList('${vo.endPage + 1}', '/xdm/codegroup/CodeGroupXdmList')|">
+                  <a class="page-link" th:attr="onclick=|goList('${vo.endPage + 1}', '/xdm/code/CodeXdmList')|">
                     <i class="fas fa-chevron-right"></i>
                   </a>
                 </li>
@@ -145,21 +142,22 @@
                 <button class="btn btn-danger btn-sm" type="button"><span class="far fa-trash-alt"></span></button>
               </div>
               <div class="col" style="text-align: right;">
+                <button class="btn btn-primary btn-sm" type="button">U</button>
                 <button class="btn btn-success btn-sm" type="button"><span class="far fa-file-excel"></span></button>
-                <a href="/xdm/product/productXdmForm"><button class="btn btn-primary btn-sm" type="button"><span class="fas fa-plus"></span></button></a>
+                <a href="/xdm/code/CodeXdmForm"><button class="btn btn-primary btn-sm" type="button"><span class="fas fa-plus"></span></button></a>
               </div>
             </div>
           </div>
         </form>
         <div th:replace="~{xdm/include/footer :: footer}"><div>
+        </div>
       </div>
-    </div>
-  </main>
-<!-- ===============================================-->
-<!--    End of Main Content-->
-<!-- ===============================================-->
-<div th:replace="~{xdm/include/includeXdmList :: includeXdmList}"></div>
-<div th:replace="~{xdm/include/includeXdmFalcon :: includeXdmFalcon}"></div>
-</body>
-
-</html>
+    </main>
+  <!-- ===============================================-->
+  <!--    End of Main Content-->
+  <!-- ===============================================-->
+  <div th:replace="~{xdm/include/includeXdmList :: includeXdmList}"></div>
+  <div th:replace="~{xdm/include/includeXdmFalcon :: includeXdmFalcon}"><div>
+  </body>
+  
+  </html>

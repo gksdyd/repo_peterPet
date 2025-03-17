@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+				 
+<mapper namespace="com.peterpet.demo.module.code.CodeDao">
+
+	<resultMap type="com.peterpet.demo.module.code.CodeDto" id="resultMapObj"></resultMap>
+	
+	<select id="selectList" resultMap="resultMapObj">
+		SELECT
+			a.codeSeq,
+			a.codeName,
+			a.codeNameEng,
+			a.codeNum,
+			a.codeInstNum,
+			a.codeUseFlag,
+			a.codeOrder,
+			a.codeDisc,
+			a.codeRegDate,
+			a.codeModDate,
+			a.codeDelFlag,
+			a.codeGroup_cogrSeq,
+		    b.cogrNum,
+		    b.cogrName
+		FROM
+			code a
+		    LEFT JOIN codegroup b ON b.cogrSeq = a.codeGroup_cogrSeq
+		ORDER BY codeSeq DESC
+		limit #{rowNumToShow} offset #{startRnumForMysql}
+	</select>
+	
+	<select id="selectOne" resultMap="resultMapObj">
+		SELECT
+			a.codeSeq,
+			a.codeName,
+			a.codeNameEng,
+			a.codeNum,
+			a.codeInstNum,
+			a.codeUseFlag,
+			a.codeOrder,
+			a.codeDisc,
+			a.codeRegDate,
+			a.codeModDate,
+			a.codeDelFlag,
+			a.codeGroup_cogrSeq,
+		    b.cogrNum,
+		    b.cogrName
+		FROM
+			code a
+		    LEFT JOIN codegroup b ON b.cogrSeq = a.codeGroup_cogrSeq
+		WHERE 1=1
+			AND a.codeSeq = #{a.codeSeq}
+	</select>
+	
+	<select id="selectCodeGroupName" resultMap="resultMapObj">
+		SELECT
+			cogrSeq,
+		    cogrName
+		FROM
+			codegroup
+	</select>
+	
+	<select id="selectMaxSeq" resultMap="resultMapObj">
+		SELECT
+			codeSeq
+		FROM
+			code
+		WHERE 1=1
+			AND codeSeq = (SELECT MAX(codeSeq) FROM code)
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO code(
+			codeName,
+			codeNameEng,
+			codeNum,
+			codeInstNum,
+			codeUseFlag,
+			codeOrder,
+			codeDisc,
+			codeRegDate,
+			codeModDate,
+			codeDelFlag,
+			codeGroup_cogrSeq
+		) VALUE (
+			#{codeName},
+			#{codeNameEng},
+			#{codeNum},
+			#{codeInstNum},
+			#{codeUseFlag},
+			#{codeOrder},
+			#{codeDisc},
+			#{codeRegDate},
+			#{codeModDate},
+			0,
+			#{codeGroup_cogrSeq}
+		)
+		<selectKey resultType="String" keyProperty="codeSeq" order="AFTER">
+			SELECT last_insert_id()
+		</selectKey>
+	</insert>
+	
+	<select id="selectOneCount" resultType="Integer">
+		SELECT COUNT(*)
+		FROM code
+		WHERE 1=1
+	</select>
+</mapper>

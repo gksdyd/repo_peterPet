@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en-US" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+		<div th:replace="~{xdm/include/head :: head}"></div>
+          <div class="card mb-3" id="customersTable" data-list='{"valueNames":["#","salary-age","type","etc", "size", "function", "brand", "ingredient", "count", "picture", "resist-date", "modify-date"],"page":10,"pagination":true}'>
+            <div class="card-header">
+              <div class="mb-2 row g-3">
+                <h1>펫 상품 리스트</h1>
+                <div class="col-4">
+                  <select class="form-select-JHY" aria-label="Default select example">
+                    <option selected="selected">날짜</option>
+                    <option value="resist_date">등록일</option>
+                    <option value="modify_date">수정일</option>
+                  </select>
+                </div>
+                <div class="col-4">
+                  <input class="form-control-JHY datetimepicker" type="text" placeholder="yy-mm-dd" data-options='{"disableMobile":true}' />
+                </div>
+                <div class="col-4">
+                  <input class="form-control-JHY datetimepicker" type="text" placeholder="yy-mm-dd" data-options='{"disableMobile":true}' />
+                </div>
+              </div>
+              <div class="mb-2 row g-3">
+                <div class="col-4">
+                  <select class="form-select-JHY" aria-label="Default select example">
+                    <option value="0">N</option>
+                    <option value="1">Y</option>
+                  </select>
+                </div>
+                <div class="col-4">
+                  <input class="form-control-JHY" type="text" placeholder="이름 검색" />
+                </div>
+                <div class="col-4">
+                  <button class="btn btn-outline-dark btn-sm" type="button"><span class="fas fa-search"></span></button>
+                  <button class="btn btn-outline-dark btn-sm" type="button"><span class="fas fa-redo-alt"></span></button>
+                </div>
+              </div>
+              <div class="mb-3 row g-3">
+                <div class="col-4">
+                  <select class="form-select-JHY" aria-label="Default select example" id="selectProductType" onchange="changeProductType()">
+                    <option th:each="productType : ${productType}" th:text="${productType.codeName}" th:value="${productType.codeSeq}"></option>
+                  </select>
+                </div>
+              </div>
+              <div class="card border h-100 border-primary mb-3" id="feedFilter">
+                <div class="mb-2 row g-3 me-2 ms-2 mt-0">
+                  <div class="col-4">
+                    <div class="form-group">
+                      <select class="form-select-JHY" id="multiple-select">
+                        <option>급여 연령</option>
+                        <option th:each="feedSalaryAge : ${feedSalaryAge}" th:value="${feedSalaryAge.codeSeq}" th:text="${feedSalaryAge.codeName}"></option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group">
+                      <select class="form-select-JHY" id="multiple-select">
+                        <option>종류</option>
+                        <option th:each="feedType : ${feedType}" th:value="${feedType.codeSeq}" th:text="${feedType.codeName}"></option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group">
+                      <select class="form-select-JHY" id="multiple-select">
+                        <option>기타</option>
+                        <option th:each="feedEtc : ${feedEtc}" th:value="${feedEtc.codeSeq}" th:text="${feedEtc.codeName}"></option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-2 row g-3 me-2 ms-2">
+                  <div class="col-4">
+                    <div class="form-group">
+                      <select class="form-select-JHY" id="multiple-select">
+                        <option>크기</option>
+                        <option th:each="feedSize : ${feedSize}" th:value="${feedSize.codeSeq}" th:text="${feedSize.codeName}"></option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group">
+                      <select class="form-select-JHY" id="multiple-select">
+                        <option>기능</option>
+                        <option th:each="feedFunction : ${feedFunction}" th:value="${feedFunction.codeSeq}" th:text="${feedFunction.codeName}"></option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group">
+                      <select class="form-select-JHY" id="multiple-select">
+                        <option>브랜드</option>
+                        <option th:each="feedBrand : ${feedBrand}" th:value="${feedBrand.codeSeq}" th:text="${feedBrand.codeName}"></option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-2 row g-3 me-2 ms-2">
+                  <div class="col-4">
+                    <div class="form-group mb-2">
+                      <select class="form-select-JHY" id="multiple-select">
+                        <option>주원료</option>
+                        <option th:each="feedIngredient : ${feedIngredient}" th:value="${feedIngredient.codeSeq}" th:text="${feedIngredient.codeName}"></option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <label class="form-label-JHY" for="description">Total: 42</label>
+                </div>
+                <div class="col-2" style="text-align: right;">
+                  <select class="form-select-JHY" aria-label="Default select example">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <div class="table-responsive scrollbar">
+                <table class="table mb-0 data-table fs-10 align-middle-JHY" data-datatables="data-datatables">
+                  <thead class="bg-200">
+                    <tr>
+                      <th>
+                        <div class="form-check fs-9 mb-0 d-flex align-items-center">
+                          <input class="form-check-input" id="checkbox-bulk-customers-select" type="checkbox" data-bulk-select='{"body":"table-customers-body","actions":"table-customers-actions","replacedElement":"table-customers-replace-element"}' />
+                        </div>
+                      </th>
+                      <th class="text-900 sort white-nowrap" data-sort="#">#</th>
+                      <th class="text-900 sort white-nowrap" data-sort="salary-age">급여 연령</th>
+                      <th class="text-900 sort white-nowrap" data-sort="type">종류</th>
+                      <th class="text-900 sort white-nowrap" data-sort="etc">기타</th>
+                      <th class="text-900 sort white-nowrap" data-sort="size">크기</th>
+                      <th class="text-900 sort white-nowrap" data-sort="function">기능</th>
+                      <th class="text-900 sort white-nowrap" data-sort="brand">브랜드</th>
+                      <th class="text-900 sort white-nowrap" data-sort="ingredient">주원료</th>
+                      <th class="text-900 sort white-nowrap" data-sort="count">갯수</th>
+                      <th class="text-900 sort white-nowrap" data-sort="picture">사진갯수</th>
+                      <th class="text-900 sort white-nowrap" data-sort="resist-date">등록일</th>
+                      <th class="text-900 sort white-nowrap text-end" data-sort="modify-date">수정일</th>
+                    </tr>
+                  </thead>
+                  <tbody class="list" id="table-customers-body">
+                    <tr th:if="${#lists.isEmpty(list)}">
+                      <td>
+                      	<div class="fs-9 mb-0">
+                        	There are no data!
+                        </div>
+                      </td>
+                    </tr>
+                    <tr th:if="${!#lists.isEmpty(list)}" class="btn-reveal-trigger" th:each="list : ${list}">
+                      <td>
+                        <div class="form-check fs-9 mb-0 d-flex align-items-center">
+                          <input class="form-check-input" type="checkbox" id="customer-0" data-bulk-select-row="data-bulk-select-row" />
+                        </div>
+                      </td>
+                      <td class="#" th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}"></td>
+                      <td class="use" th:if="${list.cogrUseFlag} == '1'">Y</td>
+                      <td class="use" th:if="${list.cogrUseFlag} == '0'">N</td>
+                      <td class="code-group-code" th:text="${list.cogrNum}"></td>
+                      <td class="code-group-name" th:text="${list.cogrName}"><a href="#"></a></td>
+                      <td class="code-group-name-eng" th:text="${list.cogrNameEng}"></td>
+                      <td class="count"></td>
+                      <td class="order" th:text="${list.cogrOrder}"></td>
+                      <td class="register-date" th:text="${list.cogrRegDate}"></td>
+                      <td class="modify-date text-end" th:text="${list.cogrModDate}"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card-footer d-flex align-items-center justify-content-center">
+              <button class="btn btn-sm btn-falcon-default me-1" type="button" title="Previous" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
+              <ul class="pagination mb-0"></ul>
+              <button class="btn btn-sm btn-falcon-default ms-1" type="button" title="Next" data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
+            </div>
+            <div class="mb-2 row g-3 ms-1 me-1">
+              <div class="col">
+                <button class="btn btn-danger btn-sm" type="button"><span class="bi-x"></span></button>
+                <button class="btn btn-danger btn-sm" type="button"><span class="far fa-trash-alt"></span></button>
+              </div>
+              <div class="col" style="text-align: right;">
+                <button class="btn btn-success btn-sm" type="button"><span class="far fa-file-excel"></span></button>
+                <a href="/xdm/codegroup/CodeGroupXdmForm"><button class="btn btn-primary btn-sm" type="button"><span class="fas fa-plus"></span></button></a>
+              </div>
+            </div>
+          </div>
+          <div th:replace="~{xdm/include/footer :: footer}"><div>
+          </div>
+        </div>
+      </main>
+    <!-- ===============================================-->
+    <!--    End of Main Content-->
+    <!-- ===============================================-->
+    <div th:replace="~{xdm/include/includeXdmList :: includeXdmList}"></div>
+    <div th:replace="~{xdm/include/includeXdmFalcon :: includeXdmFalcon}"><div>
+    </body>
+    
+    </html>

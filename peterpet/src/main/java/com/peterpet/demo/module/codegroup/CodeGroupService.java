@@ -11,19 +11,23 @@ public class CodeGroupService {
 	@Autowired
 	CodeGroupDao codeGroupDao;
 	
-	public List<CodeGroupDto> selectList() {
-		return codeGroupDao.selectList();
+	public List<CodeGroupDto> selectList(CodeGroupVo vo) {
+		return codeGroupDao.selectList(vo);
 	}
 	
 	public CodeGroupDto selectOne(CodeGroupDto codeGroupDto) {
 		return codeGroupDao.selectOne(codeGroupDto);
 	}
 	
-	public CodeGroupDto selectMaxSeq(CodeGroupDto codeGroupDto) {
-		return codeGroupDao.selectMaxSeq(codeGroupDto);
+	public CodeGroupDto selectMaxSeq() {
+		return codeGroupDao.selectMaxSeq();
 	}
 	
 	public int insert(CodeGroupDto codeGroupDto) {
 		return codeGroupDao.insert(codeGroupDto);
+	}
+	
+	public int selectOneCount() {
+		return codeGroupDao.selectOneCount();
 	}
 }

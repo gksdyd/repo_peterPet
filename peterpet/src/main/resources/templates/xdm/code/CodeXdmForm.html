@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en-US" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+
+		<div th:replace="~{xdm/include/head :: head}"></div>
+          <div class="card mb-3">
+            <div class="bg-holder d-none d-lg-block bg-card" style="background-image:url(../assets/img/icons/spot-illustrations/corner-4.png);">
+            </div>
+            <!--/.bg-holder-->
+          </div>
+          <div class="card mb-3">
+            <div class="card-header">
+              <h1>Code</h1>
+            </div>
+            <div class="card-body bg-body-tertiary">
+              <form class="needs-validation" novalidate action="/xdm/code/CodeXdmInst" method="post" id="code-form">
+                <div class="row g-3">
+                  <div class="col-3">
+                    <label class="form-label-JHY" for="codeGroup_cogrSeq">코드그룹<span style="color: red;">*</span></label>
+                  </div>
+                </div>
+                <div class="mb-3 row g-3">
+                  <div class="col-3">
+                    <select class="form-select-JHY" required="" id="codeGroup_cogrSeq" name="codeGroup_cogrSeq">
+                      <option>선택하세요</option>
+                      <option th:each="list : ${list}" th:text="${list.cogrName}" th:value="${list.cogrSeq}"></option>
+                    </select>
+                    <div class="invalid-feedback">Please select a valid state.</div>
+                  </div>
+                </div>
+                <div class="row g-3">
+                  <div class="col-3">
+                    <label class="form-label-JHY" for="codeSeq">코드<span style="color: red;">*</span></label>
+                  </div>
+                  <div class="col-3">
+                    <label class="form-label-JHY" for="codeInstNum">코드 (ANOTHER)</label>
+                  </div>
+                  <div class="col-3">
+                    <label class="form-label-JHY" for="codeName">코드 이름<span style="color: red;">*</span></label>
+                  </div>
+                  <div class="col-3">
+                    <label class="form-label-JHY" for="codeNameEng">코드 이름 (영문)</label>
+                  </div>
+                </div>
+                <div class="mb-3 row g-3">
+                  <div class="col-3">
+                    <input class="form-control-JHY" id="codeSeq" name="codeSeq" type="text" placeholder="자동생성" th:value="${item.codeSeq} + 1" readonly />
+                  </div>
+                  <div class="col-3">
+                    <input class="form-control-JHY" id="codeInstNum" name="codeInstNum" type="text" placeholder="영대소문자, 숫자" />
+                  </div>
+                  <div class="col-3">
+                    <input class="form-control-JHY" id="codeName" name="codeName" required="" type="text" placeholder="한글, 영대소문자, 숫자" />
+                    <div class="invalid-feedback">Please provide a valid name.</div>
+                  </div>
+                  <div class="col-3">
+                    <input class="form-control-JHY" id="codeNameEng" name="codeNameEng" type="text" placeholder="영대소문자, 숫자" />
+                  </div>
+                </div>
+                <div class="row g-3">
+                  <div class="col-3">
+                    <label class="form-label-JHY" for="codeUseFlag">사용여부<span style="color: red;">*</span></label>
+                  </div>
+                  <div class="col-3">
+                    <label class="form-label-JHY" for="codeOrder">순서<span style="color: red;">*</span></label>
+                  </div>
+                </div>
+                <div class="mb-3 row g-3">
+                  <div class="col-3">
+                    <select class="form-select-JHY" id="codeUseFlag" name="codeUseFlag" required="">
+                      <option selected="selected" value="">선택하세요</option>
+                      <option value="1">사용</option>
+                      <option value="0">미사용</option>
+                    </select>
+                    <div class="invalid-feedback">Please select a valid state.</div>
+                  </div>
+                  <div class="col-3">
+                    <input class="form-control-JHY" id="codeOrder" name="codeOrder" type="text" required="" />
+                    <div class="invalid-feedback">Please provide a valid order.</div>
+                  </div>
+                </div>
+                <div class="row g-3">
+                  <div class="col-6">
+                    <label class="form-label-JHY" for="codeDisc">설명</label>
+                  </div>
+                </div>
+                <div class="mb-3 row g-3">
+                  <div class="col-6">
+                    <textarea class="form-control-JHY" id="codeDisc" name="codeDisc" rows="3"></textarea>
+                  </div>
+                </div>
+                <div class="mb-3 row g-3">
+                  <div class="col">
+                    <a href="/xdm/code/CodeXdmList"><button class="btn btn-outline-dark btn-sm" type="button"><span class="fas fa-list-ul"></span></button></a>                  
+                  </div>
+                  <div class="col" style="text-align: right;">
+                    <button class="btn btn-primary btn-sm" type="button" id="btnSubmit"><span class="fas fa-database"></span></button>
+                  </div>
+                </div>
+                <input type="hidden" name="codeNum" id="codeNum" >
+                <input type="hidden" name="codeRegDate" id="codeRegDate" >
+                <input type="hidden" name="codeModDate" id="codeModDate" >
+              </form>
+            </div>
+          </div>
+          <div th:replace="~{xdm/include/footer :: footer}"><div>
+        </div>
+      </div>
+    </main>
+  <!-- ===============================================-->
+  <!--    End of Main Content-->
+  <!-- ===============================================-->
+  <script type="text/javascript">
+    document.getElementById("btnSubmit").onclick = function() {
+      let today = new Date();
+      let year = today.getFullYear();
+      let month = (today.getMonth() + 1).toString().padStart(2, '0');
+      let day = today.getDate().toString().padStart(2, '0');
+      
+      let date = year + month + day;
+      
+      document.getElementById("codeRegDate").value = date;
+      document.getElementById("codeModDate").value = date;
+      
+      if (document.getElementById("codeNum").value === "") {
+        document.getElementById("codeNum").value = document.getElementById("codeSeq").value;
+      } else {
+        // alert(date);
+        // by pass
+      }
+      document.getElementById("code-form").submit();
+    }
+  </script>
+  <div th:replace="~{xdm/include/includeXdmFalcon :: includeXdmFalcon}"><div>
+  </body>
+  
+  </html>

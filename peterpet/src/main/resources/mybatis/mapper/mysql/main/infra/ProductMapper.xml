@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+				 
+<mapper namespace="com.peterpet.demo.module.product.ProductDao">
+
+	<resultMap type="com.peterpet.demo.module.product.ProductDto" id="resultMapObj"></resultMap>
+	
+	<select id="selectProductType" resultMap="resultMapObj">
+		SELECT
+			codeSeq,
+			codeName
+		FROM
+			code
+		WHERE 1=1
+			AND codeGroup_cogrSeq = 1
+	</select>
+	
+	<select id="selectProductCate" resultMap="resultMapObj">
+		SELECT
+			cogrSeq
+		FROM
+			codegroup
+		WHERE 1=1
+			AND cogrOrder = 2
+	</select>
+	
+	<select id="selectProductFilt" resultMap="resultMapObj">
+		SELECT
+			codeSeq,
+			codeName
+		FROM
+			code
+		WHERE 1=1
+			AND codeGroup_cogrSeq = (SELECT
+										cogrSeq
+									FROM
+										codegroup
+									WHERE 1=1
+										AND cogrOrder = 2
+		                                AND cogrSeq = #{cogrSeq})
+	</select>
+</mapper>

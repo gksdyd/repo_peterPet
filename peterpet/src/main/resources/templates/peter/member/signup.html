@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{peter/include/head :: head}"></div>
+            <!--Body Container-->
+            <div id="page-content">
+                <!--Collection Banner-->
+                <div class="collection-header">
+                    <div class="collection-hero">
+                        <div class="collection-hero__image"></div>
+                        <div class="collection-hero__title-wrapper container">
+                            <h1 class="collection-hero__title">회원가입</h1>
+                            <div class="breadcrumbs text-uppercase mt-1 mt-lg-2"><a href="index.html" title="Back to the home page">Home</a><span>|</span><span class="fw-bold">회원가입</span></div>
+                        </div>
+                    </div>
+                </div>
+                <!--End Collection Banner-->
+
+                <!--Container-->
+                <div class="container">
+                    <!--Main Content-->
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 box mt-2 mt-lg-5">	
+                            <h3 class="h4 text-uppercase mb-3">개인 정보</h3>
+                            <form method="post" action="#" accept-charset="UTF-8" class="needs-validation customer-form" novalidate>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-5 col-lg-5">
+                                        <div class="form-group">
+                                            <label for="CustomerFirstName" class="d-none">성<span class="required">*</span></label>
+                                            <input id="CustomerFirstName" type="text" class="form-control" name="customer[first-name]" placeholder="성" required />
+                                            <div class="invalid-feedback">
+                                                성을 입력해주세요.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-5 col-lg-5">
+                                        <div class="form-group">
+                                            <label for="CustomerLastName" class="d-none">이름<span class="required">*</span></label>
+                                            <input id="CustomerLastName" type="text" class="form-control" name="customer[Last-name]" placeholder="이름" required />                       	
+                                            <div class="invalid-feedback">
+                                                이름을 입력해주세요.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+                                        <div class="form-check">
+                                            <input id="CustomerMan" type="radio" class="form-check-input" name="customer[Gender]" required />                       	
+                                            <label for="CustomerMan" class="form-check-label">남성</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input id="CustomerWoman" type="radio" class="form-check-input" name="customer[Gender]" required />                       	
+                                            <label for="CustomerWoman" class="form-check-label">여성</label>
+                                            <div class="invalid-feedback">
+                                                성별을 체크해주세요.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-5 col-lg-5">
+                                        <div class="form-group">
+                                            <label for="CustomerDOB" class="d-none">생일<span class="required">*</span></label>
+                                            <input id="CustomerDOB" type="date" class="form-control" name="customer[DOB]" required />
+                                            <div class="invalid-feedback">
+                                                생일을 입력해주세요.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row accordion" id="accordionExample">
+                                    <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                        <div class="form-group">
+                                            <select class="form-select register-agency" id="CustomerAgency" required>
+                                                <option selected="selected" value="">통신사</option>
+                                                <option value="SKT">SKT</option>
+                                                <option value="SK">SK</option>
+                                                <option value="LG">LG U+</option>
+                                                <option value="LG">알뜰폰</option>                     	
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                통신사를 선택해주세요.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-5 col-lg-5">
+                                        <div class="form-group">
+                                            <label for="CustomerPhone" class="d-none">전화번호<span class="required">*</span></label>
+                                            <input id="CustomerPhone" type="text" class="form-control" name="customer[phone]" placeholder="전화번호" required />                        	
+                                            <div class="invalid-feedback">
+                                                전화번호를 입력해주세요.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                                        <input type="submit" class="btn rounded mb-3 accordion-button collapsed" value="인증번호 받기" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false">
+                                    </div>
+                                </div>
+                                <div class="row accordion-collapse collapse" id="collapseOne" data-bs-parent="#accordionExample">
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                                        <div class="form-group">
+                                            <label for="CustomerCertification" class="d-none">인증번호<span class="required">*</span></label>
+                                            <input id="CustomerCertification" type="email" class="form-control" name="customer[CustomerCertification]" placeholder="인증번호" required />                        	
+                                            <div class="invalid-feedback">
+                                                인증번호를 입력해주세요.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                                        <input type="submit" class="btn rounded mb-3" value="인증확인">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <label for="CustomerEmail" class="d-none">Email<span class="required">*</span></label>
+                                            <input id="CustomerEmail" type="email" class="form-control" name="customer[email]" placeholder="이메일" required />                        	
+                                            <div class="invalid-feedback">
+                                                이메일을 입력해주세요.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group form-check col-12 col-sm-12 col-md-12 col-lg-12">
+                                        <div class="customCheckbox clearfix">
+                                            <input id="newsletter" name="newsletter" type="checkbox" />
+                                            <label for="newsletter">이메일 수신 알림 동의</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                        <div class="form-group">
+                                            <input type="text" id="sample6_postcode" class="form-control" name="customer[postcode]" placeholder="우편번호" required />
+                                            <div class="invalid-feedback">
+                                                우편번호를 입력해주세요.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+                                        <div class="form-group">
+                                            <input type="button" class="btn rounded" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <input type="text" id="sample6_address" class="form-control" name="customer[address]" placeholder="주소" required />
+                                            <div class="invalid-feedback">
+                                                주소를 입력해주세요.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <input type="text" id="sample6_detailAddress" class="form-control" name="customer[detail-address]" placeholder="상세주소" required />
+                                            <div class="invalid-feedback">
+                                                상세주소를 입력해주세요.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 class="h4 text-uppercase mb-3">로그인 정보</h3>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                                        <div class="form-group">
+                                            <label for="CustomerID" class="d-none">아이디<span class="required">*</span></label>
+                                            <input id="CustomerID" type="text" class="form-control" name="customer[ID]" placeholder="아이디" required />
+                                            <div class="invalid-feedback">
+                                                아이디를 입력해주세요.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">                                	
+                                        <div class="form-group">
+                                            <label for="CustomerPassword" class="d-none">비밀번호<span class="required">*</span></label>
+                                            <input id="CustomerPassword" type="password" class="form-control" name="customer[Password]" placeholder="비밀번호" required />
+                                            <div class="invalid-feedback">
+                                                비밀번호를 입력해주세요.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                                        <div class="form-group">
+                                            <label for="CustomerConfirmPassword" class="d-none">비밀번호 확인<span class="required">*</span></label>
+                                            <input id="CustomerConfirmPassword" type="Password" class="form-control" name="customer[ConfirmPassword]" placeholder="비밀번호 확인" required />                        	
+                                            <div class="invalid-feedback">
+                                                비밀번호가 일치하지 않습니다.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="text-left col-12 col-sm-12 col-md-6 col-lg-6">
+                                        <input type="submit" class="btn rounded mb-3" value="Submit">
+                                    </div>
+                                    <div class="text-right col-12 col-sm-12 col-md-6 col-lg-6">
+                                        <a href="login.html"><i class="align-middle icon an an-an-double-left me-2"></i>로그인 페이지</a>
+                                    </div>
+                                </div>
+                            </form>                       
+                        </div>
+                    </div>
+                    <!--End Main Content-->
+                </div>
+                <!--End Container-->
+            </div>
+            <!--End Body Container-->
+
+            <!--Scoll Top-->
+            <span id="site-scroll"><i class="icon an an-chevron-up"></i></span>
+            <!--End Scoll Top-->
+
+            <!--MiniCart Drawer-->
+            <div class="minicart-right-drawer modal right fade" id="minicart-drawer">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div id="cart-drawer" class="block block-cart">
+                            <div class="minicart-header">
+                                <a href="javascript:void(0);" class="close-cart" data-bs-dismiss="modal" aria-label="Close"><i class="an an-times-r" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left" title="Close"></i></a>
+                                <h4 class="fs-6">Your cart (2 Items)</h4>
+                            </div>
+                            <div class="minicart-content">
+                                <ul class="clearfix">
+                                    <li class="item d-flex justify-content-center align-items-center">
+                                        <a class="product-image" href="product-layout1.html">
+                                            <img class="blur-up lazyload" src="/peter/template/optimal-html/assets/images/products/cart-product-img1.jpg" data-src="/peter/template/optimal-html/assets/images/products/cart-product-img1.jpg" alt="image" title="">
+                                        </a>
+                                        <div class="product-details">
+                                            <a class="product-title" href="product-layout1.html">Floral Crop Top</a>
+                                            <div class="variant-cart">Black / XL</div>
+                                            <div class="priceRow">
+                                                <div class="product-price">
+                                                    <span class="money">$59.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="qtyDetail text-center">
+                                            <div class="wrapQtyBtn">
+                                                <div class="qtyField">
+                                                    <a class="qtyBtn minus" href="javascript:void(0);"><i class="icon an an-minus-r" aria-hidden="true"></i></a>
+                                                    <input type="text" name="quantity" value="1" class="qty">
+                                                    <a class="qtyBtn plus" href="javascript:void(0);"><i class="icon an an-plus-l" aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
+                                            <a href="#" class="edit-i remove"><i class="icon an an-edit-l" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></a>
+                                            <a href="#" class="remove"><i class="an an-times-r" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"></i></a>
+                                        </div>
+                                    </li>
+                                    <li class="item d-flex justify-content-center align-items-center">
+                                        <a class="product-image" href="product-layout1.html">
+                                            <img class="blur-up lazyload" src="/peter/template/optimal-html/assets/images/products/cart-product-img1.jpg" data-src="/peter/template/optimal-html/assets/images/products/cart-product-img1.jpg" alt="image" title="">
+                                        </a>
+                                        <div class="product-details">
+                                            <a class="product-title" href="product-layout1.html">V Neck T-shirts</a>
+                                            <div class="variant-cart">Blue / XL</div>
+                                            <div class="priceRow">
+                                                <div class="product-price">
+                                                    <span class="money">$199.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="qtyDetail text-center">
+                                            <div class="wrapQtyBtn">
+                                                <div class="qtyField">
+                                                    <a class="qtyBtn minus" href="javascript:void(0);"><i class="icon an an-minus-r" aria-hidden="true"></i></a>
+                                                    <input type="text" name="quantity" value="1" class="qty">
+                                                    <a class="qtyBtn plus" href="javascript:void(0);"><i class="icon an an-plus-l" aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
+                                            <a href="#" class="edit-i remove"><i class="icon an an-edit-l" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></a>
+                                            <a href="#" class="remove"><i class="an an-times-r" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"></i></a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="minicart-bottom">
+                                <div class="shipinfo text-center mb-3 text-uppercase">
+                                    <p class="freeShipMsg"><i class="an an-truck fs-5 me-2 align-middle"></i>SPENT <b>$199.00</b> MORE FOR FREE SHIPPING</p>
+                                </div>
+                                <div class="subtotal">
+                                    <span>Total:</span>
+                                    <span class="product-price">$93.13</span>
+                                </div>
+                                <a href="checkout-style1.html" class="w-100 p-2 my-2 btn btn-outline-primary proceed-to-checkout rounded">Proceed to Checkout</a>
+                                <a href="cart-style1.html" class="w-100 btn-primary cart-btn rounded">View Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div th:replace="~{peter/include/foot :: foot}"></div>

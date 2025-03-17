@@ -87,35 +87,27 @@
               </form>
             </div>
           </div>
-          <div th:replace="~{xdm/include/footer :: footer}"><div>
-        </div>
-      </div>
-    </main>
-  <!-- ===============================================-->
-  <!--    End of Main Content-->
-  <!-- ===============================================-->
-  <script type="text/javascript">
-    document.getElementById("btnSubmit").onclick = function() {
-      let today = new Date();
-      let year = today.getFullYear();
-      let month = (today.getMonth() + 1).toString().padStart(2, '0');
-      let day = today.getDate().toString().padStart(2, '0');
-      
-      let date = year + month + day;
-      
-      document.getElementById("cogrRegDate").value = date;
-      document.getElementById("cogrModDate").value = date;
-      
-      if (document.getElementById("cogrNum").value === "") {
-        document.getElementById("cogrNum").value = document.getElementById("cogrSeq").value;
-      } else {
-        // by pass
-      }
-      
-      document.getElementById("code-group-form").submit();
-    }
-  </script>
-  <div th:replace="~{xdm/include/includeXdmFalcon :: includeXdmFalcon}"><div>
-  </body>
-  
-  </html>
+          
+          <script type="text/javascript">
+          	document.getElementById("btnSubmit").onclick = function() {
+          		let today = new Date();
+          		let year = today.getFullYear();
+          		let month = (today.getMonth() + 1).toString().padStart(2, '0');
+          		let day = today.getDate().toString().padStart(2, '0');
+          		
+          		let date = year + month + day;
+          		
+          		document.getElementById('cogrRegDate').value = date;
+          		document.getElementById('cogrModDate').value = date;
+          		
+          		if (document.getElementById('cogrNum').value === "") {
+          			document.getElementById("cogrNum").value = document.getElementById("cogrSeq").value;
+          		} else {
+          			// by pass
+          		}
+          		
+          		document.getElementById("code-group-form").submit();
+          	}
+          </script>
+          
+          <div th:replace="~{xdm/include/footer :: footer}"></div>

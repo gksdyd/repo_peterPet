@@ -12,15 +12,22 @@ public class CodeGroupController {
 	CodeGroupService codeGroupService;
 	
 	@RequestMapping(value = "/xdm/codegroup/CodeGroupXdmList")
-	public String codeGroupXdmList(Model model) {
-		model.addAttribute("list", codeGroupService.selectList());
+	public String codeGroupXdmList(CodeGroupVo vo, Model model) {
+		vo.setParamsPaging(codeGroupService.selectOneCount());
+		model.addAttribute("list", codeGroupService.selectList(vo));
+		model.addAttribute("vo", vo);		
 		return "xdm/codegroup/CodeGroupXdmList";
 	}
 	
 	@RequestMapping(value = "/xdm/codegroup/CodeGroupXdmForm")
 	public String codeGroupXdmForm(Model model, CodeGroupDto codeGroupDto) {
-		model.addAttribute("item", codeGroupService.selectMaxSeq(codeGroupDto));
-//		System.out.println(codeGroupService.selectMaxSeq(codeGroupDto));
+		if (codeGroupService.selectMaxSeq() == null)
+		{
+			codeGroupDto.setCogrSeq("0");
+			model.addAttribute("item", codeGroupDto);
+		} else {
+			model.addAttribute("item", codeGroupService.selectMaxSeq());						
+		}
 		return "xdm/codegroup/CodeGroupXdmForm";
 	}
 	
