@@ -8,7 +8,7 @@ let form = document.querySelector("form[name=formList]");
   changeProductType = function () {	
 	document.getElementById("feedFilter").style.display = "none";
 
-	if (document.getElementById("selectProductType").value == 1) {
+	if (document.getElementById("prodType").value == 1) {
 		document.getElementById("feedFilter").style.display = "block";
 	}
   }

@@ -28,4 +28,19 @@ public class ProductController {
 		
 		return "xdm/product/ProductXdmList";
 	}
+	
+	@RequestMapping(value = "/xdm/product/ProductXdmForm")
+	public String productXdmForm(Model model) {
+		model.addAttribute("productType", productService.selectProductType());
+		
+		List<ProductDto> productCates = productService.selectProductCate();
+		model.addAttribute("feedSalaryAge", productService.selectProductFilt(productCates.get(0)));
+		model.addAttribute("feedType", productService.selectProductFilt(productCates.get(1)));
+		model.addAttribute("feedEtc", productService.selectProductFilt(productCates.get(2)));
+		model.addAttribute("feedSize", productService.selectProductFilt(productCates.get(3)));
+		model.addAttribute("feedFunction", productService.selectProductFilt(productCates.get(4)));
+		model.addAttribute("feedBrand", productService.selectProductFilt(productCates.get(5)));
+		model.addAttribute("feedIngredient", productService.selectProductFilt(productCates.get(6)));
+		return "xdm/product/ProductXdmForm";
+	}
 }

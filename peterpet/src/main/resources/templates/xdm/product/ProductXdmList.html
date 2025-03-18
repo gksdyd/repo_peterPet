@@ -37,7 +37,7 @@
               </div>
               <div class="mb-3 row g-3">
                 <div class="col-4">
-                  <select class="form-select-JHY" aria-label="Default select example" id="selectProductType" onchange="changeProductType()">
+                  <select class="form-select-JHY" aria-label="Default select example" name="prodType" id="prodType" onchange="changeProductType()">
                     <option th:each="productType : ${productType}" th:text="${productType.codeName}" th:value="${productType.codeSeq}"></option>
                   </select>
                 </div>
@@ -185,7 +185,7 @@
               </div>
               <div class="col" style="text-align: right;">
                 <button class="btn btn-success btn-sm" type="button"><span class="far fa-file-excel"></span></button>
-                <a href="/xdm/codegroup/CodeGroupXdmForm"><button class="btn btn-primary btn-sm" type="button"><span class="fas fa-plus"></span></button></a>
+                <a href="/xdm/product/ProductXdmForm"><button class="btn btn-primary btn-sm" type="button"><span class="fas fa-plus"></span></button></a>
               </div>
             </div>
           </div>
