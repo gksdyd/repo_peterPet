@@ -24,10 +24,10 @@ public class CodeGroupController {
 		if (codeGroupService.selectMaxSeq() == null)
 		{
 			codeGroupDto.setCogrSeq("0");
-			model.addAttribute("item", codeGroupDto);
 		} else {
-			model.addAttribute("item", codeGroupService.selectMaxSeq());						
+			codeGroupDto.setCogrSeq(codeGroupService.selectMaxSeq());						
 		}
+		model.addAttribute("item", codeGroupDto);
 		return "xdm/codegroup/CodeGroupXdmForm";
 	}
 	

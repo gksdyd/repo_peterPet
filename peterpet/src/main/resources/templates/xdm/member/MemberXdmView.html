@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en-US" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+
+	<div th:replace="~{xdm/include/head :: head}"></div>
+          <div class="card mb-3">
+            <div class="bg-holder d-none d-lg-block bg-card" style="background-image:url(/xdm/template/falcon-v3.23.0/assets/img/icons/spot-illustrations/corner-4.png);">
+            </div>
+            <!--/.bg-holder-->
+          </div>
+          <div class="card mb-3">
+            <div class="card-header">
+              <h1>회원 상세 정보</h1>
+            </div>
+            <div class="card-body bg-body-tertiary">
+              <div class="row g-3">
+                <div class="col-3">
+                  <label class="form-label-JHY" for="userGender">성별</label>
+                </div>
+                <div class="col-3">
+                  <label class="form-label-JHY" for="userName">이름</label>
+                </div>
+                <div class="col-3">
+                  <label class="form-label-JHY" for="userId">아이디</label>
+                </div>
+                <div class="col-3">
+                  <label class="form-label-JHY" for="userBirth">생일</label>
+                </div>
+              </div>
+              <div class="mb-3 row g-3">
+                <div class="col-3">
+                  <input class="form-control-JHY" name="userGender" id="userGender" th:value="${@codeService.selectOneCachedCode(item.userGender)}" type="text"/>
+                </div>
+                <div class="col-3">
+                  <input class="form-control-JHY" name="userName" id="userName" type="text" th:value="${item.userName}" />
+                </div>
+                <div class="col-3">
+                  <input class="form-control-JHY" name="userId" id="userId" type="text" th:value="${item.userId}" />
+                </div>
+                <div class="col-3">
+                  <input class="form-control-JHY" name="userBirth" id="userBirth" type="text" th:value="${item.userBirth}" />
+                </div>
+              </div>
+              <div class="row g-3">
+                <div class="col-3">
+                  <label class="form-label-JHY" for="userEmail">이메일</label>
+                </div>
+                <div class="col-3">
+                  <label class="form-label-JHY" for="userPhone">전화번호</label>
+                </div>
+              </div>
+              <div class="row g-3">
+                <div class="col-3">
+                  <input class="form-control-JHY" name="userEmail" id="userEmail" type="text" th:value="${item.userEmail}" />
+                  <div class="d-flex mt-2">
+                    <input class="form-check" name="userRecvNotiFlag" id="userRecvNotiFlag" th:if="${item.userRecvNotiFlag} == '0'" type="checkbox">
+                    <input class="form-check" name="userRecvNotiFlag" id="userRecvNotiFlag" th:if="${item.userRecvNotiFlag} == '1'" type="checkbox" checked>
+                    <span class="fs-10">&ensp;이메일 수신 알림 동의</span>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <input class="form-control-JHY" name="userPhone" id="userPhone" type="text" th:value="${item.userPhone}" />
+                </div>
+              </div>
+              <div class="row g-3">
+                <div class="col-3">
+                  <label class="form-label-JHY" for="userPostCode">우편번호</label>
+                </div>
+                <div class="col-3">
+                  <label class="form-label-JHY" for="userAddr">주소</label>
+                </div>
+                <div class="col-3">
+                  <label class="form-label-JHY" for="userDetailAddr">상세 주소</label>
+                </div>
+              </div>
+              <div class="row g-3 mb-1">
+                <div class="col-3">
+                  <input class="form-control-JHY" name="userPostCode" id="userPostCode" type="text" th:value="${item.userPostCode}" />
+                </div>
+                <div class="col-3">
+                  <input class="form-control-JHY" name="userAddr" id="userAddr" type="text" th:value="${item.userAddr}" />
+                </div>
+                <div class="col-3">
+                  <input class="form-control-JHY" name="userDetailAddr" id="userDetailAddr" type="text" th:value="${item.userDetailAddr}" />
+                </div>
+              </div>
+              <div class="mb-3 row g-3">
+                <div class="col-3 d-flex align-items-center">
+                  <label class="form-label-JHY" for="userDelFlag">삭제 여부&ensp;</label>
+                  <input class="form-check" type="checkbox" th:if="${item.userDelFlag} == '0'">
+                  <input class="form-check" type="checkbox" th:if="${item.userDelFlag} == '1'" checked>
+                </div>
+              </div>
+              <div class="mb-3 row g-3">
+                <div class="col">
+                  <a href="/xdm/member/MemberXdmList"><button class="btn btn-outline-dark btn-sm" type="button"><span class="fas fa-list-ul"></span></button></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div th:replace="~{xdm/include/footer :: footer}"><div>
+        </div>
+      </div>
+    </main>
+  <!-- ===============================================-->
+  <!--    End of Main Content-->
+  <!-- ===============================================-->
+  <div th:replace="~{xdm/include/includeXdmFalcon :: includeXdmFalcon}"><div>
+  </body>
+  
+  </html>

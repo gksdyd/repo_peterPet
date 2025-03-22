@@ -59,13 +59,11 @@
 			codegroup
 	</select>
 	
-	<select id="selectMaxSeq" resultMap="resultMapObj">
+	<select id="selectMaxSeq" resultType="String">
 		SELECT
-			codeSeq
+			MAX(codeSeq)
 		FROM
 			code
-		WHERE 1=1
-			AND codeSeq = (SELECT MAX(codeSeq) FROM code)
 	</select>
 	
 	<insert id="insert">
@@ -104,4 +102,16 @@
 		FROM code
 		WHERE 1=1
 	</select>
+	
+	<select id="selectListCachedCodeArrayList" resultMap="resultMapObj">
+		SELECT 
+			codeSeq,
+			codeName,
+			codeGroup_cogrSeq
+		FROM
+			code
+		WHERE 1=1
+			AND codeDelFlag = 0
+		    AND codeUseFlag = 1
+   </select>
 </mapper>

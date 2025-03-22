@@ -22,10 +22,10 @@
                 <div class="mb-3 row g-3">
                   <div class="col-3">
                     <select class="form-select-JHY" required="" id="codeGroup_cogrSeq" name="codeGroup_cogrSeq">
-                      <option>선택하세요</option>
+                      <option value="">선택하세요</option>
                       <option th:each="list : ${list}" th:text="${list.cogrName}" th:value="${list.cogrSeq}"></option>
                     </select>
-                    <div class="invalid-feedback">Please select a valid state.</div>
+                    <div class="invalid-feedback" id="cogrSeqValid">코드그룹을 선택해주세요.</div>
                   </div>
                 </div>
                 <div class="row g-3">
@@ -48,13 +48,15 @@
                   </div>
                   <div class="col-3">
                     <input class="form-control-JHY" id="codeInstNum" name="codeInstNum" type="text" placeholder="영대소문자, 숫자" />
+                    <div class="invalid-feedback" id="codeInstNumValid">영대소문자,숫자만 가능</div>
                   </div>
                   <div class="col-3">
                     <input class="form-control-JHY" id="codeName" name="codeName" required="" type="text" placeholder="한글, 영대소문자, 숫자" />
-                    <div class="invalid-feedback">Please provide a valid name.</div>
+                    <div class="invalid-feedback" id="codeNameValid">한글, 영대소문자, 숫자만 가능</div>
                   </div>
                   <div class="col-3">
                     <input class="form-control-JHY" id="codeNameEng" name="codeNameEng" type="text" placeholder="영대소문자, 숫자" />
+                    <div class="invalid-feedback" id="codeNameEngValid">영대소문자,숫자만 가능</div>
                   </div>
                 </div>
                 <div class="row g-3">
@@ -72,11 +74,11 @@
                       <option value="1">사용</option>
                       <option value="0">미사용</option>
                     </select>
-                    <div class="invalid-feedback">Please select a valid state.</div>
+                    <div class="invalid-feedback" id="codeUseFlagValid">선택하세요.</div>
                   </div>
                   <div class="col-3">
                     <input class="form-control-JHY" id="codeOrder" name="codeOrder" type="text" required="" />
-                    <div class="invalid-feedback">Please provide a valid order.</div>
+                    <div class="invalid-feedback" id="codeOrderValid">입력하세요.</div>
                   </div>
                 </div>
                 <div class="row g-3">
@@ -110,8 +112,83 @@
   <!-- ===============================================-->
   <!--    End of Main Content-->
   <!-- ===============================================-->
-  <script type="text/javascript">
+  <script type="text/javascript" th:inline="javascript">
     document.getElementById("btnSubmit").onclick = function() {
+
+      // const select = document.querySelectorAll('.form-select-JHY');
+      // const input = document.querySelectorAll('input');
+      // const valid = document.querySelectorAll('.invalid-feedback');
+      // var i = 0;
+      //   // alert(select.length);
+      //   select.forEach(select => {
+      //     if (select[i].value == "" || select[i].value == null) {
+      //       alert(select[i].value);
+      //       return false;
+      //     }
+      //   });
+
+      ///////////////////////////// validation /////////////////
+
+      const regex1 = /^[a-z|A-Z|0-9|]+$/;
+      const regex2 = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]+$/;
+
+      // codeGroup_cogrSeq
+      if (document.getElementById("codeGroup_cogrSeq").value == "") {
+        document.getElementById("cogrSeqValid").style.display = "block";
+        document.getElementById("codeGroup_cogrSeq").style.outlineColor = "red";
+        document.getElementById("codeGroup_cogrSeq").focus();
+        return false;
+      }
+
+      // codeInstNum
+      let temp = document.getElementById("codeInstNum").value.trim();
+      if (temp.length != 0) {
+        if (!regex1.test(temp)) {
+          document.getElementById("codeInstNumValid").style.display = "block";
+          document.getElementById("codeInstNum").style.outlineColor = "red";
+          document.getElementById("codeInstNum").focus();
+          return false;
+        }
+      }
+
+      // codeName
+      temp = document.getElementById("codeName").value.replace(/ /g, "");
+      if (!(regex2.test(temp))) {
+        document.getElementById("codeNameValid").style.display = "block";
+        document.getElementById("codeName").style.outlineColor = "red";
+        document.getElementById("codeName").focus();
+        return false;
+      }
+
+      // codeNameEng
+      temp = document.getElementById("codeNameEng").value.trim();
+      if (temp.length != 0) {
+        if (!regex1.test(temp)) {
+          document.getElementById("codeNameEngValid").style.display = "block";
+          document.getElementById("codeNameEng").style.outlineColor = "red";
+          document.getElementById("codeNameEng").focus();
+          return false;
+        }
+      }
+
+      // codeUseFlag
+      if (document.getElementById("codeUseFlag").value == "") {
+        document.getElementById("codeUseFlagValid").style.display = "block";
+        document.getElementById("codeUseFlag").style.outlineColor = "red";
+        document.getElementById("codeUseFlag").focus();
+        return false;
+      }
+
+      // codeOrder
+      temp = document.getElementById("codeOrder").value.trim();
+      if (temp == "") {
+        document.getElementById("codeOrderValid").style.display = "block";
+        document.getElementById("codeOrder").style.outlineColor = "red";
+        document.getElementById("codeOrder").focus();
+        return false;
+      }
+
+      // 등록일, 수정일 등록록
       let today = new Date();
       let year = today.getFullYear();
       let month = (today.getMonth() + 1).toString().padStart(2, '0');

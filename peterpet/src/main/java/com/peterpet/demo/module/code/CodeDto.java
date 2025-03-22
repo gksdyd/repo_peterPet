@@ -1,19 +1,22 @@
 package com.peterpet.demo.module.code;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CodeDto {
 
 	private String codeSeq;
 	private String codeName;
 	private String codeNameEng;
 	private Integer codeNum;
-	private Integer codeInstNum;
+	private String codeInstNum;
 	private Integer codeUseFlag;
 	private Integer codeOrder;
 	private String codeDisc;
 	private String codeRegDate;
 	private String codeModDate;
 	private Integer codeDelFlag;
-	private Integer codeGroup_cogrSeq;
+	private String codeGroup_cogrSeq;
 	
 	private String cogrSeq;
 	private Integer cogrNum;
@@ -43,10 +46,10 @@ public class CodeDto {
 	public void setCodeNum(Integer codeNum) {
 		this.codeNum = codeNum;
 	}
-	public Integer getCodeInstNum() {
+	public String getCodeInstNum() {
 		return codeInstNum;
 	}
-	public void setCodeInstNum(Integer codeInstNum) {
+	public void setCodeInstNum(String codeInstNum) {
 		this.codeInstNum = codeInstNum;
 	}
 	public Integer getCodeUseFlag() {
@@ -85,10 +88,10 @@ public class CodeDto {
 	public void setCodeDelFlag(Integer codeDelFlag) {
 		this.codeDelFlag = codeDelFlag;
 	}
-	public Integer getCodeGroup_cogrSeq() {
+	public String getCodeGroup_cogrSeq() {
 		return codeGroup_cogrSeq;
 	}
-	public void setCodeGroup_cogrSeq(Integer codeGroup_cogrSeq) {
+	public void setCodeGroup_cogrSeq(String codeGroup_cogrSeq) {
 		this.codeGroup_cogrSeq = codeGroup_cogrSeq;
 	}
 	public Integer getCogrNum() {
@@ -109,4 +112,7 @@ public class CodeDto {
 	public void setCogrSeq(String cogrSeq) {
 		this.cogrSeq = cogrSeq;
 	}
+	
+	//	for cache
+	public static List<CodeDto> cachedCodeArrayList = new ArrayList<CodeDto>();
 }

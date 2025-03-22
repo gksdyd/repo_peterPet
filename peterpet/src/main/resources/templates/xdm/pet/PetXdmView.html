@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en-US" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+
+	<div th:replace="~{xdm/include/head :: head}"></div>
+          <div class="card mb-3">
+            <div class="bg-holder d-none d-lg-block bg-card" style="background-image:url(/xdm/template/falcon-v3.23.0/assets/img/icons/spot-illustrations/corner-4.png);">
+            </div>
+            <!--/.bg-holder-->
+          </div>
+          <div class="card mb-3">
+            <div class="card-header">
+              <h1>펫 상세 정보</h1>
+            </div>
+            <div class="card-body bg-body-tertiary">
+              <div class="row g-3">
+                <div class="col-3">
+                  <label class="form-label-JHY" for="petGender">성별</label>
+                </div>
+                <div class="col-3">
+                  <label class="form-label-JHY" for="petName">이름</label>
+                </div>
+                <div class="col-3">
+                  <label class="form-label-JHY" for="petVarieties">품종</label>
+                </div>
+                <div class="col-3">
+                  <label class="form-label-JHY" for="petBirth">생일</label>
+                </div>
+              </div>
+              <div class="mb-3 row g-3">
+                <div class="col-3">
+                  <input class="form-control-JHY" name="petGender" id="petGender" th:value="${@codeService.selectOneCachedCode(item.petGender)}" type="text"/>
+                </div>
+                <div class="col-3">
+                  <input class="form-control-JHY" name="petName" id="petName" type="text" th:value="${item.petName}" />
+                </div>
+                <div class="col-3">
+                  <input class="form-control-JHY" name="petVarieties" id="petVarieties" type="text" th:value="${@codeService.selectOneCachedCode(item.petVarieties)}" />
+                </div>
+                <div class="col-3">
+                  <input class="form-control-JHY" name="petBirth" id="petBirth" type="text" th:value="${item.petBirth}" />
+                </div>
+              </div>
+              <div class="row g-3">
+                <div class="col-3">
+                  <label class="form-label-JHY" for="petWeight">무게</label>
+                </div>
+              </div>
+              <div class="row g-3">
+                <div class="col-3">
+                  <input class="form-control-JHY" name="petWeight" id="petWeight" type="text" th:value="${item.petWeight}" />
+                </div>
+                <div class="col-3">
+                  <div class="d-flex mt-2 align-items-center">
+                    <label class="form-label-JHY" for="petVaccinationFlag">예방 접종 유무&ensp;</label>
+                    <input class="form-check" name="petNeuteringFlag" id="petNeuteringFlag" th:if="${item.petNeuteringFlag} == '0'" type="checkbox">
+                    <input class="form-check" name="petNeuteringFlag" id="petNeuteringFlag" th:if="${item.petNeuteringFlag} == '1'" type="checkbox" checked>
+                    <label class="form-label-JHY ms-2" for="petNeuteringFlag">중성화 유무&ensp;</label>
+                    <input class="form-check" name="petNeuteringFlag" id="petNeuteringFlag" th:if="${item.petNeuteringFlag} == '0'" type="checkbox">
+                    <input class="form-check" name="petNeuteringFlag" id="petNeuteringFlag" th:if="${item.petNeuteringFlag} == '1'" type="checkbox" checked>
+                  </div>
+                </div>
+              </div>
+              <div class="row g-3">
+                <div class="col-3">
+                  <label class="form-label-JHY">성격/특징</label>
+                </div>
+                <div class="col-3">
+                  <label class="form-label-JHY">질병/질환</label>
+                </div>
+              </div>
+              <div class="row g-3 mb-3">
+                <div class="col-3">
+                  <span class="badge rounded-pill badge-subtle-primary me-2" th:each = "listPersonal : ${listPersonal}" th:text="${@codeService.selectOneCachedCode(listPersonal.persDiscription)}"></span>
+                </div>
+                <div class="col-3">
+                  <span class="badge rounded-pill badge-subtle-primary me-2" th:each = "listDisease : ${listDisease}" th:text="${@codeService.selectOneCachedCode(listDisease.diseDiscription)}"></span>
+                </div>
+              </div>
+              <div class="mb-3 row g-3">
+                <div class="col-3 d-flex align-items-center">
+                  <label class="form-label-JHY" for="petDelFlag">삭제 여부&ensp;</label>
+                  <input class="form-check" type="checkbox" th:if="${item.petDelFlag} == '0'">
+                  <input class="form-check" type="checkbox" th:if="${item.petDelFlag} == '1'" checked>
+                </div>
+              </div>
+              <div class="mb-3 row g-3">
+                <div class="col">
+                  <a href="/xdm/pet/PetXdmList"><button class="btn btn-outline-dark btn-sm" type="button"><span class="fas fa-list-ul"></span></button></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div th:replace="~{xdm/include/footer :: footer}"><div>
+        </div>
+      </div>
+    </main>
+  <!-- ===============================================-->
+  <!--    End of Main Content-->
+  <!-- ===============================================-->
+  <div th:replace="~{xdm/include/includeXdmFalcon :: includeXdmFalcon}"><div>
+  </body>
+  
+  </html>

@@ -45,13 +45,11 @@
 			AND cogrSeq = #{cogrSeq}
 	</select>
 	
-	<select id="selectMaxSeq" resultMap="resultMapObj">
+	<select id="selectMaxSeq" resultType="String">
 		SELECT
-			cogrSeq
+			MAX(cogrSeq)
 		FROM
 			codegroup
-		WHERE 1=1
-			AND cogrSeq = (SELECT MAX(cogrSeq) FROM codegroup)
 	</select>
 	
 	<insert id="insert">

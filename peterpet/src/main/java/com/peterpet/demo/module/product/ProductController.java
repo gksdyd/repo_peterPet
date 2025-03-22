@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.peterpet.demo.module.codegroup.CodeGroupDto;
+
 @Controller
 public class ProductController {
 
@@ -14,33 +16,28 @@ public class ProductController {
 	ProductService productService;
 	
 	@RequestMapping(value = "/xdm/product/ProductXdmList")
-	public String productXdmList(Model model, ProductDto productDto) {
-		model.addAttribute("productType", productService.selectProductType());
-		
-		List<ProductDto> productCates = productService.selectProductCate();
-		model.addAttribute("feedSalaryAge", productService.selectProductFilt(productCates.get(0)));
-		model.addAttribute("feedType", productService.selectProductFilt(productCates.get(1)));
-		model.addAttribute("feedEtc", productService.selectProductFilt(productCates.get(2)));
-		model.addAttribute("feedSize", productService.selectProductFilt(productCates.get(3)));
-		model.addAttribute("feedFunction", productService.selectProductFilt(productCates.get(4)));
-		model.addAttribute("feedBrand", productService.selectProductFilt(productCates.get(5)));
-		model.addAttribute("feedIngredient", productService.selectProductFilt(productCates.get(6)));
-		
+	public String productXdmList() {		
 		return "xdm/product/ProductXdmList";
 	}
 	
 	@RequestMapping(value = "/xdm/product/ProductXdmForm")
-	public String productXdmForm(Model model) {
-		model.addAttribute("productType", productService.selectProductType());
-		
-		List<ProductDto> productCates = productService.selectProductCate();
-		model.addAttribute("feedSalaryAge", productService.selectProductFilt(productCates.get(0)));
-		model.addAttribute("feedType", productService.selectProductFilt(productCates.get(1)));
-		model.addAttribute("feedEtc", productService.selectProductFilt(productCates.get(2)));
-		model.addAttribute("feedSize", productService.selectProductFilt(productCates.get(3)));
-		model.addAttribute("feedFunction", productService.selectProductFilt(productCates.get(4)));
-		model.addAttribute("feedBrand", productService.selectProductFilt(productCates.get(5)));
-		model.addAttribute("feedIngredient", productService.selectProductFilt(productCates.get(6)));
+	public String productXdmForm(Model model, ProductVo productVo) {
+		if (productService.selectMaxSeq() == null)
+		{
+			productVo.setProdSeq("0");
+		} else {
+			productVo.setProdSeq(productService.selectMaxSeq());					
+		}
+		productVo.feedFuncInit();
+		model.addAttribute("item", productVo);
 		return "xdm/product/ProductXdmForm";
+	}
+	
+	@RequestMapping(value = "/xdm/product/ProductXdmInst")
+	public String codeGroupXdmInst(ProductVo productVo) {
+		productVo.setRegisterFlag(1);
+		productVo.feedFuncInit();
+		productService.insert(productVo);
+		return "redirect:/xdm/product/ProductXdmList";
 	}
 }

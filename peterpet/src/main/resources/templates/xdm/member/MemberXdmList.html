@@ -6,17 +6,10 @@
         <form name="formList" id="formList" method="post" autocomplete="off">
           <input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>
           <input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}"/>
-          <div class="card mb-3" id="customersTable" data-list='{"valueNames":["#","use","code-group-code","code-group-name", "code", "instead-code", "code-name", "code-name-eng", "order", "resist-date", "modify-date"],"page":10,"pagination":true}'>
+          <div class="card mb-3" id="customersTable" data-list='{"valueNames":["#","name", "gender", "id","email", "phone", "address", "petCnt", "resist-date", "modify-date"],"page":10,"pagination":true}'>
             <div class="card-header">
               <div class="mb-2 row g-3">
-                <h1>Code</h1>
-                <div class="col-4">
-                  <select class="form-select-JHY" id="codeUseFlag" name="codeUseFlag" aria-label="Default select example">
-                    <option>사용 여부</option>
-                    <option value="0">N</option>
-                    <option value="1" selected>Y</option>
-                  </select>
-                </div>
+                <h1>회원 목록</h1>
                 <div class="col-4">
                   <select class="form-select-JHY" id="codeDelFlag" name="codeDelFlag" aria-label="Default select example">
                     <option>삭제 여부</option>
@@ -44,9 +37,11 @@
                 <div class="col-4">
                   <select class="form-select-JHY" aria-label="Default select example">
                     <option selected="selected">검색구분</option>
-                    <option value="no">코드그룹 코드</option>
-                    <option value="no">코드그룹 이름</option>
-                    <option value="no">코드그룹 이름(영문)</option>
+                    <option value="no">이름</option>
+                    <option value="no">아이디</option>
+                    <option value="no">이메일</option>
+                    <option value="no">전화번호</option>
+                    <option value="no">주소</option>
                   </select>
                 </div>
                 <div class="col-4">
@@ -83,14 +78,13 @@
                         </div>
                       </th>
                       <th class="text-900 sort white-nowrap" data-sort="#">#</th>
-                      <th class="text-900 sort white-nowrap" data-sort="use">사용</th>
-                      <th class="text-900 sort white-nowrap" data-sort="code-group-code">코드그룹 코드</th>
-                      <th class="text-900 sort white-nowrap" data-sort="code-group-name" style="min-width: 200px;">코드그룹 이름</th>
-                      <th class="text-900 sort white-nowrap" data-sort="code">코드</th>
-                      <th class="text-900 sort white-nowrap" data-sort="instead-code">대체 코드</th>
-                      <th class="text-900 sort white-nowrap" data-sort="code-name">코드 이름</th>
-                      <th class="text-900 sort white-nowrap" data-sort="code-name-eng">코드 이름(영문)</th>
-                      <th class="text-900 sort white-nowrap" data-sort="order">순서</th>
+                      <th class="text-900 sort white-nowrap" data-sort="name">이름</th>
+                      <th class="text-900 sort white-nowrap" data-sort="gender">성별</th>
+                      <th class="text-900 sort white-nowrap" data-sort="id">아이디</th>
+                      <th class="text-900 sort white-nowrap" data-sort="email">이메일</th>
+                      <th class="text-900 sort white-nowrap" data-sort="phone">전화번호</th>
+                      <th class="text-900 sort white-nowrap" data-sort="address">주소</th>
+                      <th class="text-900 sort white-nowrap" data-sort="petCnt">반려동물 수</th>
                       <th class="text-900 sort white-nowrap" data-sort="resist-date">등록일</th>
                       <th class="text-900 sort white-nowrap text-end" data-sort="modify-date">수정일</th>
                     </tr>
@@ -110,17 +104,15 @@
                         </div>
                       </td>
                       <td class="#" th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}"></td>
-                      <td class="use" th:if="${list.codeUseFlag}=='1'">Y</td>
-                      <td class="use" th:if="${list.codeUseFlag}=='0'">N</td>
-                      <td class="code-group-code" th:text="${list.cogrNum}"></td>
-                      <td class="code-group-name" th:text="${list.cogrName}"></td>
-                      <td class="code" th:text="${list.codeNum}"></td>
-                      <td class="instead-code" th:text="${list.codeInstNum}"></td>
-                      <td class="code-name"><a href="#" th:text="${list.codeName}"></a></td>
-                      <td class="code-name-eng" th:text="${list.codeNameEng}"></td>
-                      <td class="order" th:text="${list.codeOrder}">1</td>
-                      <td class="resist-date" th:text="${list.codeRegDate}"></td>
-                      <td class="modify-date text-end" th:text="${list.codeModDate}"></td>
+                      <td class="name" th:text="${list.userName}"></td>
+                      <td class="gender" th:text="${@codeService.selectOneCachedCode(list.userGender)}"></td>
+                      <td class="id"><a th:href="@{/xdm/member/MemberXdmView(userSeq=${list.userSeq})}" th:text="${list.userId}"></a></td>
+                      <td class="email" th:text="${list.userEmail}"></td>
+                      <td class="phone" th:text="${list.userPhone}"></td>
+                      <td class="address" th:text="${list.userAddr} + ' ' + ${list.userDetailAddr}"></td>
+                      <td class="petCnt"><a th:href="@{/xdm/pet/PetXdmListSelectUser(userSeq=${list.userSeq})}" th:text="${list.petCount}"></a></td>
+                      <td class="resist-date" th:text="${list.userRegDate}"></td>
+                      <td class="modify-date text-end" th:text="${list.userModDate}"></td>
                     </tr>
                   </tbody>
                 </table>

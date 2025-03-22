@@ -12,7 +12,8 @@
               <h1>펫 상품 등록</h1>
             </div>
             <div class="card-body bg-body-tertiary">
-              <!-- <form class="needs-validation" novalidate action="/xdm/product/ProductXdmInst" method="post" id="product-form"> -->
+              <form class="needs-validation" novalidate action="/xdm/product/ProductXdmInst" method="post" id="product-form" name="product-form">
+                <input type="hidden" name="registerFlag" id="registerFlag" value="0">
                 <div class="row g-3">
                   <div class="col-3">
                     <label class="form-label-JHY" for="prodType">상품 유형<span style="color: red;">*</span></label>
@@ -21,7 +22,7 @@
                 <div class="mb-3 row g-3">
                   <div class="col-3">
                     <select class="form-select-JHY" name="prodType" id="prodType"  onchange="changeProductType()">
-                      <option th:each="productType : ${productType}" th:text="${productType.codeName}" th:value="${productType.codeSeq}"></option>
+                      <option th:each="productType : ${@codeService.selectListCachedCode(1)}" th:text="${productType.codeName}" th:value="${productType.codeSeq}"></option>
                     </select>
                   </div>
                 </div>
@@ -31,7 +32,7 @@
                       <label class="form-label-JHY" for="pordSeq">사료 코드<span style="color: red;">*</span></label>
                     </div>
                     <div class="col-3">
-                      <label class="form-label-JHY" for="feedName">사료 이름<span style="color: red;">*</span></label>
+                      <label class="form-label-JHY" for="prodName">사료 이름<span style="color: red;">*</span></label>
                     </div>
                     <div class="col-3">
                       <label class="form-label-JHY" for="prodUseFlag">사용여부<span style="color: red;">*</span></label>
@@ -39,16 +40,16 @@
                   </div>
                   <div class="mb-3 row g-3 ms-2 me-2">
                     <div class="col-3">
-                      <input class="form-control-JHY" name="prodSeq" id="prodSeq" type="text" placeholder="자동생성" readonly />
+                      <input class="form-control-JHY" name="prodSeq" id="prodSeq" th:value="${item.prodSeq} + 1" type="text" placeholder="자동생성" readonly />
                     </div>
                     <div class="col-3">
-                      <input class="form-control-JHY" name="feedName" id="feedName" type="text" />
+                      <input class="form-control-JHY" name="prodName" id="prodName" th:value="${item.prodName}" type="text" />
                     </div>
                     <div class="col-3">
                       <select class="form-select-JHY" id="prodUseFlag" name="prodUseFlag" required="">
-                        <option selected="selected" value="">선택하세요</option>
-                        <option value="1">사용</option>
-                        <option value="0">미사용</option>
+                        <option value="">선택하세요</option>
+                        <option value="1" th:selected="${item.prodUseFlag} == '1'">사용</option>
+                        <option value="0" th:selected="${item.prodUseFlag} == '0'">미사용</option>
                       </select>
                       <div class="invalid-feedback">Please select a valid state.</div>
                     </div>
@@ -57,32 +58,32 @@
                     <div class="col-3">
                       <div class="form-group">
                         <select class="form-select-JHY" id="feedSalaryAge" name="feedSalaryAge">
-                          <option>급여 연령</option>
-                          <option th:each="feedSalaryAge : ${feedSalaryAge}" th:value="${feedSalaryAgeStat.count}" th:text="${feedSalaryAge.codeName}"></option>
+                          <option value="0">급여 연령</option>
+                          <option th:each="feedSalaryAge : ${@codeService.selectListCachedCode(2)}" th:selected="${item.feedSalaryAge} == ${feedSalaryAge.codeSeq}" th:text="${feedSalaryAge.codeName}" th:value="${feedSalaryAge.codeSeq}"></option>
                         </select>
                       </div>
                     </div>
                     <div class="col-3">
                       <div class="form-group">
                         <select class="form-select-JHY" id="feedType" name="feedType">
-                          <option>종류</option>
-                          <option th:each="feedType : ${feedType}" th:value="${feedTypeStat.count}" th:text="${feedType.codeName}"></option>
+                          <option value="0">종류</option>
+                          <option th:each="feedType : ${@codeService.selectListCachedCode(3)}" th:selected="${item.feedType} == ${feedType.codeSeq}" th:text="${feedType.codeName}" th:value="${feedType.codeSeq}"></option>
                         </select>
                       </div>
                     </div>
                     <div class="col-3">
                       <div class="form-group">
                         <select class="form-select-JHY" id="feedEtc" name="feedEtc">
-                          <option>기타</option>
-                          <option th:each="feedEtc : ${feedEtc}" th:value="${feedEtcStat.count}" th:text="${feedEtc.codeName}"></option>
+                          <option value="0">기타</option>
+                          <option th:each="feedEtc : ${@codeService.selectListCachedCode(4)}" th:selected="${item.feedEtc} == ${feedEtc.codeSeq}" th:text="${feedEtc.codeName}" th:value="${feedEtc.codeSeq}"></option>
                         </select>
                       </div>
                     </div>
                     <div class="col-3">
                       <div class="form-group">
                         <select class="form-select-JHY" id="feedSize" name="feedSize">
-                          <option>크기</option>
-                          <option th:each="feedSize : ${feedSize}" th:value="${feedSizeStat.count}" th:text="${feedSize.codeName}"></option>
+                          <option value="0">크기</option>
+                          <option th:each="feedSize : ${@codeService.selectListCachedCode(5)}" th:selected="${item.feedSize} == ${feedSize.codeSeq}" th:text="${feedSize.codeName}" th:value="${feedSize.codeSeq}"></option>
                         </select>
                       </div>
                     </div>
@@ -90,31 +91,87 @@
                   <div class="mb-3 row g-3 ms-2 me-2">
                     <div class="col-3">
                       <div class="form-group">
-                        <select class="form-select-JHY" id="feedFunction" name="feedFunction">
-                          <option>기능</option>
-                          <option th:each="feedFunction : ${feedFunction}" th:value="${feedFunction.codeSeq}" th:text="${feedFunction.codeName}" th:attr="onchange=|selectFeature()|"></option>
+                        <select class="form-select-JHY" id="feedFunction" name="feedFunction" onchange="selectFeature()">
+                          <option value="0">기능</option>
+                          <option th:each="feedFunction : ${@codeService.selectListCachedCode(6)}" th:text="${feedFunction.codeName}" th:value="${feedFunction.codeSeq}"></option>
                         </select>
                       </div>
                     </div>
                     <div class="col-3">
                       <div class="form-group">
-                        <select class="form-select-JHY" id="multiple-select">
-                          <option>브랜드</option>
-                          <option th:each="feedBrand : ${feedBrand}" th:value="${feedBrand.codeSeq}" th:text="${feedBrand.codeName}"></option>
+                        <select class="form-select-JHY" id="feedBrand" name="feedBrand">
+                          <option value="0">브랜드</option>
+                          <option th:each="feedBrand : ${@codeService.selectListCachedCode(7)}" th:selected="${item.feedBrand} == ${feedBrand.codeSeq}" th:text="${feedBrand.codeName}" th:value="${feedBrand.codeSeq}"></option>
                         </select>
                       </div>
                     </div>
                     <div class="col-3">
                       <div class="form-group mb-2">
-                        <select class="form-select-JHY" id="multiple-select">
-                          <option>주원료</option>
-                          <option th:each="feedIngredient : ${feedIngredient}" th:value="${feedIngredient.codeSeq}" th:text="${feedIngredient.codeName}"></option>
+                        <select class="form-select-JHY" id="feedIngredient" name="feedIngredient">
+                          <option value="0">주원료</option>
+                          <option th:each="feedIngredient : ${@codeService.selectListCachedCode(8)}" th:selected="${item.feedIngredient} == ${feedIngredient.codeSeq}" th:text="${feedIngredient.codeName}" th:value="${feedIngredient.codeSeq}"></option>
                         </select>
                       </div>
                     </div>
                   </div>
                   <div class="mb-3 row g-3 ms-2 me-2">
-                    <div class="col-1" id="selectFunction">
+                    <div class="col-3">
+                      <div class="d-flex align-items-center mb-2" th:if="${item.funcTeethFlag} != '0'">
+                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(item.funcTeethFlag)}"></span>
+                        <button class="btn-close" type="button" style="font-size: xx-small;" onclick="cancel()"></button>
+                      </div>
+                      <div class="d-flex align-items-center mb-2" th:if="${item.funcTearsFlag} != '0'">
+                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(item.funcTearsFlag)}"></span>
+                        <button class="btn-close" type="button" style="font-size: xx-small;" onclick="cancel()"></button>
+                      </div>
+                      <div class="d-flex align-items-center mb-2" th:if="${item.funcBrainFlag} != '0'">
+                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(item.funcBrainFlag)}"></span>
+                        <button class="btn-close" type="button" style="font-size: xx-small;" onclick="cancel()"></button>
+                      </div>
+                      <div class="d-flex align-items-center mb-2" th:if="${item.funcImmunityFlag} != '0'">
+                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(item.funcImmunityFlag)}"></span>
+                        <button class="btn-close" type="button" style="font-size: xx-small;" onclick="cancel()"></button>
+                      </div>
+                      <div class="d-flex align-items-center mb-2" th:if="${item.funcBoneFlag} != '0'">
+                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(item.funcBoneFlag)}"></span>
+                        <button class="btn-close" type="button" style="font-size: xx-small;" onclick="cancel()"></button>
+                      </div>
+                      <div class="d-flex align-items-center mb-2" th:if="${item.funcStressFlag} != '0'">
+                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(item.funcStressFlag)}"></span>
+                        <button class="btn-close" type="button" style="font-size: xx-small;" onclick="cancel()"></button>
+                      </div>
+                      <div class="d-flex align-items-center mb-2" th:if="${item.funcKidneyFlag} != '0'">
+                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(item.funcKidneyFlag)}"></span>
+                        <button class="btn-close" type="button" style="font-size: xx-small;" onclick="cancel()"></button>
+                      </div>
+                      <div class="d-flex align-items-center mb-2" th:if="${item.funcHeartFlag} != '0'">
+                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(item.funcHeartFlag)}"></span>
+                        <button class="btn-close" type="button" style="font-size: xx-small;" onclick="cancel()"></button>
+                      </div>
+                      <div class="d-flex align-items-center mb-2" th:if="${item.funcAllergyFlag} != '0'">
+                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(item.funcAllergyFlag)}"></span>
+                        <button class="btn-close" type="button" style="font-size: xx-small;" onclick="cancel()"></button>
+                      </div>
+                      <div class="d-flex align-items-center mb-2" th:if="${item.funcPregnancyFlag} != '0'">
+                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(item.funcPregnancyFlag)}"></span>
+                        <button class="btn-close" type="button" style="font-size: xx-small;" onclick="cancel()"></button>
+                      </div>
+                      <div class="d-flex align-items-center mb-2" th:if="${item.funcIntestineFlag} != '0'">
+                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(item.funcIntestineFlag)}"></span>
+                        <button class="btn-close" type="button" style="font-size: xx-small;" onclick="cancel()"></button>
+                      </div>
+                      <div class="d-flex align-items-center mb-2" th:if="${item.funcNeuteringFlag} != '0'">
+                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(item.funcNeuteringFlag)}"></span>
+                        <button class="btn-close" type="button" style="font-size: xx-small;" onclick="cancel()"></button>
+                      </div>
+                      <div class="d-flex align-items-center mb-2" th:if="${item.funcWeightFlag} != '0'">
+                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(item.funcWeightFlag)}"></span>
+                        <button class="btn-close" type="button" style="font-size: xx-small;" onclick="cancel()"></button>
+                      </div>
+                      <div class="d-flex align-items-center" th:if="${item.funcSkinFlag} != '0'">
+                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(item.funcSkinFlag)}"></span>
+                        <button class="btn-close" type="button" style="font-size: xx-small;" onclick="cancel()"></button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -126,8 +183,8 @@
                     <button class="btn btn-primary btn-sm" type="button" id="btnSubmit"><span class="fas fa-database"></span></button>
                   </div>
                 </div>
-                <input type="hidden" name="cogrRegDate" id="cogrRegDate" >
-                <input type="hidden" name="cogrModDate" id="cogrModDate" >
+                <input type="hidden" name="prodRegDate" id="prodRegDate" >
+                <!-- <input type="hidden" name="cogrModDate" id="cogrModDate" > -->
               </form>
             </div>
           </div>
@@ -147,16 +204,10 @@
       
       let date = year + month + day;
       
-      document.getElementById("cogrRegDate").value = date;
-      document.getElementById("cogrModDate").value = date;
+      document.getElementById("prodRegDate").value = date;
+      // document.getElementById("cogrModDate").value = date;
       
-      if (document.getElementById("cogrNum").value === "") {
-        document.getElementById("cogrNum").value = document.getElementById("cogrSeq").value;
-      } else {
-        // by pass
-      }
-      
-      document.getElementById("code-group-form").submit();
+      document.getElementById("product-form").submit();
     }
   </script>
   <div th:replace="~{xdm/include/includeXdmForm :: includeXdmForm}"></div>

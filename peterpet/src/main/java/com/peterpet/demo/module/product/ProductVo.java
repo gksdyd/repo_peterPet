@@ -1,130 +1,257 @@
 package com.peterpet.demo.module.product;
 
-public class ProductVo {
+import java.util.ArrayList;
+import java.util.List;
 
-	//	paging
-	private int thisPage = 1;									// 현재 페이지
-	private int rowNumToShow = 5;								// 화면에 보여줄 데이터 줄 갯수
-	private int pageNumToShow = 5;								// 화면에 보여줄 페이징 번호 갯수
+import com.peterpet.demo.module.base.BaseVo;
 
-	private int totalRows;										// 전체 데이터 갯수
-	private int totalPages;										// 전체 페이지 번호
-	private int startPage;										// 시작 페이지 번호
-	private int endPage;										// 마지막 페이지 번호
+public class ProductVo extends BaseVo{
 
-	private int startRnumForMysql = 0;							// 쿼리 시작 row
-
-	public int getThisPage() {
-		return thisPage;
-	}
-
-	public void setThisPage(int thisPage) {
-		this.thisPage = thisPage;
-	}
-
-	public int getRowNumToShow() {
-		return rowNumToShow;
-	}
-
-	public void setRowNumToShow(int rowNumToShow) {
-		this.rowNumToShow = rowNumToShow;
-	}
-
-	public int getPageNumToShow() {
-		return pageNumToShow;
-	}
-
-	public void setPageNumToShow(int pageNumToShow) {
-		this.pageNumToShow = pageNumToShow;
-	}
-
-	public int getTotalRows() {
-		return totalRows;
-	}
-
-	public void setTotalRows(int totalRows) {
-		this.totalRows = totalRows;
-	}
-
-	public int getTotalPages() {
-		return totalPages;
-	}
-
-	public void setTotalPages(int totalPages) {
-		this.totalPages = totalPages;
-	}
-
-	public int getStartPage() {
-		return startPage;
-	}
-
-	public void setStartPage(int startPage) {
-		this.startPage = startPage;
-	}
-
-	public int getEndPage() {
-		return endPage;
-	}
-
-	public void setEndPage(int endPage) {
-		this.endPage = endPage;
-	}
-
-	public int getStartRnumForMysql() {
-		return startRnumForMysql;
-	}
-
-	public void setStartRnumForMysql(int startRnumForMysql) {
-		this.startRnumForMysql = startRnumForMysql;
-	}
+	private String prodSeq;
+	private int prodType;
+	private int prodUseFlag;
+	private String prodName;
+	private int feedSalaryAge;
+	private int feedType;
+	private int funcTeethFlag;
+	private int funcTearsFlag;
+	private int funcBrainFlag;
+	private int funcImmunityFlag;
+	private int funcBoneFlag;
+	private int funcStressFlag;
+	private int funcKidneyFlag;
+	private int funcHeartFlag;
+	private int funcAllergyFlag;
+	private int funcPregnancyFlag;
+	private int funcIntestineFlag;
+	private int funcNeuteringFlag;
+	private int funcWeightFlag;
+	private int funcSkinFlag;
+	private int feedEtc;
+	private int feedBrand;
+	private int feedIngredient;
+	private int feedSize;
+	private int feedFunction;
+	private int registerFlag;
+	private String prodRegDate;
+	private String prodModDate;
 	
-	public void setParamsPaging(int totalRows) {
-//		setThisPage(3);
+	private int funcCount;
+	
+	public String getProdSeq() {
+		return prodSeq;
+	}
+	public void setProdSeq(String prodSeq) {
+		this.prodSeq = prodSeq;
+	}
+	public int getProdType() {
+		return prodType;
+	}
+	public void setProdType(int prodType) {
+		this.prodType = prodType;
+	}
+	public int getProdUseFlag() {
+		return prodUseFlag;
+	}
+	public void setProdUseFlag(int prodUseFlag) {
+		this.prodUseFlag = prodUseFlag;
+	}
+	public String getProdName() {
+		return prodName;
+	}
+	public void setProdName(String prodName) {
+		this.prodName = prodName;
+	}
+	public int getFeedSalaryAge() {
+		return feedSalaryAge;
+	}
+	public void setFeedSalaryAge(int feedSalaryAge) {
+		this.feedSalaryAge = feedSalaryAge;
+	}
+	public int getFeedType() {
+		return feedType;
+	}
+	public void setFeedType(int feedType) {
+		this.feedType = feedType;
+	}
+	public int getFuncTeethFlag() {
+		return funcTeethFlag;
+	}
+	public void setFuncTeethFlag(int funcTeethFlag) {
+		this.funcTeethFlag = funcTeethFlag;
+	}
+	public int getFuncTearsFlag() {
+		return funcTearsFlag;
+	}
+	public void setFuncTearsFlag(int funcTearsFlag) {
+		this.funcTearsFlag = funcTearsFlag;
+	}
+	public int getFuncBrainFlag() {
+		return funcBrainFlag;
+	}
+	public void setFuncBrainFlag(int funcBrainFlag) {
+		this.funcBrainFlag = funcBrainFlag;
+	}
+	public int getFuncImmunityFlag() {
+		return funcImmunityFlag;
+	}
+	public void setFuncImmunityFlag(int funcImmunityFlag) {
+		this.funcImmunityFlag = funcImmunityFlag;
+	}
+	public int getFuncBoneFlag() {
+		return funcBoneFlag;
+	}
+	public void setFuncBoneFlag(int funcBoneFlag) {
+		this.funcBoneFlag = funcBoneFlag;
+	}
+	public int getFuncStressFlag() {
+		return funcStressFlag;
+	}
+	public void setFuncStressFlag(int funcStressFlag) {
+		this.funcStressFlag = funcStressFlag;
+	}
+	public int getFuncKidneyFlag() {
+		return funcKidneyFlag;
+	}
+	public void setFuncKidneyFlag(int funcKidneyFlag) {
+		this.funcKidneyFlag = funcKidneyFlag;
+	}
+	public int getFuncHeartFlag() {
+		return funcHeartFlag;
+	}
+	public void setFuncHeartFlag(int funcHeartFlag) {
+		this.funcHeartFlag = funcHeartFlag;
+	}
+	public int getFuncAllergyFlag() {
+		return funcAllergyFlag;
+	}
+	public void setFuncAllergyFlag(int funcAllergyFlag) {
+		this.funcAllergyFlag = funcAllergyFlag;
+	}
+	public int getFuncPregnancyFlag() {
+		return funcPregnancyFlag;
+	}
+	public void setFuncPregnancyFlag(int funcPregnancyFlag) {
+		this.funcPregnancyFlag = funcPregnancyFlag;
+	}
+	public int getFuncIntestineFlag() {
+		return funcIntestineFlag;
+	}
+	public void setFuncIntestineFlag(int funcIntestineFlag) {
+		this.funcIntestineFlag = funcIntestineFlag;
+	}
+	public int getFuncNeuteringFlag() {
+		return funcNeuteringFlag;
+	}
+	public void setFuncNeuteringFlag(int funcNeuteringFlag) {
+		this.funcNeuteringFlag = funcNeuteringFlag;
+	}
+	public int getFuncWeightFlag() {
+		return funcWeightFlag;
+	}
+	public void setFuncWeightFlag(int funcWeightFlag) {
+		this.funcWeightFlag = funcWeightFlag;
+	}
+	public int getFuncSkinFlag() {
+		return funcSkinFlag;
+	}
+	public void setFuncSkinFlag(int funcSkinFlag) {
+		this.funcSkinFlag = funcSkinFlag;
+	}
+	public int getFeedEtc() {
+		return feedEtc;
+	}
+	public void setFeedEtc(int feedEtc) {
+		this.feedEtc = feedEtc;
+	}
+	public int getFeedBrand() {
+		return feedBrand;
+	}
+	public void setFeedBrand(int feedBrand) {
+		this.feedBrand = feedBrand;
+	}
+	public int getFeedIngredient() {
+		return feedIngredient;
+	}
+	public void setFeedIngredient(int feedIngredient) {
+		this.feedIngredient = feedIngredient;
+	}
+	public int getFeedSize() {
+		return feedSize;
+	}
+	public void setFeedSize(int feedSize) {
+		this.feedSize = feedSize;
+	}
+	public int getFuncCount() {
+		return funcCount;
+	}
+	public void setFuncCount(int funcCount) {
+		this.funcCount = funcCount;
+	}
+	public int getFeedFunction() {
+		return feedFunction;
+	}
+	public void setFeedFunction(int feedFunction) {
+		this.feedFunction = feedFunction;
+	}
+	public int getRegisterFlag() {
+		return registerFlag;
+	}
+	public void setRegisterFlag(int registerFlag) {
+		this.registerFlag = registerFlag;
+	}
+	public String getProdRegDate() {
+		return prodRegDate;
+	}
+	public void setProdRegDate(String prodRegDate) {
+		this.prodRegDate = prodRegDate;
+	}
+	public String getProdModDate() {
+		return prodModDate;
+	}
+	public void setProdModDate(String prodModDate) {
+		this.prodModDate = prodModDate;
+	}
 
-		setTotalRows(totalRows);	// 총 데이터 갯수 설정
-
-		if (getTotalRows() == 0) {	// 페이지 갯수 설정
-			setTotalPages(1);		// 1개로 셋팅
-		} else {
-			setTotalPages(getTotalRows() / getRowNumToShow());	// 총 데이터 갯수 / 한 페이지에 보여주는 데이터 갯수
-		}
-
-		if (getTotalRows() % getRowNumToShow() > 0) {	// 총 데이터가 한 페이지의 갯수로 맞아 떨어지지 않는 경우
-			setTotalPages(getTotalPages() + 1);	// 페이지 갯수 1 증가
-		}
-
-		if (getTotalPages() < getThisPage()) {	// 현재 페이지가 총 페이지 갯수보다 큰경우
-			setThisPage(getTotalPages());	// 현재 페이지를 마지막 페이지로 설정
+	public static List<Integer> feedFuncArr = new ArrayList<>();
+	
+	public void feedFuncInit() {
+		if (getRegisterFlag() == 0) {
+			feedFuncArr.clear();
 		}
 		
-		// 페이지 시작하는 번호 설정
-		setStartPage(((getThisPage() - 1) / getPageNumToShow()) * getPageNumToShow() + 1);
-
-		// 페이지 마지막 번호 설정
-		setEndPage(getStartPage() + getPageNumToShow() - 1);
-
-		if (getEndPage() > getTotalPages()) {	// 마지막 페이지 번호가 총 페이지 갯수보다 클 때
-			setEndPage(getTotalPages());	// 마지막 페이지 번호를 총 페이지 갯수로 설정
+		feedFuncArr.add(getFeedFunction());
+		
+		for (int i = 0; i < feedFuncArr.size(); i++) {
+			if (feedFuncArr.get(i) == 20) {
+				setFuncTeethFlag(feedFuncArr.get(i));
+			} else if (feedFuncArr.get(i) == 21) {
+				setFuncTearsFlag(feedFuncArr.get(i));
+			} else if (feedFuncArr.get(i) == 22) {
+				setFuncBrainFlag(feedFuncArr.get(i));
+			} else if (feedFuncArr.get(i) == 23) {
+				setFuncImmunityFlag(feedFuncArr.get(i));
+			} else if (feedFuncArr.get(i) == 24) {
+				setFuncBoneFlag(feedFuncArr.get(i));
+			} else if (feedFuncArr.get(i) == 25) {
+				setFuncStressFlag(feedFuncArr.get(i));
+			} else if (feedFuncArr.get(i) == 26) {
+				setFuncKidneyFlag(feedFuncArr.get(i));
+			} else if (feedFuncArr.get(i) == 27) {
+				setFuncHeartFlag(feedFuncArr.get(i));
+			} else if (feedFuncArr.get(i) == 28) {
+				setFuncAllergyFlag(feedFuncArr.get(i));
+			} else if (feedFuncArr.get(i) == 29) {
+				setFuncPregnancyFlag(feedFuncArr.get(i));
+			} else if (feedFuncArr.get(i) == 30) {
+				setFuncIntestineFlag(feedFuncArr.get(i));
+			} else if (feedFuncArr.get(i) == 31) {
+				setFuncNeuteringFlag(feedFuncArr.get(i));
+			} else if (feedFuncArr.get(i) == 32) {
+				setFuncWeightFlag(feedFuncArr.get(i));
+			} else if (feedFuncArr.get(i) == 33) {
+				setFuncSkinFlag(feedFuncArr.get(i));
+			}
 		}
-		
-//		setEndRnumForOracle((getRowNumToShow() * getThisPage()));
-//		setStartRnumForOracle((getEndRnumForOracle() - getRowNumToShow()) + 1);
-//		if (getStartRnumForOracle() < 1) setStartRnumForOracle(1);
-		
-		if (thisPage == 1) {	// 쿼리에 불러올 데이터 시작부분 전달
-			setStartRnumForMysql(0);
-		} else {
-			setStartRnumForMysql((getRowNumToShow() * (getThisPage()-1)));
-		}
-		
-		System.out.println("getThisPage():" + getThisPage());
-		System.out.println("getTotalRows():" + getTotalRows());
-		System.out.println("getRowNumToShow():" + getRowNumToShow());
-		System.out.println("getTotalPages():" + getTotalPages());
-		System.out.println("getStartPage():" + getStartPage());
-		System.out.println("getEndPage():" + getEndPage());		
-//		System.out.println("getStartRnumForOracle():" + getStartRnumForOracle());
-//		System.out.println("getEndRnumForOracle():" + getEndRnumForOracle());
-		System.out.println("getStartRnumForMysql(): " + getStartRnumForMysql());	
 	}
 }

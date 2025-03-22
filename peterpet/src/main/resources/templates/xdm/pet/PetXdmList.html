@@ -6,22 +6,29 @@
         <form name="formList" id="formList" method="post" autocomplete="off">
           <input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>
           <input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}"/>
-          <div class="card mb-3" id="customersTable" data-list='{"valueNames":["#","use","code-group-code","code-group-name", "code", "instead-code", "code-name", "code-name-eng", "order", "resist-date", "modify-date"],"page":10,"pagination":true}'>
+          <div class="card mb-3" id="customersTable" data-list='{"valueNames":["#","name", "varieties", "gender","birth", "weight", "vaccination", "neutering", "personality", "disease", "user-name", "resist-date", "modify-date"],"page":10,"pagination":true}'>
             <div class="card-header">
               <div class="mb-2 row g-3">
-                <h1>Code</h1>
-                <div class="col-4">
-                  <select class="form-select-JHY" id="codeUseFlag" name="codeUseFlag" aria-label="Default select example">
-                    <option>사용 여부</option>
-                    <option value="0">N</option>
-                    <option value="1" selected>Y</option>
-                  </select>
-                </div>
+                <h1>펫 목록</h1>
                 <div class="col-4">
                   <select class="form-select-JHY" id="codeDelFlag" name="codeDelFlag" aria-label="Default select example">
                     <option>삭제 여부</option>
                     <option value="1">Y</option>
                     <option value="0" selected>N</option>
+                  </select>
+                </div>
+                <div class="col-4">
+                  <select class="form-select-JHY" id="codeDelFlag" name="codeDelFlag" aria-label="Default select example">
+                    <option>접종 여부</option>
+                    <option value="1">Y</option>
+                    <option value="0">N</option>
+                  </select>
+                </div>
+                <div class="col-4">
+                  <select class="form-select-JHY" id="codeDelFlag" name="codeDelFlag" aria-label="Default select example">
+                    <option>중성화 여부</option>
+                    <option value="1">Y</option>
+                    <option value="0">N</option>
                   </select>
                 </div>
               </div>
@@ -40,13 +47,13 @@
                   <input class="form-control-JHY datetimepicker" type="text" placeholder="yy-mm-dd" data-options='{"disableMobile":true}' />
                 </div>
               </div>
-              <div class="mb-4 row g-3">
+              <div class="mb-2 row g-3">
                 <div class="col-4">
                   <select class="form-select-JHY" aria-label="Default select example">
                     <option selected="selected">검색구분</option>
-                    <option value="no">코드그룹 코드</option>
-                    <option value="no">코드그룹 이름</option>
-                    <option value="no">코드그룹 이름(영문)</option>
+                    <option value="no">이름</option>
+                    <option value="no">품종</option>
+                    <option value="no">보호자 이름</option>
                   </select>
                 </div>
                 <div class="col-4">
@@ -55,6 +62,13 @@
                 <div class="col-4">
                   <button class="btn btn-outline-dark btn-sm" type="button"><span class="fas fa-search"></span></button>
                   <button class="btn btn-outline-dark btn-sm" type="button"><span class="fas fa-redo-alt"></span></button>
+                </div>
+              </div>
+              <div class="mb-4 row g-3">
+                <div class="col-4 d-flex">
+                  <input class="form-control-JHY w-25" type="text" placeholder="최소 무게" />
+                  <label class="ms-2" for="">~</label>
+                  <input class="form-control-JHY ms-2 w-25" type="text" placeholder="최대 무게" />
                 </div>
               </div>
               <div class="row">
@@ -83,14 +97,16 @@
                         </div>
                       </th>
                       <th class="text-900 sort white-nowrap" data-sort="#">#</th>
-                      <th class="text-900 sort white-nowrap" data-sort="use">사용</th>
-                      <th class="text-900 sort white-nowrap" data-sort="code-group-code">코드그룹 코드</th>
-                      <th class="text-900 sort white-nowrap" data-sort="code-group-name" style="min-width: 200px;">코드그룹 이름</th>
-                      <th class="text-900 sort white-nowrap" data-sort="code">코드</th>
-                      <th class="text-900 sort white-nowrap" data-sort="instead-code">대체 코드</th>
-                      <th class="text-900 sort white-nowrap" data-sort="code-name">코드 이름</th>
-                      <th class="text-900 sort white-nowrap" data-sort="code-name-eng">코드 이름(영문)</th>
-                      <th class="text-900 sort white-nowrap" data-sort="order">순서</th>
+                      <th class="text-900 sort white-nowrap" data-sort="name">이름</th>
+                      <th class="text-900 sort white-nowrap" data-sort="varieties">품종</th>
+                      <th class="text-900 sort white-nowrap" data-sort="gender">성별</th>
+                      <th class="text-900 sort white-nowrap" data-sort="birth">생일</th>
+                      <th class="text-900 sort white-nowrap" data-sort="weight">무게</th>
+                      <th class="text-900 sort white-nowrap" data-sort="vaccination">접종 유무</th>
+                      <th class="text-900 sort white-nowrap" data-sort="neutering">중성화 유무</th>
+                      <th class="text-900 sort white-nowrap" data-sort="personality">성격/특징</th>
+                      <th class="text-900 sort white-nowrap" data-sort="disease">질병/질환</th>
+                      <th class="text-900 sort white-nowrap" data-sort="user-name">보호자 이름</th>
                       <th class="text-900 sort white-nowrap" data-sort="resist-date">등록일</th>
                       <th class="text-900 sort white-nowrap text-end" data-sort="modify-date">수정일</th>
                     </tr>
@@ -110,17 +126,20 @@
                         </div>
                       </td>
                       <td class="#" th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}"></td>
-                      <td class="use" th:if="${list.codeUseFlag}=='1'">Y</td>
-                      <td class="use" th:if="${list.codeUseFlag}=='0'">N</td>
-                      <td class="code-group-code" th:text="${list.cogrNum}"></td>
-                      <td class="code-group-name" th:text="${list.cogrName}"></td>
-                      <td class="code" th:text="${list.codeNum}"></td>
-                      <td class="instead-code" th:text="${list.codeInstNum}"></td>
-                      <td class="code-name"><a href="#" th:text="${list.codeName}"></a></td>
-                      <td class="code-name-eng" th:text="${list.codeNameEng}"></td>
-                      <td class="order" th:text="${list.codeOrder}">1</td>
-                      <td class="resist-date" th:text="${list.codeRegDate}"></td>
-                      <td class="modify-date text-end" th:text="${list.codeModDate}"></td>
+                      <td class="name"><a th:href="@{/xdm/pet/PetXdmView(petSeq=${list.petSeq})}" th:text="${list.petName}"></a></td>
+                      <td class="varieties" th:text="${list.petVarieties}"></td>
+                      <td class="gender" th:text="${@codeService.selectOneCachedCode(list.petGender)}"></td>
+                      <td class="birth" th:text="${list.petBirth}"></td>
+                      <td class="weight" th:text="${list.petWeight}"></td>
+                      <td class="vaccination" th:if="${list.petVaccinationFlag} == '1'">Y</td>
+                      <td class="vaccination" th:if="${list.petVaccinationFlag} == '0'">N</td>
+                      <td class="neutering" th:if="${list.petNeuteringFlag} == '1'">Y</td>
+                      <td class="neutering" th:if="${list.petNeuteringFlag} == '0'">N</td>
+                      <td class="personality" th:text="${list.personalCount}"></td>
+                      <td class="disease" th:text="${list.diseaseCount}"></td>
+                      <td class="user-name"><a th:href="@{/xdm/member/MemberXdmView(userSeq=${list.userSeq})}" th:text="${list.userName}"></a></td>
+                      <td class="resist-date" th:text="${list.petRegDate}"></td>
+                      <td class="modify-date text-end" th:text="${list.petModDate}"></td>
                     </tr>
                   </tbody>
                 </table>

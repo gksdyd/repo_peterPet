@@ -5,38 +5,70 @@
 
 	<resultMap type="com.peterpet.demo.module.product.ProductDto" id="resultMapObj"></resultMap>
 	
-	<select id="selectProductType" resultMap="resultMapObj">
+	<select id="selectMaxSeq" resultType="String">
 		SELECT
-			codeSeq,
-			codeName
+			MAX(prodSeq)
 		FROM
-			code
-		WHERE 1=1
-			AND codeGroup_cogrSeq = 1
+			product
 	</select>
 	
-	<select id="selectProductCate" resultMap="resultMapObj">
-		SELECT
-			cogrSeq
-		FROM
-			codegroup
-		WHERE 1=1
-			AND cogrOrder = 2
-	</select>
-	
-	<select id="selectProductFilt" resultMap="resultMapObj">
-		SELECT
-			codeSeq,
-			codeName
-		FROM
-			code
-		WHERE 1=1
-			AND codeGroup_cogrSeq = (SELECT
-										cogrSeq
-									FROM
-										codegroup
-									WHERE 1=1
-										AND cogrOrder = 2
-		                                AND cogrSeq = #{cogrSeq})
-	</select>
+	<insert id="insert">
+		INSERT INTO product(
+			prodType,
+			prodUseFlag,
+			prodName,
+			prodScore,
+			prodRegDate,
+			prodModDate,
+			feedSalaryAge,
+			feedType,
+			funcTeethFlag,
+			funcTearsFlag,
+			funcBrainFlag,
+			funcImmunityFlag,
+			funcBoneFlag,
+			funcStressFlag,
+			funcKidneyFlag,
+			funcHeartFlag,
+			funcAllergyFlag,
+			funcPregnancyFlag,
+			funcIntestineFlag,
+			funcNeuteringFlag,
+			funcWeightFlag,
+			funcSkinFlag,
+			feedEtc,
+			feedBrand,
+			feedIngredient,
+			feedSize,
+			feedDelFlag
+		) VALUE (
+			#{prodType},
+			#{prodUseFlag},
+			#{prodName},
+			0,
+			#{prodRegDate},
+			#{prodModDate},
+			#{feedSalaryAge},
+			#{feedType},
+			#{funcTeethFlag},
+			#{funcTearsFlag},
+			#{funcBrainFlag},
+			#{funcImmunityFlag},
+			#{funcBoneFlag},
+			#{funcStressFlag},
+			#{funcKidneyFlag},
+			#{funcHeartFlag},
+			#{funcAllergyFlag},
+			#{funcPregnancyFlag},
+			#{funcIntestineFlag},
+			#{funcNeuteringFlag},
+			#{funcWeightFlag},
+			#{funcSkinFlag},
+			#{feedEtc},
+			#{feedBrand},
+			#{feedIngredient},
+			#{feedSize},
+			0
+		)
+	</insert>
 </mapper>

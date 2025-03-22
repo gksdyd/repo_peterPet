@@ -30,16 +30,19 @@
                 <div class="mb-3 row g-3">
                   <div class="col-3">
                     <input class="form-control-JHY" name="cogrSeq" id="cogrSeq" th:value="${item.cogrSeq} + 1" type="text" placeholder="자동생성" readonly />
+                    <div class="invalid-feedback">Please select a valid state.</div>
                   </div>
                   <div class="col-3">
                     <input class="form-control-JHY" name="cogrNum" id="cogrNum" type="text" placeholder="영대소문자, 숫자" />
+                    <div class="invalid-feedback">Please select a valid state.</div>
                   </div>
                   <div class="col-3">
                     <input class="form-control-JHY" name="cogrName" id="cogrName" type="text" placeholder="한글, 영대소문자, 숫자" required />
-                    <div class="invalid-feedback">Please provide a valid name.</div>
+                    <div class="invalid-feedback" id="cogrNameValid">잘못된 코드 그룹 이름입니다.</div>
                   </div>
                   <div class="col-3">
                     <input class="form-control-JHY" name="cogrNameEng" id="cogrNameEng" type="text" placeholder="영대소문자, 숫자" />
+                    <div class="invalid-feedback">Please select a valid state.</div>
                   </div>
                 </div>
                 <div class="row g-3">
@@ -91,11 +94,53 @@
         </div>
       </div>
     </main>
+
+    <div class="modal" id="modal-valid" tabindex="-1">
+      <div class="modal-dialog mt-6" role="document">
+        <div class="modal-content border-0">
+          <div class="position-absolute top-0 end-0 mt-2 me-2 z-1">
+            <button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base" id="x-button"></button>
+          </div>
+          <div class="modal-body p-0">
+            <div class="bg-body-tertiary rounded-top-3 py-3 ps-4 pe-6">
+              <h4 class="mb-1" id="tooltippopoversLabel">잘못된 코드그룹 이름</h4>
+            </div>
+            <div class="p-4 pb-0 mb-3">
+              <div class="row">
+                <div class="col">
+                  <h5>다시 입력해주세요.</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" id="close-button" type="button" data-bs-dismiss="modal">Close</button>
+            <button class="btn btn-primary" type="button">submit </button>
+          </div>
+        </div>
+      </div>
+    </div>
   <!-- ===============================================-->
   <!--    End of Main Content-->
   <!-- ===============================================-->
   <script type="text/javascript">
+    document.getElementById("x-button").onclick = function() {
+      document.getElementById("modal-valid").style.display = "none";
+      document.getElementById("cogrName").focus();
+    }
+
+    document.getElementById("close-button").onclick = function() {
+      document.getElementById("modal-valid").style.display = "none";
+      document.getElementById("cogrName").focus();
+    }
+    
     document.getElementById("btnSubmit").onclick = function() {
+
+      if (document.getElementById("cogrName").value.trim() == null || document.getElementById("cogrName").value.trim() == "") {
+        document.getElementById("modal-valid").style.display = "block";
+        // document.getElementById("cogrNameValid").style.display = "block";
+        return false;
+      }
       let today = new Date();
       let year = today.getFullYear();
       let month = (today.getMonth() + 1).toString().padStart(2, '0');

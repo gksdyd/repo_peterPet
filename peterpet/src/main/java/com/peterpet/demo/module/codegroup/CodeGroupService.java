@@ -19,7 +19,7 @@ public class CodeGroupService {
 		return codeGroupDao.selectOne(codeGroupDto);
 	}
 	
-	public CodeGroupDto selectMaxSeq() {
+	public String selectMaxSeq() {
 		return codeGroupDao.selectMaxSeq();
 	}
 	

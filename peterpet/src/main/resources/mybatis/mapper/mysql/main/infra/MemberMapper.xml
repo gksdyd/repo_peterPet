@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+				 
+<mapper namespace="com.peterpet.demo.module.member.MemberDao">
+
+	<resultMap type="com.peterpet.demo.module.member.MemberDto" id="resultMapObj"></resultMap>
+	
+	<select id="selectList" resultMap="resultMapObj">
+		SELECT
+			userSeq,
+			userGender,
+			userName,
+			userId,
+			userEmail,
+			userPhone,
+			userAddr,
+			userDetailAddr,
+			userRegDate,
+			userModDate,
+			(SELECT
+				COUNT(*)
+			FROM
+				pet
+			WHERE 1=1
+				AND userSeq = user_userSeq) AS petCount
+		FROM
+			user
+		ORDER BY userSeq DESC
+		limit #{rowNumToShow} offset #{startRnumForMysql}
+	</select>
+	
+	<select id="selectOneCount" resultType="Integer">
+		SELECT COUNT(*)
+		FROM user
+		WHERE 1=1
+	</select>
+	
+	<select id="selectOne" resultMap="resultMapObj">
+		SELECT
+			userSeq,
+			userGender,
+			userName,
+			userId,
+			userBirth,
+			userEmail,
+			userPhone,
+			userRecvNotiFlag,
+			userPostCode,
+			userAddr,
+			userDetailAddr,
+			userDelFlag,
+			userSavePoint
+		FROM
+			user
+		WHERE 1=1
+			AND userSeq = #{userSeq}
+	</select>
+</mapper>

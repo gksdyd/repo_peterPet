@@ -11,15 +11,11 @@ public class ProductService {
 	@Autowired
 	ProductDao productDao;
 	
-	public List<ProductDto> selectProductType() {
-		return productDao.selectProductType();
+	public String selectMaxSeq() {
+		return productDao.selectMaxSeq();
 	}
 	
-	public List<ProductDto> selectProductCate() {
-		return productDao.selectProductCate();
-	}
-	
-	public List<ProductDto> selectProductFilt(ProductDto productDto) {
-		return productDao.selectProductFilt(productDto);
+	public int insert(ProductVo productVo) {
+		return productDao.insert(productVo);
 	}
 }

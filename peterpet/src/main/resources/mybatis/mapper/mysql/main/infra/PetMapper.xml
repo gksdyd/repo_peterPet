@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+				 
+<mapper namespace="com.peterpet.demo.module.pet.PetDao">
+
+	<resultMap type="com.peterpet.demo.module.pet.PetDto" id="resultMapObj"></resultMap>
+	
+	<select id="selectList" resultMap="resultMapObj">
+		SELECT
+			a.petSeq,
+			a.petVarieties,
+			a.petGender,
+			a.petName,
+			a.petNickname,
+			a.petBirth,
+			a.petWeight,
+			a.petVaccinationFlag,
+			a.petNeuteringFlag,
+			a.petRegDate,
+			a.petModDate,
+			b.userSeq,
+		    b.userName,
+		    (SELECT
+				count(*)
+			FROM
+				personality
+			WHERE 1=1
+				AND pet_petSeq = a.petSeq) AS personalCount,
+			(SELECT
+				count(*)
+			FROM
+				disease
+			WHERE 1=1
+				AND pet_petSeq = a.petSeq) AS diseaseCount
+		FROM
+			pet a
+    		LEFT JOIN user b ON a.user_userSeq = b.userSeq
+		ORDER BY petSeq DESC
+		limit #{rowNumToShow} offset #{startRnumForMysql}
+	</select>
+	
+	<select id="selectListOneUser" resultMap="resultMapObj">
+		SELECT
+			a.petSeq,
+			a.petVarieties,
+			a.petGender,
+			a.petName,
+			a.petNickname,
+			a.petBirth,
+			a.petWeight,
+			a.petVaccinationFlag,
+			a.petNeuteringFlag,
+			a.petRegDate,
+			a.petModDate,
+			b.userSeq,
+		    b.userName,
+		    (SELECT
+				count(*)
+			FROM
+				personality
+			WHERE 1=1
+				AND pet_petSeq = a.petSeq) AS personalCount,
+			(SELECT
+				count(*)
+			FROM
+				disease
+			WHERE 1=1
+				AND pet_petSeq = a.petSeq) AS diseaseCount
+		FROM
+			pet a
+    		LEFT JOIN user b ON a.user_userSeq = b.userSeq
+		WHERE 1=1
+			AND user_userSeq = #{userSeq}
+		ORDER BY petSeq DESC
+		limit #{rowNumToShow} offset #{startRnumForMysql}
+	</select>
+	
+	<select id="selectOneCount" resultType="Integer">
+		SELECT COUNT(*)
+		FROM pet
+		WHERE 1=1
+	</select>
+	
+	<select id="selectOneCountOneUser" resultType="Integer">
+		SELECT COUNT(*)
+		FROM pet
+		WHERE 1=1
+			AND user_userSeq = #{userSeq}
+	</select>
+	
+	<select id="selectOne" resultMap="resultMapObj">
+		SELECT
+			petSeq,
+			petVarieties,
+			petGender,
+			petName,
+			petNickname,
+			petBirth,
+			petWeight,
+			petVaccinationFlag,
+			petNeuteringFlag,
+			petDelFlag
+		FROM
+			pet
+		WHERE 1=1
+			AND petSeq = #{petSeq}
+	</select>
+	
+	<select id="selectOnePersonal">
+		SELECT
+			b.persDiscription
+		FROM
+			pet a
+		    LEFT JOIN personality b ON a.petSeq = b.pet_petSeq
+		WHERE 1=1
+			AND pet_petSeq = #{petSeq}
+	</select>
+	
+	<select id="selectOneDisease">
+		SELECT
+			b.diseDiscription
+		FROM
+			pet a
+		    LEFT JOIN disease b ON a.petSeq = b.pet_petSeq
+		WHERE 1=1
+			AND pet_petSeq = #{petSeq}
+	</select>
+</mapper>
