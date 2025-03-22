@@ -38,7 +38,7 @@
               <div class="mb-3 row g-3">
                 <div class="col-4">
                   <select class="form-select-JHY" aria-label="Default select example" name="prodType" id="prodType" onchange="changeProductType()">
-                    <option th:each="productType : ${productType}" th:text="${productType.codeName}" th:value="${productType.codeSeq}"></option>
+                    <option th:each="productType : ${@codeService.selectListCachedCode(1)}" th:text="${productType.codeName}" th:value="${productType.codeSeq}"></option>
                   </select>
                 </div>
               </div>
@@ -48,7 +48,7 @@
                     <div class="form-group">
                       <select class="form-select-JHY" id="multiple-select">
                         <option>급여 연령</option>
-                        <option th:each="feedSalaryAge : ${feedSalaryAge}" th:value="${feedSalaryAge.codeSeq}" th:text="${feedSalaryAge.codeName}"></option>
+                        <option th:each="feedSalaryAge : ${@codeService.selectListCachedCode(2)}" th:value="${feedSalaryAge.codeSeq}" th:text="${feedSalaryAge.codeName}"></option>
                       </select>
                     </div>
                   </div>
@@ -56,7 +56,7 @@
                     <div class="form-group">
                       <select class="form-select-JHY" id="multiple-select">
                         <option>종류</option>
-                        <option th:each="feedType : ${feedType}" th:value="${feedType.codeSeq}" th:text="${feedType.codeName}"></option>
+                        <option th:each="feedType : ${@codeService.selectListCachedCode(3)}" th:value="${feedType.codeSeq}" th:text="${feedType.codeName}"></option>
                       </select>
                     </div>
                   </div>
@@ -64,7 +64,7 @@
                     <div class="form-group">
                       <select class="form-select-JHY" id="multiple-select">
                         <option>기타</option>
-                        <option th:each="feedEtc : ${feedEtc}" th:value="${feedEtc.codeSeq}" th:text="${feedEtc.codeName}"></option>
+                        <option th:each="feedEtc : ${@codeService.selectListCachedCode(4)}" th:value="${feedEtc.codeSeq}" th:text="${feedEtc.codeName}"></option>
                       </select>
                     </div>
                   </div>
@@ -74,7 +74,7 @@
                     <div class="form-group">
                       <select class="form-select-JHY" id="multiple-select">
                         <option>크기</option>
-                        <option th:each="feedSize : ${feedSize}" th:value="${feedSize.codeSeq}" th:text="${feedSize.codeName}"></option>
+                        <option th:each="feedSize : ${@codeService.selectListCachedCode(5)}" th:value="${feedSize.codeSeq}" th:text="${feedSize.codeName}"></option>
                       </select>
                     </div>
                   </div>
@@ -82,7 +82,7 @@
                     <div class="form-group">
                       <select class="form-select-JHY" id="multiple-select">
                         <option>기능</option>
-                        <option th:each="feedFunction : ${feedFunction}" th:value="${feedFunction.codeSeq}" th:text="${feedFunction.codeName}"></option>
+                        <option th:each="feedFunction : ${@codeService.selectListCachedCode(6)}" th:value="${feedFunction.codeSeq}" th:text="${feedFunction.codeName}"></option>
                       </select>
                     </div>
                   </div>
@@ -90,7 +90,7 @@
                     <div class="form-group">
                       <select class="form-select-JHY" id="multiple-select">
                         <option>브랜드</option>
-                        <option th:each="feedBrand : ${feedBrand}" th:value="${feedBrand.codeSeq}" th:text="${feedBrand.codeName}"></option>
+                        <option th:each="feedBrand : ${@codeService.selectListCachedCode(7)}" th:value="${feedBrand.codeSeq}" th:text="${feedBrand.codeName}"></option>
                       </select>
                     </div>
                   </div>
@@ -100,7 +100,7 @@
                     <div class="form-group mb-2">
                       <select class="form-select-JHY" id="multiple-select">
                         <option>주원료</option>
-                        <option th:each="feedIngredient : ${feedIngredient}" th:value="${feedIngredient.codeSeq}" th:text="${feedIngredient.codeName}"></option>
+                        <option th:each="feedIngredient : ${@codeService.selectListCachedCode(8)}" th:value="${feedIngredient.codeSeq}" th:text="${feedIngredient.codeName}"></option>
                       </select>
                     </div>
                   </div>
