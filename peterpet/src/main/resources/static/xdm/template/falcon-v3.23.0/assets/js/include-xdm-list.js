@@ -7,8 +7,10 @@ goList = function (thisPage, address) {
   
 changeProductType = function () {	
   document.getElementById("feedFilter").style.display = "none";
+  document.getElementById("feedList").style.display = "none";
 
   if (document.getElementById("prodType").value == 1) {
     document.getElementById("feedFilter").style.display = "block";
+    document.getElementById("feedList").style.display = "block";
   }
 }

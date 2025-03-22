@@ -18,4 +18,12 @@ public class ProductService {
 	public int insert(ProductDto productDto) {
 		return productDao.insert(productDto);
 	}
+	
+	public List<ProductDto> selectList(ProductVo vo) {
+		return productDao.selectList(vo);
+	}
+	
+	public int selectOneCount() {
+		return productDao.selectOneCount();
+	}
 }

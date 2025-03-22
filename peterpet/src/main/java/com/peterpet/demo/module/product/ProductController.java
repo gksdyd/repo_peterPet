@@ -14,25 +14,27 @@ public class ProductController {
 
 	@Autowired
 	ProductService productService;
-	
+
 	@RequestMapping(value = "/xdm/product/ProductXdmList")
-	public String productXdmList() {		
+	public String productXdmList(Model model, ProductVo vo) {
+		vo.setParamsPaging(productService.selectOneCount());
+		model.addAttribute("list", productService.selectList(vo));
+		model.addAttribute("vo", vo);
 		return "xdm/product/ProductXdmList";
 	}
-	
+
 	@RequestMapping(value = "/xdm/product/ProductXdmForm")
 	public String productXdmForm(Model model, ProductDto productDto) {
-		if (productService.selectMaxSeq() == null)
-		{
+		if (productService.selectMaxSeq() == null) {
 			productDto.setProdSeq("0");
 		} else {
-			productDto.setProdSeq(productService.selectMaxSeq());					
+			productDto.setProdSeq(productService.selectMaxSeq());
 		}
 		productDto.feedFuncInit();
 		model.addAttribute("item", productDto);
 		return "xdm/product/ProductXdmForm";
 	}
-	
+
 	@RequestMapping(value = "/xdm/product/ProductXdmInst")
 	public String codeGroupXdmInst(ProductDto productDto) {
 		productDto.setRegisterFlag(1);

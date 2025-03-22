@@ -71,4 +71,28 @@
 			0
 		)
 	</insert>
+	
+	<select id="selectList" resultMap="resultMapObj">
+		SELECT
+			prodUseFlag,
+			prodName,
+			prodRegDate,
+			prodModDate,
+			feedSalaryAge,
+			feedType,
+			feedEtc,
+			feedBrand,
+			feedIngredient,
+			feedSize
+		FROM
+			product
+		ORDER BY prodSeq DESC
+		limit #{rowNumToShow} offset #{startRnumForMysql}
+	</select>
+	
+	<select id="selectOneCount" resultType="Integer">
+		SELECT COUNT(*)
+		FROM product
+		WHERE 1=1
+	</select>
 </mapper>
