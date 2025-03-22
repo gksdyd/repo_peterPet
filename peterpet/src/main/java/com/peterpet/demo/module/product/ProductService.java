@@ -15,7 +15,7 @@ public class ProductService {
 		return productDao.selectMaxSeq();
 	}
 	
-	public int insert(ProductVo productVo) {
-		return productDao.insert(productVo);
+	public int insert(ProductDto productDto) {
+		return productDao.insert(productDto);
 	}
 }

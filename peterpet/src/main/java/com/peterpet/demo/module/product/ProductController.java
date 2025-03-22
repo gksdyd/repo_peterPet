@@ -21,23 +21,23 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/xdm/product/ProductXdmForm")
-	public String productXdmForm(Model model, ProductVo productVo) {
+	public String productXdmForm(Model model, ProductDto productDto) {
 		if (productService.selectMaxSeq() == null)
 		{
-			productVo.setProdSeq("0");
+			productDto.setProdSeq("0");
 		} else {
-			productVo.setProdSeq(productService.selectMaxSeq());					
+			productDto.setProdSeq(productService.selectMaxSeq());					
 		}
-		productVo.feedFuncInit();
-		model.addAttribute("item", productVo);
+		productDto.feedFuncInit();
+		model.addAttribute("item", productDto);
 		return "xdm/product/ProductXdmForm";
 	}
 	
 	@RequestMapping(value = "/xdm/product/ProductXdmInst")
-	public String codeGroupXdmInst(ProductVo productVo) {
-		productVo.setRegisterFlag(1);
-		productVo.feedFuncInit();
-		productService.insert(productVo);
+	public String codeGroupXdmInst(ProductDto productDto) {
+		productDto.setRegisterFlag(1);
+		productDto.feedFuncInit();
+		productService.insert(productDto);
 		return "redirect:/xdm/product/ProductXdmList";
 	}
 }

@@ -1,14 +1,18 @@
-let form = document.querySelector("form[name=product-form]");
-selectFeature = function () {
-  alert(document.querySelector("#feedFunction").querySelectorAll("option").length);
-  // document.querySelector("#feedFunction").querySelectorAll("option").length
 
+let form = document.querySelector("form[name=product-form]");
+funcSelect = function () {
+  document.getElementById("addOrRemoveFlag").value = "1";
   document.getElementById("registerFlag").value = "1";
   form.action = "/xdm/product/ProductXdmForm";
   form.submit();
 }
 
-cancel = function() {
+funcRemove = function(value) {
+  document.getElementById("addOrRemoveFlag").value = "-1";
+  document.getElementById("registerFlag").value = "1";
+  document.getElementById("feedFunction").value = value;
+  form.action = "/xdm/product/ProductXdmForm";
+  form.submit();
 }
 
 changeProductType = function () {	

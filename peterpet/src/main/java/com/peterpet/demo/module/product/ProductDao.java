@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 public interface ProductDao {
 
 	public String selectMaxSeq();
-	public int insert(ProductVo productVo);
+	public int insert(ProductDto productDto);
 }
