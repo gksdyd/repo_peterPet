@@ -92,12 +92,13 @@
                   <div class="mb-3 row g-3 ms-2 me-2">
                     <div class="col-3">
                       <div class="form-group">
-                        <select class="form-select-JHY" id="feedFunction" name="feedFunction" onchange="funcSelect()">
+                        <select class="form-select-JHY" onchange="funcSelect(value, 1)">
                           <option value="0">기능</option>
                           <th:block th:each="feedFunction : ${@codeService.selectListCachedCode(6)}">
-                            <option th:text="${feedFunction.codeName}" th:value="${feedFunction.codeSeq}"></option>
+                            <option th:text="${feedFunction.codeName}" th:value="${feedFunction.codeSeq}" th:disabled="${#arrays.contains(item.feedFuncArr, feedFunction.codeSeq)} ? 'disabled' : null"></option>
                           </th:block>
                         </select>
+                        <input type="hidden" name="feedFunction" id="feedFunction" value="0">
                       </div>
                     </div>
                     <div class="col-3">
@@ -119,61 +120,9 @@
                   </div>
                   <div class="mb-3 row g-3 ms-2 me-2">
                     <div class="col-3">
-                      <div class="d-flex align-items-center mb-2" th:if="${item.funcTeethFlag} != '0'">
-                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(item.funcTeethFlag)}"></span>
-                        <button class="btn-close" type="button" style="font-size: xx-small;" onclick="funcRemove(20)"></button>
-                      </div>
-                      <div class="d-flex align-items-center mb-2" th:if="${item.funcTearsFlag} != '0'">
-                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(item.funcTearsFlag)}"></span>
-                        <button class="btn-close" type="button" style="font-size: xx-small;" onclick="funcRemove(21)"></button>
-                      </div>
-                      <div class="d-flex align-items-center mb-2" th:if="${item.funcBrainFlag} != '0'">
-                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(item.funcBrainFlag)}"></span>
-                        <button class="btn-close" type="button" style="font-size: xx-small;" onclick="funcRemove(22)"></button>
-                      </div>
-                      <div class="d-flex align-items-center mb-2" th:if="${item.funcImmunityFlag} != '0'">
-                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(item.funcImmunityFlag)}"></span>
-                        <button class="btn-close" type="button" style="font-size: xx-small;" onclick="funcRemove(23)"></button>
-                      </div>
-                      <div class="d-flex align-items-center mb-2" th:if="${item.funcBoneFlag} != '0'">
-                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(item.funcBoneFlag)}"></span>
-                        <button class="btn-close" type="button" style="font-size: xx-small;" onclick="funcRemove(24)"></button>
-                      </div>
-                      <div class="d-flex align-items-center mb-2" th:if="${item.funcStressFlag} != '0'">
-                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(item.funcStressFlag)}"></span>
-                        <button class="btn-close" type="button" style="font-size: xx-small;" onclick="funcRemove(25)"></button>
-                      </div>
-                      <div class="d-flex align-items-center mb-2" th:if="${item.funcKidneyFlag} != '0'">
-                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(item.funcKidneyFlag)}"></span>
-                        <button class="btn-close" type="button" style="font-size: xx-small;" onclick="funcRemove(26)"></button>
-                      </div>
-                      <div class="d-flex align-items-center mb-2" th:if="${item.funcHeartFlag} != '0'">
-                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(item.funcHeartFlag)}"></span>
-                        <button class="btn-close" type="button" style="font-size: xx-small;" onclick="funcRemove(27)"></button>
-                      </div>
-                      <div class="d-flex align-items-center mb-2" th:if="${item.funcAllergyFlag} != '0'">
-                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(item.funcAllergyFlag)}"></span>
-                        <button class="btn-close" type="button" style="font-size: xx-small;" onclick="funcRemove(28)"></button>
-                      </div>
-                      <div class="d-flex align-items-center mb-2" th:if="${item.funcPregnancyFlag} != '0'">
-                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(item.funcPregnancyFlag)}"></span>
-                        <button class="btn-close" type="button" style="font-size: xx-small;" onclick="funcRemove(29)"></button>
-                      </div>
-                      <div class="d-flex align-items-center mb-2" th:if="${item.funcIntestineFlag} != '0'">
-                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(item.funcIntestineFlag)}"></span>
-                        <button class="btn-close" type="button" style="font-size: xx-small;" onclick="funcRemove(30)"></button>
-                      </div>
-                      <div class="d-flex align-items-center mb-2" th:if="${item.funcNeuteringFlag} != '0'">
-                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(item.funcNeuteringFlag)}"></span>
-                        <button class="btn-close" type="button" style="font-size: xx-small;" onclick="funcRemove(31)"></button>
-                      </div>
-                      <div class="d-flex align-items-center mb-2" th:if="${item.funcWeightFlag} != '0'">
-                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(item.funcWeightFlag)}"></span>
-                        <button class="btn-close" type="button" style="font-size: xx-small;" onclick="funcRemove(32)"></button>
-                      </div>
-                      <div class="d-flex align-items-center" th:if="${item.funcSkinFlag} != '0'">
-                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(item.funcSkinFlag)}"></span>
-                        <button class="btn-close" type="button" style="font-size: xx-small;" onclick="funcRemove(33)"></button>
+                      <div class="d-flex align-items-center mb-2" th:each="feedfunc : ${item.feedFuncArr}">
+                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(#numbers.formatInteger(feedfunc, 0))}"></span>
+                        <button class="btn-close" type="button" style="font-size: xx-small;" th:onclick="funcSelect([[${feedfunc}]], -1)"></button>
                       </div>
                     </div>
                   </div>

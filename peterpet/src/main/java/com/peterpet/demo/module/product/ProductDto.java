@@ -31,7 +31,7 @@ public class ProductDto {
 	private int feedSize;
 	private String prodRegDate;
 	private String prodModDate;
-	private int feedFunction;	// 선택한 기능을 저장하기 위한 매개체
+	private String feedFunction;	// 선택한 기능을 저장하기 위한 매개체
 	private int registerFlag;	// 등록 진행 여부 플래그
 	private int addOrRemoveFlag;	// 뱃지 추가 또는 제거 플래그
 	
@@ -179,10 +179,10 @@ public class ProductDto {
 	public void setFeedSize(int feedSize) {
 		this.feedSize = feedSize;
 	}
-	public int getFeedFunction() {
+	public String getFeedFunction() {
 		return feedFunction;
 	}
-	public void setFeedFunction(int feedFunction) {
+	public void setFeedFunction(String feedFunction) {
 		this.feedFunction = feedFunction;
 	}
 	public int getRegisterFlag() {
@@ -209,8 +209,14 @@ public class ProductDto {
 	public void setAddOrRemoveFlag(int addOrRemoveFlag) {
 		this.addOrRemoveFlag = addOrRemoveFlag;
 	}
+	public static List<String> getFeedFuncArr() {
+		return feedFuncArr;
+	}
+	public static void setFeedFuncArr(List<String> feedFuncArr) {
+		ProductDto.feedFuncArr = feedFuncArr;
+	}
 
-	public static List<Integer> feedFuncArr = new ArrayList<>();
+	public static List<String> feedFuncArr = new ArrayList<>();
 	
 	public void InitProdType() {
 		if (getProdType() == 0) {
@@ -218,7 +224,7 @@ public class ProductDto {
 		}
 	}
 	
-	public void feedFuncInit() {
+	public void feedFuncSelect() {
 		// 등록 중이 아니라면 클리어
 		if (getRegisterFlag() == 0) {
 			feedFuncArr.clear();
@@ -226,59 +232,49 @@ public class ProductDto {
 		
 		// 기능 추가
 		if (addOrRemoveFlag == 1) {
-			if (feedFuncArr.size() == 0) {
-				feedFuncArr.add(getFeedFunction());
-			} else {
-				for (int i = 0; i < feedFuncArr.size(); i++) {
-					if (feedFuncArr.get(i) == getFeedFunction()) {
-						break;
-					}
-					if (i == feedFuncArr.size() - 1) {
-						feedFuncArr.add(getFeedFunction());
-					}
-				}
-			}
+			feedFuncArr.add(getFeedFunction());
 		// 기능 제거
 		} else if (addOrRemoveFlag == -1) {
 			for (int i = 0; i < feedFuncArr.size(); i++) {
-				if (feedFuncArr.get(i) == getFeedFunction()) {
+				if (feedFuncArr.get(i).equals(getFeedFunction())) {
 					feedFuncArr.remove(i);
 					break;
 				}
 			}
 		}
-		
+	}
+	
+	public void feedFuncRegister() {
 		// 기능 존재하는 플래그 서치 및 활성화
 		for (int i = 0; i < feedFuncArr.size(); i++) {
-			System.out.println(feedFuncArr.get(i));
-			if (feedFuncArr.get(i) == 20) {
-				setFuncTeethFlag(feedFuncArr.get(i));
-			} else if (feedFuncArr.get(i) == 21) {
-				setFuncTearsFlag(feedFuncArr.get(i));
-			} else if (feedFuncArr.get(i) == 22) {
-				setFuncBrainFlag(feedFuncArr.get(i));
-			} else if (feedFuncArr.get(i) == 23) {
-				setFuncImmunityFlag(feedFuncArr.get(i));
-			} else if (feedFuncArr.get(i) == 24) {
-				setFuncBoneFlag(feedFuncArr.get(i));
-			} else if (feedFuncArr.get(i) == 25) {
-				setFuncStressFlag(feedFuncArr.get(i));
-			} else if (feedFuncArr.get(i) == 26) {
-				setFuncKidneyFlag(feedFuncArr.get(i));
-			} else if (feedFuncArr.get(i) == 27) {
-				setFuncHeartFlag(feedFuncArr.get(i));
-			} else if (feedFuncArr.get(i) == 28) {
-				setFuncAllergyFlag(feedFuncArr.get(i));
-			} else if (feedFuncArr.get(i) == 29) {
-				setFuncPregnancyFlag(feedFuncArr.get(i));
-			} else if (feedFuncArr.get(i) == 30) {
-				setFuncIntestineFlag(feedFuncArr.get(i));
-			} else if (feedFuncArr.get(i) == 31) {
-				setFuncNeuteringFlag(feedFuncArr.get(i));
-			} else if (feedFuncArr.get(i) == 32) {
-				setFuncWeightFlag(feedFuncArr.get(i));
-			} else if (feedFuncArr.get(i) == 33) {
-				setFuncSkinFlag(feedFuncArr.get(i));
+			if (feedFuncArr.get(i).equals("20")) {
+				setFuncTeethFlag(20);
+			} else if (feedFuncArr.get(i).equals("21")) {
+				setFuncTearsFlag(21);
+			} else if (feedFuncArr.get(i).equals("22")) {
+				setFuncBrainFlag(22);
+			} else if (feedFuncArr.get(i).equals("23")) {
+				setFuncImmunityFlag(23);
+			} else if (feedFuncArr.get(i).equals("24")) {
+				setFuncBoneFlag(24);
+			} else if (feedFuncArr.get(i).equals("25")) {
+				setFuncStressFlag(25);
+			} else if (feedFuncArr.get(i).equals("26")) {
+				setFuncKidneyFlag(26);
+			} else if (feedFuncArr.get(i).equals("27")) {
+				setFuncHeartFlag(27);
+			} else if (feedFuncArr.get(i).equals("28")) {
+				setFuncAllergyFlag(28);
+			} else if (feedFuncArr.get(i).equals("29")) {
+				setFuncPregnancyFlag(29);
+			} else if (feedFuncArr.get(i).equals("30")) {
+				setFuncIntestineFlag(30);
+			} else if (feedFuncArr.get(i).equals("31")) {
+				setFuncNeuteringFlag(31);
+			} else if (feedFuncArr.get(i).equals("32")) {
+				setFuncWeightFlag(32);
+			} else if (feedFuncArr.get(i).equals("33")) {
+				setFuncSkinFlag(33);
 			}
 		}
 	}

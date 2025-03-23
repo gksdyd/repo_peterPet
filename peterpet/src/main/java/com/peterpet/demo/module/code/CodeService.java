@@ -56,7 +56,6 @@ public class CodeService {
 	
 	public static List<CodeDto> selectListCachedCode(String cogrSeq) throws Exception {
 		List<CodeDto> rt = new ArrayList<CodeDto>();
-		System.out.println(cogrSeq);
 		for(CodeDto codeRow : CodeDto.cachedCodeArrayList) {
 			if (codeRow.getCodeGroup_cogrSeq().equals(cogrSeq)) {
 				rt.add(codeRow);

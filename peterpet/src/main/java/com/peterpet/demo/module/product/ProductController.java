@@ -32,7 +32,7 @@ public class ProductController {
 		} else {
 			productDto.setProdSeq(productService.selectMaxSeq());
 		}
-		productDto.feedFuncInit();
+		productDto.feedFuncSelect();
 		model.addAttribute("item", productDto);
 		return "xdm/product/ProductXdmForm";
 	}
@@ -40,7 +40,7 @@ public class ProductController {
 	@RequestMapping(value = "/xdm/product/ProductXdmInst")
 	public String codeGroupXdmInst(ProductDto productDto) {
 		productDto.setRegisterFlag(1);
-		productDto.feedFuncInit();
+		productDto.feedFuncRegister();
 		productService.insert(productDto);
 		return "redirect:/xdm/product/ProductXdmList";
 	}
