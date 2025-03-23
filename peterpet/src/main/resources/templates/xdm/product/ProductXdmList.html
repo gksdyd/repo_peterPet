@@ -41,11 +41,11 @@
               <div class="mb-3 row g-3">
                 <div class="col-4">
                   <select class="form-select-JHY" aria-label="Default select example" name="prodType" id="prodType" onchange="changeProductType()">
-                    <option th:each="productType : ${@codeService.selectListCachedCode(1)}" th:text="${productType.codeName}" th:value="${productType.codeSeq}"></option>
+                    <option th:each="productType : ${@codeService.selectListCachedCode(1)}" th:text="${productType.codeName}" th:value="${productType.codeSeq}" th:selected="${vo.prodType} == ${productType.codeSeq}"></option>
                   </select>
                 </div>
               </div>
-              <div class="card border h-100 border-primary mb-3" id="feedFilter">
+              <div class="card border h-100 border-primary mb-3" th:if="${vo.prodType} == '1'">
                 <div class="mb-2 row g-3 me-2 ms-2 mt-0">
                   <div class="col-4">
                     <div class="form-group">
@@ -111,8 +111,8 @@
               </div>
               <div class="row">
                 <div class="col">
-                  <label class="form-label-JHY" for="description">Total: </label>
-                  <label class="form-label-JHY" for="description" th:text="${vo.totalRows}"></label>
+                  <label class="form-label-JHY">Total: </label>
+                  <label class="form-label-JHY" th:text="${vo.totalRows}"></label>
                 </div>
                 <div class="col-2" style="text-align: right;">
                   <select class="form-select-JHY" aria-label="Default select example">
@@ -126,7 +126,7 @@
             </div>
             <div class="card-body p-0">
               <div class="table-responsive scrollbar">
-                <table class="table mb-0 data-table fs-10 align-middle-JHY" data-datatables="data-datatables" id="feedList">
+                <table class="table mb-0 data-table fs-10 align-middle-JHY" data-datatables="data-datatables" th:if="${vo.prodType} == '1'">
                   <thead class="bg-200">
                     <tr>
                       <th>
@@ -187,15 +187,15 @@
             <div class="card-footer d-flex align-items-center justify-content-center">
               <ul class="pagination mb-0">
                 <li th:if="${vo.startPage gt vo.pageNumToShow}" class="page-item" style="cursor: pointer;">
-                  <a class="page-link" href="javascript:goList(${vo.startPage - 1})" th:attr="onclick=|goList('${vo.startPage - 1}', '/xdm/codegroup/CodeGroupXdmList')|">
+                  <a class="page-link" href="javascript:goList(${vo.startPage - 1})" th:attr="onclick=|goList('${vo.startPage - 1}', '/xdm/product/ProductXdmList')|">
                     <i class="fas fa-chevron-left"></i>
                   </a>
                 </li>
                 <li th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}" th:classappend="${num eq vo.thisPage} ? active : ''" class="page-item" style="cursor: pointer;">
-                  <a class="page-link" th:attr="onclick=|goList('${num}', '/xdm/codegroup/CodeGroupXdmList')|" th:text="${num}"></a>
+                  <a class="page-link" th:attr="onclick=|goList('${num}', '/xdm/product/ProductXdmList')|" th:text="${num}"></a>
                 </li>
                 <li th:if="${vo.endPage ne vo.totalPages}" class="page-item" style="cursor: pointer;">
-                  <a class="page-link" th:attr="onclick=|goList('${vo.endPage + 1}', '/xdm/codegroup/CodeGroupXdmList')|">
+                  <a class="page-link" th:attr="onclick=|goList('${vo.endPage + 1}', '/xdm/product/ProductXdmList')|">
                     <i class="fas fa-chevron-right"></i>
                   </a>
                 </li>

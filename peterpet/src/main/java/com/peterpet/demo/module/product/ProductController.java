@@ -17,7 +17,8 @@ public class ProductController {
 
 	@RequestMapping(value = "/xdm/product/ProductXdmList")
 	public String productXdmList(Model model, ProductVo vo) {
-		vo.setParamsPaging(productService.selectOneCount());
+		vo.InitProdType();
+		vo.setParamsPaging(productService.selectOneCount(vo));
 		model.addAttribute("list", productService.selectList(vo));
 		model.addAttribute("vo", vo);
 		return "xdm/product/ProductXdmList";
@@ -25,6 +26,7 @@ public class ProductController {
 
 	@RequestMapping(value = "/xdm/product/ProductXdmForm")
 	public String productXdmForm(Model model, ProductDto productDto) {
+		productDto.InitProdType();
 		if (productService.selectMaxSeq() == null) {
 			productDto.setProdSeq("0");
 		} else {

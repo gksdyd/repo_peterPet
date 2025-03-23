@@ -23,11 +23,11 @@
                 <div class="mb-3 row g-3">
                   <div class="col-3">
                     <select class="form-select-JHY" name="prodType" id="prodType"  onchange="changeProductType()">
-                      <option th:each="productType : ${@codeService.selectListCachedCode(1)}" th:text="${productType.codeName}" th:value="${productType.codeSeq}"></option>
+                      <option th:each="productType : ${@codeService.selectListCachedCode(1)}" th:text="${productType.codeName}" th:value="${productType.codeSeq}" th:selected="${item.prodType} == ${productType.codeSeq}"></option>
                     </select>
                   </div>
                 </div>
-                <div class="card border h-100 border-primary mb-3" id="feedFilter">
+                <div class="card border h-100 border-primary mb-3" th:if="${item.prodType} == '1'">
                   <div class="row g-3 mt-0 ms-2 me-2">
                     <div class="col-3">
                       <label class="form-label-JHY" for="pordSeq">사료 코드<span style="color: red;">*</span></label>

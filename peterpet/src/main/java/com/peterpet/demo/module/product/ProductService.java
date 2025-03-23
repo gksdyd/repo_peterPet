@@ -23,7 +23,7 @@ public class ProductService {
 		return productDao.selectList(vo);
 	}
 	
-	public int selectOneCount() {
-		return productDao.selectOneCount();
+	public int selectOneCount(ProductVo vo) {
+		return productDao.selectOneCount(vo);
 	}
 }

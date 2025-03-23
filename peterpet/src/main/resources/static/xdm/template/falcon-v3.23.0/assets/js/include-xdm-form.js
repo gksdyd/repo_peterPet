@@ -16,9 +16,6 @@ funcRemove = function(value) {
 }
 
 changeProductType = function () {	
-	document.getElementById("feedFilter").style.display = "none";
-
-	if (document.getElementById("prodType").value == 1) {
-		document.getElementById("feedFilter").style.display = "block";
-	}
+	form.action = "/xdm/product/ProductXdmForm";
+  form.submit();
 }

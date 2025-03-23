@@ -10,5 +10,5 @@ public interface ProductDao {
 	public String selectMaxSeq();
 	public int insert(ProductDto productDto);
 	public List<ProductDto> selectList(ProductVo vo);
-	public int selectOneCount();
+	public int selectOneCount(ProductVo vo);
 }

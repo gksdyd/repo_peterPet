@@ -212,6 +212,12 @@ public class ProductDto {
 
 	public static List<Integer> feedFuncArr = new ArrayList<>();
 	
+	public void InitProdType() {
+		if (getProdType() == 0) {
+			setProdType(1);
+		}
+	}
+	
 	public void feedFuncInit() {
 		// 등록 중이 아니라면 클리어
 		if (getRegisterFlag() == 0) {
