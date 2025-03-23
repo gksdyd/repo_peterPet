@@ -84,7 +84,7 @@
                       <div class="form-group">
                         <select class="form-select-JHY" id="feedSize" name="feedSize">
                           <option value="0">크기</option>
-                          <option th:each="feedSize : ${@codeService.selectListCachedCode(5)}" th:selected="${item.feedSize} == ${feedSize.codeSeq}" th:text="${feedSize.codeName}" th:value="${feedSize.codeSeq}"></option>
+                          <option th:each="feedSize : ${@codeService.selectListCachedCode(16)}" th:selected="${item.feedSize} == ${feedSize.codeSeq}" th:text="${feedSize.codeName}" th:value="${feedSize.codeSeq}"></option>
                         </select>
                       </div>
                     </div>

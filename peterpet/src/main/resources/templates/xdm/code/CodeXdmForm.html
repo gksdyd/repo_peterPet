@@ -115,22 +115,10 @@
   <script type="text/javascript" th:inline="javascript">
     document.getElementById("btnSubmit").onclick = function() {
 
-      // const select = document.querySelectorAll('.form-select-JHY');
-      // const input = document.querySelectorAll('input');
-      // const valid = document.querySelectorAll('.invalid-feedback');
-      // var i = 0;
-      //   // alert(select.length);
-      //   select.forEach(select => {
-      //     if (select[i].value == "" || select[i].value == null) {
-      //       alert(select[i].value);
-      //       return false;
-      //     }
-      //   });
-
       ///////////////////////////// validation /////////////////
 
       const regex1 = /^[a-z|A-Z|0-9|]+$/;
-      const regex2 = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]+$/;
+      const regex2 = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|~|]+$/;
 
       // codeGroup_cogrSeq
       if (document.getElementById("codeGroup_cogrSeq").value == "") {
