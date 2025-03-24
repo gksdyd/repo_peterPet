@@ -19,8 +19,8 @@ public class PetService {
 		return petDao.selectListOneUser(vo);
 	}
 	
-	public int selectOneCount() {
-		return petDao.selectOneCount();
+	public int selectOneCount(PetVo vo) {
+		return petDao.selectOneCount(vo);
 	}
 	
 	public int selectOneCountOneUser(PetVo vo) {

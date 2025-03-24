@@ -7,10 +7,14 @@ public class ProductDto {
 
 	private String prodSeq;
 	private int prodType;
-	private int prodUseFlag;
+	private Integer prodUseFlag;
 	private String prodName;
 	private int feedSalaryAge;
 	private int feedType;
+	private int feedEtc;
+	private int feedBrand;
+	private int feedIngredient;
+	private int feedSize;
 	private int funcTeethFlag;
 	private int funcTearsFlag;
 	private int funcBrainFlag;
@@ -25,10 +29,6 @@ public class ProductDto {
 	private int funcNeuteringFlag;
 	private int funcWeightFlag;
 	private int funcSkinFlag;
-	private int feedEtc;
-	private int feedBrand;
-	private int feedIngredient;
-	private int feedSize;
 	private String prodRegDate;
 	private String prodModDate;
 	private String feedFunction;	// 선택한 기능을 저장하기 위한 매개체
@@ -47,10 +47,10 @@ public class ProductDto {
 	public void setProdType(int prodType) {
 		this.prodType = prodType;
 	}
-	public int getProdUseFlag() {
+	public Integer getProdUseFlag() {
 		return prodUseFlag;
 	}
-	public void setProdUseFlag(int prodUseFlag) {
+	public void setProdUseFlag(Integer prodUseFlag) {
 		this.prodUseFlag = prodUseFlag;
 	}
 	public String getProdName() {

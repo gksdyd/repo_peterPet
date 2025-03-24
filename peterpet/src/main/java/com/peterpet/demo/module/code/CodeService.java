@@ -28,7 +28,7 @@ public class CodeService {
 		return codeDao.selectCodeGroupName();
 	}
 	
-	public String selectMaxSeq() {
+	public Integer selectMaxSeq() {
 		return codeDao.selectMaxSeq();
 	}
 	
@@ -36,8 +36,8 @@ public class CodeService {
 		return codeDao.insert(codeDto);
 	}
 	
-	public int selectOneCount() {
-		return codeDao.selectOneCount();
+	public int selectOneCount(CodeVo vo) {
+		return codeDao.selectOneCount(vo);
 	}
 	
 	@PostConstruct

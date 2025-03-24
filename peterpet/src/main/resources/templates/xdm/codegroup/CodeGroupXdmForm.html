@@ -29,19 +29,19 @@
                 </div>
                 <div class="mb-3 row g-3">
                   <div class="col-3">
-                    <input class="form-control-JHY" name="cogrSeq" id="cogrSeq" th:value="${item.cogrSeq} + 1" type="text" placeholder="자동생성" readonly />
+                    <input class="form-control-JHY" name="cogrSeq" id="cogrSeq" th:value="${item.cogrSeq}" type="text" placeholder="자동생성" readonly />
                     <div class="invalid-feedback">Please select a valid state.</div>
                   </div>
                   <div class="col-3">
-                    <input class="form-control-JHY" name="cogrNum" id="cogrNum" type="text" placeholder="영대소문자, 숫자" />
+                    <input class="form-control-JHY" name="cogrNum" id="cogrNum" th:value="${item.cogrNum}" type="text" placeholder="영대소문자, 숫자" />
                     <div class="invalid-feedback">Please select a valid state.</div>
                   </div>
                   <div class="col-3">
-                    <input class="form-control-JHY" name="cogrName" id="cogrName" type="text" placeholder="한글, 영대소문자, 숫자" required />
+                    <input class="form-control-JHY" name="cogrName" id="cogrName" th:value="${item.cogrName}" type="text" placeholder="한글, 영대소문자, 숫자" required />
                     <div class="invalid-feedback" id="cogrNameValid">잘못된 코드 그룹 이름입니다.</div>
                   </div>
                   <div class="col-3">
-                    <input class="form-control-JHY" name="cogrNameEng" id="cogrNameEng" type="text" placeholder="영대소문자, 숫자" />
+                    <input class="form-control-JHY" name="cogrNameEng" id="cogrNameEng" th:value="${item.cogrNameEng}" type="text" placeholder="영대소문자, 숫자" />
                     <div class="invalid-feedback">Please select a valid state.</div>
                   </div>
                 </div>
@@ -56,14 +56,14 @@
                 <div class="mb-3 row g-3">
                   <div class="col-3">
                     <select class="form-select-JHY" name="cogrUseFlag" id="cogrUseFlag" required>
-                      <option selected="selected" value="">선택하세요</option>
-                      <option value=1>사용</option>
-                      <option value=0>미사용</option>
+                      <option value="">선택하세요</option>
+                      <option value=1 th:selected="${item.cogrUseFlag == 1}">사용</option>
+                      <option value=0 th:selected="${item.cogrUseFlag == 0}">미사용</option>
                     </select>
                     <div class="invalid-feedback">Please select a valid state.</div>
                   </div>
                   <div class="col-3">
-                    <input class="form-control-JHY" name="cogrOrder" id="cogrOrder" type="text" required />
+                    <input class="form-control-JHY" name="cogrOrder" id="cogrOrder" th:value="${item.cogrOrder}" type="text" required />
                     <div class="invalid-feedback">Please provide a valid order.</div>
                   </div>
                 </div>
@@ -74,7 +74,7 @@
                 </div>
                 <div class="mb-3 row g-3">
                   <div class="col-6">
-                    <textarea class="form-control-JHY" name="cogrDisc" id="cogrDisc" rows="3"></textarea>
+                    <textarea class="form-control-JHY" name="cogrDisc" id="cogrDisc" th:value="${item.cogrDisc}" rows="3"></textarea>
                   </div>
                 </div>
                 <div class="mb-3 row g-3">
@@ -86,7 +86,7 @@
                   </div>
                 </div>
                 <input type="hidden" name="cogrRegDate" id="cogrRegDate" >
-                <input type="hidden" name="cogrModDate" id="cogrModDate" >
+                <!-- <input type="hidden" name="cogrModDate" id="cogrModDate" > -->
               </form>
             </div>
           </div>
@@ -134,6 +134,7 @@
       document.getElementById("cogrName").focus();
     }
     
+    // let form = document.querySelector("form[name=code-group-form]");
     document.getElementById("btnSubmit").onclick = function() {
 
       if (document.getElementById("cogrName").value.trim() == null || document.getElementById("cogrName").value.trim() == "") {
@@ -149,7 +150,7 @@
       let date = year + month + day;
       
       document.getElementById("cogrRegDate").value = date;
-      document.getElementById("cogrModDate").value = date;
+      // document.getElementById("cogrModDate").value = date;
       
       if (document.getElementById("cogrNum").value === "") {
         document.getElementById("cogrNum").value = document.getElementById("cogrSeq").value;

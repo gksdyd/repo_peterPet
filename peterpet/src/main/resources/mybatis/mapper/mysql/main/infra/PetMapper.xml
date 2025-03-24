@@ -5,6 +5,30 @@
 
 	<resultMap type="com.peterpet.demo.module.pet.PetDto" id="resultMapObj"></resultMap>
 	
+	<sql id="selectCommon">
+        FROM pet a
+        	LEFT JOIN user b ON a.user_userSeq = b.userSeq
+        WHERE 1=1
+        <if test="shDelFlag != null and !shDelFlag.equals('')">AND a.petDelFlag = #{shDelFlag}</if>
+        <if test="shDelFlag != null and !shDelFlag.equals('')">AND a.petVaccinationFlag = #{shVaccineFlag}</if>
+        <if test="shDelFlag != null and !shDelFlag.equals('')">AND a.petNeuteringFlag = #{shNeuterFlag}</if>
+        <if test="shMinWeight != null and !shMinWeight.equals('') and shMaxWeight != null and !shMaxWeight.equals('')">
+        	AND a.petWeight BETWEEN #{shMinWeight} AND #{shMaxWeight}
+        </if>
+        
+<!-- 				
+				<choose>
+					<when test="shOptionDate == 1">AND a.userRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+					<when test="shOptionDate == 2">AND a.userModDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				</choose>
+ -->				
+        <choose>
+            <when test="shOption == 1">AND a.petName LIKE CONCAT('%',#{shValue},'%')</when>
+            <when test="shOption == 2">AND a.petVarieties LIKE CONCAT('%',#{shValue},'%')</when>
+            <when test="shOption == 3">AND b.userName LIKE CONCAT('%',#{shValue},'%')</when>
+        </choose>
+    </sql>
+    
 	<select id="selectList" resultMap="resultMapObj">
 		SELECT
 			a.petSeq,
@@ -32,9 +56,7 @@
 				disease
 			WHERE 1=1
 				AND pet_petSeq = a.petSeq) AS diseaseCount
-		FROM
-			pet a
-    		LEFT JOIN user b ON a.user_userSeq = b.userSeq
+		<include refid="selectCommon"></include>
 		ORDER BY petSeq DESC
 		limit #{rowNumToShow} offset #{startRnumForMysql}
 	</select>
@@ -77,8 +99,7 @@
 	
 	<select id="selectOneCount" resultType="Integer">
 		SELECT COUNT(*)
-		FROM pet
-		WHERE 1=1
+		<include refid="selectCommon"></include>
 	</select>
 	
 	<select id="selectOneCountOneUser" resultType="Integer">

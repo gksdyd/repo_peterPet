@@ -4,5 +4,4 @@ import com.peterpet.demo.module.base.BaseVo;
 
 public class CodeVo extends BaseVo {
 
-	
 }

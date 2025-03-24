@@ -19,7 +19,7 @@ public class CodeGroupService {
 		return codeGroupDao.selectOne(codeGroupDto);
 	}
 	
-	public String selectMaxSeq() {
+	public Integer selectMaxSeq() {
 		return codeGroupDao.selectMaxSeq();
 	}
 	
@@ -27,7 +27,7 @@ public class CodeGroupService {
 		return codeGroupDao.insert(codeGroupDto);
 	}
 	
-	public int selectOneCount() {
-		return codeGroupDao.selectOneCount();
+	public int selectOneCount(CodeGroupVo vo) {
+		return codeGroupDao.selectOneCount(vo);
 	}
 }

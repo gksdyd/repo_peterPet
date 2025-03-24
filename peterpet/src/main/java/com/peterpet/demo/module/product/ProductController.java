@@ -1,13 +1,9 @@
 package com.peterpet.demo.module.product;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.peterpet.demo.module.codegroup.CodeGroupDto;
 
 @Controller
 public class ProductController {
@@ -18,6 +14,7 @@ public class ProductController {
 	@RequestMapping(value = "/xdm/product/ProductXdmList")
 	public String productXdmList(Model model, ProductVo vo) {
 		vo.InitProdType();
+		vo.feedFuncSelect();
 		vo.setParamsPaging(productService.selectOneCount(vo));
 		model.addAttribute("list", productService.selectList(vo));
 		model.addAttribute("vo", vo);

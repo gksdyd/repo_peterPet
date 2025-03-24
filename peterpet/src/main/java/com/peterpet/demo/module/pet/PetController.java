@@ -3,6 +3,7 @@ package com.peterpet.demo.module.pet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -13,10 +14,11 @@ public class PetController {
 	PetService petService;
 	
 	@RequestMapping(value = "/PetXdmList")
-	public String petXdmList(Model model, PetVo vo) {
-		vo.setParamsPaging(petService.selectOneCount());
-		model.addAttribute("list", petService.selectList(vo));
-		model.addAttribute("vo", vo);
+	public String petXdmList(Model model, @ModelAttribute("vo") PetVo vo) {
+		vo.setParamsPaging(petService.selectOneCount(vo));
+		if (vo.getTotalRows() > 0) {
+			model.addAttribute("list", petService.selectList(vo));
+		}
 		return "xdm/pet/PetXdmList";
 	}
 	

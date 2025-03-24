@@ -9,7 +9,7 @@ public interface PetDao {
 
 	List<PetDto> selectList(PetVo vo);
 	List<PetDto> selectListOneUser(PetVo vo);
-	int selectOneCount();
+	int selectOneCount(PetVo vo);
 	int selectOneCountOneUser(PetVo vo);
 	PetDto selectOne(PetDto petDto);
 	List<PetDto> selectOnePersonal(PetDto petDto);

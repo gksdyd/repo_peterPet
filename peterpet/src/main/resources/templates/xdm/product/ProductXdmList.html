@@ -5,6 +5,8 @@
         <form name="formList" id="formList" method="post" autocomplete="off">
           <input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>
           <input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}"/>
+          <input type="hidden" name="registerFlag" id="registerFlag" value="0">
+          <input type="hidden" name="addOrRemoveFlag" id="addOrRemoveFlag" value="0">
           <div class="card mb-3" id="customersTable" data-list='{"valueNames":["#", "use", "name", "salary-age","type","etc", "size", "function", "brand", "ingredient", "count", "picture", "resist-date", "modify-date"],"page":10,"pagination":true}'>
             <div class="card-header">
               <div class="mb-2 row g-3">
@@ -40,7 +42,7 @@
               </div>
               <div class="mb-3 row g-3">
                 <div class="col-4">
-                  <select class="form-select-JHY" aria-label="Default select example" name="prodType" id="prodType" onchange="changeProductType()">
+                  <select class="form-select-JHY" aria-label="Default select example" name="prodType" id="prodType" onchange="changeProductType('formList', '/xdm/product/ProductXdmList')">
                     <option th:each="productType : ${@codeService.selectListCachedCode(1)}" th:text="${productType.codeName}" th:value="${productType.codeSeq}" th:selected="${vo.prodType} == ${productType.codeSeq}"></option>
                   </select>
                 </div>
@@ -83,10 +85,11 @@
                   </div>
                   <div class="col-4">
                     <div class="form-group">
-                      <select class="form-select-JHY" id="feedFunction" name="feedFunction">
+                      <select class="form-select-JHY" onchange="funcSelect('formList', '/xdm/product/ProductXdmList', value, 1)">
                         <option value="">기능</option>
-                        <option th:each="feedFunction : ${@codeService.selectListCachedCode(6)}" th:value="${feedFunction.codeSeq}" th:text="${feedFunction.codeName}"></option>
+                        <option th:each="feedFunction : ${@codeService.selectListCachedCode(6)}" th:value="${feedFunction.codeSeq}" th:text="${feedFunction.codeName}" th:disabled="${#arrays.contains(vo.feedFuncArr, feedFunction.codeSeq)} ? 'disabled' : null"></option>
                       </select>
+                      <input type="hidden" name="feedFunction" id="feedFunction" value="0">
                     </div>
                   </div>
                   <div class="col-4">
@@ -106,6 +109,12 @@
                         <option th:each="feedIngredient : ${@codeService.selectListCachedCode(8)}" th:value="${feedIngredient.codeSeq}" th:text="${feedIngredient.codeName}"></option>
                       </select>
                     </div>
+                  </div>
+                </div>
+                <div class="mb-2 row g-3 me-2 ms-2">
+                  <div class="col-2" th:each="feedfunc : ${vo.feedFuncArr}">
+                    <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(#numbers.formatInteger(feedfunc, 0))}"></span>
+                    <button class="btn-close" type="button" style="font-size: xx-small;" th:onclick="funcSelect('formList', '/xdm/product/ProductXdmList', [[${feedfunc}]], -1)"></button>
                   </div>
                 </div>
               </div>

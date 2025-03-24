@@ -5,6 +5,29 @@
 
 	<resultMap type="com.peterpet.demo.module.code.CodeDto" id="resultMapObj"></resultMap>
 	
+	<sql id="selectCommon">
+        FROM
+			code a
+		    LEFT JOIN codegroup b ON b.cogrSeq = a.codeGroup_cogrSeq
+        WHERE 1=1
+        <if test="shUseFlag != null and !shUseFlag.equals('')">AND a.codeUseFlag = #{shUseFlag}</if>
+        <if test="shDelFlag != null and !shDelFlag.equals('')">AND a.codeDelFlag = #{shDelFlag}</if>
+<!-- 				
+				<choose>
+					<when test="shOptionDate == 1">AND a.codeRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+					<when test="shOptionDate == 2">AND a.codeModDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				</choose>
+ -->				
+        <choose>
+            <when test="shOption == 1">AND a.codeGroup_cogrSeq = #{shValue}</when>
+            <when test="shOption == 2">AND b.cogrName LIKE CONCAT('%',#{shValue},'%')</when>
+            <when test="shOption == 3">AND a.codeSeq = #{shValue}</when>
+            <when test="shOption == 4">AND a.codeInstNum LIKE CONCAT('%',#{shValue},'%')</when>
+            <when test="shOption == 5">AND a.codeName LIKE CONCAT('%',#{shValue},'%')</when>
+            <when test="shOption == 6">AND a.codeNameEng LIKE CONCAT('%',#{shValue},'%')</when>
+        </choose>
+    </sql>
+    
 	<select id="selectList" resultMap="resultMapObj">
 		SELECT
 			a.codeSeq,
@@ -21,9 +44,7 @@
 			a.codeGroup_cogrSeq,
 		    b.cogrNum,
 		    b.cogrName
-		FROM
-			code a
-		    LEFT JOIN codegroup b ON b.cogrSeq = a.codeGroup_cogrSeq
+		<include refid="selectCommon"></include>
 		ORDER BY codeSeq DESC
 		limit #{rowNumToShow} offset #{startRnumForMysql}
 	</select>
@@ -48,7 +69,7 @@
 			code a
 		    LEFT JOIN codegroup b ON b.cogrSeq = a.codeGroup_cogrSeq
 		WHERE 1=1
-			AND a.codeSeq = #{a.codeSeq}
+			AND a.codeSeq = #{codeSeq}
 	</select>
 	
 	<select id="selectCodeGroupName" resultMap="resultMapObj">
@@ -59,7 +80,7 @@
 			codegroup
 	</select>
 	
-	<select id="selectMaxSeq" resultType="String">
+	<select id="selectMaxSeq" resultType="Integer">
 		SELECT
 			MAX(codeSeq)
 		FROM
@@ -99,8 +120,7 @@
 	
 	<select id="selectOneCount" resultType="Integer">
 		SELECT COUNT(*)
-		FROM code
-		WHERE 1=1
+		<include refid="selectCommon"></include>
 	</select>
 	
 	<select id="selectListCachedCodeArrayList" resultMap="resultMapObj">

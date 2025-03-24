@@ -15,8 +15,8 @@ public class MemberService {
 		return memberDao.selectList(vo);
 	}
 	
-	int selectOneCount() {
-		return memberDao.selectOneCount();
+	int selectOneCount(MemberVo vo) {
+		return memberDao.selectOneCount(vo);
 	}
 	
 	MemberDto selectOne(MemberDto memberDto) {

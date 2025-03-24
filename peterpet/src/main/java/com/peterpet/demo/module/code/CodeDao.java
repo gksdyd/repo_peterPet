@@ -12,8 +12,8 @@ public interface CodeDao {
 	public List<CodeDto> selectList(CodeVo vo);
 	public CodeDto selectOne(CodeDto codeDto);
 	public List<CodeDto> selectCodeGroupName();
-	public String selectMaxSeq();
+	public Integer selectMaxSeq();
 	public int insert(CodeDto codeDto);
-	public int selectOneCount();
+	public int selectOneCount(CodeVo vo);
 	public List<CodeDto> selectListCachedCodeArrayList();
 }

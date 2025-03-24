@@ -5,34 +5,51 @@
 
 	<resultMap type="com.peterpet.demo.module.member.MemberDto" id="resultMapObj"></resultMap>
 	
+	<sql id="selectCommon">
+        FROM user a
+        WHERE 1=1
+        <if test="shDelFlag != null and !shDelFlag.equals('')">AND a.userDelFlag = #{shDelFlag}</if>
+<!-- 				
+				<choose>
+					<when test="shOptionDate == 1">AND a.userRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+					<when test="shOptionDate == 2">AND a.userModDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				</choose>
+ -->				
+        <choose>
+            <when test="shOption == 1">AND a.userName LIKE CONCAT('%',#{shValue},'%')</when>
+            <when test="shOption == 2">AND a.userId LIKE CONCAT('%',#{shValue},'%')</when>
+            <when test="shOption == 3">AND a.userEmail LIKE CONCAT('%',#{shValue},'%')</when>
+            <when test="shOption == 4">AND a.userPhone LIKE CONCAT('%',#{shValue},'%')</when>
+            <when test="shOption == 5">AND a.userAddr LIKE CONCAT('%',#{shValue},'%')</when>
+        </choose>
+    </sql>
+    
 	<select id="selectList" resultMap="resultMapObj">
 		SELECT
-			userSeq,
-			userGender,
-			userName,
-			userId,
-			userEmail,
-			userPhone,
-			userAddr,
-			userDetailAddr,
-			userRegDate,
-			userModDate,
+			a.userSeq,
+			a.userGender,
+			a.userName,
+			a.userId,
+			a.userEmail,
+			a.userPhone,
+			a.userAddr,
+			a.userDetailAddr,
+			a.userRegDate,
+			a.userModDate,
 			(SELECT
 				COUNT(*)
 			FROM
 				pet
 			WHERE 1=1
 				AND userSeq = user_userSeq) AS petCount
-		FROM
-			user
+		<include refid="selectCommon"></include>
 		ORDER BY userSeq DESC
 		limit #{rowNumToShow} offset #{startRnumForMysql}
 	</select>
 	
 	<select id="selectOneCount" resultType="Integer">
 		SELECT COUNT(*)
-		FROM user
-		WHERE 1=1
+		<include refid="selectCommon"></include>
 	</select>
 	
 	<select id="selectOne" resultMap="resultMapObj">

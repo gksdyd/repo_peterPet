@@ -11,64 +11,67 @@
               <div class="mb-2 row g-3">
                 <h1>펫 목록</h1>
                 <div class="col-4">
-                  <select class="form-select-JHY" id="codeDelFlag" name="codeDelFlag" aria-label="Default select example">
-                    <option>삭제 여부</option>
-                    <option value="1">Y</option>
-                    <option value="0" selected>N</option>
+                  <select class="form-select-JHY" id="shDelFlag" name="shDelFlag" aria-label="Default select example">
+                    <option value="" th:selected="${vo.shDelFlag == null}">삭제여부</option>
+                    <option value="1" th:selected="${vo.shDelFlag == 1}">Y</option>
+                    <option value="0" th:selected="${vo.shDelFlag == 0}">N</option>  
                   </select>
                 </div>
                 <div class="col-4">
-                  <select class="form-select-JHY" id="codeDelFlag" name="codeDelFlag" aria-label="Default select example">
-                    <option>접종 여부</option>
-                    <option value="1">Y</option>
-                    <option value="0">N</option>
+                  <select class="form-select-JHY" id="shVaccineFlag" name="shVaccineFlag" aria-label="Default select example">
+                    <option value="" th:selected="${vo.shVaccineFlag == null}">접종여부</option>
+                    <option value="1" th:selected="${vo.shVaccineFlag == 1}">Y</option>
+                    <option value="0" th:selected="${vo.shVaccineFlag == 0}">N</option>  
                   </select>
                 </div>
                 <div class="col-4">
-                  <select class="form-select-JHY" id="codeDelFlag" name="codeDelFlag" aria-label="Default select example">
-                    <option>중성화 여부</option>
-                    <option value="1">Y</option>
-                    <option value="0">N</option>
+                  <select class="form-select-JHY" id="shNeuterFlag" name="shNeuterFlag" aria-label="Default select example">
+                    <option value="" th:selected="${vo.shNeuterFlag == null}">중성화여부</option>
+                    <option value="1" th:selected="${vo.shNeuterFlag == 1}">Y</option>
+                    <option value="0" th:selected="${vo.shNeuterFlag == 0}">N</option>  
                   </select>
                 </div>
               </div>
               <div class="mb-2 row g-3">
                 <div class="col-4">
-                  <select class="form-select-JHY" aria-label="Default select example">
-                    <option selected="selected">날짜</option>
-                    <option id="codeRegDate">등록일</option>
-                    <option id="codeModDate">수정일</option>
+                  <select class="form-select-JHY" id="shOptionDate" name="shOptionDate" aria-label="Default select example">
+                    <option value="" th:selected="${vo.shOptionDate == null}">날짜</option>
+                    <option value="1" th:selected="${vo.shOptionDate == 1}">등록일</option>
+                    <option value="2" th:selected="${vo.shOptionDate == 2}">수정일</option>
                   </select>
                 </div>
                 <div class="col-4">
-                  <input class="form-control-JHY datetimepicker" type="text" placeholder="yy-mm-dd" data-options='{"disableMobile":true}' />
+                  <input class="form-control-JHY datetimepicker" type="text" id="shDateStart" name="shDateStart" placeholder="yy-mm-dd" autocomplete="off" />
+                  <!-- <input class="form-control-JHY datetimepicker" type="text" id="shDateStart" name="shDateStart" th:value="${#strings.substring(vo.shDateStart, 0, 10)}" placeholder="yy-mm-dd" autocomplete="off" /> -->
                 </div>
                 <div class="col-4">
-                  <input class="form-control-JHY datetimepicker" type="text" placeholder="yy-mm-dd" data-options='{"disableMobile":true}' />
+                  <input class="form-control-JHY datetimepicker" type="text" id="shDateEnd" name="shDateEnd" placeholder="yy-mm-dd" autocomplete="off" />
+                  <!-- <input class="form-control-JHY datetimepicker" type="text" id="shDateEnd" name="shDateEnd" th:value="${#strings.substring(vo.shDateEnd, 0, 10)}" placeholder="yy-mm-dd" autocomplete="off" /> -->
                 </div>
               </div>
               <div class="mb-2 row g-3">
                 <div class="col-4">
-                  <select class="form-select-JHY" aria-label="Default select example">
-                    <option selected="selected">검색구분</option>
-                    <option value="no">이름</option>
-                    <option value="no">품종</option>
-                    <option value="no">보호자 이름</option>
+                  <select class="form-select-JHY" id="shOption" name="shOption" aria-label="Default select example">
+                    <option value="" th:selected="${vo.shOption == null}">검색구분</option>
+                    <option value="1" th:selected="${vo.shOption == 1}">이름</option>
+                    <option value="2" th:selected="${vo.shOption == 2}">품종</option>
+                    <option value="3" th:selected="${vo.shOption == 3}">보호자 이름</option>
                   </select>
                 </div>
                 <div class="col-4">
-                  <input class="form-control-JHY" type="text" placeholder="검색어" />
+                  <input class="form-control-JHY" type="text" id="shValue" name="shValue" th:value="${vo.shValue}" onkeyup="enterkey()" placeholder="검색어" />
                 </div>
                 <div class="col-4">
-                  <button class="btn btn-outline-dark btn-sm" type="button"><span class="fas fa-search"></span></button>
-                  <button class="btn btn-outline-dark btn-sm" type="button"><span class="fas fa-redo-alt"></span></button>
+                  <button class="btn btn-outline-dark btn-sm" type="button" id="btnSearch" onclick="search('/xdm/pet/PetXdmList')"><span class="fas fa-search"></span></button>
+                  <button class="btn btn-outline-dark btn-sm" type="button" id="btnReset" onclick="shReset('/xdm/pet/PetXdmList', 3)"><span class="fas fa-redo-alt"></span></button>
                 </div>
               </div>
               <div class="mb-4 row g-3">
                 <div class="col-4 d-flex">
-                  <input class="form-control-JHY w-25" type="text" placeholder="최소 무게" />
-                  <label class="ms-2" for="">~</label>
-                  <input class="form-control-JHY ms-2 w-25" type="text" placeholder="최대 무게" />
+                  <input class="form-control-JHY w-25" type="text" id="shMinWeight" name="shMinWeight" th:value="${vo.shMinWeight}" placeholder="최소 무게" />
+                  <label class="ms-2" for="">kg ~</label>
+                  <input class="form-control-JHY ms-2 w-25" type="text" id="shMaxWeight" name="shMaxWeight" th:value="${vo.shMaxWeight}" placeholder="최대 무게" />
+                  <label class="ms-2" for="">kg</label>
                 </div>
               </div>
               <div class="row">
@@ -77,11 +80,13 @@
                   <label class="form-label-JHY" for="description" th:text="${vo.totalRows}"></label>
                 </div>
                 <div class="col-2" style="text-align: right;">
-                  <select class="form-select-JHY" aria-label="Default select example">
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                    <option value="20">20</option>
+                  <select class="form-select-JHY" aria-label="Default select example" id="changeRowNum" name="changeRowNum" onchange="changeRow('/xdm/pet/PetXdmList')">
+                    <option value="5" th:selected="${vo.rowNumToShow eq 5}">5</option>
+                    <option value="10" th:selected="${vo.rowNumToShow eq 10}">10</option>
+                    <option value="30" th:selected="${vo.rowNumToShow eq 30}">30</option>
+                    <option value="50" th:selected="${vo.rowNumToShow eq 50}">50</option>
+                    <option value="80" th:selected="${vo.rowNumToShow eq 80}">80</option>
+                    <option value="100" th:selected="${vo.rowNumToShow eq 100}">100</option>   
                   </select>
                 </div>
               </div>

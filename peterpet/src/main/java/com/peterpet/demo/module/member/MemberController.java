@@ -3,6 +3,7 @@ package com.peterpet.demo.module.member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -13,10 +14,11 @@ public class MemberController {
 	MemberService memberService;
 	
 	@RequestMapping(value = "/MemberXdmList")
-	public String memberXdmList(Model model, MemberVo vo) {
-		vo.setParamsPaging(memberService.selectOneCount());
-		model.addAttribute("list", memberService.selectList(vo));
-		model.addAttribute("vo", vo);
+	public String memberXdmList(Model model, @ModelAttribute("vo") MemberVo vo) {
+		vo.setParamsPaging(memberService.selectOneCount(vo));
+		if (vo.getTotalRows() > 0) {
+			model.addAttribute("list", memberService.selectList(vo));
+		}
 		return "xdm/member/MemberXdmList";
 	}
 	

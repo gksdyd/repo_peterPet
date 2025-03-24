@@ -22,7 +22,7 @@
                 </div>
                 <div class="mb-3 row g-3">
                   <div class="col-3">
-                    <select class="form-select-JHY" name="prodType" id="prodType"  onchange="changeProductType()">
+                    <select class="form-select-JHY" name="prodType" id="prodType" onchange="changeProductType('product-form', '/xdm/product/ProductXdmForm')">
                       <option th:each="productType : ${@codeService.selectListCachedCode(1)}" th:text="${productType.codeName}" th:value="${productType.codeSeq}" th:selected="${item.prodType} == ${productType.codeSeq}"></option>
                     </select>
                   </div>
@@ -92,11 +92,9 @@
                   <div class="mb-3 row g-3 ms-2 me-2">
                     <div class="col-3">
                       <div class="form-group">
-                        <select class="form-select-JHY" onchange="funcSelect(value, 1)">
+                        <select class="form-select-JHY" onchange="funcSelect('product-form', '/xdm/product/ProductXdmForm', value, 1)">
                           <option value="0">기능</option>
-                          <th:block th:each="feedFunction : ${@codeService.selectListCachedCode(6)}">
-                            <option th:text="${feedFunction.codeName}" th:value="${feedFunction.codeSeq}" th:disabled="${#arrays.contains(item.feedFuncArr, feedFunction.codeSeq)} ? 'disabled' : null"></option>
-                          </th:block>
+                          <option th:each="feedFunction : ${@codeService.selectListCachedCode(6)}" th:text="${feedFunction.codeName}" th:value="${feedFunction.codeSeq}" th:disabled="${#arrays.contains(item.feedFuncArr, feedFunction.codeSeq)} ? 'disabled' : null"></option>
                         </select>
                         <input type="hidden" name="feedFunction" id="feedFunction" value="0">
                       </div>
@@ -122,7 +120,7 @@
                     <div class="col-3">
                       <div class="d-flex align-items-center mb-2" th:each="feedfunc : ${item.feedFuncArr}">
                         <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(#numbers.formatInteger(feedfunc, 0))}"></span>
-                        <button class="btn-close" type="button" style="font-size: xx-small;" th:onclick="funcSelect([[${feedfunc}]], -1)"></button>
+                        <button class="btn-close" type="button" style="font-size: xx-small;" th:onclick="funcSelect('product-form', '/xdm/product/ProductXdmForm', [[${feedfunc}]], -1)"></button>
                       </div>
                     </div>
                   </div>

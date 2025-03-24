@@ -5,24 +5,41 @@
 
 	<resultMap type="com.peterpet.demo.module.codegroup.CodeGroupDto" id="resultMapObj"></resultMap>
 	
+	<sql id="selectCommon">
+        FROM codegroup a
+        WHERE 1=1
+        <if test="shUseFlag != null and !shUseFlag.equals('')">AND a.cogrUseFlag = #{shUseFlag}</if>
+        <if test="shDelFlag != null and !shDelFlag.equals('')">AND a.cogrDelFlag = #{shDelFlag}</if>
+<!-- 				
+				<choose>
+					<when test="shOptionDate == 1">AND a.cogrRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+					<when test="shOptionDate == 2">AND a.cogrModDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				</choose>
+ -->				
+        <choose>
+            <when test="shOption == 1">AND a.cogrSeq = #{shValue}</when>
+            <when test="shOption == 2">AND a.cogrName LIKE CONCAT('%',#{shValue},'%')</when>
+            <when test="shOption == 3">AND a.cogrNameEng LIKE CONCAT('%',#{shValue},'%')</when>
+        </choose>
+    </sql>
+    
 	<select id="selectList" resultMap="resultMapObj">
 		SELECT
-			cogrSeq,
-			cogrName,
-			cogrNameEng,
-			cogrUseFlag,
-			cogrOrder,
-			cogrDisc,
-			cogrRegDate,
-			cogrModDate,
-			cogrDelFlag,
-			cogrNum,
+			a.cogrSeq,
+			a.cogrName,
+			a.cogrNameEng,
+			a.cogrUseFlag,
+			a.cogrOrder,
+			a.cogrDisc,
+			a.cogrRegDate,
+			a.cogrModDate,
+			a.cogrDelFlag,
+			a.cogrNum,
 			(SELECT COUNT(*)
 			FROM code
 			WHERE 1=1
 			AND codeGroup_cogrSeq = cogrSeq) AS count
-		FROM
-			codegroup
+		<include refid="selectCommon"></include>
 		ORDER BY cogrSeq DESC
 		limit #{rowNumToShow} offset #{startRnumForMysql}
 	</select>
@@ -45,7 +62,7 @@
 			AND cogrSeq = #{cogrSeq}
 	</select>
 	
-	<select id="selectMaxSeq" resultType="String">
+	<select id="selectMaxSeq" resultType="Integer">
 		SELECT
 			MAX(cogrSeq)
 		FROM
@@ -81,9 +98,6 @@
 	
 	<select id="selectOneCount" resultType="Integer">
 		SELECT COUNT(*)
-		FROM codegroup
-		WHERE 1=1
-			<!-- <if test="useFlag == 1">AND cogrUseFlag = #{cogrUseFlag}</if>
-			<if test="delFlag == 1">AND cogrDelFlag = #{cogrDelFlag}</if> -->
+		<include refid="selectCommon"></include>
 	</select>
 </mapper>

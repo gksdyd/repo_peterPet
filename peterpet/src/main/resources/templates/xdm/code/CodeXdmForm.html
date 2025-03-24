@@ -23,7 +23,7 @@
                   <div class="col-3">
                     <select class="form-select-JHY" required="" id="codeGroup_cogrSeq" name="codeGroup_cogrSeq">
                       <option value="">선택하세요</option>
-                      <option th:each="list : ${list}" th:text="${list.cogrName}" th:value="${list.cogrSeq}"></option>
+                      <option th:each="list : ${list}" th:text="${list.cogrName}" th:value="${list.cogrSeq}" th:selected="${list.cogrSeq} == ${item.codeGroup_cogrSeq}"></option>
                     </select>
                     <div class="invalid-feedback" id="cogrSeqValid">코드그룹을 선택해주세요.</div>
                   </div>
@@ -44,18 +44,18 @@
                 </div>
                 <div class="mb-3 row g-3">
                   <div class="col-3">
-                    <input class="form-control-JHY" id="codeSeq" name="codeSeq" type="text" placeholder="자동생성" th:value="${item.codeSeq} + 1" readonly />
+                    <input class="form-control-JHY" id="codeSeq" name="codeSeq" type="text" placeholder="자동생성" th:value="${item.codeSeq}" readonly />
                   </div>
                   <div class="col-3">
-                    <input class="form-control-JHY" id="codeInstNum" name="codeInstNum" type="text" placeholder="영대소문자, 숫자" />
+                    <input class="form-control-JHY" id="codeInstNum" name="codeInstNum" th:value="${item.codeInstNum}" type="text" placeholder="영대소문자, 숫자" />
                     <div class="invalid-feedback" id="codeInstNumValid">영대소문자,숫자만 가능</div>
                   </div>
                   <div class="col-3">
-                    <input class="form-control-JHY" id="codeName" name="codeName" required="" type="text" placeholder="한글, 영대소문자, 숫자" />
+                    <input class="form-control-JHY" id="codeName" name="codeName" th:value="${item.codeName}" required="" type="text" placeholder="한글, 영대소문자, 숫자" />
                     <div class="invalid-feedback" id="codeNameValid">한글, 영대소문자, 숫자만 가능</div>
                   </div>
                   <div class="col-3">
-                    <input class="form-control-JHY" id="codeNameEng" name="codeNameEng" type="text" placeholder="영대소문자, 숫자" />
+                    <input class="form-control-JHY" id="codeNameEng" name="codeNameEng" th:value="${item.codeNameEng}" type="text" placeholder="영대소문자, 숫자" />
                     <div class="invalid-feedback" id="codeNameEngValid">영대소문자,숫자만 가능</div>
                   </div>
                 </div>
@@ -70,14 +70,14 @@
                 <div class="mb-3 row g-3">
                   <div class="col-3">
                     <select class="form-select-JHY" id="codeUseFlag" name="codeUseFlag" required="">
-                      <option selected="selected" value="">선택하세요</option>
-                      <option value="1">사용</option>
-                      <option value="0">미사용</option>
+                      <option value="">선택하세요</option>
+                      <option value=1 th:selected="${item.codeUseFlag == 1}">사용</option>
+                      <option value=0 th:selected="${item.codeUseFlag == 0}">미사용</option>
                     </select>
                     <div class="invalid-feedback" id="codeUseFlagValid">선택하세요.</div>
                   </div>
                   <div class="col-3">
-                    <input class="form-control-JHY" id="codeOrder" name="codeOrder" type="text" required="" />
+                    <input class="form-control-JHY" id="codeOrder" name="codeOrder" th:value="${item.codeOrder}" type="text" required="" />
                     <div class="invalid-feedback" id="codeOrderValid">입력하세요.</div>
                   </div>
                 </div>
@@ -88,7 +88,7 @@
                 </div>
                 <div class="mb-3 row g-3">
                   <div class="col-6">
-                    <textarea class="form-control-JHY" id="codeDisc" name="codeDisc" rows="3"></textarea>
+                    <textarea class="form-control-JHY" id="codeDisc" name="codeDisc" th:value="${item.codeDisc}" rows="3"></textarea>
                   </div>
                 </div>
                 <div class="mb-3 row g-3">

@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface MemberDao {
 
 	List<MemberDto> selectList(MemberVo vo);
-	int selectOneCount();
+	int selectOneCount(MemberVo vo);
 	MemberDto selectOne(MemberDto memberDto);
 }
