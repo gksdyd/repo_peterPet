@@ -117,6 +117,14 @@
                     </div>
                   </div>
                   <div class="mb-3 row g-3 ms-2 me-2">
+                    <div class="col-2" th:each="feedfunc : ${item.feedFuncArr}">
+                      <div class="d-flex align-items-center mb-2">
+                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(#numbers.formatInteger(feedfunc, 0))}"></span>
+                        <button class="btn-close" type="button" style="font-size: xx-small;" th:onclick="funcSelect('product-form', '/xdm/product/ProductXdmForm', [[${feedfunc}]], -1)"></button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mb-3 row g-3 ms-2 me-2">
                     <div class="col-3">
                       <div class="input-group">
                         <input class="form-control fs-11" type="text" placeholder="가격" aria-describedby="basic-addon2" /><span class="input-group-text fs-11" id="basic-addon2">원</span>
@@ -139,14 +147,6 @@
                         <input class="form-control fs-11" type="text" placeholder="가격" aria-label="First name" />
                         <input class="form-control fs-11" type="text" placeholder="무게" aria-label="Last name" />
                         <input class="form-control fs-11" type="text" placeholder="할인율" aria-label="Last name" />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="mb-3 row g-3 ms-2 me-2">
-                    <div class="col-3">
-                      <div class="d-flex align-items-center mb-2" th:each="feedfunc : ${item.feedFuncArr}">
-                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(#numbers.formatInteger(feedfunc, 0))}"></span>
-                        <button class="btn-close" type="button" style="font-size: xx-small;" th:onclick="funcSelect('product-form', '/xdm/product/ProductXdmForm', [[${feedfunc}]], -1)"></button>
                       </div>
                     </div>
                   </div>
