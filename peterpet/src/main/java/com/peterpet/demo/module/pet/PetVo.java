@@ -5,8 +5,9 @@ import com.peterpet.demo.module.base.BaseVo;
 public class PetVo extends BaseVo {
 
 	private String userSeq;
-	private Integer shVaccineFlag = 1;
-	private Integer shNeuterFlag = 1;
+	private Integer shVaccineFlag;
+	private Integer shNeuterFlag;
+	private Integer shVarieties;
 	private Integer shMinWeight = 0;
 	private Integer shMaxWeight = 100;
 
@@ -32,6 +33,14 @@ public class PetVo extends BaseVo {
 
 	public void setShNeuterFlag(Integer shNeuterFlag) {
 		this.shNeuterFlag = shNeuterFlag;
+	}
+
+	public Integer getShVarieties() {
+		return shVarieties;
+	}
+
+	public void setShVarieties(Integer shVarieties) {
+		this.shVarieties = shVarieties;
 	}
 
 	public Integer getShMinWeight() {
