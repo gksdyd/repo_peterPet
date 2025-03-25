@@ -40,6 +40,10 @@ public class CodeService {
 		return codeDao.selectOneCount(vo);
 	}
 	
+	public int update(CodeDto codeDto) {
+		return codeDao.update(codeDto);
+	}
+	
 	@PostConstruct
 	public void selectListCachedCodeArrayList() throws Exception {
 		List<CodeDto> codeListFromDb = (ArrayList<CodeDto>) codeDao.selectListCachedCodeArrayList();

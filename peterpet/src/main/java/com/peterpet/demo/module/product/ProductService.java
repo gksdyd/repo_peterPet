@@ -11,7 +11,7 @@ public class ProductService {
 	@Autowired
 	ProductDao productDao;
 	
-	public String selectMaxSeq() {
+	public Integer selectMaxSeq() {
 		return productDao.selectMaxSeq();
 	}
 	

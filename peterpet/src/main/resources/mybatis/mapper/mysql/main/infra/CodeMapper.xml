@@ -22,7 +22,7 @@
             <when test="shOption == 1">AND a.codeGroup_cogrSeq = #{shValue}</when>
             <when test="shOption == 2">AND b.cogrName LIKE CONCAT('%',#{shValue},'%')</when>
             <when test="shOption == 3">AND a.codeSeq = #{shValue}</when>
-            <when test="shOption == 4">AND a.codeInstNum LIKE CONCAT('%',#{shValue},'%')</when>
+            <when test="shOption == 4">AND a.codeNum LIKE CONCAT('%',#{shValue},'%')</when>
             <when test="shOption == 5">AND a.codeName LIKE CONCAT('%',#{shValue},'%')</when>
             <when test="shOption == 6">AND a.codeNameEng LIKE CONCAT('%',#{shValue},'%')</when>
         </choose>
@@ -34,7 +34,6 @@
 			a.codeName,
 			a.codeNameEng,
 			a.codeNum,
-			a.codeInstNum,
 			a.codeUseFlag,
 			a.codeOrder,
 			a.codeDisc,
@@ -55,7 +54,6 @@
 			a.codeName,
 			a.codeNameEng,
 			a.codeNum,
-			a.codeInstNum,
 			a.codeUseFlag,
 			a.codeOrder,
 			a.codeDisc,
@@ -92,24 +90,20 @@
 			codeName,
 			codeNameEng,
 			codeNum,
-			codeInstNum,
 			codeUseFlag,
 			codeOrder,
 			codeDisc,
 			codeRegDate,
-			codeModDate,
 			codeDelFlag,
 			codeGroup_cogrSeq
 		) VALUE (
 			#{codeName},
 			#{codeNameEng},
 			#{codeNum},
-			#{codeInstNum},
 			#{codeUseFlag},
 			#{codeOrder},
 			#{codeDisc},
 			#{codeRegDate},
-			#{codeModDate},
 			0,
 			#{codeGroup_cogrSeq}
 		)
@@ -134,4 +128,19 @@
 			AND codeDelFlag = 0
 		    AND codeUseFlag = 1
    </select>
+   
+   <update id="update">
+		update code
+		set 
+			codeName = #{codeName},
+			codeNameEng = #{codeNameEng},
+			codeNum = #{codeNum},
+			codeUseFlag = #{codeUseFlag},
+			codeOrder = #{codeOrder},
+			codeDisc = #{codeDisc},
+			codeModDate = #{codeModDate},
+			codeGroup_cogrSeq = #{codeGroup_cogrSeq}
+		where
+			codeSeq = #{codeSeq};
+	</update>
 </mapper>

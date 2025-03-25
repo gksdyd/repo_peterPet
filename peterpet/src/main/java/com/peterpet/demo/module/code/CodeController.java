@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.peterpet.demo.module.codegroup.CodeGroupVo;
+
 @Controller
 public class CodeController {
 
@@ -22,15 +24,20 @@ public class CodeController {
 	}
 	
 	@RequestMapping(value = "/xdm/code/CodeXdmForm")
-	public String codeXdmForm(Model model, CodeDto codeDto) {
-		if (codeService.selectMaxSeq() == null)
-		{
-			codeDto.setCodeSeq("1");
+	public String codeXdmForm(Model model, CodeDto codeDto, @ModelAttribute("vo") CodeVo vo) {
+		if (vo.getRegisterOrModifyFlag() == 1) {
+			if (codeService.selectMaxSeq() == null)
+			{
+				codeDto.setCodeSeq("1");
+			} else {
+				codeDto.setCodeSeq((codeService.selectMaxSeq() + 1) + "");
+			}
+			model.addAttribute("item", codeDto);
+			model.addAttribute("list", codeService.selectCodeGroupName());
 		} else {
-			codeDto.setCodeSeq((codeService.selectMaxSeq() + 1) + "");
+			model.addAttribute("item", codeService.selectOne(codeDto));
+			model.addAttribute("list", codeService.selectCodeGroupName());
 		}
-		model.addAttribute("item", codeDto);
-		model.addAttribute("list", codeService.selectCodeGroupName());
 		return "xdm/code/CodeXdmForm";
 	}
 	
@@ -40,10 +47,9 @@ public class CodeController {
 		return "redirect:/xdm/code/CodeXdmList";
 	}
 	
-	@RequestMapping(value = "/xdm/code/CodeXdmView")
-	public String codeXdmView(Model model, CodeDto codeDto) {
-		model.addAttribute("item", codeService.selectOne(codeDto));
-		model.addAttribute("list", codeService.selectCodeGroupName());
-		return "xdm/code/CodeXdmForm";
+	@RequestMapping(value = "/xdm/code/CodeXdmUpdt")
+	public String codeXdmUpdt(CodeDto codeDto) {
+		codeService.update(codeDto);
+		return "redirect:/xdm/code/CodeXdmList";
 	}
 }

@@ -8,8 +8,7 @@ public class CodeDto {
 	private String codeSeq;
 	private String codeName;
 	private String codeNameEng;
-	private Integer codeNum;
-	private String codeInstNum;
+	private String codeNum;
 	private Integer codeUseFlag;
 	private Integer codeOrder;
 	private String codeDisc;
@@ -40,17 +39,11 @@ public class CodeDto {
 	public void setCodeNameEng(String codeNameEng) {
 		this.codeNameEng = codeNameEng;
 	}
-	public Integer getCodeNum() {
+	public String getCodeNum() {
 		return codeNum;
 	}
-	public void setCodeNum(Integer codeNum) {
+	public void setCodeNum(String codeNum) {
 		this.codeNum = codeNum;
-	}
-	public String getCodeInstNum() {
-		return codeInstNum;
-	}
-	public void setCodeInstNum(String codeInstNum) {
-		this.codeInstNum = codeInstNum;
 	}
 	public Integer getCodeUseFlag() {
 		return codeUseFlag;

@@ -12,7 +12,8 @@
               <h1>Code Group</h1>
             </div>
             <div class="card-body bg-body-tertiary">
-              <form class="needs-validation" novalidate action="/xdm/codegroup/CodeGroupXdmInst" method="post" id="code-group-form">
+              <form class="needs-validation" id="code-group-form" novalidate>
+                <input type="hidden" name="registerOrModifyFlag" id="registerOrModifyFlag" th:value="${vo.registerOrModifyFlag}" disabled>
                 <div class="row g-3">
                   <div class="col-3">
                     <label class="form-label-JHY" for="cogrSeq">코드그룹 코드<span style="color: red;">*</span></label>
@@ -30,19 +31,18 @@
                 <div class="mb-3 row g-3">
                   <div class="col-3">
                     <input class="form-control-JHY" name="cogrSeq" id="cogrSeq" th:value="${item.cogrSeq}" type="text" placeholder="자동생성" readonly />
-                    <div class="invalid-feedback">Please select a valid state.</div>
                   </div>
                   <div class="col-3">
                     <input class="form-control-JHY" name="cogrNum" id="cogrNum" th:value="${item.cogrNum}" type="text" placeholder="영대소문자, 숫자" />
-                    <div class="invalid-feedback">Please select a valid state.</div>
+                    <div class="invalid-feedback" id="cogrNumValid">영대소문자, 숫자만 입력하세요!</div>
                   </div>
                   <div class="col-3">
-                    <input class="form-control-JHY" name="cogrName" id="cogrName" th:value="${item.cogrName}" type="text" placeholder="한글, 영대소문자, 숫자" required />
-                    <div class="invalid-feedback" id="cogrNameValid">잘못된 코드 그룹 이름입니다.</div>
+                    <input class="form-control-JHY" name="cogrName" id="cogrName" th:value="${item.cogrName}" type="text" placeholder="한글, 영대소문자, 숫자, ~, /" required />
+                    <div class="invalid-feedback" id="cogrNameValid">한글, 영대소문자, 숫자, ~, / 만 입력해주세요!</div>
                   </div>
                   <div class="col-3">
                     <input class="form-control-JHY" name="cogrNameEng" id="cogrNameEng" th:value="${item.cogrNameEng}" type="text" placeholder="영대소문자, 숫자" />
-                    <div class="invalid-feedback">Please select a valid state.</div>
+                    <div class="invalid-feedback" id="cogrNameEngValid">영대소문자, 숫자만 입력해주세요!</div>
                   </div>
                 </div>
                 <div class="row g-3">
@@ -55,16 +55,16 @@
                 </div>
                 <div class="mb-3 row g-3">
                   <div class="col-3">
-                    <select class="form-select-JHY" name="cogrUseFlag" id="cogrUseFlag" required>
+                    <select class="form-select-JHY" name="cogrUseFlag" id="cogrUseFlag">
                       <option value="">선택하세요</option>
-                      <option value=1 th:selected="${item.cogrUseFlag == 1}">사용</option>
-                      <option value=0 th:selected="${item.cogrUseFlag == 0}">미사용</option>
+                      <option value="1" th:selected="${item.cogrUseFlag == 1}">사용</option>
+                      <option value="0" th:selected="${item.cogrUseFlag == 0}">미사용</option>
                     </select>
-                    <div class="invalid-feedback">Please select a valid state.</div>
+                    <div class="invalid-feedback" id="cogrUseFlagValid">사용여부를 선택해주세요!</div>
                   </div>
                   <div class="col-3">
                     <input class="form-control-JHY" name="cogrOrder" id="cogrOrder" th:value="${item.cogrOrder}" type="text" required />
-                    <div class="invalid-feedback">Please provide a valid order.</div>
+                    <div class="invalid-feedback" id="cogrOrderValid">숫자만 입력해주세요!</div>
                   </div>
                 </div>
                 <div class="row g-3">
@@ -80,88 +80,113 @@
                 <div class="mb-3 row g-3">
                   <div class="col">
                     <a href="/xdm/codegroup/CodeGroupXdmList"><button class="btn btn-outline-dark btn-sm" type="button"><span class="fas fa-list-ul"></span></button></a>
+                    <button class="btn btn-danger btn-sm" type="button" id="deleteBtn" th:if="${vo.registerOrModifyFlag != 1}"><span class="bi-x"></span></button>
+                    <button class="btn btn-danger btn-sm" type="button" id="ueleteBtn" th:if="${vo.registerOrModifyFlag != 1}"><span class="far fa-trash-alt"></span></button>
                   </div>
                   <div class="col" style="text-align: right;">
                     <button class="btn btn-primary btn-sm" type="button" id="btnSubmit"><span class="fas fa-database"></span></button>
                   </div>
                 </div>
                 <input type="hidden" name="cogrRegDate" id="cogrRegDate" >
-                <!-- <input type="hidden" name="cogrModDate" id="cogrModDate" > -->
+                <input type="hidden" name="cogrModDate" id="cogrModDate" >
               </form>
             </div>
           </div>
-          <div th:replace="~{xdm/include/footer :: footer}"><div>
+          <div th:replace="~{xdm/include/footer :: footer}"></div>
         </div>
       </div>
     </main>
-
-    <div class="modal" id="modal-valid" tabindex="-1">
-      <div class="modal-dialog mt-6" role="document">
-        <div class="modal-content border-0">
-          <div class="position-absolute top-0 end-0 mt-2 me-2 z-1">
-            <button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base" id="x-button"></button>
-          </div>
-          <div class="modal-body p-0">
-            <div class="bg-body-tertiary rounded-top-3 py-3 ps-4 pe-6">
-              <h4 class="mb-1" id="tooltippopoversLabel">잘못된 코드그룹 이름</h4>
-            </div>
-            <div class="p-4 pb-0 mb-3">
-              <div class="row">
-                <div class="col">
-                  <h5>다시 입력해주세요.</h5>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" id="close-button" type="button" data-bs-dismiss="modal">Close</button>
-            <button class="btn btn-primary" type="button">submit </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div th:replace="~{xdm/include/modal :: modal}"></div>
+    
   <!-- ===============================================-->
   <!--    End of Main Content-->
   <!-- ===============================================-->
-  <script type="text/javascript">
-    document.getElementById("x-button").onclick = function() {
-      document.getElementById("modal-valid").style.display = "none";
-      document.getElementById("cogrName").focus();
+  <script type="text/javascript">    
+    let form = document.getElementById("code-group-form");
+    let goUrlXdmInst = "/xdm/codegroup/CodeGroupXdmInst";
+    let goUrlXdmUpdt = "/xdm/codegroup/CodeGroupXdmUpdt";
+    let goUrlXdmUelt = "/xdm/codegroup/CodeGroupXdmUelt";
+    let goUrlXdmDelt = "/xdm/codegroup/CodeGroupXdmDelt";
+
+    let seq = document.getElementById("cogrSeq");
+    let registerDate = document.getElementById("cogrRegDate");
+    let modifyDate = document.getElementById("cogrModDate");
+    let anotherNum = document.getElementById("cogrNum");
+    let name = document.getElementById("cogrName");
+    let engName = document.getElementById("cogrNameEng");
+    let useFlag = document.getElementById("cogrUseFlag");
+    let order = document.getElementById("cogrOrder");
+
+    let modalDelete = document.getElementById("modalDelete");
+    let modalDelButton = document.getElementById("modalDelBtn");
+    let modalCloseButton = document.getElementById("close-button");
+    let modalXButton = document.getElementById("x-button");
+
+    let anotherNumValid = document.getElementById("cogrNumValid");
+    let nameValid = document.getElementById("cogrNameValid");
+    let engNameValid = document.getElementById("cogrNameEngValid");
+    let useFlagValid = document.getElementById("cogrUseFlagValid");
+    let orderValid = document.getElementById("cogrOrderValid");
+
+    validationInit = function() {
+      anotherNumValid.style.display = "none";
+      nameValid.style.display = "none";
+      engNameValid.style.display = "none";
+      useFlagValid.style.display = "none";
+      orderValid.style.display = "none";
     }
 
-    document.getElementById("close-button").onclick = function() {
-      document.getElementById("modal-valid").style.display = "none";
-      document.getElementById("cogrName").focus();
-    }
+    validation = function() {
     
-    // let form = document.querySelector("form[name=code-group-form]");
-    document.getElementById("btnSubmit").onclick = function() {
+      let temp;
 
-      if (document.getElementById("cogrName").value.trim() == null || document.getElementById("cogrName").value.trim() == "") {
-        document.getElementById("modal-valid").style.display = "block";
-        // document.getElementById("cogrNameValid").style.display = "block";
+      temp = bothSidesGapRemove(anotherNum.value);
+      if (checkLength(temp) && !onlyKoEngNumValid(temp)) {
+        anotherNumValid.style.display = "block";
+        anotherNum.style.outlineColor = "red";
+        anotherNum.focus();
         return false;
       }
-      let today = new Date();
-      let year = today.getFullYear();
-      let month = (today.getMonth() + 1).toString().padStart(2, '0');
-      let day = today.getDate().toString().padStart(2, '0');
-      
-      let date = year + month + day;
-      
-      document.getElementById("cogrRegDate").value = date;
-      // document.getElementById("cogrModDate").value = date;
-      
-      if (document.getElementById("cogrNum").value === "") {
-        document.getElementById("cogrNum").value = document.getElementById("cogrSeq").value;
-      } else {
-        // by pass
+
+      temp = allGapRemove(name.value);
+      if (!checkLength(temp) || !onlyEngKoNumSpecialChar(temp)) {
+        nameValid.style.display = "block";
+        name.style.outlineColor = "red";
+        name.focus();
+        return false;
       }
-      
-      document.getElementById("code-group-form").submit();
+
+      temp = allGapRemove(engName.value);
+      if (checkLength(temp) && !onlyEngNumSpecialChar(temp)) {
+        engNameValid.style.display = "block";
+        engName.style.outlineColor = "red";
+        engName.focus();
+        return false;
+      }
+
+     
+      temp = useFlag.value;
+      if (temp == "") {
+        useFlagValid.style.display = "block";
+        useFlag.style.outlineColor = "red";
+        useFlag.focus();
+        return false;
+      }
+
+      temp = bothSidesGapRemove(order.value);
+      if (!checkLength(temp) || !onlyNum(temp)) {
+        orderValid.style.display = "block";
+        order.style.outlineColor = "red";
+        order.focus();
+        return false;
+      }
+
+      return true;
     }
   </script>
-  <div th:replace="~{xdm/include/includeXdmFalcon :: includeXdmFalcon}"><div>
-  </body>
-  
-  </html>
+  <div th:replace="~{xdm/include/includeXdmForm :: includeXdmForm}"></div>
+  <div th:replace="~{xdm/include/includeXdmFalcon :: includeXdmFalcon}"></div>
+
+</body>
+
+</html>

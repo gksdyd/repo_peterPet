@@ -23,11 +23,11 @@
                 <div class="mb-3 row g-3">
                   <div class="col-3">
                     <select class="form-select-JHY" name="prodType" id="prodType" onchange="changeProductType('product-form', '/xdm/product/ProductXdmForm')">
-                      <option th:each="productType : ${@codeService.selectListCachedCode(1)}" th:text="${productType.codeName}" th:value="${productType.codeSeq}" th:selected="${item.prodType} == ${productType.codeSeq}"></option>
+                      <option th:each="productType : ${@codeService.selectListCachedCode(1)}" th:text="${productType.codeName}" th:value="${productType.codeSeq}" th:selected="${func.prodType} == ${productType.codeSeq}"></option>
                     </select>
                   </div>
                 </div>
-                <div class="card border h-100 border-primary mb-3" th:if="${item.prodType} == '1'">
+                <div class="card border h-100 border-primary mb-3" th:if="${func.prodType} == '1'">
                   <div class="row g-3 mt-0 ms-2 me-2">
                     <div class="col-3">
                       <label class="form-label-JHY" for="pordSeq">사료 코드<span style="color: red;">*</span></label>
@@ -41,7 +41,7 @@
                   </div>
                   <div class="mb-3 row g-3 ms-2 me-2">
                     <div class="col-3">
-                      <input class="form-control-JHY" name="prodSeq" id="prodSeq" th:value="${item.prodSeq} + 1" type="text" placeholder="자동생성" readonly />
+                      <input class="form-control-JHY" name="prodSeq" id="prodSeq" th:value="${func.prodSeq}" type="text" placeholder="자동생성" readonly />
                     </div>
                     <div class="col-3">
                       <input class="form-control-JHY" name="prodName" id="prodName" th:value="${item.prodName}" type="text" />
@@ -94,7 +94,7 @@
                       <div class="form-group">
                         <select class="form-select-JHY" onchange="funcSelect('product-form', '/xdm/product/ProductXdmForm', value, 1)">
                           <option value="0">기능</option>
-                          <option th:each="feedFunction : ${@codeService.selectListCachedCode(6)}" th:text="${feedFunction.codeName}" th:value="${feedFunction.codeSeq}" th:disabled="${#arrays.contains(item.feedFuncArr, feedFunction.codeSeq)} ? 'disabled' : null"></option>
+                          <option th:each="feedFunction : ${@codeService.selectListCachedCode(6)}" th:text="${feedFunction.codeName}" th:value="${feedFunction.codeSeq}" th:disabled="${#arrays.contains(func.feedFuncArr, feedFunction.codeSeq)} ? 'disabled' : null"></option>
                         </select>
                         <input type="hidden" name="feedFunction" id="feedFunction" value="0">
                       </div>
@@ -117,7 +117,7 @@
                     </div>
                   </div>
                   <div class="mb-3 row g-3 ms-2 me-2">
-                    <div class="col-2" th:each="feedfunc : ${item.feedFuncArr}">
+                    <div class="col-2" th:each="feedfunc : ${func.feedFuncArr}">
                       <div class="d-flex align-items-center mb-2">
                         <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(#numbers.formatInteger(feedfunc, 0))}"></span>
                         <button class="btn-close" type="button" style="font-size: xx-small;" th:onclick="funcSelect('product-form', '/xdm/product/ProductXdmForm', [[${feedfunc}]], -1)"></button>
@@ -127,23 +127,29 @@
                   <div class="mb-3 row g-3 ms-2 me-2">
                     <div class="col-3">
                       <div class="input-group">
-                        <input class="form-control fs-11" type="text" placeholder="가격" aria-describedby="basic-addon2" /><span class="input-group-text fs-11" id="basic-addon2">원</span>
+                        <input class="form-control fs-11" type="text" id="price" name="price" th:value="${info.price}" placeholder="가격" aria-describedby="basic-addon2" /><span class="input-group-text fs-11" id="basic-addon2">원</span>
                       </div>
                     </div>
                     <div class="col-3">
                       <div class="input-group">
-                        <input class="form-control fs-11" type="text" placeholder="무게" aria-describedby="basic-addon2" /><span class="input-group-text fs-11" id="basic-addon2">kg</span>
+                        <input class="form-control fs-11" type="text" id="weight" name="weight" th:value="${info.weight}" placeholder="무게" aria-describedby="basic-addon2" /><span class="input-group-text fs-11" id="basic-addon2">kg</span>
                       </div>
                     </div>
                     <div class="col-3">
                       <div class="input-group">
-                        <input class="form-control fs-11" type="text" placeholder="할인율" aria-describedby="basic-addon2" /><span class="input-group-text fs-11" id="basic-addon2">%</span>
+                        <input class="form-control fs-11" type="text" id="discount" name="discount" th:value="${info.discount}" placeholder="할인율" aria-describedby="basic-addon2" /><span class="input-group-text fs-11" id="basic-addon2">%</span>
                       </div>
+                    </div>
+                    <div class="col-3">
+                      <button class="btn btn-outline-primary me-1 mb-1 fs-11" type="button">
+                        <span class="fas fa-plus me-1" data-fa-transform="shrink-3"></span>저장
+                      </button>
                     </div>
                   </div>
                   <div class="mb-3 row g-3 ms-2 me-2">
                     <div class="col-3">
-                      <div class="input-group"><span class="input-group-text fs-11">1</span>
+                      <div class="input-group">
+                        <span class="input-group-text fs-11">1</span>
                         <input class="form-control fs-11" type="text" placeholder="가격" aria-label="First name" />
                         <input class="form-control fs-11" type="text" placeholder="무게" aria-label="Last name" />
                         <input class="form-control fs-11" type="text" placeholder="할인율" aria-label="Last name" />
@@ -182,6 +188,7 @@
       
       document.getElementById("prodRegDate").value = date;
       // document.getElementById("cogrModDate").value = date;
+      document.getElementById("registerFlag").value = 1;
       
       document.getElementById("product-form").submit();
     }

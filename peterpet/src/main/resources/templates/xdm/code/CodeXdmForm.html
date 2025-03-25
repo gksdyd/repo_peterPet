@@ -13,7 +13,8 @@
               <h1>Code</h1>
             </div>
             <div class="card-body bg-body-tertiary">
-              <form class="needs-validation" novalidate action="/xdm/code/CodeXdmInst" method="post" id="code-form">
+              <form class="needs-validation" id="code-form">
+                <input type="hidden" name="registerOrModifyFlag" id="registerOrModifyFlag" th:value="${vo.registerOrModifyFlag}" disabled>
                 <div class="row g-3">
                   <div class="col-3">
                     <label class="form-label-JHY" for="codeGroup_cogrSeq">코드그룹<span style="color: red;">*</span></label>
@@ -25,7 +26,7 @@
                       <option value="">선택하세요</option>
                       <option th:each="list : ${list}" th:text="${list.cogrName}" th:value="${list.cogrSeq}" th:selected="${list.cogrSeq} == ${item.codeGroup_cogrSeq}"></option>
                     </select>
-                    <div class="invalid-feedback" id="cogrSeqValid">코드그룹을 선택해주세요.</div>
+                    <div class="invalid-feedback" id="cogrSeqValid">코드그룹을 선택해주세요!</div>
                   </div>
                 </div>
                 <div class="row g-3">
@@ -33,7 +34,7 @@
                     <label class="form-label-JHY" for="codeSeq">코드<span style="color: red;">*</span></label>
                   </div>
                   <div class="col-3">
-                    <label class="form-label-JHY" for="codeInstNum">코드 (ANOTHER)</label>
+                    <label class="form-label-JHY" for="codeNum">코드 (ANOTHER)</label>
                   </div>
                   <div class="col-3">
                     <label class="form-label-JHY" for="codeName">코드 이름<span style="color: red;">*</span></label>
@@ -47,16 +48,16 @@
                     <input class="form-control-JHY" id="codeSeq" name="codeSeq" type="text" placeholder="자동생성" th:value="${item.codeSeq}" readonly />
                   </div>
                   <div class="col-3">
-                    <input class="form-control-JHY" id="codeInstNum" name="codeInstNum" th:value="${item.codeInstNum}" type="text" placeholder="영대소문자, 숫자" />
-                    <div class="invalid-feedback" id="codeInstNumValid">영대소문자,숫자만 가능</div>
+                    <input class="form-control-JHY" id="codeNum" name="codeNum" th:value="${item.codeNum}" type="text" placeholder="영대소문자, 숫자" />
+                    <div class="invalid-feedback" id="codeNumValid">영대소문자,숫자만 입력해주세요!</div>
                   </div>
                   <div class="col-3">
                     <input class="form-control-JHY" id="codeName" name="codeName" th:value="${item.codeName}" required="" type="text" placeholder="한글, 영대소문자, 숫자" />
-                    <div class="invalid-feedback" id="codeNameValid">한글, 영대소문자, 숫자만 가능</div>
+                    <div class="invalid-feedback" id="codeNameValid">한글, 영대소문자, 숫자, ~, / 만 입력해주세요!</div>
                   </div>
                   <div class="col-3">
                     <input class="form-control-JHY" id="codeNameEng" name="codeNameEng" th:value="${item.codeNameEng}" type="text" placeholder="영대소문자, 숫자" />
-                    <div class="invalid-feedback" id="codeNameEngValid">영대소문자,숫자만 가능</div>
+                    <div class="invalid-feedback" id="codeNameEngValid">영대소문자, 숫자만 입력해주세요!</div>
                   </div>
                 </div>
                 <div class="row g-3">
@@ -74,11 +75,11 @@
                       <option value=1 th:selected="${item.codeUseFlag == 1}">사용</option>
                       <option value=0 th:selected="${item.codeUseFlag == 0}">미사용</option>
                     </select>
-                    <div class="invalid-feedback" id="codeUseFlagValid">선택하세요.</div>
+                    <div class="invalid-feedback" id="codeUseFlagValid">사용여부를 선택해주세요!</div>
                   </div>
                   <div class="col-3">
                     <input class="form-control-JHY" id="codeOrder" name="codeOrder" th:value="${item.codeOrder}" type="text" required="" />
-                    <div class="invalid-feedback" id="codeOrderValid">입력하세요.</div>
+                    <div class="invalid-feedback" id="codeOrderValid">숫자만 입력해주세요!</div>
                   </div>
                 </div>
                 <div class="row g-3">
@@ -93,13 +94,14 @@
                 </div>
                 <div class="mb-3 row g-3">
                   <div class="col">
-                    <a href="/xdm/code/CodeXdmList"><button class="btn btn-outline-dark btn-sm" type="button"><span class="fas fa-list-ul"></span></button></a>                  
+                    <a href="/xdm/code/CodeXdmList"><button class="btn btn-outline-dark btn-sm" type="button"><span class="fas fa-list-ul"></span></button></a>
+                    <button class="btn btn-danger btn-sm" type="button" id="deleteBtn" th:if="${vo.registerOrModifyFlag != 1}"><span class="bi-x"></span></button>
+                    <button class="btn btn-danger btn-sm" type="button" id="ueleteBtn" th:if="${vo.registerOrModifyFlag != 1}"><span class="far fa-trash-alt"></span></button>
                   </div>
                   <div class="col" style="text-align: right;">
                     <button class="btn btn-primary btn-sm" type="button" id="btnSubmit"><span class="fas fa-database"></span></button>
                   </div>
                 </div>
-                <input type="hidden" name="codeNum" id="codeNum" >
                 <input type="hidden" name="codeRegDate" id="codeRegDate" >
                 <input type="hidden" name="codeModDate" id="codeModDate" >
               </form>
@@ -109,94 +111,107 @@
         </div>
       </div>
     </main>
+    <div th:replace="~{xdm/include/modal :: modal}"></div>
   <!-- ===============================================-->
   <!--    End of Main Content-->
   <!-- ===============================================-->
   <script type="text/javascript" th:inline="javascript">
-    document.getElementById("btnSubmit").onclick = function() {
+    let form = document.getElementById("code-form");
+    let goUrlXdmInst = "/xdm/code/CodeXdmInst";
+    let goUrlXdmUpdt = "/xdm/code/CodeXdmUpdt";
+    let goUrlXdmUelt = "/xdm/code/CodeXdmUelt";
+    let goUrlXdmDelt = "/xdm/code/CodeXdmDelt";
 
-      ///////////////////////////// validation /////////////////
+    let seq = document.getElementById("codeSeq");
+    let registerDate = document.getElementById("codeRegDate");
+    let modifyDate = document.getElementById("codeModDate");
+    let anotherNum = document.getElementById("codeNum");
+    let name = document.getElementById("codeName");
+    let engName = document.getElementById("codeNameEng");
+    let useFlag = document.getElementById("codeUseFlag");
+    let order = document.getElementById("codeOrder");
+    let cogrSeq = document.getElementById("codeGroup_cogrSeq");
 
-      const regex1 = /^[a-z|A-Z|0-9|]+$/;
-      const regex2 = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|~|]+$/;
+    let modalDelete = document.getElementById("modalDelete");
+    let modalDelButton = document.getElementById("modalDelBtn");
+    let modalCloseButton = document.getElementById("close-button");
+    let modalXButton = document.getElementById("x-button");
 
-      // codeGroup_cogrSeq
-      if (document.getElementById("codeGroup_cogrSeq").value == "") {
-        document.getElementById("cogrSeqValid").style.display = "block";
-        document.getElementById("codeGroup_cogrSeq").style.outlineColor = "red";
-        document.getElementById("codeGroup_cogrSeq").focus();
-        return false;
-      }
+    let cogrSeqValid = document.getElementById("cogrSeqValid");
+    let anotherNumValid = document.getElementById("codeNumValid");
+    let nameValid = document.getElementById("codeNameValid");
+    let engNameValid = document.getElementById("codeNameEngValid");
+    let useFlagValid = document.getElementById("codeUseFlagValid");
+    let orderValid = document.getElementById("codeOrderValid");
 
-      // codeInstNum
-      let temp = document.getElementById("codeInstNum").value.trim();
-      if (temp.length != 0) {
-        if (!regex1.test(temp)) {
-          document.getElementById("codeInstNumValid").style.display = "block";
-          document.getElementById("codeInstNum").style.outlineColor = "red";
-          document.getElementById("codeInstNum").focus();
-          return false;
-        }
-      }
-
-      // codeName
-      temp = document.getElementById("codeName").value.replace(/ /g, "");
-      if (!(regex2.test(temp))) {
-        document.getElementById("codeNameValid").style.display = "block";
-        document.getElementById("codeName").style.outlineColor = "red";
-        document.getElementById("codeName").focus();
-        return false;
-      }
-
-      // codeNameEng
-      temp = document.getElementById("codeNameEng").value.trim();
-      if (temp.length != 0) {
-        if (!regex1.test(temp)) {
-          document.getElementById("codeNameEngValid").style.display = "block";
-          document.getElementById("codeNameEng").style.outlineColor = "red";
-          document.getElementById("codeNameEng").focus();
-          return false;
-        }
-      }
-
-      // codeUseFlag
-      if (document.getElementById("codeUseFlag").value == "") {
-        document.getElementById("codeUseFlagValid").style.display = "block";
-        document.getElementById("codeUseFlag").style.outlineColor = "red";
-        document.getElementById("codeUseFlag").focus();
-        return false;
-      }
-
-      // codeOrder
-      temp = document.getElementById("codeOrder").value.trim();
-      if (temp == "") {
-        document.getElementById("codeOrderValid").style.display = "block";
-        document.getElementById("codeOrder").style.outlineColor = "red";
-        document.getElementById("codeOrder").focus();
-        return false;
-      }
-
-      // 등록일, 수정일 등록록
-      let today = new Date();
-      let year = today.getFullYear();
-      let month = (today.getMonth() + 1).toString().padStart(2, '0');
-      let day = today.getDate().toString().padStart(2, '0');
-      
-      let date = year + month + day;
-      
-      document.getElementById("codeRegDate").value = date;
-      document.getElementById("codeModDate").value = date;
-      
-      if (document.getElementById("codeNum").value === "") {
-        document.getElementById("codeNum").value = document.getElementById("codeSeq").value;
-      } else {
-        // alert(date);
-        // by pass
-      }
-      document.getElementById("code-form").submit();
+    validationInit = function() {
+      cogrSeqValid.style.display = "none";
+      anotherNumValid.style.display = "none";
+      nameValid.style.display = "none";
+      engNameValid.style.display = "none";
+      useFlagValid.style.display = "none";
+      orderValid.style.display = "none";
     }
-  </script>
-  <div th:replace="~{xdm/include/includeXdmFalcon :: includeXdmFalcon}"><div>
+
+    validation = function() {
+    
+    let temp;
+
+    temp = cogrSeq.value;
+    if (temp == "") {
+      cogrSeqValid.style.display = "block";
+      cogrSeq.style.outlineColor = "red";
+      cogrSeq.focus();
+      return false;
+    }
+
+    temp = bothSidesGapRemove(anotherNum.value);
+    if (checkLength(temp) && !onlyKoEngNumValid(temp)) {
+      anotherNumValid.style.display = "block";
+      anotherNum.style.outlineColor = "red";
+      anotherNum.focus();
+      return false;
+    }
+
+    temp = allGapRemove(name.value);
+    if (!checkLength(temp) || !onlyEngKoNumSpecialChar(temp)) {
+      nameValid.style.display = "block";
+      name.style.outlineColor = "red";
+      name.focus();
+      return false;
+    }
+
+    temp = allGapRemove(engName.value);
+    if (checkLength(temp) && !onlyEngNumSpecialChar(temp)) {
+      engNameValid.style.display = "block";
+      engName.style.outlineColor = "red";
+      engName.focus();
+      return false;
+    }
+
+   
+    temp = useFlag.value;
+    if (temp == "") {
+      useFlagValid.style.display = "block";
+      useFlag.style.outlineColor = "red";
+      useFlag.focus();
+      return false;
+    }
+
+    temp = bothSidesGapRemove(order.value);
+    if (!checkLength(temp) || !onlyNum(temp)) {
+      orderValid.style.display = "block";
+      order.style.outlineColor = "red";
+      order.focus();
+      return false;
+    }
+
+    return true;
+  }
+    </script>
+
+    <div th:replace="~{xdm/include/includeXdmForm :: includeXdmForm}"></div>
+    <div th:replace="~{xdm/include/includeXdmFalcon :: includeXdmFalcon}"></div>
   </body>
   
   </html>

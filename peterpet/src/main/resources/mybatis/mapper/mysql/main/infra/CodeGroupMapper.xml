@@ -77,7 +77,6 @@
 			cogrOrder,
 			cogrDisc,
 			cogrRegDate,
-			cogrModDate,
 			cogrDelFlag,
 			cogrNum
 		) VALUE (
@@ -87,7 +86,6 @@
 			#{cogrOrder},
 			#{cogrDisc},
 			#{cogrRegDate},
-			#{cogrModDate},
 			0,
 			#{cogrNum}
 		)
@@ -100,4 +98,32 @@
 		SELECT COUNT(*)
 		<include refid="selectCommon"></include>
 	</select>
+	
+	<update id="update">
+		UPDATE codegroup
+		SET 
+			cogrName = #{cogrName},
+			cogrNameEng = #{cogrNameEng},
+			cogrUseFlag = #{cogrUseFlag},
+			cogrOrder = #{cogrOrder},
+			cogrDisc = #{cogrDisc},
+			cogrModDate = #{cogrModDate},
+			cogrNum = #{cogrNum}
+		WHERE
+			cogrSeq = #{cogrSeq}
+	</update>
+	
+	<update id="uelete">
+		UPDATE codegroup
+		SET
+			cogrDelFlag = 1
+		WHERE
+			cogrSeq = #{cogrSeq}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM codegroup
+		WHERE
+			cogrSeq = #{cogrSeq}
+	</delete>
 </mapper>

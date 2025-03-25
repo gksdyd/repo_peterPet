@@ -4,8 +4,10 @@
 
 		<div th:replace="~{xdm/include/head :: head}"></div>
         <form name="formList" id="formList" method="post" autocomplete="off">
+          <input type="hidden" name="registerOrModifyFlag" id="registerOrModifyFlag" value="0">
           <input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>
           <input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}"/>
+          <input type="hidden" id="cogrSeq" name="cogrSeq" value=0/>
           <div class="card mb-3" id="customersTable" data-list='{"valueNames":["#","use","code-group-code","code-group-name", "code-group-name-eng", "count", "order", "resist-date", "modify-date"],"page":10,"pagination":true}'>
             <div class="card-header" id="search">
               <div class="mb-2 row g-3">
@@ -115,7 +117,7 @@
                       <td class="use" th:if="${list.cogrUseFlag} == '1'">Y</td>
                       <td class="use" th:if="${list.cogrUseFlag} == '0'">N</td>
                       <td class="code-group-code" th:text="${list.cogrNum}"></td>
-                      <td class="code-group-name"><a th:href="@{/xdm/codegroup/CodeGroupXdmView(cogrSeq=${list.cogrSeq})}" th:text="${list.cogrName}"></a></td>
+                      <td class="code-group-name"><a th:href="@{/xdm/codegroup/CodeGroupXdmForm(cogrSeq=${list.cogrSeq})}" th:text="${list.cogrName}"></a></td>
                       <td class="code-group-name-eng" th:text="${list.cogrNameEng}"></td>
                       <td class="count" th:text="${list.count}"></td>
                       <td class="order" th:text="${list.cogrOrder}"></td>
@@ -150,7 +152,7 @@
               </div>
               <div class="col" style="text-align: right;">
                 <button class="btn btn-success btn-sm" type="button"><span class="far fa-file-excel"></span></button>
-                <a href="/xdm/codegroup/CodeGroupXdmForm"><button class="btn btn-primary btn-sm" type="button"><span class="fas fa-plus"></span></button></a>
+                <button class="btn btn-primary btn-sm" type="button" id="registerBtn"><span class="fas fa-plus"></span></button>
               </div>
             </div>
           </div>
@@ -162,6 +164,10 @@
 <!-- ===============================================-->
 <!--    End of Main Content-->
 <!-- ===============================================-->
+ <script>
+   let goUrlXdmForm = "/xdm/codegroup/CodeGroupXdmForm";
+ </script>
+
 <div th:replace="~{xdm/include/includeXdmList :: includeXdmList}"></div>
 <div th:replace="~{xdm/include/includeXdmFalcon :: includeXdmFalcon}"></div>
 </body>

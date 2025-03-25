@@ -23,14 +23,19 @@ public class CodeGroupController {
 	}
 	
 	@RequestMapping(value = "/xdm/codegroup/CodeGroupXdmForm")
-	public String codeGroupXdmForm(Model model, CodeGroupDto codeGroupDto) {
-		if (codeGroupService.selectMaxSeq() == null)
-		{
-			codeGroupDto.setCogrSeq("1");
+	public String codeGroupXdmForm(Model model, CodeGroupDto codeGroupDto, @ModelAttribute("vo") CodeGroupVo vo) {
+		if (vo.getRegisterOrModifyFlag() == 1) {
+			if (codeGroupService.selectMaxSeq() == null)
+			{
+				codeGroupDto.setCogrSeq("1");
+			} else {
+				codeGroupDto.setCogrSeq((codeGroupService.selectMaxSeq() + 1) + "");
+			}
+			model.addAttribute("item", codeGroupDto);
 		} else {
-			codeGroupDto.setCogrSeq((codeGroupService.selectMaxSeq() + 1) + "");
+			System.out.println("fdsfas");
+			model.addAttribute("item", codeGroupService.selectOne(codeGroupDto));
 		}
-		model.addAttribute("item", codeGroupDto);
 		return "xdm/codegroup/CodeGroupXdmForm";
 	}
 	
@@ -40,9 +45,21 @@ public class CodeGroupController {
 		return "redirect:/xdm/codegroup/CodeGroupXdmList";
 	}
 	
-	@RequestMapping(value = "/xdm/codegroup/CodeGroupXdmView")
-	public String codeGroupXdmView(Model model, CodeGroupDto codeGroupDto) {
-		model.addAttribute("item", codeGroupService.selectOne(codeGroupDto));
-		return "xdm/codegroup/CodeGroupXdmForm";
+	@RequestMapping(value = "/xdm/codegroup/CodeGroupXdmUpdt")
+	public String codeGroupXdmUpdt(CodeGroupDto codeGroupDto) {
+		codeGroupService.update(codeGroupDto);
+		return "redirect:/xdm/codegroup/CodeGroupXdmList";
+	}
+	
+	@RequestMapping(value = "/xdm/codegroup/CodeGroupXdmUelt")
+	public String codeGroupXdmUelt(CodeGroupDto codeGroupDto) {
+		codeGroupService.uelete(codeGroupDto);
+		return "redirect:/xdm/codegroup/CodeGroupXdmList";
+	}
+	
+	@RequestMapping(value = "/xdm/codegroup/CodeGroupXdmDelt")
+	public String codeGroupXdmDelt(CodeGroupDto codeGroupDto) {
+		codeGroupService.delete(codeGroupDto);
+		return "redirect:/xdm/codegroup/CodeGroupXdmList";
 	}
 }

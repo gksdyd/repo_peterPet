@@ -12,32 +12,35 @@
               <div class="mb-2 row g-3">
                 <h1>펫 상품 리스트</h1>
                 <div class="col-4">
-                  <select class="form-select-JHY" aria-label="Default select example">
-                    <option selected="selected">날짜</option>
-                    <option value="resist_date">등록일</option>
-                    <option value="modify_date">수정일</option>
+                  <select class="form-select-JHY" id="shOptionDate" name="shOptionDate" aria-label="Default select example">
+                    <option value="" th:selected="${vo.shOptionDate == null}">날짜</option>
+                    <option value="1" th:selected="${vo.shOptionDate == 1}">등록일</option>
+                    <option value="2" th:selected="${vo.shOptionDate == 2}">수정일</option>
                   </select>
                 </div>
                 <div class="col-4">
-                  <input class="form-control-JHY datetimepicker" type="text" placeholder="yy-mm-dd" data-options='{"disableMobile":true}' />
+                  <input class="form-control-JHY datetimepicker" type="text" id="shDateStart" name="shDateStart" placeholder="yy-mm-dd" autocomplete="off" />
+                  <!-- <input class="form-control-JHY datetimepicker" type="text" id="shDateStart" name="shDateStart" th:value="${#strings.substring(vo.shDateStart, 0, 10)}" placeholder="yy-mm-dd" autocomplete="off" /> -->
                 </div>
                 <div class="col-4">
-                  <input class="form-control-JHY datetimepicker" type="text" placeholder="yy-mm-dd" data-options='{"disableMobile":true}' />
+                  <input class="form-control-JHY datetimepicker" type="text" id="shDateEnd" name="shDateEnd" placeholder="yy-mm-dd" autocomplete="off" />
+                  <!-- <input class="form-control-JHY datetimepicker" type="text" id="shDateEnd" name="shDateEnd" th:value="${#strings.substring(vo.shDateEnd, 0, 10)}" placeholder="yy-mm-dd" autocomplete="off" /> -->
                 </div>
               </div>
               <div class="mb-2 row g-3">
                 <div class="col-4">
-                  <select class="form-select-JHY" aria-label="Default select example">
-                    <option value="0">N</option>
-                    <option value="1">Y</option>
+                  <select class="form-select-JHY" id="shDelFlag" name="shDelFlag" aria-label="Default select example">
+                    <option value="" th:selected="${vo.shDelFlag == null}">삭제여부</option>
+                    <option value="1" th:selected="${vo.shDelFlag == 1}">Y</option>
+                    <option value="0" th:selected="${vo.shDelFlag == 0}">N</option>
                   </select>
                 </div>
                 <div class="col-4">
-                  <input class="form-control-JHY" type="text" placeholder="이름 검색" />
+                  <input class="form-control-JHY" type="text" id="shValue" name="shValue" th:value="${vo.shValue}" onkeyup="enterkey()" placeholder="이름 검색" />
                 </div>
                 <div class="col-4">
-                  <button class="btn btn-outline-dark btn-sm" type="button"><span class="fas fa-search"></span></button>
-                  <button class="btn btn-outline-dark btn-sm" type="button"><span class="fas fa-redo-alt"></span></button>
+                  <button class="btn btn-outline-dark btn-sm" type="button" id="btnSearch" onclick="search('/xdm/product/ProductXdmList')"><span class="fas fa-search"></span></button>
+                  <button class="btn btn-outline-dark btn-sm" type="button" id="btnReset" onclick="shReset('/xdm/product/ProductXdmList', 4)"><span class="fas fa-redo-alt"></span></button>
                 </div>
               </div>
               <div class="mb-3 row g-3">
@@ -47,29 +50,30 @@
                   </select>
                 </div>
               </div>
+              <!-- 사료 필터 -->
               <div class="card border h-100 border-primary mb-3" th:if="${vo.prodType} == '1'">
                 <div class="mb-2 row g-3 me-2 ms-2 mt-0">
                   <div class="col-4">
                     <div class="form-group">
-                      <select class="form-select-JHY" id="feedSalaryAge" name="feedSalaryAge">
-                        <option value="">급여 연령</option>
-                        <option th:each="feedSalaryAge : ${@codeService.selectListCachedCode(2)}" th:value="${feedSalaryAge.codeSeq}" th:text="${feedSalaryAge.codeName}"></option>
+                      <select class="form-select-JHY" id="shFeedSalaryAge" name="shFeedSalaryAge">
+                        <option value="" th:selected="${vo.shFeedSalaryAge == null}">급여 연령</option>
+                        <option th:each="feedSalaryAge : ${@codeService.selectListCachedCode(2)}" th:value="${feedSalaryAge.codeSeq}" th:text="${feedSalaryAge.codeName}" th:selected="${vo.shFeedSalaryAge} == ${feedSalaryAge.codeSeq}"></option>
                       </select>
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="form-group">
-                      <select class="form-select-JHY" id="feedType" name="feedType">
-                        <option value="">종류</option>
-                        <option th:each="feedType : ${@codeService.selectListCachedCode(3)}" th:value="${feedType.codeSeq}" th:text="${feedType.codeName}"></option>
+                      <select class="form-select-JHY" id="shFeedType" name="shFeedType">
+                        <option value="" th:selected="${vo.shFeedType == null}">종류</option>
+                        <option th:each="feedType : ${@codeService.selectListCachedCode(3)}" th:value="${feedType.codeSeq}" th:text="${feedType.codeName}" th:selected="${vo.shFeedType} == ${feedType.codeSeq}"></option>
                       </select>
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="form-group">
-                      <select class="form-select-JHY" id="feedEtc" name="feedEtc">
-                        <option value="">기타</option>
-                        <option th:each="feedEtc : ${@codeService.selectListCachedCode(4)}" th:value="${feedEtc.codeSeq}" th:text="${feedEtc.codeName}"></option>
+                      <select class="form-select-JHY" id="shFeedEtc" name="shFeedEtc">
+                        <option value="" th:selected="${vo.shFeedType == null}">기타</option>
+                        <option th:each="feedEtc : ${@codeService.selectListCachedCode(4)}" th:value="${feedEtc.codeSeq}" th:text="${feedEtc.codeName}" th:selected="${vo.shFeedEtc} == ${feedEtc.codeSeq}"></option>
                       </select>
                     </div>
                   </div>
@@ -77,9 +81,9 @@
                 <div class="mb-2 row g-3 me-2 ms-2">
                   <div class="col-4">
                     <div class="form-group">
-                      <select class="form-select-JHY" id="feedSize" name="feedSize">
-                        <option value="">크기</option>
-                        <option th:each="feedSize : ${@codeService.selectListCachedCode(16)}" th:value="${feedSize.codeSeq}" th:text="${feedSize.codeName}"></option>
+                      <select class="form-select-JHY" id="shFeedSize" name="shFeedSize">
+                        <option value="" th:selected="${vo.shFeedSize == null}">크기</option>
+                        <option th:each="feedSize : ${@codeService.selectListCachedCode(16)}" th:value="${feedSize.codeSeq}" th:text="${feedSize.codeName}" th:selected="${vo.shFeedSize} == ${feedSize.codeSeq}"></option>
                       </select>
                     </div>
                   </div>
@@ -94,9 +98,9 @@
                   </div>
                   <div class="col-4">
                     <div class="form-group">
-                      <select class="form-select-JHY" id="feedBrand" name="feedBrand">
-                        <option value="">브랜드</option>
-                        <option th:each="feedBrand : ${@codeService.selectListCachedCode(7)}" th:value="${feedBrand.codeSeq}" th:text="${feedBrand.codeName}"></option>
+                      <select class="form-select-JHY" id="shFeedBrand" name="shFeedBrand">
+                        <option value="" th:selected="${vo.shFeedBrand == null}">브랜드</option>
+                        <option th:each="feedBrand : ${@codeService.selectListCachedCode(7)}" th:value="${feedBrand.codeSeq}" th:text="${feedBrand.codeName}" th:selected="${vo.shFeedBrand} == ${feedBrand.codeSeq}"></option>
                       </select>
                     </div>
                   </div>
@@ -104,9 +108,72 @@
                 <div class="mb-2 row g-3 me-2 ms-2">
                   <div class="col-4">
                     <div class="form-group mb-2">
-                      <select class="form-select-JHY" id="feedIngredient" name="feedIngredient">
-                        <option value="">주원료</option>
-                        <option th:each="feedIngredient : ${@codeService.selectListCachedCode(8)}" th:value="${feedIngredient.codeSeq}" th:text="${feedIngredient.codeName}"></option>
+                      <select class="form-select-JHY" id="shFeedIngredient" name="shFeedIngredient">
+                        <option value="" th:selected="${vo.shFeedIngredient == null}">주원료</option>
+                        <option th:each="feedIngredient : ${@codeService.selectListCachedCode(8)}" th:value="${feedIngredient.codeSeq}" th:text="${feedIngredient.codeName}" th:selected="${vo.shFeedIngredient} == ${feedIngredient.codeSeq}"></option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-2 row g-3 me-2 ms-2">
+                  <div class="col-2" th:each="feedfunc : ${vo.feedFuncArr}">
+                    <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(#numbers.formatInteger(feedfunc, 0))}"></span>
+                    <button class="btn-close" type="button" style="font-size: xx-small;" th:onclick="funcSelect('formList', '/xdm/product/ProductXdmList', [[${feedfunc}]], -1)"></button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 간식 필터 -->
+              <div class="card border h-100 border-primary mb-3" th:if="${vo.prodType} == '2'">
+                <div class="mb-2 row g-3 me-2 ms-2 mt-0">
+                  <div class="col-4">
+                    <div class="form-group">
+                      <select class="form-select-JHY" id="shFeedEtc" name="shFeedEtc">
+                        <option value="" th:selected="${vo.shFeedType == null}">간식종류</option>
+                        <option th:each="feedEtc : ${@codeService.selectListCachedCode(17)}" th:value="${feedEtc.codeSeq}" th:text="${feedEtc.codeName}" th:selected="${vo.shFeedEtc} == ${feedEtc.codeSeq}"></option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group">
+                      <select class="form-select-JHY" id="shFeedSalaryAge" name="shFeedSalaryAge">
+                        <option value="" th:selected="${vo.shFeedSalaryAge == null}">급여 연령</option>
+                        <option th:each="feedSalaryAge : ${@codeService.selectListCachedCode(2)}" th:value="${feedSalaryAge.codeSeq}" th:text="${feedSalaryAge.codeName}" th:selected="${vo.shFeedSalaryAge} == ${feedSalaryAge.codeSeq}"></option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group">
+                      <select class="form-select-JHY" id="shFeedType" name="shFeedType">
+                        <option value="" th:selected="${vo.shFeedType == null}">원료특징</option>
+                        <option th:each="feedType : ${@codeService.selectListCachedCode(3)}" th:value="${feedType.codeSeq}" th:text="${feedType.codeName}" th:selected="${vo.shFeedType} == ${feedType.codeSeq}"></option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-2 row g-3 me-2 ms-2">
+                  <div class="col-4">
+                    <div class="form-group">
+                      <select class="form-select-JHY" onchange="funcSelect('formList', '/xdm/product/ProductXdmList', value, 1)">
+                        <option value="">기능</option>
+                        <option th:each="feedFunction : ${@codeService.selectListCachedCode(6)}" th:value="${feedFunction.codeSeq}" th:text="${feedFunction.codeName}" th:disabled="${#arrays.contains(vo.feedFuncArr, feedFunction.codeSeq)} ? 'disabled' : null"></option>
+                      </select>
+                      <input type="hidden" name="feedFunction" id="feedFunction" value="0">
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group">
+                      <select class="form-select-JHY" id="shFeedBrand" name="shFeedBrand">
+                        <option value="" th:selected="${vo.shFeedBrand == null}">브랜드</option>
+                        <option th:each="feedBrand : ${@codeService.selectListCachedCode(7)}" th:value="${feedBrand.codeSeq}" th:text="${feedBrand.codeName}" th:selected="${vo.shFeedBrand} == ${feedBrand.codeSeq}"></option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group mb-2">
+                      <select class="form-select-JHY" id="shFeedIngredient" name="shFeedIngredient">
+                        <option value="" th:selected="${vo.shFeedIngredient == null}">주원료</option>
+                        <option th:each="feedIngredient : ${@codeService.selectListCachedCode(8)}" th:value="${feedIngredient.codeSeq}" th:text="${feedIngredient.codeName}" th:selected="${vo.shFeedIngredient} == ${feedIngredient.codeSeq}"></option>
                       </select>
                     </div>
                   </div>
@@ -124,11 +191,13 @@
                   <label class="form-label-JHY" th:text="${vo.totalRows}"></label>
                 </div>
                 <div class="col-2" style="text-align: right;">
-                  <select class="form-select-JHY" aria-label="Default select example">
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                    <option value="20">20</option>
+                  <select class="form-select-JHY" aria-label="Default select example" id="changeRowNum" name="changeRowNum" onchange="changeRow('/xdm/product/ProductXdmList')">
+                    <option value="5" th:selected="${vo.rowNumToShow eq 5}">5</option>
+                    <option value="10" th:selected="${vo.rowNumToShow eq 10}">10</option>
+                    <option value="30" th:selected="${vo.rowNumToShow eq 30}">30</option>
+                    <option value="50" th:selected="${vo.rowNumToShow eq 50}">50</option>
+                    <option value="80" th:selected="${vo.rowNumToShow eq 80}">80</option>
+                    <option value="100" th:selected="${vo.rowNumToShow eq 100}">100</option>   
                   </select>
                 </div>
               </div>
@@ -184,7 +253,7 @@
                       <td class="function"></td>
                       <td class="brand" th:text="${@codeService.selectOneCachedCode(list.feedBrand)}"></td>
                       <td class="ingredient" th:text="${@codeService.selectOneCachedCode(list.feedIngredient)}"></td>
-                      <td class="count"></td>
+                      <td class="count" th:text="${list.infoCount}"></td>
                       <td class="picture"></td>
                       <td class="register-date" th:text="${list.prodRegDate}"></td>
                       <td class="modify-date text-end" th:text="${list.prodModDate}"></td>

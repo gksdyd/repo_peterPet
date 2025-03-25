@@ -5,7 +5,27 @@
 
 	<resultMap type="com.peterpet.demo.module.product.ProductDto" id="resultMapObj"></resultMap>
 	
-	<select id="selectMaxSeq" resultType="String">
+	<sql id="selectCommon">
+        FROM product a
+        WHERE 1=1
+        	AND prodType = #{prodType}
+        	AND a.prodName LIKE CONCAT('%',#{shValue},'%')
+         <if test="shDelFlag != null and !shDelFlag.equals('')">AND a.feedDelFlag = #{shDelFlag}</if>
+         <if test="shFeedSalaryAge != null and !shFeedSalaryAge.equals('')">AND a.feedSalaryAge = #{shFeedSalaryAge}</if>
+         <if test="shFeedType != null and !shFeedType.equals('')">AND a.feedType = #{shFeedType}</if>
+         <if test="shFeedEtc != null and !shFeedEtc.equals('')">AND a.feedEtc = #{shFeedEtc}</if>
+         <if test="shFeedSize != null and !shFeedSize.equals('')">AND a.feedSize = #{shFeedSize}</if>
+         <if test="shFeedBrand != null and !shFeedBrand.equals('')">AND a.feedBrand = #{shFeedBrand}</if>
+         <if test="shFeedIngredient != null and !shFeedIngredient.equals('')">AND a.feedIngredient = #{shFeedIngredient}</if>
+<!-- 				
+				<choose>
+					<when test="shOptionDate == 1">AND a.userRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+					<when test="shOptionDate == 2">AND a.userModDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+				</choose>
+ -->				
+    </sql>
+    
+	<select id="selectMaxSeq" resultType="Integer">
 		SELECT
 			MAX(prodSeq)
 		FROM
@@ -83,17 +103,20 @@
 			feedEtc,
 			feedBrand,
 			feedIngredient,
-			feedSize
-		FROM
-			product
+			feedSize,
+			(SELECT
+				COUNT(*)
+			FROM
+				feedInfo
+			WHERE 1=1
+				AND prodSeq = product_prodSeq) AS infoCount
+		<include refid="selectCommon"></include>
 		ORDER BY prodSeq DESC
 		limit #{rowNumToShow} offset #{startRnumForMysql}
 	</select>
 	
 	<select id="selectOneCount" resultType="Integer">
 		SELECT COUNT(*)
-		FROM product
-		WHERE 1=1
-			AND prodType = #{prodType}
+		<include refid="selectCommon"></include>
 	</select>
 </mapper>

@@ -50,6 +50,14 @@
                 </div>
               </div>
               <div class="mb-2 row g-3">
+                <div class="col-4 d-flex">
+                  <input class="form-control-JHY w-25" type="text" id="shMinWeight" name="shMinWeight" th:value="${vo.shMinWeight}" placeholder="최소 무게" />
+                  <label class="ms-2" for="">kg ~</label>
+                  <input class="form-control-JHY ms-2 w-25" type="text" id="shMaxWeight" name="shMaxWeight" th:value="${vo.shMaxWeight}" placeholder="최대 무게" />
+                  <label class="ms-2" for="">kg</label>
+                </div>
+              </div>
+              <div class="mb-4 row g-3">
                 <div class="col-4">
                   <select class="form-select-JHY" id="shOption" name="shOption" aria-label="Default select example">
                     <option value="" th:selected="${vo.shOption == null}">검색구분</option>
@@ -64,14 +72,6 @@
                 <div class="col-4">
                   <button class="btn btn-outline-dark btn-sm" type="button" id="btnSearch" onclick="search('/xdm/pet/PetXdmList')"><span class="fas fa-search"></span></button>
                   <button class="btn btn-outline-dark btn-sm" type="button" id="btnReset" onclick="shReset('/xdm/pet/PetXdmList', 3)"><span class="fas fa-redo-alt"></span></button>
-                </div>
-              </div>
-              <div class="mb-4 row g-3">
-                <div class="col-4 d-flex">
-                  <input class="form-control-JHY w-25" type="text" id="shMinWeight" name="shMinWeight" th:value="${vo.shMinWeight}" placeholder="최소 무게" />
-                  <label class="ms-2" for="">kg ~</label>
-                  <input class="form-control-JHY ms-2 w-25" type="text" id="shMaxWeight" name="shMaxWeight" th:value="${vo.shMaxWeight}" placeholder="최대 무게" />
-                  <label class="ms-2" for="">kg</label>
                 </div>
               </div>
               <div class="row">
