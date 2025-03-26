@@ -12,9 +12,9 @@ public class ProductController {
 	ProductService productService;
 
 	@RequestMapping(value = "/xdm/product/ProductXdmList")
-	public String productXdmList(Model model, FeedFuncVo vo) {
+	public String productXdmList(Model model, FeedVo vo) {
 		vo.InitProdType();
-		vo.feedFuncSelect();
+		vo.prodFuncSelect();
 		vo.setParamsPaging(productService.selectOneCount(vo));
 		model.addAttribute("list", productService.selectList(vo));
 		model.addAttribute("vo", vo);
@@ -22,7 +22,7 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/xdm/product/ProductXdmForm")
-	public String productXdmForm(Model model, FeedFuncVo feedFuncVo,
+	public String productXdmForm(Model model, FeedVo feedFuncVo,
 			ProductDto productDto, FeedInfoVo feedInfoVo) {
 		feedFuncVo.InitProdType();
 		if (productService.selectMaxSeq() == null) {
@@ -30,7 +30,7 @@ public class ProductController {
 		} else {
 			feedFuncVo.setProdSeq((productService.selectMaxSeq() + 1) + "");
 		}
-		feedFuncVo.feedFuncSelect();
+		feedFuncVo.prodFuncSelect();
 		model.addAttribute("item", productDto);
 		model.addAttribute("func", feedFuncVo);
 		model.addAttribute("info", feedInfoVo);
@@ -38,8 +38,8 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/xdm/product/ProductXdmInst")
-	public String codeGroupXdmInst(FeedFuncVo vo, ProductDto productDto) {
-		vo.feedFuncRegister(productDto);
+	public String codeGroupXdmInst(FeedVo vo, ProductDto productDto) {
+		vo.prodFuncRegister(productDto);
 		productService.insert(productDto);
 		return "redirect:/xdm/product/ProductXdmList";
 	}

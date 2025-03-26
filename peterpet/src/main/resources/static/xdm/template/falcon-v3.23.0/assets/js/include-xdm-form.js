@@ -2,8 +2,8 @@
 // 공통
 
 const regex1 = /^[a-z|A-Z|0-9|]+$/;
-const regex2 = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|~|/|]+$/;
-const regex3 = /^[a-z|A-Z|0-9|~|/|]+$/;
+const regex2 = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|~|/|(-)|,|]+$/;
+const regex3 = /^[a-z|A-Z|0-9|~|/|(-)|,|]+$/;
 const regex4 = /^[0-9|]+$/;
 
 // 모든 공백 제거
@@ -32,7 +32,7 @@ onlyKoEngNumValid = function(text) {
     return true;
 }
 
-// 영어, 한글, 숫자, ~, / 만
+// 영어, 한글, 숫자, ~, /, (, ) 만
 onlyEngKoNumSpecialChar = function(text) {
     if (!regex2.test(text)) {
         return false;
@@ -40,7 +40,7 @@ onlyEngKoNumSpecialChar = function(text) {
     return true;
 }
 
-// 영어, 숫자, ~, / 만
+// 영어, 숫자, ~, /, (, ) 만
 onlyEngNumSpecialChar = function(text) {
     if (!regex3.test(text)) {
         return false;

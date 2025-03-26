@@ -91,9 +91,9 @@
                     <div class="form-group">
                       <select class="form-select-JHY" onchange="funcSelect('formList', '/xdm/product/ProductXdmList', value, 1)">
                         <option value="">기능</option>
-                        <option th:each="feedFunction : ${@codeService.selectListCachedCode(6)}" th:value="${feedFunction.codeSeq}" th:text="${feedFunction.codeName}" th:disabled="${#arrays.contains(vo.feedFuncArr, feedFunction.codeSeq)} ? 'disabled' : null"></option>
+                        <option th:each="prodFunction : ${@codeService.selectListCachedCode(6)}" th:value="${prodFunction.codeSeq}" th:text="${prodFunction.codeName}" th:disabled="${#arrays.contains(vo.prodFuncArr, prodFunction.codeSeq)} ? 'disabled' : null"></option>
                       </select>
-                      <input type="hidden" name="feedFunction" id="feedFunction" value="0">
+                      <input type="hidden" name="prodFunction" id="prodFunction" value="0">
                     </div>
                   </div>
                   <div class="col-4">
@@ -116,9 +116,9 @@
                   </div>
                 </div>
                 <div class="mb-2 row g-3 me-2 ms-2">
-                  <div class="col-2" th:each="feedfunc : ${vo.feedFuncArr}">
-                    <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(#numbers.formatInteger(feedfunc, 0))}"></span>
-                    <button class="btn-close" type="button" style="font-size: xx-small;" th:onclick="funcSelect('formList', '/xdm/product/ProductXdmList', [[${feedfunc}]], -1)"></button>
+                  <div class="col-2" th:each="prodFunction : ${vo.prodFuncArr}">
+                    <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(#numbers.formatInteger(prodFunction, 0))}"></span>
+                    <button class="btn-close" type="button" style="font-size: xx-small;" th:onclick="funcSelect('formList', '/xdm/product/ProductXdmList', [[${prodFunction}]], -1)"></button>
                   </div>
                 </div>
               </div>
@@ -128,25 +128,25 @@
                 <div class="mb-2 row g-3 me-2 ms-2 mt-0">
                   <div class="col-4">
                     <div class="form-group">
-                      <select class="form-select-JHY" id="shFeedEtc" name="shFeedEtc">
-                        <option value="" th:selected="${vo.shFeedType == null}">간식종류</option>
-                        <option th:each="feedEtc : ${@codeService.selectListCachedCode(17)}" th:value="${feedEtc.codeSeq}" th:text="${feedEtc.codeName}" th:selected="${vo.shFeedEtc} == ${feedEtc.codeSeq}"></option>
+                      <select class="form-select-JHY" id="shSnackType" name="shSnackType">
+                        <option value="" th:selected="${vo.shSnackType == null}">간식종류</option>
+                        <option th:each="snackType : ${@codeService.selectListCachedCode(17)}" th:value="${snackType.codeSeq}" th:text="${snackType.codeName}" th:selected="${vo.shSnackType} == ${snackType.codeSeq}"></option>
                       </select>
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="form-group">
-                      <select class="form-select-JHY" id="shFeedSalaryAge" name="shFeedSalaryAge">
-                        <option value="" th:selected="${vo.shFeedSalaryAge == null}">급여 연령</option>
-                        <option th:each="feedSalaryAge : ${@codeService.selectListCachedCode(2)}" th:value="${feedSalaryAge.codeSeq}" th:text="${feedSalaryAge.codeName}" th:selected="${vo.shFeedSalaryAge} == ${feedSalaryAge.codeSeq}"></option>
+                      <select class="form-select-JHY" id="shSnackSalaryAge" name="shSnackSalaryAge">
+                        <option value="" th:selected="${vo.shSnackSalaryAge == null}">급여 연령</option>
+                        <option th:each="snackSalaryAge : ${@codeService.selectListCachedCode(2)}" th:value="${snackSalaryAge.codeSeq}" th:text="${snackSalaryAge.codeName}" th:selected="${vo.shSnackSalaryAge} == ${snackSalaryAge.codeSeq}"></option>
                       </select>
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="form-group">
-                      <select class="form-select-JHY" id="shFeedType" name="shFeedType">
-                        <option value="" th:selected="${vo.shFeedType == null}">원료특징</option>
-                        <option th:each="feedType : ${@codeService.selectListCachedCode(3)}" th:value="${feedType.codeSeq}" th:text="${feedType.codeName}" th:selected="${vo.shFeedType} == ${feedType.codeSeq}"></option>
+                      <select class="form-select-JHY" id="shSnackMaterial" name="shSnackMaterial">
+                        <option value="" th:selected="${vo.shSnackMaterial == null}">원료특징</option>
+                        <option th:each="snackMaterial : ${@codeService.selectListCachedCode(18)}" th:value="${snackMaterial.codeSeq}" th:text="${snackMaterial.codeName}" th:selected="${vo.shSnackMaterial} == ${snackMaterial.codeSeq}"></option>
                       </select>
                     </div>
                   </div>
@@ -156,32 +156,32 @@
                     <div class="form-group">
                       <select class="form-select-JHY" onchange="funcSelect('formList', '/xdm/product/ProductXdmList', value, 1)">
                         <option value="">기능</option>
-                        <option th:each="feedFunction : ${@codeService.selectListCachedCode(6)}" th:value="${feedFunction.codeSeq}" th:text="${feedFunction.codeName}" th:disabled="${#arrays.contains(vo.feedFuncArr, feedFunction.codeSeq)} ? 'disabled' : null"></option>
+                        <option th:each="prodFunction : ${@codeService.selectListCachedCode(6)}" th:value="${prodFunction.codeSeq}" th:text="${prodFunction.codeName}" th:disabled="${#arrays.contains(vo.prodFuncArr, prodFunction.codeSeq)} ? 'disabled' : null"></option>
                       </select>
-                      <input type="hidden" name="feedFunction" id="feedFunction" value="0">
+                      <input type="hidden" name="prodFunction" id="prodFunction" value="0">
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="form-group">
-                      <select class="form-select-JHY" id="shFeedBrand" name="shFeedBrand">
-                        <option value="" th:selected="${vo.shFeedBrand == null}">브랜드</option>
-                        <option th:each="feedBrand : ${@codeService.selectListCachedCode(7)}" th:value="${feedBrand.codeSeq}" th:text="${feedBrand.codeName}" th:selected="${vo.shFeedBrand} == ${feedBrand.codeSeq}"></option>
+                      <select class="form-select-JHY" id="shSnackBrand" name="shSnackBrand">
+                        <option value="" th:selected="${vo.shSnackBrand == null}">브랜드</option>
+                        <option th:each="snackBrand : ${@codeService.selectListCachedCode(19)}" th:value="${snackBrand.codeSeq}" th:text="${snackBrand.codeName}" th:selected="${vo.shSnackBrand} == ${snackBrand.codeSeq}"></option>
                       </select>
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="form-group mb-2">
-                      <select class="form-select-JHY" id="shFeedIngredient" name="shFeedIngredient">
-                        <option value="" th:selected="${vo.shFeedIngredient == null}">주원료</option>
-                        <option th:each="feedIngredient : ${@codeService.selectListCachedCode(8)}" th:value="${feedIngredient.codeSeq}" th:text="${feedIngredient.codeName}" th:selected="${vo.shFeedIngredient} == ${feedIngredient.codeSeq}"></option>
+                      <select class="form-select-JHY" id="shSnackIngredient" name="shSnackIngredient">
+                        <option value="" th:selected="${vo.shSnackIngredient == null}">주원료</option>
+                        <option th:each="snackIngredient : ${@codeService.selectListCachedCode(8)}" th:value="${snackIngredient.codeSeq}" th:text="${snackIngredient.codeName}" th:selected="${vo.shSnackIngredient} == ${snackIngredient.codeSeq}"></option>
                       </select>
                     </div>
                   </div>
                 </div>
                 <div class="mb-2 row g-3 me-2 ms-2">
-                  <div class="col-2" th:each="feedfunc : ${vo.feedFuncArr}">
-                    <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(#numbers.formatInteger(feedfunc, 0))}"></span>
-                    <button class="btn-close" type="button" style="font-size: xx-small;" th:onclick="funcSelect('formList', '/xdm/product/ProductXdmList', [[${feedfunc}]], -1)"></button>
+                  <div class="col-2" th:each="prodFunction : ${vo.prodFuncArr}">
+                    <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(#numbers.formatInteger(prodFunction, 0))}"></span>
+                    <button class="btn-close" type="button" style="font-size: xx-small;" th:onclick="funcSelect('formList', '/xdm/product/ProductXdmList', [[${prodFunction}]], -1)"></button>
                   </div>
                 </div>
               </div>

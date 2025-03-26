@@ -94,9 +94,9 @@
                       <div class="form-group">
                         <select class="form-select-JHY" onchange="funcSelect('product-form', '/xdm/product/ProductXdmForm', value, 1)">
                           <option value="0">기능</option>
-                          <option th:each="feedFunction : ${@codeService.selectListCachedCode(6)}" th:text="${feedFunction.codeName}" th:value="${feedFunction.codeSeq}" th:disabled="${#arrays.contains(func.feedFuncArr, feedFunction.codeSeq)} ? 'disabled' : null"></option>
+                          <option th:each="prodFunction : ${@codeService.selectListCachedCode(6)}" th:text="${prodFunction.codeName}" th:value="${prodFunction.codeSeq}" th:disabled="${#arrays.contains(func.prodFuncArr, prodFunction.codeSeq)} ? 'disabled' : null"></option>
                         </select>
-                        <input type="hidden" name="feedFunction" id="feedFunction" value="0">
+                        <input type="hidden" name="prodFunction" id="prodFunction" value="0">
                       </div>
                     </div>
                     <div class="col-3">
@@ -117,10 +117,10 @@
                     </div>
                   </div>
                   <div class="mb-3 row g-3 ms-2 me-2">
-                    <div class="col-2" th:each="feedfunc : ${func.feedFuncArr}">
+                    <div class="col-2" th:each="prodFunction : ${func.prodFuncArr}">
                       <div class="d-flex align-items-center mb-2">
-                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(#numbers.formatInteger(feedfunc, 0))}"></span>
-                        <button class="btn-close" type="button" style="font-size: xx-small;" th:onclick="funcSelect('product-form', '/xdm/product/ProductXdmForm', [[${feedfunc}]], -1)"></button>
+                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(#numbers.formatInteger(prodFunction, 0))}"></span>
+                        <button class="btn-close" type="button" style="font-size: xx-small;" th:onclick="funcSelect('product-form', '/xdm/product/ProductXdmForm', [[${prodFunction}]], -1)"></button>
                       </div>
                     </div>
                   </div>
