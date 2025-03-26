@@ -1,8 +1,6 @@
-const regex1 = /^[a-z|A-Z|0-9|]+$/;
-const regex2 = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|~|/|(-)|,|]+$/;
-const regex3 = /^[a-z|A-Z|0-9|~|/|(-)|,|]+$/;
-const regex4 = /^[0-9|]+$/;
-const regex5 = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|!-/|]+$/;
+/* ===============================================-->
+                    validation 관련 Js
+   ===============================================--> */
 
 // 모든 공백 제거
 allGapRemove = function(text) {
@@ -54,6 +52,7 @@ onlyNum = function(text) {
     return true;
 }
 
+// 영어, 한글, 숫자, 특수문자만
 onlyEngKoNumAllSpecialChar = function(text) {
     if (!regex5.test(text)) {
         return false;

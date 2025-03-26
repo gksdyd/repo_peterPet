@@ -1,3 +1,7 @@
+/* ===============================================-->
+                        상수
+   ===============================================--> */
+
 // 삭제 모달
 const DELETE_FLAG = 1;
 const UELETE_FLAG = 2;
@@ -12,3 +16,10 @@ const PRODUCT = 4;
 const URL_SIGNIN_FORM_XDM = "/xdm/member/LoginXdmForm"
 const URL_SIGNOUT_PROC_XDM = "/xdm/member/LogoutXdmProc"
 const URL_INDEX_VIEW_XDM = "/xdm/index/IndexXdmView"
+
+// 정규식 상수
+const regex1 = /^[a-z|A-Z|0-9|]+$/;
+const regex2 = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|~|/|(-)|,|]+$/;
+const regex3 = /^[a-z|A-Z|0-9|~|/|(-)|,|]+$/;
+const regex4 = /^[0-9|]+$/;
+const regex5 = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|!-/|]+$/;

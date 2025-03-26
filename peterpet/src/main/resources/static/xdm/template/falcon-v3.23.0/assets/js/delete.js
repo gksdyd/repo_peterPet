@@ -1,9 +1,13 @@
-let modalDelete = document.getElementById("modalDelete");
-let delButton = document.getElementById("deleteBtn");
-let ueleteBtn = document.getElementById("ueleteBtn");
-let modalCloseButton = document.getElementById("close-button");
-let modalXButton = document.getElementById("x-button");
-let modalDelButton = document.getElementById("modalDelBtn");
+/* ===============================================-->
+                    삭제 관련 Js
+   ===============================================--> */
+
+let modalDelete = document.getElementById("modalDelete");       // 삭제 모달 창의 Id
+let delButton = document.getElementById("deleteBtn");           // 삭제(x) 버튼의 Id
+let ueleteBtn = document.getElementById("ueleteBtn");           // 삭제(쓰레기통) 버튼의 Id
+let modalCloseButton = document.getElementById("close-button"); // 삭제 모달 창의 Close 버튼
+let modalXButton = document.getElementById("x-button");         // 삭제 모달 창의 X 버튼
+let modalDelButton = document.getElementById("modalDelBtn");    // 삭제 모달 창의 삭제 버튼
 
 // 삭제버튼(쓰레기통)
 ueleteBtn.onclick = function() {

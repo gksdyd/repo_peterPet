@@ -1,3 +1,8 @@
+/* ===============================================-->
+                    등록 관련 JS
+   ===============================================--> */
+
+// 등록일 및 수정일 계산 함수
 calculateToday = function() {
     let today = new Date();
     let year = today.getFullYear();
@@ -6,6 +11,7 @@ calculateToday = function() {
     return year + month + day;
 }
   
+// 등록 및 수정하는 함수
 document.getElementById("btnSubmit").onclick = function() {
     validationInit();
 
