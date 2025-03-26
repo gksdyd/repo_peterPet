@@ -1,0 +1,20 @@
+$("#btnLogout").on("click", function(){
+    alert("fds");
+    $.ajax({
+      async: true 
+      ,cache: false
+      ,type: "post"
+      ,url: URL_SIGNOUT_PROC_XDM
+      ,data: {}
+      ,success: function(response) {
+        if(response.rt == "success") {
+          location.href = URL_SIGNIN_FORM_XDM;
+        } else {
+          // by pass
+        }
+      }
+      ,error : function(jqXHR){
+        alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+      }
+    });
+  });

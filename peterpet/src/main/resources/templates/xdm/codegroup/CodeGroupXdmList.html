@@ -134,11 +134,14 @@
 <!--    End of Main Content-->
 <!-- ===============================================-->
  <script>
-   let goUrlXdmList = "/xdm/codegroup/CodeGroupXdmList";
-   let goUrlXdmForm = "/xdm/codegroup/CodeGroupXdmForm";
+    let form = document.querySelector("form[name=formList]");
+   
+    let goUrlXdmList = "/xdm/codegroup/CodeGroupXdmList";
+    let goUrlXdmForm = "/xdm/codegroup/CodeGroupXdmForm";
  </script>
 
 <div th:replace="~{xdm/include/includeXdmFalcon :: includeXdmFalcon}"></div>
+<div th:replace="~{xdm/include/includeXdmCommon :: includeXdmCommon}"></div>
 <div th:replace="~{xdm/include/includeXdmList :: includeXdmList}"></div>
 </body>
 
