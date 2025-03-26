@@ -143,4 +143,18 @@
 		where
 			codeSeq = #{codeSeq};
 	</update>
+	
+	<update id="uelete">
+		UPDATE code
+		SET
+			codeDelFlag = 1
+		WHERE
+			codeSeq = #{codeSeq}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM code
+		WHERE
+			codeSeq = #{codeSeq}
+	</delete>
 </mapper>

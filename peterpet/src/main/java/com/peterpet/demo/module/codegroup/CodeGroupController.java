@@ -7,12 +7,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping(value = "/xdm/codegroup")
 public class CodeGroupController {
 
 	@Autowired
 	CodeGroupService codeGroupService;
 	
-	@RequestMapping(value = "/xdm/codegroup/CodeGroupXdmList")
+	@RequestMapping(value = "/CodeGroupXdmList")
 	public String codeGroupXdmList(@ModelAttribute("vo") CodeGroupVo vo, Model model) {
 //		setSearch(vo);
 		vo.setParamsPaging(codeGroupService.selectOneCount(vo));
@@ -22,7 +23,7 @@ public class CodeGroupController {
 		return "xdm/codegroup/CodeGroupXdmList";
 	}
 	
-	@RequestMapping(value = "/xdm/codegroup/CodeGroupXdmForm")
+	@RequestMapping(value = "/CodeGroupXdmForm")
 	public String codeGroupXdmForm(Model model, CodeGroupDto codeGroupDto, @ModelAttribute("vo") CodeGroupVo vo) {
 		if (vo.getRegisterOrModifyFlag() == 1) {
 			if (codeGroupService.selectMaxSeq() == null)
@@ -39,25 +40,25 @@ public class CodeGroupController {
 		return "xdm/codegroup/CodeGroupXdmForm";
 	}
 	
-	@RequestMapping(value = "/xdm/codegroup/CodeGroupXdmInst")
+	@RequestMapping(value = "/CodeGroupXdmInst")
 	public String codeGroupXdmInst(CodeGroupDto codeGroupDto) {
 		codeGroupService.insert(codeGroupDto);
 		return "redirect:/xdm/codegroup/CodeGroupXdmList";
 	}
 	
-	@RequestMapping(value = "/xdm/codegroup/CodeGroupXdmUpdt")
+	@RequestMapping(value = "/CodeGroupXdmUpdt")
 	public String codeGroupXdmUpdt(CodeGroupDto codeGroupDto) {
 		codeGroupService.update(codeGroupDto);
 		return "redirect:/xdm/codegroup/CodeGroupXdmList";
 	}
 	
-	@RequestMapping(value = "/xdm/codegroup/CodeGroupXdmUelt")
+	@RequestMapping(value = "/CodeGroupXdmUelt")
 	public String codeGroupXdmUelt(CodeGroupDto codeGroupDto) {
 		codeGroupService.uelete(codeGroupDto);
 		return "redirect:/xdm/codegroup/CodeGroupXdmList";
 	}
 	
-	@RequestMapping(value = "/xdm/codegroup/CodeGroupXdmDelt")
+	@RequestMapping(value = "/CodeGroupXdmDelt")
 	public String codeGroupXdmDelt(CodeGroupDto codeGroupDto) {
 		codeGroupService.delete(codeGroupDto);
 		return "redirect:/xdm/codegroup/CodeGroupXdmList";

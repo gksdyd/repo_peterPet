@@ -115,6 +115,7 @@
   <!-- ===============================================-->
   <!--    End of Main Content-->
   <!-- ===============================================-->
+
   <script type="text/javascript" th:inline="javascript">
     let form = document.getElementById("code-form");
     let goUrlXdmInst = "/xdm/code/CodeXdmInst";
@@ -133,9 +134,11 @@
     let cogrSeq = document.getElementById("codeGroup_cogrSeq");
 
     let modalDelete = document.getElementById("modalDelete");
-    let modalDelButton = document.getElementById("modalDelBtn");
+    let delButton = document.getElementById("deleteBtn");
+    let ueleteBtn = document.getElementById("ueleteBtn");
     let modalCloseButton = document.getElementById("close-button");
     let modalXButton = document.getElementById("x-button");
+    let modalDelButton = document.getElementById("modalDelBtn");
 
     let cogrSeqValid = document.getElementById("cogrSeqValid");
     let anotherNumValid = document.getElementById("codeNumValid");
@@ -209,9 +212,8 @@
     return true;
   }
     </script>
-
-    <div th:replace="~{xdm/include/includeXdmForm :: includeXdmForm}"></div>
     <div th:replace="~{xdm/include/includeXdmFalcon :: includeXdmFalcon}"></div>
+    <div th:replace="~{xdm/include/includeXdmForm :: includeXdmForm}"></div>
   </body>
   
   </html>

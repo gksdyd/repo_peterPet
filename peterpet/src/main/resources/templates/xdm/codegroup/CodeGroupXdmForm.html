@@ -118,9 +118,11 @@
     let order = document.getElementById("cogrOrder");
 
     let modalDelete = document.getElementById("modalDelete");
-    let modalDelButton = document.getElementById("modalDelBtn");
+    let delButton = document.getElementById("deleteBtn");
+    let ueleteBtn = document.getElementById("ueleteBtn");
     let modalCloseButton = document.getElementById("close-button");
     let modalXButton = document.getElementById("x-button");
+    let modalDelButton = document.getElementById("modalDelBtn");
 
     let anotherNumValid = document.getElementById("cogrNumValid");
     let nameValid = document.getElementById("cogrNameValid");
@@ -184,8 +186,8 @@
       return true;
     }
   </script>
-  <div th:replace="~{xdm/include/includeXdmForm :: includeXdmForm}"></div>
   <div th:replace="~{xdm/include/includeXdmFalcon :: includeXdmFalcon}"></div>
+  <div th:replace="~{xdm/include/includeXdmForm :: includeXdmForm}"></div>
 
 </body>
 
