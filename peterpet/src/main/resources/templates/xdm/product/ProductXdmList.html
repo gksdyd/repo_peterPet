@@ -39,8 +39,8 @@
                   <input class="form-control-JHY" type="text" id="shValue" name="shValue" th:value="${vo.shValue}" onkeyup="enterkey()" placeholder="이름 검색" />
                 </div>
                 <div class="col-4">
-                  <button class="btn btn-outline-dark btn-sm" type="button" id="btnSearch" onclick="search('/xdm/product/ProductXdmList')"><span class="fas fa-search"></span></button>
-                  <button class="btn btn-outline-dark btn-sm" type="button" id="btnReset" onclick="shReset('/xdm/product/ProductXdmList', 4)"><span class="fas fa-redo-alt"></span></button>
+                  <button class="btn btn-outline-dark btn-sm" type="button" id="btnSearch" onclick="search()"><span class="fas fa-search"></span></button>
+                  <button class="btn btn-outline-dark btn-sm" type="button" id="btnReset" onclick="shReset(4)"><span class="fas fa-redo-alt"></span></button>
                 </div>
               </div>
               <div class="mb-3 row g-3">
@@ -185,22 +185,7 @@
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col">
-                  <label class="form-label-JHY">Total: </label>
-                  <label class="form-label-JHY" th:text="${vo.totalRows}"></label>
-                </div>
-                <div class="col-2" style="text-align: right;">
-                  <select class="form-select-JHY" aria-label="Default select example" id="changeRowNum" name="changeRowNum" onchange="changeRow('/xdm/product/ProductXdmList')">
-                    <option value="5" th:selected="${vo.rowNumToShow eq 5}">5</option>
-                    <option value="10" th:selected="${vo.rowNumToShow eq 10}">10</option>
-                    <option value="30" th:selected="${vo.rowNumToShow eq 30}">30</option>
-                    <option value="50" th:selected="${vo.rowNumToShow eq 50}">50</option>
-                    <option value="80" th:selected="${vo.rowNumToShow eq 80}">80</option>
-                    <option value="100" th:selected="${vo.rowNumToShow eq 100}">100</option>   
-                  </select>
-                </div>
-              </div>
+              <div th:replace="~{xdm/include/listRowNum :: listRowNum}"></div>
             </div>
             <div class="card-body p-0">
               <div class="table-responsive scrollbar">
@@ -262,23 +247,7 @@
                 </table>
               </div>
             </div>
-            <div class="card-footer d-flex align-items-center justify-content-center">
-              <ul class="pagination mb-0">
-                <li th:if="${vo.startPage gt vo.pageNumToShow}" class="page-item" style="cursor: pointer;">
-                  <a class="page-link" href="javascript:goList(${vo.startPage - 1})" th:attr="onclick=|goList('${vo.startPage - 1}', '/xdm/product/ProductXdmList')|">
-                    <i class="fas fa-chevron-left"></i>
-                  </a>
-                </li>
-                <li th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}" th:classappend="${num eq vo.thisPage} ? active : ''" class="page-item" style="cursor: pointer;">
-                  <a class="page-link" th:attr="onclick=|goList('${num}', '/xdm/product/ProductXdmList')|" th:text="${num}"></a>
-                </li>
-                <li th:if="${vo.endPage ne vo.totalPages}" class="page-item" style="cursor: pointer;">
-                  <a class="page-link" th:attr="onclick=|goList('${vo.endPage + 1}', '/xdm/product/ProductXdmList')|">
-                    <i class="fas fa-chevron-right"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
+            <div th:replace="~{xdm/include/pagination :: pagination}"></div>
             <div class="mb-2 row g-3 ms-1 me-1">
               <div class="col">
                 <button class="btn btn-danger btn-sm" type="button"><span class="bi-x"></span></button>
@@ -298,8 +267,11 @@
   <!-- ===============================================-->
   <!--    End of Main Content-->
   <!-- ===============================================-->
+   <script>
+    let goUrlXdmList = "/xdm/product/ProductXdmList";
+   </script>
   <div th:replace="~{xdm/include/includeXdmList :: includeXdmList}"></div>
-  <div th:replace="~{xdm/include/includeXdmFalcon :: includeXdmFalcon}"><div>
+  <div th:replace="~{xdm/include/includeXdmFalcon :: includeXdmFalcon}"></div>
   </body>
   
   </html>

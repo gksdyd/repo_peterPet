@@ -6,24 +6,24 @@ const pet = 3;
 const product = 4;
 
 let form = document.querySelector("form[name=formList]");
-goList = function (thisPage, address) {
+goList = function (thisPage) {
     document.querySelector("input[name=thisPage]").value = thisPage;
-    form.action = address;
+    form.action = goUrlXdmList;
     form.submit();
 }
 
-search = function (address) {
-  form.action = address;
+search = function () {
+  form.action = goUrlXdmList;
   form.submit();
 }
 
-changeRow = function (address) {
+changeRow = function () {
   document.getElementById("rowNumToShow").value = document.getElementById("changeRowNum").value;
-  form.action = address;
+  form.action = goUrlXdmList;
   form.submit();
 }
 
-shReset = function (address, flag) {
+shReset = function (flag) {
   if (flag == code) {
     document.getElementById("shUseFlag").value = 1;
     document.getElementById("shOption").value = null;
@@ -47,7 +47,7 @@ shReset = function (address, flag) {
   document.getElementById("shDelFlag").value = 0;
   document.getElementById("shOptionDate").value = "";
   document.getElementById("shValue").value = null;
-  form.action = address;
+  form.action = goUrlXdmList;
   form.submit();
 }
 
