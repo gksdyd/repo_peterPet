@@ -34,7 +34,6 @@ public class CodeGroupController {
 			}
 			model.addAttribute("item", codeGroupDto);
 		} else {
-			System.out.println("fdsfas");
 			model.addAttribute("item", codeGroupService.selectOne(codeGroupDto));
 		}
 		return "xdm/codegroup/CodeGroupXdmForm";
