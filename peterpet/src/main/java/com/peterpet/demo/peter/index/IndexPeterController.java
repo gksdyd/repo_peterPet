@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexPeterController {
 
-	@RequestMapping(value = "/peter/index/indexPeter")
+	@RequestMapping(value = "/peter/index/IndexPeterView")
 	public String indexPeterController() {
-		return "peter/index/indexPeter";
+		return "peter/index/IndexPeterView";
 	}
 }

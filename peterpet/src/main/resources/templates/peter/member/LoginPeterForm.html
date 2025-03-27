@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{peter/include/head :: head}"></div>
+            <!--Body Container-->
+            <div id="page-content">   
+                <!--Collection Banner-->
+                <div class="collection-header">
+                    <div class="collection-hero">
+                        <div class="collection-hero__image"></div>
+                        <div class="collection-hero__title-wrapper container">
+                            <h1 class="collection-hero__title">로그인</h1>
+                            <div class="breadcrumbs text-uppercase mt-1 mt-lg-2"><a href="index-demo15.html" title="Back to the home page">Home</a><span>|</span><span class="fw-bold">로그인</span></div>
+                        </div>
+                    </div>
+                </div>
+                <!--End Collection Banner-->
+
+                <!--Container-->
+                <div class="container">
+                    <!--Main Content-->
+                    <div class="login-register pt-2 pt-lg-5">
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-8 col-lg-8" style="margin: 0 auto;">
+                                <div class="inner">
+                                    <form class="needs-validation customer-form" novalidate>	
+                                        <h3 class="h4 text-uppercase">로그인</h3>
+                                        <div class="row">
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                                <div class="form-group">
+                                                    <label for="userId" class="d-none">아이디<span class="required">*</span></label>
+                                                    <input type="text" class="form-control" name="userId" placeholder="아이디" id="userId" required />
+                                                    <div class="invalid-feedback" id="userIdValid">
+                                                        아이디를 입력해주세요.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                                <div class="form-group">
+                                                    <label for="userPassword" class="d-none">비밀번호<span class="required">*</span></label>
+                                                    <input type="password" class="form-control" name="userPassword" placeholder="비밀번호" id="userPassword" required />                        	
+                                                    <div class="invalid-feedback" id="userPasswordValid">
+                                                        비밀번호를 입력해주세요.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="text-left col-12 col-sm-12 col-md-12 col-lg-12 mb-2">
+                                                <p class="d-flex-center">
+                                                    <button type="button" class="btn btn--link fw-bold" id="loginBtn">로그인</button>
+                                                    <a href="/peter/member/SignupPeterForm" class="me-auto fw-bold">회원가입</a>
+                                                    <a href="forgot-password.html" class="fw-bold">비밀번호 찾기</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Main Content-->
+                </div>
+                <!--End Container-->
+            </div>
+            <!--End Body Container-->
+
+            <!--Scoll Top-->
+            <span id="site-scroll"><i class="icon an an-chevron-up"></i></span>
+            <!--End Scoll Top-->
+            <script>
+                let id = document.getElementById("userId");
+                let password = document.getElementById("userPassword");
+
+                let idValid = document.getElementById("userIdValid");
+                let passwordValid = document.getElementById("userPasswordValid");
+
+                document.getElementById("loginBtn").onclick = function() {
+                    loginLogic();
+                }
+      
+                validationInit = function() {
+                    idValid.style.display = "none";
+                    passwordValid.style.display = "none";
+                }
+      
+                validation = function() {
+                    let temp;
+                    
+                    temp = id.value;
+                    if (!checkLength(temp) || !onlyKoEngNumValid(temp)) {
+                    idValid.style.display = "block";
+                    id.style.outlineColor = "red";
+                    id.focus();
+                    return false;
+                    }
+
+                    temp = password.value;
+                    if (!checkLength(temp) || !onlyEngKoNumAllSpecialChar(temp)) {
+                    passwordValid.style.display = "block";
+                    password.style.outlineColor = "red";
+                    password.focus();
+                    return false;
+                    }
+
+                    return true;
+                }
+      
+                function loginLogic () {
+                    
+                    validationInit();
+                    
+                    if(!validation()) {
+                    return false;
+                    }
+                    
+                    $.ajax({
+                    async: true 
+                    ,cache: false
+                    ,type: "post"
+                    /* ,dataType:"json" */
+                    ,url: "/peter/member/LoginPeterProc"
+                    /* ,data : $("#formLogin").serialize() */
+                    ,data : { "admiId" : $("#admiId").val(), "admiPassword" : $("#admiPassword").val(), "autoLogin" : $("#autoLogin").is(":checked")}
+                    ,success: function(response) {
+                        if(response.rt == "success") {
+                        if(response.changePwd == "true") {
+                            // location.href = "/v1/infra/member/expiredPwdUsrForm";
+                        } else {
+                            location.href = "/peter/index/IndexPeterView";
+                        }
+                        } else {
+                        document.getElementById("modalAlertTitle").innerText = "확 인";
+                        document.getElementById("modalAlertBody").innerText = "일치하는 회원이 존재 하지 않습니다!";
+                        $("#modalAlert").modal("show");
+                        }
+                    }
+                    ,error : function(jqXHR, textStatus, errorThrown){
+                        alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+                    }
+                    });
+                }
+            </script>
+
+            <div th:replace="~{peter/include/foot :: foot}"></div>
+            <div th:replace="~{peter/include/includePeterOriginal :: includePeterOriginal}"></div>
+            <div th:replace="~{peter/include/includePeterCommon :: includePeterCommon}"></div>
+        </div>
+        <!--End Page Wrapper-->
+    </body>
+</html>

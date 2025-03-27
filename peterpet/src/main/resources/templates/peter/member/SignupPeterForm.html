@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{peter/include/head :: head}"></div>
+            <!--Body Container-->
+            <div id="page-content">
+                <!--Collection Banner-->
+                <div class="collection-header">
+                    <div class="collection-hero">
+                        <div class="collection-hero__image"></div>
+                        <div class="collection-hero__title-wrapper container">
+                            <h1 class="collection-hero__title">회원가입</h1>
+                            <div class="breadcrumbs text-uppercase mt-1 mt-lg-2"><a href="index.html" title="Back to the home page">Home</a><span>|</span><span class="fw-bold">회원가입</span></div>
+                        </div>
+                    </div>
+                </div>
+                <!--End Collection Banner-->
+
+                <!--Container-->
+                <div class="container">
+                    <!--Main Content-->
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 box mt-2 mt-lg-5">	
+                            <h3 class="h4 text-uppercase mb-3">개인 정보</h3>
+                            <form method="post" action="#" accept-charset="UTF-8" class="needs-validation customer-form" novalidate>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-5 col-lg-5">
+                                        <div class="form-group">
+                                            <label for="userName" class="d-none">이름<span class="required">*</span></label>
+                                            <input id="userName" type="text" class="form-control" name="userName" placeholder="이름" required />
+                                            <div class="invalid-feedback" id="userNameValid">이름을 입력해주세요.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+                                        <div class="form-check">
+                                            <input id="userMan" type="radio" class="form-check-input" name="userGender" required />                       	
+                                            <label for="userMan" class="form-check-label">남성</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input id="userWoman" type="radio" class="form-check-input" name="userGender" required />                       	
+                                            <label for="userWoman" class="form-check-label">여성</label>
+                                            <div class="invalid-feedback" id="userGenderValid">성별을 체크해주세요.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-5 col-lg-5">
+                                        <div class="form-group">
+                                            <label for="userBirth" class="d-none">생일<span class="required">*</span></label>
+                                            <input id="userBirth" type="date" class="form-control" name="userBirth" required />
+                                            <div class="invalid-feedback" id="userBirthValid">생일을 입력해주세요.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row accordion" id="accordionExample">
+                                    <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                        <div class="form-group">
+                                            <select class="form-select register-agency" id="userAgency" name="userAgency" required>
+                                                <option value="">통신사</option>
+                                                <option value="SKT">SKT</option>
+                                                <option value="SK">SK</option>
+                                                <option value="LG">LG U+</option>
+                                                <option value="LG">알뜰폰</option>                     	
+                                            </select>
+                                            <div class="invalid-feedback" id="userAgencyValid">통신사를 선택해주세요.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-5 col-lg-5">
+                                        <div class="form-group">
+                                            <label for="userPhone" class="d-none">전화번호<span class="required">*</span></label>
+                                            <input id="userPhone" type="text" class="form-control" name="userPhone" placeholder="전화번호" oninput="autoPhoneNum(this)" maxlength="13" required />                        	
+                                            <div class="invalid-feedback" id="userPhoneValid">전화번호를 입력해주세요.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                                        <button type="button" class="btn rounded mb-3 collapsed" id="recieveCertificationNumBtn">인증번호 받기</button>
+                                    </div>
+                                </div>
+                                <div class="row accordion-collapse collapse" id="collapsePhone">
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                                        <div class="form-group">
+                                            <label for="userCertification" class="d-none">인증번호<span class="required">*</span></label>
+                                            <input id="userCertification" type="temx" class="form-control" name="userCertification" placeholder="인증번호" required />                        	
+                                            <div class="invalid-feedback" id="userCertificationValid">인증번호를 입력해주세요.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                                        <button type="button" class="btn rounded mb-3" id="certificationBtn">인증확인</button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <label for="userEmail" class="d-none">Email<span class="required">*</span></label>
+                                            <input id="userEmail" type="email" class="form-control" name="userEmail" placeholder="이메일" required />                        	
+                                            <div class="invalid-feedback" id="userEmailValid">이메일을 입력해주세요.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group form-check col-12 col-sm-12 col-md-12 col-lg-12">
+                                        <div class="customCheckbox clearfix">
+                                            <input id="userRecvNotiFlag" name="userRecvNotiFlag" type="checkbox" />
+                                            <label for="userRecvNotiFlag">이메일 수신 알림 동의</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                        <div class="form-group">
+                                            <input type="text" id="userPostCode" class="form-control" name="userPostCode" placeholder="우편번호" readonly required />
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+                                        <div class="form-group">
+                                            <button type="button" class="btn rounded" onclick="daumPostcode()">우편번호 찾기</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <input type="text" id="userAddr" class="form-control" name="userAddr" placeholder="주소" readonly required />
+                                            <div class="invalid-feedback" id="userAddrValid">주소를 입력해주세요.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <input type="text" id="userDetailAddr" class="form-control" name="userDetailAddr" placeholder="상세주소" required />
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 class="h4 text-uppercase mb-3">로그인 정보</h3>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                                        <div class="form-group">
+                                            <label for="userId" class="d-none">아이디<span class="required">*</span></label>
+                                            <input id="userId" type="text" class="form-control" name="userId" placeholder="아이디" required />
+                                            <div class="invalid-feedback" id="userIdValid">아이디를 입력해주세요.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">                                	
+                                        <div class="form-group">
+                                            <label for="userPassword" class="d-none">비밀번호<span class="required">*</span></label>
+                                            <input id="userPassword" type="password" class="form-control" name="userPassword" placeholder="비밀번호" maxlength="12" required />
+                                            <div class="invalid-feedback" id="userPasswordValid">비밀번호를 입력해주세요.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                                        <div class="form-group">
+                                            <label for="userConfirmPassword" class="d-none">비밀번호 확인<span class="required">*</span></label>
+                                            <input id="userConfirmPassword" type="Password" class="form-control" name="userConfirmPassword" placeholder="비밀번호 확인" required />                        	
+                                            <div class="invalid-feedback" id="userConfirmPasswordValid">비밀번호가 일치하지 않습니다.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="text-left col-12 col-sm-12 col-md-6 col-lg-6">
+                                        <button type="button" class="btn rounded mb-3" id="singUpBtn">Submit</button>
+                                    </div>
+                                    <div class="text-right col-12 col-sm-12 col-md-6 col-lg-6">
+                                        <a href="/peter/member/LoginPeterForm"><i class="align-middle icon an an-an-double-left me-2"></i>로그인 페이지</a>
+                                    </div>
+                                </div>
+                            </form>                       
+                        </div>
+                    </div>
+                    <!--End Main Content-->
+                </div>
+                <!--End Container-->
+            </div>
+            <!--End Body Container-->
+
+            <!--Scoll Top-->
+            <span id="site-scroll"><i class="icon an an-chevron-up"></i></span>
+            <!--End Scoll Top-->
+
+            <!--MiniCart Drawer-->
+            <div class="minicart-right-drawer modal right fade" id="minicart-drawer">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div id="cart-drawer" class="block block-cart">
+                            <div class="minicart-header">
+                                <a href="javascript:void(0);" class="close-cart" data-bs-dismiss="modal" aria-label="Close"><i class="an an-times-r" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left" title="Close"></i></a>
+                                <h4 class="fs-6">Your cart (2 Items)</h4>
+                            </div>
+                            <div class="minicart-content">
+                                <ul class="clearfix">
+                                    <li class="item d-flex justify-content-center align-items-center">
+                                        <a class="product-image" href="product-layout1.html">
+                                            <img class="blur-up lazyload" src="/peter/template/optimal-html/assets/images/products/cart-product-img1.jpg" data-src="/peter/template/optimal-html/assets/images/products/cart-product-img1.jpg" alt="image" title="">
+                                        </a>
+                                        <div class="product-details">
+                                            <a class="product-title" href="product-layout1.html">Floral Crop Top</a>
+                                            <div class="variant-cart">Black / XL</div>
+                                            <div class="priceRow">
+                                                <div class="product-price">
+                                                    <span class="money">$59.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="qtyDetail text-center">
+                                            <div class="wrapQtyBtn">
+                                                <div class="qtyField">
+                                                    <a class="qtyBtn minus" href="javascript:void(0);"><i class="icon an an-minus-r" aria-hidden="true"></i></a>
+                                                    <input type="text" name="quantity" value="1" class="qty">
+                                                    <a class="qtyBtn plus" href="javascript:void(0);"><i class="icon an an-plus-l" aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
+                                            <a href="#" class="edit-i remove"><i class="icon an an-edit-l" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></a>
+                                            <a href="#" class="remove"><i class="an an-times-r" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"></i></a>
+                                        </div>
+                                    </li>
+                                    <li class="item d-flex justify-content-center align-items-center">
+                                        <a class="product-image" href="product-layout1.html">
+                                            <img class="blur-up lazyload" src="/peter/template/optimal-html/assets/images/products/cart-product-img1.jpg" data-src="/peter/template/optimal-html/assets/images/products/cart-product-img1.jpg" alt="image" title="">
+                                        </a>
+                                        <div class="product-details">
+                                            <a class="product-title" href="product-layout1.html">V Neck T-shirts</a>
+                                            <div class="variant-cart">Blue / XL</div>
+                                            <div class="priceRow">
+                                                <div class="product-price">
+                                                    <span class="money">$199.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="qtyDetail text-center">
+                                            <div class="wrapQtyBtn">
+                                                <div class="qtyField">
+                                                    <a class="qtyBtn minus" href="javascript:void(0);"><i class="icon an an-minus-r" aria-hidden="true"></i></a>
+                                                    <input type="text" name="quantity" value="1" class="qty">
+                                                    <a class="qtyBtn plus" href="javascript:void(0);"><i class="icon an an-plus-l" aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
+                                            <a href="#" class="edit-i remove"><i class="icon an an-edit-l" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></a>
+                                            <a href="#" class="remove"><i class="an an-times-r" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"></i></a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="minicart-bottom">
+                                <div class="shipinfo text-center mb-3 text-uppercase">
+                                    <p class="freeShipMsg"><i class="an an-truck fs-5 me-2 align-middle"></i>SPENT <b>$199.00</b> MORE FOR FREE SHIPPING</p>
+                                </div>
+                                <div class="subtotal">
+                                    <span>Total:</span>
+                                    <span class="product-price">$93.13</span>
+                                </div>
+                                <a href="checkout-style1.html" class="w-100 p-2 my-2 btn btn-outline-primary proceed-to-checkout rounded">Proceed to Checkout</a>
+                                <a href="cart-style1.html" class="w-100 btn-primary cart-btn rounded">View Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div th:replace="~{peter/include/foot :: foot}"></div>
+            <div th:replace="~{peter/include/includePeterOriginal :: includePeterOriginal}"></div>
+            <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+            <div th:replace="~{peter/include/includePeterCommon :: includePeterCommon}"></div>
+
+            <script>
+                let name = document.getElementById("userName");
+                let man = document.getElementById("userMan");
+                let woman = document.getElementById("userWoman");
+                let birth = document.getElementById("userBirth");
+                let agency = document.getElementById("userAgency");
+                let phone = document.getElementById("userPhone");
+                let certification = document.getElementById("userCertification");
+                let email = document.getElementById("userEmail");
+                let postaCode = document.getElementById("userPostCode");
+                let address = document.getElementById("userAddr");
+                let detailAddress = document.getElementById("userDetailAddr");
+                let id = document.getElementById("userId");
+                let password = document.getElementById("userPassword");
+                let confirmPassword = document.getElementById("userConfirmPassword");
+                
+                let nameValid = document.getElementById("userNameValid");
+                let genderValid = document.getElementById("userGenderValid");
+                let birthValid = document.getElementById("userBirthValid");
+                let agencyValid = document.getElementById("userAgencyValid");
+                let phoneValid = document.getElementById("userPhoneValid");
+                let certificationValid = document.getElementById("userCertificationValid");
+                let emailValid = document.getElementById("userEmailValid");
+                let addressValid = document.getElementById("userAddrValid");
+                let idValid = document.getElementById("userIdValid");
+                let passwordValid = document.getElementById("userPasswordValid");
+                let confirmPasswordValid = document.getElementById("userConfirmPasswordValid");
+
+                validationInit = function() {
+                    nameValid.style.display = "none";
+                    genderValid.style.display = "none";
+                    birthValid.style.display = "none";
+                    agencyValid.style.display = "none";
+                    phoneValid.style.display = "none";
+                    certificationValid.style.display = "none";
+                    emailValid.style.display = "none";
+                    addressValid.style.display = "none";
+                    idValid.style.display = "none";
+                    passwordValid.style.display = "none";
+                    confirmPasswordValid.style.display = "none";
+                }
+
+                autoPhoneNum = function(target){
+                    target.value = target.value
+                    .replace(/[^0-9]/g, "")
+                    .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+                }
+
+                $("#recieveCertificationNumBtn").on("click", function() {
+                    validationInit();
+
+                    temp = agency.value;
+                    if (!checkLength(temp)) {
+                        agencyValid.style.display = "block";
+                        agency.focus();
+                        return false;
+                    }
+
+                    temp = phone.value;
+                    if (!onlyPhone(temp)) {
+                        phoneValid.style.display = "block";
+                        phone.focus();
+                        return false;
+                    }
+                    document.getElementById("collapsePhone").classList.add('show');
+                });
+
+                $("#certificationBtn").on("click", function() {
+                    // $.ajax({
+                    //     async: true 
+                    //     ,cache: false
+                    //     ,type: "post"
+                    //     ,url: URL_SIGNOUT_PROC_XDM
+                    //     ,data: {}
+                    //     ,success: function(response) {
+                    //         if(response.rt == "success") {
+                    //         location.href = URL_SIGNIN_FORM_XDM;
+                    //         } else {
+                    //         // by pass
+                    //         }
+                    //     }
+                    //     ,error : function(jqXHR){
+                    //         alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+                    //     }
+                    // });
+                });
+      
+                validation = function() {
+                    let temp;
+                    
+                    temp = name.value;
+                    if (!checkLength(temp) || !onlyKo(temp)) {
+                        nameValid.style.display = "block";
+                        name.style.outlineColor = "red";
+                        name.focus();
+                        return false;
+                    }
+
+                    if (!(man.checked || woman.checked)) {
+                        genderValid.style.display = "block";
+                        man.style.outlineColor = "red";
+                        woman.style.outlineColor = "red";
+                        man.focus();
+                        return false;
+                    }
+
+                    temp = birth.value;
+                    if (!checkLength(temp)) {
+                        birthValid.style.display = "block";
+                        birth.style.outlineColor = "red";
+                        birth.focus();
+                        return false;
+                    }
+
+                    temp = agency.value;
+                    if (!checkLength(temp)) {
+                        agencyValid.style.display = "block";
+                        agency.focus();
+                        return false;
+                    }
+
+                    temp = phone.value;
+                    if (!onlyPhone(temp)) {
+                        phoneValid.style.display = "block";
+                        phone.focus();
+                        return false;
+                    }
+
+                    temp = email.value;
+                    if (checkLength(temp) && !onlyEmail(temp)) {
+                        emailValid.style.display = "block";
+                        email.style.outlineColor = "red";
+                        email.focus();
+                        return false;
+                    }
+
+                    if (!checkLength(postaCode.value) || !checkLength(address.value)) {
+                        addressValid.style.display = "block";
+                        address.style.outlineColor = "red";
+                        address.focus();
+                        return false;
+                    }
+
+                    temp = id.value;
+                    if (!checkLength(temp) || !onlyKoEngNumValid(temp)) {
+                        idValid.style.display = "block";
+                        id.style.outlineColor = "red";
+                        id.focus();
+                        return false;
+                    }
+
+                    temp = password.value;
+                    if (checkLengthCnt(temp) < 8 || !onlyEngKoNumAllSpecialChar(temp)) {
+                        passwordValid.style.display = "block";
+                        password.style.outlineColor = "red";
+                        password.focus();
+                        return false;
+                    }
+
+                    if (temp != confirmPassword.value) {
+                        confirmPasswordValid.style.display = "block";
+                        confirmPassword.style.outlineColor = "red";
+                        confirmPassword.focus();
+                        return false;
+                    }
+
+                    return true;
+                }
+      
+                function signUpLogic () {
+                    
+                    validationInit();
+                    
+                    if(!validation()) {
+                        return false;
+                    }
+                    
+                    $.ajax({
+                        async: true 
+                        ,cache: false
+                        ,type: "post"
+                        /* ,dataType:"json" */
+                        ,url: "/peter/member/LoginPeterProc"
+                        /* ,data : $("#formLogin").serialize() */
+                        ,data : { "userName" : $("#userName").val(), "userBirth" : $("#userBirth").val(), "userGender" : $("#userBirth").val(),
+                        "userAgency" : $("#userAgency").val(), "userPhone" : $("#userPhone").val(), "userEmail" : $("#userEmail").val(),
+                        "userPostCode" : $("#userPostCode").val(), "userAddr" : $("#userAddr").val(), "userDetailAddr" : $("#userDetailAddr").val(),
+                        "userId" : $("#userId").val(), "userPassword" : $("#userPassword").val(), "userRecvNotiFlag" : $("#userRecvNotiFlag").is(":checked")}
+                        ,success: function(response) {
+                            if(response.rt == "success") {
+                            if(response.changePwd == "true") {
+                                // location.href = "/v1/infra/member/expiredPwdUsrForm";
+                            } else {
+                                location.href = "/peter/index/IndexPeterView";
+                            }
+                            } else {
+                            document.getElementById("modalAlertTitle").innerText = "확 인";
+                            document.getElementById("modalAlertBody").innerText = "일치하는 회원이 존재 하지 않습니다!";
+                            $("#modalAlert").modal("show");
+                            }
+                        }
+                        ,error : function(jqXHR, textStatus, errorThrown){
+                            alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+                        }
+                    });
+                }
+
+                $("#singUpBtn").on("click", function() {
+                    signUpLogic();
+                });
+            </script>            
+        </div>
+        <!--End Page Wrapper-->
+    </body>
+</html>
