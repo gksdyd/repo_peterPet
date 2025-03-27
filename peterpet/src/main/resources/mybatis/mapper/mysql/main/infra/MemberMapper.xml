@@ -58,8 +58,10 @@
 			userGender,
 			userName,
 			userId,
+			userPassword,
 			userBirth,
 			userEmail,
+			userAgency,
 			userPhone,
 			userRecvNotiFlag,
 			userPostCode,
@@ -70,6 +72,30 @@
 		FROM
 			user
 		WHERE 1=1
-			AND userSeq = #{userSeq}
+			AND userId = #{userSeq}
+	</select>
+	
+	<select id="selectOneLogin" resultMap="resultMapObj">
+		SELECT
+			userSeq,
+			userGender,
+			userName,
+			userId,
+			userPassword,
+			userBirth,
+			userEmail,
+			userAgency,
+			userPhone,
+			userRecvNotiFlag,
+			userPostCode,
+			userAddr,
+			userDetailAddr,
+			userDelFlag,
+			userSavePoint
+		FROM
+			user
+		WHERE 1=1
+			AND userId = #{userId}
+			AND userPassword = #{userPassword}
 	</select>
 </mapper>

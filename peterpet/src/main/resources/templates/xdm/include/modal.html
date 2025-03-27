@@ -2,12 +2,36 @@
 <html data-bs-theme="light" lang="en-US" dir="ltr" xmlns:th="http://www.thymeleaf.org">
 
 <th:block th:fragment="modal">
-	<div class="modal" id="modalDelete" tabindex="-1">
+	<div class="modal" id="modal" tabindex="-1">
 		<div class="modal-dialog mt-6" role="document">
 		  <div class="modal-content border-0">
-			<div class="position-absolute top-0 end-0 mt-2 me-2 z-1">
-			  <button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base" id="x-button"></button>
+			<div class="position-absolute top-0 end-0 mt-2 me-2 z-1" style="display: none;">
+			  <button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base" id="xBtn"></button>
 			</div>
+			<div class="modal-body p-0">
+			  <div class="bg-body-tertiary rounded-top-3 py-3 ps-4 pe-6">
+				<h4 class="mb-1" id="modalTitle"></h4>
+			  </div>
+			  <div class="p-4 pb-0 mb-3">
+				<div class="row">
+				  <div class="col">
+					<h5 id="modalText"></h5>
+				  </div>
+				</div>
+			  </div>
+			</div>
+			<div class="modal-footer">
+			  <button class="btn btn-secondary" id="modalCloseBtn" type="button" data-bs-dismiss="modal" style="display: none;">취소</button>
+			  <button class="btn btn-primary" type="button" id="modalDelBtn" style="display: none;">삭제</button>
+			  <button class="btn btn-primary" type="button" id="modalCheckBtn" style="display: none;">확인</button>
+			</div>
+		  </div>
+		</div>
+	  </div>
+
+	  <!-- <div class="modal" id="modalLogin" tabindex="-1">
+		<div class="modal-dialog mt-6" role="document">
+		  <div class="modal-content border-0">
 			<div class="modal-body p-0">
 			  <div class="bg-body-tertiary rounded-top-3 py-3 ps-4 pe-6">
 				<h4 class="mb-1" id="tooltippopoversLabel">WARNING</h4>
@@ -15,16 +39,15 @@
 			  <div class="p-4 pb-0 mb-3">
 				<div class="row">
 				  <div class="col">
-					<h5>정말 삭제하시겠습니까??</h5>
+					<h5>회원 정보가 일치하지 않습니다!</h5>
 				  </div>
 				</div>
 			  </div>
 			</div>
 			<div class="modal-footer">
-			  <button class="btn btn-secondary" id="close-button" type="button" data-bs-dismiss="modal">취소</button>
-			  <button class="btn btn-primary" type="button" id="modalDelBtn">삭제</button>
+			  <button class="btn btn-primary" type="button" id="modalCheckBtn">확인</button>
 			</div>
 		  </div>
 		</div>
-	  </div>
+	  </div> -->
 </th:block>

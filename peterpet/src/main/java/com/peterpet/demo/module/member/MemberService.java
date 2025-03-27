@@ -22,4 +22,8 @@ public class MemberService {
 	MemberDto selectOne(MemberDto memberDto) {
 		return memberDao.selectOne(memberDto);
 	}
+	
+	MemberDto selectOneLogin(MemberDto memberDto) {
+		return memberDao.selectOneLogin(memberDto);
+	}
 }

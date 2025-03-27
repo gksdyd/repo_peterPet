@@ -10,4 +10,5 @@ public interface MemberDao {
 	List<MemberDto> selectList(MemberVo vo);
 	int selectOneCount(MemberVo vo);
 	MemberDto selectOne(MemberDto memberDto);
+	MemberDto selectOneLogin(MemberDto memberDto);
 }

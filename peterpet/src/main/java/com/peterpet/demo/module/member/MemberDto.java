@@ -5,9 +5,11 @@ public class MemberDto {
 	private String userSeq;	
 	private int userGender;	
 	private String userName;	
-	private String userId;	
+	private String userId;
+	private String userPassword;
 	private String userBirth;	
 	private String userEmail;	
+	private String userAgency;	
 	private String userPhone;	
 	private int userRecvNotiFlag;	
 	private String userPostCode;	
@@ -128,5 +130,17 @@ public class MemberDto {
 	}
 	public void setPetCount(int petCount) {
 		this.petCount = petCount;
+	}
+	public String getUserPassword() {
+		return userPassword;
+	}
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
+	}
+	public String getUserAgency() {
+		return userAgency;
+	}
+	public void setUserAgency(String userAgency) {
+		this.userAgency = userAgency;
 	}
 }

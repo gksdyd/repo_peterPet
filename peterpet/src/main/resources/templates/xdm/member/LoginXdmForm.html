@@ -91,16 +91,16 @@
                       </div>
                       <form class="needs-validation" id="singInForm" name="singInForm" novalidate>
                         <div class="mb-3">
-                          <label class="form-label" for="admiId">ID</label>
-                          <input class="form-control" id="admiId" name="admiId" type="text" />
-                          <div class="invalid-feedback" id="admiIdValid">아이디를 잘못입력했습니다!</div>
+                          <label class="form-label" for="userId">ID</label>
+                          <input class="form-control" id="userId" name="userId" type="text" />
+                          <div class="invalid-feedback" id="userIdValid">아이디를 잘못입력했습니다!</div>
                         </div>
                         <div class="mb-3">
                           <div class="d-flex justify-content-between">
-                            <label class="form-label" for="admiPassword">Password</label>
+                            <label class="form-label" for="userPassword">Password</label>
                           </div>
-                          <input class="form-control" id="admiPassword" name="admiPassword" type="password" />
-                          <div class="invalid-feedback" id="admiPasswordValid">비밀번호가 일치하지 않습니다!</div>
+                          <input class="form-control" id="userPassword" name="userPassword" type="password" />
+                          <div class="invalid-feedback" id="userPasswordValid">비밀번호가 일치하지 않습니다!</div>
                         </div>
                         <div class="row flex-between-center">
                           <div class="col-auto">
@@ -132,6 +132,7 @@
         </div>
       </div>
     </main>
+    <div th:replace="~{xdm/include/modal :: modal}"></div>
     <!-- ===============================================-->
     <!--    End of Main Content-->
     <!-- ===============================================-->
@@ -140,11 +141,11 @@
     <!--    JavaScripts-->
     <!-- ===============================================-->
      <script>
-      let adminId = document.getElementById("admiId");
-      let adminPassword = document.getElementById("admiPassword");
+      let adminId = document.getElementById("userId");
+      let adminPassword = document.getElementById("userPassword");
 
-      let adminIdValid = document.getElementById("admiIdValid");
-      let adminPasswordValid = document.getElementById("admiPasswordValid");
+      let adminIdValid = document.getElementById("userIdValid");
+      let adminPasswordValid = document.getElementById("userPasswordValid");
 
       document.getElementById("singIn").onclick = function() {
         loginLogic();
@@ -192,7 +193,7 @@
           /* ,dataType:"json" */
           ,url: "/xdm/member/LoginXdmProc"
           /* ,data : $("#formLogin").serialize() */
-          ,data : { "admiId" : $("#admiId").val(), "admiPassword" : $("#admiPassword").val(), "autoLogin" : $("#autoLogin").is(":checked")}
+          ,data : { "userId" : $("#userId").val(), "userPassword" : $("#userPassword").val(), "autoLogin" : $("#autoLogin").is(":checked")}
           ,success: function(response) {
             if(response.rt == "success") {
               if(response.changePwd == "true") {
@@ -201,9 +202,10 @@
                 location.href = "/xdm/index/IndexXdmView";
               }
             } else {
-              document.getElementById("modalAlertTitle").innerText = "확 인";
-              document.getElementById("modalAlertBody").innerText = "일치하는 회원이 존재 하지 않습니다!";
-              $("#modalAlert").modal("show");
+              modalTitle.innerText = "확 인";
+              modalText.innerText = "일치하는 회원이 존재 하지 않습니다!";
+              modalCloseButton.style.display = "block";
+              $("#modal").modal("show");
             }
           }
           ,error : function(jqXHR, textStatus, errorThrown){

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.peterpet.demo.module.base.Constants;
+
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -35,7 +37,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/LoginXdmForm")
-	public String loginXdmForm() {
+	public String loginXdmForm(MemberDto vo, HttpSession httpSession) {
 		return "xdm/member/LoginXdmForm";
 	}
 	
@@ -43,7 +45,20 @@ public class MemberController {
 	@RequestMapping(value = "/LoginXdmProc")
 	public Map<String, Object> loginXdmProc(MemberDto dto, HttpSession httpSession) throws Exception {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
-		returnMap.put("rt", "success");
+		
+		MemberDto rtMember = memberService.selectOneLogin(dto);
+		
+		if (rtMember != null) {
+			httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE_XDM); // 60second * 30 = 30minute
+			httpSession.setAttribute("sessSeqXdm", rtMember.getUserSeq());
+			httpSession.setAttribute("sessIdXdm", rtMember.getUserId());
+			httpSession.setAttribute("sessNameXdm", rtMember.getUserName());
+			
+			returnMap.put("rt", "success");
+		} else {
+			returnMap.put("rt", "fali");
+		}
+		
 		return returnMap;
 	}
 	
