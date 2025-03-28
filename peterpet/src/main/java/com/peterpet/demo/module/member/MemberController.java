@@ -37,7 +37,9 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/LoginXdmForm")
-	public String loginXdmForm(MemberDto vo, HttpSession httpSession) {
+	public String loginXdmForm(MemberDto vo, HttpSession httpSession, Model model) {
+		vo.setUserSeq("1");
+		model.addAttribute("item", memberService.selectOne(vo));
 		return "xdm/member/LoginXdmForm";
 	}
 	
@@ -66,6 +68,9 @@ public class MemberController {
 	@RequestMapping(value = "/LogoutXdmProc")
 	public Map<String, Object> logoutXdmProc(MemberDto dto, HttpSession httpSession) throws Exception {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
+		httpSession.setAttribute("sessSeqXdm", null);
+		httpSession.setAttribute("sessIdXdm", null);
+		httpSession.setAttribute("sessNameXdm", null);
 		returnMap.put("rt", "success");
 		return returnMap;
 	}
