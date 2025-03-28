@@ -187,4 +187,13 @@ public class BaseVo {
 //		System.out.println("getEndRnumForOracle():" + getEndRnumForOracle());
 		System.out.println("getStartRnumForMysql(): " + getStartRnumForMysql());	
 	}
+	
+	public void checkDate(BaseVo vo) {
+		if (vo.getShDateStart() == "") {
+			vo.setShDateStart(null);
+		} 
+		if (vo.getShDateEnd() == "") {
+			vo.setShDateEnd(null);
+		}
+	}
 }

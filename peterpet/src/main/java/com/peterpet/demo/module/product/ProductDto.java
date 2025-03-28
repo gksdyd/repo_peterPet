@@ -12,25 +12,31 @@ public class ProductDto {
 	private int feedBrand;
 	private int feedIngredient;
 	private int feedSize;
-	private int funcTeethFlag;
-	private int funcTearsFlag;
-	private int funcBrainFlag;
-	private int funcImmunityFlag;
-	private int funcBoneFlag;
-	private int funcStressFlag;
-	private int funcKidneyFlag;
-	private int funcHeartFlag;
-	private int funcAllergyFlag;
-	private int funcPregnancyFlag;
-	private int funcIntestineFlag;
-	private int funcNeuteringFlag;
-	private int funcWeightFlag;
-	private int funcSkinFlag;
+	private int prodTeethFlag;
+	private int prodTearsFlag;
+	private int prodBrainFlag;
+	private int prodImmunityFlag;
+	private int prodBoneFlag;
+	private int prodStressFlag;
+	private int prodKidneyFlag;
+	private int prodHeartFlag;
+	private int prodAllergyFlag;
+	private int prodPregnancyFlag;
+	private int prodIntestineFlag;
+	private int prodNeuteringFlag;
+	private int prodWeightFlag;
+	private int prodSkinFlag;
 	private String prodRegDate;
 	private String prodModDate;
 	private int infoCount;
 	
 	private int funcCnt;
+	
+	private Integer infoPrice;
+	private Double infoWeight;
+	private Integer infoDiscount;
+	private Integer infoDelFlag;
+	private String product_prodSeq;
 	
 	public String getProdSeq() {
 		return prodSeq;
@@ -68,89 +74,89 @@ public class ProductDto {
 	public void setFeedType(int feedType) {
 		this.feedType = feedType;
 	}
-	public int getFuncTeethFlag() {
-		return funcTeethFlag;
+	public int getProdTeethFlag() {
+		return prodTeethFlag;
 	}
-	public void setFuncTeethFlag(int funcTeethFlag) {
-		this.funcTeethFlag = funcTeethFlag;
+	public void setProdTeethFlag(int prodTeethFlag) {
+		this.prodTeethFlag = prodTeethFlag;
 	}
-	public int getFuncTearsFlag() {
-		return funcTearsFlag;
+	public int getProdTearsFlag() {
+		return prodTearsFlag;
 	}
-	public void setFuncTearsFlag(int funcTearsFlag) {
-		this.funcTearsFlag = funcTearsFlag;
+	public void setProdTearsFlag(int prodTearsFlag) {
+		this.prodTearsFlag = prodTearsFlag;
 	}
-	public int getFuncBrainFlag() {
-		return funcBrainFlag;
+	public int getProdBrainFlag() {
+		return prodBrainFlag;
 	}
-	public void setFuncBrainFlag(int funcBrainFlag) {
-		this.funcBrainFlag = funcBrainFlag;
+	public void setProdBrainFlag(int prodBrainFlag) {
+		this.prodBrainFlag = prodBrainFlag;
 	}
-	public int getFuncImmunityFlag() {
-		return funcImmunityFlag;
+	public int getProdImmunityFlag() {
+		return prodImmunityFlag;
 	}
-	public void setFuncImmunityFlag(int funcImmunityFlag) {
-		this.funcImmunityFlag = funcImmunityFlag;
+	public void setProdImmunityFlag(int prodImmunityFlag) {
+		this.prodImmunityFlag = prodImmunityFlag;
 	}
-	public int getFuncBoneFlag() {
-		return funcBoneFlag;
+	public int getProdBoneFlag() {
+		return prodBoneFlag;
 	}
-	public void setFuncBoneFlag(int funcBoneFlag) {
-		this.funcBoneFlag = funcBoneFlag;
+	public void setProdBoneFlag(int prodBoneFlag) {
+		this.prodBoneFlag = prodBoneFlag;
 	}
-	public int getFuncStressFlag() {
-		return funcStressFlag;
+	public int getProdStressFlag() {
+		return prodStressFlag;
 	}
-	public void setFuncStressFlag(int funcStressFlag) {
-		this.funcStressFlag = funcStressFlag;
+	public void setProdStressFlag(int prodStressFlag) {
+		this.prodStressFlag = prodStressFlag;
 	}
-	public int getFuncKidneyFlag() {
-		return funcKidneyFlag;
+	public int getProdKidneyFlag() {
+		return prodKidneyFlag;
 	}
-	public void setFuncKidneyFlag(int funcKidneyFlag) {
-		this.funcKidneyFlag = funcKidneyFlag;
+	public void setProdKidneyFlag(int prodKidneyFlag) {
+		this.prodKidneyFlag = prodKidneyFlag;
 	}
-	public int getFuncHeartFlag() {
-		return funcHeartFlag;
+	public int getProdHeartFlag() {
+		return prodHeartFlag;
 	}
-	public void setFuncHeartFlag(int funcHeartFlag) {
-		this.funcHeartFlag = funcHeartFlag;
+	public void setProdHeartFlag(int prodHeartFlag) {
+		this.prodHeartFlag = prodHeartFlag;
 	}
-	public int getFuncAllergyFlag() {
-		return funcAllergyFlag;
+	public int getProdAllergyFlag() {
+		return prodAllergyFlag;
 	}
-	public void setFuncAllergyFlag(int funcAllergyFlag) {
-		this.funcAllergyFlag = funcAllergyFlag;
+	public void setProdAllergyFlag(int prodAllergyFlag) {
+		this.prodAllergyFlag = prodAllergyFlag;
 	}
-	public int getFuncPregnancyFlag() {
-		return funcPregnancyFlag;
+	public int getProdPregnancyFlag() {
+		return prodPregnancyFlag;
 	}
-	public void setFuncPregnancyFlag(int funcPregnancyFlag) {
-		this.funcPregnancyFlag = funcPregnancyFlag;
+	public void setProdPregnancyFlag(int prodPregnancyFlag) {
+		this.prodPregnancyFlag = prodPregnancyFlag;
 	}
-	public int getFuncIntestineFlag() {
-		return funcIntestineFlag;
+	public int getProdIntestineFlag() {
+		return prodIntestineFlag;
 	}
-	public void setFuncIntestineFlag(int funcIntestineFlag) {
-		this.funcIntestineFlag = funcIntestineFlag;
+	public void setProdIntestineFlag(int prodIntestineFlag) {
+		this.prodIntestineFlag = prodIntestineFlag;
 	}
-	public int getFuncNeuteringFlag() {
-		return funcNeuteringFlag;
+	public int getProdNeuteringFlag() {
+		return prodNeuteringFlag;
 	}
-	public void setFuncNeuteringFlag(int funcNeuteringFlag) {
-		this.funcNeuteringFlag = funcNeuteringFlag;
+	public void setProdNeuteringFlag(int prodNeuteringFlag) {
+		this.prodNeuteringFlag = prodNeuteringFlag;
 	}
-	public int getFuncWeightFlag() {
-		return funcWeightFlag;
+	public int getProdWeightFlag() {
+		return prodWeightFlag;
 	}
-	public void setFuncWeightFlag(int funcWeightFlag) {
-		this.funcWeightFlag = funcWeightFlag;
+	public void setProdWeightFlag(int prodWeightFlag) {
+		this.prodWeightFlag = prodWeightFlag;
 	}
-	public int getFuncSkinFlag() {
-		return funcSkinFlag;
+	public int getProdSkinFlag() {
+		return prodSkinFlag;
 	}
-	public void setFuncSkinFlag(int funcSkinFlag) {
-		this.funcSkinFlag = funcSkinFlag;
+	public void setProdSkinFlag(int prodSkinFlag) {
+		this.prodSkinFlag = prodSkinFlag;
 	}
 	public int getFeedEtc() {
 		return feedEtc;
@@ -199,5 +205,35 @@ public class ProductDto {
 	}
 	public void setInfoCount(int infoCount) {
 		this.infoCount = infoCount;
+	}
+	public Integer getInfoPrice() {
+		return infoPrice;
+	}
+	public void setInfoPrice(Integer infoPrice) {
+		this.infoPrice = infoPrice;
+	}
+	public Double getInfoWeight() {
+		return infoWeight;
+	}
+	public void setInfoWeight(Double infoWeight) {
+		this.infoWeight = infoWeight;
+	}
+	public Integer getInfoDiscount() {
+		return infoDiscount;
+	}
+	public void setInfoDiscount(Integer infoDiscount) {
+		this.infoDiscount = infoDiscount;
+	}
+	public Integer getInfoDelFlag() {
+		return infoDelFlag;
+	}
+	public void setInfoDelFlag(Integer infoDelFlag) {
+		this.infoDelFlag = infoDelFlag;
+	}
+	public String getProduct_prodSeq() {
+		return product_prodSeq;
+	}
+	public void setProduct_prodSeq(String product_prodSeq) {
+		this.product_prodSeq = product_prodSeq;
 	}
 }

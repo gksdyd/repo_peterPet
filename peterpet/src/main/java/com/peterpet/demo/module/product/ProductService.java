@@ -26,4 +26,8 @@ public class ProductService {
 	public int selectOneCount(ProductVo vo) {
 		return productDao.selectOneCount(vo);
 	}
+	
+	public String selectOneFunc(ProductVo vo) {
+		return productDao.selectOneFunc(vo);
+	}
 }

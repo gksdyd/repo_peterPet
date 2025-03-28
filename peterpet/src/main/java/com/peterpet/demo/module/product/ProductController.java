@@ -1,20 +1,35 @@
 package com.peterpet.demo.module.product;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
+@RequestMapping(value = "/xdm/product")
 public class ProductController {
 
 	@Autowired
 	ProductService productService;
 
-	@RequestMapping(value = "/xdm/product/ProductXdmList")
-	public String productXdmList(Model model, FeedVo vo) {
+	@ResponseBody
+	@RequestMapping(value = "/ProductXdmProc")
+	public Map<String, Object> productXdmProc(ProductVo vo) {
+		Map<String, Object> rtType = new HashMap<String, Object>();
+
+		vo.prodFuncSelect(productService.selectOneFunc(vo));
+		rtType.put("funcArr", ProductVo.prodFuncArr);
+		rtType.put("funcNameArr", ProductVo.prodFuncNameArr);			
+		return rtType;
+	}
+	
+	@RequestMapping(value = "/ProductXdmList")
+	public String productXdmList(Model model, ProductVo vo) {
 		vo.InitProdType();
-		vo.prodFuncSelect();
 		vo.setParamsPaging(productService.selectOneCount(vo));
 		model.addAttribute("list", productService.selectList(vo));
 		model.addAttribute("vo", vo);
@@ -22,23 +37,22 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/xdm/product/ProductXdmForm")
-	public String productXdmForm(Model model, FeedVo feedFuncVo,
-			ProductDto productDto, FeedInfoVo feedInfoVo) {
-		feedFuncVo.InitProdType();
+	public String productXdmForm(Model model, ProductVo vo) {
+		vo.InitProdType();
 		if (productService.selectMaxSeq() == null) {
-			feedFuncVo.setProdSeq("1");
+			vo.setProdSeq("1");
 		} else {
-			feedFuncVo.setProdSeq((productService.selectMaxSeq() + 1) + "");
+			vo.setProdSeq((productService.selectMaxSeq() + 1) + "");
 		}
-		feedFuncVo.prodFuncSelect();
-		model.addAttribute("item", productDto);
-		model.addAttribute("func", feedFuncVo);
-		model.addAttribute("info", feedInfoVo);
+//		vo.prodFuncSelect();
+		model.addAttribute("item", vo);
+//		model.addAttribute("func", vo);
+//		model.addAttribute("info", feedInfoVo);
 		return "xdm/product/ProductXdmForm";
 	}
 
 	@RequestMapping(value = "/xdm/product/ProductXdmInst")
-	public String codeGroupXdmInst(FeedVo vo, ProductDto productDto) {
+	public String codeGroupXdmInst(ProductVo vo, ProductDto productDto) {
 		vo.prodFuncRegister(productDto);
 		productService.insert(productDto);
 		return "redirect:/xdm/product/ProductXdmList";

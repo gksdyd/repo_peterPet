@@ -17,6 +17,10 @@ const URL_SIGNIN_FORM_XDM = "/xdm/member/LoginXdmForm"
 const URL_SIGNOUT_PROC_XDM = "/xdm/member/LogoutXdmProc"
 const URL_INDEX_VIEW_XDM = "/xdm/index/IndexXdmView"
 
+// 상품 기능 뱃지 추가/제거
+const ADD_FUNCTION = 1;
+const REMOVE_FUNCTION = -1;
+
 // 정규식 상수
 const regex1 = /^[a-z|A-Z|0-9|]+$/;
 const regex2 = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|~|/|(-)|,|]+$/;

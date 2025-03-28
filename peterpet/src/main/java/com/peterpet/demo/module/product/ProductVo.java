@@ -7,15 +7,30 @@ import com.peterpet.demo.module.base.BaseVo;
 
 public class ProductVo extends BaseVo{
 
+	private static int currProdType;
 	private String prodSeq;
-	private int prodType;
+	private int prodType = 1;
 	
-	private int registerFlag;	// 등록 진행 여부 플래그
 	private int addOrRemoveFlag;	// 뱃지 추가 또는 제거 플래그
 	private String prodFunction;	// 선택한 기능을 저장하기 위한 매개체
+	
+	private String infoSeq;
+	
+	private Integer shFeedSalaryAge;
+	private Integer shFeedType;
+	private Integer shFeedEtc;
+	private Integer shFeedSize;
+	private Integer shFeedBrand;
+	private Integer shFeedIngredient;
+	
+	private Integer shSnackType;
+	private Integer shSnackSalaryAge;
+	private Integer shSnackMaterial;
+	private Integer shSnackBrand;
+	private Integer shSnackIngredient;
 
 	public static List<String> prodFuncArr = new ArrayList<>();
-	public static List<FeedInfoVo> feedInfoArr = new ArrayList<>();
+	public static List<String> prodFuncNameArr = new ArrayList<>();
 	
 	public String getProdSeq() {
 		return prodSeq;
@@ -31,14 +46,6 @@ public class ProductVo extends BaseVo{
 
 	public void setProdType(int prodType) {
 		this.prodType = prodType;
-	}
-	
-	public int getRegisterFlag() {
-		return registerFlag;
-	}
-
-	public void setRegisterFlag(int registerFlag) {
-		this.registerFlag = registerFlag;
 	}
 
 	public int getAddOrRemoveFlag() {
@@ -57,36 +64,118 @@ public class ProductVo extends BaseVo{
 		this.prodFunction = prodFunction;
 	}
 
-	public static List<String> getProdFuncArr() {
-		return prodFuncArr;
+	public String getInfoSeq() {
+		return infoSeq;
 	}
 
-	public static void setProdFuncArr(List<String> prodFuncArr) {
-		ProductVo.prodFuncArr = prodFuncArr;
+	public void setInfoSeq(String infoSeq) {
+		this.infoSeq = infoSeq;
 	}
 
-	public static List<FeedInfoVo> getFeedInfoArr() {
-		return feedInfoArr;
+	public Integer getShFeedSalaryAge() {
+		return shFeedSalaryAge;
 	}
 
-	public static void setFeedInfoArr(List<FeedInfoVo> feedInfoArr) {
-		FeedInfoVo.feedInfoArr = feedInfoArr;
+	public void setShFeedSalaryAge(Integer shFeedSalaryAge) {
+		this.shFeedSalaryAge = shFeedSalaryAge;
 	}
 
-	public void prodFuncSelect() {
-		// 등록 중이 아니라면 클리어
-		if (getRegisterFlag() == 0) {
-			prodFuncArr.clear();
-		}
-		
+	public Integer getShFeedType() {
+		return shFeedType;
+	}
+
+	public void setShFeedType(Integer shFeedType) {
+		this.shFeedType = shFeedType;
+	}
+
+	public Integer getShFeedEtc() {
+		return shFeedEtc;
+	}
+
+	public void setShFeedEtc(Integer shFeedEtc) {
+		this.shFeedEtc = shFeedEtc;
+	}
+
+	public Integer getShFeedSize() {
+		return shFeedSize;
+	}
+
+	public void setShFeedSize(Integer shFeedSize) {
+		this.shFeedSize = shFeedSize;
+	}
+
+	public Integer getShFeedBrand() {
+		return shFeedBrand;
+	}
+
+	public void setShFeedBrand(Integer shFeedBrand) {
+		this.shFeedBrand = shFeedBrand;
+	}
+
+	public Integer getShFeedIngredient() {
+		return shFeedIngredient;
+	}
+
+	public void setShFeedIngredient(Integer shFeedIngredient) {
+		this.shFeedIngredient = shFeedIngredient;
+	}
+
+	public Integer getShSnackType() {
+		return shSnackType;
+	}
+
+	public void setShSnackType(Integer shSnackType) {
+		this.shSnackType = shSnackType;
+	}
+
+	public Integer getShSnackSalaryAge() {
+		return shSnackSalaryAge;
+	}
+
+	public void setShSnackSalaryAge(Integer shSnackSalaryAge) {
+		this.shSnackSalaryAge = shSnackSalaryAge;
+	}
+
+	public Integer getShSnackMaterial() {
+		return shSnackMaterial;
+	}
+
+	public void setShSnackMaterial(Integer shSnackMaterial) {
+		this.shSnackMaterial = shSnackMaterial;
+	}
+
+	public Integer getShSnackBrand() {
+		return shSnackBrand;
+	}
+
+	public void setShSnackBrand(Integer shSnackBrand) {
+		this.shSnackBrand = shSnackBrand;
+	}
+
+	public Integer getShSnackIngredient() {
+		return shSnackIngredient;
+	}
+
+	public void setShSnackIngredient(Integer shSnackIngredient) {
+		this.shSnackIngredient = shSnackIngredient;
+	}
+
+	public void prodFuncArrClear() {
+		prodFuncArr.clear();
+		prodFuncNameArr.clear();
+	}
+	
+	public void prodFuncSelect(String name) {		
 		// 기능 추가
 		if (getAddOrRemoveFlag() == 1) {
 			prodFuncArr.add(getProdFunction());
+			prodFuncNameArr.add(name);
 		// 기능 제거
 		} else if (getAddOrRemoveFlag() == -1) {
 			for (int i = 0; i < prodFuncArr.size(); i++) {
 				if (prodFuncArr.get(i).equals(getProdFunction())) {
 					prodFuncArr.remove(i);
+					prodFuncNameArr.remove(i);
 					break;
 				}
 			}
@@ -97,40 +186,42 @@ public class ProductVo extends BaseVo{
 		// 기능 존재하는 플래그 서치 및 활성화
 		for (int i = 0; i < prodFuncArr.size(); i++) {
 			if (prodFuncArr.get(i).equals("20")) {
-				productDto.setFuncTeethFlag(20);
+				productDto.setProdTeethFlag(20);
 			} else if (prodFuncArr.get(i).equals("21")) {
-				productDto.setFuncTearsFlag(21);
+				productDto.setProdTearsFlag(21);
 			} else if (prodFuncArr.get(i).equals("22")) {
-				productDto.setFuncBrainFlag(22);
+				productDto.setProdBrainFlag(22);
 			} else if (prodFuncArr.get(i).equals("23")) {
-				productDto.setFuncImmunityFlag(23);
+				productDto.setProdImmunityFlag(23);
 			} else if (prodFuncArr.get(i).equals("24")) {
-				productDto.setFuncBoneFlag(24);
+				productDto.setProdBoneFlag(24);
 			} else if (prodFuncArr.get(i).equals("25")) {
-				productDto.setFuncStressFlag(25);
+				productDto.setProdStressFlag(25);
 			} else if (prodFuncArr.get(i).equals("26")) {
-				productDto.setFuncKidneyFlag(26);
+				productDto.setProdKidneyFlag(26);
 			} else if (prodFuncArr.get(i).equals("27")) {
-				productDto.setFuncHeartFlag(27);
+				productDto.setProdHeartFlag(27);
 			} else if (prodFuncArr.get(i).equals("28")) {
-				productDto.setFuncAllergyFlag(28);
+				productDto.setProdAllergyFlag(28);
 			} else if (prodFuncArr.get(i).equals("29")) {
-				productDto.setFuncPregnancyFlag(29);
+				productDto.setProdPregnancyFlag(29);
 			} else if (prodFuncArr.get(i).equals("30")) {
-				productDto.setFuncIntestineFlag(30);
+				productDto.setProdIntestineFlag(30);
 			} else if (prodFuncArr.get(i).equals("31")) {
-				productDto.setFuncNeuteringFlag(31);
+				productDto.setProdNeuteringFlag(31);
 			} else if (prodFuncArr.get(i).equals("32")) {
-				productDto.setFuncWeightFlag(32);
+				productDto.setProdWeightFlag(32);
 			} else if (prodFuncArr.get(i).equals("33")) {
-				productDto.setFuncSkinFlag(33);
+				productDto.setProdSkinFlag(33);
 			}
 		}
 	}
 	
 	public void InitProdType() {
-		if (getProdType() == 0) {
-			setProdType(1);
+		if (getProdType() != currProdType) {
+			System.out.println("clear");
+			prodFuncArrClear();
+			currProdType = getProdType();
 		}
 	}
 }
