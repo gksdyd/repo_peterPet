@@ -14226,7 +14226,7 @@ docReady(emojiMartInit);
 docReady(nouisliderInit);
 docReady(bulkSelectInit);
 docReady(advanceAjaxTableInit);
-docReady(listInit);
+// docReady(listInit);
 docReady(sortableInit);
 docReady(flatpickrIntit);
 //# sourceMappingURL=theme.js.map
