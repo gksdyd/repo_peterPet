@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.peterpet.demo.module.base.BaseVo;
+import com.peterpet.demo.module.base.Constants;
 
 public class ProductVo extends BaseVo{
 
-	private static int currProdType;
+	private static int currProdType = Constants.INIT_PRODUCT_TYPE;
 	private String prodSeq;
-	private int prodType = 1;
+	private int prodType;
 	
 	private int addOrRemoveFlag;	// 뱃지 추가 또는 제거 플래그
 	private String prodFunction;	// 선택한 기능을 저장하기 위한 매개체
@@ -221,7 +222,11 @@ public class ProductVo extends BaseVo{
 		if (getProdType() != currProdType) {
 			System.out.println("clear");
 			prodFuncArrClear();
-			currProdType = getProdType();
+			if (getProdType() == 0) {
+				setProdType(currProdType);
+			} else {
+				currProdType = getProdType();				
+			}
 		}
 	}
 }
