@@ -13,7 +13,6 @@
             </div>
             <div class="card-body bg-body-tertiary">
               <form class="needs-validation" novalidate action="/xdm/product/ProductXdmInst" method="post" id="product-form" name="product-form">
-                <input type="hidden" name="registerFlag" id="registerFlag" value="0">
                 <input type="hidden" name="addOrRemoveFlag" id="addOrRemoveFlag" value="0">
                 <div class="row g-3">
                   <div class="col-3">
@@ -188,7 +187,6 @@
       
       document.getElementById("prodRegDate").value = date;
       // document.getElementById("cogrModDate").value = date;
-      document.getElementById("registerFlag").value = 1;
       
       document.getElementById("product-form").submit();
     }

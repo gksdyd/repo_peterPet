@@ -1,6 +1,9 @@
 /* ===============================================-->
                         상수
    ===============================================--> */
+// 공통
+const ON = 1;
+const OFF = 0;
 
 // 삭제 모달
 const DELETE_FLAG = 1;
@@ -8,9 +11,10 @@ const UELETE_FLAG = 2;
 
 // search
 const CODE = 1;
-const MEMBER = 2;
-const PET = 3;
-const PRODUCT = 4;
+const CODE_GROUP = 2;
+const MEMBER = 3;
+const PET = 4;
+const PRODUCT = 5;
 
 // 로그인관련 경로
 const URL_SIGNIN_FORM_XDM = "/xdm/member/LoginXdmForm";
