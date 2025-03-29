@@ -174,9 +174,7 @@
                   </div>
                 </div>
                 <div class="mb-2 row g-3 me-2 ms-2">
-                  <div class="col-2" th:each="prodFunction : ${vo.prodFuncArr}">
-                    <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(#numbers.formatInteger(prodFunction, 0))}"></span>
-                    <button class="btn-close" type="button" style="font-size: xx-small;" onclick="funcRemove()"></button>
+                  <div class="col-2">
                   </div>
                 </div>
               </div>

@@ -22,7 +22,6 @@ funcRemove = function(value) {
 
 // 상품의 기능을 여러개 설정하는 함수
 funcSelect = function (flag) {
-  alert($("#prodFunction").val());
   $.ajax({
     async: true 
     ,cache: false
@@ -31,7 +30,6 @@ funcSelect = function (flag) {
     ,data: { "prodFunction" : $("#prodFunction").val(), "addOrRemoveFlag" : flag }
     ,success: function(response) {
       $("#createFunction").empty();
-
       for (let i = 0; i < response.funcArr.length; i++) {
         let funcBadge = $("<span></span>").addClass("badge").addClass("rounded-pill").addClass("badge-subtle-primary");
         let funcCloseBtn = $("<button></button>").addClass("btn-close").css('font-size', 'xx-small').prop("type", "button");
@@ -51,4 +49,7 @@ funcSelect = function (flag) {
     }
   });
 }
+
+// Init
+funcSelect(MAINTAIN_FUNCTION);
 

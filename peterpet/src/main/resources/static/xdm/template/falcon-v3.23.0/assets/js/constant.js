@@ -13,12 +13,16 @@ const PET = 3;
 const PRODUCT = 4;
 
 // 로그인관련 경로
-const URL_SIGNIN_FORM_XDM = "/xdm/member/LoginXdmForm"
-const URL_SIGNOUT_PROC_XDM = "/xdm/member/LogoutXdmProc"
-const URL_INDEX_VIEW_XDM = "/xdm/index/IndexXdmView"
+const URL_SIGNIN_FORM_XDM = "/xdm/member/LoginXdmForm";
+const URL_SIGNOUT_PROC_XDM = "/xdm/member/LogoutXdmProc";
+const URL_INDEX_VIEW_XDM = "/xdm/index/IndexXdmView";
+
+// 상품관련 경로
+const URL_PRODUCT_FUNCTION_XDM = "/xdm/product/ProductXdmProc";
 
 // 상품 기능 뱃지 추가/제거
 const ADD_FUNCTION = 1;
+const MAINTAIN_FUNCTION = 0;
 const REMOVE_FUNCTION = -1;
 
 // 정규식 상수
