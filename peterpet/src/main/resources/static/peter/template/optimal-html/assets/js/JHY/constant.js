@@ -9,8 +9,10 @@
 
 
 // 로그인관련 경로
-const URL_SIGNOUT_PROC_XDM = "/peter/member/LogoutPeterProc";
+const URL_SIGNOUT_PROC_XDM = "/xdm/member/LogoutXdmProc";
+const URL_SIGNIN_PROC_XDM = "/xdm/member/LoginXdmProc";
 const URL_SIGNIN_FORM_XDM = "/peter/member/LoginPeterForm";
+const URL_INDEX_VIEW_PETER = "/peter/index/IndexPeterView";
 
 // 정규식 상수
 const regex1 = /^[a-z|A-Z|0-9|]+$/;

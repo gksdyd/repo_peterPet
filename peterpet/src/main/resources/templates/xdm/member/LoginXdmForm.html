@@ -191,7 +191,7 @@
           ,cache: false
           ,type: "post"
           /* ,dataType:"json" */
-          ,url: "/xdm/member/LoginXdmProc"
+          ,url: URL_SIGNIN_PROC_XDM
           /* ,data : $("#formLogin").serialize() */
           ,data : { "userId" : $("#userId").val(), "userPassword" : $("#userPassword").val(), "autoLogin" : $("#autoLogin").is(":checked")}
           ,success: function(response) {
@@ -199,7 +199,7 @@
               if(response.changePwd == "true") {
                 // location.href = "/v1/infra/member/expiredPwdUsrForm";
               } else {
-                location.href = "/xdm/index/IndexXdmView";
+                location.href = URL_INDEX_VIEW_XDM;
               }
             } else {
               modalTitle.innerText = "확 인";

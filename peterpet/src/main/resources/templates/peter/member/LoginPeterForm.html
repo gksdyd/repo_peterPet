@@ -119,20 +119,20 @@
                     ,cache: false
                     ,type: "post"
                     /* ,dataType:"json" */
-                    ,url: "/peter/member/LoginPeterProc"
+                    ,url: URL_SIGNIN_PROC_XDM
                     /* ,data : $("#formLogin").serialize() */
-                    ,data : { "admiId" : $("#admiId").val(), "admiPassword" : $("#admiPassword").val(), "autoLogin" : $("#autoLogin").is(":checked")}
+                    ,data : { "userId" : $("#userId").val(), "userPassword" : $("#userPassword").val(), "autoLogin" : $("#autoLogin").is(":checked")}
                     ,success: function(response) {
                         if(response.rt == "success") {
                         if(response.changePwd == "true") {
                             // location.href = "/v1/infra/member/expiredPwdUsrForm";
                         } else {
-                            location.href = "/peter/index/IndexPeterView";
+                            location.href = URL_INDEX_VIEW_PETER;
                         }
                         } else {
-                        document.getElementById("modalAlertTitle").innerText = "확 인";
-                        document.getElementById("modalAlertBody").innerText = "일치하는 회원이 존재 하지 않습니다!";
-                        $("#modalAlert").modal("show");
+                            document.getElementById("modalAlertTitle").innerText = "확 인";
+                            document.getElementById("modalAlertBody").innerText = "일치하는 회원이 존재 하지 않습니다!";
+                            $("#modalAlert").modal("show");
                         }
                     }
                     ,error : function(jqXHR, textStatus, errorThrown){

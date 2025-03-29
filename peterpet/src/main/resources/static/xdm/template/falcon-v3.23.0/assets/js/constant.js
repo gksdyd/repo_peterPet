@@ -18,6 +18,7 @@ const PRODUCT = 5;
 
 // 로그인관련 경로
 const URL_SIGNIN_FORM_XDM = "/xdm/member/LoginXdmForm";
+const URL_SIGNIN_PROC_XDM = "/xdm/member/LoginXdmProc";
 const URL_SIGNOUT_PROC_XDM = "/xdm/member/LogoutXdmProc";
 const URL_INDEX_VIEW_XDM = "/xdm/index/IndexXdmView";
 
