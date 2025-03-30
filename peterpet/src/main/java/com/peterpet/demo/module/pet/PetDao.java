@@ -11,7 +11,8 @@ public interface PetDao {
 	List<PetDto> selectListOneUser(PetVo vo);
 	int selectOneCount(PetVo vo);
 	int selectOneCountOneUser(PetVo vo);
-	PetDto selectOne(PetDto petDto);
-	List<PetDto> selectOnePersonal(PetDto petDto);
-	List<PetDto> selectOneDisease(PetDto petDto);
+	PetDto selectOne(PetVo vo);
+	List<PetDto> selectOnePersonal(PetVo vo);
+	List<PetDto> selectOneDisease(PetVo vo);
+	List<PetDto> selectListPeterPets(PetVo vo);
 }

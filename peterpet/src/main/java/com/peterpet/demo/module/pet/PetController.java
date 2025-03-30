@@ -31,10 +31,10 @@ public class PetController {
 	}
 	
 	@RequestMapping(value = "/PetXdmView")
-	public String petXdmView(Model model, PetDto petDto) {
-		model.addAttribute("item", petService.selectOne(petDto));
-		model.addAttribute("listPersonal", petService.selectOnePersonal(petDto));
-		model.addAttribute("listDisease", petService.selectOneDisease(petDto));
+	public String petXdmView(Model model, PetVo vo) {
+		model.addAttribute("item", petService.selectOne(vo));
+		model.addAttribute("listPersonal", petService.selectOnePersonal(vo));
+		model.addAttribute("listDisease", petService.selectOneDisease(vo));
 		return "xdm/pet/PetXdmView";
 	}
 }

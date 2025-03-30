@@ -37,7 +37,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/LoginXdmForm")
-	public String loginXdmForm(MemberDto vo, HttpSession httpSession, Model model) {
+	public String loginXdmForm(MemberDto vo, Model model) {
 		vo.setUserSeq("1");
 		model.addAttribute("item", memberService.selectOne(vo));
 		return "xdm/member/LoginXdmForm";
