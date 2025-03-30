@@ -27,15 +27,19 @@ public class PetService {
 		return petDao.selectOneCountOneUser(vo);
 	}
 	
-	public PetDto selectOne(PetDto petDto) {
-		return petDao.selectOne(petDto);
+	public PetDto selectOne(PetVo vo) {
+		return petDao.selectOne(vo);
 	}
 	
-	List<PetDto> selectOnePersonal(PetDto petDto) {
-		return petDao.selectOnePersonal(petDto);
+	public List<PetDto> selectOnePersonal(PetVo vo) {
+		return petDao.selectOnePersonal(vo);
 	}
 	
-	List<PetDto> selectOneDisease(PetDto petDto) {
-		return petDao.selectOneDisease(petDto);
+	public List<PetDto> selectOneDisease(PetVo vo) {
+		return petDao.selectOneDisease(vo);
+	}
+	
+	public List<PetDto> selectListPeterPets(PetVo vo) {
+		return petDao.selectListPeterPets(vo);
 	}
 }

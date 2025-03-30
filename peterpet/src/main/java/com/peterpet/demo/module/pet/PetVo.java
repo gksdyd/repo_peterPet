@@ -1,10 +1,14 @@
 package com.peterpet.demo.module.pet;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import com.peterpet.demo.module.base.BaseVo;
 
 public class PetVo extends BaseVo {
 
 	private String userSeq;
+	private String petSeq;
 	private Integer shVaccineFlag;
 	private Integer shNeuterFlag;
 	private Integer shVarieties;
@@ -17,6 +21,14 @@ public class PetVo extends BaseVo {
 
 	public void setUserSeq(String userSeq) {
 		this.userSeq = userSeq;
+	}
+
+	public String getPetSeq() {
+		return petSeq;
+	}
+
+	public void setPetSeq(String petSeq) {
+		this.petSeq = petSeq;
 	}
 
 	public Integer getShVaccineFlag() {
@@ -57,5 +69,16 @@ public class PetVo extends BaseVo {
 
 	public void setShMaxWeight(Integer shMaxWeight) {
 		this.shMaxWeight = shMaxWeight;
+	}
+	
+	public void calculateAge(List<PetDto> petDto) {
+		LocalDate now = LocalDate.now();
+		
+		int currYear = now.getYear();
+		
+		for (PetDto pet : petDto) {
+			int birth = Integer.parseInt(pet.getPetBirth().substring(0, 4));
+			pet.setPetAge(currYear - birth + 1);			
+		}
 	}
 }

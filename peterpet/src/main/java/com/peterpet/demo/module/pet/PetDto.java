@@ -24,6 +24,8 @@ public class PetDto {
 	private String persDiscription;
 	private String diseDiscription;
 	
+	private int petAge;
+	
 	public String getPetSeq() {
 		return petSeq;
 	}
@@ -137,5 +139,11 @@ public class PetDto {
 	}
 	public void setDiseDiscription(String diseDiscription) {
 		this.diseDiscription = diseDiscription;
+	}
+	public int getPetAge() {
+		return petAge;
+	}
+	public void setPetAge(int petAge) {
+		this.petAge = petAge;
 	}
 }
