@@ -7,7 +7,7 @@
 			<label class="form-label-JHY" for="description">Total: </label>
 			<label class="form-label-JHY" for="description" th:text="${vo.totalRows}"></label>
 		</div>
-		<div class="col-2" style="text-align: right;">
+		<div class="col-4 col-lg-2" style="text-align: right;">
 			<select class="form-select-JHY" aria-label="Default select example" id="changeRowNum" name="changeRowNum" onchange="changeRow()">
 			<option value="5" th:selected="${vo.rowNumToShow eq 5}">5</option>
 			<option value="10" th:selected="${vo.rowNumToShow eq 10}">10</option>

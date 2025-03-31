@@ -15,7 +15,7 @@ public class CodeGroupController {
 	
 	@RequestMapping(value = "/CodeGroupXdmList")
 	public String codeGroupXdmList(@ModelAttribute("vo") CodeGroupVo vo, Model model) {
-//		setSearch(vo);
+		vo.initTime();
 		vo.setParamsPaging(codeGroupService.selectOneCount(vo));
 		if (vo.getTotalRows() > 0) {
 			model.addAttribute("list", codeGroupService.selectList(vo));

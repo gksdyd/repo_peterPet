@@ -6,9 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.peterpet.demo.module.codegroup.CodeGroupDto;
-import com.peterpet.demo.module.codegroup.CodeGroupVo;
-
 @Controller
 @RequestMapping(value = "/xdm/code")
 public class CodeController {
@@ -18,6 +15,7 @@ public class CodeController {
 	
 	@RequestMapping(value = "/CodeXdmList")
 	public String codeXdmList(@ModelAttribute("vo") CodeVo vo, Model model) {
+		vo.initTime();
 		vo.setParamsPaging(codeService.selectOneCount(vo));
 		if (vo.getTotalRows() > 0) {
 			model.addAttribute("list", codeService.selectList(vo));
