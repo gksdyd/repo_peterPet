@@ -38,7 +38,7 @@
                 </div>
                 <div class="col-4">
                   <button class="btn btn-outline-dark btn-sm" type="button" id="btnSearch" onclick="search()"><span class="fas fa-search"></span></button>
-                  <button class="btn btn-outline-dark btn-sm" type="button" id="btnReset" onclick="shReset(PRODUCT)"><span class="fas fa-redo-alt"></span></button>
+                  <button class="btn btn-outline-dark btn-sm" type="button" id="btnReset" onclick="shReset()"><span class="fas fa-redo-alt"></span></button>
                 </div>
               </div>
               <div class="mb-3 row g-3">
@@ -87,7 +87,7 @@
                   </div>
                   <div class="col-4">
                     <div class="form-group">
-                      <select class="form-select-JHY" name="prodFunction" id="prodFunction" onchange="funcSelect(ADD_FUNCTION)">
+                      <select class="form-select-JHY" name="prodFunction" id="prodFunction">
                         <option value="">기능</option>
                         <option th:each="prodFunction : ${@codeService.selectListCachedCode(6)}" th:value="${prodFunction.codeSeq}" th:text="${prodFunction.codeName}" th:disabled="${#arrays.contains(vo.prodFuncArr, prodFunction.codeSeq)} ? 'disabled' : null"></option>
                       </select>
@@ -260,15 +260,16 @@
   <!-- ===============================================-->
   <!--    End of Main Content-->
   <!-- ===============================================-->
+    <div th:replace="~{xdm/include/includeXdmFalcon :: includeXdmFalcon}"></div>
+    <div th:replace="~{xdm/include/includeXdmCommon :: includeXdmCommon}"></div>
+    <div th:replace="~{xdm/include/includeXdmList :: includeXdmList}"></div>
+    <div th:replace="~{xdm/include/includeXdmCommonProd :: includeXdmCommonProd}"></div>
     <script>
       let form = document.querySelector("form[name=formList]");
 
       let goUrlXdmList = "/xdm/product/ProductXdmList";
     </script>
-    <div th:replace="~{xdm/include/includeXdmFalcon :: includeXdmFalcon}"></div>
-    <div th:replace="~{xdm/include/includeXdmCommon :: includeXdmCommon}"></div>
-    <div th:replace="~{xdm/include/includeXdmList :: includeXdmList}"></div>
-    <div th:replace="~{xdm/include/includeXdmCommonProd :: includeXdmCommonProd}"></div>
+    
   </body>
   
   </html>

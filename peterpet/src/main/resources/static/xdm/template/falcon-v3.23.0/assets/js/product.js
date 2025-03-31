@@ -21,26 +21,26 @@ funcRemove = function(value) {
 }
 
 // 상품의 기능을 여러개 설정하는 함수
-funcSelect = function (flag) {
+var funcArray = [];
+$("#prodFunction").change(function(){
+  funcArray.push($(this).val());
+  // alert(funcArray.join(""));
   $.ajax({
     async: true 
     ,cache: false
     ,type: "post"
     ,url: URL_PRODUCT_FUNCTION_XDM
-    ,data: { "prodFunction" : $("#prodFunction").val(), "addOrRemoveFlag" : flag }
+    ,data: { "prodFunction" : $(this).val() }
     ,success: function(response) {
-      $("#createFunction").empty();
-      for (let i = 0; i < response.funcArr.length; i++) {
-        let funcBadge = $("<span></span>").addClass("badge").addClass("rounded-pill").addClass("badge-subtle-primary");
-        let funcCloseBtn = $("<button></button>").addClass("btn-close").css('font-size', 'xx-small').prop("type", "button");
-        $("#createFunction").append(funcBadge.text(response.funcNameArr[i]));
-        $("#createFunction").append(funcCloseBtn.attr("onclick", "funcRemove(" + response.funcArr[i] + ");"));
+      let funcBadge = $("<span></span>").addClass("badge").addClass("rounded-pill").addClass("badge-subtle-primary");
+      let funcCloseBtn = $("<button></button>").addClass("btn-close").addClass("removeFunc").css('font-size', 'xx-small').prop("type", "button");
+      $("#createFunction").append(funcBadge.text(response.funcName));
+      $("#createFunction").append(funcCloseBtn);
 
-        for (let j = 1; j < document.querySelectorAll("#prodFunction option").length; j++) {
-          if (document.querySelectorAll("#prodFunction option")[j].value == response.funcArr[i]) {
-            document.querySelectorAll("#prodFunction option")[j].setAttribute("disabled", "true");
-            break;
-          }
+      for (let j = 1; j < document.querySelectorAll("#prodFunction option").length; j++) {
+        if (document.querySelectorAll("#prodFunction option")[j].value == response.funcSeq) {
+          document.querySelectorAll("#prodFunction option")[j].setAttribute("disabled", "true");
+          break;
         }
       }
     }
@@ -48,8 +48,9 @@ funcSelect = function (flag) {
       alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
     }
   });
-}
+});
 
-// Init
-funcSelect(MAINTAIN_FUNCTION);
+// $(document).on('click', '.removeFunc', function(){
+//   alert($(this));
+// });
 

@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.peterpet.demo.module.code.CodeService;
+
 @Controller
 @RequestMapping(value = "/xdm/product")
 public class ProductController {
@@ -18,12 +20,12 @@ public class ProductController {
 
 	@ResponseBody
 	@RequestMapping(value = "/ProductXdmProc")
-	public Map<String, Object> productXdmProc(ProductVo vo) {
+	public Map<String, Object> productXdmProc(ProductVo vo) throws Exception {
 		Map<String, Object> rtType = new HashMap<String, Object>();
 
-		vo.prodFuncSelect(productService.selectOneFunc(vo));
-		rtType.put("funcArr", ProductVo.prodFuncArr);
-		rtType.put("funcNameArr", ProductVo.prodFuncNameArr);			
+//		vo.prodFuncSelect(productService.selectOneFunc(vo));
+		rtType.put("funcSeq", vo.getProdFunction());
+		rtType.put("funcName", CodeService.selectOneCachedCode(vo.getProdFunction()));		
 		return rtType;
 	}
 	
