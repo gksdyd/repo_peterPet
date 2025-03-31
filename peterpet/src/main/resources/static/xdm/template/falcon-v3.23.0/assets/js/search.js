@@ -9,6 +9,6 @@ search = function () {
 }
 
 // 현재 검색 리스트 초기화 함수
-shReset = function (flag) {
+shReset = function () {
   location = goUrlXdmList;
 }
