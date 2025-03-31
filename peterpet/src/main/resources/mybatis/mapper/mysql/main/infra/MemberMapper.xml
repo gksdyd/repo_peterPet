@@ -9,12 +9,12 @@
         FROM user a
         WHERE 1=1
         <if test="shDelFlag != null and !shDelFlag.equals('')">AND a.userDelFlag = #{shDelFlag}</if>
-<!-- 				
-				<choose>
-					<when test="shOptionDate == 1">AND a.userRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-					<when test="shOptionDate == 2">AND a.userModDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-				</choose>
- -->				
+			
+		<choose>
+			<when test="shOptionDate == 1">AND a.userRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			<when test="shOptionDate == 2">AND a.userModDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+		</choose>		
+				
         <choose>
             <when test="shOption == 1">AND a.userName LIKE CONCAT('%',#{shValue},'%')</when>
             <when test="shOption == 2">AND a.userId LIKE CONCAT('%',#{shValue},'%')</when>
@@ -87,4 +87,19 @@
 			AND userId = #{userId}
 			AND userPassword = #{userPassword}
 	</select>
+	
+	<update id="update">
+		UPDATE user
+		SET 
+			userName = #{userName},
+			userModDate = date_format(NOW(), '%Y-%m-%d %H:%i:%S'),
+			userEmail = #{userEmail},
+			userPhone = #{userPhone},
+			userRecvNotiFlag = #{userRecvNotiFlag},
+			userPostCode = #{userPostCode},
+			userAddr = #{userAddr},
+			userDetailAddr = #{userDetailAddr}
+		WHERE
+			userSeq = #{userSeq}
+	</update>
 </mapper>

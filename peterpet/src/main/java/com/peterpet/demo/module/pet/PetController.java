@@ -15,6 +15,7 @@ public class PetController {
 	
 	@RequestMapping(value = "/PetXdmList")
 	public String petXdmList(Model model, @ModelAttribute("vo") PetVo vo) {
+		vo.initTime();
 		vo.setParamsPaging(petService.selectOneCount(vo));
 		if (vo.getTotalRows() > 0) {
 			model.addAttribute("list", petService.selectList(vo));

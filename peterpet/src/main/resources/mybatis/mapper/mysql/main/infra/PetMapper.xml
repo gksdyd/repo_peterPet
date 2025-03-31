@@ -15,13 +15,12 @@
         <if test="shMinWeight != null and !shMinWeight.equals('') and shMaxWeight != null and !shMaxWeight.equals('')">
         	AND a.petWeight BETWEEN #{shMinWeight} AND #{shMaxWeight}
         </if>
-        
-<!-- 				
-				<choose>
-					<when test="shOptionDate == 1">AND a.userRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-					<when test="shOptionDate == 2">AND a.userModDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-				</choose>
- -->				
+        			
+		<choose>
+			<when test="shOptionDate == 1">AND a.petRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			<when test="shOptionDate == 2">AND a.petModDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+		</choose>		
+			
         <choose>
             <when test="shOption == 1">AND a.petName LIKE CONCAT('%',#{shValue},'%')</when>
             <when test="shOption == 2">AND b.userName LIKE CONCAT('%',#{shValue},'%')</when>
@@ -144,5 +143,22 @@
 		    LEFT JOIN disease b ON a.petSeq = b.pet_petSeq
 		WHERE 1=1
 			AND pet_petSeq = #{petSeq}
+	</select>
+	
+	<select id="selectListPeterPets" resultMap="resultMapObj">
+		SELECT
+			petSeq,
+			petVarieties,
+			petGender,
+			petName,
+			petNickname,
+			petBirth,
+			petWeight,
+			petVaccinationFlag,
+			petNeuteringFlag
+		FROM
+			pet
+		WHERE 1=1
+			AND user_userSeq = #{userSeq}
 	</select>
 </mapper>

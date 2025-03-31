@@ -23,6 +23,7 @@ public class MemberController {
 	
 	@RequestMapping(value = "/MemberXdmList")
 	public String memberXdmList(Model model, @ModelAttribute("vo") MemberVo vo) {
+		vo.initTime();
 		vo.setParamsPaging(memberService.selectOneCount(vo));
 		if (vo.getTotalRows() > 0) {
 			model.addAttribute("list", memberService.selectList(vo));
