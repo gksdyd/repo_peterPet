@@ -13,7 +13,7 @@ public class ProductVo extends BaseVo{
 	private int prodType;
 	
 	private int addOrRemoveFlag;	// 뱃지 추가 또는 제거 플래그
-	private String prodFunction;	// 선택한 기능을 저장하기 위한 매개체
+	private int prodFunction;	// 선택한 기능을 저장하기 위한 매개체
 	
 	private String infoSeq;
 	
@@ -57,11 +57,11 @@ public class ProductVo extends BaseVo{
 		this.addOrRemoveFlag = addOrRemoveFlag;
 	}
 	
-	public String getProdFunction() {
+	public int getProdFunction() {
 		return prodFunction;
 	}
 
-	public void setProdFunction(String prodFunction) {
+	public void setProdFunction(int prodFunction) {
 		this.prodFunction = prodFunction;
 	}
 
@@ -168,23 +168,25 @@ public class ProductVo extends BaseVo{
 	
 	public void prodFuncSelect(String name) {		
 		// 기능 추가
-		if (getAddOrRemoveFlag() == 1) {
-			prodFuncArr.add(getProdFunction());
-			prodFuncNameArr.add(name);
-		// 기능 제거
-		} else if (getAddOrRemoveFlag() == -1) {
-			for (int i = 0; i < prodFuncArr.size(); i++) {
-				if (prodFuncArr.get(i).equals(getProdFunction())) {
-					prodFuncArr.remove(i);
-					prodFuncNameArr.remove(i);
-					break;
-				}
-			}
-		}
+//		if (getAddOrRemoveFlag() == 1) {
+//			prodFuncArr.add(getProdFunction());
+//			prodFuncNameArr.add(name);
+//		// 기능 제거
+//		} else if (getAddOrRemoveFlag() == -1) {
+//			for (int i = 0; i < prodFuncArr.size(); i++) {
+//				if (prodFuncArr.get(i).equals(getProdFunction())) {
+//					prodFuncArr.remove(i);
+//					prodFuncNameArr.remove(i);
+//					break;
+//				}
+//			}
+//		}
 	}
 	
+	// 기능 존재하는 플래그 서치 및 활성화
 	public void prodFuncRegister(ProductDto productDto) {
-		// 기능 존재하는 플래그 서치 및 활성화
+		List<String> prodFuncFlagAddr = new ArrayList<>();
+		
 		for (int i = 0; i < prodFuncArr.size(); i++) {
 			if (prodFuncArr.get(i).equals("20")) {
 				productDto.setProdTeethFlag(20);
@@ -220,7 +222,6 @@ public class ProductVo extends BaseVo{
 	
 	public void InitProdType() {
 		if (getProdType() != currProdType) {
-			System.out.println("clear");
 			prodFuncArrClear();
 			if (getProdType() == 0) {
 				setProdType(currProdType);

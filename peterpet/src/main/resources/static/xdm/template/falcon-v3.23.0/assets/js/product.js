@@ -22,9 +22,9 @@ funcRemove = function(value) {
 
 // 상품의 기능을 여러개 설정하는 함수
 var funcArray = [];
+
 $("#prodFunction").change(function(){
   funcArray.push($(this).val());
-  // alert(funcArray.join(""));
   $.ajax({
     async: true 
     ,cache: false
@@ -35,7 +35,7 @@ $("#prodFunction").change(function(){
       let funcBadge = $("<span></span>").addClass("badge").addClass("rounded-pill").addClass("badge-subtle-primary");
       let funcCloseBtn = $("<button></button>").addClass("btn-close").addClass("removeFunc").css('font-size', 'xx-small').prop("type", "button");
       $("#createFunction").append(funcBadge.text(response.funcName));
-      $("#createFunction").append(funcCloseBtn);
+      $("#createFunction").append(funcCloseBtn.attr('value', response.funcSeq));
 
       for (let j = 1; j < document.querySelectorAll("#prodFunction option").length; j++) {
         if (document.querySelectorAll("#prodFunction option")[j].value == response.funcSeq) {
@@ -50,7 +50,34 @@ $("#prodFunction").change(function(){
   });
 });
 
-// $(document).on('click', '.removeFunc', function(){
-//   alert($(this));
-// });
+$(document).on('click', '.removeFunc', function(){
+  for (let i = 0; i < funcArray.length; i++) {
+    if (funcArray[i] == $(this).val()) {
+      document.querySelectorAll(".removeFunc")[i].remove();
+      document.querySelectorAll(".badge-subtle-primary")[i].remove();
+      funcArray.splice(i, 1);
+      break;
+    }
+  }
 
+  for (let j = 1; j < document.querySelectorAll("#prodFunction option").length; j++) {
+    if (document.querySelectorAll("#prodFunction option")[j].value == $(this).val()) {
+      document.querySelectorAll("#prodFunction option")[j].removeAttribute("disabled");
+      break;
+    }
+  }
+});
+
+// submitFunc = function() {
+//   for (let i = 0; i < funcArray.length; i++) {
+
+//   }
+// }
+
+// $("#btnSearch").on('click', function() {
+//   // alert("fds");
+//   for (let i = 0; i < funcArray.length; i++) {
+
+//   }
+//   search();
+// });
