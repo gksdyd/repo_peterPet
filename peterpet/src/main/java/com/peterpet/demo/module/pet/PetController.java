@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.peterpet.demo.module.util.UtilDateTime;
+
 @Controller
 @RequestMapping(value = "/xdm/pet")
 public class PetController {
@@ -15,7 +17,7 @@ public class PetController {
 	
 	@RequestMapping(value = "/PetXdmList")
 	public String petXdmList(Model model, @ModelAttribute("vo") PetVo vo) {
-		vo.initTime();
+		UtilDateTime.initTime(vo);
 		vo.setParamsPaging(petService.selectOneCount(vo));
 		if (vo.getTotalRows() > 0) {
 			model.addAttribute("list", petService.selectList(vo));

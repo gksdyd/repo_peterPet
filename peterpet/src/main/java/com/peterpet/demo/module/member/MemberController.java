@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.peterpet.demo.module.base.Constants;
+import com.peterpet.demo.module.util.UtilDateTime;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -23,7 +24,7 @@ public class MemberController {
 	
 	@RequestMapping(value = "/MemberXdmList")
 	public String memberXdmList(Model model, @ModelAttribute("vo") MemberVo vo) {
-		vo.initTime();
+		UtilDateTime.initTime(vo);
 		vo.setParamsPaging(memberService.selectOneCount(vo));
 		if (vo.getTotalRows() > 0) {
 			model.addAttribute("list", memberService.selectList(vo));

@@ -1,8 +1,5 @@
 package com.peterpet.demo.module.base;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-
 public class BaseVo {
 
 //	paging
@@ -189,19 +186,5 @@ public class BaseVo {
 //		System.out.println("getStartRnumForOracle():" + getStartRnumForOracle());
 //		System.out.println("getEndRnumForOracle():" + getEndRnumForOracle());
 		System.out.println("getStartRnumForMysql(): " + getStartRnumForMysql());	
-	}
-	
-	public void initTime() {
-		
-		if (getShDateStart() != null) {
-			LocalTime time = LocalTime.MIN;
-			DateTimeFormatter format = DateTimeFormatter.ofPattern("HH:mm:ss");
-			setShDateStart(getShDateStart() + " " + time.format(format));
-		}
-		if (getShDateEnd() != null) {
-			LocalTime time = LocalTime.MAX;
-			DateTimeFormatter format = DateTimeFormatter.ofPattern("HH:mm:ss");
-			setShDateEnd(getShDateEnd() + " " + time.format(format));
-		}
 	}
 }

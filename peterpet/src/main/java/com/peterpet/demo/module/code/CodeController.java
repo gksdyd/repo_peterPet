@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.peterpet.demo.module.util.UtilDateTime;
+
 @Controller
 @RequestMapping(value = "/xdm/code")
 public class CodeController {
@@ -15,7 +17,7 @@ public class CodeController {
 	
 	@RequestMapping(value = "/CodeXdmList")
 	public String codeXdmList(@ModelAttribute("vo") CodeVo vo, Model model) {
-		vo.initTime();
+		UtilDateTime.initTime(vo);
 		vo.setParamsPaging(codeService.selectOneCount(vo));
 		if (vo.getTotalRows() > 0) {
 			model.addAttribute("list", codeService.selectList(vo));
