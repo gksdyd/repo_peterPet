@@ -37,7 +37,7 @@
                   <input class="form-control-JHY" type="text" id="shValue" name="shValue" th:value="${vo.shValue}" onkeyup="enterkey()" placeholder="이름 검색" />
                 </div>
                 <div class="col-4">
-                  <button class="btn btn-outline-dark btn-sm" type="button" id="btnSearch" onclick="search()"><span class="fas fa-search"></span></button>
+                  <button class="btn btn-outline-dark btn-sm" type="button" id="btnSearch"><span class="fas fa-search"></span></button>
                   <button class="btn btn-outline-dark btn-sm" type="button" id="btnReset" onclick="shReset()"><span class="fas fa-redo-alt"></span></button>
                 </div>
               </div>
@@ -50,6 +50,20 @@
               </div>
               <!-- 사료 필터 -->
               <div class="card border h-100 border-primary mb-3" th:if="${vo.prodType} == '1'">
+                <input type="hidden" id="prodTeethFlag" name="prodTeethFlag">
+                <input type="hidden" id="prodTearsFlag" name="prodTearsFlag">
+                <input type="hidden" id="prodBrainFlag" name="prodBrainFlag">
+                <input type="hidden" id="prodImmunityFlag" name="prodImmunityFlag">
+                <input type="hidden" id="prodBoneFlag" name="prodBoneFlag">
+                <input type="hidden" id="prodStressFlag" name="prodStressFlag">
+                <input type="hidden" id="prodKidneyFlag" name="prodKidneyFlag">
+                <input type="hidden" id="prodHeartFlag" name="prodHeartFlag">
+                <input type="hidden" id="prodAllergyFlag" name="prodAllergyFlag">
+                <input type="hidden" id="prodPregnancyFlag" name="prodPregnancyFlag">
+                <input type="hidden" id="prodIntestineFlag" name="prodIntestineFlag">
+                <input type="hidden" id="prodNeuteringFlag" name="prodNeuteringFlag">
+                <input type="hidden" id="prodWeightFlag" name="prodWeightFlag">
+                <input type="hidden" id="prodSkinFlag" name="prodSkinFlag">
                 <div class="mb-2 row g-3 me-2 ms-2 mt-0">
                   <div class="col-4">
                     <div class="form-group">
@@ -89,7 +103,7 @@
                     <div class="form-group">
                       <select class="form-select-JHY" name="prodFunction" id="prodFunction">
                         <option value="">기능</option>
-                        <option th:each="prodFunction : ${@codeService.selectListCachedCode(6)}" th:value="${prodFunction.codeSeq}" th:text="${prodFunction.codeName}" th:disabled="${#arrays.contains(vo.prodFuncArr, prodFunction.codeSeq)} ? 'disabled' : null"></option>
+                        <option th:each="prodFunction : ${@codeService.selectListCachedCode(6)}" th:value="${prodFunction.codeSeq}" th:text="${prodFunction.codeName}"></option>
                       </select>
                     </div>
                   </div>
@@ -151,7 +165,7 @@
                     <div class="form-group">
                       <select class="form-select-JHY" onchange="funcSelect(ADD_FUNCTION)">
                         <option value="">기능</option>
-                        <option th:each="prodFunction : ${@codeService.selectListCachedCode(6)}" th:value="${prodFunction.codeSeq}" th:text="${prodFunction.codeName}" th:disabled="${#arrays.contains(vo.prodFuncArr, prodFunction.codeSeq)} ? 'disabled' : null"></option>
+                        <option th:each="prodFunction : ${@codeService.selectListCachedCode(6)}" th:value="${prodFunction.codeSeq}" th:text="${prodFunction.codeName}"></option>
                       </select>
                       <input type="hidden" name="prodFunction" id="prodFunction" value="0">
                     </div>

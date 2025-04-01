@@ -29,6 +29,8 @@ const URL_PRODUCT_FUNCTION_XDM = "/xdm/product/ProductXdmProc";
 const ADD_FUNCTION = 1;
 const MAINTAIN_FUNCTION = 0;
 const REMOVE_FUNCTION = -1;
+const FUNCTION_ID_ARRAY = ["prodTeethFlag", "prodTearsFlag", "prodBrainFlag", "prodImmunityFlag", "prodBoneFlag", "prodStressFlag", "prodKidneyFlag", "prodHeartFlag",
+                           "prodAllergyFlag", "prodPregnancyFlag", "prodIntestineFlag", "prodNeuteringFlag", "prodWeightFlag", "prodSkinFlag"];
 
 // 정규식 상수
 const regex1 = /^[a-z|A-Z|0-9|]+$/;

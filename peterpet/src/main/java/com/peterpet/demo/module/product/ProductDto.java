@@ -12,20 +12,20 @@ public class ProductDto {
 	private int feedBrand;
 	private int feedIngredient;
 	private int feedSize;
-	private int prodTeethFlag;
-	private int prodTearsFlag;
-	private int prodBrainFlag;
-	private int prodImmunityFlag;
-	private int prodBoneFlag;
-	private int prodStressFlag;
-	private int prodKidneyFlag;
-	private int prodHeartFlag;
-	private int prodAllergyFlag;
-	private int prodPregnancyFlag;
-	private int prodIntestineFlag;
-	private int prodNeuteringFlag;
-	private int prodWeightFlag;
-	private int prodSkinFlag;
+	private Integer prodTeethFlag;
+	private Integer prodTearsFlag;
+	private Integer prodBrainFlag;
+	private Integer prodImmunityFlag;
+	private Integer prodBoneFlag;
+	private Integer prodStressFlag;
+	private Integer prodKidneyFlag;
+	private Integer prodHeartFlag;
+	private Integer prodAllergyFlag;
+	private Integer prodPregnancyFlag;
+	private Integer prodIntestineFlag;
+	private Integer prodNeuteringFlag;
+	private Integer prodWeightFlag;
+	private Integer prodSkinFlag;
 	private String prodRegDate;
 	private String prodModDate;
 	private int infoCount;
@@ -74,88 +74,88 @@ public class ProductDto {
 	public void setFeedType(int feedType) {
 		this.feedType = feedType;
 	}
-	public int getProdTeethFlag() {
+	public Integer getProdTeethFlag() {
 		return prodTeethFlag;
 	}
-	public void setProdTeethFlag(int prodTeethFlag) {
+	public void setProdTeethFlag(Integer prodTeethFlag) {
 		this.prodTeethFlag = prodTeethFlag;
 	}
-	public int getProdTearsFlag() {
+	public Integer getProdTearsFlag() {
 		return prodTearsFlag;
 	}
-	public void setProdTearsFlag(int prodTearsFlag) {
+	public void setProdTearsFlag(Integer prodTearsFlag) {
 		this.prodTearsFlag = prodTearsFlag;
 	}
-	public int getProdBrainFlag() {
+	public Integer getProdBrainFlag() {
 		return prodBrainFlag;
 	}
-	public void setProdBrainFlag(int prodBrainFlag) {
+	public void setProdBrainFlag(Integer prodBrainFlag) {
 		this.prodBrainFlag = prodBrainFlag;
 	}
-	public int getProdImmunityFlag() {
+	public Integer getProdImmunityFlag() {
 		return prodImmunityFlag;
 	}
-	public void setProdImmunityFlag(int prodImmunityFlag) {
+	public void setProdImmunityFlag(Integer prodImmunityFlag) {
 		this.prodImmunityFlag = prodImmunityFlag;
 	}
-	public int getProdBoneFlag() {
+	public Integer getProdBoneFlag() {
 		return prodBoneFlag;
 	}
-	public void setProdBoneFlag(int prodBoneFlag) {
+	public void setProdBoneFlag(Integer prodBoneFlag) {
 		this.prodBoneFlag = prodBoneFlag;
 	}
-	public int getProdStressFlag() {
+	public Integer getProdStressFlag() {
 		return prodStressFlag;
 	}
-	public void setProdStressFlag(int prodStressFlag) {
+	public void setProdStressFlag(Integer prodStressFlag) {
 		this.prodStressFlag = prodStressFlag;
 	}
-	public int getProdKidneyFlag() {
+	public Integer getProdKidneyFlag() {
 		return prodKidneyFlag;
 	}
-	public void setProdKidneyFlag(int prodKidneyFlag) {
+	public void setProdKidneyFlag(Integer prodKidneyFlag) {
 		this.prodKidneyFlag = prodKidneyFlag;
 	}
-	public int getProdHeartFlag() {
+	public Integer getProdHeartFlag() {
 		return prodHeartFlag;
 	}
-	public void setProdHeartFlag(int prodHeartFlag) {
+	public void setProdHeartFlag(Integer prodHeartFlag) {
 		this.prodHeartFlag = prodHeartFlag;
 	}
-	public int getProdAllergyFlag() {
+	public Integer getProdAllergyFlag() {
 		return prodAllergyFlag;
 	}
-	public void setProdAllergyFlag(int prodAllergyFlag) {
+	public void setProdAllergyFlag(Integer prodAllergyFlag) {
 		this.prodAllergyFlag = prodAllergyFlag;
 	}
-	public int getProdPregnancyFlag() {
+	public Integer getProdPregnancyFlag() {
 		return prodPregnancyFlag;
 	}
-	public void setProdPregnancyFlag(int prodPregnancyFlag) {
+	public void setProdPregnancyFlag(Integer prodPregnancyFlag) {
 		this.prodPregnancyFlag = prodPregnancyFlag;
 	}
-	public int getProdIntestineFlag() {
+	public Integer getProdIntestineFlag() {
 		return prodIntestineFlag;
 	}
-	public void setProdIntestineFlag(int prodIntestineFlag) {
+	public void setProdIntestineFlag(Integer prodIntestineFlag) {
 		this.prodIntestineFlag = prodIntestineFlag;
 	}
-	public int getProdNeuteringFlag() {
+	public Integer getProdNeuteringFlag() {
 		return prodNeuteringFlag;
 	}
-	public void setProdNeuteringFlag(int prodNeuteringFlag) {
+	public void setProdNeuteringFlag(Integer prodNeuteringFlag) {
 		this.prodNeuteringFlag = prodNeuteringFlag;
 	}
-	public int getProdWeightFlag() {
+	public Integer getProdWeightFlag() {
 		return prodWeightFlag;
 	}
-	public void setProdWeightFlag(int prodWeightFlag) {
+	public void setProdWeightFlag(Integer prodWeightFlag) {
 		this.prodWeightFlag = prodWeightFlag;
 	}
-	public int getProdSkinFlag() {
+	public Integer getProdSkinFlag() {
 		return prodSkinFlag;
 	}
-	public void setProdSkinFlag(int prodSkinFlag) {
+	public void setProdSkinFlag(Integer prodSkinFlag) {
 		this.prodSkinFlag = prodSkinFlag;
 	}
 	public int getFeedEtc() {

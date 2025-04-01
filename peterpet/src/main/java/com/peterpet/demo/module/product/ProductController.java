@@ -23,7 +23,6 @@ public class ProductController {
 	public Map<String, Object> productXdmProc(ProductVo vo) throws Exception {
 		Map<String, Object> rtType = new HashMap<String, Object>();
 
-//		vo.prodFuncSelect(productService.selectOneFunc(vo));
 		rtType.put("funcSeq", vo.getProdFunction());
 		rtType.put("funcName", CodeService.selectOneCachedCode(vo.getProdFunction()));		
 		return rtType;
@@ -40,7 +39,6 @@ public class ProductController {
 
 	@RequestMapping(value = "/xdm/product/ProductXdmForm")
 	public String productXdmForm(Model model, ProductVo vo) {
-		vo.InitProdType();
 		if (productService.selectMaxSeq() == null) {
 			vo.setProdSeq("1");
 		} else {
@@ -55,7 +53,7 @@ public class ProductController {
 
 	@RequestMapping(value = "/xdm/product/ProductXdmInst")
 	public String codeGroupXdmInst(ProductVo vo, ProductDto productDto) {
-		vo.prodFuncRegister(productDto);
+//		vo.prodFuncRegister(productDto);
 		productService.insert(productDto);
 		return "redirect:/xdm/product/ProductXdmList";
 	}

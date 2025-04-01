@@ -10,23 +10,38 @@
         WHERE 1=1
         	AND prodType = #{prodType}
         	AND a.prodName LIKE CONCAT('%',#{shValue},'%')
-        	<if test="prodType == 1">
 		        <if test="shDelFlag != null and !shDelFlag.equals('')">AND a.feedDelFlag = #{shDelFlag}</if>
-		        <if test="shFeedSalaryAge != null and !shFeedSalaryAge.equals('')">AND a.feedSalaryAge = #{shFeedSalaryAge}</if>
-		        <if test="shFeedType != null and !shFeedType.equals('')">AND a.feedType = #{shFeedType}</if>
-		        <if test="shFeedEtc != null and !shFeedEtc.equals('')">AND a.feedEtc = #{shFeedEtc}</if>
-		        <if test="shFeedSize != null and !shFeedSize.equals('')">AND a.feedSize = #{shFeedSize}</if>
-		        <if test="shFeedBrand != null and !shFeedBrand.equals('')">AND a.feedBrand = #{shFeedBrand}</if>
-		        <if test="shFeedIngredient != null and !shFeedIngredient.equals('')">AND a.feedIngredient = #{shFeedIngredient}</if>
-			</if>
-			<if test="prodType == 2">
-				<if test="shDelFlag != null and !shDelFlag.equals('')">AND a.feedDelFlag = #{shDelFlag}</if>
-		        <if test="shSnackType != null and !shSnackType.equals('')">AND a.snackType = #{shSnackType}</if>
-		        <if test="shSnackSalaryAge != null and !shSnackSalaryAge.equals('')">AND a.SnackSalaryAge = #{shSnackSalaryAge}</if>
-		        <if test="shSnackMaterial != null and !shSnackMaterial.equals('')">AND a.snackMaterial = #{shSnackMaterial}</if>
-		        <if test="shSnackBrand != null and !shSnackBrand.equals('')">AND a.snackBrand = #{shSnackBrand}</if>
-		        <if test="shSnackIngredient != null and !shSnackIngredient.equals('')">AND a.snackIngredient = #{shSnackIngredient}</if>
-			</if>
+		        
+	        	<if test="prodType == 1">
+			        <if test="shFeedSalaryAge != null and !shFeedSalaryAge.equals('')">AND a.feedSalaryAge = #{shFeedSalaryAge}</if>
+			        <if test="shFeedType != null and !shFeedType.equals('')">AND a.feedType = #{shFeedType}</if>
+			        <if test="shFeedEtc != null and !shFeedEtc.equals('')">AND a.feedEtc = #{shFeedEtc}</if>
+			        <if test="shFeedSize != null and !shFeedSize.equals('')">AND a.feedSize = #{shFeedSize}</if>
+			        <if test="shFeedBrand != null and !shFeedBrand.equals('')">AND a.feedBrand = #{shFeedBrand}</if>
+			        <if test="shFeedIngredient != null and !shFeedIngredient.equals('')">AND a.feedIngredient = #{shFeedIngredient}</if>
+			        <if test="prodTeethFlag != null">AND a.prodTeethFlag = #{prodTeethFlag}</if>
+		        	<if test="prodTearsFlag != null">AND a.prodTearsFlag = #{prodTearsFlag}</if>
+		        	<if test="prodBrainFlag != null">AND a.prodBrainFlag = #{prodBrainFlag}</if>
+		        	<if test="prodImmunityFlag != null">AND a.prodImmunityFlag = #{prodImmunityFlag}</if>
+		        	<if test="prodBoneFlag != null">AND a.prodBoneFlag = #{prodBoneFlag}</if>
+		        	<if test="prodStressFlag != null">AND a.prodStressFlag = #{prodStressFlag}</if>
+		        	<if test="prodKidneyFlag != null">AND a.prodKidneyFlag = #{prodKidneyFlag}</if>
+		        	<if test="prodHeartFlag != null">AND a.prodHeartFlag = #{prodHeartFlag}</if>
+		        	<if test="prodAllergyFlag != null">AND a.prodAllergyFlag = #{prodAllergyFlag}</if>
+		        	<if test="prodPregnancyFlag != null">AND a.prodPregnancyFlag = #{prodPregnancyFlag}</if>
+		        	<if test="prodIntestineFlag != null">AND a.prodIntestineFlag = #{prodIntestineFlag}</if>
+		        	<if test="prodNeuteringFlag != null">AND a.prodNeuteringFlag = #{prodNeuteringFlag}</if>
+		        	<if test="prodWeightFlag != null">AND a.prodWeightFlag = #{prodWeightFlag}</if>
+		        	<if test="prodSkinFlag != null">AND a.prodSkinFlag = #{prodSkinFlag}</if>
+				</if>
+				
+				<if test="prodType == 2">
+			        <if test="shSnackType != null and !shSnackType.equals('')">AND a.snackType = #{shSnackType}</if>
+			        <if test="shSnackSalaryAge != null and !shSnackSalaryAge.equals('')">AND a.SnackSalaryAge = #{shSnackSalaryAge}</if>
+			        <if test="shSnackMaterial != null and !shSnackMaterial.equals('')">AND a.snackMaterial = #{shSnackMaterial}</if>
+			        <if test="shSnackBrand != null and !shSnackBrand.equals('')">AND a.snackBrand = #{shSnackBrand}</if>
+			        <if test="shSnackIngredient != null and !shSnackIngredient.equals('')">AND a.snackIngredient = #{shSnackIngredient}</if>
+				</if>
 			
 <!-- 				
 				<choose>
