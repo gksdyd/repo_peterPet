@@ -10,21 +10,21 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.peterpet.demo.module.base.BaseController;
 import com.peterpet.demo.module.base.Constants;
-import com.peterpet.demo.module.util.UtilDateTime;
 
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping(value = "/xdm/member")
-public class MemberController {
+public class MemberController extends BaseController {
 	
 	@Autowired
 	MemberService memberService;
 	
 	@RequestMapping(value = "/MemberXdmList")
 	public String memberXdmList(Model model, @ModelAttribute("vo") MemberVo vo) {
-		UtilDateTime.initTime(vo);
+		initSearchTime(vo);
 		vo.setParamsPaging(memberService.selectOneCount(vo));
 		if (vo.getTotalRows() > 0) {
 			model.addAttribute("list", memberService.selectList(vo));

@@ -6,18 +6,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.peterpet.demo.module.util.UtilDateTime;
+import com.peterpet.demo.module.base.BaseController;
 
 @Controller
 @RequestMapping(value = "/xdm/codegroup")
-public class CodeGroupController {
+public class CodeGroupController extends BaseController {
 
 	@Autowired
 	CodeGroupService codeGroupService;
 	
 	@RequestMapping(value = "/CodeGroupXdmList")
 	public String codeGroupXdmList(@ModelAttribute("vo") CodeGroupVo vo, Model model) {
-		UtilDateTime.initTime(vo);
+		initSearchTime(vo);
 		vo.setParamsPaging(codeGroupService.selectOneCount(vo));
 		if (vo.getTotalRows() > 0) {
 			model.addAttribute("list", codeGroupService.selectList(vo));
