@@ -24,11 +24,10 @@ const URL_INDEX_VIEW_XDM = "/xdm/index/IndexXdmView";
 
 // 상품관련 경로
 const URL_PRODUCT_FUNCTION_XDM = "/xdm/product/ProductXdmProc";
+const URL_PRODUCT_FUNCTION_BACKUP_XDM = "/xdm/product/ProductBackupXdmProc";
+
 
 // 상품 기능 뱃지 추가/제거
-const ADD_FUNCTION = 1;
-const MAINTAIN_FUNCTION = 0;
-const REMOVE_FUNCTION = -1;
 const FUNCTION_ID_ARRAY = ["prodTeethFlag", "prodTearsFlag", "prodBrainFlag", "prodImmunityFlag", "prodBoneFlag", "prodStressFlag", "prodKidneyFlag", "prodHeartFlag",
                            "prodAllergyFlag", "prodPregnancyFlag", "prodIntestineFlag", "prodNeuteringFlag", "prodWeightFlag", "prodSkinFlag"];
 

@@ -1,11 +1,18 @@
 package com.peterpet.demo.module.product;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.peterpet.demo.module.base.BaseVo;
 import com.peterpet.demo.module.base.Constants;
 
 public class ProductVo extends BaseVo{
 
 	private static int currProdType = Constants.INIT_PRODUCT_TYPE;
+	public List<String> prodFuncArray = new ArrayList<>();
+	public List<String> prodFuncNameArray = new ArrayList<>();
+	public List<String> prodFuncIdArray = new ArrayList<>();
+	
 	private String prodSeq;
 	private int prodType;
 	private Integer prodTeethFlag;
@@ -38,6 +45,30 @@ public class ProductVo extends BaseVo{
 	private Integer shSnackBrand;
 	private Integer shSnackIngredient;
 	
+	public List<String> getProdFuncArray() {
+		return prodFuncArray;
+	}
+
+	public void setProdFuncArray(List<String> prodFuncArray) {
+		this.prodFuncArray = prodFuncArray;
+	}
+
+	public List<String> getProdFuncIdArray() {
+		return prodFuncIdArray;
+	}
+
+	public void setProdFuncIdArray(List<String> prodFuncIdArray) {
+		this.prodFuncIdArray = prodFuncIdArray;
+	}
+
+	public List<String> getProdFuncNameArray() {
+		return prodFuncNameArray;
+	}
+
+	public void setProdFuncNameArray(List<String> prodFuncNameArray) {
+		this.prodFuncNameArray = prodFuncNameArray;
+	}
+
 	public String getProdSeq() {
 		return prodSeq;
 	}

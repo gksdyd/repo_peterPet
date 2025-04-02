@@ -64,6 +64,9 @@
                 <input type="hidden" id="prodNeuteringFlag" name="prodNeuteringFlag">
                 <input type="hidden" id="prodWeightFlag" name="prodWeightFlag">
                 <input type="hidden" id="prodSkinFlag" name="prodSkinFlag">
+                <input type="hidden" id="prodFuncArray" name="prodFuncArray">
+                <input type="hidden" id="prodFuncNameArray" name="prodFuncNameArray">
+                <input type="hidden" id="prodFuncIdArray" name="prodFuncIdArray">
                 <div class="mb-2 row g-3 me-2 ms-2 mt-0">
                   <div class="col-4">
                     <div class="form-group">
@@ -103,7 +106,7 @@
                     <div class="form-group">
                       <select class="form-select-JHY" name="prodFunction" id="prodFunction">
                         <option value="">기능</option>
-                        <option th:each="prodFunction : ${@codeService.selectListCachedCode(6)}" th:value="${prodFunction.codeSeq}" th:text="${prodFunction.codeName}"></option>
+                        <option th:each="prodFunction : ${@codeService.selectListCachedCode(6)}" th:value="${prodFunction.codeSeq}" th:text="${prodFunction.codeName}" th:disabled="${#arrays.contains(vo.prodFuncArray, prodFunction.codeSeq)} ? 'disabled' : null"></option>
                       </select>
                     </div>
                   </div>
@@ -278,10 +281,20 @@
     <div th:replace="~{xdm/include/includeXdmCommon :: includeXdmCommon}"></div>
     <div th:replace="~{xdm/include/includeXdmList :: includeXdmList}"></div>
     <div th:replace="~{xdm/include/includeXdmCommonProd :: includeXdmCommonProd}"></div>
-    <script>
+    <script th:inline="javascript">
       let form = document.querySelector("form[name=formList]");
 
       let goUrlXdmList = "/xdm/product/ProductXdmList";
+      funcArray = [[${vo.prodFuncArray}]];
+      funcNameArray = [[${vo.prodFuncNameArray}]];
+      funcIdArray = [[${vo.prodFuncIdArray}]];
+
+      for (let i = 0; i < funcArray.length; i++) {
+        let funcBadge = $("<span></span>").addClass("badge").addClass("rounded-pill").addClass("badge-subtle-primary");
+        let funcCloseBtn = $("<button></button>").addClass("btn-close").addClass("removeFunc").css('font-size', 'xx-small').prop("type", "button");
+        $("#createFunction").append(funcBadge.text(funcNameArray[i]));
+        $("#createFunction").append(funcCloseBtn.attr('value', funcArray[i]));
+      }
     </script>
     
   </body>

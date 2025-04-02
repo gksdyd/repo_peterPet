@@ -22,7 +22,7 @@ public class ProductController {
 	@RequestMapping(value = "/ProductXdmProc")
 	public Map<String, Object> productXdmProc(ProductVo vo) throws Exception {
 		Map<String, Object> rtType = new HashMap<String, Object>();
-
+		
 		rtType.put("funcSeq", vo.getProdFunction());
 		rtType.put("funcName", CodeService.selectOneCachedCode(vo.getProdFunction()));		
 		return rtType;

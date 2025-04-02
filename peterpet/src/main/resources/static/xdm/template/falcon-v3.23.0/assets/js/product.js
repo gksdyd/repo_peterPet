@@ -22,6 +22,7 @@ funcRemove = function(value) {
 
 // 상품의 기능을 여러개 설정하는 함수
 var funcArray = [];
+var funcNameArray = [];
 var funcIdArray = [];
 
 $("#prodFunction").change(function(){
@@ -41,6 +42,7 @@ $("#prodFunction").change(function(){
         if (document.querySelectorAll("#prodFunction option")[j].value == response.funcSeq) {
           document.querySelectorAll("#prodFunction option")[j].setAttribute("disabled", "true");
           funcArray.push(response.funcSeq);
+          funcNameArray.push(response.funcName);
           funcIdArray.push(FUNCTION_ID_ARRAY[j - 1]);
           break;
         }
@@ -58,6 +60,7 @@ $(document).on('click', '.removeFunc', function(){
       document.querySelectorAll(".removeFunc")[i].remove();
       document.querySelectorAll(".badge-subtle-primary")[i].remove();
       funcArray.splice(i, 1);
+      funcNameArray.splice(i, 1);
       funcIdArray.splice(i, 1);
       break;
     }
@@ -75,6 +78,9 @@ submitFunc = function() {
   for (let i = 0; i < funcArray.length; i++) {
     $("#" + funcIdArray[i]).val(funcArray[i]);
   }
+  $("#prodFuncArray").val(funcArray);
+  $("#prodFuncNameArray").val(funcNameArray);
+  $("#prodFuncIdArray").val(funcIdArray);
 }
 
 $("#btnSearch").on('click', function() {
