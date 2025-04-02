@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.peterpet.demo.module.base.BaseController;
 import com.peterpet.demo.module.code.CodeService;
+import com.peterpet.demo.module.util.UtilDateTime;
 
 @Controller
 @RequestMapping(value = "/xdm/product")
@@ -31,6 +32,7 @@ public class ProductController extends BaseController {
 	
 	@RequestMapping(value = "/ProductXdmList")
 	public String productXdmList(Model model, ProductVo vo) {
+		initSearchTime(vo);
 		vo.InitProdType();
 		vo.setParamsPaging(productService.selectOneCount(vo));
 		model.addAttribute("list", productService.selectList(vo));
