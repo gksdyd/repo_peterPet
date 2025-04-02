@@ -1,0 +1,1471 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{peter/include/head :: head}"></div>
+            <!--Body Container-->
+            <div id="page-content">
+                <!--Collection Banner-->
+                <div class="collection-header">
+                    <div class="collection-hero">
+                        <div class="collection-hero__image"></div>
+                        <div class="collection-hero__title-wrapper container">
+                            <h1 class="collection-hero__title">마이페이지</h1>
+                            <div class="breadcrumbs text-uppercase mt-1 mt-lg-2"><a href="index.html" title="Back to the home page">Home</a><span>|</span><span class="fw-bold">마이페이지</span></div>
+                        </div>
+                    </div>
+                </div>
+                <!--End Collection Banner-->
+
+                <!--Container-->
+                <div class="container pt-2">
+                    <div class="row mb-4 mb-lg-5 pb-lg-5">
+                        <div class="col-xl-3 col-lg-2 col-md-12 mb-4 mb-lg-0">
+                            <!-- Nav tabs -->
+                            <ul class="nav flex-column bg-light h-100 dashboard-list" role="tablist">
+                                <li><a class="nav-link active" data-bs-toggle="tab" href="#dashboard">Dashboard</a></li>
+                                <li><a class="nav-link" data-bs-toggle="tab" href="#orders">Orders</a></li>
+                                <li><a class="nav-link" data-bs-toggle="tab" href="#orderstracking">Orders tracking</a></li>
+                                <li><a class="nav-link" data-bs-toggle="tab" href="#downloads">Downloads</a></li>
+                                <li><a class="nav-link" data-bs-toggle="tab" href="#address">Addresses</a></li>
+                                <li><a class="nav-link" data-bs-toggle="tab" href="#account-details">마이페이지</a></li>
+                                <li><a class="nav-link" data-bs-toggle="tab" href="#pet-page">반려동물목록</a></li>
+                                <li><a class="nav-link" data-bs-toggle="tab" href="#wishlist">Wishlist</a></li>
+                                <li><a class="nav-link" data-bs-toggle="tab" href="#change-password">비밀번호 변경</a></li>
+                                <li><a class="nav-link" data-bs-toggle="tab" href="#withdraw">탈퇴</a></li>
+                                <li><a class="nav-link" href="login.html">로그아웃</a></li>
+                            </ul>
+                            <!-- End Nav tabs -->
+                        </div>
+
+                        <div class="col-xl-9 col-lg-10 col-md-12">
+                            <!-- Tab panes -->
+                            <div class="tab-content dashboard-content">
+                                <!-- Dashboard -->
+                                <div id="dashboard" class="tab-pane fade active show">
+                                    <h3>Dashboard </h3>
+                                    <p>From your account dashboard. you can easily check &amp; view your
+                                        <a class="text-decoration-underline" href="#">recent orders</a>, manage your
+                                        <a class="text-decoration-underline" href="#">shipping and billing addresses</a> and
+                                        <a class="text-decoration-underline" href="#">edit your password and account details.</a>
+                                    </p>
+                                    <div class="row user-profile mt-4">
+                                        <div class="col-12 col-lg-6">
+                                            <div class="profile-img">
+                                                <div class="img"><img src="assets/images/avatar-img1.jpg" alt="profile" width="65" /></div>
+                                                <div class="detail ms-3">
+                                                    <h5 class="mb-1">Optimal</h5>
+                                                    <p>Balance: <strong>$500</strong></p>
+                                                </div>
+                                                <div class="lbl">SILVER USER</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-6">
+                                            <ul class="profile-order mt-3 mt-lg-0">
+                                                <li>
+                                                    <h3 class="mb-1">16</h3>
+                                                    All Orders
+                                                </li>
+                                                <li>
+                                                    <h3 class="mb-1">02</h3>
+                                                    Awaiting Payments
+                                                </li>
+                                                <li>
+                                                    <h3 class="mb-1">00</h3>
+                                                    Awaiting Shipment
+                                                </li>
+                                                <li>
+                                                    <h3 class="mb-1">01</h3>
+                                                    Awaiting Delivery
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive order-table mt-4">
+                                        <table class="table table-bordered table-hover align-middle text-center mb-0">
+                                            <thead class="alt-font">
+                                                <tr>
+                                                    <th>Order</th>
+                                                    <th>Product</th>
+                                                    <th>Date</th>
+                                                    <th>Status</th>
+                                                    <th>Total</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Long Sleeve T-shirts</td>
+                                                    <td>March 04, 2021</td>
+                                                    <td class="text-success">Completed</td>
+                                                    <td>$165.00 for 1 item </td>
+                                                    <td><a class="link-underline view" href="cart-style1.html">View</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>Floral Crop Top</td>
+                                                    <td>May 12, 2021</td>
+                                                    <td class="text-danger">Processing</td>
+                                                    <td>$113.00 for 3 item </td>
+                                                    <td><a class="link-underline view" href="cart-style1.html">View</a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- End Dashboard -->
+
+                                <!-- Orders -->
+                                <div id="orders" class="product-order tab-pane fade">
+                                    <h3>Orders</h3>
+                                    <div class="table-responsive order-table">
+                                        <table class="table table-bordered table-hover align-middle text-center mb-0">
+                                            <thead class="alt-font">
+                                                <tr>
+                                                    <th>Order</th>
+                                                    <th>Product</th>
+                                                    <th>Date</th>
+                                                    <th>Status</th>
+                                                    <th>Total</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Long Sleeve T-shirts</td>
+                                                    <td>March 04, 2021</td>
+                                                    <td class="text-success">Completed</td>
+                                                    <td>$165.00 for 1 item </td>
+                                                    <td><a class="link-underline view" href="cart-style1.html">View</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>Floral Crop Top</td>
+                                                    <td>May 19, 2021</td>
+                                                    <td class="text-success">Completed</td>
+                                                    <td>$150.00 for 1 item </td>
+                                                    <td><a class="link-underline view" href="cart-style1.html">View</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td>Bodysuit Black</td>
+                                                    <td>June 24, 2021</td>
+                                                    <td class="text-danger">Processing</td>
+                                                    <td>$190.00 for 2 item </td>
+                                                    <td><a class="link-underline view" href="cart-style1.html">View</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>4</td>
+                                                    <td>Hoodie Sweatshirt</td>
+                                                    <td>July 28, 2021</td>
+                                                    <td class="text-danger">Processing</td>
+                                                    <td>$170.00 for 1 item </td>
+                                                    <td><a class="link-underline view" href="cart-style1.html">View</a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- End Orders -->
+
+                                <!-- Orders tracking -->
+                                <div id="orderstracking" class="order-tracking tab-pane fade">
+                                    <h3>Orders tracking</h3>
+                                    <form class="orderstracking-from mt-3" method="post" action="#">
+                                        <p class="mb-3">To track your order please enter your OrderID in the box below and press "Track" button. This was given to you on your receipt and in the confirmation email you should have received.</p>
+                                        <div class="row align-items-center">
+                                            <div class="form-group col-md-5 col-lg-5">
+                                                <label for="orderId" class="d-none">Order ID <span class="required-f">*</span></label>
+                                                <input name="orderId" placeholder="Order ID" value="" id="orderId" type="text" required>
+                                            </div>
+                                            <div class="form-group col-md-5 col-lg-5">
+                                                <label for="billingEmail" class="d-none">Billing email <span class="required-f">*</span></label>
+                                                <input name="billingEmail" placeholder="Billing email" value="" id="billingEmail" type="text" required>
+                                            </div>
+                                            <div class="form-group col-md-2 col-lg-2">
+                                                <button type="submit" class="btn rounded w-100 h-100"><span>Track</span></button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="row mt-2">
+                                        <div class="col-sm-12">
+                                            <h3>Status for order no: 000123</h3>
+                                            <!-- Status Order -->
+                                            <div class="row mt-3">
+                                                <div class="col-lg-2 col-md-3 col-sm-4">
+                                                    <div class="product-img mb-3 mb-sm-0">
+                                                        <img class="blur-up lazyload" data-src="assets/images/products/product-1.jpg" src="assets/images/products/product-1.jpg" alt="product" title="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-9 col-sm-8">
+                                                    <div class="tracking-detail d-flex-center">
+                                                        <ul>
+                                                            <li>
+                                                                <div class="left"><span>Order name</span></div>
+                                                                <div class="right"><span>Sunset Sleep Scarf Top</span></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="left"><span>customer number</span></div>
+                                                                <div class="right"><span>000123</span></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="left"><span>order date</span></div>
+                                                                <div class="right"><span>14 Nov 2021</span></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="left"><span>Ship Date</span></div>
+                                                                <div class="right"><span>16 Nov 2021</span></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="left"><span>shipping address</span></div>
+                                                                <div class="right"><span>55 Gallaxy Enque, 2568 steet, 23568 NY</span></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="left"><span>Carrier</span></div>
+                                                                <div class="right"><span>Ipsum</span></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="left"><span>carrier tracking number</span></div>
+                                                                <div class="right"><span>000123</span></div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-12 col-sm-12 mt-4 mt-lg-0">
+                                                    <div class="tracking-map map-section ratio ratio-16x9 h-100">
+                                                        <iframe src="https://www.google.com/maps/embed?pb=" allowfullscreen="" height="650"></iframe>                             
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End Status Order -->
+                                            <!-- Tracking Steps -->
+                                            <div class="tracking-steps nav mt-5 mb-4 clearfix">
+                                                <div class="step done"><span>order placed</span></div>
+                                                <div class="step current"><span>preparing to ship</span></div>
+                                                <div class="step"><span>shipped</span></div>
+                                                <div class="step"><span>delivered</span></div>
+                                            </div>
+                                            <!-- End Tracking Steps -->
+                                            <!-- Order Table -->
+                                            <div class="table-responsive order-table">
+                                                <table class="table table-bordered table-hover align-middle text-center mb-0">
+                                                    <thead class="">
+                                                        <tr>
+                                                            <th scope="col">Date</th>
+                                                            <th scope="col">Time</th>
+                                                            <th scope="col">Description</th>
+                                                            <th scope="col">Location</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>14 Nov 2021</td>
+                                                            <td>08.00 AM</td>
+                                                            <td>Shipped</td>
+                                                            <td>Canada</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>15 Nov 2021</td>
+                                                            <td>12.00 AM</td>
+                                                            <td>Shipping info received</td>
+                                                            <td>California</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>16 Nov 2021</td>
+                                                            <td>10.00 AM</td>
+                                                            <td>Origin scan</td>
+                                                            <td>Landon</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- End Order Table -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Orders tracking -->
+
+                                <!-- Downloads -->
+                                <div id="downloads" class="product-order tab-pane fade">
+                                    <h3>Downloads</h3>
+                                    <div class="table-responsive order-table">
+                                        <table class="table table-bordered table-hover align-middle text-center mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Product</th>
+                                                    <th>Downloads remaining</th>
+                                                    <th>Expires</th>
+                                                    <th>Download</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Long Sleeve T-shirts</td>
+                                                    <td>July 22, 2021</td>
+                                                    <td>Never</td>
+                                                    <td><a class="link-underline view" href="#">Click Here To Download Your File</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Floral Crop Top</td>
+                                                    <td>Dec 17, 2021</td>
+                                                    <td>Never</td>
+                                                    <td><a class="link-underline view" href="#">Click Here To Download Your File</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Bodysuit Black</td>
+                                                    <td>June 24, 2021</td>
+                                                    <td>Never</td>
+                                                    <td><a class="link-underline view" href="#">Click Here To Download Your File</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Hoodie Sweatshirt</td>
+                                                    <td>July 28, 2021</td>
+                                                    <td>Never</td>
+                                                    <td><a class="link-underline view" href="#">Click Here To Download Your File</a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- End Downloads -->
+
+                                <!-- Address -->
+                                <div id="address" class="address tab-pane">
+                                    <h3>Addresses</h3>
+                                    <p class="xs-fon-13 margin-10px-bottom">The following addresses will be used on the checkout page by default.</p>
+                                    <div class="row">
+                                        <div class="col-12 col-sm-6">
+                                            <h4 class="billing-address">Shipping address</h4>
+                                            <a class="link-underline view" href="#">Edit</a>
+                                            <p>No 40 Baria Sreet <br> 133/2 NewYork City, <br> NY, United States.</p>
+
+                                            <div class="accordion add-address mt-3" id="address1">
+                                                <button class="collapsed btn btn--small rounded" type="button" data-bs-toggle="collapse" data-bs-target="#shipping" aria-expanded="false" aria-controls="shipping">Add Address</button>
+                                                <div id="shipping" class="accordion-collapse collapse" data-bs-parent="#address">
+                                                    <form class="address-from mt-3" method="post" action="#">
+                                                        <fieldset>
+                                                            <h2 class="login-title mb-3">Shipping details</h2>
+                                                            <div class="row">
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                                    <label for="input-firstname1" class="d-none">First Name <span class="required-f">*</span></label>
+                                                                    <input name="firstname" placeholder="First Name" value="" id="input-firstname1" type="text">
+                                                                </div>
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                                    <label for="input-lastname1" class="d-none">Last Name <span class="required-f">*</span></label>
+                                                                    <input name="lastname" placeholder="Last Name" value="" id="input-lastname1" type="text">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                                    <label for="input-email1" class="d-none">Email <span class="required-f">*</span></label>
+                                                                    <input name="email" placeholder="Email" value="" id="input-email1" type="email" required>
+                                                                </div>
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                                    <label for="input-telephone1" class="d-none">Telephone <span class="required-f">*</span></label>
+                                                                    <input name="telephone" placeholder="Telephone" value="" id="input-telephone1" type="tel">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                                    <label for="input-company1" class="d-none">Company</label>
+                                                                    <input name="company" placeholder="Company" value="" id="input-company1" type="text">
+                                                                </div>
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                                    <label for="input-address-11" class="d-none">Address <span class="required-f">*</span></label>
+                                                                    <input name="address_1" placeholder="Address" value="" id="input-address-11" type="text">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                                    <label for="input-address-21" class="d-none">Apartment <span class="required-f">*</span></label>
+                                                                    <input name="address_2" placeholder="Apartment" value="" id="input-address-21" type="text">
+                                                                </div>
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                                    <label for="input-city1" class="d-none">City <span class="required-f">*</span></label>
+                                                                    <input name="city" placeholder="City" value="" id="input-city1" type="text">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                                    <label for="input-postcode1" class="d-none">Post Code <span class="required-f">*</span></label>
+                                                                    <input name="postcode" placeholder="Post Code" value="" id="input-postcode1" type="text">
+                                                                </div>
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                                    <label for="input-country1" class="d-none">Country <span class="required-f">*</span></label>
+                                                                    <select name="country_id" id="input-country1">
+                                                                        <option value="">Select Country</option>
+                                                                        <option value="244">Aaland Islands</option>
+                                                                        <option value="1">Afghanistan</option>
+                                                                        <option value="2">Albania</option>
+                                                                        <option value="3">Algeria</option>
+                                                                        <option value="4">American Samoa</option>
+                                                                        <option value="5">Andorra</option>
+                                                                        <option value="6">Angola</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group col-md-12 col-lg-12 col-xl-12">
+                                                                    <label for="input-zone1" class="d-none">Region / State <span class="required-f">*</span></label>
+                                                                    <select name="zone_id" id="input-zone1">
+                                                                        <option value="">Select Region / State</option>
+                                                                        <option value="3513">Aberdeen</option>
+                                                                        <option value="3514">Aberdeenshire</option>
+                                                                        <option value="3515">Anglesey</option>
+                                                                        <option value="3516">Angus</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <button type="submit" class="btn rounded mt-1"><span>Add Address</span></button>
+                                                        </fieldset>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <h4 class="billing-address">Billing address</h4>
+                                            <a class="link-underline view" href="#">Edit</a>
+                                            <p>No 40 Baria Sreet <br> 133/2 NewYork City, <br> NY, United States.</p>
+
+                                            <div class="accordion add-address mt-3" id="address2">
+                                                <button class="collapsed btn btn--small rounded" type="button" data-bs-toggle="collapse" data-bs-target="#billing" aria-expanded="false" aria-controls="billing">Add Address</button>
+                                                <div id="billing" class="accordion-collapse collapse" data-bs-parent="#address">
+                                                    <form class="address-from mt-3" method="post" action="#">
+                                                        <fieldset>
+                                                            <h2 class="login-title mb-3">Billing details</h2>
+                                                            <div class="row">
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                                    <label for="input-firstname2" class="d-none">First Name <span class="required-f">*</span></label>
+                                                                    <input name="firstname" placeholder="First Name" value="" id="input-firstname2" type="text">
+                                                                </div>
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                                    <label for="input-lastname2" class="d-none">Last Name <span class="required-f">*</span></label>
+                                                                    <input name="lastname" placeholder="Last Name" value="" id="input-lastname2" type="text">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                                    <label for="input-email2" class="d-none">Email <span class="required-f">*</span></label>
+                                                                    <input name="email" placeholder="Email" id="input-email2" type="email" required>
+                                                                </div>
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                                    <label for="input-telephone2" class="d-none">Telephone <span class="required-f">*</span></label>
+                                                                    <input name="telephone" placeholder="Telephone" value="" id="input-telephone2" type="tel">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                                    <label for="input-company2" class="d-none">Company</label>
+                                                                    <input name="company" placeholder="Company" value="" id="input-company2" type="text">
+                                                                </div>
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                                    <label for="input-address-12" class="d-none">Address <span class="required-f">*</span></label>
+                                                                    <input name="address_1" placeholder="Address" value="" id="input-address-12" type="text">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                                    <label for="input-address-22" class="d-none">Apartment <span class="required-f">*</span></label>
+                                                                    <input name="address_2" placeholder="Apartment" value="" id="input-address-22" type="text">
+                                                                </div>
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                                    <label for="input-city2" class="d-none">City <span class="required-f">*</span></label>
+                                                                    <input name="city" placeholder="City" value="" id="input-city2" type="text">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                                    <label for="input-postcode2" class="d-none">Post Code <span class="required-f">*</span></label>
+                                                                    <input name="postcode" placeholder="Post Code" value="" id="input-postcode2" type="text">
+                                                                </div>
+                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                                    <label for="input-country2" class="d-none">Country <span class="required-f">*</span></label>
+                                                                    <select name="country_id" id="input-country2">
+                                                                        <option value="">Select Country</option>
+                                                                        <option value="244">Aaland Islands</option>
+                                                                        <option value="1">Afghanistan</option>
+                                                                        <option value="2">Albania</option>
+                                                                        <option value="3">Algeria</option>
+                                                                        <option value="4">American Samoa</option>
+                                                                        <option value="5">Andorra</option>
+                                                                        <option value="6">Angola</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group col-md-12 col-lg-12 col-xl-12">
+                                                                    <label for="input-zone2" class="d-none">Region / State <span class="required-f">*</span></label>
+                                                                    <select name="zone_id" id="input-zone2">
+                                                                        <option value="">Select Region / State</option>
+                                                                        <option value="3513">Aberdeen</option>
+                                                                        <option value="3514">Aberdeenshire</option>
+                                                                        <option value="3515">Anglesey</option>
+                                                                        <option value="3516">Angus</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <button type="submit" class="btn rounded mt-1"><span>Add Address</span></button>
+                                                        </fieldset>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Address -->
+
+                                <!-- Account Details -->
+                                <div id="account-details" class="tab-pane fade">
+                                    <h3>마이페이지</h3>
+                                    <div class="account-login-form bg-light-gray padding-20px-all">
+                                        <form  id="userInfoForm" class="needs-validation customer-form" novalidate>
+                                            <input type="hidden" id="userSeq" name="userSeq" th:value="${item.userSeq}">
+                                            <input type="hidden" id="userModDate" name="userModDate">
+                                            <input type="hidden" id="registerOrModifyFlag" name="registerOrModifyFlag" value="0" disabled>
+                                            <fieldset>
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <div class="d-flex mt-3 col-md-12 col-lg-12 col-xl-12">
+                                                            <label class="control-label me-3 mb-0"><strong>성별</strong></label>
+                                                            <div class="customRadio clearfix me-3 mb-0" th:each="gender : ${@codeService.selectListCachedCode(12)}">
+                                                                <input name="userGender" th:checked="${item.userGender} == ${gender.codeSeq}" type="radio" class="padding-10px-right" disabled>
+                                                                <label for="man" class="mb-0" th:text="${gender.codeName}">&nbsp;</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                        <label for="userName">이름</label>
+                                                        <input name="userName" placeholder="이름" id="userName" th:value="${item.userName}" class="form-control" type="text">
+                                                        <div class="invalid-feedback" id="userNameValid">이름을 입력해주세요.</div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                        <label for="userId">ID</label>
+                                                        <input id="userId" name="userId" th:value="${item.userId}" placeholder="ID" class="form-control" type="text" disabled>
+                                                    </div>
+                                                    <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                        <label for="userBirth">생일</label>
+                                                        <input name="userBirth" placeholder="생일" th:value="${item.userBirth}" id="userBirth" class="form-control" type="text" disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                        <label for="userEmail">이메일<span class="required">*</span></label>
+                                                        <input name="userEmail" placeholder="이메일" th:value="${item.userEmail}" id="userEmail" class="form-control" type="email" required>
+                                                        <div class="invalid-feedback" id="userEmailValid">이메일을 입력해주세요.</div>
+                                                    </div>
+                                                    <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                        <label for="userPhone">전화번호<span class="required">*</span></label>
+                                                        <input name="userPhone" placeholder="전화번호" th:value="${item.userPhone}" id="userPhone" class="form-control" type="tel" oninput="autoPhoneNum(this)" maxlength="13" required />
+                                                        <div class="invalid-feedback" id="userPhoneValid">전화번호를 입력해주세요.</div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-4">
+                                                    <div class="col-md-12 col-lg-12 col-xl-12">
+                                                        <div class="customCheckbox clearfix">
+                                                            <input id="userRecvNotiFlag" name="userRecvNotiFlag" th:checked="${item.userRecvNotiFlag == 1}" type="checkbox" />
+                                                            <label for="userRecvNotiFlag">이메일 수신 알림 동의</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                        <label for="userPostCode">우편번호<span class="required">*</span></label>
+                                                        <input type="text" id="userPostCode" class="form-control" name="userPostCode" th:value="${item.userPostCode}" placeholder="우편번호" readonly />
+                                                    </div>
+                                                    <div class="form-group col-md-6 col-lg-6 col-xl-6 mt-4">
+                                                        <input type="button" class="btn rounded" onclick="daumPostcode()" value="우편번호 찾기">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                        <label for="userAddr">주소<span class="required">*</span></label>
+                                                        <input type="text" id="userAddr" class="form-control" name="userAddr" th:value="${item.userAddr}" placeholder="주소" readonly required />
+                                                        <div class="invalid-feedback" id="userAddrValid">주소를 입력해주세요.</div>
+                                                    </div>
+                                                    <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                        <label for="userDetailAddr">상세주소<span class="required">*</span></label>
+                                                        <input type="text" id="userDetailAddr" class="form-control" name="userDetailAddr" th:value="${item.userDetailAddr}" placeholder="상세주소" />
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <button id="btnSubmit" type="button" class="btn btn-primary rounded">Save</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- End Account Details -->
+
+                                <div id="pet-page" class="tab-pane fade">
+                                    <!-- Pet Detail -->
+                                    <div id="pet-detail">
+                                        <h3>반려동물목록</h3>
+                                        <div class="row mt-3">
+                                            <div class="col-lg-3 col-md-3 col-sm-4">
+                                                <div class="product-img mb-3 mb-sm-0">
+                                                    <img id="presentimg" src="/peter/template/optimal-html/assets/images/mypetinfo/my-account-pet-image.png">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-9 col-md-9 col-sm-8">
+                                                <div class="tracking-detail" id="aaa">
+                                                    <ul>
+                                                        <li>
+                                                            <div class="left"><span>이름</span></div>
+                                                            <div class="right"><span th:if="${dto} != null" id="userPetName" th:text="${dto.petName}"></span></div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="left"><span>품종</span></div>
+                                                            <div class="right"><span id="userPetVarieties"></span></div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="left"><span>성별</span></div>
+                                                            <div class="right"><span id="userPetGender"></span></div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="left"><span>생일</span></div>
+                                                            <div class="right"><span id="userPetBirth"></span></div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="left"><span>체중</span></div>
+                                                            <div class="right"><span id="userPetWeight"></span></div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="left"><span>예방 접종 유무</span></div>
+                                                            <div class="right"><span id="userPetVaccin"></span></div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="left"><span>중성화 유무</span></div>
+                                                            <div class="right"><span id="userPetNeuter">예</span></div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="left"><span>아이의 성격</span></div>
+                                                            <div class="right">
+                                                                <ul id="userPetPersonal"></ul>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="left"><span>아이의 질병/질환</span></div>
+                                                            <div class="right">
+                                                                <ul id="userPetDisease"></ul>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="text-left col-lg-6 col-md-6 col-sm-6">
+                                                <input type="button" class="btn rounded mb-3 register" value="수정" id="button-modify">
+                                            </div>
+                                            <div class="text-right col-lg-6 col-md-6 col-sm-6">
+                                                <input type="button" class="btn rounded mb-3 list" value="목록" id="button-list">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Pet Detail -->
+
+                                    <!-- Pet Register -->
+                                    <div id="pet-register">
+                                        <h3>반려동물등록/수정</h3>
+                                        <div class="account-login-form bg-light-gray padding-20px-all">
+                                            <form  method="post" action="#" class="needs-validation customer-form" novalidate>
+                                                <fieldset>
+                                                    <div class="row form-group">
+                                                        <div class="d-flex mt-3 col-md-6 col-lg-6 col-xl-6">
+                                                            <label class="control-label me-3">품종<span class="required">*</span></label>
+                                                            <div class="customRadio clearfix me-3">
+                                                                <input name="kind" id="dog" value="1" type="radio" class="padding-10px-right form-check-input" required />
+                                                                <label for="dog" class="form-check-label">강아지 &nbsp;</label>
+                                                            </div>
+                                                            <div class="customRadio clearfix me-3">
+                                                                <input name="kind" id="cat" value="0" type="radio" class="padding-10px-right form-check-input" required />
+                                                                <label for="cat" class="form-check-label">고양이</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="d-flex mt-3 col-md-6 col-lg-6 col-xl-6">
+                                                            <label class="control-label me-3">성별<span class="required">*</span></label>
+                                                            <div class="customRadio clearfix me-3">
+                                                                <input name="pet-gender" id="male" value="1" type="radio" class="padding-10px-right form-check-input" required />
+                                                                <label for="male" class="form-check-label">남자아이 &nbsp;</label>
+                                                            </div>
+                                                            <div class="customRadio clearfix me-3">
+                                                                <input name="pet-gender" id="female" value="0" type="radio" class="padding-10px-right form-check-input" required />
+                                                                <label for="female" class="form-check-label">여자아이</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <div class="col-md-6 col-lg-6 col-xl-6">
+                                                            <div class="form-control" action="" method="get">
+                                                                <input class="search-txt" type="text" name="" placeholder="품종">
+                                                                <button class="search-btn" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="icon an an-search-l"></i></button>
+                                                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-scrollable">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">품종 선택</h1>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                            ...
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                                                            <button type="button" class="btn btn-primary">저장</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                            <label for="input-dogname">이름<span class="required">*</span></label>
+                                                            <input name="lastname" placeholder="이름" value="" id="input-dogname" class="form-control" type="text" required>
+                                                            <div class="invalid-feedback">
+                                                                이름을 입력해주세요.
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                            <label for="input-nickname">닉네임<span class="required">*</span></label>
+                                                            <select class="form-select register-agency" id="input-nickname" required>
+                                                                <option selected="selected" value="">닉네임</option>
+                                                                <option value="guardian">보호자</option>
+                                                                <option value="mother">엄마</option>
+                                                                <option value="father">아빠</option>
+                                                                <option value="sister-girl">언니</option>                     	
+                                                                <option value="sister-boy">누나</option>                     	
+                                                                <option value="brother-girl">오빠</option>                     	
+                                                                <option value="brother-boy">형</option>                     	
+                                                            </select>
+                                                            <div class="invalid-feedback">
+                                                                닉네임을 선택해주세요.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                            <label for="Pet-DOB">생일<span class="required">*</span></label>
+                                                            <input id="Pet-DOB" type="date" class="form-control" name="PetDOB" required />
+                                                            <div class="invalid-feedback">
+                                                                생일을 입력해주세요.
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                            <label>체중<span class="required">*</span></label>
+                                                            <input name="weight" placeholder="체중" class="form-control" type="text" required />
+                                                            <div class="invalid-feedback">
+                                                                체중을 입력해주세요.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="d-flex mt-3 col-md-6 col-lg-6 col-xl-6 form-check">
+                                                            <label class="control-label me-3">예방 접종<span class="required">*</span></label>
+                                                            <div class="customRadio clearfix me-3">
+                                                                <input name="pet-vaccination" id="vaccination-yes" value="1" type="radio" class="padding-10px-right form-check-input" required />
+                                                                <label for="vaccination-yes" class="form-check-label">예. &nbsp;</label>
+                                                            </div>
+                                                            <div class="customRadio clearfix me-3">
+                                                                <input name="pet-vaccination" id="vaccination-no" value="0" type="radio" class="padding-10px-right form-check-input" required />
+                                                                <label for="vaccination-no" class="form-check-label">아니오.</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="d-flex mt-3 col-md-6 col-lg-6 col-xl-6 form-check">
+                                                            <label class="control-label me-3">중성화<span class="required">*</span></label>
+                                                            <div class="customRadio clearfix me-3">
+                                                                <input name="pet-neutering" id="neutering-yes" value="1" type="radio" class="padding-10px-right form-check-input" required />
+                                                                <label for="neutering-yes" class="form-check-label">예. &nbsp;</label>
+                                                            </div>
+                                                            <div class="customRadio clearfix me-3">
+                                                                <input name="pet-neutering" id="neutering-no" value="0" type="radio" class="padding-10px-right form-check-input" required />
+                                                                <label for="neutering-no" class="form-check-label">아니오.</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-group mt-3">
+                                                        <div class="col-md-6 col-lg-6 col-xl-6">
+                                                            <label>아이의 성격/특징</label>
+                                                            <div class="form-control" action="" method="get">
+                                                                <input class="search-txt" type="text" name="" placeholder="아이의 성격/특징">
+                                                                <button class="search-btn" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="icon an an-search-l"></i></button>
+                                                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-scrollable">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">품종 선택</h1>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                            ...
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                                                            <button type="button" class="btn btn-primary">저장</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 col-lg-6 col-xl-6">
+                                                            <label>아이의 질병/질환</label>
+                                                            <div class="form-control" action="" method="get">
+                                                                <input class="search-txt" type="text" name="" placeholder="아이의 질병/질환">
+                                                                <button class="search-btn" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="icon an an-search-l"></i></button>
+                                                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-scrollable">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">품종 선택</h1>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                            ...
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                                                            <button type="button" class="btn btn-primary">저장</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-group mt-3">
+                                                        <div class="col-md-3 col-lg-3 col-xl-3">
+                                                            <a data-toggle="tooltip" title="대표사진">
+                                                                <img id="presentimg" src="/peter/template/optimal-html/assets/images/mypetinfo/my-account-pet-image.png">
+                                                            </a>
+                                                            <div class="input-type" id="file-area">
+                                                                <input type="file" id="presentimg1" onchange="loadImg(this,1)" class="form-control-file border" name="uploadfile1" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-group mt-3">
+                                                        <div class="col-md-12 col-lg-12 col-xl-12">
+                                                            <div class="form-control p-2 pet-image-check-style">
+                                                                <label><h2 class="text-uppercase">사진 인증 안내 사항</h2></label>
+                                                                <ul>
+                                                                    <li class="fs-6">프로필 등록, 반려인 인증 외의 목적으로는 이용되지 않습니다.</li>
+                                                                    <li class="fs-6">3장의 사진이 같은 반려동물의 사진이 아닐 경우, 재인증을 요청할 수 있습니다.</li>
+                                                                    <li class="fs-6">프로필에 등록한 반려동물과 일치하지 않거나 얼굴 식별이 불가능한 경우 인증이 어려울 수 있습니다.</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-group mt-3">
+                                                        <div class="text-left col-lg-6 col-md-6 col-sm-6">
+                                                            <input type="submit" class="btn rounded mb-3" value="저장">
+                                                        </div>
+                                                        <div class="text-right col-lg-6 col-md-6 col-sm-6">
+                                                            <input type="button" class="btn rounded mb-3 list" value="목록" id="button-list">
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- End Pet Register -->
+
+                                    <!-- pet list -->
+                                    <div id="pet-list">
+                                        <h3>반려동물 목록</h3>
+                                        <div class="row">
+                                            <div class="col-6 col-sm-6 col-md-3 col-lg-3" th:each="list : ${list}">
+                                                <img id="presentimg" src="/peter/template/optimal-html/assets/images/mypetinfo/my-account-pet-image.png">
+
+                                                <div class="text-center">
+                                                    <div>이름 :  <span th:text="${list.petName}"></span></div>
+                                                    <div>나이 : <span th:text="${list.petAge}"></span></div>
+                                                    <div>품종 : <span th:text="${@codeService.selectOneCachedCode(list.petVarieties)}"></span></div>
+                                                    <button type="button" class="btn rounded mb-3 detail" th:value="${list.petSeq}">자세히보기</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col text-right">
+                                                <input type="button" class="btn rounded mb-3 register" value="등록" id="button-register">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End pet list -->
+                                </div>
+                                
+                                <!-- Change Password -->
+                                <div id="change-password" class="tab-pane fade">
+                                    <form method="post" action="#" accept-charset="UTF-8" class="needs-validation customer-form" novalidate>	
+                                        <h3 class="h4 text-uppercase mb-2">비밀번호 변경</h3>
+                                        <div class="row">
+                                            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <label for="CurrentPassword">현재 비밀번호 <span class="required">*</span></label>
+                                                    <input type="password" class="form-control" name="customer[password]" placeholder="현재 비밀번호" id="CurrentPassword" required />
+                                                    <div class="invalid-feedback">
+                                                        Please write current password.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <label for="NewPassword">새 비밀번호 <span class="required">*</span></label>
+                                                    <input type="password" class="form-control" name="customer[password]" placeholder="새 비밀번호" id="NewPassword" required />
+                                                    <div class="invalid-feedback">
+                                                        Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <label for="Verify">새 비밀번호 확인 <span class="required">*</span></label>
+                                                    <input type="password" class="form-control" name="customer[password]" placeholder="비밀번호 확인" id="Verify" required />
+                                                    <div class="invalid-feedback">
+                                                        To confirm, type the new password again.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="text-left col-12 col-sm-12 col-md-12 col-lg-12">
+                                                <p class="d-flex-center">
+                                                    <input type="submit" class="btn rounded me-auto" value="변경">
+                                                    <a href="login.html"><i class="align-middle icon an an-an-double-left me-2"></i>로그인 페이지</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- End Change Password -->
+                                 
+                                <!-- Wishlist -->
+                                <div id="wishlist" class="product-wishlist tab-pane fade">
+                                    <h3>My Wishlist</h3>
+                                    <!-- Grid Product -->
+                                    <div class="grid-products grid--view-items wishlist-grid mt-4">
+                                        <div class="row">
+                                            <div class="col-6 col-sm-6 col-md-3 col-lg-3 item position-relative">
+                                                <button type="button" class="btn remove-icon close-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="icon an an-times-r"></i></button>
+                                                <!-- Product Image -->
+                                                <div class="product-image">
+                                                    <!-- Product Image -->
+                                                    <a href="product-layout1.html" class="product-img">
+                                                        <!-- image -->
+                                                        <img class="primary blur-up lazyload" data-src="assets/images/products/product-1.jpg" src="assets/images/products/product-1.jpg" alt="product" title="product" />
+                                                        <!-- End image -->
+                                                        <!-- Hover image -->
+                                                        <img class="hover blur-up lazyload" data-src="assets/images/products/product-1-1.jpg" src="assets/images/products/product-1-1.jpg" alt="product" title="product" />
+                                                        <!-- End hover image -->
+                                                        <!-- product label -->
+                                                        <div class="product-labels rectangular"><span class="lbl pr-label3">Low in stock</span></div>
+                                                        <!-- End product label -->
+                                                    </a>
+                                                    <!-- End Product Image -->
+                                                </div>
+                                                <!-- End Product Image -->
+
+                                                <!-- Product Details -->
+                                                <div class="product-details text-center">
+                                                    <!-- Product Name -->
+                                                    <div class="product-name">
+                                                        <a href="product-layout1.html">Martha Knit Top</a>
+                                                    </div>
+                                                    <!-- End Product Name -->
+                                                    <!-- Product Price -->
+                                                    <div class="product-price">
+                                                        <span class="old-price">$199.00</span>
+                                                        <span class="price">$150.00</span>
+                                                    </div>
+                                                    <!-- End Product Price -->
+                                                    <!-- Product Review -->
+                                                    <div class="product-review d-flex align-items-center justify-content-center">
+                                                        <i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i> <i class="an an-star-o"></i>
+                                                        <span class="caption hidden ms-2">9 reviews</span>
+                                                    </div>
+                                                    <!-- End Product Review -->
+                                                    <!-- Product Button -->
+                                                    <form method="post" action="/cart/add" class="cart-form mt-3" enctype="multipart/form-data">
+                                                        <a href="cart-style1.html" class="btn btn--small rounded product-form__cart-submit"><span>Add to cart</span></a>
+                                                    </form>
+                                                    <!-- End Product Button -->
+                                                </div>
+                                                <!-- End Product Details -->
+                                            </div>
+                                            <div class="col-6 col-sm-6 col-md-3 col-lg-3 item position-relative">
+                                                <button type="button" class="btn remove-icon close-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="icon an an-times-r"></i></button>
+                                                <!-- Product Image -->
+                                                <div class="product-image">
+                                                    <!-- Product Image -->
+                                                    <a href="product-layout1.html" class="product-img">
+                                                        <!-- image -->
+                                                        <img class="primary blur-up lazyload" data-src="assets/images/products/product-1.jpg" src="assets/images/products/product-1.jpg" alt="product" title="product" />
+                                                        <!-- End image -->
+                                                        <!-- Hover image -->
+                                                        <img class="hover blur-up lazyload" data-src="assets/images/products/product-1-1.jpg" src="assets/images/products/product-1-1.jpg" alt="product" title="product" />
+                                                        <!-- End hover image -->
+                                                        <!-- Product Label -->
+                                                        <div class="product-labels rectangular"><span class="lbl pr-label2">New</span></div>
+                                                        <!-- End Product Label -->
+                                                    </a>
+                                                    <!-- End Product Image -->
+                                                </div>
+                                                <!-- End Product Image -->
+                                                <!-- Product Details -->
+                                                <div class="product-details text-center">
+                                                    <!-- Product Name -->
+                                                    <div class="product-name">
+                                                        <a href="product-layout1.html">Long Sleeve T-shirts</a>
+                                                    </div>
+                                                    <!-- End Product Name -->
+                                                    <!-- Product Price -->
+                                                    <div class="product-price">
+                                                        <span class="price">$199.00</span>
+                                                    </div>
+                                                    <!-- End Product Price -->
+                                                    <!-- Product Review -->
+                                                    <div class="product-review d-flex align-items-center justify-content-center">
+                                                        <i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i>
+                                                        <span class="caption hidden ms-2">20 reviews</span>
+                                                    </div>
+                                                    <!-- End Product Review -->
+                                                    <!-- Product Button -->
+                                                    <form method="post" action="/cart/add" class="cart-form mt-3" enctype="multipart/form-data">
+                                                        <a href="cart-style1.html" class="btn btn--small rounded product-form__cart-submit"><span>Add to cart</span></a>
+                                                    </form>
+                                                    <!-- End Product Button -->
+                                                </div>
+                                                <!-- End Product Details -->
+                                            </div>
+                                            <div class="col-6 col-sm-6 col-md-3 col-lg-3 item position-relative">
+                                                <button type="button" class="btn remove-icon close-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="icon an an-times-r"></i></button>
+                                                <!-- Product Image -->
+                                                <div class="product-image">
+                                                    <!-- Product Image -->
+                                                    <a href="product-layout1.html" class="product-img">
+                                                        <!-- image -->
+                                                        <img class="primary blur-up lazyload" data-src="assets/images/products/product-1.jpg" src="assets/images/products/product-1.jpg" alt="product" title="product" />
+                                                        <!-- End image -->
+                                                        <!-- Hover image -->
+                                                        <img class="hover blur-up lazyload" data-src="assets/images/products/product-1-1.jpg" src="assets/images/products/product-1-1.jpg" alt="product" title="product" />
+                                                        <!-- End hover image -->
+                                                        <!-- Product Label -->
+                                                        <div class="product-labels rectangular"><span class="lbl on-sale">Out of stock</span></div>
+                                                        <!-- End Product Label -->
+                                                    </a>
+                                                    <!-- End Product Image -->
+                                                </div>
+                                                <!-- End Product Image -->
+                                                <!-- Product Details -->
+                                                <div class="product-details text-center">
+                                                    <!-- Product Name -->
+                                                    <div class="product-name">
+                                                        <a href="product-layout1.html">Stand Collar Slim Shirt</a>
+                                                    </div>
+                                                    <!-- End Product Name -->
+                                                    <!-- Product Price -->
+                                                    <div class="product-price">
+                                                        <span class="price">$399.00</span>
+                                                    </div>
+                                                    <!-- End Product Price -->
+                                                    <!-- Product Review -->
+                                                    <div class="product-review d-flex align-items-center justify-content-center">
+                                                        <i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i>
+                                                        <span class="caption hidden ms-2">19 reviews</span>
+                                                    </div>
+                                                    <!-- End Product Review -->
+                                                    <!-- Product Button -->
+                                                    <form method="post" action="/cart/add" class="cart-form mt-3" enctype="multipart/form-data">
+                                                        <a href="cart-style1.html" class="btn btn--small rounded product-form__cart-submit soldOutBtn disabled"><span>Out Of stock</span></a>
+                                                    </form>
+                                                    <!-- End Product Button -->
+                                                </div>
+                                                <!-- End Product Details -->
+                                            </div>
+                                            <div class="col-6 col-sm-6 col-md-3 col-lg-3 item position-relative">
+                                                <button type="button" class="btn remove-icon close-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="icon an an-times-r"></i></button>
+                                                <!-- Product Image -->
+                                                <div class="product-image">
+                                                    <!-- Product Image -->
+                                                    <a href="product-layout1.html" class="product-img">
+                                                        <!-- image -->
+                                                        <img class="primary blur-up lazyload" data-src="assets/images/products/product-1.jpg" src="assets/images/products/product-1.jpg" alt="product" title="product" />
+                                                        <!-- End image -->
+                                                        <!-- Hover image -->
+                                                        <img class="hover blur-up lazyload" data-src="assets/images/products/product-1-1.jpg" src="assets/images/products/product-1-1.jpg" alt="product" title="product" />
+                                                        <!-- End hover image -->
+                                                        <!-- Product Label -->
+                                                        <div class="product-labels"><span class="lbl pr-label1">Sale</span></div>
+                                                        <!-- End Product Label -->
+                                                    </a>
+                                                    <!-- End Product Image -->
+                                                </div>
+                                                <!-- End Product Image -->
+
+                                                <!-- Product Details -->
+                                                <div class="product-details text-center">
+                                                    <!-- Product Name -->
+                                                    <div class="product-name">
+                                                        <a href="product-layout1.html">Backpack With Contrast</a>
+                                                    </div>
+                                                    <!-- End Product Name -->
+                                                    <!-- Product Price -->
+                                                    <div class="product-price">
+                                                        <span class="old-price">$99.00</span>
+                                                        <span class="price">$88.00</span>
+                                                    </div>
+                                                    <!-- End Product Price -->
+                                                    <!-- Product Review -->
+                                                    <div class="product-review d-flex align-items-center justify-content-center">
+                                                        <i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i>
+                                                        <span class="caption hidden ms-2">2 reviews</span>
+                                                    </div>
+                                                    <!-- End Product Review -->
+                                                    <!-- Product Button -->
+                                                    <form method="post" action="/cart/add" class="cart-form mt-3" enctype="multipart/form-data">
+                                                        <a href="cart-style1.html" class="btn btn--small rounded product-form__cart-submit"><span>Add to cart</span></a>
+                                                    </form>
+                                                    <!-- End Product Button -->
+                                                </div>
+                                                <!-- End Product Details -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Grid Product-->
+                                </div>
+                                <!-- End Wishlist -->
+
+                                <!-- withdraw -->
+                                <div id="withdraw" class="tab-pane fade">	
+                                    <form method="post" action="#" accept-charset="UTF-8" class="needs-validation customer-form" novalidate>
+                                        <h1 class="text-uppercase mb-2  text-style-center">피터펫을 떠나신다니 너무 아쉬워요.</h1>
+                                        <p class="fs-6 mb-5  text-style-center">피터펫에서는 우리 아이를 돌봄해주거나 친구가 되어줄 이웃들과 함께할 수 있어요.</p>
+                                        <div class="accordion" id="accordionExample">
+                                            <div class="row">
+                                                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                                    <div class="form-control p-2 withdraw-box-style">
+                                                        <label><h2 class="text-uppercase">
+                                                            <span>이웃과의 채팅방</span>
+                                                            <span style="float: right;">개</span>
+                                                        </h2></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-3">
+                                                    <div class="form-control p-2 withdraw-box-style">
+                                                        <label><h2 class="text-uppercase">
+                                                            <span>이웃이 올린 돌봄 요청 글</span>
+                                                            <span style="float: right;">개</span>
+                                                        </h2></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-5">
+                                                    <div class="form-control p-2 withdraw-check-style">
+                                                        <label><h2 class="text-uppercase">꼭 확인해주세요!</h2></label>
+                                                        <ul>
+                                                            <li class="fs-6">탈퇴 후 3개월 간 재가입이 불가능하며, 삭제된 정보를 복구할 수 없어요.</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                                    <label><h2 class="text-uppercase">피터펫을 떠나시는 이유가 무엇인가요?</h2></label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                                    <div class="form-check">
+                                                        <input id="Reason1" type="radio" class="form-check-input" name="WithdrawReason" required />                       	
+                                                        <label for="Reason1" class="form-check-label fs-6">우리 동네 이웃이 많지 않아요.</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                                    <div class="form-check">
+                                                        <input id="Reason2" type="radio" class="form-check-input" name="WithdrawReason" required />                       	
+                                                        <label for="Reason2" class="form-check-label fs-6">지금은 돌봄이 필요하지 않아요.</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                                    <div class="form-check">
+                                                        <input id="Reason3" type="radio" class="form-check-input" name="WithdrawReason" required />                       	
+                                                        <label for="Reason3" class="form-check-label fs-6">이웃에게 연락이 오지 않아요.</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                                    <div class="form-check">
+                                                        <input id="Reason4" type="radio" class="form-check-input" name="WithdrawReason" required />                       	
+                                                        <label for="Reason4" class="form-check-label fs-6">돌봄 요청글을 삭제할 수 없어요.</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                                    <div class="form-check">
+                                                        <input id="Reason5" type="radio" class="form-check-input" name="WithdrawReason" required />                       	
+                                                        <label for="Reason5" class="form-check-label fs-6">대표 아이를 삭제하거나 변경할 수가 없어요.</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                                    <div class="form-check">
+                                                        <input id="Reason6" type="radio" class="form-check-input" name="WithdrawReason" required />                       	
+                                                        <label for="Reason6" class="form-check-label fs-6">불쾌감을 주는 이웃을 만났어요.</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                                    <div class="form-check">
+                                                        <input id="Reason7" type="radio" class="form-check-input" name="WithdrawReason" required />                       	
+                                                        <label for="Reason7" class="form-check-label fs-6">알림이 오지 않아요.</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                                    <div class="form-check">
+                                                        <input id="Reason8" type="radio" class="form-check-input" name="WithdrawReason" required />                       	
+                                                        <label for="Reason8" class="form-check-label fs-6">홈페이지 사용이 불편해요.</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                                    <div class="form-check">
+                                                        <input id="Reason9" type="radio" class="form-check-input" name="WithdrawReason" required />                       	
+                                                        <label for="Reason9" class="form-check-label fs-6">상품이 적어요.</label>
+                                                        <div class="invalid-feedback fs-6">
+                                                            Please check reason.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                                    <div class="form-check">
+                                                        <input id="Reason10" type="radio" class="form-check-input accordion-body collapsed" name="WithdrawReason" data-bs-toggle="collapse" data-bs-target="#collapseEtc" aria-expanded="false" required />                       	
+                                                        <label for="Reason10" class="form-check-label fs-6">기타</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row accordion-collapse collapse" id="collapseEtc" data-bs-parent="#accordionExample">
+                                                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                                    <textarea name="EtcReason" id="Reason10"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-4">
+                                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-5">
+                                                    <div class="form-control p-2 withdraw-check-style">
+                                                        <p class="fs-6 mb-2">어떤 점이 불편하셨는지 말씀해주시면 문제를 해결할 수 있도록 최선을 다해 도와드릴게요!</p>
+                                                        <a href="contact-style2.html"><button type="button" class="fs-6">피터펫 문의하기</button></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="text-left col-12 col-sm-12 col-md-12 col-lg-12">
+                                                    <p class="d-flex-center">
+                                                        <input type="submit" class="btn rounded me-auto" value="탈퇴할래요!" data-bs-toggle="modal" data-bs-target="#WithdrawModal">
+                                                        <a href="index-demo15.html"><i class="align-middle icon an an-an-double-left me-2"></i>좀더 둘러볼게요!</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="WithdrawModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Withdraw</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body fs-6">
+                                                            정말 탈퇴하시겠습니까?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                                        <button type="button" class="btn btn-primary">탈퇴할래요!</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- End withdraw -->
+                            </div>
+                            <!-- End Tab panes -->
+                        </div>
+                    </div>
+                    <!--End Main Content-->
+                </div>
+                <!--End Container-->
+            </div>
+            <!--End Body Container-->
+
+            <!--Scoll Top-->
+            <span id="site-scroll"><i class="icon an an-chevron-up"></i></span>
+            <!--End Scoll Top-->
+
+            <!--MiniCart Drawer-->
+            <div class="minicart-right-drawer modal right fade" id="minicart-drawer">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div id="cart-drawer" class="block block-cart">
+                            <div class="minicart-header">
+                                <a href="javascript:void(0);" class="close-cart" data-bs-dismiss="modal" aria-label="Close"><i class="an an-times-r" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left" title="Close"></i></a>
+                                <h4 class="fs-6">Your cart (2 Items)</h4>
+                            </div>
+                            <div class="minicart-content">
+                                <ul class="clearfix">
+                                    <li class="item d-flex justify-content-center align-items-center">
+                                        <a class="product-image" href="product-layout1.html">
+                                            <img class="blur-up lazyload" src="assets/images/products/cart-product-img1.jpg" data-src="assets/images/products/cart-product-img1.jpg" alt="image" title="">
+                                        </a>
+                                        <div class="product-details">
+                                            <a class="product-title" href="product-layout1.html">Floral Crop Top</a>
+                                            <div class="variant-cart">Black / XL</div>
+                                            <div class="priceRow">
+                                                <div class="product-price">
+                                                    <span class="money">$59.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="qtyDetail text-center">
+                                            <div class="wrapQtyBtn">
+                                                <div class="qtyField">
+                                                    <a class="qtyBtn minus" href="javascript:void(0);"><i class="icon an an-minus-r" aria-hidden="true"></i></a>
+                                                    <input type="text" name="quantity" value="1" class="qty">
+                                                    <a class="qtyBtn plus" href="javascript:void(0);"><i class="icon an an-plus-l" aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
+                                            <a href="#" class="edit-i remove"><i class="icon an an-edit-l" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></a>
+                                            <a href="#" class="remove"><i class="an an-times-r" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"></i></a>
+                                        </div>
+                                    </li>
+                                    <li class="item d-flex justify-content-center align-items-center">
+                                        <a class="product-image" href="product-layout1.html">
+                                            <img class="blur-up lazyload" src="assets/images/products/cart-product-img1.jpg" data-src="assets/images/products/cart-product-img1.jpg" alt="image" title="">
+                                        </a>
+                                        <div class="product-details">
+                                            <a class="product-title" href="product-layout1.html">V Neck T-shirts</a>
+                                            <div class="variant-cart">Blue / XL</div>
+                                            <div class="priceRow">
+                                                <div class="product-price">
+                                                    <span class="money">$199.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="qtyDetail text-center">
+                                            <div class="wrapQtyBtn">
+                                                <div class="qtyField">
+                                                    <a class="qtyBtn minus" href="javascript:void(0);"><i class="icon an an-minus-r" aria-hidden="true"></i></a>
+                                                    <input type="text" name="quantity" value="1" class="qty">
+                                                    <a class="qtyBtn plus" href="javascript:void(0);"><i class="icon an an-plus-l" aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
+                                            <a href="#" class="edit-i remove"><i class="icon an an-edit-l" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></a>
+                                            <a href="#" class="remove"><i class="an an-times-r" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"></i></a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="minicart-bottom">
+                                <div class="shipinfo text-center mb-3 text-uppercase">
+                                    <p class="freeShipMsg"><i class="an an-truck fs-5 me-2 align-middle"></i>SPENT <b>$199.00</b> MORE FOR FREE SHIPPING</p>
+                                </div>
+                                <div class="subtotal">
+                                    <span>Total:</span>
+                                    <span class="product-price">$93.13</span>
+                                </div>
+                                <a href="checkout-style1.html" class="w-100 p-2 my-2 btn btn-outline-primary proceed-to-checkout rounded">Proceed to Checkout</a>
+                                <a href="cart-style1.html" class="w-100 btn-primary cart-btn rounded">View Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div th:replace="~{peter/include/foot :: foot}"></div>
+            <div th:replace="~{peter/include/includePeterOriginal :: includePeterOriginal}"></div>
+            <div th:replace="~{peter/include/includePeterCommon :: includePeterCommon}"></div>
+            <div th:replace="~{peter/include/includePeterRegister :: includePeterRegister}"></div>
+
+            <script type="text/javascript" th:inline="javascript">
+                let form = document.getElementById("userInfoForm");
+                let goUrlPeterUpdt = "/peter/member/UpdatePeterForm";
+                let goUrlPeterProc = "/peter/pet/PetPeterProc";
+
+                let name = document.getElementById("userName");
+                let modifyDate = document.getElementById("userModDate");
+                let email = document.getElementById("userEmail");
+                let phone = document.getElementById("userPhone");
+                let emailNociceFlag = document.getElementById("userRecvNotiFlag");
+                let postaCode = document.getElementById("userPostCode");
+                let address = document.getElementById("userAddr");
+                let detailAddress = document.getElementById("userDetailAddr");
+            
+                let nameValid = document.getElementById("userNameValid");
+                let emailValid = document.getElementById("userEmailValid");
+                let phoneVaild = document.getElementById("userPhoneValid");
+                let addressValid = document.getElementById("userAddrValid");
+            
+                validationInit = function() {
+                    nameValid.style.display = "none";
+                    emailValid.style.display = "none";
+                    phoneVaild.style.display = "none";
+                    addressValid.style.display = "none";
+                }
+            
+                validation = function() {
+                
+                    let temp;
+                
+                    temp = name.value;
+                    if (!checkLength(temp) && !onlyKo(temp)) {
+                        nameValid.style.display = "block";
+                        name.style.outlineColor = "red";
+                        name.focus();
+                        return false;
+                    }
+                
+                    temp = email.value;
+                    if (!checkLength(temp) && !onlyEmail(temp)) {
+                        emailValid.style.display = "block";
+                        email.style.outlineColor = "red";
+                        email.focus();
+                        return false;
+                    }
+                
+                    temp = phone.value;
+                    if (!checkLength(temp) || !onlyPhone(temp)) {
+                        phoneVaild.style.display = "block";
+                        phone.style.outlineColor = "red";
+                        phone.focus();
+                        return false;
+                    }
+                
+                    if (!checkLength(postaCode.value) || !checkLength(address.value)) {
+                        addressValid.style.display = "block";
+                        address.style.outlineColor = "red";
+                        address.focus();
+                        return false;
+                    }
+
+                    if (emailNociceFlag.checked) {
+                        emailNociceFlag.value = 1;
+                    } else {
+                        emailNociceFlag.value = 0;
+                    }
+                
+                    return true;
+                }
+            </script>
+        </div>
+        <!--End Page Wrapper-->
+    </body>
+</html>

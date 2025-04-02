@@ -11,19 +11,27 @@ public class MemberService {
 	@Autowired
 	MemberDao memberDao;
 	
-	List<MemberDto> selectList(MemberVo vo) {
+	public List<MemberDto> selectList(MemberVo vo) {
 		return memberDao.selectList(vo);
 	}
 	
-	int selectOneCount(MemberVo vo) {
+	public int selectOneCount(MemberVo vo) {
 		return memberDao.selectOneCount(vo);
 	}
 	
-	MemberDto selectOne(MemberDto memberDto) {
+	public MemberDto selectOne(MemberDto memberDto) {
 		return memberDao.selectOne(memberDto);
 	}
 	
-	MemberDto selectOneLogin(MemberDto memberDto) {
+	public MemberDto selectOneLogin(MemberDto memberDto) {
 		return memberDao.selectOneLogin(memberDto);
+	}
+	
+	public int update(MemberDto memberDto) {
+		return memberDao.update(memberDto);
+	}
+	
+	public int insert(MemberDto memberDto) {
+		return memberDao.insert(memberDto);
 	}
 }

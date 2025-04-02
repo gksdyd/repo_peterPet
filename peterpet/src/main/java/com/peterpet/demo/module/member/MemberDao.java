@@ -11,4 +11,6 @@ public interface MemberDao {
 	int selectOneCount(MemberVo vo);
 	MemberDto selectOne(MemberDto memberDto);
 	MemberDto selectOneLogin(MemberDto memberDto);
+	int update(MemberDto memberDto);
+	int insert(MemberDto memberDto);
 }

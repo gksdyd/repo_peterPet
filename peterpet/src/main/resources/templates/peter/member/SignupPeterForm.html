@@ -22,7 +22,8 @@
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 box mt-2 mt-lg-5">	
                             <h3 class="h4 text-uppercase mb-3">개인 정보</h3>
-                            <form method="post" action="#" accept-charset="UTF-8" class="needs-validation customer-form" novalidate>
+                            <form id="singupForm" accept-charset="UTF-8" class="needs-validation customer-form" novalidate>
+                                <input type="hidden" id="userGender" name="userGender">
                                 <div class="row">
                                     <div class="col-12 col-sm-12 col-md-5 col-lg-5">
                                         <div class="form-group">
@@ -33,11 +34,11 @@
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-2 col-lg-2">
                                         <div class="form-check">
-                                            <input id="userMan" type="radio" class="form-check-input" name="userGender" required />                       	
+                                            <input id="userMan" type="radio" class="form-check-input" name="userMan" value="159" required />                       	
                                             <label for="userMan" class="form-check-label">남성</label>
                                         </div>
                                         <div class="form-check">
-                                            <input id="userWoman" type="radio" class="form-check-input" name="userGender" required />                       	
+                                            <input id="userWoman" type="radio" class="form-check-input" name="userWoman" value="160" required />                       	
                                             <label for="userWoman" class="form-check-label">여성</label>
                                             <div class="invalid-feedback" id="userGenderValid">성별을 체크해주세요.</div>
                                         </div>
@@ -57,10 +58,7 @@
                                         <div class="form-group">
                                             <select class="form-select register-agency" id="userAgency" name="userAgency" required>
                                                 <option value="">통신사</option>
-                                                <option value="SKT">SKT</option>
-                                                <option value="SK">SK</option>
-                                                <option value="LG">LG U+</option>
-                                                <option value="LG">알뜰폰</option>                     	
+                                                <option th:each="agency : ${@codeService.selectListCachedCode(13)}" th:value="${agency.codeSeq}" th:text="${agency.codeName}"></option>                   	
                                             </select>
                                             <div class="invalid-feedback" id="userAgencyValid">통신사를 선택해주세요.</div>
                                         </div>
@@ -72,11 +70,11 @@
                                             <div class="invalid-feedback" id="userPhoneValid">전화번호를 입력해주세요.</div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                                    <!-- <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                                         <button type="button" class="btn rounded mb-3 collapsed" id="recieveCertificationNumBtn">인증번호 받기</button>
-                                    </div>
+                                    </div> -->
                                 </div>
-                                <div class="row accordion-collapse collapse" id="collapsePhone">
+                                <!-- <div class="row accordion-collapse collapse" id="collapsePhone">
                                     <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                                         <div class="form-group">
                                             <label for="userCertification" class="d-none">인증번호<span class="required">*</span></label>
@@ -87,7 +85,7 @@
                                     <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                                         <button type="button" class="btn rounded mb-3" id="certificationBtn">인증확인</button>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="row">
                                     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                         <div class="form-group">
@@ -100,7 +98,7 @@
                                 <div class="row">
                                     <div class="form-group form-check col-12 col-sm-12 col-md-12 col-lg-12">
                                         <div class="customCheckbox clearfix">
-                                            <input id="userRecvNotiFlag" name="userRecvNotiFlag" type="checkbox" />
+                                            <input id="userRecvNotiFlag" name="userRecvNotiFlag" type="checkbox" value="0" />
                                             <label for="userRecvNotiFlag">이메일 수신 알림 동의</label>
                                         </div>
                                     </div>
@@ -262,14 +260,20 @@
             <div th:replace="~{peter/include/includePeterCommon :: includePeterCommon}"></div>
 
             <script>
+                let form = document.getElementById("singupForm");
+
+                let goUrlInsertUser = "/peter/member/InsertPeterForm"
+
                 let name = document.getElementById("userName");
+                let gender = document.getElementById("userGender");
                 let man = document.getElementById("userMan");
                 let woman = document.getElementById("userWoman");
                 let birth = document.getElementById("userBirth");
                 let agency = document.getElementById("userAgency");
                 let phone = document.getElementById("userPhone");
-                let certification = document.getElementById("userCertification");
+                // let certification = document.getElementById("userCertification");
                 let email = document.getElementById("userEmail");
+                let receiveNotice = document.getElementById("userRecvNotiFlag");
                 let postaCode = document.getElementById("userPostCode");
                 let address = document.getElementById("userAddr");
                 let detailAddress = document.getElementById("userDetailAddr");
@@ -282,12 +286,25 @@
                 let birthValid = document.getElementById("userBirthValid");
                 let agencyValid = document.getElementById("userAgencyValid");
                 let phoneValid = document.getElementById("userPhoneValid");
-                let certificationValid = document.getElementById("userCertificationValid");
+                // let certificationValid = document.getElementById("userCertificationValid");
                 let emailValid = document.getElementById("userEmailValid");
                 let addressValid = document.getElementById("userAddrValid");
                 let idValid = document.getElementById("userIdValid");
                 let passwordValid = document.getElementById("userPasswordValid");
                 let confirmPasswordValid = document.getElementById("userConfirmPasswordValid");
+
+                styleInit = function() {
+                    name.style.borderColor = "#757575";
+                    birth.style.borderColor = "#757575";
+                    agency.style.borderColor = "#757575";
+                    phone.style.borderColor = "#757575";
+                    // certification.style.borderColor = "#757575";
+                    email.style.borderColor = "#757575";
+                    address.style.borderColor = "#757575";
+                    id.style.borderColor = "#757575";
+                    password.style.borderColor = "#757575";
+                    confirmPassword.style.borderColor = "#757575";
+                }
 
                 validationInit = function() {
                     nameValid.style.display = "none";
@@ -295,7 +312,7 @@
                     birthValid.style.display = "none";
                     agencyValid.style.display = "none";
                     phoneValid.style.display = "none";
-                    certificationValid.style.display = "none";
+                    // certificationValid.style.display = "none";
                     emailValid.style.display = "none";
                     addressValid.style.display = "none";
                     idValid.style.display = "none";
@@ -348,23 +365,27 @@
                     temp = name.value;
                     if (!checkLength(temp) || !onlyKo(temp)) {
                         nameValid.style.display = "block";
-                        name.style.outlineColor = "red";
+                        name.style.borderColor = "red";
                         name.focus();
                         return false;
                     }
 
                     if (!(man.checked || woman.checked)) {
                         genderValid.style.display = "block";
-                        man.style.outlineColor = "red";
-                        woman.style.outlineColor = "red";
                         man.focus();
                         return false;
+                    } else {
+                        if (man.checked) {
+                            gender.value = man.value;
+                        } else {
+                            gender.value = woman.value;
+                        }
                     }
 
                     temp = birth.value;
                     if (!checkLength(temp)) {
                         birthValid.style.display = "block";
-                        birth.style.outlineColor = "red";
+                        birth.style.borderColor = "red";
                         birth.focus();
                         return false;
                     }
@@ -372,6 +393,7 @@
                     temp = agency.value;
                     if (!checkLength(temp)) {
                         agencyValid.style.display = "block";
+                        agency.style.borderColor = "red";
                         agency.focus();
                         return false;
                     }
@@ -379,21 +401,22 @@
                     temp = phone.value;
                     if (!onlyPhone(temp)) {
                         phoneValid.style.display = "block";
+                        phone.style.borderColor = "red";
                         phone.focus();
                         return false;
                     }
 
                     temp = email.value;
-                    if (checkLength(temp) && !onlyEmail(temp)) {
+                    if (!checkLength(temp) && !onlyEmail(temp)) {
                         emailValid.style.display = "block";
-                        email.style.outlineColor = "red";
+                        email.style.borderColor = "red";
                         email.focus();
                         return false;
                     }
 
                     if (!checkLength(postaCode.value) || !checkLength(address.value)) {
                         addressValid.style.display = "block";
-                        address.style.outlineColor = "red";
+                        address.style.borderColor = "red";
                         address.focus();
                         return false;
                     }
@@ -401,7 +424,7 @@
                     temp = id.value;
                     if (!checkLength(temp) || !onlyKoEngNumValid(temp)) {
                         idValid.style.display = "block";
-                        id.style.outlineColor = "red";
+                        id.style.borderColor = "red";
                         id.focus();
                         return false;
                     }
@@ -409,57 +432,35 @@
                     temp = password.value;
                     if (checkLengthCnt(temp) < 8 || !onlyEngKoNumAllSpecialChar(temp)) {
                         passwordValid.style.display = "block";
-                        password.style.outlineColor = "red";
+                        password.style.borderColor = "red";
                         password.focus();
                         return false;
                     }
 
                     if (temp != confirmPassword.value) {
                         confirmPasswordValid.style.display = "block";
-                        confirmPassword.style.outlineColor = "red";
+                        confirmPassword.style.borderColor = "red";
                         confirmPassword.focus();
                         return false;
+                    }
+
+                    if (receiveNotice.checked) {
+                        receiveNotice.value = 1;
                     }
 
                     return true;
                 }
       
                 function signUpLogic () {
-                    
+                    styleInit();
                     validationInit();
                     
                     if(!validation()) {
                         return false;
                     }
-                    
-                    $.ajax({
-                        async: true 
-                        ,cache: false
-                        ,type: "post"
-                        /* ,dataType:"json" */
-                        ,url: "/peter/member/LoginPeterProc"
-                        /* ,data : $("#formLogin").serialize() */
-                        ,data : { "userName" : $("#userName").val(), "userBirth" : $("#userBirth").val(), "userGender" : $("#userBirth").val(),
-                        "userAgency" : $("#userAgency").val(), "userPhone" : $("#userPhone").val(), "userEmail" : $("#userEmail").val(),
-                        "userPostCode" : $("#userPostCode").val(), "userAddr" : $("#userAddr").val(), "userDetailAddr" : $("#userDetailAddr").val(),
-                        "userId" : $("#userId").val(), "userPassword" : $("#userPassword").val(), "userRecvNotiFlag" : $("#userRecvNotiFlag").is(":checked")}
-                        ,success: function(response) {
-                            if(response.rt == "success") {
-                            if(response.changePwd == "true") {
-                                // location.href = "/v1/infra/member/expiredPwdUsrForm";
-                            } else {
-                                location.href = URL_INDEX_VIEW_PETER;
-                            }
-                            } else {
-                            document.getElementById("modalAlertTitle").innerText = "확 인";
-                            document.getElementById("modalAlertBody").innerText = "일치하는 회원이 존재 하지 않습니다!";
-                            $("#modalAlert").modal("show");
-                            }
-                        }
-                        ,error : function(jqXHR, textStatus, errorThrown){
-                            alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
-                        }
-                    });
+                    form.action = goUrlInsertUser;
+                    form.method = "post";
+                    form.submit();
                 }
 
                 $("#singUpBtn").on("click", function() {

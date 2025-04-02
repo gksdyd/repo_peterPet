@@ -102,4 +102,47 @@
 		WHERE
 			userSeq = #{userSeq}
 	</update>
+	
+	<insert id="insert">
+		INSERT INTO user (
+			userGender,
+			userName,
+			userId,
+			userPassword,
+			userBirth,
+			userEmail,
+			userAgency,
+			userPhone,
+			userRecvNotiFlag,
+			userPostCode,
+			userAddr,
+			userDetailAddr,
+			userLatitude,
+			userLongitude,
+			userDelFlag,
+			userSavePoint,
+			userRegDate
+		) VALUE (
+			#{userGender},
+			#{userName},
+			#{userId},
+			#{userPassword},
+			#{userBirth},
+			#{userEmail},
+			#{userAgency},
+			#{userPhone},
+			#{userRecvNotiFlag},
+			#{userPostCode},
+			#{userAddr},
+			#{userDetailAddr},
+			0,
+			0,
+			0,
+			0,
+			date_format(NOW(), '%Y-%m-%d %H:%i:%S')
+		)
+		<selectKey resultType="String" keyProperty="userSeq" order="AFTER">
+			SELECT last_insert_id()
+		</selectKey>
+	</insert>
 </mapper>

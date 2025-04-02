@@ -83,6 +83,11 @@
                     idValid.style.display = "none";
                     passwordValid.style.display = "none";
                 }
+
+                styleInit = function() {
+                    id.style.borderColor = "#757575";
+                    password.style.borderColor = "#757575";
+                }
       
                 validation = function() {
                     let temp;
@@ -90,7 +95,7 @@
                     temp = id.value;
                     if (!checkLength(temp) || !onlyKoEngNumValid(temp)) {
                     idValid.style.display = "block";
-                    id.style.outlineColor = "red";
+                    id.style.borderColor = "red";
                     id.focus();
                     return false;
                     }
@@ -98,7 +103,7 @@
                     temp = password.value;
                     if (!checkLength(temp) || !onlyEngKoNumAllSpecialChar(temp)) {
                     passwordValid.style.display = "block";
-                    password.style.outlineColor = "red";
+                    password.style.borderColor = "red";
                     password.focus();
                     return false;
                     }
@@ -109,6 +114,7 @@
                 function loginLogic () {
                     
                     validationInit();
+                    styleInit();
                     
                     if(!validation()) {
                     return false;
