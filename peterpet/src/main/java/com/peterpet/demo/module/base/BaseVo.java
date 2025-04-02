@@ -25,6 +25,8 @@ public class BaseVo {
 	private Integer shOption;									/* null 값을 받아야 되는 경우가 있어서 int 대신 Integer 사용 */
 	private String shValue = "";
 
+	private int registerOrModifyFlag;
+	
 	public int getThisPage() {
 		return thisPage;
 	}
@@ -138,6 +140,14 @@ public class BaseVo {
 		this.shValue = shValue;
 	}
 	
+	public int getRegisterOrModifyFlag() {
+		return registerOrModifyFlag;
+	}
+
+	public void setRegisterOrModifyFlag(int registerOrModifyFlag) {
+		this.registerOrModifyFlag = registerOrModifyFlag;
+	}
+
 	public void setParamsPaging(int totalRows) {
 //		setThisPage(3);
 

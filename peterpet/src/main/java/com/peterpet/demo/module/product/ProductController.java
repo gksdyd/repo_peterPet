@@ -43,23 +43,30 @@ public class ProductController extends BaseController {
 
 	@RequestMapping(value = "/ProductXdmForm")
 	public String productXdmForm(Model model, ProductDto productDto, @ModelAttribute("vo") ProductVo vo) {
-		vo.InitProdType();
-		if (productService.selectMaxSeq() == null) {
-			productDto.setProdSeq("1");
+		if (vo.getRegisterOrModifyFlag() == 1) {
+			vo.InitProdType();
+			if (productService.selectMaxSeq() == null) {
+				productDto.setProdSeq("1");
+			} else {
+				productDto.setProdSeq((productService.selectMaxSeq() + 1) + "");
+			}
+			model.addAttribute("item", productDto);
 		} else {
-			productDto.setProdSeq((productService.selectMaxSeq() + 1) + "");
+			
 		}
-		model.addAttribute("item", productDto);
-//		vo.prodFuncSelect();
-//		model.addAttribute("func", vo);
-//		model.addAttribute("info", feedInfoVo);
 		return "xdm/product/ProductXdmForm";
 	}
 
-	@RequestMapping(value = "/xdm/product/ProductXdmInst")
-	public String codeGroupXdmInst(ProductVo vo, ProductDto productDto) {
-//		vo.prodFuncRegister(productDto);
+	@RequestMapping(value = "/ProductXdmInst")
+	public String codeGroupXdmInst(ProductDto productDto) {
 		productService.insert(productDto);
+		
+		for (int i = 0; i < productDto.getFeedPriceArray().size(); i++) {
+			productDto.setInfoPrice(productDto.getFeedPriceArray().get(i));
+			productDto.setInfoWeight(productDto.getFeedWeightArray().get(i));
+			productDto.setInfoDiscount(productDto.getFeedDiscountArray().get(i));
+			productService.infoInsert(productDto);
+		}
 		return "redirect:/xdm/product/ProductXdmList";
 	}
 }

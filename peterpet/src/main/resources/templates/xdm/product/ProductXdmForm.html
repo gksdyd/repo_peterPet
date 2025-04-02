@@ -13,6 +13,7 @@
             </div>
             <div class="card-body bg-body-tertiary">
               <form class="needs-validation" novalidate id="product-form" name="product-form">
+                <input type="hidden" name="registerOrModifyFlag" id="registerOrModifyFlag" th:value="${vo.registerOrModifyFlag}" disabled>
                 <div class="row g-3">
                   <div class="col-3">
                     <label class="form-label-JHY" for="prodType">상품 유형<span style="color: red;">*</span></label>
@@ -26,6 +27,23 @@
                   </div>
                 </div>
                 <div class="card border h-100 border-primary mb-3" th:if="${vo.prodType} == '1'">
+                  <input type="hidden" id="feedPriceArray" name="feedPriceArray">
+                  <input type="hidden" id="feedWeightArray" name="feedWeightArray">
+                  <input type="hidden" id="feedDiscountArray" name="feedDiscountArray">
+                  <input type="hidden" id="prodTeethFlag" name="prodTeethFlag">
+                  <input type="hidden" id="prodTearsFlag" name="prodTearsFlag">
+                  <input type="hidden" id="prodBrainFlag" name="prodBrainFlag">
+                  <input type="hidden" id="prodImmunityFlag" name="prodImmunityFlag">
+                  <input type="hidden" id="prodBoneFlag" name="prodBoneFlag">
+                  <input type="hidden" id="prodStressFlag" name="prodStressFlag">
+                  <input type="hidden" id="prodKidneyFlag" name="prodKidneyFlag">
+                  <input type="hidden" id="prodHeartFlag" name="prodHeartFlag">
+                  <input type="hidden" id="prodAllergyFlag" name="prodAllergyFlag">
+                  <input type="hidden" id="prodPregnancyFlag" name="prodPregnancyFlag">
+                  <input type="hidden" id="prodIntestineFlag" name="prodIntestineFlag">
+                  <input type="hidden" id="prodNeuteringFlag" name="prodNeuteringFlag">
+                  <input type="hidden" id="prodWeightFlag" name="prodWeightFlag">
+                  <input type="hidden" id="prodSkinFlag" name="prodSkinFlag">
                   <div class="row g-3 mt-0 ms-2 me-2">
                     <div class="col-3">
                       <label class="form-label-JHY" for="pordSeq">사료 코드<span style="color: red;">*</span></label>
@@ -148,6 +166,8 @@
                 <div class="mb-3 row g-3">
                   <div class="col">
                     <a href="/xdm/product/ProductXdmList"><button class="btn btn-outline-dark btn-sm" type="button"><span class="fas fa-list-ul"></span></button></a>
+                    <button class="btn btn-danger btn-sm" type="button" id="deleteBtn" th:if="${vo.registerOrModifyFlag != 1}"><span class="bi-x"></span></button>
+                    <button class="btn btn-danger btn-sm" type="button" id="ueleteBtn" th:if="${vo.registerOrModifyFlag != 1}"><span class="far fa-trash-alt"></span></button>
                   </div>
                   <div class="col" style="text-align: right;">
                     <button class="btn btn-primary btn-sm" type="button" id="btnSubmit"><span class="fas fa-database"></span></button>
@@ -163,13 +183,17 @@
   <!-- ===============================================-->
   <!--    End of Main Content-->
   <!-- ===============================================-->
-  <script type="text/javascript">
-
-  </script>
   <div th:replace="~{xdm/include/includeXdmFalcon :: includeXdmFalcon}"></div>
   <div th:replace="~{xdm/include/includeXdmCommon :: includeXdmCommon}"></div>
   <div th:replace="~{xdm/include/includeXdmForm :: includeXdmForm}"></div>
   <div th:replace="~{xdm/include/includeXdmCommonProd :: includeXdmCommonProd}"></div>
+
+  <script type="text/javascript">
+    let form = document.getElementById("product-form");
+
+    let goUrlXdmInst = "/xdm/product/ProductXdmInst";
+    // let goUrlXdmUpdt = "/xdm/product/ProductXdmInst";
+  </script>
   </body>
   
   </html>

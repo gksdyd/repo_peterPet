@@ -12,4 +12,5 @@ public interface ProductDao {
 	public List<ProductDto> selectList(ProductVo vo);
 	public int selectOneCount(ProductVo vo);
 	public String selectOneFunc(ProductVo vo);
+	public int infoInsert(ProductDto productDto);
 }

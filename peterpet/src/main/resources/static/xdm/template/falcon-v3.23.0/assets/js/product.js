@@ -114,7 +114,7 @@ $("#feedInfoSaveBtn").on('click', function() {
 
   let createPrice = document.createElement('input');
   createPrice.setAttribute("type", "text");
-  createPrice.setAttribute("class", "form-control fs-11");
+  createPrice.setAttribute("class", "form-control fs-11 feedPrice");
   createPrice.setAttribute("style", "text-align: right");
   createPrice.setAttribute("value", feedPrice.value);
 
@@ -124,7 +124,7 @@ $("#feedInfoSaveBtn").on('click', function() {
 
   let createWeight = document.createElement('input');
   createWeight.setAttribute("type", "text");
-  createWeight.setAttribute("class", "form-control fs-11 text-right");
+  createWeight.setAttribute("class", "form-control fs-11 text-right feedWeight");
   createWeight.setAttribute("style", "text-align: right");
   createWeight.setAttribute("value", feedWeight.value);
 
@@ -134,7 +134,7 @@ $("#feedInfoSaveBtn").on('click', function() {
 
   let createDiscount = document.createElement('input');
   createDiscount.setAttribute("type", "text");
-  createDiscount.setAttribute("class", "form-control fs-11");
+  createDiscount.setAttribute("class", "form-control fs-11 feedDiscount");
   createDiscount.setAttribute("style", "text-align: right");
   createDiscount.setAttribute("value", feedDiscount.value);
 
@@ -174,3 +174,34 @@ $(document).on('click', '.removeBtn', function(){
     document.querySelectorAll(".removeBtn")[i].parentNode.firstChild.innerHTML = i + 1;
   }
 });
+
+// 등록 시, 가격, 무게, 할인율 전달하는 함수
+feedInfoSave = function() {
+  let priceArray = [];
+  let weightArray = [];
+  let discountArray = [];
+
+  let feedPrice = document.querySelectorAll(".feedPrice");
+  let feedWeight = document.querySelectorAll(".feedWeight");
+  let feedDiscount = document.querySelectorAll(".feedDiscount");
+
+  let feedPriceArray = document.getElementById("feedPriceArray");
+  let feedWeightArray = document.getElementById("feedWeightArray");
+  let feedDiscountArray = document.getElementById("feedDiscountArray");
+  
+  for (let i = 0; i < feedPrice.length; i++) {
+    priceArray.push(feedPrice[i].value);
+    weightArray.push(feedWeight[i].value);
+    discountArray.push(feedDiscount[i].value);
+  }
+
+  feedPriceArray.value = priceArray;
+  feedWeightArray.value = weightArray;
+  feedDiscountArray.value = discountArray;
+}
+
+funcRegister = function() {
+  for (let i = 0; i < funcArray.length; i++) {
+    $("#" + funcIdArray[i]).val(funcArray[i]);
+  }
+}

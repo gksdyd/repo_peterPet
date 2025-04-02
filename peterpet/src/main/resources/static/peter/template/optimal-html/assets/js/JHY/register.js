@@ -11,10 +11,8 @@ document.getElementById("btnSubmit").onclick = function() {
     }
 
     if (document.getElementById("registerOrModifyFlag").value == 1) {
-        registerDate.value = calculateToday();
         form.action = goUrlXdmInst;
     } else {
-        modifyDate.value = calculateToday();
         form.action = goUrlPeterUpdt;
     }
 

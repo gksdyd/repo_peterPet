@@ -30,4 +30,8 @@ public class ProductService {
 	public String selectOneFunc(ProductVo vo) {
 		return productDao.selectOneFunc(vo);
 	}
+	
+	public int infoInsert(ProductDto productDto) {
+		return productDao.infoInsert(productDto);
+	}
 }

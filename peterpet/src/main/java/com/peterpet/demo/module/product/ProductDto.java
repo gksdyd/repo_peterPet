@@ -1,5 +1,8 @@
 package com.peterpet.demo.module.product;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProductDto {
 
 	private String prodSeq;
@@ -37,6 +40,10 @@ public class ProductDto {
 	private Integer infoDiscount;
 	private Integer infoDelFlag;
 	private String product_prodSeq;
+	
+	List<Integer> feedPriceArray = new ArrayList<>();
+	List<Double> feedWeightArray = new ArrayList<>();
+	List<Integer> feedDiscountArray = new ArrayList<>();
 	
 	public String getProdSeq() {
 		return prodSeq;
@@ -235,5 +242,23 @@ public class ProductDto {
 	}
 	public void setProduct_prodSeq(String product_prodSeq) {
 		this.product_prodSeq = product_prodSeq;
+	}
+	public List<Integer> getFeedPriceArray() {
+		return feedPriceArray;
+	}
+	public void setFeedPriceArray(List<Integer> feedPriceArray) {
+		this.feedPriceArray = feedPriceArray;
+	}
+	public List<Double> getFeedWeightArray() {
+		return feedWeightArray;
+	}
+	public void setFeedWeightArray(List<Double> feedWeightArray) {
+		this.feedWeightArray = feedWeightArray;
+	}
+	public List<Integer> getFeedDiscountArray() {
+		return feedDiscountArray;
+	}
+	public void setFeedDiscountArray(List<Integer> feedDiscountArray) {
+		this.feedDiscountArray = feedDiscountArray;
 	}
 }
