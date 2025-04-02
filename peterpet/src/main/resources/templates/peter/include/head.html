@@ -69,11 +69,12 @@
                             <div class="user-link iconset"><i class="icon an an-user-expand"></i><span class="tooltip-label">Account</span></div>
                             <div id="userLinks">
                                 <ul class="user-links">
-                                    <li><a href="/peter/member/LoginPeterForm">로그인</a></li>
-                                    <li><a href="javascript:void(0);" id="btnLogout">로그아웃</a></li>
-                                    <li><a href="/peter/member/SignupPeterForm">회원가입</a></li>
-                                    <li><a href="my-wishlist.html">Wishlist</a></li>
-                                    <li><a href="compare-style1.html">Compare</a></li>
+                                    <li><a href="/peter/member/MyAccountPeterForm" th:if="${session.sessSeqXdm} != null"><span class="an an-user-expand me-2"></span><span th:text="${session.sessIdXdm}"></span></a></li>
+                                    <li><a href="/peter/member/LoginPeterForm" th:if="${session.sessSeqXdm} == null">로그인</a></li>
+                                    <li><a href="/peter/member/SignupPeterForm" th:if="${session.sessSeqXdm} == null">회원가입</a></li>
+                                    <li><a href="my-wishlist.html" th:if="${session.sessSeqXdm} != null">Wishlist</a></li>
+                                    <li><a href="compare-style1.html" th:if="${session.sessSeqXdm} != null">Compare</a></li>
+                                    <li><a href="javascript:void(0);" id="btnLogout" th:if="${session.sessSeqXdm} != null">LogOut</a></li>
                                 </ul>
                             </div>
                             <!--End Setting Dropdown-->

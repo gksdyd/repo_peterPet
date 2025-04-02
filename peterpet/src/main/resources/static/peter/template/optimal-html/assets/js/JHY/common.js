@@ -12,7 +12,7 @@ $("#btnLogout").on("click", function(){
       ,data: {}
       ,success: function(response) {
         if(response.rt == "success") {
-          location.href = URL_SIGNIN_FORM_XDM;
+          location.href = URL_INDEX_VIEW_PETER;
         } else {
           // by pass
         }
