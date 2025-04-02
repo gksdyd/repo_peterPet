@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -40,15 +41,16 @@ public class ProductController extends BaseController {
 		return "xdm/product/ProductXdmList";
 	}
 
-	@RequestMapping(value = "/xdm/product/ProductXdmForm")
-	public String productXdmForm(Model model, ProductVo vo) {
+	@RequestMapping(value = "/ProductXdmForm")
+	public String productXdmForm(Model model, ProductDto productDto, @ModelAttribute("vo") ProductVo vo) {
+		vo.InitProdType();
 		if (productService.selectMaxSeq() == null) {
-			vo.setProdSeq("1");
+			productDto.setProdSeq("1");
 		} else {
-			vo.setProdSeq((productService.selectMaxSeq() + 1) + "");
+			productDto.setProdSeq((productService.selectMaxSeq() + 1) + "");
 		}
+		model.addAttribute("item", productDto);
 //		vo.prodFuncSelect();
-		model.addAttribute("item", vo);
 //		model.addAttribute("func", vo);
 //		model.addAttribute("info", feedInfoVo);
 		return "xdm/product/ProductXdmForm";

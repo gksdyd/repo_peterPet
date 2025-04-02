@@ -12,8 +12,7 @@
               <h1>펫 상품 등록</h1>
             </div>
             <div class="card-body bg-body-tertiary">
-              <form class="needs-validation" novalidate action="/xdm/product/ProductXdmInst" method="post" id="product-form" name="product-form">
-                <input type="hidden" name="addOrRemoveFlag" id="addOrRemoveFlag" value="0">
+              <form class="needs-validation" novalidate id="product-form" name="product-form">
                 <div class="row g-3">
                   <div class="col-3">
                     <label class="form-label-JHY" for="prodType">상품 유형<span style="color: red;">*</span></label>
@@ -21,12 +20,12 @@
                 </div>
                 <div class="mb-3 row g-3">
                   <div class="col-3">
-                    <select class="form-select-JHY" name="prodType" id="prodType" onchange="changeProductType('product-form', '/xdm/product/ProductXdmForm')">
-                      <option th:each="productType : ${@codeService.selectListCachedCode(1)}" th:text="${productType.codeName}" th:value="${productType.codeSeq}" th:selected="${func.prodType} == ${productType.codeSeq}"></option>
+                    <select class="form-select-JHY" name="prodType" id="prodType" onchange="changeProductType('product-form', URL_PRODUCT_XDM_FORM)">
+                      <option th:each="productType : ${@codeService.selectListCachedCode(1)}" th:text="${productType.codeName}" th:value="${productType.codeSeq}" th:selected="${vo.prodType} == ${productType.codeSeq}"></option>
                     </select>
                   </div>
                 </div>
-                <div class="card border h-100 border-primary mb-3" th:if="${func.prodType} == '1'">
+                <div class="card border h-100 border-primary mb-3" th:if="${vo.prodType} == '1'">
                   <div class="row g-3 mt-0 ms-2 me-2">
                     <div class="col-3">
                       <label class="form-label-JHY" for="pordSeq">사료 코드<span style="color: red;">*</span></label>
@@ -40,7 +39,7 @@
                   </div>
                   <div class="mb-3 row g-3 ms-2 me-2">
                     <div class="col-3">
-                      <input class="form-control-JHY" name="prodSeq" id="prodSeq" th:value="${func.prodSeq}" type="text" placeholder="자동생성" readonly />
+                      <input class="form-control-JHY" name="prodSeq" id="prodSeq" th:value="${item.prodSeq}" type="text" placeholder="자동생성" readonly />
                     </div>
                     <div class="col-3">
                       <input class="form-control-JHY" name="prodName" id="prodName" th:value="${item.prodName}" type="text" />
@@ -58,7 +57,7 @@
                     <div class="col-3">
                       <div class="form-group">
                         <select class="form-select-JHY" id="feedSalaryAge" name="feedSalaryAge">
-                          <option value="0">급여 연령</option>
+                          <option value="">급여 연령</option>
                           <option th:each="feedSalaryAge : ${@codeService.selectListCachedCode(2)}" th:selected="${item.feedSalaryAge} == ${feedSalaryAge.codeSeq}" th:text="${feedSalaryAge.codeName}" th:value="${feedSalaryAge.codeSeq}"></option>
                         </select>
                       </div>
@@ -66,7 +65,7 @@
                     <div class="col-3">
                       <div class="form-group">
                         <select class="form-select-JHY" id="feedType" name="feedType">
-                          <option value="0">종류</option>
+                          <option value="">종류</option>
                           <option th:each="feedType : ${@codeService.selectListCachedCode(3)}" th:selected="${item.feedType} == ${feedType.codeSeq}" th:text="${feedType.codeName}" th:value="${feedType.codeSeq}"></option>
                         </select>
                       </div>
@@ -74,7 +73,7 @@
                     <div class="col-3">
                       <div class="form-group">
                         <select class="form-select-JHY" id="feedEtc" name="feedEtc">
-                          <option value="0">기타</option>
+                          <option value="">기타</option>
                           <option th:each="feedEtc : ${@codeService.selectListCachedCode(4)}" th:selected="${item.feedEtc} == ${feedEtc.codeSeq}" th:text="${feedEtc.codeName}" th:value="${feedEtc.codeSeq}"></option>
                         </select>
                       </div>
@@ -82,7 +81,7 @@
                     <div class="col-3">
                       <div class="form-group">
                         <select class="form-select-JHY" id="feedSize" name="feedSize">
-                          <option value="0">크기</option>
+                          <option value="">크기</option>
                           <option th:each="feedSize : ${@codeService.selectListCachedCode(16)}" th:selected="${item.feedSize} == ${feedSize.codeSeq}" th:text="${feedSize.codeName}" th:value="${feedSize.codeSeq}"></option>
                         </select>
                       </div>
@@ -91,9 +90,9 @@
                   <div class="mb-3 row g-3 ms-2 me-2">
                     <div class="col-3">
                       <div class="form-group">
-                        <select class="form-select-JHY" onchange="funcSelect('product-form', '/xdm/product/ProductXdmForm', value, 1)">
-                          <option value="0">기능</option>
-                          <option th:each="prodFunction : ${@codeService.selectListCachedCode(6)}" th:text="${prodFunction.codeName}" th:value="${prodFunction.codeSeq}" th:disabled="${#arrays.contains(func.prodFuncArr, prodFunction.codeSeq)} ? 'disabled' : null"></option>
+                        <select class="form-select-JHY" name="prodFunction" id="prodFunction">
+                          <option value="">기능</option>
+                          <option th:each="prodFunction : ${@codeService.selectListCachedCode(6)}" th:text="${prodFunction.codeName}" th:value="${prodFunction.codeSeq}" th:disabled="${#arrays.contains(vo.prodFuncArray, prodFunction.codeSeq)} ? 'disabled' : null"></option>
                         </select>
                         <input type="hidden" name="prodFunction" id="prodFunction" value="0">
                       </div>
@@ -101,7 +100,7 @@
                     <div class="col-3">
                       <div class="form-group">
                         <select class="form-select-JHY" id="feedBrand" name="feedBrand">
-                          <option value="0">브랜드</option>
+                          <option value="">브랜드</option>
                           <option th:each="feedBrand : ${@codeService.selectListCachedCode(7)}" th:selected="${item.feedBrand} == ${feedBrand.codeSeq}" th:text="${feedBrand.codeName}" th:value="${feedBrand.codeSeq}"></option>
                         </select>
                       </div>
@@ -109,50 +108,40 @@
                     <div class="col-3">
                       <div class="form-group mb-2">
                         <select class="form-select-JHY" id="feedIngredient" name="feedIngredient">
-                          <option value="0">주원료</option>
+                          <option value="">주원료</option>
                           <option th:each="feedIngredient : ${@codeService.selectListCachedCode(8)}" th:selected="${item.feedIngredient} == ${feedIngredient.codeSeq}" th:text="${feedIngredient.codeName}" th:value="${feedIngredient.codeSeq}"></option>
                         </select>
                       </div>
                     </div>
                   </div>
                   <div class="mb-3 row g-3 ms-2 me-2">
-                    <div class="col-2" th:each="prodFunction : ${func.prodFuncArr}">
-                      <div class="d-flex align-items-center mb-2">
-                        <span class="badge rounded-pill badge-subtle-primary" th:text="${@codeService.selectOneCachedCode(#numbers.formatInteger(prodFunction, 0))}"></span>
-                        <button class="btn-close" type="button" style="font-size: xx-small;" th:onclick="funcSelect('product-form', '/xdm/product/ProductXdmForm', [[${prodFunction}]], -1)"></button>
-                      </div>
+                    <div class="col" id="createFunction">
                     </div>
                   </div>
                   <div class="mb-3 row g-3 ms-2 me-2">
                     <div class="col-3">
                       <div class="input-group">
-                        <input class="form-control fs-11" type="text" id="price" name="price" th:value="${info.price}" placeholder="가격" aria-describedby="basic-addon2" /><span class="input-group-text fs-11" id="basic-addon2">원</span>
+                        <input class="form-control fs-11" style="text-align: right;" type="text" id="feedPriec" name="feedPriec" placeholder="가격" aria-describedby="basic-addon2" /><span class="input-group-text fs-11" id="basic-addon2">원</span>
                       </div>
                     </div>
                     <div class="col-3">
                       <div class="input-group">
-                        <input class="form-control fs-11" type="text" id="weight" name="weight" th:value="${info.weight}" placeholder="무게" aria-describedby="basic-addon2" /><span class="input-group-text fs-11" id="basic-addon2">kg</span>
+                        <input class="form-control fs-11" style="text-align: right;" type="text" id="feedWeight" name="feedWeight" placeholder="무게" aria-describedby="basic-addon2" /><span class="input-group-text fs-11" id="basic-addon2">kg</span>
                       </div>
                     </div>
                     <div class="col-3">
                       <div class="input-group">
-                        <input class="form-control fs-11" type="text" id="discount" name="discount" th:value="${info.discount}" placeholder="할인율" aria-describedby="basic-addon2" /><span class="input-group-text fs-11" id="basic-addon2">%</span>
+                        <input class="form-control fs-11" style="text-align: right;" type="text" id="feedDiscount" name="feedDiscount" placeholder="할인율" aria-describedby="basic-addon2" /><span class="input-group-text fs-11" id="basic-addon2">%</span>
                       </div>
                     </div>
                     <div class="col-3">
-                      <button class="btn btn-outline-primary me-1 mb-1 fs-11" type="button">
+                      <button class="btn btn-outline-primary me-1 mb-1 fs-11" type="button" id="feedInfoSaveBtn">
                         <span class="fas fa-plus me-1" data-fa-transform="shrink-3"></span>저장
                       </button>
                     </div>
                   </div>
                   <div class="mb-3 row g-3 ms-2 me-2">
-                    <div class="col-3">
-                      <div class="input-group">
-                        <span class="input-group-text fs-11">1</span>
-                        <input class="form-control fs-11" type="text" placeholder="가격" aria-label="First name" />
-                        <input class="form-control fs-11" type="text" placeholder="무게" aria-label="Last name" />
-                        <input class="form-control fs-11" type="text" placeholder="할인율" aria-label="Last name" />
-                      </div>
+                    <div class="col col-lg-6 col-md-10" id="createFeedInfo">
                     </div>
                   </div>
                 </div>
@@ -164,8 +153,6 @@
                     <button class="btn btn-primary btn-sm" type="button" id="btnSubmit"><span class="fas fa-database"></span></button>
                   </div>
                 </div>
-                <input type="hidden" name="prodRegDate" id="prodRegDate" >
-                <!-- <input type="hidden" name="cogrModDate" id="cogrModDate" > -->
               </form>
             </div>
           </div>
@@ -177,19 +164,7 @@
   <!--    End of Main Content-->
   <!-- ===============================================-->
   <script type="text/javascript">
-    document.getElementById("btnSubmit").onclick = function() {
-      let today = new Date();
-      let year = today.getFullYear();
-      let month = (today.getMonth() + 1).toString().padStart(2, '0');
-      let day = today.getDate().toString().padStart(2, '0');
-      
-      let date = year + month + day;
-      
-      document.getElementById("prodRegDate").value = date;
-      // document.getElementById("cogrModDate").value = date;
-      
-      document.getElementById("product-form").submit();
-    }
+
   </script>
   <div th:replace="~{xdm/include/includeXdmFalcon :: includeXdmFalcon}"></div>
   <div th:replace="~{xdm/include/includeXdmCommon :: includeXdmCommon}"></div>

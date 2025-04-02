@@ -6,12 +6,12 @@ public class ProductDto {
 	private int prodType;
 	private Integer prodUseFlag;
 	private String prodName;
-	private int feedSalaryAge;
-	private int feedType;
-	private int feedEtc;
-	private int feedBrand;
-	private int feedIngredient;
-	private int feedSize;
+	private Integer feedSalaryAge;
+	private Integer feedType;
+	private Integer feedEtc;
+	private Integer feedBrand;
+	private Integer feedIngredient;
+	private Integer feedSize;
 	private Integer prodTeethFlag;
 	private Integer prodTearsFlag;
 	private Integer prodBrainFlag;
@@ -62,16 +62,16 @@ public class ProductDto {
 	public void setProdName(String prodName) {
 		this.prodName = prodName;
 	}
-	public int getFeedSalaryAge() {
+	public Integer getFeedSalaryAge() {
 		return feedSalaryAge;
 	}
-	public void setFeedSalaryAge(int feedSalaryAge) {
+	public void setFeedSalaryAge(Integer feedSalaryAge) {
 		this.feedSalaryAge = feedSalaryAge;
 	}
-	public int getFeedType() {
+	public Integer getFeedType() {
 		return feedType;
 	}
-	public void setFeedType(int feedType) {
+	public void setFeedType(Integer feedType) {
 		this.feedType = feedType;
 	}
 	public Integer getProdTeethFlag() {
@@ -158,28 +158,28 @@ public class ProductDto {
 	public void setProdSkinFlag(Integer prodSkinFlag) {
 		this.prodSkinFlag = prodSkinFlag;
 	}
-	public int getFeedEtc() {
+	public Integer getFeedEtc() {
 		return feedEtc;
 	}
-	public void setFeedEtc(int feedEtc) {
+	public void setFeedEtc(Integer feedEtc) {
 		this.feedEtc = feedEtc;
 	}
-	public int getFeedBrand() {
+	public Integer getFeedBrand() {
 		return feedBrand;
 	}
-	public void setFeedBrand(int feedBrand) {
+	public void setFeedBrand(Integer feedBrand) {
 		this.feedBrand = feedBrand;
 	}
-	public int getFeedIngredient() {
+	public Integer getFeedIngredient() {
 		return feedIngredient;
 	}
-	public void setFeedIngredient(int feedIngredient) {
+	public void setFeedIngredient(Integer feedIngredient) {
 		this.feedIngredient = feedIngredient;
 	}
-	public int getFeedSize() {
+	public Integer getFeedSize() {
 		return feedSize;
 	}
-	public void setFeedSize(int feedSize) {
+	public void setFeedSize(Integer feedSize) {
 		this.feedSize = feedSize;
 	}
 	public String getProdRegDate() {

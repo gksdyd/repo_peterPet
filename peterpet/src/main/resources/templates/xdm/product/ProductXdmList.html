@@ -3,6 +3,7 @@
 <html data-bs-theme="light" lang="en-US" dir="ltr" xmlns:th="http://www.thymeleaf.org">
 		<div th:replace="~{xdm/include/head :: head}"></div>
         <form name="formList" id="formList" method="post" autocomplete="off">
+          <input type="hidden" name="registerOrModifyFlag" id="registerOrModifyFlag" value="0">
           <input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>
           <input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}"/>
           <div class="card mb-3" id="customersTable" data-list='{"valueNames":["#", "use", "name", "salary-age","type","etc", "size", "function", "brand", "ingredient", "count", "picture", "resist-date", "modify-date"],"page":10,"pagination":true}'>
@@ -210,13 +211,13 @@
                       <th class="text-900 sort white-nowrap" data-sort="name">이름</th>
                       <th class="text-900 sort white-nowrap" data-sort="salary-age">급여 연령</th>
                       <th class="text-900 sort white-nowrap" data-sort="type">종류</th>
-                      <th class="text-900 sort white-nowrap" data-sort="etc">기타</th>
+                      <!-- <th class="text-900 sort white-nowrap" data-sort="etc">기타</th> -->
                       <th class="text-900 sort white-nowrap" data-sort="size">크기</th>
-                      <th class="text-900 sort white-nowrap" data-sort="function">기능</th>
+                      <!-- <th class="text-900 sort white-nowrap" data-sort="function">기능</th> -->
                       <th class="text-900 sort white-nowrap" data-sort="brand">브랜드</th>
                       <th class="text-900 sort white-nowrap" data-sort="ingredient">주원료</th>
                       <th class="text-900 sort white-nowrap" data-sort="count">갯수</th>
-                      <th class="text-900 sort white-nowrap" data-sort="picture">사진갯수</th>
+                      <!-- <th class="text-900 sort white-nowrap" data-sort="picture">사진갯수</th> -->
                       <th class="text-900 sort white-nowrap" data-sort="resist-date">등록일</th>
                       <th class="text-900 sort white-nowrap text-end" data-sort="modify-date">수정일</th>
                     </tr>
@@ -241,13 +242,13 @@
                       <td class="name" th:text="${list.prodName}"></td>
                       <td class="salary-age" th:text="${@codeService.selectOneCachedCode(list.feedSalaryAge)}"><a href="#"></a></td>
                       <td class="type" th:text="${@codeService.selectOneCachedCode(list.feedType)}"></td>
-                      <td class="etc" th:text="${@codeService.selectOneCachedCode(list.feedEtc)}"></td>
+                      <!-- <td class="etc" th:text="${@codeService.selectOneCachedCode(list.feedEtc)}"></td> -->
                       <td class="size" th:text="${@codeService.selectOneCachedCode(list.feedSize)}"></td>
-                      <td class="function"></td>
+                      <!-- <td class="function"></td> -->
                       <td class="brand" th:text="${@codeService.selectOneCachedCode(list.feedBrand)}"></td>
                       <td class="ingredient" th:text="${@codeService.selectOneCachedCode(list.feedIngredient)}"></td>
                       <td class="count" th:text="${list.infoCount}"></td>
-                      <td class="picture"></td>
+                      <!-- <td class="picture"></td> -->
                       <td class="register-date" th:text="${list.prodRegDate}"></td>
                       <td class="modify-date text-end" th:text="${list.prodModDate}"></td>
                     </tr>
@@ -263,7 +264,7 @@
               </div>
               <div class="col" style="text-align: right;">
                 <button class="btn btn-success btn-sm" type="button"><span class="far fa-file-excel"></span></button>
-                <a href="/xdm/product/ProductXdmForm"><button class="btn btn-primary btn-sm" type="button"><span class="fas fa-plus"></span></button></a>
+                <button class="btn btn-primary btn-sm" type="button" id="registerBtn"><span class="fas fa-plus"></span></button>
               </div>
             </div>
           </div>
@@ -283,6 +284,8 @@
       let form = document.querySelector("form[name=formList]");
 
       let goUrlXdmList = "/xdm/product/ProductXdmList";
+      let goUrlXdmForm = URL_PRODUCT_XDM_FORM;
+
       funcArray = [[${vo.prodFuncArray}]];
       funcNameArray = [[${vo.prodFuncNameArray}]];
       funcIdArray = [[${vo.prodFuncIdArray}]];

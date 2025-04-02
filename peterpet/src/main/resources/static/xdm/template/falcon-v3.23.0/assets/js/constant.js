@@ -25,6 +25,8 @@ const URL_INDEX_VIEW_XDM = "/xdm/index/IndexXdmView";
 // 상품관련 경로
 const URL_PRODUCT_FUNCTION_XDM = "/xdm/product/ProductXdmProc";
 const URL_PRODUCT_FUNCTION_BACKUP_XDM = "/xdm/product/ProductBackupXdmProc";
+const URL_PRODUCT_XDM_FORM = "/xdm/product/ProductXdmForm";
+const URL_PRODUCT_XDM_LIST = "/xdm/product/ProductXdmList";
 
 
 // 상품 기능 뱃지 추가/제거
