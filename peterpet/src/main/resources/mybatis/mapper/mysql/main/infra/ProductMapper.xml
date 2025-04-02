@@ -43,12 +43,11 @@
 			        <if test="shSnackIngredient != null and !shSnackIngredient.equals('')">AND a.snackIngredient = #{shSnackIngredient}</if>
 				</if>
 			
-<!-- 				
 				<choose>
-					<when test="shOptionDate == 1">AND a.userRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-					<when test="shOptionDate == 2">AND a.userModDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+					<when test="shOptionDate == 1">AND a.prodRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+					<when test="shOptionDate == 2">AND a.prodModDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
 				</choose>
- -->				
+ 
     </sql>
     
 	<select id="selectMaxSeq" resultType="Integer">

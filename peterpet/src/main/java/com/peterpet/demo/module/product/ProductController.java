@@ -9,11 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.peterpet.demo.module.base.BaseController;
 import com.peterpet.demo.module.code.CodeService;
 
 @Controller
 @RequestMapping(value = "/xdm/product")
-public class ProductController {
+public class ProductController extends BaseController {
 
 	@Autowired
 	ProductService productService;
