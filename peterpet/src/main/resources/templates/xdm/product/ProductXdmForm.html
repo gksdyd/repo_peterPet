@@ -61,6 +61,7 @@
                     </div>
                     <div class="col-3">
                       <input class="form-control-JHY" name="prodName" id="prodName" th:value="${item.prodName}" type="text" />
+                      <div class="invalid-feedback" id="prodNameValid">이름을 입력해주세요.</div>
                     </div>
                     <div class="col-3">
                       <select class="form-select-JHY" id="prodUseFlag" name="prodUseFlag" required="">
@@ -68,7 +69,7 @@
                         <option value="1" th:selected="${item.prodUseFlag} == '1'">사용</option>
                         <option value="0" th:selected="${item.prodUseFlag} == '0'">미사용</option>
                       </select>
-                      <div class="invalid-feedback">Please select a valid state.</div>
+                      <div class="invalid-feedback" id="prodUseFlagValid">사용 여부를 선택해주세요.</div>
                     </div>
                   </div>
                   <div class="mb-3 row g-3 ms-2 me-2">
@@ -139,17 +140,20 @@
                   <div class="mb-3 row g-3 ms-2 me-2">
                     <div class="col-3">
                       <div class="input-group">
-                        <input class="form-control fs-11" style="text-align: right;" type="text" id="feedPriec" name="feedPriec" placeholder="가격" aria-describedby="basic-addon2" /><span class="input-group-text fs-11" id="basic-addon2">원</span>
+                        <input class="form-control fs-11" style="text-align: right;" type="text" id="feedPrice" name="feedPrice" placeholder="가격" aria-describedby="basic-addon2" /><span class="input-group-text fs-11" id="basic-addon2">원</span>
+                        <div class="invalid-feedback" id="feedPriceValid">가격을 입력해주세요.</div>
                       </div>
                     </div>
                     <div class="col-3">
                       <div class="input-group">
-                        <input class="form-control fs-11" style="text-align: right;" type="text" id="feedWeight" name="feedWeight" placeholder="무게" aria-describedby="basic-addon2" /><span class="input-group-text fs-11" id="basic-addon2">kg</span>
+                        <input class="form-control fs-11" style="text-align: right;" type="text" id="feedWeight" name="feedWeight" placeholder="무게" aria-describedby="basic-addon2" maxlength="5" /><span class="input-group-text fs-11" id="basic-addon2">kg</span>
+                        <div class="invalid-feedback" id="feedWeightValid">무게를 입력해주세요.</div>
                       </div>
                     </div>
                     <div class="col-3">
                       <div class="input-group">
-                        <input class="form-control fs-11" style="text-align: right;" type="text" id="feedDiscount" name="feedDiscount" placeholder="할인율" aria-describedby="basic-addon2" /><span class="input-group-text fs-11" id="basic-addon2">%</span>
+                        <input class="form-control fs-11" style="text-align: right;" type="text" id="feedDiscount" name="feedDiscount" placeholder="할인율" aria-describedby="basic-addon2" maxlength="3" /><span class="input-group-text fs-11" id="basic-addon2">%</span>
+                        <div class="invalid-feedback" id="feedDiscountValid">할인율을 입력해주세요.</div>
                       </div>
                     </div>
                     <div class="col-3">
@@ -187,12 +191,85 @@
   <div th:replace="~{xdm/include/includeXdmCommon :: includeXdmCommon}"></div>
   <div th:replace="~{xdm/include/includeXdmForm :: includeXdmForm}"></div>
   <div th:replace="~{xdm/include/includeXdmCommonProd :: includeXdmCommonProd}"></div>
-
   <script type="text/javascript">
     let form = document.getElementById("product-form");
 
     let goUrlXdmInst = "/xdm/product/ProductXdmInst";
     // let goUrlXdmUpdt = "/xdm/product/ProductXdmInst";
+
+    let name = document.getElementById("prodName");
+    let useFlag = document.getElementById("prodUseFlag");
+    let feedPrice = document.getElementById("feedPrice");
+    let feedWeight = document.getElementById("feedWeight");
+    let feedDiscount = document.getElementById("feedDiscount");
+    
+    let nameValid = document.getElementById("prodNameValid");
+    let useFlagValid = document.getElementById("prodUseFlagValid");
+    let feedPriceValid = document.getElementById("feedPriceValid");
+    let feedWeightValid = document.getElementById("feedWeightValid");
+    let feedDiscountValid = document.getElementById("feedDiscountValid");
+
+    validationInit = function() {
+      nameValid.style.display = "none";
+      useFlagValid.style.display = "none";
+      feedPriceValid.style.display = "none";
+      feedWeightValid.style.display = "none";
+      feedDiscountValid.style.display = "none";
+    }
+
+    validation = function() {
+      let temp;
+
+      temp = allGapRemove(name.value);
+      if (!checkLength(temp) || !onlyEngKoNumSpecialChar(temp)) {
+        nameValid.style.display = "block";
+        name.style.outlineColor = "red";
+        name.focus();
+        return false;
+      }
+
+      temp = useFlag.value;
+      if (temp == "") {
+        useFlagValid.style.display = "block";
+        useFlag.style.outlineColor = "red";
+        useFlag.focus();
+        return false;
+      }
+
+      funcRegister();
+      feedInfoSave();
+
+      return true;
+    }
+
+    infoValidation = function() {
+      let temp;
+      
+      temp = bothSidesGapRemove(feedPrice.value);
+      if (!checkLength(temp) || !onlyNum(temp)) {
+        feedPriceValid.style.display = "block";
+        feedPrice.style.outlineColor = "red";
+        feedPrice.focus();
+        return false;
+      }
+
+      temp = dotRemove(feedWeight.value);
+      if (!checkLength(temp) || !onlyNum(temp)) {
+        feedWeightValid.style.display = "block";
+        feedWeight.style.outlineColor = "red";
+        feedWeight.focus();
+        return false;
+      }
+
+      temp = bothSidesGapRemove(feedDiscount.value);
+      if (!checkLength(temp) || !onlyNum(temp) || temp > 100) {
+        feedDiscountValid.style.display = "block";
+        feedDiscount.style.outlineColor = "red";
+        feedDiscount.focus();
+        return false;
+      }
+      return true;
+    }
   </script>
   </body>
   

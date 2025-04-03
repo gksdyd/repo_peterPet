@@ -94,10 +94,6 @@ $("#btnSearch").on('click', function() {
                           Form
    ===============================================--> */
 
-let feedPrice = document.getElementById("feedPriec");
-let feedWeight = document.getElementById("feedWeight");
-let feedDiscount = document.getElementById("feedDiscount");
-
 let createFeedInfo = document.getElementById("createFeedInfo");
 let createDelBtn = document.getElementById("createDelBtn");
 
@@ -105,6 +101,11 @@ var num = 1;
 
 // 사료 가격, 무게, 할인율 추가 버튼
 $("#feedInfoSaveBtn").on('click', function() {
+  validationInit();
+  if (!infoValidation()) {
+      return false;
+  }
+
   let inputGroup = document.createElement('div');
   inputGroup.setAttribute("class", "input-group mb-2");
 

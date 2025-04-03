@@ -12,6 +12,11 @@ bothSidesGapRemove = function(text) {
     return text.trim();
 }
 
+// .제거
+dotRemove = function(text) {
+    return text.replace(/\./g, "");
+}
+
 // 길이 체크
 checkLength = function(text) {
     if (text.length == 0) {
@@ -55,6 +60,14 @@ onlyNum = function(text) {
 // 영어, 한글, 숫자, 특수문자만
 onlyEngKoNumAllSpecialChar = function(text) {
     if (!regex5.test(text)) {
+        return false;
+    }
+    return true;
+}
+
+// 무게만
+onlyWeight = function(text) {
+    if (!regexWeight.test(text)) {
         return false;
     }
     return true;

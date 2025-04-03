@@ -4,12 +4,10 @@
   
 // 등록 및 수정하는 함수
 document.getElementById("btnSubmit").onclick = function() {
-    funcRegister();
-    feedInfoSave();
-    // validationInit();
-    // if (!validation()) {
-    //     return false;
-    // }
+    validationInit();
+    if (!validation()) {
+        return false;
+    }
 
     if (document.getElementById("registerOrModifyFlag").value == 1) {
         form.action = goUrlXdmInst;
