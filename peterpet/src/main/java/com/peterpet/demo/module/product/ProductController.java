@@ -61,6 +61,11 @@ public class ProductController extends BaseController {
 	public String codeGroupXdmInst(ProductDto productDto) {
 		productService.insert(productDto);
 		
+		for (int i = 0; i < productDto.getProdFuncArray().size(); i++) {
+			productDto.setFuncName(productDto.getProdFuncArray().get(i));
+			productService.funcInsert(productDto);
+		}
+		
 		for (int i = 0; i < productDto.getFeedPriceArray().size(); i++) {
 			productDto.setInfoPrice(productDto.getFeedPriceArray().get(i));
 			productDto.setInfoWeight(productDto.getFeedWeightArray().get(i));

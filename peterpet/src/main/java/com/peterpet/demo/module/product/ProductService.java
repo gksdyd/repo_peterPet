@@ -27,11 +27,11 @@ public class ProductService {
 		return productDao.selectOneCount(vo);
 	}
 	
-	public String selectOneFunc(ProductVo vo) {
-		return productDao.selectOneFunc(vo);
-	}
-	
 	public int infoInsert(ProductDto productDto) {
 		return productDao.infoInsert(productDto);
+	}
+	
+	public int funcInsert(ProductDto productDto) {
+		return productDao.funcInsert(productDto);
 	}
 }

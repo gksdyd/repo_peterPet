@@ -11,7 +11,6 @@ public class ProductVo extends BaseVo{
 	private static int currProdType = Constants.INIT_PRODUCT_TYPE;
 	public List<String> prodFuncArray = new ArrayList<>();
 	public List<String> prodFuncNameArray = new ArrayList<>();
-	public List<String> prodFuncIdArray = new ArrayList<>();
 	
 	private String prodSeq;
 	private int prodType;
@@ -37,14 +36,6 @@ public class ProductVo extends BaseVo{
 
 	public void setProdFuncArray(List<String> prodFuncArray) {
 		this.prodFuncArray = prodFuncArray;
-	}
-
-	public List<String> getProdFuncIdArray() {
-		return prodFuncIdArray;
-	}
-
-	public void setProdFuncIdArray(List<String> prodFuncIdArray) {
-		this.prodFuncIdArray = prodFuncIdArray;
 	}
 
 	public List<String> getProdFuncNameArray() {

@@ -105,6 +105,16 @@
 		)
 	</insert>
 	
+	<insert id="funcInsert">
+		INSERT INTO func(
+			funcName,
+			product_prodSeq
+		) VALUE (
+			#{funcName},
+			#{prodSeq}
+		)
+	</insert>
+	
 	<select id="selectList" resultMap="resultMapObj">
 		SELECT
 			prodUseFlag,
@@ -137,14 +147,5 @@
 	<select id="selectOneCount" resultType="Integer">
 		SELECT COUNT(*)
 		<include refid="selectCommon"></include>
-	</select>
-	
-	<select id="selectOneFunc" resultType="String">
-		SELECT
-			codeName
-		FROM
-			code
-		WHERE 1=1
-			AND codeSeq = #{prodFunction}
 	</select>
 </mapper>

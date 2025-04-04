@@ -51,7 +51,6 @@
               <div class="card border h-100 border-primary mb-3" th:if="${vo.prodType} == '1'">
                 <input type="hidden" id="prodFuncArray" name="prodFuncArray">
                 <input type="hidden" id="prodFuncNameArray" name="prodFuncNameArray">
-                <input type="hidden" id="prodFuncIdArray" name="prodFuncIdArray">
                 <div class="mb-2 row g-3 me-2 ms-2 mt-0">
                   <div class="col-4">
                     <div class="form-group">
@@ -272,7 +271,6 @@
 
       funcArray = [[${vo.prodFuncArray}]];
       funcNameArray = [[${vo.prodFuncNameArray}]];
-      funcIdArray = [[${vo.prodFuncIdArray}]];
 
       for (let i = 0; i < funcArray.length; i++) {
         let funcBadge = $("<span></span>").addClass("badge").addClass("rounded-pill").addClass("badge-subtle-primary");

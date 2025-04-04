@@ -27,7 +27,9 @@ public class ProductDto {
 	private String product_prodSeq;
 	
 	private String funcSeq;
-	private Integer funcName;
+	private String funcName;
+	
+	public List<String> prodFuncArray = new ArrayList<>();
 	
 	List<Integer> feedPriceArray = new ArrayList<>();
 	List<Double> feedWeightArray = new ArrayList<>();
@@ -171,10 +173,16 @@ public class ProductDto {
 	public void setFuncSeq(String funcSeq) {
 		this.funcSeq = funcSeq;
 	}
-	public Integer getFuncName() {
+	public String getFuncName() {
 		return funcName;
 	}
-	public void setFuncName(Integer funcName) {
+	public void setFuncName(String funcName) {
 		this.funcName = funcName;
+	}
+	public List<String> getProdFuncArray() {
+		return prodFuncArray;
+	}
+	public void setProdFuncArray(List<String> prodFuncArray) {
+		this.prodFuncArray = prodFuncArray;
 	}
 }
