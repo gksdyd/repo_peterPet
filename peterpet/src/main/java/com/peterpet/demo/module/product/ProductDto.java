@@ -18,8 +18,7 @@ public class ProductDto {
 	private String prodRegDate;
 	private String prodModDate;
 	private int infoCount;
-	
-	private int funcCnt;
+	private int funcCount;
 	
 	private Integer infoPrice;
 	private Double infoWeight;
@@ -106,11 +105,11 @@ public class ProductDto {
 	public void setProdModDate(String prodModDate) {
 		this.prodModDate = prodModDate;
 	}
-	public int getFuncCnt() {
-		return funcCnt;
+	public int getFuncCount() {
+		return funcCount;
 	}
-	public void setFuncCnt(int funcCnt) {
-		this.funcCnt = funcCnt;
+	public void setFuncCount(int funcCount) {
+		this.funcCount = funcCount;
 	}
 	public int getInfoCount() {
 		return infoCount;

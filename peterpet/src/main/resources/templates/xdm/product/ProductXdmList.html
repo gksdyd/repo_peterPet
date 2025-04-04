@@ -199,7 +199,7 @@
                       <th class="text-900 sort white-nowrap" data-sort="type">종류</th>
                       <th class="text-900 sort white-nowrap" data-sort="etc">기타</th>
                       <th class="text-900 sort white-nowrap" data-sort="size">크기</th>
-                      <!-- <th class="text-900 sort white-nowrap" data-sort="function">기능</th> -->
+                      <th class="text-900 sort white-nowrap" data-sort="function">기능</th>
                       <th class="text-900 sort white-nowrap" data-sort="brand">브랜드</th>
                       <th class="text-900 sort white-nowrap" data-sort="ingredient">주원료</th>
                       <th class="text-900 sort white-nowrap" data-sort="count">사료 타입</th>
@@ -229,7 +229,7 @@
                       <td class="type" th:text="${@codeService.selectOneCachedCode(list.feedType)}"></td>
                       <td class="etc" th:text="${@codeService.selectOneCachedCode(list.feedEtc)}"></td>
                       <td class="size" th:text="${@codeService.selectOneCachedCode(list.feedSize)}"></td>
-                      <!-- <td class="function"></td> -->
+                      <td class="function" th:text="${list.funcCount}"></td>
                       <td class="brand" th:text="${@codeService.selectOneCachedCode(list.feedBrand)}"></td>
                       <td class="ingredient" th:text="${@codeService.selectOneCachedCode(list.feedIngredient)}"></td>
                       <td class="count" th:text="${list.infoCount}"></td>

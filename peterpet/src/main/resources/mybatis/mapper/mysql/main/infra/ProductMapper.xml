@@ -122,7 +122,13 @@
 			FROM
 				feedInfo
 			WHERE 1=1
-				AND prodSeq = product_prodSeq) AS infoCount
+				AND prodSeq = product_prodSeq) AS infoCount,
+			(SELECT
+				COUNT(*)
+			FROM
+				func
+			WHERE 1=1
+				AND prodSeq = product_prodSeq) AS funcCount
 		<include refid="selectCommon"></include>
 		ORDER BY prodSeq DESC
 		limit #{rowNumToShow} offset #{startRnumForMysql}
