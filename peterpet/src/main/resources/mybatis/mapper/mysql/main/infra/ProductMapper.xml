@@ -7,6 +7,12 @@
 	
 	<sql id="selectCommon">
         FROM product a
+        LEFT JOIN (SELECT
+        		GROUP_CONCAT(funcName) AS funcName,
+        		product_prodSeq
+        	FROM
+        		func
+        	GROUP BY product_prodSeq) AS b ON a.prodSeq = b.product_prodSeq
         WHERE 1=1
         	AND prodType = #{prodType}
         	AND a.prodName LIKE CONCAT('%',#{shValue},'%')
@@ -19,20 +25,11 @@
 			        <if test="shFeedSize != null and !shFeedSize.equals('')">AND a.feedSize = #{shFeedSize}</if>
 			        <if test="shFeedBrand != null and !shFeedBrand.equals('')">AND a.feedBrand = #{shFeedBrand}</if>
 			        <if test="shFeedIngredient != null and !shFeedIngredient.equals('')">AND a.feedIngredient = #{shFeedIngredient}</if>
-			        <if test="prodTeethFlag != null">AND a.prodTeethFlag = #{prodTeethFlag}</if>
-		        	<if test="prodTearsFlag != null">AND a.prodTearsFlag = #{prodTearsFlag}</if>
-		        	<if test="prodBrainFlag != null">AND a.prodBrainFlag = #{prodBrainFlag}</if>
-		        	<if test="prodImmunityFlag != null">AND a.prodImmunityFlag = #{prodImmunityFlag}</if>
-		        	<if test="prodBoneFlag != null">AND a.prodBoneFlag = #{prodBoneFlag}</if>
-		        	<if test="prodStressFlag != null">AND a.prodStressFlag = #{prodStressFlag}</if>
-		        	<if test="prodKidneyFlag != null">AND a.prodKidneyFlag = #{prodKidneyFlag}</if>
-		        	<if test="prodHeartFlag != null">AND a.prodHeartFlag = #{prodHeartFlag}</if>
-		        	<if test="prodAllergyFlag != null">AND a.prodAllergyFlag = #{prodAllergyFlag}</if>
-		        	<if test="prodPregnancyFlag != null">AND a.prodPregnancyFlag = #{prodPregnancyFlag}</if>
-		        	<if test="prodIntestineFlag != null">AND a.prodIntestineFlag = #{prodIntestineFlag}</if>
-		        	<if test="prodNeuteringFlag != null">AND a.prodNeuteringFlag = #{prodNeuteringFlag}</if>
-		        	<if test="prodWeightFlag != null">AND a.prodWeightFlag = #{prodWeightFlag}</if>
-		        	<if test="prodSkinFlag != null">AND a.prodSkinFlag = #{prodSkinFlag}</if>
+			        <if test="prodFuncArray != null and prodFuncArray.size() > 0">
+			        	<foreach collection="prodFuncArray" item="func">
+			        		AND FIND_IN_SET(#{func}, funcName) > 0
+			        	</foreach>
+			        </if>
 				</if>
 				
 				<if test="prodType == 2">
@@ -66,20 +63,6 @@
 			prodRegDate,
 			feedSalaryAge,
 			feedType,
-			prodTeethFlag,
-			prodTearsFlag,
-			prodBrainFlag,
-			prodImmunityFlag,
-			prodBoneFlag,
-			prodStressFlag,
-			prodKidneyFlag,
-			prodHeartFlag,
-			prodAllergyFlag,
-			prodPregnancyFlag,
-			prodIntestineFlag,
-			prodNeuteringFlag,
-			prodWeightFlag,
-			prodSkinFlag,
 			feedEtc,
 			feedBrand,
 			feedIngredient,
@@ -93,20 +76,6 @@
 			date_format(NOW(), '%Y-%m-%d %H:%i:%S'),
 			#{feedSalaryAge},
 			#{feedType},
-			#{prodTeethFlag},
-			#{prodTearsFlag},
-			#{prodBrainFlag},
-			#{prodImmunityFlag},
-			#{prodBoneFlag},
-			#{prodStressFlag},
-			#{prodKidneyFlag},
-			#{prodHeartFlag},
-			#{prodAllergyFlag},
-			#{prodPregnancyFlag},
-			#{prodIntestineFlag},
-			#{prodNeuteringFlag},
-			#{prodWeightFlag},
-			#{prodSkinFlag},
 			#{feedEtc},
 			#{feedBrand},
 			#{feedIngredient},

@@ -15,20 +15,6 @@ public class ProductDto {
 	private Integer feedBrand;
 	private Integer feedIngredient;
 	private Integer feedSize;
-	private Integer prodTeethFlag;
-	private Integer prodTearsFlag;
-	private Integer prodBrainFlag;
-	private Integer prodImmunityFlag;
-	private Integer prodBoneFlag;
-	private Integer prodStressFlag;
-	private Integer prodKidneyFlag;
-	private Integer prodHeartFlag;
-	private Integer prodAllergyFlag;
-	private Integer prodPregnancyFlag;
-	private Integer prodIntestineFlag;
-	private Integer prodNeuteringFlag;
-	private Integer prodWeightFlag;
-	private Integer prodSkinFlag;
 	private String prodRegDate;
 	private String prodModDate;
 	private int infoCount;
@@ -40,6 +26,9 @@ public class ProductDto {
 	private Integer infoDiscount;
 	private Integer infoDelFlag;
 	private String product_prodSeq;
+	
+	private String funcSeq;
+	private Integer funcName;
 	
 	List<Integer> feedPriceArray = new ArrayList<>();
 	List<Double> feedWeightArray = new ArrayList<>();
@@ -80,90 +69,6 @@ public class ProductDto {
 	}
 	public void setFeedType(Integer feedType) {
 		this.feedType = feedType;
-	}
-	public Integer getProdTeethFlag() {
-		return prodTeethFlag;
-	}
-	public void setProdTeethFlag(Integer prodTeethFlag) {
-		this.prodTeethFlag = prodTeethFlag;
-	}
-	public Integer getProdTearsFlag() {
-		return prodTearsFlag;
-	}
-	public void setProdTearsFlag(Integer prodTearsFlag) {
-		this.prodTearsFlag = prodTearsFlag;
-	}
-	public Integer getProdBrainFlag() {
-		return prodBrainFlag;
-	}
-	public void setProdBrainFlag(Integer prodBrainFlag) {
-		this.prodBrainFlag = prodBrainFlag;
-	}
-	public Integer getProdImmunityFlag() {
-		return prodImmunityFlag;
-	}
-	public void setProdImmunityFlag(Integer prodImmunityFlag) {
-		this.prodImmunityFlag = prodImmunityFlag;
-	}
-	public Integer getProdBoneFlag() {
-		return prodBoneFlag;
-	}
-	public void setProdBoneFlag(Integer prodBoneFlag) {
-		this.prodBoneFlag = prodBoneFlag;
-	}
-	public Integer getProdStressFlag() {
-		return prodStressFlag;
-	}
-	public void setProdStressFlag(Integer prodStressFlag) {
-		this.prodStressFlag = prodStressFlag;
-	}
-	public Integer getProdKidneyFlag() {
-		return prodKidneyFlag;
-	}
-	public void setProdKidneyFlag(Integer prodKidneyFlag) {
-		this.prodKidneyFlag = prodKidneyFlag;
-	}
-	public Integer getProdHeartFlag() {
-		return prodHeartFlag;
-	}
-	public void setProdHeartFlag(Integer prodHeartFlag) {
-		this.prodHeartFlag = prodHeartFlag;
-	}
-	public Integer getProdAllergyFlag() {
-		return prodAllergyFlag;
-	}
-	public void setProdAllergyFlag(Integer prodAllergyFlag) {
-		this.prodAllergyFlag = prodAllergyFlag;
-	}
-	public Integer getProdPregnancyFlag() {
-		return prodPregnancyFlag;
-	}
-	public void setProdPregnancyFlag(Integer prodPregnancyFlag) {
-		this.prodPregnancyFlag = prodPregnancyFlag;
-	}
-	public Integer getProdIntestineFlag() {
-		return prodIntestineFlag;
-	}
-	public void setProdIntestineFlag(Integer prodIntestineFlag) {
-		this.prodIntestineFlag = prodIntestineFlag;
-	}
-	public Integer getProdNeuteringFlag() {
-		return prodNeuteringFlag;
-	}
-	public void setProdNeuteringFlag(Integer prodNeuteringFlag) {
-		this.prodNeuteringFlag = prodNeuteringFlag;
-	}
-	public Integer getProdWeightFlag() {
-		return prodWeightFlag;
-	}
-	public void setProdWeightFlag(Integer prodWeightFlag) {
-		this.prodWeightFlag = prodWeightFlag;
-	}
-	public Integer getProdSkinFlag() {
-		return prodSkinFlag;
-	}
-	public void setProdSkinFlag(Integer prodSkinFlag) {
-		this.prodSkinFlag = prodSkinFlag;
 	}
 	public Integer getFeedEtc() {
 		return feedEtc;
@@ -260,5 +165,17 @@ public class ProductDto {
 	}
 	public void setFeedDiscountArray(List<Integer> feedDiscountArray) {
 		this.feedDiscountArray = feedDiscountArray;
+	}
+	public String getFuncSeq() {
+		return funcSeq;
+	}
+	public void setFuncSeq(String funcSeq) {
+		this.funcSeq = funcSeq;
+	}
+	public Integer getFuncName() {
+		return funcName;
+	}
+	public void setFuncName(Integer funcName) {
+		this.funcName = funcName;
 	}
 }
