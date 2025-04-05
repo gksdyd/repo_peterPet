@@ -221,8 +221,4 @@ public class ProductVo extends BaseVo{
 			}
 		}
 	}
-	
-	public void InitFuncName() {
-		
-	}
 }

@@ -13,7 +13,7 @@
             </div>
             <div class="card-body bg-body-tertiary">
               <form class="needs-validation" novalidate id="product-form" name="product-form">
-                <input type="hidden" name="registerOrModifyFlag" id="registerOrModifyFlag" th:value="${vo.registerOrModifyFlag}" disabled>
+                <input type="hidden" name="registerOrModifyFlag" id="registerOrModifyFlag" th:value="${vo.registerOrModifyFlag}">
                 <div class="row g-3">
                   <div class="col-3">
                     <label class="form-label-JHY" for="prodType">상품 유형<span style="color: red;">*</span></label>
@@ -159,7 +159,7 @@
                 </div>
                 <div class="mb-3 row g-3">
                   <div class="col">
-                    <a href="/xdm/product/ProductXdmList"><button class="btn btn-outline-dark btn-sm" type="button"><span class="fas fa-list-ul"></span></button></a>
+                    <a th:href="@{/xdm/product/ProductXdmList(prodType=1)}"><button class="btn btn-outline-dark btn-sm" type="button"><span class="fas fa-list-ul"></span></button></a>
                     <button class="btn btn-danger btn-sm" type="button" id="deleteBtn" th:if="${vo.registerOrModifyFlag != 1}"><span class="bi-x"></span></button>
                     <button class="btn btn-danger btn-sm" type="button" id="ueleteBtn" th:if="${vo.registerOrModifyFlag != 1}"><span class="far fa-trash-alt"></span></button>
                   </div>
