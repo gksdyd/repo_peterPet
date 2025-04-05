@@ -12,6 +12,7 @@
         <if test="shDelFlag != null and !shDelFlag.equals('')">AND a.petDelFlag = #{shDelFlag}</if>
         <if test="shVaccineFlag != null and !shVaccineFlag.equals('')">AND a.petVaccinationFlag = #{shVaccineFlag}</if>
         <if test="shNeuterFlag != null and !shNeuterFlag.equals('')">AND a.petNeuteringFlag = #{shNeuterFlag}</if>
+        <if test="shVarieties != null and !shVarieties.equals('')">AND a.petVarieties = #{shVarieties}</if>
         <if test="shMinWeight != null and !shMinWeight.equals('') and shMaxWeight != null and !shMaxWeight.equals('')">
         	AND a.petWeight BETWEEN #{shMinWeight} AND #{shMaxWeight}
         </if>
