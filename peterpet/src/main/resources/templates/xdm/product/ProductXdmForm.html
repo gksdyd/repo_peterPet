@@ -21,7 +21,7 @@
                 </div>
                 <div class="mb-3 row g-3">
                   <div class="col-3">
-                    <select class="form-select-JHY" name="prodType" id="prodType" onchange="changeProductType('product-form', URL_PRODUCT_XDM_FORM)">
+                    <select class="form-select-JHY" name="prodType" id="prodType" onchange="changeProductType('product-form', URL_PRODUCT_XDM_FORM)" th:disabled="${vo.registerOrModifyFlag != 1} ? 'disabled' : null">
                       <option th:each="productType : ${@codeService.selectListCachedCode(1)}" th:text="${productType.codeName}" th:value="${productType.codeSeq}" th:selected="${vo.prodType} == ${productType.codeSeq}"></option>
                     </select>
                   </div>
