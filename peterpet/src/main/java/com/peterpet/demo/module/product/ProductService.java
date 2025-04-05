@@ -59,11 +59,19 @@ public class ProductService {
 		return productDao.funcUpdate(productDto);
 	}
 	
+	public int delete(ProductDto productDto) {
+		return productDao.delete(productDto);
+	}
+	
 	public int funcDelete(ProductDto productDto) {
 		return productDao.funcDelete(productDto);
 	}
 	
 	public int infoDelete(ProductDto productDto) {
 		return productDao.infoDelete(productDto);
+	}
+	
+	public int uelete(ProductDto productDto) {
+		return productDao.uelete(productDto);
 	}
 }

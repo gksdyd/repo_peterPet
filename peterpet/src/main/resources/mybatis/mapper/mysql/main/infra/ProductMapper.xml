@@ -16,7 +16,7 @@
         WHERE 1=1
         	AND prodType = #{prodType}
         	AND a.prodName LIKE CONCAT('%',#{shValue},'%')
-		        <if test="shDelFlag != null and !shDelFlag.equals('')">AND a.feedDelFlag = #{shDelFlag}</if>
+		        <if test="shDelFlag != null and !shDelFlag.equals('')">AND a.prodDelFlag = #{shDelFlag}</if>
 		        
 	        	<if test="prodType == 1">
 			        <if test="shFeedSalaryAge != null and !shFeedSalaryAge.equals('')">AND a.feedSalaryAge = #{shFeedSalaryAge}</if>
@@ -67,7 +67,7 @@
 			feedBrand,
 			feedIngredient,
 			feedSize,
-			feedDelFlag
+			prodDelFlag
 		) VALUE (
 			#{prodType},
 			#{prodUseFlag},
@@ -231,6 +231,12 @@
 			funcSeq = #{funcSeq}
 	</update>
 	
+	<delete id="delete">
+		DELETE FROM product
+		WHERE
+			prodSeq = #{prodSeq}
+	</delete>
+	
 	<delete id="funcDelete">
 		DELETE FROM func
 		WHERE
@@ -242,4 +248,12 @@
 		WHERE
 			infoSeq = #{infoSeq}
 	</delete>
+	
+	<update id="uelete">
+		UPDATE product
+		SET
+			prodDelFlag = 1
+		WHERE
+			prodSeq = #{prodSeq}
+	</update>
 </mapper>

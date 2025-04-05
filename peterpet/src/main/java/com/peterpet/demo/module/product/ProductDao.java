@@ -19,6 +19,8 @@ public interface ProductDao {
 	public int update(ProductDto productDto);
 	public int infoUpdate(ProductDto productDto);
 	public int funcUpdate(ProductDto productDto);
+	public int delete(ProductDto productDto);
 	public int funcDelete(ProductDto productDto);
 	public int infoDelete(ProductDto productDto);
+	public int uelete(ProductDto productDto);
 }

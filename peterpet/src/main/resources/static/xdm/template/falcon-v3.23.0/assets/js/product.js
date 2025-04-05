@@ -224,6 +224,9 @@ initInfo = function() {
   let priceArray = feedPriceArray.value.replace(/\[|\]/g, "").split(',');
   let weightArray = feedWeightArray.value.replace(/\[|\]/g, "").split(',');
   let discountArray = feedDiscountArray.value.replace(/\[|\]/g, "").split(',');
+  feedPriceArray.value = priceArray;
+  feedWeightArray.value = weightArray;
+  feedDiscountArray.value = discountArray;
   $("#feedInfoSeqArray").val($("#feedInfoSeqArray").val().replace(/\[|\]/g, "").split(','));
 
   if (priceArray != "") {

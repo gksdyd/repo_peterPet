@@ -174,6 +174,7 @@
         </div>
       </div>
     </main>
+    <div th:replace="~{xdm/include/modal :: modal}"></div>
   <!-- ===============================================-->
   <!--    End of Main Content-->
   <!-- ===============================================-->
@@ -186,6 +187,8 @@
 
     let goUrlXdmInst = "/xdm/product/ProductXdmInst";
     let goUrlXdmUpdt = "/xdm/product/ProductXdmUpdt";
+    let goUrlXdmDelt = "/xdm/product/ProductXdmDele";
+    let goUrlXdmUelt = "/xdm/product/ProductXdmUele";
 
     let name = document.getElementById("prodName");
     let useFlag = document.getElementById("prodUseFlag");

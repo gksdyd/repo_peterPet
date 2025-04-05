@@ -26,6 +26,10 @@ ueleteBtn.onclick = function() {
 
 // 영구 삭제버튼(x)
 deleteBtn.onclick = function() {
+    modalTitle.innerText = "WARNING";
+    modalText.innerText = "정말 영구 삭제하시겠습니까??";
+    modalCloseButton.style.display = "block";
+    modalDelButton.style.display = "block";
     modal.style.display = "block";
     modalDelButton.value = DELETE_FLAG;
 }

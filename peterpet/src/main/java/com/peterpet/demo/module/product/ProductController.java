@@ -185,4 +185,30 @@ public class ProductController extends BaseController {
 		}
 		return "redirect:/xdm/product/ProductXdmList";
 	}
+	
+	@RequestMapping(value = "/ProductXdmDele")
+	public String productXdmDele(ProductDto productDto) {
+		// 사료의 기능 삭제
+		for (int i = 0; i < productDto.getProdFuncSeqArray().size(); i++) {
+			productDto.setFuncSeq(productDto.getProdFuncSeqArray().get(i));
+			productService.funcDelete(productDto);
+		}
+		
+		// 사료의 정보 삭제
+		for (int i = 0; i < productDto.getFeedInfoSeqArray().size(); i++) {
+			productDto.setInfoSeq(productDto.getFeedInfoSeqArray().get(i));
+			productService.infoDelete(productDto);
+		}
+		
+		productService.delete(productDto);
+		
+		return "redirect:/xdm/product/ProductXdmList";
+	}
+	
+	@RequestMapping(value = "/ProductXdmUele")
+	public String productXdmUele(ProductDto productDto) {	
+		productService.uelete(productDto);
+		
+		return "redirect:/xdm/product/ProductXdmList";
+	}
 }
