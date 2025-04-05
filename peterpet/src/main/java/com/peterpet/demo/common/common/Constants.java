@@ -9,4 +9,8 @@ public class Constants {
 	
 	public static final String SEND_REDIRECT_ADDRESS_XDM = "/xdm/member/LoginXdmForm";
 	public static final String SEND_REDIRECT_ADDRESS_PETER = "/peter/member/LoginPeterForm";
+	
+	public static final int PRODUCT_UPDATE_COUNT_MAINTAIN = 0;
+	public static final int PRODUCT_UPDATE_COUNT_INCREASE = 1;
+	public static final int PRODUCT_UPDATE_COUNT_DECREASE = -1;
 }

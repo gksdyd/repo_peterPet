@@ -9,8 +9,14 @@ import com.peterpet.demo.module.base.Constants;
 public class ProductVo extends BaseVo{
 
 	private static int currProdType = Constants.INIT_PRODUCT_TYPE;
+	public List<String> prodFuncSeqArray = new ArrayList<>();
 	public List<String> prodFuncArray = new ArrayList<>();
 	public List<String> prodFuncNameArray = new ArrayList<>();
+	
+	List<String> feedInfoSeqArray = new ArrayList<>();
+	List<Integer> feedPriceArray = new ArrayList<>();
+	List<Double> feedWeightArray = new ArrayList<>();
+	List<Integer> feedDiscountArray = new ArrayList<>();
 	
 	private String prodSeq;
 	private int prodType;
@@ -166,6 +172,46 @@ public class ProductVo extends BaseVo{
 		this.shSnackIngredient = shSnackIngredient;
 	}
 	
+	public List<Integer> getFeedPriceArray() {
+		return feedPriceArray;
+	}
+
+	public void setFeedPriceArray(List<Integer> feedPriceArray) {
+		this.feedPriceArray = feedPriceArray;
+	}
+
+	public List<Double> getFeedWeightArray() {
+		return feedWeightArray;
+	}
+
+	public void setFeedWeightArray(List<Double> feedWeightArray) {
+		this.feedWeightArray = feedWeightArray;
+	}
+
+	public List<Integer> getFeedDiscountArray() {
+		return feedDiscountArray;
+	}
+
+	public void setFeedDiscountArray(List<Integer> feedDiscountArray) {
+		this.feedDiscountArray = feedDiscountArray;
+	}
+
+	public List<String> getProdFuncSeqArray() {
+		return prodFuncSeqArray;
+	}
+
+	public void setProdFuncSeqArray(List<String> prodFuncSeqArray) {
+		this.prodFuncSeqArray = prodFuncSeqArray;
+	}
+
+	public List<String> getFeedInfoSeqArray() {
+		return feedInfoSeqArray;
+	}
+
+	public void setFeedInfoSeqArray(List<String> feedInfoSeqArray) {
+		this.feedInfoSeqArray = feedInfoSeqArray;
+	}
+
 	public void InitProdType() {
 		if (getProdType() != currProdType) {
 			if (getProdType() == 0) {
@@ -174,5 +220,9 @@ public class ProductVo extends BaseVo{
 				currProdType = getProdType();				
 			}
 		}
+	}
+	
+	public void InitFuncName() {
+		
 	}
 }

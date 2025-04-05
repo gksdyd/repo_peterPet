@@ -103,6 +103,9 @@
 			date_format(NOW(), '%Y-%m-%d %H:%i:%S'),
 			#{prodSeq}
 		)
+		<selectKey resultType="String" keyProperty="infoSeq" order="AFTER">
+			SELECT last_insert_id()
+		</selectKey>
 	</insert>
 	
 	<insert id="funcInsert">
@@ -113,10 +116,14 @@
 			#{funcName},
 			#{prodSeq}
 		)
+		<selectKey resultType="String" keyProperty="funcSeq" order="AFTER">
+			SELECT last_insert_id()
+		</selectKey>
 	</insert>
 	
 	<select id="selectList" resultMap="resultMapObj">
 		SELECT
+			prodSeq,
 			prodUseFlag,
 			prodName,
 			prodRegDate,
@@ -148,4 +155,91 @@
 		SELECT COUNT(*)
 		<include refid="selectCommon"></include>
 	</select>
+	
+	<select id="selectOnePoduct" resultMap="resultMapObj">
+		SELECT
+			prodSeq,
+			prodUseFlag,
+			prodName,
+			feedSalaryAge,
+			feedType,
+			feedEtc,
+			feedBrand,
+			feedIngredient,
+			feedSize
+        FROM
+        	product
+        WHERE 1=1
+        	AND prodSeq = #{prodSeq}
+	</select>
+	
+	<select id="selectOneFunctions" resultMap="resultMapObj">
+		SELECT
+			funcSeq,
+			funcName
+        FROM
+        	func
+        	LEFT JOIN product ON prodSeq = product_prodSeq
+        WHERE 1=1
+        	AND prodSeq = #{prodSeq}
+	</select>
+	
+	<select id="selectOneInfos" resultMap="resultMapObj">
+		SELECT
+			infoSeq,
+			infoPrice,
+			infoWeight,
+			infoDiscount
+        FROM
+        	feedinfo
+        	LEFT JOIN product ON prodSeq = product_prodSeq
+        WHERE 1=1
+        	AND prodSeq = #{prodSeq}
+	</select>
+	
+	<update id="update">
+		UPDATE product
+		SET
+			prodUseFlag = #{prodUseFlag},
+			prodName = #{prodName},
+			prodModDate = date_format(NOW(), '%Y-%m-%d %H:%i:%S'),
+			feedSalaryAge = #{feedSalaryAge},
+			feedType = #{feedType},
+			feedEtc = #{feedEtc},
+			feedBrand = #{feedBrand},
+			feedIngredient = #{feedIngredient},
+			feedSize = #{feedSize}
+		WHERE
+			prodSeq = #{prodSeq}
+	</update>
+	
+	<update id="infoUpdate">
+		UPDATE feedinfo
+		SET
+			infoPrice = #{infoPrice},
+			infoWeight = #{infoWeight},
+			infoDiscount = #{infoDiscount}
+		WHERE
+			infoSeq = #{infoSeq}
+	</update>
+	
+	<update id="funcUpdate">
+		UPDATE func
+		SET
+			funcName = #{funcName}
+		WHERE
+			funcSeq = #{funcSeq}
+	</update>
+	
+	<delete id="funcDelete">
+		DELETE FROM func
+		WHERE
+			funcSeq = #{funcSeq}
+	</delete>
+	
+	<delete id="infoDelete">
+		DELETE FROM feedinfo
+		WHERE
+			infoSeq = #{infoSeq}
+	</delete>
 </mapper>

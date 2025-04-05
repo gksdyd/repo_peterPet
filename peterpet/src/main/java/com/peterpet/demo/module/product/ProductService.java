@@ -34,4 +34,36 @@ public class ProductService {
 	public int funcInsert(ProductDto productDto) {
 		return productDao.funcInsert(productDto);
 	}
+	
+	public ProductDto selectOnePoduct(ProductVo vo) {
+		return productDao.selectOnePoduct(vo);
+	}
+	
+	public List<ProductDto> selectOneFunctions(ProductVo vo) {
+		return productDao.selectOneFunctions(vo);
+	}
+	
+	public List<ProductDto> selectOneInfos(ProductVo vo) {
+		return productDao.selectOneInfos(vo);
+	}
+	
+	public int update(ProductDto productDto) {
+		return productDao.update(productDto);
+	}
+	
+	public int infoUpdate(ProductDto productDto) {
+		return productDao.infoUpdate(productDto);
+	}
+	
+	public int funcUpdate(ProductDto productDto) {
+		return productDao.funcUpdate(productDto);
+	}
+	
+	public int funcDelete(ProductDto productDto) {
+		return productDao.funcDelete(productDto);
+	}
+	
+	public int infoDelete(ProductDto productDto) {
+		return productDao.infoDelete(productDto);
+	}
 }

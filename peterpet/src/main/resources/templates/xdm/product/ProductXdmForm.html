@@ -27,10 +27,13 @@
                   </div>
                 </div>
                 <div class="card border h-100 border-primary mb-3" th:if="${vo.prodType} == '1'">
-                  <input type="hidden" id="prodFuncArray" name="prodFuncArray">
-                  <input type="hidden" id="feedPriceArray" name="feedPriceArray">
-                  <input type="hidden" id="feedWeightArray" name="feedWeightArray">
-                  <input type="hidden" id="feedDiscountArray" name="feedDiscountArray">
+                  <input type="hidden" id="prodFuncArray" name="prodFuncArray" th:value="${vo.prodFuncArray}">
+                  <input type="hidden" id="prodFuncNameArray" name="prodFuncNameArray" th:value="${vo.prodFuncNameArray}" disabled>
+                  <input type="hidden" id="feedPriceArray" name="feedPriceArray" th:value="${vo.feedPriceArray}">
+                  <input type="hidden" id="feedWeightArray" name="feedWeightArray" th:value="${vo.feedWeightArray}">
+                  <input type="hidden" id="feedDiscountArray" name="feedDiscountArray" th:value="${vo.feedDiscountArray}">
+                  <input type="hidden" id="prodFuncSeqArray" name="prodFuncSeqArray" th:value="${vo.prodFuncSeqArray}">
+                  <input type="hidden" id="feedInfoSeqArray" name="feedInfoSeqArray" th:value="${vo.feedInfoSeqArray}">
                   <div class="row g-3 mt-0 ms-2 me-2">
                     <div class="col-3">
                       <label class="form-label-JHY" for="pordSeq">사료 코드<span style="color: red;">*</span></label>
@@ -98,7 +101,7 @@
                       <div class="form-group">
                         <select class="form-select-JHY" name="prodFunction" id="prodFunction">
                           <option value="">기능</option>
-                          <option th:each="prodFunction : ${@codeService.selectListCachedCode(6)}" th:text="${prodFunction.codeName}" th:value="${prodFunction.codeSeq}" th:disabled="${#arrays.contains(vo.prodFuncArray, prodFunction.codeSeq)} ? 'disabled' : null"></option>
+                          <option th:each="prodFunction : ${@codeService.selectListCachedCode(6)}" th:text="${prodFunction.codeName}" th:value="${prodFunction.codeSeq}" th:disabled="${#strings.contains(vo.prodFuncArray, prodFunction.codeSeq)} ? 'disabled' : null"></option>
                         </select>
                         <input type="hidden" name="prodFunction" id="prodFunction" value="0">
                       </div>
@@ -182,7 +185,7 @@
     let form = document.getElementById("product-form");
 
     let goUrlXdmInst = "/xdm/product/ProductXdmInst";
-    // let goUrlXdmUpdt = "/xdm/product/ProductXdmInst";
+    let goUrlXdmUpdt = "/xdm/product/ProductXdmUpdt";
 
     let name = document.getElementById("prodName");
     let useFlag = document.getElementById("prodUseFlag");

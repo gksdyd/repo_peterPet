@@ -141,7 +141,7 @@
 			codeModDate = date_format(NOW(), '%Y-%m-%d %H:%i:%S'),
 			codeGroup_cogrSeq = #{codeGroup_cogrSeq}
 		where
-			codeSeq = #{codeSeq};
+			codeSeq = #{codeSeq}
 	</update>
 	
 	<update id="uelete">

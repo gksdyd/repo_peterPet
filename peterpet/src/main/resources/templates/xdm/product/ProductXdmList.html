@@ -223,7 +223,7 @@
                       <td class="#" th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}"></td>
                       <td class="use" th:if="${list.prodUseFlag} == '1'">Y</td>
                       <td class="use" th:if="${list.prodUseFlag} == '0'">N</td>
-                      <td class="name" th:text="${list.prodName}"></td>
+                      <td class="name"><a th:href="@{/xdm/product/ProductXdmForm(prodSeq=${list.prodSeq})}" th:text="${list.prodName}"></a></td>
                       <td class="salary-age" th:text="${@codeService.selectOneCachedCode(list.feedSalaryAge)}"><a href="#"></a></td>
                       <td class="type" th:text="${@codeService.selectOneCachedCode(list.feedType)}"></td>
                       <td class="etc" th:text="${@codeService.selectOneCachedCode(list.feedEtc)}"></td>

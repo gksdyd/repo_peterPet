@@ -20,6 +20,7 @@ public class ProductDto {
 	private int infoCount;
 	private int funcCount;
 	
+	private String infoSeq;
 	private Integer infoPrice;
 	private Double infoWeight;
 	private Integer infoDiscount;
@@ -29,8 +30,10 @@ public class ProductDto {
 	private String funcSeq;
 	private String funcName;
 	
+	public List<String> prodFuncSeqArray = new ArrayList<>();
 	public List<String> prodFuncArray = new ArrayList<>();
 	
+	List<String> feedInfoSeqArray = new ArrayList<>();
 	List<Integer> feedPriceArray = new ArrayList<>();
 	List<Double> feedWeightArray = new ArrayList<>();
 	List<Integer> feedDiscountArray = new ArrayList<>();
@@ -184,5 +187,23 @@ public class ProductDto {
 	}
 	public void setProdFuncArray(List<String> prodFuncArray) {
 		this.prodFuncArray = prodFuncArray;
+	}
+	public List<String> getProdFuncSeqArray() {
+		return prodFuncSeqArray;
+	}
+	public void setProdFuncSeqArray(List<String> prodFuncSeqArray) {
+		this.prodFuncSeqArray = prodFuncSeqArray;
+	}
+	public List<String> getFeedInfoSeqArray() {
+		return feedInfoSeqArray;
+	}
+	public void setFeedInfoSeqArray(List<String> feedInfoSeqArray) {
+		this.feedInfoSeqArray = feedInfoSeqArray;
+	}
+	public String getInfoSeq() {
+		return infoSeq;
+	}
+	public void setInfoSeq(String infoSeq) {
+		this.infoSeq = infoSeq;
 	}
 }

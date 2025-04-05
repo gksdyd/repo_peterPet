@@ -13,4 +13,12 @@ public interface ProductDao {
 	public int selectOneCount(ProductVo vo);
 	public int infoInsert(ProductDto productDto);
 	public int funcInsert(ProductDto productDto);
+	public ProductDto selectOnePoduct(ProductVo vo);
+	public List<ProductDto> selectOneFunctions(ProductVo vo);
+	public List<ProductDto> selectOneInfos(ProductVo vo);
+	public int update(ProductDto productDto);
+	public int infoUpdate(ProductDto productDto);
+	public int funcUpdate(ProductDto productDto);
+	public int funcDelete(ProductDto productDto);
+	public int infoDelete(ProductDto productDto);
 }
