@@ -340,7 +340,7 @@
                     document.getElementById("collapsePhone").classList.add('show');
                 });
 
-                $("#certificationBtn").on("click", function() {
+                // $("#certificationBtn").on("click", function() {
                     // $.ajax({
                     //     async: true 
                     //     ,cache: false
@@ -358,7 +358,7 @@
                     //         alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
                     //     }
                     // });
-                });
+                // });
       
                 validation = function() {
                     let temp;
@@ -424,9 +424,14 @@
 
                     temp = id.value;
                     if (!checkLength(temp) || !onlyKoEngNumValid(temp)) {
+                        idValid.innerText = "아이디를 입력해주세요.";
                         idValid.style.display = "block";
                         id.style.borderColor = "red";
                         id.focus();
+                        return false;
+                    }
+
+                    if (!idDuplicateCheck()) {
                         return false;
                     }
 
@@ -455,7 +460,7 @@
                 function signUpLogic () {
                     styleInit();
                     validationInit();
-                    
+
                     if(!validation()) {
                         return false;
                     }

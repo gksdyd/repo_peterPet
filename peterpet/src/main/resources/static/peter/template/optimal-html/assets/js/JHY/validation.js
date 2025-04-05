@@ -94,3 +94,29 @@ onlyEmail = function(text) {
     }
     return true;
 }
+
+idDuplicateCheck = function() {
+    let result = false;
+
+    $.ajax({
+        async: false 
+        ,cache: false
+        ,type: "post"
+        ,url: URL_ID_CHECK_PETER
+        ,data: { "userId" : id.value }
+        ,success: function(response) {
+          if(response.rt == "success") {
+            result = true;
+          } else {
+            idValid.innerText = "중복된 아이디입니다.";
+            idValid.style.display = "block";
+            id.style.borderColor = "red";
+            id.focus();
+          }
+        }
+        ,error : function(jqXHR){
+          alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+        }
+    });
+    return result;
+}

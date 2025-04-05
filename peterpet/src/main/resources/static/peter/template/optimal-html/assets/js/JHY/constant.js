@@ -9,6 +9,7 @@
 
 
 // 로그인관련 경로
+const URL_ID_CHECK_PETER = "/peter/member/CheckIdPeterProc";
 const URL_SIGNOUT_PROC_XDM = "/xdm/member/LogoutXdmProc";
 const URL_SIGNIN_PROC_XDM = "/xdm/member/LoginXdmProc";
 const URL_SIGNIN_FORM_XDM = "/peter/member/LoginPeterForm";

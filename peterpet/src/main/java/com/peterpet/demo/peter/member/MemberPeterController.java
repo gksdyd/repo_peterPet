@@ -49,7 +49,6 @@ public class MemberPeterController {
 	@RequestMapping(value = "/InsertPeterForm")
 	public String InsertPeterForm(MemberDto memberDto) {
 		memberService.insert(memberDto);
-		System.out.println("fsfs");
 		return "redirect:/peter/index/IndexPeterView";
 	}
 	
@@ -67,6 +66,19 @@ public class MemberPeterController {
 		model.addAttribute("item", memberService.selectOne(memberDto));
 		model.addAttribute("list", pets);
 		return "peter/member/MyAccountPeterForm";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/CheckIdPeterProc")
+	public Map<String, Object> checkIdPeterProc(MemberDto dto) throws Exception {
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		
+		if (memberService.checkId(dto) == 0) {
+			returnMap.put("rt", "success");
+		} else {
+			returnMap.put("rt", "fail");
+		}
+		return returnMap;
 	}
 	
 	@ResponseBody

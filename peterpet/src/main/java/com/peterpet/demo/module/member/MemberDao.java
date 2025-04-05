@@ -13,4 +13,5 @@ public interface MemberDao {
 	MemberDto selectOneLogin(MemberDto memberDto);
 	int update(MemberDto memberDto);
 	int insert(MemberDto memberDto);
+	int checkId(MemberDto memberDto);
 }
