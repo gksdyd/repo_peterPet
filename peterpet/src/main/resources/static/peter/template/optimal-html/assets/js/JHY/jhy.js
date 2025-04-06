@@ -72,30 +72,79 @@
         
     }
 
+var contentA = document.getElementById("pet-list");
+var contentB = document.getElementById("pet-register");
+var contentC = document.getElementById("pet-detail");
     // 페이지 진입 시 기본 값
 window.addEventListener('DOMContentLoaded', function() {
-    showContent('list');
-  });
+    contentA.style.display = "block";
+    contentB.style.display = "none";
+    contentC.style.display = "none";
+});
   
-  function showContent(content) {
-    var contentA = document.getElementById("pet-list");
-    var contentB = document.getElementById("pet-register");
-    var contentC = document.getElementById("pet-detail");
-  
+$('.detail').click(function(){
     // 내용 숨김
     contentA.style.display = "none";
     contentB.style.display = "none";
+    contentC.style.display = "block";
+    
+    $.ajax({
+        async: true 
+        ,cache: false
+        ,type: "post"
+        ,url: goUrlPeterProc
+        ,data: { "petSeq" : $(this).val() }
+        ,success: function(response) {
+            $("#userPetName").text(response.dto.petName);
+            $("#userPetVarieties").text(response.variety);
+            $("#userPetGender").text(response.gender);
+            $("#userPetBirth").text(response.dto.petBirth);
+            $("#userPetWeight").text(response.dto.petWeight + "kg");
+
+            if (response.dto.petVaccinationFlag == 1) {
+                $("#userPetVaccin").text("예");
+            } else {
+                $("#userPetVaccin").text("아니오");
+            }
+
+            if (response.dto.petNeuteringFlag == 1) {
+                $("#userPetNeuter").text("예");
+            } else {
+                $("#userPetNeuter").text("아니오");
+            }
+            
+            let text = "";
+            for(let i = 0; i < response.personal.length; i++) {
+                text += response.personal[i] + '<br>';
+            }
+            $("#userPetPersonal").html(text);
+
+            text = "";
+            for(let i = 0; i < response.disease.length; i++) {
+                text += response.disease[i] + '<br>';
+            }
+            $("#userPetDisease").html(text);
+        }
+        ,error : function(jqXHR) {
+            alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+        }
+    })
+});
+
+$('.register').click(function(){
+    // 내용 숨김
+    contentA.style.display = "none";
     contentC.style.display = "none";
-  
-    // 선택한 내용 보이기
-    if (content === "list") {
-      contentA.style.display = "block";
-    } else if (content === "register") {
-      contentB.style.display = "block";
-    } else if (content === "detail") {
-        contentC.style.display = "block";
-      }
-  }
+    contentB.style.display = "block";
+    alert($(this).val());
+});
+$('.list').click(function(){
+    // 내용 숨김
+    contentB.style.display = "none";
+    contentC.style.display = "none";
+    contentA.style.display = "block";
+    alert($(this).val());
+});
 
   function showModal(modal) {  
     // 내용 숨김

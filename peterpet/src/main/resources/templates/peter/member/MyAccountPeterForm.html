@@ -614,7 +614,7 @@
                                                     <ul>
                                                         <li>
                                                             <div class="left"><span>이름</span></div>
-                                                            <div class="right"><span th:if="${dto} != null" id="userPetName" th:text="${dto.petName}"></span></div>
+                                                            <div class="right"><span id="userPetName"></span></div>
                                                         </li>
                                                         <li>
                                                             <div class="left"><span>품종</span></div>
@@ -638,19 +638,15 @@
                                                         </li>
                                                         <li>
                                                             <div class="left"><span>중성화 유무</span></div>
-                                                            <div class="right"><span id="userPetNeuter">예</span></div>
+                                                            <div class="right"><span id="userPetNeuter"></span></div>
                                                         </li>
                                                         <li>
                                                             <div class="left"><span>아이의 성격</span></div>
-                                                            <div class="right">
-                                                                <ul id="userPetPersonal"></ul>
-                                                            </div>
+                                                            <div class="right"><ul id="userPetPersonal"></ul></div>
                                                         </li>
                                                         <li>
                                                             <div class="left"><span>아이의 질병/질환</span></div>
-                                                            <div class="right">
-                                                                <ul id="userPetDisease"></ul>
-                                                            </div>
+                                                            <div class="right"><ul id="userPetDisease"></ul></div>
                                                         </li>
                                                     </ul>
                                                 </div>

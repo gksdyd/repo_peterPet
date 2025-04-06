@@ -21,8 +21,8 @@ public class PetDto {
 	
 	private int petDelFlag;
 	
-	private String persDiscription;
-	private String diseDiscription;
+	private Integer persDiscription;
+	private Integer diseDiscription;
 	
 	private int petAge;
 	
@@ -128,16 +128,16 @@ public class PetDto {
 	public void setDiseaseCount(int diseaseCount) {
 		this.diseaseCount = diseaseCount;
 	}
-	public String getPersDiscription() {
+	public Integer getPersDiscription() {
 		return persDiscription;
 	}
-	public void setPersDiscription(String persDiscription) {
+	public void setPersDiscription(Integer persDiscription) {
 		this.persDiscription = persDiscription;
 	}
-	public String getDiseDiscription() {
+	public Integer getDiseDiscription() {
 		return diseDiscription;
 	}
-	public void setDiseDiscription(String diseDiscription) {
+	public void setDiseDiscription(Integer diseDiscription) {
 		this.diseDiscription = diseDiscription;
 	}
 	public int getPetAge() {
