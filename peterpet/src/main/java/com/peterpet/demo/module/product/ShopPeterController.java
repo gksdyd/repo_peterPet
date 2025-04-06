@@ -1,4 +1,4 @@
-package com.peterpet.demo.peter.shop;
+package com.peterpet.demo.module.product;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,4 +1,4 @@
-package com.peterpet.demo.peter.member;
+package com.peterpet.demo.module.member;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,8 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.peterpet.demo.module.member.MemberDto;
-import com.peterpet.demo.module.member.MemberService;
 import com.peterpet.demo.module.pet.PetDto;
 import com.peterpet.demo.module.pet.PetService;
 import com.peterpet.demo.module.pet.PetVo;
