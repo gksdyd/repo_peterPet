@@ -74,12 +74,12 @@
                       <th class="text-900 sort white-nowrap" data-sort="#">#</th>
                       <th class="text-900 sort white-nowrap" data-sort="use">사용</th>
                       <th class="text-900 sort white-nowrap" data-sort="code-group-code">코드그룹 코드</th>
-                      <th class="text-900 sort white-nowrap" data-sort="code-group-name" style="min-width: 200px;">코드그룹 이름</th>
+                      <th class="text-900 sort white-nowrap" data-sort="code-group-name">코드그룹 이름</th>
                       <th class="text-900 sort white-nowrap" data-sort="code-group-name-eng">코드그룹 이름(영문)</th>
                       <th class="text-900 sort white-nowrap" data-sort="count">갯수</th>
                       <th class="text-900 sort white-nowrap" data-sort="order">순서</th>
                       <th class="text-900 sort white-nowrap" data-sort="resist-date">등록일</th>
-                      <th class="text-900 sort white-nowrap text-end" data-sort="modify-date">수정일</th>
+                      <th class="text-900 sort white-nowrap" data-sort="modify-date">수정일</th>
                     </tr>
                   </thead>
                   <tbody class="list" id="table-customers-body">
@@ -99,13 +99,14 @@
                       <td class="#" th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}"></td>
                       <td class="use" th:if="${list.cogrUseFlag} == '1'">Y</td>
                       <td class="use" th:if="${list.cogrUseFlag} == '0'">N</td>
-                      <td class="code-group-code" th:text="${list.cogrNum}"></td>
+                      <td class="code-group-code" th:if="${list.cogrNum} == null" th:text="${list.cogrSeq}"></td>
+                      <td class="code-group-code" th:if="${list.cogrNum} != null" th:text="${list.cogrNum}"></td>
                       <td class="code-group-name"><a th:href="@{/xdm/codegroup/CodeGroupXdmForm(cogrSeq=${list.cogrSeq})}" th:text="${list.cogrName}"></a></td>
                       <td class="code-group-name-eng" th:text="${list.cogrNameEng}"></td>
                       <td class="count" th:text="${list.count}"></td>
                       <td class="order" th:text="${list.cogrOrder}"></td>
                       <td class="register-date" th:text="${list.cogrRegDate}"></td>
-                      <td class="modify-date text-end" th:text="${list.cogrModDate}"></td>
+                      <td class="modify-date\" th:text="${list.cogrModDate}"></td>
                     </tr>
                   </tbody>
                 </table>

@@ -76,14 +76,14 @@
                       <th class="text-900 sort white-nowrap" data-sort="#">#</th>
                       <th class="text-900 sort white-nowrap" data-sort="use">사용</th>
                       <th class="text-900 sort white-nowrap" data-sort="code-group-code">코드그룹 코드</th>
-                      <th class="text-900 sort white-nowrap" data-sort="code-group-name" style="min-width: 200px;">코드그룹 이름</th>
+                      <th class="text-900 sort white-nowrap" data-sort="code-group-name">코드그룹 이름</th>
                       <th class="text-900 sort white-nowrap" data-sort="code">코드</th>
                       <th class="text-900 sort white-nowrap" data-sort="instead-code">대체 코드</th>
                       <th class="text-900 sort white-nowrap" data-sort="code-name">코드 이름</th>
                       <th class="text-900 sort white-nowrap" data-sort="code-name-eng">코드 이름(영문)</th>
                       <th class="text-900 sort white-nowrap" data-sort="order">순서</th>
                       <th class="text-900 sort white-nowrap" data-sort="resist-date">등록일</th>
-                      <th class="text-900 sort white-nowrap text-end" data-sort="modify-date">수정일</th>
+                      <th class="text-900 sort white-nowrap" data-sort="modify-date">수정일</th>
                     </tr>
                   </thead>
                   <tbody class="list" id="table-customers-body">
@@ -103,7 +103,8 @@
                       <td class="#" th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}"></td>
                       <td class="use" th:if="${list.codeUseFlag}=='1'">Y</td>
                       <td class="use" th:if="${list.codeUseFlag}=='0'">N</td>
-                      <td class="code-group-code" th:text="${list.cogrNum}"></td>
+                      <td class="code-group-code" th:if="${list.cogrNum} == null" th:text="${list.codeGroup_cogrSeq}"></td>
+                      <td class="code-group-code" th:if="${list.cogrNum} != null" th:text="${list.cogrNum}"></td>
                       <td class="code-group-name" th:text="${list.cogrName}"></td>
                       <td class="code" th:text="${list.codeSeq}"></td>
                       <td class="instead-code" th:text="${list.codeNum}"></td>
@@ -111,7 +112,7 @@
                       <td class="code-name-eng" th:text="${list.codeNameEng}"></td>
                       <td class="order" th:text="${list.codeOrder}">1</td>
                       <td class="resist-date" th:text="${list.codeRegDate}"></td>
-                      <td class="modify-date text-end" th:text="${list.codeModDate}"></td>
+                      <td class="modify-date" th:text="${list.codeModDate}"></td>
                     </tr>
                   </tbody>
                 </table>
