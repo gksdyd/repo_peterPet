@@ -42,4 +42,20 @@ public class PetService {
 	public List<PetDto> selectListPeterPets(PetVo vo) {
 		return petDao.selectListPeterPets(vo);
 	}
+	
+	public int insert(PetDto petDto) {
+		return petDao.insert(petDto);
+	}
+	
+	public int personalInsert(PetDto petDto) {
+		return petDao.personalInsert(petDto);
+	}
+	
+	public int diseaseInsert(PetDto petDto) {
+		return petDao.diseaseInsert(petDto);
+	}
+	
+	public String selectMaxSeq() {
+		return petDao.selectMaxSeq();
+	}
 }

@@ -593,7 +593,7 @@
                                                     </div>
                                                 </div>
                                             </fieldset>
-                                            <button id="btnSubmit" type="button" class="btn btn-primary rounded">Save</button>
+                                            <button id="userUpdateBtn" type="button" class="btn btn-primary rounded">Save</button>
                                         </form>
                                     </div>
                                 </div>
@@ -667,7 +667,14 @@
                                     <div id="pet-register">
                                         <h3>반려동물등록/수정</h3>
                                         <div class="account-login-form bg-light-gray padding-20px-all">
-                                            <form class="needs-validation" id="petRegister" name="petRegister" novalidate>
+                                            <form class="needs-validation" id="petInfoForm" name="petInfoForm" novalidate>
+                                                <input type="hidden" id="petType" name="petType">
+                                                <input type="hidden" id="petGender" name="petGender">
+                                                <input type="hidden" id="petVarieties" name="petVarieties">
+                                                <input type="hidden" id="petVaccinationFlag" name="petVaccinationFlag">
+                                                <input type="hidden" id="petNeuteringFlag" name="petNeuteringFlag">
+                                                <input type="hidden" id="petPersonalArray" name="petPersonalArray">
+                                                <input type="hidden" id="petDiseaseArray" name="petDiseaseArray">
                                                 <fieldset>
                                                     <div class="row form-group">
                                                         <div class="d-flex mt-3 col-md-6 col-lg-6 col-xl-6">
@@ -697,7 +704,6 @@
                                                         <div class="col-md-6 col-lg-6 col-xl-6">
                                                             <div class="form-control">
                                                                 <input class="search-txt" type="text" id="petVariety" name="petVariety" placeholder="품종" disabled>
-                                                                <input type="hidden" id="petVarieties" name="petVarieties">
                                                                 <button class="search-btn" type="button" id="searchVariety" data-bs-toggle="modal" data-bs-target="#modalPet"><i class="icon an an-search-l"></i></button>
                                                             </div>
                                                         </div>
@@ -741,23 +747,23 @@
                                                         <div class="d-flex mt-3 col-md-6 col-lg-6 col-xl-6 form-check">
                                                             <label class="control-label me-3">예방 접종<span class="required">*</span></label>
                                                             <div class="customRadio clearfix me-3">
-                                                                <input name="pet-vaccination" id="vaccination-yes" value="1" type="radio" class="padding-10px-right form-check-input" required />
-                                                                <label for="vaccination-yes" class="form-check-label">예 &nbsp;</label>
+                                                                <input name="pet-vaccination" id="vaccinationYes" value="1" type="radio" class="padding-10px-right form-check-input" required />
+                                                                <label for="vaccinationYes" class="form-check-label">예 &nbsp;</label>
                                                             </div>
                                                             <div class="customRadio clearfix me-3">
-                                                                <input name="pet-vaccination" id="vaccination-no" value="0" type="radio" class="padding-10px-right form-check-input" required />
-                                                                <label for="vaccination-no" class="form-check-label">아니오</label>
+                                                                <input name="pet-vaccination" id="vaccinationNo" value="0" type="radio" class="padding-10px-right form-check-input" required />
+                                                                <label for="vaccinationNo" class="form-check-label">아니오</label>
                                                             </div>
                                                         </div>
                                                         <div class="d-flex mt-3 col-md-6 col-lg-6 col-xl-6 form-check">
                                                             <label class="control-label me-3">중성화<span class="required">*</span></label>
                                                             <div class="customRadio clearfix me-3">
-                                                                <input name="pet-neutering" id="neutering-yes" value="1" type="radio" class="padding-10px-right form-check-input" required />
-                                                                <label for="neutering-yes" class="form-check-label">예 &nbsp;</label>
+                                                                <input name="pet-neutering" id="neuteringYes" value="1" type="radio" class="padding-10px-right form-check-input" required />
+                                                                <label for="neuteringYes" class="form-check-label">예 &nbsp;</label>
                                                             </div>
                                                             <div class="customRadio clearfix me-3">
-                                                                <input name="pet-neutering" id="neutering-no" value="0" type="radio" class="padding-10px-right form-check-input" required />
-                                                                <label for="neutering-no" class="form-check-label">아니오</label>
+                                                                <input name="pet-neutering" id="neuteringNo" value="0" type="radio" class="padding-10px-right form-check-input" required />
+                                                                <label for="neuteringNo" class="form-check-label">아니오</label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -807,10 +813,10 @@
                                                     </div>
                                                     <div class="row form-group mt-3">
                                                         <div class="text-left col-lg-6 col-md-6 col-sm-6">
-                                                            <input type="submit" class="btn rounded mb-3" value="저장">
+                                                            <button type="button" class="btn rounded mb-3" id="petSubmitBtn">저장</button>
                                                         </div>
                                                         <div class="text-right col-lg-6 col-md-6 col-sm-6">
-                                                            <input type="button" class="btn rounded mb-3 list" value="목록" id="button-list">
+                                                            <button type="button" class="btn rounded mb-3 list" id="button-list">목록</button>
                                                         </div>
                                                     </div>
                                                 </fieldset>
@@ -1343,8 +1349,11 @@
             <div th:replace="~{peter/include/includePeterRegister :: includePeterRegister}"></div>
 
             <script type="text/javascript" th:inline="javascript">
-                let form = document.getElementById("userInfoForm");
-                let goUrlPeterUpdt = "/peter/member/UpdatePeterForm";
+                let userform = document.getElementById("userInfoForm");
+                let petform = document.getElementById("petInfoForm");
+
+                let goUrlPeterUserUpdt = "/peter/member/UpdatePeterForm";
+                let goUrlPeterPetInst = "/peter/pet/InsertPeterForm";
                 let goUrlPeterProc = "/peter/pet/PetPeterProc";
 
                 let name = document.getElementById("userName");
@@ -1360,6 +1369,26 @@
                 let emailValid = document.getElementById("userEmailValid");
                 let phoneVaild = document.getElementById("userPhoneValid");
                 let addressValid = document.getElementById("userAddrValid");
+
+                let type = document.getElementById("petType");
+                let dog = document.getElementById("dog");
+                let cat = document.getElementById("cat");
+                let gender = document.getElementById("petGender");
+                let male = document.getElementById("male");
+                let female = document.getElementById("female");
+                let varieties = document.getElementById("petVarieties");
+                let petName = document.getElementById("petName");
+                let nickname = document.getElementById("petNickname");
+                let petBirth = document.getElementById("petBirth");
+                let petWeight = document.getElementById("petWeight");
+                let petVaccinationFlag = document.getElementById("petVaccinationFlag");
+                let vaccinationYes = document.getElementById("vaccinationYes");
+                let vaccinationNo = document.getElementById("vaccinationNo");
+                let petNeuteringFlag = document.getElementById("petNeuteringFlag");
+                let neuteringYes = document.getElementById("neuteringYes");
+                let neuteringNo = document.getElementById("neuteringNo");
+                let petPersonalArray = document.getElementById("petPersonalArray");
+                let petDiseaseArray = document.getElementById("petDiseaseArray");
             
                 validationInit = function() {
                     nameValid.style.display = "none";

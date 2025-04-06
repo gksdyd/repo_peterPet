@@ -164,4 +164,70 @@
 		WHERE 1=1
 			AND user_userSeq = #{userSeq}
 	</select>
+	
+	<insert id="insert">
+		INSERT INTO pet(
+			petType,
+			petVarieties,
+			petGender,
+			petName,
+			petNickname,
+			petBirth,
+			petWeight,
+			petVaccinationFlag,
+			petNeuteringFlag,
+			petRegDate,
+			petDelFlag,
+			user_userSeq
+		) VALUE (
+			#{petType},
+			#{petVarieties},
+			#{petGender},
+			#{petName},
+			#{petNickname},
+			#{petBirth},
+			#{petWeight},
+			#{petVaccinationFlag},
+			#{petNeuteringFlag},
+			date_format(NOW(), '%Y-%m-%d %H:%i:%S'),
+			0,
+			#{user_userSeq}
+		)
+		<selectKey resultType="String" keyProperty="petSeq" order="AFTER">
+			SELECT last_insert_id()
+		</selectKey>
+	</insert>
+	
+	<select id="selectMaxSeq" resultType="String">
+		SELECT
+			MAX(petSeq)
+		FROM
+			pet
+	</select>
+	
+	<insert id="personalInsert">
+		INSERT INTO personality(
+			persDiscription,
+			pet_petSeq
+		) VALUE(
+			#{persDiscription},
+			#{petSeq}
+		)
+		<selectKey resultType="String" keyProperty="persSeq" order="AFTER">
+			SELECT last_insert_id()
+		</selectKey>
+	</insert>
+	
+	<insert id="diseaseInsert">
+		INSERT INTO disease(
+			diseDiscription,
+			pet_petSeq
+		) VALUE(
+			#{diseDiscription},
+			#{petSeq}
+		)
+		<selectKey resultType="String" keyProperty="diseSeq" order="AFTER">
+			SELECT last_insert_id()
+		</selectKey>
+	</insert>
 </mapper>

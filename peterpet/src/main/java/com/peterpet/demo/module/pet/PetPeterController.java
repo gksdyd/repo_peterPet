@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.peterpet.demo.module.code.CodeService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping(value = "/peter/pet")
 public class PetPeterController {
@@ -45,5 +47,23 @@ public class PetPeterController {
 		}
 		rtMap.put("disease", disease);
 		return rtMap;
+	}
+	
+	@RequestMapping(value = "/InsertPeterForm")
+	public String insertPeterForm(PetDto petDto, HttpSession httpSession) {
+		petDto.setUser_userSeq((String) httpSession.getAttribute("sessSeqXdm"));
+		petService.insert(petDto);
+		
+		petDto.setPetSeq(petService.selectMaxSeq());
+		for (int i = 0; i < petDto.getPetPersonalArray().size(); i++) {
+			petDto.setPersDiscription(petDto.getPetPersonalArray().get(i));
+			petService.personalInsert(petDto);
+		}
+		
+		for (int i = 0; i < petDto.getPetDiseaseArray().size(); i++) {
+			petDto.setDiseDiscription(petDto.getPetDiseaseArray().get(i));
+			petService.diseaseInsert(petDto);
+		}
+		return "redirect:/peter/member/MyAccountPeterForm";
 	}
 }

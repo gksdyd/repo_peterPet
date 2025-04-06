@@ -3,21 +3,64 @@
    ===============================================--> */
   
 // 등록 및 수정하는 함수
-document.getElementById("btnSubmit").onclick = function() {
+document.getElementById("userUpdateBtn").onclick = function() {
     validationInit();
 
     if (!validation()) {
         return false;
     }
 
-    if (document.getElementById("registerOrModifyFlag").value == 1) {
-        form.action = goUrlXdmInst;
-    } else {
-        form.action = goUrlPeterUpdt;
+    userform.action = goUrlPeterUserUpdt;
+    userform.method = "post";
+    userform.submit();
+}
+
+document.getElementById("petSubmitBtn").onclick = function() {
+    // validationInit();
+
+    // if (!validation()) {
+    //     return false;
+    // }
+
+    if (dog.checked) {
+        type.value = dog.value;
+    } else if (cat.checked) {
+        type.value = cat.value;
     }
 
-    form.method = "post";
-    form.submit();
+    if (male.checked) {
+        gender.value = male.value;
+    } else if (female.checked) {
+        gender.value = female.value;
+    }
+
+    if (vaccinationYes.checked) {
+        petVaccinationFlag.value = vaccinationYes.value;
+    } else if (vaccinationNo.checked) {
+        petVaccinationFlag.value = vaccinationNo.value;
+    }
+
+    if (neuteringYes.checked) {
+        petNeuteringFlag.value = neuteringYes.value;
+    } else if (neuteringNo.checked) {
+        petNeuteringFlag.value = neuteringNo.value;
+    }
+
+    let array = [];
+    for (let i = 0; i < document.querySelectorAll("#createPersonal > .removeFunc").length; i++) {
+        array.push(document.querySelectorAll("#createPersonal > .removeFunc")[i].value);
+    }
+    petPersonalArray.value = array;
+
+    array = [];
+    for (let i = 0; i < document.querySelectorAll("#createDisease > .removeFunc").length; i++) {
+        array.push(document.querySelectorAll("#createDisease > .removeFunc")[i].value);
+    }
+    petDiseaseArray.value = array;
+
+    petform.action = goUrlPeterPetInst;
+    petform.method = "post";
+    petform.submit();
 }
 
 $(".selectPet ul li").on("click", function(e) {

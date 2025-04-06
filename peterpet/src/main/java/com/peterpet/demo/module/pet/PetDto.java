@@ -1,18 +1,21 @@
 package com.peterpet.demo.module.pet;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PetDto {
 
 	private String petSeq;
-	private int petType;
-	private int petVarieties;
-	private int petGender;
+	private Integer petType;
+	private Integer petVarieties;
+	private Integer petGender;
 	private String petName;
-	private int petNickname;
+	private Integer petNickname;
 	private String petBirth;
-	private double petWeight;
-	private int petVaccinationFlag;
-	private int petNeuteringFlag;
-	private int user_userSeq;
+	private Double petWeight;
+	private Integer petVaccinationFlag;
+	private Integer petNeuteringFlag;
+	private String user_userSeq;
 	private String petRegDate;
 	private String petModDate;
 	private String userSeq;
@@ -22,8 +25,13 @@ public class PetDto {
 	
 	private int petDelFlag;
 	
+	private String persSeq;
 	private Integer persDiscription;
+	private String diseSeq;
 	private Integer diseDiscription;
+	
+	private List<Integer> petPersonalArray = new ArrayList<>();
+	private List<Integer> petDiseaseArray = new ArrayList<>();
 	
 	private int petAge;
 	
@@ -33,16 +41,16 @@ public class PetDto {
 	public void setPetSeq(String petSeq) {
 		this.petSeq = petSeq;
 	}
-	public int getPetVarieties() {
+	public Integer getPetVarieties() {
 		return petVarieties;
 	}
-	public void setPetVarieties(int petVarieties) {
+	public void setPetVarieties(Integer petVarieties) {
 		this.petVarieties = petVarieties;
 	}
-	public int getPetGender() {
+	public Integer getPetGender() {
 		return petGender;
 	}
-	public void setPetGender(int petGender) {
+	public void setPetGender(Integer petGender) {
 		this.petGender = petGender;
 	}
 	public String getPetName() {
@@ -51,10 +59,10 @@ public class PetDto {
 	public void setPetName(String petName) {
 		this.petName = petName;
 	}
-	public int getPetNickname() {
+	public Integer getPetNickname() {
 		return petNickname;
 	}
-	public void setPetNickname(int petNickname) {
+	public void setPetNickname(Integer petNickname) {
 		this.petNickname = petNickname;
 	}
 	public String getPetBirth() {
@@ -63,28 +71,28 @@ public class PetDto {
 	public void setPetBirth(String petBirth) {
 		this.petBirth = petBirth;
 	}
-	public double getPetWeight() {
+	public Double getPetWeight() {
 		return petWeight;
 	}
-	public void setPetWeight(double petWeight) {
+	public void setPetWeight(Double petWeight) {
 		this.petWeight = petWeight;
 	}
-	public int getPetVaccinationFlag() {
+	public Integer getPetVaccinationFlag() {
 		return petVaccinationFlag;
 	}
-	public void setPetVaccinationFlag(int petVaccinationFlag) {
+	public void setPetVaccinationFlag(Integer petVaccinationFlag) {
 		this.petVaccinationFlag = petVaccinationFlag;
 	}
-	public int getPetNeuteringFlag() {
+	public Integer getPetNeuteringFlag() {
 		return petNeuteringFlag;
 	}
-	public void setPetNeuteringFlag(int petNeuteringFlag) {
+	public void setPetNeuteringFlag(Integer petNeuteringFlag) {
 		this.petNeuteringFlag = petNeuteringFlag;
 	}
-	public int getUser_userSeq() {
+	public String getUser_userSeq() {
 		return user_userSeq;
 	}
-	public void setUser_userSeq(int user_userSeq) {
+	public void setUser_userSeq(String user_userSeq) {
 		this.user_userSeq = user_userSeq;
 	}
 	public String getPetRegDate() {
@@ -147,10 +155,34 @@ public class PetDto {
 	public void setPetAge(int petAge) {
 		this.petAge = petAge;
 	}
-	public int getPetType() {
+	public Integer getPetType() {
 		return petType;
 	}
-	public void setPetType(int petType) {
+	public void setPetType(Integer petType) {
 		this.petType = petType;
+	}
+	public List<Integer> getPetPersonalArray() {
+		return petPersonalArray;
+	}
+	public void setPetPersonalArray(List<Integer> petPersonalArray) {
+		this.petPersonalArray = petPersonalArray;
+	}
+	public List<Integer> getPetDiseaseArray() {
+		return petDiseaseArray;
+	}
+	public void setPetDiseaseArray(List<Integer> petDiseaseArray) {
+		this.petDiseaseArray = petDiseaseArray;
+	}
+	public String getPersSeq() {
+		return persSeq;
+	}
+	public void setPersSeq(String persSeq) {
+		this.persSeq = persSeq;
+	}
+	public String getDiseSeq() {
+		return diseSeq;
+	}
+	public void setDiseSeq(String diseSeq) {
+		this.diseSeq = diseSeq;
 	}
 }
