@@ -12,9 +12,6 @@
     height: auto;
     margin: 0 auto;
 }
-.register-agency {
-    font-size: small;
-}
 .search-txt {
     border: none;
     background: none;
@@ -86,4 +83,23 @@
     color: blue;
     border-style: hidden;
     background: none;
+}
+.selectPet {
+    height: 200px;
+    ul {
+        list-style-type: none;
+        border-left: 1px solid gray;
+        border-right: 1px solid gray;
+        border-top: 1px solid gray;
+    }
+}
+
+.selectActive {
+    background-color: #3ad25d;
+}
+
+.badgeStyle {
+    background-color: yellow;
+    color: black;
+    font-size: x-small;
 }

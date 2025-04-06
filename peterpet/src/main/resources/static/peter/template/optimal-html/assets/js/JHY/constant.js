@@ -2,8 +2,14 @@
                         상수
    ===============================================--> */
 
-// 삭제 모달
+// 모달
+const ID_SEARCH_VARIETY = "searchVariety";
+const ID_SEARCH_PERSONAL = "searchPersonal";
+const ID_SEARCH_DISEASE = "searchDisease";
 
+const VALUE_BUTTON_VARIETY = 1;
+const VALUE_BUTTON_PERSONAL = 2;
+const VALUE_BUTTON_DISEASE = 3;
 
 // search
 

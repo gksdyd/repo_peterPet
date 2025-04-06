@@ -48,7 +48,6 @@
                                     <div class="col-12 col-sm-12 col-md-5 col-lg-5">
                                         <div class="form-group">
                                             <label for="userBirth" class="d-none">생일<span class="required">*</span></label>
-                                            <!-- <input id="userBirth" type="date" class="form-control" name="userBirth" required /> -->
                                             <input class="form-control datetimepicker" id="userBirth" name="userBirth" type="text" placeholder="yy-mm-dd" />
                                             <div class="invalid-feedback" id="userBirthValid">생일을 입력해주세요.</div>
                                         </div>
@@ -57,7 +56,7 @@
                                 <div class="row accordion" id="accordionExample">
                                     <div class="col-12 col-sm-12 col-md-3 col-lg-3">
                                         <div class="form-group">
-                                            <select class="form-select register-agency" id="userAgency" name="userAgency" required>
+                                            <select class="form-select-JHY" id="userAgency" name="userAgency" required>
                                                 <option value="">통신사</option>
                                                 <option th:each="agency : ${@codeService.selectListCachedCode(13)}" th:value="${agency.codeSeq}" th:text="${agency.codeName}"></option>                   	
                                             </select>
