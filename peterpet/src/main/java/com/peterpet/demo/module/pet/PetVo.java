@@ -11,6 +11,7 @@ public class PetVo extends BaseVo {
 	private String petSeq;
 	private Integer shVaccineFlag;
 	private Integer shNeuterFlag;
+	private Integer shType;
 	private Integer shVarieties;
 	private Integer shMinWeight = 0;
 	private Integer shMaxWeight = 100;
@@ -71,6 +72,14 @@ public class PetVo extends BaseVo {
 		this.shMaxWeight = shMaxWeight;
 	}
 	
+	public Integer getShType() {
+		return shType;
+	}
+
+	public void setShType(Integer shType) {
+		this.shType = shType;
+	}
+
 	public void calculateAge(List<PetDto> petDto) {
 		LocalDate now = LocalDate.now();
 		

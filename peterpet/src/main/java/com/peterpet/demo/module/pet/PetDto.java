@@ -3,6 +3,7 @@ package com.peterpet.demo.module.pet;
 public class PetDto {
 
 	private String petSeq;
+	private int petType;
 	private int petVarieties;
 	private int petGender;
 	private String petName;
@@ -145,5 +146,11 @@ public class PetDto {
 	}
 	public void setPetAge(int petAge) {
 		this.petAge = petAge;
+	}
+	public int getPetType() {
+		return petType;
+	}
+	public void setPetType(int petType) {
+		this.petType = petType;
 	}
 }

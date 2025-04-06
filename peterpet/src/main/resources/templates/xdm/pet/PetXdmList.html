@@ -6,7 +6,7 @@
         <form name="formList" id="formList" method="post" autocomplete="off">
           <input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>
           <input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}"/>
-          <div class="card mb-3" id="customersTable" data-list='{"valueNames":["#","name", "varieties", "gender","birth", "weight", "vaccination", "neutering", "personality", "disease", "user-name", "resist-date", "modify-date"],"page":10,"pagination":true}'>
+          <div class="card mb-3" id="customersTable" data-list='{"valueNames":["#","name", "types", "varieties", "gender","birth", "weight", "vaccination", "neutering", "personality", "disease", "user-name", "resist-date", "modify-date"],"page":10,"pagination":true}'>
             <div class="card-header">
               <div class="mb-2 row g-3">
                 <h1>펫 목록</h1>
@@ -48,6 +48,12 @@
                 </div>
               </div>
               <div class="mb-2 row g-3">
+                <div class="col-4">
+                  <select class="form-select-JHY" id="shType" name="shType">
+                    <option value="" th:selected="${vo.shType == null}">반려동물 유형</option>
+                    <option th:each="type : ${@codeService.selectListCachedCode(26)}" th:value="${type.codeSeq}" th:text="${type.codeName}" th:selected="${vo.shType} == ${type.codeSeq}"></option>
+                  </select>
+                </div>
                 <div class="col-4">
                   <select class="form-select-JHY" id="shVarieties" name="shVarieties">
                     <option value="" th:selected="${vo.shVarieties == null}">품종</option>
@@ -91,6 +97,7 @@
                       </th>
                       <th class="text-900 sort white-nowrap" data-sort="#">#</th>
                       <th class="text-900 sort white-nowrap" data-sort="name">이름</th>
+                      <th class="text-900 sort white-nowrap" data-sort="types">유형</th>
                       <th class="text-900 sort white-nowrap" data-sort="varieties">품종</th>
                       <th class="text-900 sort white-nowrap" data-sort="gender">성별</th>
                       <th class="text-900 sort white-nowrap" data-sort="birth">생일</th>
@@ -120,7 +127,8 @@
                       </td>
                       <td class="#" th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}"></td>
                       <td class="name"><a th:href="@{/xdm/pet/PetXdmView(petSeq=${list.petSeq})}" th:text="${list.petName}"></a></td>
-                      <td class="varieties" th:text="${list.petVarieties}"></td>
+                      <td class="types" th:text="${@codeService.selectOneCachedCode(list.petType)}"></td>
+                      <td class="varieties" th:text="${@codeService.selectOneCachedCode(list.petVarieties)}"></td>
                       <td class="gender" th:text="${@codeService.selectOneCachedCode(list.petGender)}"></td>
                       <td class="birth" th:text="${list.petBirth}"></td>
                       <td class="weight" th:text="${list.petWeight}"></td>
