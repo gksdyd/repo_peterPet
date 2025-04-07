@@ -137,8 +137,11 @@ $('.register').click(function(){
     contentA.style.display = "none";
     contentC.style.display = "none";
     contentB.style.display = "block";
+
+    $("#petSubmitBtn").val(REGISTER);
     
     if ($(this).attr("id") == "petModifyBtn") {
+        $("#petSubmitBtn").val(MODIFY);
         $.ajax({
             async: true 
             ,cache: false
@@ -146,6 +149,8 @@ $('.register').click(function(){
             ,url: goUrlPeterProc
             ,data: { "petSeq" : $("#userPetSeq").val() }
             ,success: function(response) {
+                $("#petSeq").val(response.dto.petSeq);
+
                 if (response.dto.petType == 239) {
                     dog.checked = true;
                 } else if (response.dto.petType == 240) {

@@ -36,7 +36,11 @@ document.getElementById("petSubmitBtn").onclick = function() {
     }
     petDiseaseArray.value = array;
 
-    petform.action = goUrlPeterPetInst;
+    if ($(this).val() == REGISTER) {
+        petform.action = goUrlPeterPetInst;
+    } else if ($(this).val() == MODIFY) {
+        petform.action = goUrlPeterPetUpdt;
+    }
     petform.method = "post";
     petform.submit();
 }

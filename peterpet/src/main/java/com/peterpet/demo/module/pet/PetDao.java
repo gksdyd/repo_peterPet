@@ -19,4 +19,9 @@ public interface PetDao {
 	public int personalInsert(PetDto petDto);
 	public int diseaseInsert(PetDto petDto);
 	public String selectMaxSeq();
+	public int update(PetDto petDto);
+	public int updatePersonal(PetDto petDto);
+	public int updateDisease(PetDto petDto);
+	public int deletePersonal(PetDto petDto);
+	public int deleteDisease(PetDto petDto);
 }

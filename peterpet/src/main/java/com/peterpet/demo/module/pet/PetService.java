@@ -58,4 +58,24 @@ public class PetService {
 	public String selectMaxSeq() {
 		return petDao.selectMaxSeq();
 	}
+	
+	public int update(PetDto petDto) {
+		return petDao.update(petDto);
+	}
+	
+	public int updatePersonal(PetDto petDto) {
+		return petDao.updatePersonal(petDto);
+	}
+	
+	public int updateDisease(PetDto petDto) {
+		return petDao.updateDisease(petDto);
+	}
+	
+	public int deletePersonal(PetDto petDto) {
+		return petDao.deletePersonal(petDto);
+	}
+	
+	public int deleteDisease(PetDto petDto) {
+		return petDao.deleteDisease(petDto);
+	}
 }

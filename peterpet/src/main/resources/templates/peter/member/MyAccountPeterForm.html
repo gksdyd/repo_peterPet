@@ -669,6 +669,7 @@
                                         <h3>반려동물등록/수정</h3>
                                         <div class="account-login-form bg-light-gray padding-20px-all">
                                             <form class="needs-validation" id="petInfoForm" name="petInfoForm" novalidate>
+                                                <input type="hidden" id="petSeq" name="petSeq">
                                                 <input type="hidden" id="petType" name="petType">
                                                 <input type="hidden" id="petGender" name="petGender">
                                                 <input type="hidden" id="petVarieties" name="petVarieties">
@@ -1357,6 +1358,7 @@
 
                 let goUrlPeterUserUpdt = "/peter/member/UpdatePeterForm";
                 let goUrlPeterPetInst = "/peter/pet/InsertPeterForm";
+                let goUrlPeterPetUpdt = "/peter/pet/UpdatePeterForm";
                 let goUrlPeterProc = "/peter/pet/PetPeterProc";
 
                 let name = document.getElementById("userName");

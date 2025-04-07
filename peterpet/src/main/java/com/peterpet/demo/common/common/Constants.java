@@ -13,4 +13,8 @@ public class Constants {
 	public static final int PRODUCT_UPDATE_COUNT_MAINTAIN = 0;
 	public static final int PRODUCT_UPDATE_COUNT_INCREASE = 1;
 	public static final int PRODUCT_UPDATE_COUNT_DECREASE = -1;
+	
+	public static final int PET_UPDATE_COUNT_MAINTAIN = 0;
+	public static final int PET_UPDATE_COUNT_INCREASE = 1;
+	public static final int PET_UPDATE_COUNT_DECREASE = -1;
 }

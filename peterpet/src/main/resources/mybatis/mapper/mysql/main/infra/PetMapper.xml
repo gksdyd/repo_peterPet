@@ -131,6 +131,7 @@
 	
 	<select id="selectOnePersonal">
 		SELECT
+			b.persSeq,
 			b.persDiscription
 		FROM
 			pet a
@@ -141,6 +142,7 @@
 	
 	<select id="selectOneDisease">
 		SELECT
+			b.diseSeq,
 			b.diseDiscription
 		FROM
 			pet a
@@ -231,4 +233,49 @@
 			SELECT last_insert_id()
 		</selectKey>
 	</insert>
+	
+	<update id="update">
+		UPDATE pet
+		SET
+			petType = #{petType},
+			petVarieties = #{petVarieties},
+			petGender = #{petGender},
+			petName = #{petName},
+			petNickname = #{petNickname},
+			petBirth = #{petBirth},
+			petWeight = #{petWeight},
+			petVaccinationFlag = #{petVaccinationFlag},
+			petNeuteringFlag = #{petNeuteringFlag},
+			petModDate = date_format(NOW(), '%Y-%m-%d %H:%i:%S')
+		WHERE 1=1
+			AND petSeq = #{petSeq}
+	</update>
+	
+	<update id="updatePersonal">
+		UPDATE personality
+		SET
+			persDiscription = #{persDiscription}
+		WHERE 1=1
+			AND persSeq = #{persSeq}
+	</update>
+	
+	<update id="updateDisease">
+		UPDATE disease
+		SET
+			diseDiscription = #{diseDiscription}
+		WHERE 1=1
+			AND diseSeq = #{diseSeq}
+	</update>
+	
+	<delete id="deletePersonal">
+		DELETE FROM personality
+		WHERE 1=1
+			AND persSeq = #{persSeq}
+	</delete>
+	
+	<delete id="deleteDisease">
+		DELETE FROM disease
+		WHERE 1=1
+			AND diseSeq = #{diseSeq}
+	</delete>
 </mapper>

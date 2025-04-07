@@ -31,3 +31,7 @@ const regex5 = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|!-/|]+$/;
 const regex6 = /^[가-힣|]+$/;
 const regexPhone = /^01[016789]-\d{3,4}-\d{4}$/;
 const regexEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+
+// 펫 관련 플래그
+const REGISTER = 1;
+const MODIFY = 0;
