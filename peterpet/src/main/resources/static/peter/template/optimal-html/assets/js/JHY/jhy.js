@@ -218,6 +218,35 @@ $('.register').click(function(){
 });
 
 $('.list').click(function(){
+    initPetInfo();
+    // 내용 숨김
+    contentB.style.display = "none";
+    contentC.style.display = "none";
+    contentA.style.display = "block";
+});
+
+initPetInfo = function() {
+    dog.checked = true;
+    male.checked = false;
+    female.checked = false;
+
+    $("#petVarieties").val("");
+    $("#petVariety").val("");
+    $("#petName").val("");
+
+    for (let i = 0; i < document.querySelectorAll("#petNickname option").length; i++) {
+        document.querySelectorAll("#petNickname option")[i].removeAttribute('selected');
+    }
+
+    $("#petBirth").val("");
+    $("#petWeight").val("");
+
+    vaccinationYes.checked = false;
+    vaccinationNo.checked = false;
+
+    neuteringYes.checked = false;
+    neuteringNo.checked = false;
+
     $("#createPersonal").empty();
     $("#createDisease").empty();
 
@@ -230,12 +259,7 @@ $('.list').click(function(){
         document.querySelectorAll(".selDisease")[j].style = 'border-bottom : 1px solid gray';
         document.querySelectorAll(".selDisease a")[j].style.display = 'block';
     }
-
-    // 내용 숨김
-    contentB.style.display = "none";
-    contentC.style.display = "none";
-    contentA.style.display = "block";
-});
+}
 
   function showModal(modal) {  
     // 내용 숨김
