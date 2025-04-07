@@ -95,6 +95,14 @@ onlyEmail = function(text) {
     return true;
 }
 
+// 무게만
+onlyWeight = function(text) {
+    if (!regexWeight.test(text)) {
+        return false;
+    }
+    return true;
+}
+
 idDuplicateCheck = function() {
     let result = false;
 

@@ -4,6 +4,7 @@
   
 // 등록 및 수정하는 함수
 document.getElementById("userUpdateBtn").onclick = function() {
+    styleInit();
     validationInit();
 
     if (!validation()) {
@@ -16,34 +17,11 @@ document.getElementById("userUpdateBtn").onclick = function() {
 }
 
 document.getElementById("petSubmitBtn").onclick = function() {
-    // validationInit();
+    petStyleInit();
+    petValidationInit();
 
-    // if (!validation()) {
-    //     return false;
-    // }
-
-    if (dog.checked) {
-        type.value = dog.value;
-    } else if (cat.checked) {
-        type.value = cat.value;
-    }
-
-    if (male.checked) {
-        gender.value = male.value;
-    } else if (female.checked) {
-        gender.value = female.value;
-    }
-
-    if (vaccinationYes.checked) {
-        petVaccinationFlag.value = vaccinationYes.value;
-    } else if (vaccinationNo.checked) {
-        petVaccinationFlag.value = vaccinationNo.value;
-    }
-
-    if (neuteringYes.checked) {
-        petNeuteringFlag.value = neuteringYes.value;
-    } else if (neuteringNo.checked) {
-        petNeuteringFlag.value = neuteringNo.value;
+    if (!petValidation()) {
+        return false;
     }
 
     let array = [];
