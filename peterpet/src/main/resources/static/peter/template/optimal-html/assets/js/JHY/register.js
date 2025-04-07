@@ -109,7 +109,7 @@ $(".search-btn").on("click", function() {
     let id = $(this).attr("id");
     
     $(".selDogVarieties").hide();
-    // $(".selCatVarieties").hide();
+    $(".selCatVarieties").hide();
     $(".selPersonal").hide();
     $(".selDisease").hide();
 
@@ -119,7 +119,7 @@ $(".search-btn").on("click", function() {
         if (dog.checked) {
             $(".selDogVarieties").show();
         } else if (cat.checked) {
-            // $(".selCatVarieties").show();
+            $(".selCatVarieties").show();
         }
     } else if (id == ID_SEARCH_PERSONAL) {
         $(".selPersonal").show();
