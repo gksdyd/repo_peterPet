@@ -74,4 +74,12 @@ public class ProductService {
 	public int uelete(ProductDto productDto) {
 		return productDao.uelete(productDto);
 	}
+	
+	public int severalUelete(ProductVo vo) {
+		return productDao.severalUelete(vo);
+	}
+	
+	public int severalDelete(ProductVo vo) {
+		return productDao.severalDelete(vo);
+	}
 }

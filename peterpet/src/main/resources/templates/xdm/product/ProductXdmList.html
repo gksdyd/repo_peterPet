@@ -217,20 +217,26 @@
                     <tr th:if="${!#lists.isEmpty(list)}" class="btn-reveal-trigger" th:each="list : ${list}">
                       <td>
                         <div class="form-check fs-9 mb-0 d-flex align-items-center">
-                          <input class="form-check-input" type="checkbox" id="customer-0" data-bulk-select-row="data-bulk-select-row" />
+                          <input class="form-check-input listCheckBox" type="checkbox" id="customer-0" th:value="${list.prodSeq}" data-bulk-select-row="data-bulk-select-row" />
                         </div>
                       </td>
                       <td class="#" th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}"></td>
                       <td class="use" th:if="${list.prodUseFlag} == '1'">Y</td>
                       <td class="use" th:if="${list.prodUseFlag} == '0'">N</td>
                       <td class="name"><a th:href="@{/xdm/product/ProductXdmForm(prodSeq=${list.prodSeq})}" th:text="${list.prodName}"></a></td>
-                      <td class="salary-age" th:text="${@codeService.selectOneCachedCode(list.feedSalaryAge)}"><a href="#"></a></td>
-                      <td class="type" th:text="${@codeService.selectOneCachedCode(list.feedType)}"></td>
-                      <td class="etc" th:text="${@codeService.selectOneCachedCode(list.feedEtc)}"></td>
-                      <td class="size" th:text="${@codeService.selectOneCachedCode(list.feedSize)}"></td>
+                      <td class="salary-age" th:if="${list.feedSalaryAge} != null" th:text="${@codeService.selectOneCachedCode(list.feedSalaryAge)}"><a href="#"></a></td>
+                      <td class="salary-age" th:if="${list.feedSalaryAge} == null"><a href="#"></a></td>
+                      <td class="type" th:if="${list.feedType} != null" th:text="${@codeService.selectOneCachedCode(list.feedType)}"></td>
+                      <td class="type" th:if="${list.feedType} == null"></td>
+                      <td class="etc" th:if="${list.feedEtc} != null" th:text="${@codeService.selectOneCachedCode(list.feedEtc)}"></td>
+                      <td class="etc" th:if="${list.feedEtc} == null"></td>
+                      <td class="size" th:if="${list.feedSize} != null" th:text="${@codeService.selectOneCachedCode(list.feedSize)}"></td>
+                      <td class="size" th:if="${list.feedSize} == null"></td>
                       <td class="function" th:text="${list.funcCount}"></td>
-                      <td class="brand" th:text="${@codeService.selectOneCachedCode(list.feedBrand)}"></td>
-                      <td class="ingredient" th:text="${@codeService.selectOneCachedCode(list.feedIngredient)}"></td>
+                      <td class="brand" th:if="${list.feedBrand} != null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)}"></td>
+                      <td class="brand" th:if="${list.feedBrand} == null"></td>
+                      <td class="ingredient" th:if="${list.feedIngredient} != null" th:text="${@codeService.selectOneCachedCode(list.feedIngredient)}"></td>
+                      <td class="ingredient" th:if="${list.feedIngredient} == null"></td>
                       <td class="count" th:text="${list.infoCount}"></td>
                       <td class="register-date" th:text="${list.prodRegDate}"></td>
                       <td class="modify-date text-end" th:text="${list.prodModDate}"></td>
@@ -242,8 +248,8 @@
             <div th:replace="~{xdm/include/pagination :: pagination}"></div>
             <div class="mb-2 row g-3 ms-1 me-1">
               <div class="col">
-                <button class="btn btn-danger btn-sm" type="button"><span class="bi-x"></span></button>
-                <button class="btn btn-danger btn-sm" type="button"><span class="far fa-trash-alt"></span></button>
+                <button class="btn btn-danger btn-sm" type="button" id="deleteBtn" value="1"><span class="bi-x"></span></button>
+                <button class="btn btn-danger btn-sm" type="button" id="ueleteBtn" value="1"><span class="far fa-trash-alt"></span></button>
               </div>
               <div class="col" style="text-align: right;">
                 <button class="btn btn-success btn-sm" type="button"><span class="far fa-file-excel"></span></button>
@@ -256,6 +262,7 @@
       </div>
     </div>
   </main>
+  <div th:replace="~{xdm/include/modal :: modal}"></div>
   <!-- ===============================================-->
   <!--    End of Main Content-->
   <!-- ===============================================-->
@@ -268,6 +275,8 @@
 
       let goUrlXdmList = "/xdm/product/ProductXdmList";
       let goUrlXdmForm = URL_PRODUCT_XDM_FORM;
+      let goUrlXdmDeltProc = "/xdm/product/ProductXdmDeltProc";
+      let goUrlXdmUeltProc = "/xdm/product/ProductXdmUeltProc";
 
       funcArray = [[${vo.prodFuncArray}]];
       funcNameArray = [[${vo.prodFuncNameArray}]];

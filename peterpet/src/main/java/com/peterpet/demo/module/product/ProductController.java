@@ -211,4 +211,16 @@ public class ProductController extends BaseController {
 		
 		return "redirect:/xdm/product/ProductXdmList";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/ProductXdmDeltProc")
+	public void productXdmDeltProc(ProductVo vo) {
+		productService.severalDelete(vo);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/ProductXdmUeltProc")
+	public void productXdmUeltProc(ProductVo vo) {
+		productService.severalUelete(vo);
+	}
 }

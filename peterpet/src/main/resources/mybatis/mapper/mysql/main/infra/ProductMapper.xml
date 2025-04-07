@@ -256,4 +256,22 @@
 		WHERE
 			prodSeq = #{prodSeq}
 	</update>
+	
+	<update id="severalUelete">
+		UPDATE product
+		SET
+			prodDelFlag = 1
+		WHERE prodSeq IN
+		<foreach collection="listArray" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+	
+	<delete id="severalDelete">
+		DELETE FROM product
+		WHERE prodSeq IN
+		<foreach collection="listArray" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
 </mapper>

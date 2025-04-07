@@ -23,4 +23,6 @@ public interface ProductDao {
 	public int funcDelete(ProductDto productDto);
 	public int infoDelete(ProductDto productDto);
 	public int uelete(ProductDto productDto);
+	public int severalUelete(ProductVo vo);
+	public int severalDelete(ProductVo vo);
 }
