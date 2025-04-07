@@ -29,6 +29,7 @@ public class PetPeterController {
 		
 		PetDto petDto = petService.selectOne(vo);
 		
+		rtMap.put("type", CodeService.selectOneCachedCode(petDto.getPetType()));
 		rtMap.put("variety", CodeService.selectOneCachedCode(petDto.getPetVarieties()));
 		rtMap.put("gender", CodeService.selectOneCachedCode(petDto.getPetGender()));
 		rtMap.put("dto", petDto);
@@ -39,6 +40,7 @@ public class PetPeterController {
 			personal.add(CodeService.selectOneCachedCode(petDtos.get(i).getPersDiscription()));
 		}
 		rtMap.put("personal", personal);
+		rtMap.put("personalDto", petDtos);
 		
 		List<String> disease = new ArrayList<>();
 		petDtos = petService.selectOneDisease(vo);
@@ -46,6 +48,7 @@ public class PetPeterController {
 			disease.add(CodeService.selectOneCachedCode(petDtos.get(i).getDiseDiscription()));
 		}
 		rtMap.put("disease", disease);
+		rtMap.put("diseaseDto", petDtos);
 		return rtMap;
 	}
 	

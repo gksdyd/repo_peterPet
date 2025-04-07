@@ -95,6 +95,7 @@ $('.detail').click(function(){
         ,url: goUrlPeterProc
         ,data: { "petSeq" : $(this).val() }
         ,success: function(response) {
+            $("#userPetSeq").val(response.dto.petSeq);
             $("#userPetName").text(response.dto.petName);
             $("#userPetVarieties").text(response.variety);
             $("#userPetGender").text(response.gender);
@@ -136,14 +137,104 @@ $('.register').click(function(){
     contentA.style.display = "none";
     contentC.style.display = "none";
     contentB.style.display = "block";
-    alert($(this).val());
+    
+    if ($(this).attr("id") == "petModifyBtn") {
+        $.ajax({
+            async: true 
+            ,cache: false
+            ,type: "post"
+            ,url: goUrlPeterProc
+            ,data: { "petSeq" : $("#userPetSeq").val() }
+            ,success: function(response) {
+                if (response.dto.petType == 239) {
+                    dog.checked = true;
+                } else if (response.dto.petType == 240) {
+                    cat.checked = true;
+                }
+
+                if (response.dto.petGender == 150) {
+                    male.checked = true;
+                } else if (response.dto.petGender == 151) {
+                    female.checked = true;
+                }
+
+                $("#petVarieties").val(response.dto.petVarieties);
+                $("#petVariety").val(response.variety);
+                $("#petName").val(response.dto.petName);
+
+                for (let i = 0; i < document.querySelectorAll("#petNickname option").length; i++) {
+                    if (document.querySelectorAll("#petNickname option")[i].value == response.dto.petNickname) {
+                        document.querySelectorAll("#petNickname option")[i].setAttribute('selected', 'selected');
+                    }
+                }
+
+                $("#petBirth").val(response.dto.petBirth);
+                $("#petWeight").val(response.dto.petWeight);
+    
+                if (response.dto.petVaccinationFlag == 1) {
+                    vaccinationYes.checked = true;
+                } else {
+                    vaccinationNo.checked = true;
+                }
+    
+                if (response.dto.petNeuteringFlag == 1) {
+                    neuteringYes.checked = true;
+                } else {
+                    neuteringNo.checked = true;
+                }
+                
+                for(let i = 0; i < response.personal.length; i++) {
+                    let personalBadge = $("<span></span>").addClass("badge").addClass("rounded-pill").addClass("badgeStyle");
+                    let personalCloseBtn = $("<button></button>").addClass("btn-close").addClass("removeFunc").css('font-size', 'xx-small').prop("type", "button");
+                    $("#createPersonal").append(personalBadge.text(response.personal[i]));
+                    $("#createPersonal").append(personalCloseBtn.attr('value', response.personalDto[i].persDiscription));
+                    for (let j = 0; j < document.querySelectorAll(".selPersonal a").length; j++) {
+                        if (document.querySelectorAll(".selPersonal a")[j].getAttribute("value") == response.personalDto[i].persDiscription) {
+                            document.querySelectorAll(".selPersonal")[j].style.borderBottom = '';
+                            document.querySelectorAll(".selPersonal a")[j].style.display = 'none';
+                            break;
+                        }
+                    }
+                }
+
+                for(let i = 0; i < response.disease.length; i++) {
+                    let diseaseBadge = $("<span></span>").addClass("badge").addClass("rounded-pill").addClass("badgeStyle");
+                    let diseaseCloseBtn = $("<button></button>").addClass("btn-close").addClass("removeFunc").css('font-size', 'xx-small').prop("type", "button");
+                    $("#createDisease").append(diseaseBadge.text(response.disease[i]));
+                    $("#createDisease").append(diseaseCloseBtn.attr('value', response.diseaseDto[i].diseDiscription));
+                    for (let j = 0; j < document.querySelectorAll(".selDisease a").length; j++) {
+                        if (document.querySelectorAll(".selDisease a")[j].getAttribute("value") == response.diseaseDto[i].diseDiscription) {
+                            document.querySelectorAll(".selDisease")[j].style.borderBottom = '';
+                            document.querySelectorAll(".selDisease a")[j].style.display = 'none';
+                        }
+                    }
+                }
+            }
+            ,error : function(jqXHR) {
+                alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+            }
+        })
+    }
 });
+
 $('.list').click(function(){
+    $("#createPersonal").empty();
+    $("#createDisease").empty();
+
+    for (let j = 0; j < document.querySelectorAll(".selPersonal a").length; j++) {
+        document.querySelectorAll(".selPersonal")[j].style = 'border-bottom : 1px solid gray';
+        document.querySelectorAll(".selPersonal a")[j].style.display = 'block';
+    }
+
+    for (let j = 0; j < document.querySelectorAll(".selDisease a").length; j++) {
+        document.querySelectorAll(".selDisease")[j].style = 'border-bottom : 1px solid gray';
+        document.querySelectorAll(".selDisease a")[j].style.display = 'block';
+    }
+
     // 내용 숨김
     contentB.style.display = "none";
     contentC.style.display = "none";
     contentA.style.display = "block";
-    alert($(this).val());
 });
 
   function showModal(modal) {  

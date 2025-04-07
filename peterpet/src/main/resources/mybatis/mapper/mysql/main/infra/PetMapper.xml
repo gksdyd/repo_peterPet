@@ -113,6 +113,7 @@
 	<select id="selectOne" resultMap="resultMapObj">
 		SELECT
 			petSeq,
+			petType,
 			petVarieties,
 			petGender,
 			petName,
