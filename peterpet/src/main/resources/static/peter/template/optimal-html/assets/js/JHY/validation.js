@@ -120,3 +120,29 @@ idDuplicateCheck = function() {
     });
     return result;
 }
+
+emailDuplicateCheck = function() {
+    let result = false;
+
+    $.ajax({
+        async: false 
+        ,cache: false
+        ,type: "post"
+        ,url: URL_EMAIL_CHECK_PETER
+        ,data: { "userEmail" : email.value }
+        ,success: function(response) {
+          if(response.rt == "success") {
+            result = true;
+          } else {
+            emailValid.innerText = "중복된 이메일입니다.";
+            emailValid.style.display = "block";
+            email.style.borderColor = "red";
+            email.focus();
+          }
+        }
+        ,error : function(jqXHR){
+          alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+        }
+    });
+    return result;
+}

@@ -16,6 +16,7 @@ const VALUE_BUTTON_DISEASE = 3;
 
 // 로그인관련 경로
 const URL_ID_CHECK_PETER = "/peter/member/CheckIdPeterProc";
+const URL_EMAIL_CHECK_PETER = "/peter/member/CheckEmailPeterProc";
 const URL_SIGNOUT_PROC_XDM = "/xdm/member/LogoutXdmProc";
 const URL_SIGNIN_PROC_XDM = "/xdm/member/LoginXdmProc";
 const URL_SIGNIN_FORM_XDM = "/peter/member/LoginPeterForm";

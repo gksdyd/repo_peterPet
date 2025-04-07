@@ -14,4 +14,5 @@ public interface MemberDao {
 	int update(MemberDto memberDto);
 	int insert(MemberDto memberDto);
 	int checkId(MemberDto memberDto);
+	int checkEmail(MemberDto memberDto);
 }

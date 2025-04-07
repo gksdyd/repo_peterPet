@@ -153,4 +153,12 @@
 		WHERE 1=1
 			AND userId = #{userId}
 	</select>
+	
+	<select id="checkEmail" resultType="Integer">
+		SELECT COUNT(*)
+		FROM
+			user
+		WHERE 1=1
+			AND userEmail = #{userEmail}
+	</select>
 </mapper>

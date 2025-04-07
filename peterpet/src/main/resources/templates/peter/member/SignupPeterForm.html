@@ -407,10 +407,15 @@
                     }
 
                     temp = email.value;
-                    if (!checkLength(temp) && !onlyEmail(temp)) {
+                    if (!checkLength(temp) || !onlyEmail(temp)) {
+                        emailValid.innerText = "이메일을 입력해주세요.";
                         emailValid.style.display = "block";
                         email.style.borderColor = "red";
                         email.focus();
+                        return false;
+                    }
+
+                    if (!emailDuplicateCheck()) {
                         return false;
                     }
 
@@ -470,6 +475,38 @@
 
                 $("#singUpBtn").on("click", function() {
                     signUpLogic();
+                });
+
+                $("#userId").on("change", function() {
+                    styleInit();
+                    validationInit();
+                    if (!idDuplicateCheck()) {
+                        return false;
+                    }
+
+                    if (!checkLength(id.value) || !onlyKoEngNumValid(id.value)) {
+                        idValid.innerText = "아이디를 입력해주세요.";
+                        idValid.style.display = "block";
+                        id.style.borderColor = "red";
+                        id.focus();
+                        return false;
+                    }
+                });
+
+                $("#userEmail").on("change", function() {
+                    styleInit();
+                    validationInit();
+                    if (!emailDuplicateCheck()) {
+                        return false;
+                    }
+
+                    if (!checkLength(email.value) || !onlyEmail(email.value)) {
+                        emailValid.innerText = "이메일을 입력해주세요.";
+                        emailValid.style.display = "block";
+                        email.style.borderColor = "red";
+                        email.focus();
+                        return false;
+                    }
                 });
             </script>            
         </div>

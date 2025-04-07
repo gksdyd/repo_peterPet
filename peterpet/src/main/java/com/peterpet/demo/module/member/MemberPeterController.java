@@ -80,6 +80,20 @@ public class MemberPeterController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value = "/CheckEmailPeterProc")
+	public Map<String, Object> checkEmailPeterProc(MemberDto dto) throws Exception {
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		
+		if (memberService.checkEmail(dto) == 0) {
+			returnMap.put("rt", "success");
+		} else {
+			System.out.println("fs");
+			returnMap.put("rt", "fail");
+		}
+		return returnMap;
+	}
+	
+	@ResponseBody
 	@RequestMapping(value = "/PhoneXdmProc")
 	public Map<String, Object> phoneXdmProc(MemberDto dto, HttpSession httpSession) throws Exception {
 		Map<String, Object> returnMap = new HashMap<String, Object>();		

@@ -38,4 +38,8 @@ public class MemberService {
 	public int checkId(MemberDto memberDto) {
 		return memberDao.checkId(memberDto);
 	}
+	
+	public int checkEmail(MemberDto memberDto) {
+		return memberDao.checkEmail(memberDto);
+	}
 }
