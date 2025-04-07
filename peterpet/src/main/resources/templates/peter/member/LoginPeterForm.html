@@ -68,7 +68,15 @@
             <!--Scoll Top-->
             <span id="site-scroll"><i class="icon an an-chevron-up"></i></span>
             <!--End Scoll Top-->
+            <div th:replace="~{peter/include/modal :: modal}"></div>
+            <div th:replace="~{peter/include/foot :: foot}"></div>
+            <div th:replace="~{peter/include/includePeterOriginal :: includePeterOriginal}"></div>
+            <div th:replace="~{peter/include/includePeterCommon :: includePeterCommon}"></div>
             <script>
+                let modalTitle = document.getElementById("modalTitle");
+                let modalText = document.getElementById("modalText");
+                let modalCloseButton = document.getElementById("modalCloseBtn");
+
                 let id = document.getElementById("userId");
                 let password = document.getElementById("userPassword");
 
@@ -130,15 +138,16 @@
                     ,data : { "userId" : $("#userId").val(), "userPassword" : $("#userPassword").val(), "autoLogin" : $("#autoLogin").is(":checked")}
                     ,success: function(response) {
                         if(response.rt == "success") {
-                        if(response.changePwd == "true") {
-                            // location.href = "/v1/infra/member/expiredPwdUsrForm";
+                            if(response.changePwd == "true") {
+                                // location.href = "/v1/infra/member/expiredPwdUsrForm";
+                            } else {
+                                location.href = URL_INDEX_VIEW_PETER;
+                            }
                         } else {
-                            location.href = URL_INDEX_VIEW_PETER;
-                        }
-                        } else {
-                            document.getElementById("modalAlertTitle").innerText = "확 인";
-                            document.getElementById("modalAlertBody").innerText = "일치하는 회원이 존재 하지 않습니다!";
-                            $("#modalAlert").modal("show");
+                            modalTitle.innerText = "확 인";
+                            modalText.innerText = "일치하는 회원이 존재 하지 않습니다!";
+                            modalCloseButton.style.display = "block";
+                            $("#modal").modal("show");
                         }
                     }
                     ,error : function(jqXHR, textStatus, errorThrown){
@@ -147,10 +156,6 @@
                     });
                 }
             </script>
-
-            <div th:replace="~{peter/include/foot :: foot}"></div>
-            <div th:replace="~{peter/include/includePeterOriginal :: includePeterOriginal}"></div>
-            <div th:replace="~{peter/include/includePeterCommon :: includePeterCommon}"></div>
         </div>
         <!--End Page Wrapper-->
     </body>

@@ -32,4 +32,31 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="modal" id="modal" tabindex="-1">
+		<div class="modal-dialog mt-6" role="document">
+		  <div class="modal-content border-0">
+			<div class="position-absolute top-0 end-0 mt-2 me-2 z-1" style="display: none;">
+			  <button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base" id="xBtn"></button>
+			</div>
+			<div class="modal-body p-0">
+			  <div class="bg-body-tertiary rounded-top-3 py-3 ps-4 pe-6">
+				<h4 class="mb-1" id="modalTitle"></h4>
+			  </div>
+			  <div class="p-4 pb-0 mb-3">
+				<div class="row">
+				  <div class="col">
+					<h5 id="modalText"></h5>
+				  </div>
+				</div>
+			  </div>
+			</div>
+			<div class="modal-footer">
+			  <button class="btn btn-secondary" id="modalCloseBtn" type="button" data-bs-dismiss="modal" style="display: none;">취소</button>
+			  <button class="btn btn-danger" type="button" id="modalDelBtn" style="display: none;">삭제</button>
+			  <button class="btn btn-primary" type="button" id="modalCheckBtn" style="display: none;">확인</button>
+			</div>
+		  </div>
+		</div>
+	  </div>
 </th:block>

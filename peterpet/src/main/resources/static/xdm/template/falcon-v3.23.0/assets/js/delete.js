@@ -11,8 +11,8 @@ let modalCloseButton = document.getElementById("modalCloseBtn"); // 모달 창�
 let modalDelButton = document.getElementById("modalDelBtn");    // 모달 창의 삭제 버튼
 let modalChkButton = document.getElementById("modalCheckBtn");  // 모달 창의 확인 버튼
 
-let modalTitle = document.getElementById("modalTitle");  // 모달 창의 확인 버튼
-let modalText = document.getElementById("modalText");  // 모달 창의 확인 버튼
+let modalTitle = document.getElementById("modalTitle");
+let modalText = document.getElementById("modalText");
 
 // 삭제버튼(쓰레기통)
 ueleteBtn.onclick = function() {
