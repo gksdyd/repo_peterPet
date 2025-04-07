@@ -1,10 +1,14 @@
 package com.peterpet.demo.module.codegroup;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.peterpet.demo.module.base.BaseController;
 
@@ -63,5 +67,21 @@ public class CodeGroupController extends BaseController {
 	public String codeGroupXdmDelt(CodeGroupDto codeGroupDto) {
 		codeGroupService.delete(codeGroupDto);
 		return "redirect:/xdm/codegroup/CodeGroupXdmList";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/CodeGroupXdmDeltProc")
+	public Map<String, Object> codeGroupXdmDeltProc(CodeGroupVo vo) {
+		Map<String, Object> rtMap = new HashMap<>();
+		codeGroupService.severalDelete(vo);
+		return rtMap;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/CodeGroupXdmUeltProc")
+	public void codeGroupXdmUeltProc(CodeGroupVo vo) {
+		System.out.println(vo.getListArray());
+		codeGroupService.severalUelete(vo);
+		return;
 	}
 }

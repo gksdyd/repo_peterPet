@@ -42,4 +42,11 @@ public class CodeGroupService {
 	public int delete(CodeGroupDto codeGroupDto) {
 		return codeGroupDao.delete(codeGroupDto);
 	}
+	
+	public int severalUelete(CodeGroupVo vo) {
+		return codeGroupDao.severalUelete(vo);
+	}
+	public int severalDelete(CodeGroupVo vo) {
+		return codeGroupDao.severalDelete(vo);
+	}
 }

@@ -8,13 +8,8 @@ const OFF = 0;
 // 삭제 모달
 const DELETE_FLAG = 1;
 const UELETE_FLAG = 2;
-
-// search
-const CODE = 1;
-const CODE_GROUP = 2;
-const MEMBER = 3;
-const PET = 4;
-const PRODUCT = 5;
+const SEVERAL_DELETE_FLAG = 3;
+const SEVERAL_UELETE_FLAG = 4;
 
 // 로그인관련 경로
 const URL_SIGNIN_FORM_XDM = "/xdm/member/LoginXdmForm";

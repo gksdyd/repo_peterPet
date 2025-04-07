@@ -1,5 +1,8 @@
 package com.peterpet.demo.module.base;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BaseVo {
 
 //	paging
@@ -26,6 +29,8 @@ public class BaseVo {
 	private String shValue = "";
 
 	private int registerOrModifyFlag;
+	
+	private List<String> listArray = new ArrayList<>();
 	
 	public int getThisPage() {
 		return thisPage;
@@ -146,6 +151,14 @@ public class BaseVo {
 
 	public void setRegisterOrModifyFlag(int registerOrModifyFlag) {
 		this.registerOrModifyFlag = registerOrModifyFlag;
+	}
+
+	public List<String> getListArray() {
+		return listArray;
+	}
+
+	public void setListArray(List<String> listArray) {
+		this.listArray = listArray;
 	}
 
 	public void setParamsPaging(int totalRows) {

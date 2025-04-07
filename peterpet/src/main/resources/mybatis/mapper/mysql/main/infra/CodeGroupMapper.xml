@@ -126,4 +126,22 @@
 		WHERE
 			cogrSeq = #{cogrSeq}
 	</delete>
+	
+	<update id="severalUelete">
+		UPDATE codegroup
+		SET
+			cogrDelFlag = 1
+		WHERE cogrSeq IN
+		<foreach collection="listArray" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+	
+	<delete id="severalDelete">
+		DELETE FROM codegroup
+		WHERE cogrSeq IN
+		<foreach collection="listArray" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
 </mapper>
