@@ -11,9 +11,12 @@
 				</div>
 				<div class="modal-body selectPet">
 					<ul>
-						<li class="fs-6 selVarieties" style="border-bottom: 1px solid gray;" th:each="variety : ${@codeService.selectListCachedCode(9)}">
+						<li class="fs-6 selDogVarieties" style="border-bottom: 1px solid gray;" th:each="variety : ${@codeService.selectListCachedCode(9)}">
 							<a th:text="${variety.codeName}" th:value="${variety.codeSeq}"></a>
 						</li>
+						<!-- <li class="fs-6 selCatVarieties" style="border-bottom: 1px solid gray;" th:each="variety : ${@codeService.selectListCachedCode(9)}">
+							<a th:text="${variety.codeName}" th:value="${variety.codeSeq}"></a>
+						</li> -->
 						<li class="fs-6 selPersonal" style="border-bottom: 1px solid gray;" th:each="personal : ${@codeService.selectListCachedCode(14)}">
 							<a th:text="${personal.codeName}" th:value="${personal.codeSeq}"></a>
 						</li>

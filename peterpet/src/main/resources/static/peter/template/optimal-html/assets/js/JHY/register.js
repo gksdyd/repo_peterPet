@@ -108,14 +108,19 @@ $("#selectBtn").on("click", function() {
 $(".search-btn").on("click", function() {
     let id = $(this).attr("id");
     
-    $(".selVarieties").hide();
+    $(".selDogVarieties").hide();
+    // $(".selCatVarieties").hide();
     $(".selPersonal").hide();
     $(".selDisease").hide();
 
     if (id == ID_SEARCH_VARIETY) {
-        $(".selVarieties").show();
         $("#modalPetLabel").text("품종 선택");
         $("#selectBtn").val(VALUE_BUTTON_VARIETY);
+        if (dog.checked) {
+            $(".selDogVarieties").show();
+        } else if (cat.checked) {
+            // $(".selCatVarieties").show();
+        }
     } else if (id == ID_SEARCH_PERSONAL) {
         $(".selPersonal").show();
         $("#modalPetLabel").text("성격/특징 선택");
