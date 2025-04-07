@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.peterpet.demo.module.codegroup.CodeGroupDto;
+import com.peterpet.demo.module.codegroup.CodeGroupVo;
 
 @Repository
 public interface CodeDao {
@@ -19,4 +20,6 @@ public interface CodeDao {
 	public int update(CodeDto codeDto);
 	public int uelete(CodeDto codeDto);
 	public int delete(CodeDto codeDto);
+	public int severalUelete(CodeVo vo);
+	public int severalDelete(CodeVo vo);
 }

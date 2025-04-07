@@ -157,4 +157,22 @@
 		WHERE
 			codeSeq = #{codeSeq}
 	</delete>
+	
+	<update id="severalUelete">
+		UPDATE code
+		SET
+			codeDelFlag = 1
+		WHERE codeSeq IN
+		<foreach collection="listArray" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+	
+	<delete id="severalDelete">
+		DELETE FROM code
+		WHERE codeSeq IN
+		<foreach collection="listArray" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
 </mapper>

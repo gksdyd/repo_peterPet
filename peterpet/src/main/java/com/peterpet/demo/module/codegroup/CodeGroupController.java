@@ -71,17 +71,13 @@ public class CodeGroupController extends BaseController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/CodeGroupXdmDeltProc")
-	public Map<String, Object> codeGroupXdmDeltProc(CodeGroupVo vo) {
-		Map<String, Object> rtMap = new HashMap<>();
+	public void codeGroupXdmDeltProc(CodeGroupVo vo) {
 		codeGroupService.severalDelete(vo);
-		return rtMap;
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/CodeGroupXdmUeltProc")
 	public void codeGroupXdmUeltProc(CodeGroupVo vo) {
-		System.out.println(vo.getListArray());
 		codeGroupService.severalUelete(vo);
-		return;
 	}
 }

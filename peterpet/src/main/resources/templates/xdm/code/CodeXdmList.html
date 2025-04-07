@@ -97,7 +97,7 @@
                     <tr th:if="${!#lists.isEmpty(list)}" class="btn-reveal-trigger" th:each="list : ${list}">
                       <td>
                         <div class="form-check fs-9 mb-0 d-flex align-items-center">
-                          <input class="form-check-input" type="checkbox" id="customer-0" data-bulk-select-row="data-bulk-select-row" />
+                          <input class="form-check-input listCheckBox" type="checkbox" id="customer-0" th:value="${list.codeSeq}" data-bulk-select-row="data-bulk-select-row" />
                         </div>
                       </td>
                       <td class="#" th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}"></td>
@@ -121,8 +121,8 @@
             <div th:replace="~{xdm/include/pagination :: pagination}"></div>
             <div class="mb-2 row g-3 ms-1 me-1">
               <div class="col">
-                <button class="btn btn-danger btn-sm" type="button"><span class="bi-x"></span></button>
-                <button class="btn btn-danger btn-sm" type="button"><span class="far fa-trash-alt"></span></button>
+                <button class="btn btn-danger btn-sm" type="button" id="deleteBtn" value="1"><span class="bi-x"></span></button>
+                <button class="btn btn-danger btn-sm" type="button" id="ueleteBtn" value="1"><span class="far fa-trash-alt"></span></button>
               </div>
               <div class="col" style="text-align: right;">
                 <button class="btn btn-primary btn-sm" type="button">U</button>
@@ -136,6 +136,10 @@
         </div>
       </div>
     </main>
+    <div th:replace="~{xdm/include/modal :: modal}"></div>
+    <div th:replace="~{xdm/include/includeXdmFalcon :: includeXdmFalcon}"></div>
+    <div th:replace="~{xdm/include/includeXdmCommon :: includeXdmCommon}"></div>
+    <div th:replace="~{xdm/include/includeXdmList :: includeXdmList}"></div>
   <!-- ===============================================-->
   <!--    End of Main Content-->
   <!-- ===============================================-->
@@ -144,11 +148,9 @@
     
     let goUrlXdmForm = "/xdm/code/CodeXdmForm";
     let goUrlXdmList = "/xdm/code/CodeXdmList";
+    let goUrlXdmDeltProc = "/xdm/code/CodeXdmDeltProc";
+    let goUrlXdmUeltProc = "/xdm/code/CodeXdmUeltProc";
   </script>
-
-<div th:replace="~{xdm/include/includeXdmFalcon :: includeXdmFalcon}"></div>
-<div th:replace="~{xdm/include/includeXdmCommon :: includeXdmCommon}"></div>
-<div th:replace="~{xdm/include/includeXdmList :: includeXdmList}"></div>
   </body>
   
   </html>
