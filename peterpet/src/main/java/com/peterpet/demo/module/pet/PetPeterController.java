@@ -163,4 +163,10 @@ public class PetPeterController {
 		
 		return "redirect:/peter/member/MyAccountPeterForm";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/PetPeterDeltProc")
+	public void petPeterDeltProc(PetVo vo) {
+		petService.uelete(vo);
+	}
 }

@@ -22,6 +22,10 @@ const URL_SIGNIN_PROC_XDM = "/xdm/member/LoginXdmProc";
 const URL_SIGNIN_FORM_XDM = "/peter/member/LoginPeterForm";
 const URL_INDEX_VIEW_PETER = "/peter/index/IndexPeterView";
 
+// 삭제관련 경로
+const URL_PETER_DELETE_PROC = "/peter/pet/PetPeterDeltProc";
+const URL_PETER_MYACCOUNT = "/peter/member/MyAccountPeterForm";
+
 // 정규식 상수
 const regex1 = /^[a-z|A-Z|0-9|]+$/;
 const regex2 = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|~|/|(-)|,|]+$/;

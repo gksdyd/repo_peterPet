@@ -24,4 +24,5 @@ public interface PetDao {
 	public int updateDisease(PetDto petDto);
 	public int deletePersonal(PetDto petDto);
 	public int deleteDisease(PetDto petDto);
+	public int uelete(PetVo vo);
 }

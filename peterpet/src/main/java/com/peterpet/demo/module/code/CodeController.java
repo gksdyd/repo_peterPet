@@ -1,8 +1,5 @@
 package com.peterpet.demo.module.code;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.peterpet.demo.module.base.BaseController;
-import com.peterpet.demo.module.codegroup.CodeGroupVo;
 
 @Controller
 @RequestMapping(value = "/xdm/code")

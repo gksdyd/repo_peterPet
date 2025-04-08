@@ -78,4 +78,8 @@ public class PetService {
 	public int deleteDisease(PetDto petDto) {
 		return petDao.deleteDisease(petDto);
 	}
+	
+	public int uelete(PetVo vo) {
+		return petDao.uelete(vo);
+	}
 }

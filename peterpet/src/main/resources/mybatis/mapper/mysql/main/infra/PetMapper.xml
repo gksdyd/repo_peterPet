@@ -166,6 +166,7 @@
 			pet
 		WHERE 1=1
 			AND user_userSeq = #{userSeq}
+			AND petDelFlag = 0
 	</select>
 	
 	<insert id="insert">
@@ -278,4 +279,13 @@
 		WHERE 1=1
 			AND diseSeq = #{diseSeq}
 	</delete>
+	
+	<update id="uelete">
+		UPDATE pet
+		SET
+			petDelFlag = 1,
+			petModDate = date_format(NOW(), '%Y-%m-%d %H:%i:%S')
+		WHERE 1=1
+			AND petSeq = #{petSeq}
+	</update>
 </mapper>
