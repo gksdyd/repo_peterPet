@@ -25,10 +25,14 @@ public class ProductDto {
 	private Double infoWeight;
 	private Integer infoDiscount;
 	private Integer infoDelFlag;
+	private int infoMain;
 	private String product_prodSeq;
 	
 	private String funcSeq;
 	private String funcName;
+	private int funcMain;
+	
+	private int discountPrice;
 	
 	public List<String> prodFuncSeqArray = new ArrayList<>();
 	public List<String> prodFuncArray = new ArrayList<>();
@@ -205,5 +209,27 @@ public class ProductDto {
 	}
 	public void setInfoSeq(String infoSeq) {
 		this.infoSeq = infoSeq;
+	}
+	public int getInfoMain() {
+		return infoMain;
+	}
+	public void setInfoMain(int infoMain) {
+		this.infoMain = infoMain;
+	}
+	public int getFuncMain() {
+		return funcMain;
+	}
+	public void setFuncMain(int funcMain) {
+		this.funcMain = funcMain;
+	}
+	public int getDiscountPrice() {
+		return discountPrice;
+	}
+	public void setDiscountPrice(int discountPrice) {
+		this.discountPrice = discountPrice;
+	}
+	
+	public void calculatePrice() {
+		discountPrice = infoPrice * (100 - infoDiscount) / 100;
 	}
 }

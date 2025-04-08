@@ -274,4 +274,20 @@
 			#{item}
 		</foreach>
 	</delete>
+	
+	<select id="selectFeedList" resultMap="resultMapObj">
+		SELECT
+			a.prodSeq,
+			a.prodName,
+			a.feedBrand,
+			b.infoPrice,
+			b.infoWeight,
+			b.infoDiscount,
+			c.funcName
+		FROM product a
+			LEFT JOIN feedinfo b ON a.prodSeq = b.product_prodSeq AND infoMain = 1
+			LEFT JOIN func c ON a.prodSeq = c.product_prodSeq AND funcMain = 1
+		WHERE 1=1
+			AND a.prodDelFlag = 0
+	</select>
 </mapper>

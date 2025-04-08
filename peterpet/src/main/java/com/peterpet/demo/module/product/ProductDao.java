@@ -25,4 +25,5 @@ public interface ProductDao {
 	public int uelete(ProductDto productDto);
 	public int severalUelete(ProductVo vo);
 	public int severalDelete(ProductVo vo);
+	public List<ProductDto> selectFeedList(ProductVo vo);
 }

@@ -82,4 +82,8 @@ public class ProductService {
 	public int severalDelete(ProductVo vo) {
 		return productDao.severalDelete(vo);
 	}
+	
+	public List<ProductDto> selectFeedList(ProductVo vo) {
+		return productDao.selectFeedList(vo);
+	}
 }
