@@ -40,8 +40,6 @@ public class MemberController extends BaseController {
 	
 	@RequestMapping(value = "/LoginXdmForm")
 	public String loginXdmForm(MemberDto vo, Model model) {
-		vo.setUserSeq("1");
-		model.addAttribute("item", memberService.selectOne(vo));
 		return "xdm/member/LoginXdmForm";
 	}
 	
@@ -52,7 +50,7 @@ public class MemberController extends BaseController {
 		
 		MemberDto rtMember = memberService.selectOneLogin(dto);
 		
-		if (rtMember != null) {
+		if (rtMember != null && matchesBcrypt(dto.getUserPassword(), rtMember.getUserPassword(), 10)) {
 			httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE_XDM); // 60second * 30 = 30minute
 			httpSession.setAttribute("sessSeqXdm", rtMember.getUserSeq());
 			httpSession.setAttribute("sessIdXdm", rtMember.getUserId());

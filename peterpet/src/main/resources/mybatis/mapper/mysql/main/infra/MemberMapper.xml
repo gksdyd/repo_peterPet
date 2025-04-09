@@ -85,7 +85,6 @@
 			user
 		WHERE 1=1
 			AND userId = #{userId}
-			AND userPassword = #{userPassword}
 	</select>
 	
 	<update id="update">

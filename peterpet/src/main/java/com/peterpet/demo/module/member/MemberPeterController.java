@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.peterpet.demo.module.base.BaseController;
 import com.peterpet.demo.module.pet.PetDto;
 import com.peterpet.demo.module.pet.PetService;
 import com.peterpet.demo.module.pet.PetVo;
@@ -19,7 +20,7 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping(value = "/peter/member")
-public class MemberPeterController {
+public class MemberPeterController extends BaseController {
 	
 	@Autowired
 	MemberService memberService;
@@ -28,8 +29,6 @@ public class MemberPeterController {
 	
 	@RequestMapping(value = "/LoginPeterForm")
 	public String loginPeterForm(MemberDto memberDto, Model model) {
-		memberDto.setUserSeq("1");
-		model.addAttribute("item", memberService.selectOne(memberDto));
 		return "peter/member/LoginPeterForm";
 	}
 	
@@ -46,6 +45,7 @@ public class MemberPeterController {
 	
 	@RequestMapping(value = "/InsertPeterForm")
 	public String InsertPeterForm(MemberDto memberDto) {
+		memberDto.setUserPassword(encodeBcrypt(memberDto.getUserPassword(), 10));
 		memberService.insert(memberDto);
 		return "redirect:/peter/index/IndexPeterView";
 	}
