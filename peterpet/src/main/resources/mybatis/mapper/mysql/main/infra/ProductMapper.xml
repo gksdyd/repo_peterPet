@@ -94,6 +94,7 @@
 			infoDiscount,
 			infoDelFlag,
 			infoRegDate,
+			infoMain,
 			product_prodSeq
 		) VALUE (
 			#{infoPrice},
@@ -101,6 +102,7 @@
 			#{infoDiscount},
 			0,
 			date_format(NOW(), '%Y-%m-%d %H:%i:%S'),
+			#{infoMain},
 			#{prodSeq}
 		)
 		<selectKey resultType="String" keyProperty="infoSeq" order="AFTER">
@@ -111,9 +113,11 @@
 	<insert id="funcInsert">
 		INSERT INTO func(
 			funcName,
+			funcMain,
 			product_prodSeq
 		) VALUE (
 			#{funcName},
+			#{funcMain},
 			#{prodSeq}
 		)
 		<selectKey resultType="String" keyProperty="funcSeq" order="AFTER">
@@ -279,6 +283,7 @@
 		SELECT
 			a.prodSeq,
 			a.prodName,
+			a.prodScore,
 			a.feedBrand,
 			b.infoPrice,
 			b.infoWeight,

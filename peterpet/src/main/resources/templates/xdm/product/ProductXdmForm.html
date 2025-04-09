@@ -255,7 +255,7 @@
       }
 
       temp = bothSidesGapRemove(feedDiscount.value);
-      if (!checkLength(temp) || !onlyNum(temp) || temp > 100) {
+      if (checkLength(temp) && (!onlyNum(temp) || temp > 100)) {
         feedDiscountValid.style.display = "block";
         feedDiscount.style.outlineColor = "red";
         feedDiscount.focus();

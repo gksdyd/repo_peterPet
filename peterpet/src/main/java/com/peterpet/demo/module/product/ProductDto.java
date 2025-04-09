@@ -9,6 +9,7 @@ public class ProductDto {
 	private int prodType;
 	private Integer prodUseFlag;
 	private String prodName;
+	private String prodScore;
 	private Integer feedSalaryAge;
 	private Integer feedType;
 	private Integer feedEtc;
@@ -25,12 +26,12 @@ public class ProductDto {
 	private Double infoWeight;
 	private Integer infoDiscount;
 	private Integer infoDelFlag;
-	private int infoMain;
+	private int infoMain = 0;
 	private String product_prodSeq;
 	
 	private String funcSeq;
 	private String funcName;
-	private int funcMain;
+	private int funcMain = 0;
 	
 	private int discountPrice;
 	
@@ -229,6 +230,12 @@ public class ProductDto {
 		this.discountPrice = discountPrice;
 	}
 	
+	public String getProdScore() {
+		return prodScore;
+	}
+	public void setProdScore(String prodScore) {
+		this.prodScore = prodScore;
+	}
 	public void calculatePrice() {
 		discountPrice = infoPrice * (100 - infoDiscount) / 100;
 	}

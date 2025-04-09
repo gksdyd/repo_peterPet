@@ -78,11 +78,17 @@ public class ProductController extends BaseController {
 		productService.insert(productDto);
 		
 		for (int i = 0; i < productDto.getProdFuncArray().size(); i++) {
+			if (i == 0) {
+				productDto.setFuncMain(1);
+			}
 			productDto.setFuncName(productDto.getProdFuncArray().get(i));
 			productService.funcInsert(productDto);
 		}
 		
 		for (int i = 0; i < productDto.getFeedPriceArray().size(); i++) {
+			if (i == 0) {
+				productDto.setInfoMain(1);
+			}
 			productDto.setInfoPrice(productDto.getFeedPriceArray().get(i));
 			productDto.setInfoWeight(productDto.getFeedWeightArray().get(i));
 			productDto.setInfoDiscount(productDto.getFeedDiscountArray().get(i));
@@ -112,6 +118,9 @@ public class ProductController extends BaseController {
 		
 		// 사료의 기능 갯수 증가, 감소에 따른 insert, update, delete
 		for (int i = 0; i < size; i++) {
+			if (i == 0) {
+				productDto.setFuncMain(1);
+			}
 			if (flag == Constants.PRODUCT_UPDATE_COUNT_DECREASE) {
 				if (i < productDto.getProdFuncArray().size()) {
 					productDto.setFuncSeq(productDto.getProdFuncSeqArray().get(i));
@@ -151,6 +160,9 @@ public class ProductController extends BaseController {
 		
 		// 사료의 정보 갯수 증가, 감소에 따른 insert, update, delete
 		for (int i = 0; i < size; i++) {
+			if (i == 0) {
+				productDto.setInfoMain(1);
+			}
 			if (flag == Constants.PRODUCT_UPDATE_COUNT_DECREASE) {
 				if (i < productDto.getFeedPriceArray().size()) {
 					productDto.setInfoSeq(productDto.getFeedInfoSeqArray().get(i));
