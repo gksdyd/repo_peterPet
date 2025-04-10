@@ -4057,12 +4057,12 @@ var listInit = function listInit() {
             }, options.pagination)
           });
         }
-        var paginationButtonNext = el.querySelector('[data-list-pagination="next"]');
-        var paginationButtonPrev = el.querySelector('[data-list-pagination="prev"]');
-        var viewAll = el.querySelector('[data-list-view="*"]');
-        var viewLess = el.querySelector('[data-list-view="less"]');
-        var listInfo = el.querySelector('[data-list-info]');
-        var listFilters = document.querySelectorAll('[data-list-filter]');
+        // var paginationButtonNext = el.querySelector('[data-list-pagination="next"]');
+        // var paginationButtonPrev = el.querySelector('[data-list-pagination="prev"]');
+        // var viewAll = el.querySelector('[data-list-view="*"]');
+        // var viewLess = el.querySelector('[data-list-view="less"]');
+        // var listInfo = el.querySelector('[data-list-info]');
+        // var listFilters = document.querySelectorAll('[data-list-filter]');
         var list = new window.List(el, options);
 
         //-------fallback-----------
@@ -4080,100 +4080,100 @@ var listInit = function listInit() {
 
         // ---------------------------------------
 
-        var totalItem = list.items.length;
-        var itemsPerPage = list.page;
-        var btnDropdownClose = list.listContainer.querySelector('.btn-close');
-        var pageQuantity = Math.ceil(totalItem / itemsPerPage);
-        var numberOfcurrentItems = list.visibleItems.length;
-        var pageCount = 1;
-        btnDropdownClose && btnDropdownClose.addEventListener('search.close', function () {
-          list.fuzzySearch('');
-        });
-        var updateListControls = function updateListControls() {
-          listInfo && (listInfo.innerHTML = "".concat(list.i, " to ").concat(numberOfcurrentItems, " of ").concat(totalItem));
-          paginationButtonPrev && togglePaginationButtonDisable(paginationButtonPrev, pageCount === 1);
-          paginationButtonNext && togglePaginationButtonDisable(paginationButtonNext, pageCount === pageQuantity);
-          if (pageCount > 1 && pageCount < pageQuantity) {
-            togglePaginationButtonDisable(paginationButtonNext, false);
-            togglePaginationButtonDisable(paginationButtonPrev, false);
-          }
-        };
+        // var totalItem = list.items.length;
+        // var itemsPerPage = list.page;
+        // var btnDropdownClose = list.listContainer.querySelector('.btn-close');
+        // var pageQuantity = Math.ceil(totalItem / itemsPerPage);
+        // var numberOfcurrentItems = list.visibleItems.length;
+        // var pageCount = 1;
+        // btnDropdownClose && btnDropdownClose.addEventListener('search.close', function () {
+        //   list.fuzzySearch('');
+        // });
+        // var updateListControls = function updateListControls() {
+        //   listInfo && (listInfo.innerHTML = "".concat(list.i, " to ").concat(numberOfcurrentItems, " of ").concat(totalItem));
+        //   paginationButtonPrev && togglePaginationButtonDisable(paginationButtonPrev, pageCount === 1);
+        //   paginationButtonNext && togglePaginationButtonDisable(paginationButtonNext, pageCount === pageQuantity);
+        //   if (pageCount > 1 && pageCount < pageQuantity) {
+        //     togglePaginationButtonDisable(paginationButtonNext, false);
+        //     togglePaginationButtonDisable(paginationButtonPrev, false);
+        //   }
+        // };
 
-        // List info
-        updateListControls();
-        if (paginationButtonNext) {
-          paginationButtonNext.addEventListener('click', function (e) {
-            e.preventDefault();
-            pageCount += 1;
-            var nextInitialIndex = list.i + itemsPerPage;
-            nextInitialIndex <= list.size() && list.show(nextInitialIndex, itemsPerPage);
-            numberOfcurrentItems += list.visibleItems.length;
-            updateListControls();
-          });
-        }
-        if (paginationButtonPrev) {
-          paginationButtonPrev.addEventListener('click', function (e) {
-            e.preventDefault();
-            pageCount -= 1;
-            numberOfcurrentItems -= list.visibleItems.length;
-            var prevItem = list.i - itemsPerPage;
-            prevItem > 0 && list.show(prevItem, itemsPerPage);
-            updateListControls();
-          });
-        }
-        var toggleViewBtn = function toggleViewBtn() {
-          viewLess.classList.toggle('d-none');
-          viewAll.classList.toggle('d-none');
-        };
-        if (viewAll) {
-          viewAll.addEventListener('click', function () {
-            list.show(1, totalItem);
-            pageQuantity = 1;
-            pageCount = 1;
-            numberOfcurrentItems = totalItem;
-            updateListControls();
-            toggleViewBtn();
-          });
-        }
-        if (viewLess) {
-          viewLess.addEventListener('click', function () {
-            list.show(1, itemsPerPage);
-            pageQuantity = Math.ceil(totalItem / itemsPerPage);
-            pageCount = 1;
-            numberOfcurrentItems = list.visibleItems.length;
-            updateListControls();
-            toggleViewBtn();
-          });
-        }
-        // numbering pagination
-        if (options.pagination) {
-          el.querySelector('.pagination').addEventListener('click', function (e) {
-            if (e.target.classList[0] === 'page') {
-              pageCount = Number(e.target.innerText);
-              updateListControls();
-            }
-          });
-        }
-        if (listFilters) {
-          listFilters.forEach(function (listFilter) {
-            listFilter.addEventListener('change', function () {
-              var activeFilters = {};
-              listFilters.forEach(function (filter) {
-                var key = filter.getAttribute('data-list-filter');
-                var value = filter.value.trim().toLowerCase();
-                if (value) {
-                  activeFilters[key] = value;
-                }
-              });
-              list.filter(function (item) {
-                return Object.keys(activeFilters).every(function (key) {
-                  var itemValue = item.values()[key].toLowerCase();
-                  return itemValue.includes(activeFilters[key]);
-                });
-              });
-            });
-          });
-        }
+        // // List info
+        // updateListControls();
+        // if (paginationButtonNext) {
+        //   paginationButtonNext.addEventListener('click', function (e) {
+        //     e.preventDefault();
+        //     pageCount += 1;
+        //     var nextInitialIndex = list.i + itemsPerPage;
+        //     nextInitialIndex <= list.size() && list.show(nextInitialIndex, itemsPerPage);
+        //     numberOfcurrentItems += list.visibleItems.length;
+        //     updateListControls();
+        //   });
+        // }
+        // if (paginationButtonPrev) {
+        //   paginationButtonPrev.addEventListener('click', function (e) {
+        //     e.preventDefault();
+        //     pageCount -= 1;
+        //     numberOfcurrentItems -= list.visibleItems.length;
+        //     var prevItem = list.i - itemsPerPage;
+        //     prevItem > 0 && list.show(prevItem, itemsPerPage);
+        //     updateListControls();
+        //   });
+        // }
+        // var toggleViewBtn = function toggleViewBtn() {
+        //   viewLess.classList.toggle('d-none');
+        //   viewAll.classList.toggle('d-none');
+        // };
+        // if (viewAll) {
+        //   viewAll.addEventListener('click', function () {
+        //     list.show(1, totalItem);
+        //     pageQuantity = 1;
+        //     pageCount = 1;
+        //     numberOfcurrentItems = totalItem;
+        //     updateListControls();
+        //     toggleViewBtn();
+        //   });
+        // }
+        // if (viewLess) {
+        //   viewLess.addEventListener('click', function () {
+        //     list.show(1, itemsPerPage);
+        //     pageQuantity = Math.ceil(totalItem / itemsPerPage);
+        //     pageCount = 1;
+        //     numberOfcurrentItems = list.visibleItems.length;
+        //     updateListControls();
+        //     toggleViewBtn();
+        //   });
+        // }
+        // // numbering pagination
+        // if (options.pagination) {
+        //   el.querySelector('.pagination').addEventListener('click', function (e) {
+        //     if (e.target.classList[0] === 'page') {
+        //       pageCount = Number(e.target.innerText);
+        //       updateListControls();
+        //     }
+        //   });
+        // }
+        // if (listFilters) {
+        //   listFilters.forEach(function (listFilter) {
+        //     listFilter.addEventListener('change', function () {
+        //       var activeFilters = {};
+        //       listFilters.forEach(function (filter) {
+        //         var key = filter.getAttribute('data-list-filter');
+        //         var value = filter.value.trim().toLowerCase();
+        //         if (value) {
+        //           activeFilters[key] = value;
+        //         }
+        //       });
+        //       list.filter(function (item) {
+        //         return Object.keys(activeFilters).every(function (key) {
+        //           var itemValue = item.values()[key].toLowerCase();
+        //           return itemValue.includes(activeFilters[key]);
+        //         });
+        //       });
+        //     });
+        //   });
+        // }
 
         //bulk-select
         if (bulkSelect) {
@@ -14226,7 +14226,7 @@ docReady(emojiMartInit);
 docReady(nouisliderInit);
 docReady(bulkSelectInit);
 docReady(advanceAjaxTableInit);
-// docReady(listInit);
+docReady(listInit);
 docReady(sortableInit);
 docReady(flatpickrIntit);
 //# sourceMappingURL=theme.js.map
