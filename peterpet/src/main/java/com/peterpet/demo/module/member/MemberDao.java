@@ -7,12 +7,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MemberDao {
 
-	List<MemberDto> selectList(MemberVo vo);
-	int selectOneCount(MemberVo vo);
-	MemberDto selectOne(MemberDto memberDto);
-	MemberDto selectOneLogin(MemberDto memberDto);
-	int update(MemberDto memberDto);
-	int insert(MemberDto memberDto);
-	int checkId(MemberDto memberDto);
-	int checkEmail(MemberDto memberDto);
+	public List<MemberDto> selectList(MemberVo vo);
+	public int selectOneCount(MemberVo vo);
+	public MemberDto selectOne(MemberDto memberDto);
+	public MemberDto selectOneLogin(MemberDto memberDto);
+	public int update(MemberDto memberDto);
+	public int insert(MemberDto memberDto);
+	public int checkId(MemberDto memberDto);
+	public int checkEmail(MemberDto memberDto);
+	public int updatePassword(MemberDto memberDto);
 }

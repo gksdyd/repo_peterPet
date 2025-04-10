@@ -42,4 +42,8 @@ public class MemberService {
 	public int checkEmail(MemberDto memberDto) {
 		return memberDao.checkEmail(memberDto);
 	}
+	
+	public int updatePassword(MemberDto memberDto) {
+		return memberDao.updatePassword(memberDto);
+	}
 }

@@ -856,15 +856,15 @@
                                 
                                 <!-- Change Password -->
                                 <div id="change-password" class="tab-pane fade">
-                                    <form method="post" action="#" accept-charset="UTF-8" class="needs-validation customer-form" novalidate>	
+                                    <form id="formPasswordChange" accept-charset="UTF-8" class="needs-validation customer-form" novalidate>	
                                         <h3 class="h4 text-uppercase mb-2">비밀번호 변경</h3>
                                         <div class="row">
                                             <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                                 <div class="form-group">
-                                                    <label for="CurrentPassword">현재 비밀번호 <span class="required">*</span></label>
-                                                    <input type="password" class="form-control" name="customer[password]" placeholder="현재 비밀번호" id="CurrentPassword" required />
-                                                    <div class="invalid-feedback">
-                                                        Please write current password.
+                                                    <label for="userPassword">현재 비밀번호 <span class="required">*</span></label>
+                                                    <input type="password" class="form-control" name="userPassword" placeholder="현재 비밀번호" id="userPassword" required />
+                                                    <div class="invalid-feedback" id="userPasswordValid">
+                                                        비밀번호가 일치하지 않습니다.
                                                     </div>
                                                 </div>
                                             </div>
@@ -872,19 +872,19 @@
                                         <div class="row">
                                             <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                                 <div class="form-group">
-                                                    <label for="NewPassword">새 비밀번호 <span class="required">*</span></label>
-                                                    <input type="password" class="form-control" name="customer[password]" placeholder="새 비밀번호" id="NewPassword" required />
-                                                    <div class="invalid-feedback">
-                                                        Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters.
+                                                    <label for="newPassword">새 비밀번호 <span class="required">*</span></label>
+                                                    <input type="password" class="form-control" name="newPassword" placeholder="새 비밀번호" id="newPassword" required />
+                                                    <div class="invalid-feedback" id="newPasswordValid">
+                                                        비밀번호를 다시 입력해주세요.
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                                 <div class="form-group">
-                                                    <label for="Verify">새 비밀번호 확인 <span class="required">*</span></label>
-                                                    <input type="password" class="form-control" name="customer[password]" placeholder="비밀번호 확인" id="Verify" required />
-                                                    <div class="invalid-feedback">
-                                                        To confirm, type the new password again.
+                                                    <label for="newPasswordCheck">새 비밀번호 확인 <span class="required">*</span></label>
+                                                    <input type="password" class="form-control" name="newPasswordCheck" placeholder="비밀번호 확인" id="newPasswordCheck" required />
+                                                    <div class="invalid-feedback" id="newPasswordCheckValid">
+                                                        비밀번호가 일치하지 않습니다.
                                                     </div>
                                                 </div>
                                             </div>
@@ -892,7 +892,7 @@
                                         <div class="row">
                                             <div class="text-left col-12 col-sm-12 col-md-12 col-lg-12">
                                                 <p class="d-flex-center">
-                                                    <input type="submit" class="btn rounded me-auto" value="변경">
+                                                    <button type="button" class="btn rounded me-auto" id="changeBtn">변경</button>
                                                     <a href="login.html"><i class="align-middle icon an an-an-double-left me-2"></i>로그인 페이지</a>
                                                 </p>
                                             </div>
@@ -1356,6 +1356,7 @@
             <script type="text/javascript" th:inline="javascript">
                 let userform = document.getElementById("userInfoForm");
                 let petform = document.getElementById("petInfoForm");
+                let passwordChangeForm = document.getElementById("formPasswordChange");
 
                 let goUrlPeterUserUpdt = "/peter/member/UpdatePeterForm";
                 let goUrlPeterPetInst = "/peter/pet/InsertPeterForm";
@@ -1406,6 +1407,14 @@
                 let petWeightValid = document.getElementById("petWeightValid");
                 let petVaccinationValid = document.getElementById("petVaccinationValid");
                 let petNeuteringValid = document.getElementById("petNeuteringValid");
+
+                let userPassword = document.getElementById("userPassword");
+                let newPassword = document.getElementById("newPassword");
+                let newPasswordCheck = document.getElementById("newPasswordCheck");
+
+                let userPasswordValid = document.getElementById("userPasswordValid");
+                let newPasswordValid = document.getElementById("newPasswordValid");
+                let newPasswordCheckValid = document.getElementById("newPasswordCheckValid");
             
                 validationInit = function() {
                     nameValid.style.display = "none";
@@ -1415,10 +1424,10 @@
                 }
 
                 styleInit = function() {
-                    nameValid.style.borderColor = "#757575";
-                    emailValid.style.borderColor = "#757575";
-                    phoneVaild.style.borderColor = "#757575";
-                    addressValid.style.borderColor = "#757575";
+                    name.style.borderColor = "#757575";
+                    email.style.borderColor = "#757575";
+                    phone.style.borderColor = "#757575";
+                    address.style.borderColor = "#757575";
                 }
 
                 petValidationInit = function() {
@@ -1433,14 +1442,26 @@
                 }
 
                 petStyleInit = function() {
-                    petGenderValid.style.borderColor = "#757575";
-                    petVarietyValid.style.borderColor = "#757575";
-                    petNameValid.style.borderColor = "#757575";
-                    petNicknameValid.style.borderColor = "#757575";
-                    petBirthValid.style.borderColor = "#757575";
-                    petWeightValid.style.borderColor = "#757575";
-                    petVaccinationValid.style.borderColor = "#757575";
-                    petNeuteringValid.style.borderColor = "#757575";
+                    petGender.style.borderColor = "#757575";
+                    petVariety.style.borderColor = "#757575";
+                    petName.style.borderColor = "#757575";
+                    petNickname.style.borderColor = "#757575";
+                    petBirth.style.borderColor = "#757575";
+                    petWeight.style.borderColor = "#757575";
+                    petVaccination.style.borderColor = "#757575";
+                    petNeutering.style.borderColor = "#757575";
+                }
+
+                passwordValidationInit = function() {
+                    userPasswordValid.style.display = "none";
+                    newPasswordValid.style.display = "none";
+                    newPasswordCheckValid.style.display = "none";
+                }
+
+                passwordStyleInit = function() {
+                    userPassword.style.borderColor = "#757575";
+                    newPassword.style.borderColor = "#757575";
+                    newPasswordCheck.style.borderColor = "#757575";
                 }
             
                 validation = function() {
@@ -1573,6 +1594,36 @@
                 
                     return true;
                 }
+
+                passwordValidation = function() {
+                
+                let temp;
+            
+                temp = userPassword.value;
+                if (!checkLength(temp) || !onlyEngKoNumAllSpecialChar(temp)) {
+                    userPasswordValid.style.display = "block";
+                    userPassword.style.borderColor = "red";
+                    userPassword.focus();
+                    return false;
+                }
+
+                temp = newPassword.value;
+                if (!checkLength(temp) || !onlyEngKoNumAllSpecialChar(temp)) {
+                    newPasswordValid.style.display = "block";
+                    newPassword.style.borderColor = "red";
+                    newPassword.focus();
+                    return false;
+                }
+
+                if (temp != newPasswordCheck.value) {
+                    newPasswordCheckValid.style.display = "block";
+                    newPasswordCheck.style.borderColor = "red";
+                    newPasswordCheck.focus();
+                    return false;
+                }
+            
+                return true;
+            }
             </script>
         </div>
         <!--End Page Wrapper-->

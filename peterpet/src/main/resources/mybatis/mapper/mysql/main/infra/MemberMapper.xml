@@ -160,4 +160,12 @@
 		WHERE 1=1
 			AND userEmail = #{userEmail}
 	</select>
+	
+	<update id="updatePassword">
+		UPDATE user
+		SET 
+			userPassword = #{userPassword}
+		WHERE
+			userSeq = #{userSeq}
+	</update>
 </mapper>

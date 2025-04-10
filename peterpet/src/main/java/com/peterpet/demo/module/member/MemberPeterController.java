@@ -87,9 +87,25 @@ public class MemberPeterController extends BaseController {
 		if (memberService.checkEmail(dto) == 0) {
 			returnMap.put("rt", "success");
 		} else {
-			System.out.println("fs");
 			returnMap.put("rt", "fail");
 		}
+		return returnMap;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/PasswordChangePeterProc")
+	public Map<String, Object> passwordChangePeterProc(MemberDto dto) throws Exception {
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		MemberDto rtMember = memberService.selectOne(dto);
+		
+		if (matchesBcrypt(dto.getUserPassword(), rtMember.getUserPassword(), 10)) {
+			dto.setUserPassword(encodeBcrypt(dto.getNewPassword(), 10));
+			memberService.updatePassword(dto);
+			returnMap.put("rt", "success");
+		} else {
+			returnMap.put("rt", "fail");
+		}
+		
 		return returnMap;
 	}
 	

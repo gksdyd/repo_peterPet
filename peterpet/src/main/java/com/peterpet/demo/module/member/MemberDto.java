@@ -23,6 +23,8 @@ public class MemberDto {
 	private String userModDate;
 	private int petCount;
 	
+	private String newPassword;
+	
 	public String getUserSeq() {
 		return userSeq;
 	}
@@ -142,5 +144,11 @@ public class MemberDto {
 	}
 	public void setUserAgency(String userAgency) {
 		this.userAgency = userAgency;
+	}
+	public String getNewPassword() {
+		return newPassword;
+	}
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
 	}
 }

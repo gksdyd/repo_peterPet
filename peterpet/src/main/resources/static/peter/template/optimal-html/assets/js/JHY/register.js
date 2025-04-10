@@ -145,3 +145,35 @@ $(document).on('click', '.removeFunc', function(){
       }
     }
 });
+
+document.getElementById("changeBtn").onclick = function() {
+    passwordStyleInit();
+    passwordValidationInit();
+
+    if (!passwordValidation()) {
+        return false;
+    }
+    $.ajax({
+        async: true 
+        ,cache: false
+        ,type: "post"
+        ,url: URL_PASSWORD_CHANGE_PETER
+        ,data: { "userPassword" : userPassword.value, "newPassword" : newPassword.value, "userSeq" : $("#userSeq").val() }
+        ,success: function(response) {
+            if (response.rt == "success") {
+                location.href = URL_INDEX_VIEW_PETER;
+            } else {
+                $(".bg-body-tertiary").css("backgroundColor", "#E4EEF7");
+                $(".modal-body").css("backgroundColor", "#EBF5FF");
+                $(".modal-footer").css("backgroundColor", "#EBF5FF");
+                modalTitle.innerText = "알림";
+                modalText.innerText = "비밀번호가 일치하지 않습니다!";
+                modalCloseButton.style.display = "block";
+                modal.style.display = "block";
+            }
+        }
+        ,error : function(jqXHR){
+          alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+        }
+    });
+}
