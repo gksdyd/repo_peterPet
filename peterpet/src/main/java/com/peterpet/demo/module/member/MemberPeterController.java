@@ -94,13 +94,16 @@ public class MemberPeterController extends BaseController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/PasswordChangePeterProc")
-	public Map<String, Object> passwordChangePeterProc(MemberDto dto) throws Exception {
+	public Map<String, Object> passwordChangePeterProc(MemberDto dto, HttpSession httpSession) throws Exception {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		MemberDto rtMember = memberService.selectOne(dto);
 		
 		if (matchesBcrypt(dto.getUserPassword(), rtMember.getUserPassword(), 10)) {
 			dto.setUserPassword(encodeBcrypt(dto.getNewPassword(), 10));
 			memberService.updatePassword(dto);
+			httpSession.setAttribute("sessSeqXdm", null);
+			httpSession.setAttribute("sessIdXdm", null);
+			httpSession.setAttribute("sessNameXdm", null);
 			returnMap.put("rt", "success");
 		} else {
 			returnMap.put("rt", "fail");
