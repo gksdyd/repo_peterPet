@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.peterpet.demo.module.base.BaseController;
+import com.peterpet.demo.module.base.Constants;
 import com.peterpet.demo.module.pet.PetDto;
 import com.peterpet.demo.module.pet.PetService;
 import com.peterpet.demo.module.pet.PetVo;
@@ -55,8 +56,8 @@ public class MemberPeterController extends BaseController {
 			Model model, HttpSession httpSession) {
 		List<PetDto> pets = new ArrayList<>();
 		
-		memberDto.setUserSeq((String)httpSession.getAttribute("sessSeqXdm"));
-		petVo.setUserSeq((String)httpSession.getAttribute("sessSeqXdm"));
+		memberDto.setUserSeq((String)httpSession.getAttribute("sessSeqPeter"));
+		petVo.setUserSeq((String)httpSession.getAttribute("sessSeqPeter"));
 		
 		pets = petService.selectListPeterPets(petVo);
 		petVo.calculateAge(pets);
@@ -101,9 +102,9 @@ public class MemberPeterController extends BaseController {
 		if (matchesBcrypt(dto.getUserPassword(), rtMember.getUserPassword(), 10)) {
 			dto.setUserPassword(encodeBcrypt(dto.getNewPassword(), 10));
 			memberService.updatePassword(dto);
-			httpSession.setAttribute("sessSeqXdm", null);
-			httpSession.setAttribute("sessIdXdm", null);
-			httpSession.setAttribute("sessNameXdm", null);
+			httpSession.setAttribute("sessSeqPeter", null);
+			httpSession.setAttribute("sessIdPeter", null);
+			httpSession.setAttribute("sessNamePeter", null);
 			returnMap.put("rt", "success");
 		} else {
 			returnMap.put("rt", "fail");
@@ -116,6 +117,38 @@ public class MemberPeterController extends BaseController {
 	@RequestMapping(value = "/PhoneXdmProc")
 	public Map<String, Object> phoneXdmProc(MemberDto dto, HttpSession httpSession) throws Exception {
 		Map<String, Object> returnMap = new HashMap<String, Object>();		
+		return returnMap;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/LoginPeterProc")
+	public Map<String, Object> loginPeterProc(MemberDto dto, HttpSession httpSession) throws Exception {
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		
+		MemberDto rtMember = memberService.selectOneLogin(dto);
+
+		if (rtMember != null && matchesBcrypt(dto.getUserPassword(), rtMember.getUserPassword(), 10)) {
+			httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE_XDM); // 60second * 30 = 30minute
+			httpSession.setAttribute("sessSeqPeter", rtMember.getUserSeq());
+			httpSession.setAttribute("sessIdPeter", rtMember.getUserId());
+			httpSession.setAttribute("sessNamePeter", rtMember.getUserName());
+			
+			returnMap.put("rt", "success");
+		} else {
+			returnMap.put("rt", "fali");
+		}
+		
+		return returnMap;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/LogoutPeterProc")
+	public Map<String, Object> logoutPeterProc(MemberDto dto, HttpSession httpSession) throws Exception {
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		httpSession.setAttribute("sessSeqPeter", null);
+		httpSession.setAttribute("sessIdPeter", null);
+		httpSession.setAttribute("sessNamePeter", null);
+		returnMap.put("rt", "success");
 		return returnMap;
 	}
 }

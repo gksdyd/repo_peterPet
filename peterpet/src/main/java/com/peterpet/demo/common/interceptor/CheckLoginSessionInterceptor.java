@@ -26,7 +26,7 @@ public class CheckLoginSessionInterceptor implements HandlerInterceptor{
 		
 //		사용자용
 		if(request.getRequestURI().contains(Constants.PETER_URI_CONTAINS_TEXT)) {
-			if (request.getSession().getAttribute(Constants.SESSION_ATTR_SEQ) != null) {
+			if (request.getSession().getAttribute(Constants.SESSION_PETER_SEQ) != null) {
 				// by pass
 			} else {
 				response.sendRedirect(Constants.SEND_REDIRECT_ADDRESS_PETER);

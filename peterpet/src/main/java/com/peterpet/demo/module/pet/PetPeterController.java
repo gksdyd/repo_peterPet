@@ -55,7 +55,7 @@ public class PetPeterController {
 	
 	@RequestMapping(value = "/InsertPeterForm")
 	public String insertPeterForm(PetDto petDto, HttpSession httpSession) {
-		petDto.setUser_userSeq((String) httpSession.getAttribute("sessSeqXdm"));
+		petDto.setUser_userSeq((String) httpSession.getAttribute("sessSeqPeter"));
 		petService.insert(petDto);
 		
 		petDto.setPetSeq(petService.selectMaxSeq());

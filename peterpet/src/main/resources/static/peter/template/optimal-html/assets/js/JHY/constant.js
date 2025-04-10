@@ -18,8 +18,8 @@ const VALUE_BUTTON_DISEASE = 3;
 const URL_ID_CHECK_PETER = "/peter/member/CheckIdPeterProc";
 const URL_EMAIL_CHECK_PETER = "/peter/member/CheckEmailPeterProc";
 const URL_PASSWORD_CHANGE_PETER = "/peter/member/PasswordChangePeterProc";
-const URL_SIGNOUT_PROC_XDM = "/xdm/member/LogoutXdmProc";
-const URL_SIGNIN_PROC_XDM = "/xdm/member/LoginXdmProc";
+const URL_SIGNOUT_PROC_XDM = "/peter/member/LogoutPeterProc";
+const URL_SIGNIN_PROC_XDM = "/peter/member/LoginPeterProc";
 const URL_SIGNIN_FORM_XDM = "/peter/member/LoginPeterForm";
 const URL_INDEX_VIEW_PETER = "/peter/index/IndexPeterView";
 

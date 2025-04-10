@@ -25,7 +25,8 @@ public class WebMvcConfigurerImpl implements WebMvcConfigurer {
 				"/peter/shop/ShopPeterList",
 				"/peter/member/InsertPeterForm",
 				"/peter/member/CheckIdPeterProc",
-				"/peter/member/CheckEmailPeterProc"
+				"/peter/member/CheckEmailPeterProc",
+				"/peter/member/LoginPeterProc"
 		);
 	}
 
