@@ -85,6 +85,7 @@
 			user
 		WHERE 1=1
 			AND userId = #{userId}
+			AND userDelFlag = 0
 	</select>
 	
 	<update id="update">
@@ -165,6 +166,15 @@
 		UPDATE user
 		SET 
 			userPassword = #{userPassword}
+		WHERE
+			userSeq = #{userSeq}
+	</update>
+	
+	<update id="uelete">
+		UPDATE user
+		SET 
+			userDelFlag = 1,
+			userSecession = #{userSecession}
 		WHERE
 			userSeq = #{userSeq}
 	</update>

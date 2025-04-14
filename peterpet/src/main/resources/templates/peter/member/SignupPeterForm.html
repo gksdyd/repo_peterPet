@@ -442,7 +442,7 @@
                     }
 
                     temp = password.value;
-                    if (checkLengthCnt(temp) < 8 || !onlyEngKoNumAllSpecialChar(temp)) {
+                    if (checkLengthCnt(temp) < 8 || !onlyPassword(temp)) {
                         passwordValid.style.display = "block";
                         password.style.borderColor = "red";
                         password.focus();

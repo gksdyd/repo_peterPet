@@ -32,7 +32,6 @@
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#wishlist">Wishlist</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#change-password">비밀번호 변경</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#withdraw">탈퇴</a></li>
-                                <li><a class="nav-link" href="login.html">로그아웃</a></li>
                             </ul>
                             <!-- End Nav tabs -->
                         </div>
@@ -1139,82 +1138,20 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                                <div class="col-12 col-sm-12 col-md-6 col-lg-6" th:each="WithdrawReason : ${@codeService.selectListCachedCode(30)}">
                                                     <div class="form-check">
-                                                        <input id="Reason1" type="radio" class="form-check-input" name="WithdrawReason" required />                       	
-                                                        <label for="Reason1" class="form-check-label fs-6">우리 동네 이웃이 많지 않아요.</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                                                    <div class="form-check">
-                                                        <input id="Reason2" type="radio" class="form-check-input" name="WithdrawReason" required />                       	
-                                                        <label for="Reason2" class="form-check-label fs-6">지금은 돌봄이 필요하지 않아요.</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                                                    <div class="form-check">
-                                                        <input id="Reason3" type="radio" class="form-check-input" name="WithdrawReason" required />                       	
-                                                        <label for="Reason3" class="form-check-label fs-6">이웃에게 연락이 오지 않아요.</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                                                    <div class="form-check">
-                                                        <input id="Reason4" type="radio" class="form-check-input" name="WithdrawReason" required />                       	
-                                                        <label for="Reason4" class="form-check-label fs-6">돌봄 요청글을 삭제할 수 없어요.</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                                                    <div class="form-check">
-                                                        <input id="Reason5" type="radio" class="form-check-input" name="WithdrawReason" required />                       	
-                                                        <label for="Reason5" class="form-check-label fs-6">대표 아이를 삭제하거나 변경할 수가 없어요.</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                                                    <div class="form-check">
-                                                        <input id="Reason6" type="radio" class="form-check-input" name="WithdrawReason" required />                       	
-                                                        <label for="Reason6" class="form-check-label fs-6">불쾌감을 주는 이웃을 만났어요.</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                                                    <div class="form-check">
-                                                        <input id="Reason7" type="radio" class="form-check-input" name="WithdrawReason" required />                       	
-                                                        <label for="Reason7" class="form-check-label fs-6">알림이 오지 않아요.</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                                                    <div class="form-check">
-                                                        <input id="Reason8" type="radio" class="form-check-input" name="WithdrawReason" required />                       	
-                                                        <label for="Reason8" class="form-check-label fs-6">홈페이지 사용이 불편해요.</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                                                    <div class="form-check">
-                                                        <input id="Reason9" type="radio" class="form-check-input" name="WithdrawReason" required />                       	
-                                                        <label for="Reason9" class="form-check-label fs-6">상품이 적어요.</label>
-                                                        <div class="invalid-feedback fs-6">
-                                                            Please check reason.
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                                                    <div class="form-check">
-                                                        <input id="Reason10" type="radio" class="form-check-input accordion-body collapsed" name="WithdrawReason" data-bs-toggle="collapse" data-bs-target="#collapseEtc" aria-expanded="false" required />                       	
-                                                        <label for="Reason10" class="form-check-label fs-6">기타</label>
+                                                        <input th:id="Reason + ${WithdrawReason.codeSeq}" type="radio" class="form-check-input" name="WithdrawReason" th:value="${WithdrawReason.codeSeq}" required />                       	
+                                                        <label th:for="Reason + ${WithdrawReason.codeSeq}" class="form-check-label fs-6" th:text="${WithdrawReason.codeName}"></label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row accordion-collapse collapse" id="collapseEtc" data-bs-parent="#accordionExample">
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-                                                    <textarea name="EtcReason" id="Reason10"></textarea>
+                                                    <textarea id="EtcReason"></textarea>
                                                 </div>
+                                            </div>
+                                            <div class="invalid-feedback fs-6" id="reasonValid">
+                                                탈퇴 이유를 체크해주세요.
                                             </div>
                                             <div class="row mt-4">
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-5">
@@ -1227,28 +1164,9 @@
                                             <div class="row">
                                                 <div class="text-left col-12 col-sm-12 col-md-12 col-lg-12">
                                                     <p class="d-flex-center">
-                                                        <input type="submit" class="btn rounded me-auto" value="탈퇴할래요!" data-bs-toggle="modal" data-bs-target="#WithdrawModal">
-                                                        <a href="index-demo15.html"><i class="align-middle icon an an-an-double-left me-2"></i>좀더 둘러볼게요!</a>
+                                                        <button type="button" id="userDeleteBtn" class="btn rounded me-auto" data-bs-toggle="modal" data-bs-target="#WithdrawModal">탈퇴할래요!</button>
+                                                        <a href="/peter/index/IndexPeterView"><i class="align-middle icon an an-an-double-left me-2"></i>좀더 둘러볼게요!</a>
                                                     </p>
-                                                </div>
-                                            </div>
-
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="WithdrawModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Withdraw</h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body fs-6">
-                                                            정말 탈퇴하시겠습니까?
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                                                        <button type="button" class="btn btn-primary">탈퇴할래요!</button>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1600,7 +1518,7 @@
                 let temp;
             
                 temp = userPassword.value;
-                if (!checkLength(temp) || !onlyEngKoNumAllSpecialChar(temp)) {
+                if (!checkLength(temp) || !onlyPassword(temp)) {
                     userPasswordValid.style.display = "block";
                     userPassword.style.borderColor = "red";
                     userPassword.focus();
@@ -1608,7 +1526,7 @@
                 }
 
                 temp = newPassword.value;
-                if (!checkLength(temp) || !onlyEngKoNumAllSpecialChar(temp)) {
+                if (!checkLength(temp) || !onlyPassword(temp)) {
                     newPasswordValid.style.display = "block";
                     newPassword.style.borderColor = "red";
                     newPassword.focus();
@@ -1624,6 +1542,26 @@
             
                 return true;
             }
+
+            secession = function() {
+                let array = $('input[name="WithdrawReason"]');
+                let flag = false;
+                $.each(array, function(index, value) {
+                    if ($(value).is(':checked')) {
+                        flag = true;
+                    }
+                })
+                return flag;
+            }
+
+            $('input[name="WithdrawReason"]').on("click", function() {
+                $("#reasonValid").hide();
+                if ($(this).val() == 270) {
+                    $("#collapseEtc").show();
+                } else {
+                    $("#collapseEtc").hide();
+                }
+            })
             </script>
         </div>
         <!--End Page Wrapper-->

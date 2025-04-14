@@ -22,6 +22,7 @@ public class MemberDto {
 	private String userRegDate;
 	private String userModDate;
 	private int petCount;
+	private int userSecession;
 	
 	private String newPassword;
 	
@@ -150,5 +151,11 @@ public class MemberDto {
 	}
 	public void setNewPassword(String newPassword) {
 		this.newPassword = newPassword;
+	}
+	public int getUserSecession() {
+		return userSecession;
+	}
+	public void setUserSecession(int userSecession) {
+		this.userSecession = userSecession;
 	}
 }

@@ -3,6 +3,7 @@
    ===============================================--> */
 
 let petDeleteBtn = document.getElementById("petDeleteBtn");
+let userDeleteBtn = document.getElementById("userDeleteBtn");
 
 let modal = document.getElementById("modal");
 let modalXButton = document.getElementById("xBtn");         // 모달 창의 X 버튼
@@ -26,6 +27,21 @@ petDeleteBtn.onclick = function() {
     modal.style.display = "block";
 }
 
+userDeleteBtn.onclick = function() {
+    if (!secession()) {
+        $("#reasonValid").show();
+        return;
+    }
+    modalTitle.innerText = "WARNING";
+    modalText.innerText = "정말 탈퇴하시겠습니까?";
+    modalCloseButton.style.display = "block";
+    modalDelButton.style.display = "block";
+    $(".bg-body-tertiary").css("backgroundColor", "#E4EEF7");
+    $(".modal-body").css("backgroundColor", "#EBF5FF");
+    $(".modal-footer").css("backgroundColor", "#EBF5FF");
+    modal.style.display = "block";
+}
+
 // 모달의 x버튼
 modalXButton.onclick = function() {
     modal.style.display = "none";
@@ -38,7 +54,7 @@ modalCloseButton.onclick = function() {
 
 // 모달의 삭제 버튼
 modalDelButton.onclick = function() {
-    if ($("#userPetSeq").val() != null) {
+    if ($("#userPetSeq").val() != "") {
         $.ajax({
             async: true 
             ,cache: false
@@ -53,9 +69,19 @@ modalDelButton.onclick = function() {
             }
         });
     } else {
-        form.action = goUrlPeterDelt;
-        form.method = "post";
-        form.submit();
+        $.ajax({
+            async: true 
+            ,cache: false
+            ,type: "post"
+            ,url: URL_PETER_USER_DELETE_PROC
+            ,data: { }
+            ,success: function(response) {
+                location.href = URL_INDEX_VIEW_PETER;
+            }
+            ,error : function(jqXHR){
+              alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+            }
+        });
     }
 }
 

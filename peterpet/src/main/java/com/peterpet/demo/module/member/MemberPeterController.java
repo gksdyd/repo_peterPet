@@ -151,4 +151,14 @@ public class MemberPeterController extends BaseController {
 		returnMap.put("rt", "success");
 		return returnMap;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/UserPeterDeltProc")
+	public void userPeterDeltProc(MemberDto dto, HttpSession httpSession) throws Exception {
+		dto.setUserSeq(httpSession.getAttribute("sessSeqPeter").toString());
+		memberService.uelete(dto);
+		httpSession.setAttribute("sessSeqPeter", null);
+		httpSession.setAttribute("sessIdPeter", null);
+		httpSession.setAttribute("sessNamePeter", null);
+	}
 }

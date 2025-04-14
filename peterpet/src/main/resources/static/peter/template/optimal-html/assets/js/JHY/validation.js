@@ -103,6 +103,14 @@ onlyWeight = function(text) {
     return true;
 }
 
+// 비밀번호
+onlyPassword = function(text) {
+    if (!regexPassword.test(text)) {
+        return false;
+    }
+    return true;
+}
+
 idDuplicateCheck = function() {
     let result = false;
 
