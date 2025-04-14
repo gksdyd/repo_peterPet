@@ -174,7 +174,8 @@
 		UPDATE user
 		SET 
 			userDelFlag = 1,
-			userSecession = #{userSecession}
+			userSecession = #{userSecession},
+			userEtcReason = #{userEtcReason}
 		WHERE
 			userSeq = #{userSeq}
 	</update>

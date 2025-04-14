@@ -74,7 +74,7 @@ modalDelButton.onclick = function() {
             ,cache: false
             ,type: "post"
             ,url: URL_PETER_USER_DELETE_PROC
-            ,data: { }
+            ,data: { "userSecession" : $('input[name="WithdrawReason"]:checked').val(), "userEtcReason" : $("#userEtcReason").val()}
             ,success: function(response) {
                 location.href = URL_INDEX_VIEW_PETER;
             }

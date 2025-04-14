@@ -25,6 +25,7 @@ public class MemberDto {
 	private int userSecession;
 	
 	private String newPassword;
+	private String userEtcReason;
 	
 	public String getUserSeq() {
 		return userSeq;
@@ -157,5 +158,11 @@ public class MemberDto {
 	}
 	public void setUserSecession(int userSecession) {
 		this.userSecession = userSecession;
+	}
+	public String getUserEtcReason() {
+		return userEtcReason;
+	}
+	public void setUserEtcReason(String userEtcReason) {
+		this.userEtcReason = userEtcReason;
 	}
 }

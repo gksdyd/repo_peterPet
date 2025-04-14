@@ -1147,12 +1147,10 @@
                                             </div>
                                             <div class="row accordion-collapse collapse" id="collapseEtc" data-bs-parent="#accordionExample">
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-                                                    <textarea id="EtcReason"></textarea>
+                                                    <textarea id="userEtcReason" maxlength="100"></textarea>
                                                 </div>
                                             </div>
-                                            <div class="invalid-feedback fs-6" id="reasonValid">
-                                                탈퇴 이유를 체크해주세요.
-                                            </div>
+                                            <div class="invalid-feedback fs-6" id="reasonValid"></div>
                                             <div class="row mt-4">
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-5">
                                                     <div class="form-control p-2 withdraw-check-style">
@@ -1546,9 +1544,17 @@
             secession = function() {
                 let array = $('input[name="WithdrawReason"]');
                 let flag = false;
+                $("#reasonValid").hide();
+                $("#reasonValid").text("탈퇴 이유를 체크해주세요.");
                 $.each(array, function(index, value) {
                     if ($(value).is(':checked')) {
                         flag = true;
+                        if ($(value).val() == 270) {
+                            if ($("#userEtcReason").val() == "") {
+                                flag = false;
+                                $("#reasonValid").text("이유를 적어주세요!");
+                            }
+                        }
                     }
                 })
                 return flag;
