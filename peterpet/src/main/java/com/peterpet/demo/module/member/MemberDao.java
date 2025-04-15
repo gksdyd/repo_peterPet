@@ -17,4 +17,5 @@ public interface MemberDao {
 	public int checkEmail(MemberDto memberDto);
 	public int updatePassword(MemberDto memberDto);
 	public int uelete(MemberDto memberDto);
+	public MemberDto checkPhone(MemberDto memberDto);
 }

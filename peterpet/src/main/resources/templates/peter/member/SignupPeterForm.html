@@ -255,6 +255,7 @@
             </div>
 
             <div th:replace="~{peter/include/foot :: foot}"></div>
+            <div th:replace="~{peter/include/modal :: modal}"></div>
             <div th:replace="~{peter/include/includePeterOriginal :: includePeterOriginal}"></div>
             <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
             <div th:replace="~{peter/include/includePeterCommon :: includePeterCommon}"></div>
@@ -405,6 +406,10 @@
                         phoneValid.style.display = "block";
                         phone.style.borderColor = "red";
                         phone.focus();
+                        return false;
+                    }
+
+                    if (!phoneDuplicateCheck()) {
                         return false;
                     }
 

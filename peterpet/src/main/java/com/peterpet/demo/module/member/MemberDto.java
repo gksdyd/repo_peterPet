@@ -27,6 +27,8 @@ public class MemberDto {
 	private String newPassword;
 	private String userEtcReason;
 	
+	private Integer dateDiff;
+	
 	public String getUserSeq() {
 		return userSeq;
 	}
@@ -164,5 +166,11 @@ public class MemberDto {
 	}
 	public void setUserEtcReason(String userEtcReason) {
 		this.userEtcReason = userEtcReason;
+	}
+	public Integer getDateDiff() {
+		return dateDiff;
+	}
+	public void setDateDiff(Integer dateDiff) {
+		this.dateDiff = dateDiff;
 	}
 }

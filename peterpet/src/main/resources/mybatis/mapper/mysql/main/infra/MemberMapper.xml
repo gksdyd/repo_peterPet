@@ -175,8 +175,19 @@
 		SET 
 			userDelFlag = 1,
 			userSecession = #{userSecession},
-			userEtcReason = #{userEtcReason}
+			userEtcReason = #{userEtcReason},
+			userModDate = date_format(NOW(), '%Y-%m-%d %H:%i:%S')
 		WHERE
 			userSeq = #{userSeq}
 	</update>
+	
+	<select id="checkPhone" resultMap="resultMapObj">
+		SELECT
+			userDelFlag,
+			TIMESTAMPDIFF(DAY, userModDate, date_format(NOW(), '%Y-%m-%d %H:%i:%S')) AS dateDiff
+		FROM
+			user
+		WHERE 1=1
+			AND userPhone = #{userPhone}
+	</select>
 </mapper>

@@ -162,3 +162,50 @@ emailDuplicateCheck = function() {
     });
     return result;
 }
+
+let modal = document.getElementById("modal");
+let modalCloseButton = document.getElementById("modalCloseBtn"); // 모달 창의 Close 버튼
+
+let modalTitle = document.getElementById("modalTitle");
+let modalText = document.getElementById("modalText");
+
+phoneDuplicateCheck = function() {
+    let result = false;
+    alert( phone.value);
+    $.ajax({
+        async: false 
+        ,cache: false
+        ,type: "post"
+        ,url: URL_PHONE_CHECK_PETER
+        ,data: { "userPhone" : phone.value }
+        ,success: function(response) {
+          if(response.rt == "success") {
+            result = true;
+          } else if (response.rt == "already") {
+            modalTitle.innerText = "WARNING";
+            modalText.innerText = "이미 회원가입을 하셨습니다.";
+            modalCloseButton.style.display = "block";
+            $(".bg-body-tertiary").css("backgroundColor", "#E4EEF7");
+            $(".modal-body").css("backgroundColor", "#EBF5FF");
+            $(".modal-footer").css("backgroundColor", "#EBF5FF");
+            modal.style.display = "block";
+          } else if (response.rt == "periord") {
+            modalTitle.innerText = "WARNING";
+            modalText.innerText = "탈퇴한 회원입니다.";
+            modalCloseButton.style.display = "block";
+            $(".bg-body-tertiary").css("backgroundColor", "#E4EEF7");
+            $(".modal-body").css("backgroundColor", "#EBF5FF");
+            $(".modal-footer").css("backgroundColor", "#EBF5FF");
+            modal.style.display = "block";
+          }
+        }
+        ,error : function(jqXHR){
+          alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+        }
+    });
+    return result;
+}
+
+modalCloseButton.onclick = function() {
+    modal.style.display = "none";
+}

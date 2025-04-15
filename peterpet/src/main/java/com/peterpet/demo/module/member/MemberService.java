@@ -50,4 +50,8 @@ public class MemberService {
 	public int uelete(MemberDto memberDto) {
 		return memberDao.uelete(memberDto);
 	}
+	
+	public MemberDto checkPhone(MemberDto memberDto) {
+		return memberDao.checkPhone(memberDto);
+	}
 }
