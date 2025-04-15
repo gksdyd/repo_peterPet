@@ -294,5 +294,6 @@
 			LEFT JOIN func c ON a.prodSeq = c.product_prodSeq AND funcMain = 1
 		WHERE 1=1
 			AND a.prodDelFlag = 0
+		limit #{rowNumToShow} offset #{startRnumForMysql}
 	</select>
 </mapper>

@@ -134,7 +134,11 @@ $("#feedInfoSaveBtn").on('click', function() {
   createDiscount.setAttribute("type", "text");
   createDiscount.setAttribute("class", "form-control fs-11 feedDiscount");
   createDiscount.setAttribute("style", "text-align: right");
-  createDiscount.setAttribute("value", feedDiscount.value);
+  if (feedDiscount.value == "") {
+    createDiscount.setAttribute("value", "0");
+  } else {
+    createDiscount.setAttribute("value", feedDiscount.value);
+  }
 
   let createPer = document.createElement('span');
   createPer.setAttribute("class", "input-group-text fs-11");

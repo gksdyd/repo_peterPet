@@ -2,6 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <div th:replace="~{peter/include/head :: head}"></div>
+        <form id="productPagination">
+            <input type="hidden" id="prodType" name="prodType" th:value="${vo.prodType}">
+            <input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>
             <!--Body Container-->
             <div id="page-content">  
                 <!--Collection Banner-->
@@ -10,7 +13,7 @@
                         <div class="collection-hero__image"></div>
                         <div class="collection-hero__title-wrapper container">
                             <h2 class="collection-hero__title" th:text="${@codeService.selectOneCachedCode(vo.prodType)}"></h2>
-                            <div class="breadcrumbs text-uppercase mt-1 mt-lg-2"><a href="index.html" title="Back to the home page">Home</a><span>|</span><span class="fw-bold">사료</span></div>
+                            <div class="breadcrumbs text-uppercase mt-1 mt-lg-2"><a href="/peter/index/IndexPeterView" title="Back to the home page">Home</a><span>|</span><span class="fw-bold" th:text="${@codeService.selectOneCachedCode(vo.prodType)}"></span></div>
                         </div>
                     </div>
                 </div>
@@ -21,7 +24,7 @@
                         <!--Sidebar-->
                         <div class="col-12 col-sm-12 col-md-12 col-lg-3 sidebar filterbar">
                             <div class="closeFilter d-block d-lg-none"><i class="icon icon an an-times-r"></i></div>
-                            <div class="sidebar_tags">
+                            <div class="sidebar_tags" th:if="${vo.prodType} == 1">
                                 <!--Price Filter-->
                                 <div class="sidebar_widget filterBox filter-widget">
                                     <div class="widget-title"><h2 class="mb-0">Price</h2></div>
@@ -146,7 +149,7 @@
                                         <li class="product-count d-flex align-items-center">
                                             <button type="button" class="btn btn-filter an an-slider-3 d-inline-flex d-lg-none me-2 me-sm-3"><span class="hidden">Filter</span></button>
                                             <div class="filters-toolbar__item">
-                                                <span class="filters-toolbar__product-count d-none d-sm-block">Showing: 21 products</span>
+                                                <span class="filters-toolbar__product-count d-none d-sm-block">Showing: <span th:text="${vo.totalRows}"></span> products</span>
                                             </div>
                                         </li>
                                         <li class="collection-view ms-sm-auto">
@@ -176,13 +179,13 @@
 
                             <!--Product Grid-->
                             <div class="grid-products grid--view-items prd-grid">
-                                <div class="row">
+                                <div class="row"  th:if="${vo.prodType} == 1">
                                     <div class="col-6 col-sm-6 col-md-4 col-lg-4 item" th:each="list : ${list}">
                                         <!--Start Product Image-->
                                         <div class="product-image">
                                             <!--Start Product Image-->
                                             <a href="product-page.html" class="product-img">
-                                                <img class="blur-up lazyload" data-src="assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity.jpeg" src="assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity.jpeg" alt="image" title="">
+                                                <img class="blur-up lazyload" data-src="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity.jpeg" src="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity.jpeg" alt="image" title="">
                                                 <!-- product label -->
                                                 <div class="product-labels"><span class="lbl on-sale rounded">최저가도전!</span></div>
                                                 <!-- End product label -->
@@ -194,22 +197,27 @@
                                         <div class="product-details text-center">
                                             <!--Product Name-->
                                             <div class="product-name text-uppercase">
-                                                <a href="product-page.html" th:if="${list.funcName} == null and ${list.infoWeight} == null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName}"></a>
-                                                <a href="product-page.html" th:if="${list.funcName} != null and ${list.infoWeight} == null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName} + ' ' + ${@codeService.selectOneCachedCode(list.funcName)}"></a>
-                                                <a href="product-page.html" th:if="${list.funcName} == null and ${list.infoWeight} != null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName} + ' ' + ${list.infoWeight} + 'kg'"></a>
-                                                <a href="product-page.html" th:if="${list.funcName} != null and ${list.infoWeight} != null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName} + ' ' + ${list.infoWeight} + 'kg' + ' ' + ${@codeService.selectOneCachedCode(list.funcName)}"></a>
+                                                <a th:href="@{product-page.html(prodSeq=${list.prodSeq})}" th:if="${list.funcName} == null and ${list.infoWeight} == null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName}"></a>
+                                                <a th:href="@{product-page.html(prodSeq=${list.prodSeq})}" th:if="${list.funcName} != null and ${list.infoWeight} == null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName} + ' ' + ${@codeService.selectOneCachedCode(list.funcName)}"></a>
+                                                <a th:href="@{product-page.html(prodSeq=${list.prodSeq})}" th:if="${list.funcName} == null and ${list.infoWeight} != null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName} + ' ' + ${list.infoWeight} + 'kg'"></a>
+                                                <a th:href="@{product-page.html(prodSeq=${list.prodSeq})}" th:if="${list.funcName} != null and ${list.infoWeight} != null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName} + ' ' + ${list.infoWeight} + 'kg' + ' ' + ${@codeService.selectOneCachedCode(list.funcName)}"></a>
                                             </div>
                                             <!--End Product Name-->
                                             <!--Product Price-->
                                             <div class="product-price">
-                                                <div class="old-price" th:if="${list.infoDiscount} != null" th:text="${list.infoPrice}"></div>
-                                                <span class="price" th:if="${list.infoDiscount} != null" th:text="${list.infoDiscount} + '% ' + ${list.discountPrice}"></span>
-                                                <span class="price" th:if="${list.infoDiscount} == null" th:text="${list.infoPrice}"></span>
+                                                <div class="old-price" th:if="${list.infoDiscount} != 0" th:text="${list.infoPrice}"></div>
+                                                <span class="price" th:if="${list.infoDiscount} == 0" th:text="${list.infoPrice}"></span>
+                                                <span class="price" th:if="${list.infoDiscount} != 0" th:text="${list.infoDiscount} + '% ' + ${list.discountPrice}"></span>
                                             </div>
                                             <!--End Product Price-->
                                             <!--Product Review-->
                                             <div class="product-review d-flex align-items-center justify-content-center">
-                                                <i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i>
+                                                <span th:if="${list.prodScore} > 4"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i></span>
+                                                <span th:if="${list.prodScore} > 3"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i></span>
+                                                <span th:if="${list.prodScore} > 2"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
+                                                <span th:if="${list.prodScore} > 1"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
+                                                <span th:if="${list.prodScore} > 0"><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
+                                                <span th:if="${list.prodScore} == 0"><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
                                             </div>
                                             <!--End Product Review-->
                                             <!--deliver-->
@@ -244,23 +252,14 @@
 
                             <!--Pagination Classic-->
                             <hr class="clear">
-                            <div class="pagination">
-                                <ul>
-                                    <li class="prev"><a href="#"><i class="icon align-middle an an-caret-left" aria-hidden="true"></i></a></li>
-                                    <li class="active"><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">...</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li class="next"><a href="#"><i class="icon align-middle an an-caret-right" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </div>
-                            <!--End Pagination Classic-->
+                            <div th:replace="~{peter/include/pagination :: pagination}"></div>
                         </div>
                         <!--End Main Content-->
                     </div>
                 </div>
             </div>
             <!--End Body Container-->
+        </form>
 
             <!--Scoll Top-->
             <span id="site-scroll"><i class="icon an an-chevron-up"></i></span>
@@ -350,5 +349,10 @@
             <div th:replace="~{peter/include/includePeterCommon :: includePeterCommon}"></div>
         </div>
         <!--End Page Wrapper-->
+        <script>
+            form = document.getElementById("productPagination");
+
+            goUrlProductList = "/peter/shop/ShopPeterList";
+        </script>
     </body>
 </html>
