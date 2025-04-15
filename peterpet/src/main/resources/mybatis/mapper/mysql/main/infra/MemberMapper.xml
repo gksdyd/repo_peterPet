@@ -69,7 +69,9 @@
 			userAddr,
 			userDetailAddr,
 			userDelFlag,
-			userSavePoint
+			userSavePoint,
+			userSecession,
+			userEtcReason
 		FROM
 			user
 		WHERE 1=1
