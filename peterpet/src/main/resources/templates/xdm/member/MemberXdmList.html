@@ -17,6 +17,12 @@
                     <option value="0" th:selected="${vo.shDelFlag == 0}">N</option>  
                   </select>
                 </div>
+                <div class="col-4">
+                  <select class="form-select-JHY" id="shSecession" name="shSecession" aria-label="Default select example">
+                    <option value="" th:selected="${vo.shDelFlag == null}">탈퇴이유</option>
+                    <option th:each="WithdrawReason : ${@codeService.selectListCachedCode(30)}" th:value="${WithdrawReason.codeSeq}" th:text="${WithdrawReason.codeName}" th:selected="${WithdrawReason.codeSeq} == ${vo.shSecession}"></option>
+                  </select>
+                </div>
               </div>
               <div class="mb-2 row g-3">
                 <div class="col-4">

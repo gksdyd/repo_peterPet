@@ -9,6 +9,7 @@
         FROM user a
         WHERE 1=1
         <if test="shDelFlag != null and !shDelFlag.equals('')">AND a.userDelFlag = #{shDelFlag}</if>
+        <if test="shSecession != null and !shSecession.equals('')">AND a.userSecession = #{shSecession}</if>
 			
 		<choose>
 			<when test="shOptionDate == 1">AND a.userRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
