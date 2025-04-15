@@ -17,7 +17,7 @@ public class ShopPeterController {
 	
 	@RequestMapping(value = "/ShopPeterList")
 	public String shopPeterList(@ModelAttribute("vo") ProductVo vo, Model model) {
-		vo.setRowNumToShow(12);
+		vo.setRowNumToShow(9);
 		vo.setParamsPaging(productService.selectOneCount(vo));
 		List<ProductDto> dtos = productService.selectFeedList(vo);
 		

@@ -1601,11 +1601,18 @@
      32. Product Grid-List change view
      -------------------------------------*/
     function prd_change_view() {
+        if ($("#gridMethod").val() == 0) {
+            $('.grid--view-items').removeClass('prd-list').addClass('prd-grid');
+        }else if ($("#gridMethod").val() == 1) {
+            $('.grid--view-items').removeClass('prd-grid').addClass('prd-list');
+        }
         $('.change-view').on('click', function (e) {
             if ($(this).hasClass('prd-grid')) {
                 $('.grid--view-items').removeClass('prd-list').addClass('prd-grid');
+                $("#gridMethod").val(0);
             } else if ($(this).hasClass('prd-list')) {
                 $('.grid--view-items').removeClass('prd-grid').addClass('prd-list');
+                $("#gridMethod").val(1);
             }
         });
 
@@ -1615,7 +1622,6 @@
         });
     }
     prd_change_view();
-
     /*------------------------------------
      33. Write Review Toggle Box
      -------------------------------------*/

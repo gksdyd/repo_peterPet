@@ -36,6 +36,8 @@ public class ProductVo extends BaseVo{
 	private Integer shSnackBrand;
 	private Integer shSnackIngredient;
 	
+	private Integer gridMethod = 0;
+	
 	public List<String> getProdFuncArray() {
 		return prodFuncArray;
 	}
@@ -210,6 +212,14 @@ public class ProductVo extends BaseVo{
 
 	public void setFeedInfoSeqArray(List<String> feedInfoSeqArray) {
 		this.feedInfoSeqArray = feedInfoSeqArray;
+	}
+
+	public Integer getGridMethod() {
+		return gridMethod;
+	}
+
+	public void setGridMethod(Integer gridMethod) {
+		this.gridMethod = gridMethod;
 	}
 
 	public void InitProdType() {

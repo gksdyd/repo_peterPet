@@ -5,6 +5,7 @@
         <form id="productPagination">
             <input type="hidden" id="prodType" name="prodType" th:value="${vo.prodType}">
             <input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>
+            <input type="hidden" id="gridMethod" name="gridMethod" th:value="${vo.gridMethod}"/>
             <!--Body Container-->
             <div id="page-content">  
                 <!--Collection Banner-->
@@ -28,17 +29,15 @@
                                 <!--Price Filter-->
                                 <div class="sidebar_widget filterBox filter-widget">
                                     <div class="widget-title"><h2 class="mb-0">Price</h2></div>
-                                    <form action="#" method="post" class="price-filter filterDD">
-                                        <div id="slider-range" class="mt-2"></div>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <p class="no-margin"><input id="amount" type="text"></p>
-                                            </div>
-                                            <div class="col-6 text-right margin-25px-top">
-                                                <button class="btn btn--small rounded">filter</button>
-                                            </div>
+                                    <div id="slider-range" class="mt-2"></div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <p class="no-margin"><input id="amount" type="text"></p>
                                         </div>
-                                    </form>
+                                        <div class="col-6 text-right margin-25px-top">
+                                            <button class="btn btn--small rounded">filter</button>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!--End Price Filter-->
                                 <!--age type-->
@@ -154,7 +153,7 @@
                                         </li>
                                         <li class="collection-view ms-sm-auto">
                                             <div class="filters-toolbar__item collection-view-as d-flex align-items-center me-3">
-                                                <a href="javascript:void(0)" class="change-view prd-grid change-view--active"><i class="icon an an-th" aria-hidden="true"></i><span class="tooltip-label">Grid View</span></a>
+                                                <a href="javascript:void(0)" class="change-view prd-grid"><i class="icon an an-th" aria-hidden="true"></i><span class="tooltip-label">Grid View</span></a>
                                                 <a href="javascript:void(0)" class="change-view prd-list"><i class="icon an an-th-list" aria-hidden="true"></i><span class="tooltip-label">List View</span></a>
                                             </div>
                                         </li>
@@ -221,28 +220,10 @@
                                             </div>
                                             <!--End Product Review-->
                                             <!--deliver-->
-                                            <div class="d-flex align-items-center justify-content-center" style="color: rgb(229, 135, 151);">
+                                            <div class="product-review d-flex align-items-center justify-content-center" style="color: rgb(229, 135, 151);">
                                                 <i class="an an-ship-fast fs-4"></i>&emsp;빠른 배송
                                             </div>
                                             <!--End deliver-->
-                                            <!-- Product Button -->
-                                            <div class="button-action d-flex">
-                                                <div class="addtocart-btn">
-                                                    <form class="addtocart" action="#" method="post">
-                                                        <a class="btn pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon hidden an an-cart-l"></i>Add To Cart</a>
-                                                    </form>
-                                                </div>
-                                                <div class="quickview-btn">
-                                                    <a class="btn btn-icon quick-view quick-view-popup" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label top">Quick View</span></a>
-                                                </div>
-                                                <div class="wishlist-btn">
-                                                    <a class="btn btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Add To Wishlist</span></a>
-                                                </div>
-                                                <div class="compare-btn">
-                                                    <a class="btn btn-icon compare add-to-compare" href="compare.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label top">Add to Compare</span></a>
-                                                </div>
-                                            </div>
-                                            <!-- End Product Button -->
                                         </div>
                                         <!--End Product Details-->
                                     </div>
