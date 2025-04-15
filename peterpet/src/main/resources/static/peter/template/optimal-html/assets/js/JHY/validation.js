@@ -171,7 +171,7 @@ let modalText = document.getElementById("modalText");
 
 phoneDuplicateCheck = function() {
     let result = false;
-    alert( phone.value);
+
     $.ajax({
         async: false 
         ,cache: false
