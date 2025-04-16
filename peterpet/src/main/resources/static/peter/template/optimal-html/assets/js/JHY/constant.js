@@ -29,6 +29,9 @@ const URL_PETER_DELETE_PROC = "/peter/pet/PetPeterDeltProc";
 const URL_PETER_MYACCOUNT = "/peter/member/MyAccountPeterForm";
 const URL_PETER_USER_DELETE_PROC = "/peter/member/UserPeterDeltProc";
 
+// shop관련 경로
+const URL_PETER_SHOP = "/peter/shop/ShopPeterList";
+
 // 정규식 상수
 const regex1 = /^[a-z|A-Z|0-9|]+$/;
 const regex2 = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|~|/|(-)|,|]+$/;

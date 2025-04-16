@@ -37,6 +37,7 @@ public class ProductVo extends BaseVo{
 	private Integer shSnackIngredient;
 	
 	private Integer gridMethod = 0;
+	private Integer shSortBy = 0;
 	
 	public List<String> getProdFuncArray() {
 		return prodFuncArray;
@@ -220,6 +221,14 @@ public class ProductVo extends BaseVo{
 
 	public void setGridMethod(Integer gridMethod) {
 		this.gridMethod = gridMethod;
+	}
+
+	public Integer getShSortBy() {
+		return shSortBy;
+	}
+
+	public void setShSortBy(Integer shSortBy) {
+		this.shSortBy = shSortBy;
 	}
 
 	public void InitProdType() {

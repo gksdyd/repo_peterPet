@@ -159,15 +159,13 @@
                                         </li>
                                         <li class="filters-sort ms-auto ms-sm-0">
                                             <div class="filters-toolbar__item">
-                                                <label for="SortBy" class="hidden">Sort by:</label>
-                                                <select name="SortBy" id="SortBy" class="filters-toolbar__input filters-toolbar__input--sort">
-                                                    <option value="featured" selected="selected">정렬</option>
-                                                    <option value="best-selling">펫피터랭킹순</option>
-                                                    <option value="title-ascending">최신순</option>
-                                                    <option value="title-descending">판매량순</option>
-                                                    <option value="price-ascending">리뷰많은순</option>
-                                                    <option value="price-descending">낮은가격순</option>
-                                                    <option value="created-ascending">높은가격순</option>
+                                                <label for="shSortBy" class="hidden">Sort by:</label>
+                                                <select name="shSortBy" id="shSortBy" class="filters-toolbar__input filters-toolbar__input--sort">
+                                                    <option value="" th:selected="${vo.shSortBy == null}">정렬</option>
+                                                    <option value="1" th:selected="${vo.shSortBy == 1}">최신순</option>
+                                                    <option value="2" th:selected="${vo.shSortBy == 2}">리뷰많은순</option>
+                                                    <option value="3" th:selected="${vo.shSortBy == 3}">낮은가격순</option>
+                                                    <option value="4" th:selected="${vo.shSortBy == 4}">높은가격순</option>
                                                 </select>
                                             </div>
                                         </li>
@@ -326,14 +324,13 @@
             </div>
 
             <div th:replace="~{peter/include/foot :: foot}"></div>
-            <div th:replace="~{peter/include/includePeterOriginal :: includePeterOriginal}"></div>
             <div th:replace="~{peter/include/includePeterCommon :: includePeterCommon}"></div>
+            <div th:replace="~{peter/include/includePeterOriginal :: includePeterOriginal}"></div>
         </div>
         <!--End Page Wrapper-->
         <script>
-            form = document.getElementById("productPagination");
-
-            goUrlProductList = "/peter/shop/ShopPeterList";
+            let form = document.getElementById("productPagination");
         </script>
+        <script src="/peter/template/optimal-html/assets/js/JHY/sort.js"></script>
     </body>
 </html>
