@@ -46,21 +46,51 @@ public class BaseController {
 		if (startDateTime == endDateTime) {	// 평일
 			if (startDateTime.getHour() < 16) {
 				endDateTime = LocalDateTime.of(LocalDate.now(), LocalTime.of(16, 0));
+				vo.setDeliveryTime("오늘 오후 8시 ~ 밤 12시 사이");
 			} else if (startDateTime.getHour() < 22) {
 				if (startDateTime.getDayOfWeek().getValue() != 5) {
 					endDateTime = LocalDateTime.of(LocalDate.now(), LocalTime.of(22, 0));
+					vo.setDeliveryTime("내일 새벽 7시 전");
 				} else {
 					endDateTime = LocalDateTime.of(LocalDate.now().plusDays(2), LocalTime.of(22, 0));
+					vo.setDeliveryTime("내일 새벽 7시 전");
 				}
 			} else {
 				if (startDateTime.getDayOfWeek().getValue() != 5) {
-					endDateTime = LocalDateTime.of(LocalDate.now().plusDays(1), LocalTime.of(16, 0));					
+					endDateTime = LocalDateTime.of(LocalDate.now().plusDays(1), LocalTime.of(16, 0));
+					vo.setDeliveryTime("내일 오후 8시 ~ 밤 12시 사이");
 				} else {
 					endDateTime = LocalDateTime.of(LocalDate.now().plusDays(2), LocalTime.of(22, 0));
+					vo.setDeliveryTime("월요일 새벽 7시 전");
 				}
 			}
 		} else {
-			endDateTime = LocalDateTime.of(endDateTime.minusDays(1).toLocalDate(), LocalTime.of(10, 0));
+			long day = ChronoUnit.DAYS.between(startDateTime, endDateTime);
+			if (day == 1) {
+				vo.setDeliveryTime("내일 새벽 7시 전");
+			} else if (day == 2) {
+				vo.setDeliveryTime("모레 새벽 7시 전");
+			} else {
+				int dayOfWeek = endDateTime.getDayOfWeek().getValue();
+				switch (dayOfWeek) {
+					case 1:
+						vo.setDeliveryTime("월요일 새벽 7시 전");
+						break;
+					case 2:
+						vo.setDeliveryTime("화요일 새벽 7시 전");
+						break;
+					case 3:
+						vo.setDeliveryTime("수요일 새벽 7시 전");
+						break;
+					case 4:
+						vo.setDeliveryTime("목요일 새벽 7시 전");
+						break;
+					case 5:
+						vo.setDeliveryTime("금요일 새벽 7시 전");
+						break;
+				}
+			}
+			endDateTime = LocalDateTime.of(endDateTime.minusDays(1).toLocalDate(), LocalTime.of(22, 0));
 		}
 		
 		vo.setDiffDay(ChronoUnit.DAYS.between(startDateTime, endDateTime));

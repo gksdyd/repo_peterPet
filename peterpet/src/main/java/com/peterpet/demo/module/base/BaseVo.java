@@ -36,6 +36,7 @@ public class BaseVo {
 	private long diffHour;
 	private long diffMinute;
 	private long diffSecond;
+	private String deliveryTime;
 	
 	public int getThisPage() {
 		return thisPage;
@@ -196,6 +197,14 @@ public class BaseVo {
 
 	public void setDiffSecond(long diffSecond) {
 		this.diffSecond = diffSecond;
+	}
+
+	public String getDeliveryTime() {
+		return deliveryTime;
+	}
+
+	public void setDeliveryTime(String deliveryTime) {
+		this.deliveryTime = deliveryTime;
 	}
 
 	public void setParamsPaging(int totalRows) {

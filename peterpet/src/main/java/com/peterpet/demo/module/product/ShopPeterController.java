@@ -51,6 +51,7 @@ public class ShopPeterController extends BaseController {
 		rtMap.put("hour", vo.getDiffHour());
 		rtMap.put("minute", vo.getDiffMinute());
 		rtMap.put("second", vo.getDiffSecond());
+		rtMap.put("delivery", vo.getDeliveryTime());
 		return rtMap;
 	}
 }
