@@ -828,20 +828,14 @@
                         <div class="img"><img src="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity.jpeg" class="product-featured-img" alt="product" /></div>
                         <select name="id" id="variantOptions1" class="product-form__variants selectbox no-js ms-3">
                             <option>중량 선택</option>
-                            <option selected="selected">3kg</option>
-                            <option>6kg</option>
-                            <option>8kg</option>
-                            <option>10kg</option>
-                            <option>12kg</option>
-                            <option>15kg</option>
-                            <option>20kg</option>
+                            <option th:each="weight : ${item.weightArray}" th:text="${weight} + 'kg'" th:value="${weight}" th:selected="${#strings.toString(item.infoWeight)} == ${weight}"></option>
                         </select>
                         <div class="qtyField mx-2" title="Quantity">
                             <a class="qtyBtn minus" href="javascript:void(0);"><i class="icon an an-minus-r" aria-hidden="true"></i></a>
                             <input type="text" id="quantity1" name="quantity" value="1" class="product-form__input qty rounded-0">
                             <a class="qtyBtn plus" href="javascript:void(0);"><i class="icon an an-plus-r" aria-hidden="true"></i></a>
                         </div>
-                        <button type="submit" name="add" class="btn rounded btn-secondary product-form__cart-submit"><span>장바구니 담기</span></button>                    
+                        <button type="button" name="add" class="btn rounded btn-secondary product-form__cart-submit"><span>장바구니 담기</span></button>                    
                     </form>
                 </div>
             </div>
