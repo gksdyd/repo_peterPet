@@ -27,4 +27,13 @@ public class ShopPeterController {
 		model.addAttribute("list", dtos);
 		return "peter/shop/ShopPeterList";
 	}
+	
+	@RequestMapping(value = "/ShopPeterView")
+	public String shopPeterView(@ModelAttribute("vo") ProductVo vo, Model model) {
+		ProductDto dto = productService.selectOnePoduct(vo);
+		dto.setWeightArray(dto.getWeightArr().split(","));
+		model.addAttribute("item", dto);
+		
+		return "peter/shop/ShopPeterView";
+	}
 }

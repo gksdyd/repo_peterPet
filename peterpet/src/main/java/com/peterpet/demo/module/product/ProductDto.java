@@ -16,10 +16,13 @@ public class ProductDto {
 	private Integer feedBrand;
 	private Integer feedIngredient;
 	private Integer feedSize;
+	private Integer prodPetType;
+	private Integer prodIsStock;
 	private String prodRegDate;
 	private String prodModDate;
 	private int infoCount;
 	private int funcCount;
+	private int reviewCount;
 	
 	private String infoSeq;
 	private Integer infoPrice;
@@ -42,6 +45,9 @@ public class ProductDto {
 	List<Integer> feedPriceArray = new ArrayList<>();
 	List<Double> feedWeightArray = new ArrayList<>();
 	List<Integer> feedDiscountArray = new ArrayList<>();
+	
+	private String weightArr;
+	String[] weightArray; 
 	
 	public String getProdSeq() {
 		return prodSeq;
@@ -238,5 +244,35 @@ public class ProductDto {
 	}
 	public void calculatePrice() {
 		discountPrice = infoPrice * (100 - infoDiscount) / 100;
+	}
+	public Integer getProdPetType() {
+		return prodPetType;
+	}
+	public void setProdPetType(Integer prodPetType) {
+		this.prodPetType = prodPetType;
+	}
+	public int getReviewCount() {
+		return reviewCount;
+	}
+	public void setReviewCount(int reviewCount) {
+		this.reviewCount = reviewCount;
+	}
+	public String getWeightArr() {
+		return weightArr;
+	}
+	public void setWeightArr(String weightArr) {
+		this.weightArr = weightArr;
+	}
+	public String[] getWeightArray() {
+		return weightArray;
+	}
+	public void setWeightArray(String[] weightArray) {
+		this.weightArray = weightArray;
+	}
+	public Integer getProdIsStock() {
+		return prodIsStock;
+	}
+	public void setProdIsStock(Integer prodIsStock) {
+		this.prodIsStock = prodIsStock;
 	}
 }
