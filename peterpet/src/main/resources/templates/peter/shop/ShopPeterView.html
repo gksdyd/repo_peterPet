@@ -162,7 +162,11 @@
                                 <!-- End Product Form -->
                                 <!-- Product Info -->
                                 <div class="freeShipMsg" data-price="199"><i class="icon an an-truck" aria-hidden="true"></i><b class="freeShip"><span class="money" data-currency-usd="2만원" data-currency="USD">2만원</span></b> 이상 무료 배송(배송비 2,500원)</div>
-                                <div class="shippingMsg"><i class="icon an an-clock-r" aria-hidden="true"></i>16시간 15분 54초 내 주문 시 <b id="fromDate">내일 새벽 7시</b> 전 도착(토요일 및 공휴일 제외)</div>
+                                <div class="shippingMsg"><i class="icon an an-clock-r" aria-hidden="true"></i>
+                                    <span id="day"></span>
+                                    <span id="hour" th:text="${vo.diffHour} + '시간 '"></span>
+                                    <span id="minute" th:text="${vo.diffMinute} + '분 '"></span>
+                                    <span id="second" th:text="${vo.diffSecond} + '초 '"></span>내 주문 시 <b id="fromDate">내일 새벽 7시</b> 전 도착(토요일 및 공휴일 제외)</div>
                                 <div class="userViewMsg" data-user="20" data-time="11000"><i class="icon an an-eye-r" aria-hidden="true"></i> 지금 이 상품 <strong class="uersView">21</strong>명이 보는 중</div>
                                 <div class="trustseal-img mt-4 d-none"><img src="/peter/template/optimal-html/assets/images/powerby-cards.jpg" alt="powerby cards" /></div>
                                 <!-- End Product Info -->
@@ -879,5 +883,9 @@
             <div th:replace="~{peter/include/includePeterOriginal :: includePeterOriginal}"></div>
         </div>
         <!--End Page Wrapper-->
+        <script th:inline="javascript" src="/peter/template/optimal-html/assets/js/JHY/product.js"></script>
+        <script>
+            // periordTime();
+        </script>
     </body>
 </html>

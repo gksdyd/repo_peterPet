@@ -32,6 +32,11 @@ public class BaseVo {
 	
 	private List<String> listArray = new ArrayList<>();
 	
+	private long diffDay;
+	private long diffHour;
+	private long diffMinute;
+	private long diffSecond;
+	
 	public int getThisPage() {
 		return thisPage;
 	}
@@ -159,6 +164,38 @@ public class BaseVo {
 
 	public void setListArray(List<String> listArray) {
 		this.listArray = listArray;
+	}
+
+	public long getDiffDay() {
+		return diffDay;
+	}
+
+	public void setDiffDay(long diffDay) {
+		this.diffDay = diffDay;
+	}
+
+	public long getDiffHour() {
+		return diffHour;
+	}
+
+	public void setDiffHour(long diffHour) {
+		this.diffHour = diffHour;
+	}
+
+	public long getDiffMinute() {
+		return diffMinute;
+	}
+
+	public void setDiffMinute(long diffMinute) {
+		this.diffMinute = diffMinute;
+	}
+
+	public long getDiffSecond() {
+		return diffSecond;
+	}
+
+	public void setDiffSecond(long diffSecond) {
+		this.diffSecond = diffSecond;
 	}
 
 	public void setParamsPaging(int totalRows) {
