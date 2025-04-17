@@ -86,6 +86,34 @@
         }).open();
     }
 
+    function initPostcode() {
+        var container = document.getElementById('map'),
+            options = {
+                center: new kakao.maps.LatLng(37.537187, 127.005476),
+                level: 5
+            };
+        var map = new kakao.maps.Map(container, options);
+        var marker = new kakao.maps.Marker({
+            position: new kakao.maps.LatLng(37.537187, 127.005476),
+            map: map
+        });
+
+        var geocoder = new kakao.maps.services.Geocoder();
+        var callback = function(result, status) {
+            if (status === kakao.maps.services.Status.OK) {
+                var results = result[0];
+                var coords = new kakao.maps.LatLng(results.y, results.x);
+                // 지도 관련 처리
+                map.relayout();
+                map.setCenter(coords);
+                marker.setPosition(coords);
+            }
+        };
+        setTimeout(() => {
+            geocoder.addressSearch(document.getElementById("userAddr").value, callback);
+        }, 300);
+    }
+
     $(document).ready(function(){
         $('[data-toggle="tooltip"]').tooltip();
     });

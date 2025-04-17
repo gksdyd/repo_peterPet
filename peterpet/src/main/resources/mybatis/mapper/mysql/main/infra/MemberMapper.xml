@@ -109,11 +109,11 @@
 			userRecvNotiFlag = #{userRecvNotiFlag},
 			userPostCode = #{userPostCode},
 			userAddr = #{userAddr},
-			userJibunAddr = #{userDetailAddr}
-			userDetailAddr = #{userDetailAddr}
-			userReference = #{userDetailAddr}
-			userLatitude = #{userDetailAddr}
-			userLongitude = #{userDetailAddr}
+			userJibunAddr = #{userJibunAddr},
+			userDetailAddr = #{userDetailAddr},
+			userReference = #{userReference},
+			userLatitude = #{userLatitude},
+			userLongitude = #{userLongitude}
 		WHERE
 			userSeq = #{userSeq}
 	</update>

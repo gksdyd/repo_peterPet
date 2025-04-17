@@ -27,7 +27,7 @@
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#orderstracking">Orders tracking</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#downloads">Downloads</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#address">Addresses</a></li>
-                                <li><a class="nav-link" data-bs-toggle="tab" href="#account-details">마이페이지</a></li>
+                                <li><a class="nav-link myPage" data-bs-toggle="tab" href="#account-details">마이페이지</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#pet-page">반려동물목록</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#wishlist">Wishlist</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#change-password">비밀번호 변경</a></li>
@@ -591,6 +591,11 @@
                                                         <input type="text" id="userDetailAddr" class="form-control" name="userDetailAddr" th:value="${item.userDetailAddr}" placeholder="상세주소" />
                                                     </div>
                                                 </div>
+                                                <div class="mb-3" id="map" style="width:500px;height:300px;"></div>
+                                                <input type="hidden" id="userLongitude" name="userLongitude" th:value="${item.userLongitude}">
+                                                <input type="hidden" id="userLatitude" name="userLatitude" th:value="${item.userLatitude}">
+                                                <input type="hidden" id="userReference" name="userReference" th:value="${item.userReference}">
+                                                <input type="hidden" id="userJibunAddr" name="userJibunAddr" th:value="${item.userJibunAddr}">
                                             </fieldset>
                                             <button id="userUpdateBtn" type="button" class="btn btn-primary rounded">Save</button>
                                         </form>
@@ -1270,6 +1275,10 @@
             <div th:replace="~{peter/include/includePeterRegister :: includePeterRegister}"></div>
 
             <script type="text/javascript" th:inline="javascript">
+                $(".myPage").on("click", function() {
+                    initPostcode();
+                });
+                
                 let userform = document.getElementById("userInfoForm");
                 let petform = document.getElementById("petInfoForm");
                 let passwordChangeForm = document.getElementById("formPasswordChange");
