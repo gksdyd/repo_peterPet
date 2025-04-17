@@ -118,16 +118,42 @@
                                 <div class="row">
                                     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                         <div class="form-group">
-                                            <input type="text" id="userAddr" class="form-control" name="userAddr" placeholder="주소" readonly required />
+                                            <input type="text" id="userAddr" class="form-control" name="userAddr" placeholder="도로 주소" readonly required />
                                             <div class="invalid-feedback" id="userAddrValid">주소를 입력해주세요.</div>
                                         </div>
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                         <div class="form-group">
-                                            <input type="text" id="userDetailAddr" class="form-control" name="userDetailAddr" placeholder="상세주소" required />
+                                            <input type="text" id="userJibunAddr" class="form-control" name="userJibunAddr" placeholder="지번 주소" readonly required />
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <input type="text" id="userDetailAddr" class="form-control" name="userDetailAddr" placeholder="상세주소" required />
+                                            <div class="invalid-feedback" id="userAddrValid">주소를 입력해주세요.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <input type="text" id="userReference" class="form-control" name="userReference" placeholder="참고항목" required />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <input type="text" id="userLatitude" class="form-control" name="userLatitude" placeholder="경도" readonly required />
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <input type="text" id="userLongitude" class="form-control" name="userLongitude" placeholder="위도" readonly required />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3" id="map" style="width:500px;height:300px; display: none;"></div>
                                 <h3 class="h4 text-uppercase mb-3">로그인 정보</h3>
                                 <div class="row">
                                     <div class="col-12 col-sm-12 col-md-4 col-lg-4">
@@ -257,6 +283,7 @@
             <div th:replace="~{peter/include/foot :: foot}"></div>
             <div th:replace="~{peter/include/modal :: modal}"></div>
             <div th:replace="~{peter/include/includePeterOriginal :: includePeterOriginal}"></div>
+            <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f2f7e6e53740de949bdcafe061e92431&libraries=services"></script>
             <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
             <div th:replace="~{peter/include/includePeterCommon :: includePeterCommon}"></div>
 

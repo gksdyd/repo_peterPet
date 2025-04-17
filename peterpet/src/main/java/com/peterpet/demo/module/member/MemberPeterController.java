@@ -118,16 +118,20 @@ public class MemberPeterController extends BaseController {
 	public Map<String, Object> checkPhonePeterProc(MemberDto dto, HttpSession httpSession) throws Exception {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		dto = memberService.checkPhone(dto);
-		if (dto.getUserDelFlag() == 0) {
-			returnMap.put("rt", "already");
-		} else if (dto.getUserDelFlag() == 1) {
-			if (dto.getDateDiff() <= 30) {
-				returnMap.put("rt", "periord");
+		if (dto != null) {
+			if (dto.getUserDelFlag() == 0) {
+				returnMap.put("rt", "already");
+			} else if (dto.getUserDelFlag() == 1) {
+				if (dto.getDateDiff() <= 30) {
+					returnMap.put("rt", "periord");
+				} else {
+					returnMap.put("rt", "success");
+				}
 			} else {
-				returnMap.put("rt", "sucess");
+				returnMap.put("rt", "success");
 			}
 		} else {
-			returnMap.put("rt", "sucess");
+			returnMap.put("rt", "success");
 		}
 		return returnMap;
 	}

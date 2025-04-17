@@ -34,6 +34,10 @@
 			a.userEmail,
 			a.userPhone,
 			a.userAddr,
+			a.userJibunAddr,
+			a.userReference,
+			a.userLatitude,
+			a.userLongitude,
 			a.userDetailAddr,
 			a.userRegDate,
 			a.userModDate,
@@ -67,7 +71,11 @@
 			userRecvNotiFlag,
 			userPostCode,
 			userAddr,
+			userJibunAddr,
 			userDetailAddr,
+			userReference,
+			userLatitude,
+			userLongitude,
 			userDelFlag,
 			userSavePoint,
 			userSecession,
@@ -101,7 +109,11 @@
 			userRecvNotiFlag = #{userRecvNotiFlag},
 			userPostCode = #{userPostCode},
 			userAddr = #{userAddr},
+			userJibunAddr = #{userDetailAddr}
 			userDetailAddr = #{userDetailAddr}
+			userReference = #{userDetailAddr}
+			userLatitude = #{userDetailAddr}
+			userLongitude = #{userDetailAddr}
 		WHERE
 			userSeq = #{userSeq}
 	</update>
@@ -119,7 +131,9 @@
 			userRecvNotiFlag,
 			userPostCode,
 			userAddr,
+			userJibunAddr,
 			userDetailAddr,
+			userReference,
 			userLatitude,
 			userLongitude,
 			userDelFlag,
@@ -137,9 +151,11 @@
 			#{userRecvNotiFlag},
 			#{userPostCode},
 			#{userAddr},
+			#{userJibunAddr},
 			#{userDetailAddr},
-			0,
-			0,
+			#{userReference},
+			#{userLatitude},
+			#{userLongitude},
 			0,
 			0,
 			date_format(NOW(), '%Y-%m-%d %H:%i:%S')

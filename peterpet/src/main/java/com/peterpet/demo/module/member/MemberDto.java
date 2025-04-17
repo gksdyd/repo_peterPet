@@ -14,7 +14,9 @@ public class MemberDto {
 	private int userRecvNotiFlag;	
 	private String userPostCode;	
 	private String userAddr;	
+	private String userJibunAddr;	
 	private String userDetailAddr;	
+	private String userReference;	
 	private double userLatitude;	
 	private double userLongitude;	
 	private int userDelFlag;	
@@ -172,5 +174,17 @@ public class MemberDto {
 	}
 	public void setDateDiff(Integer dateDiff) {
 		this.dateDiff = dateDiff;
+	}
+	public String getUserJibunAddr() {
+		return userJibunAddr;
+	}
+	public void setUserJibunAddr(String userJibunAddr) {
+		this.userJibunAddr = userJibunAddr;
+	}
+	public String getUserReference() {
+		return userReference;
+	}
+	public void setUserReference(String userReference) {
+		this.userReference = userReference;
 	}
 }
