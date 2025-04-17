@@ -48,7 +48,7 @@
                 </div>
                 <div class="col-4">
                   <select class="form-select-JHY" aria-label="Default select example" name="prodPetType" id="prodPetType">
-                    <option value="0" th:selected="${vo.prodPetType == 0}">강아지 유형</option>
+                    <option value="0" th:selected="${vo.prodPetType == 0}">반려동물 유형</option>
                     <option th:each="productPetType : ${@codeService.selectListCachedCode(26)}" th:text="${productPetType.codeName}" th:value="${productPetType.codeSeq}" th:selected="${vo.prodPetType} == ${productPetType.codeSeq}"></option>
                   </select>
                 </div>

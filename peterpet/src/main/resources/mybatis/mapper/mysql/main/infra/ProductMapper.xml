@@ -68,7 +68,8 @@
 			feedBrand,
 			feedIngredient,
 			feedSize,
-			prodDelFlag
+			prodDelFlag,
+			prodPetType
 		) VALUE (
 			#{prodType},
 			#{prodUseFlag},
@@ -81,7 +82,8 @@
 			#{feedBrand},
 			#{feedIngredient},
 			#{feedSize},
-			0
+			0,
+			#{prodPetType}
 		)
 		<selectKey resultType="String" keyProperty="prodSeq" order="AFTER">
 			SELECT last_insert_id()
@@ -176,6 +178,7 @@
 			prodPetType,
 			prodScore,
 			prodIsStock,
+			prodPetType,
 			b.infoDiscount,
 			b.infoPrice,
 			b.infoWeight,
@@ -224,7 +227,8 @@
 			feedEtc = #{feedEtc},
 			feedBrand = #{feedBrand},
 			feedIngredient = #{feedIngredient},
-			feedSize = #{feedSize}
+			feedSize = #{feedSize},
+			prodPetType = #{prodPetType}
 		WHERE
 			prodSeq = #{prodSeq}
 	</update>

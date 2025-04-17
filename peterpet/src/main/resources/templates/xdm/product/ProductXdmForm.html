@@ -14,9 +14,13 @@
             <div class="card-body bg-body-tertiary">
               <form class="needs-validation" novalidate id="product-form" name="product-form">
                 <input type="hidden" name="registerOrModifyFlag" id="registerOrModifyFlag" th:value="${vo.registerOrModifyFlag}">
+                <input type="hidden" name="prodPetType" id="prodPetType" th:value="${item.prodPetType}">
                 <div class="row g-3">
                   <div class="col-3">
                     <label class="form-label-JHY" for="prodType">상품 유형<span style="color: red;">*</span></label>
+                  </div>
+                  <div class="col-3">
+                    <label class="form-label-JHY" for="prodType">반려동물 유형<span style="color: red;">*</span></label>
                   </div>
                 </div>
                 <div class="mb-3 row g-3">
@@ -24,6 +28,16 @@
                     <select class="form-select-JHY" name="prodType" id="prodType" onchange="changeProductType('product-form', URL_PRODUCT_XDM_FORM)" th:disabled="${vo.registerOrModifyFlag != 1} ? 'disabled' : null">
                       <option th:each="productType : ${@codeService.selectListCachedCode(1)}" th:text="${productType.codeName}" th:value="${productType.codeSeq}" th:selected="${vo.prodType} == ${productType.codeSeq}"></option>
                     </select>
+                  </div>
+                  <div class="col-3 d-flex">
+                    <div class="form-check">
+                      <input class="form-check-input" id="dog" type="radio" name="petType" value="239" />
+                      <label class="form-check-label" for="flexRadioDefault1">강아지</label>
+                    </div>
+                    <div class="form-check ms-3">
+                      <input class="form-check-input" id="cat" type="radio" name="petType" value="240" />
+                      <label class="form-check-label" for="flexRadioDefault2">고양이</label>
+                    </div>
                   </div>
                 </div>
                 <div class="card border h-100 border-primary mb-3" th:if="${vo.prodType} == '1'">
@@ -202,6 +216,12 @@
     let feedWeightValid = document.getElementById("feedWeightValid");
     let feedDiscountValid = document.getElementById("feedDiscountValid");
 
+    if ($("#prodPetType").val() == 239) {
+      $("#dog").prop('checked', true);
+    } else if ($("#prodPetType").val() == 240) {
+      $("#cat").prop('checked', true);
+    }
+
     validationInit = function() {
       nameValid.style.display = "none";
       useFlagValid.style.display = "none";
@@ -212,6 +232,12 @@
 
     validation = function() {
       let temp;
+
+      if ($("#dog").is(":checked")) {
+        $("#prodPetType").val($("#dog").val());
+      } else if ($("#cat").is(":checked")) {
+        $("#prodPetType").val($("#cat").val());
+      }
 
       temp = allGapRemove(name.value);
       if (!checkLength(temp) || !onlyEngKoNumSpecialChar(temp)) {
