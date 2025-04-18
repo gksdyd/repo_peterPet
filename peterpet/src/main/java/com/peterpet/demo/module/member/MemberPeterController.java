@@ -27,6 +27,8 @@ public class MemberPeterController extends BaseController {
 	MemberService memberService;
 	@Autowired
 	PetService petService;
+	@Autowired
+	MailService mailService;
 	
 	@RequestMapping(value = "/LoginPeterForm")
 	public String loginPeterForm(MemberDto memberDto, Model model) {
@@ -45,7 +47,19 @@ public class MemberPeterController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/InsertPeterForm")
-	public String InsertPeterForm(MemberDto memberDto) {
+	public String InsertPeterForm(MemberDto memberDto) throws Exception {
+		Thread thread = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					mailService.sendMailWelcome(memberDto);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		thread.start();
 		memberDto.setUserPassword(encodeBcrypt(memberDto.getUserPassword(), 10));
 		memberService.insert(memberDto);
 		return "redirect:/peter/index/IndexPeterView";
