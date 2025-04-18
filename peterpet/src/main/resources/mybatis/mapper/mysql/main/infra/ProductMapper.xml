@@ -295,6 +295,15 @@
 		</foreach>
 	</delete>
 	
+	<sql id="commonFeed">
+		FROM product a
+			LEFT JOIN feedinfo b ON a.prodSeq = b.product_prodSeq AND infoMain = 1
+			LEFT JOIN func c ON a.prodSeq = c.product_prodSeq AND funcMain = 1
+		WHERE 1=1
+			AND a.prodDelFlag = 0
+			<if test="shFeedSalaryAge != null and !shFeedSalaryAge.equals('')">AND a.feedSalaryAge = #{shFeedSalaryAge}</if>
+	</sql>
+	
 	<select id="selectFeedList" resultMap="resultMapObj">
 		SELECT
 			a.prodSeq,
@@ -305,11 +314,7 @@
 			b.infoWeight,
 			b.infoDiscount,
 			c.funcName
-		FROM product a
-			LEFT JOIN feedinfo b ON a.prodSeq = b.product_prodSeq AND infoMain = 1
-			LEFT JOIN func c ON a.prodSeq = c.product_prodSeq AND funcMain = 1
-		WHERE 1=1
-			AND a.prodDelFlag = 0
+		<include refid="commonFeed"></include>
         <choose>
 			<when test="shSortBy == 1">ORDER BY a.prodRegDate DESC</when>
 			<when test="shSortBy == 2">ORDER BY (SELECT COUNT(*) FROM review WHERE a.prodSeq = product_prodSeq)</when>
@@ -317,5 +322,10 @@
 			<when test="shSortBy == 4">ORDER BY b.infoPrice * (100 - infoDiscount) / 100 DESC</when>
 		</choose>
 		limit #{rowNumToShow} offset #{startRnumForMysql}
+	</select>
+	
+	<select id="selectOneFeedCount" resultType="Integer">
+		SELECT COUNT(*)
+		<include refid="commonFeed"></include>
 	</select>
 </mapper>

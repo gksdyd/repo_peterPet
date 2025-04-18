@@ -6,13 +6,45 @@ let prodName = [];
 let infoDiscount = [];
 let infoPrice = [];
 let prodScore = [];
+let feedSalaryAge;
+
+function noEvent() { // 새로 고침 방지
+    if (event.keyCode == 116) {
+        form.action = goUrlProductList;
+        form.submit();
+        return false;
+    } else if (event.ctrlKey && (event.keyCode == 78 || event.keyCode == 82)) {
+        form.action = goUrlProductList;
+        form.submit();
+        return false;
+    }
+}
+document.onkeydown=noEvent;
 
 $("#shSortBy").on("change", function () {
+    checkBox();
+    create();
+});
+
+$("input[name=feedSalaryAge]").change(function() {
+    checkBox();
+    create();
+});
+
+checkBox = function() {
+    let temp = document.querySelectorAll("input[name=feedSalaryAge]");
+    for (let i = 0; i < temp.length; i++) {
+        if (temp[i].checked) {
+            $("#shFeedSalaryAge").val(temp[i].value);
+            feedSalaryAge = temp[i].value;
+            break;
+        }
+    }
+}
+
+create = function() {
     let createProduct = $(".productInfo");
-    console.log("선택된 요소 수:", createProduct.length);
-    console.log("비우기 전 내용:", createProduct.html());
     createProduct.empty();
-    console.log("비운 후 내용:", createProduct.html());
     getSettingValue();
     for (let i = 0; i < prodSeq.length; i++) {
         let body = document.createElement('div');
@@ -22,7 +54,7 @@ $("#shSortBy").on("change", function () {
         createProduct.append(body);
     }
     initArray();
-});
+}
 
 getSettingValue = function() {
     $.ajax({
@@ -30,8 +62,9 @@ getSettingValue = function() {
         ,cache: false
         ,type: "post"
         ,url: URL_PETER_INFO
-        ,data: { "shSortBy" : $("#shSortBy").val(), "thisPage" : $("#thisPage").val() }
+        ,data: { "shSortBy" : $("#shSortBy").val(), "thisPage" : $("#thisPage").val(), "shFeedSalaryAge" : feedSalaryAge }
         ,success: function(response) {
+            $("#productNum").text(response.vo.totalRows);
             for (let i = 0; i < response.dtos.length; i++) {
                 prodSeq.push(response.dtos[i].prodSeq);
                 funcName.push(response.dtos[i].funcName);

@@ -86,4 +86,8 @@ public class ProductService {
 	public List<ProductDto> selectFeedList(ProductVo vo) {
 		return productDao.selectFeedList(vo);
 	}
+	
+	public int selectOneFeedCount(ProductVo vo) {
+		return productDao.selectOneFeedCount(vo);
+	}
 }
