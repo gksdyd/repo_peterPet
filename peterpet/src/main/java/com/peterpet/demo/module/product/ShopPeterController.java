@@ -54,4 +54,13 @@ public class ShopPeterController extends BaseController {
 		rtMap.put("delivery", vo.getDeliveryTime());
 		return rtMap;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/ShopPeterInfoProc")
+	public Map<String, Object> shopPeterInfoProc(ProductVo vo) {
+		Map<String, Object> rtMap = new HashMap<>();
+		vo.setRowNumToShow(9);
+		rtMap.put("dtos", productService.selectFeedList(vo));
+		return rtMap;
+	}
 }

@@ -32,6 +32,7 @@ const URL_PETER_USER_DELETE_PROC = "/peter/member/UserPeterDeltProc";
 // shop관련 경로
 const URL_PETER_SHOP = "/peter/shop/ShopPeterList";
 const URL_PETER_TIME = "/peter/shop/ShopPeterTimeProc";
+const URL_PETER_INFO = "/peter/shop/ShopPeterInfoProc";
 
 // 정규식 상수
 const regex1 = /^[a-z|A-Z|0-9|]+$/;

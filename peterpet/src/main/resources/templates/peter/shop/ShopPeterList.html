@@ -176,8 +176,8 @@
 
                             <!--Product Grid-->
                             <div class="grid-products grid--view-items prd-grid">
-                                <div class="row"  th:if="${vo.prodType} == 1">
-                                    <div class="col-6 col-sm-6 col-md-4 col-lg-4 item" th:each="list : ${list}" id="productInfo">
+                                <div class="row productInfo"  th:if="${vo.prodType} == 1">
+                                    <div class="col-6 col-sm-6 col-md-4 col-lg-4 item" th:each="list : ${list}">
                                         <!--Start Product Image-->
                                         <div class="product-image">
                                             <!--Start Product Image-->
@@ -210,10 +210,10 @@
                                             <!--Product Review-->
                                             <div class="product-review d-flex align-items-center justify-content-center">
                                                 <span th:if="${list.prodScore} > 4"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i></span>
-                                                <span th:if="${list.prodScore} > 3"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i></span>
-                                                <span th:if="${list.prodScore} > 2"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
-                                                <span th:if="${list.prodScore} > 1"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
-                                                <span th:if="${list.prodScore} > 0"><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
+                                                <span th:if="${list.prodScore} > 3 and 4 >= ${list.prodScore}"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i></span>
+                                                <span th:if="${list.prodScore} > 2 and 3 >= ${list.prodScore}"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
+                                                <span th:if="${list.prodScore} > 1 and 2 >= ${list.prodScore}"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
+                                                <span th:if="${list.prodScore} > 0 and 1 >= ${list.prodScore}"><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
                                                 <span th:if="${list.prodScore} == 0"><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
                                             </div>
                                             <!--End Product Review-->
@@ -328,15 +328,15 @@
             <div th:replace="~{peter/include/includePeterOriginal :: includePeterOriginal}"></div>
         </div>
         <!--End Page Wrapper-->
-        <script>
+        <script th:inline="javascript">
             let form = document.getElementById("productPagination");
 
             let goUrlProductList = "/peter/shop/ShopPeterList";
+
+            window.href = /*[[@{/peter/shop/ShopPeterView(prodSeq=value, prodType=${vo.prodType})}]]*/ '';
+            window.func = /*[[${@codeService.selectOneCachedCode(1)}]]*/ '';
+            window.weight = /*[[${@codeService.selectOneCachedCode(1)}]]*/ '';
         </script>
         <script th:inline="javascript" src="/peter/template/optimal-html/assets/js/JHY/sort.js"></script>
-
-        <script>
-            // initProduct();
-        </script>
     </body>
 </html>
