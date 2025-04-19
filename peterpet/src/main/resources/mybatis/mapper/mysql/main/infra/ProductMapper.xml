@@ -302,6 +302,7 @@
 		WHERE 1=1
 			AND a.prodDelFlag = 0
 			<if test="shFeedSalaryAge != null and !shFeedSalaryAge.equals('')">AND a.feedSalaryAge = #{shFeedSalaryAge}</if>
+			<if test="shFeedType != null and !shFeedType.equals('')">AND a.feedType = #{shFeedType}</if>
 	</sql>
 	
 	<select id="selectFeedList" resultMap="resultMapObj">

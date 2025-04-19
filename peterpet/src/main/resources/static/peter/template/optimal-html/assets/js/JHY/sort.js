@@ -7,6 +7,7 @@ let infoDiscount = [];
 let infoPrice = [];
 let prodScore = [];
 let feedSalaryAge;
+let feedType;
 
 let start;
 let end;
@@ -37,18 +38,33 @@ $("input[name=feedSalaryAge]").change(function() {
     pagination();
 });
 
+$("input[name=feedType]").change(function() {
+    checkBox();
+    create();
+    pagination();
+});
+
 checkBox = function() {
+    let productType = document.querySelectorAll(".product-type");
     let badge = document.querySelectorAll("#searchBadge a");
-    let temp = document.querySelectorAll("input[name=feedSalaryAge]");
-    for (let i = 0; i < temp.length; i++) {
-        if (temp[i].checked) {
-            $("#shFeedSalaryAge").val(temp[i].value);
-            feedSalaryAge = temp[i].value;
-            addBadge(temp[i].value);
-        } else {
-            for (let j = 1; j < badge.length; j++) {
-                if (badge[j].getAttribute("data-value") == temp[i].value) {
-                    badge[j].parentNode.remove();
+    allRemoveBadge();
+    for (let j = 0; j < productType.length; j++) {
+        let inputType = productType[j].querySelectorAll(".form-check-input");
+        for (let i = 0; i < inputType.length; i++) {
+            if (inputType[i].checked) {
+                if (j == 0) {
+                    $("#shFeedSalaryAge").val(inputType[i].value);
+                    feedSalaryAge = inputType[i].value;
+                } else if (j == 1) {
+                    $("#shFeedType").val(inputType[i].value);
+                    feedType = inputType[i].value;
+                }
+                addBadge(inputType[i].value);
+            } else {
+                for (let k = 1; k < badge.length; k++) {
+                    if (badge[k].getAttribute("data-value") == inputType[i].value) {
+                        badge[k].parentNode.remove();
+                    }
                 }
             }
         }
@@ -75,7 +91,7 @@ getSettingValue = function() {
         ,cache: false
         ,type: "post"
         ,url: URL_PETER_INFO
-        ,data: { "shSortBy" : $("#shSortBy").val(), "thisPage" : $("#thisPage").val(), "shFeedSalaryAge" : feedSalaryAge }
+        ,data: { "shSortBy" : $("#shSortBy").val(), "thisPage" : $("#thisPage").val(), "shFeedSalaryAge" : feedSalaryAge, "shFeedType" : feedType }
         ,success: function(response) {
             $("#productNum").text(response.vo.totalRows);
 
@@ -281,13 +297,16 @@ removeBadge = function(e) {
     
     for (let i = 0; i < productType.length; i++) {
         let inputType = productType[i].querySelectorAll(".form-check-input");
-        if (i == 0) {
-            $("#shFeedSalaryAge").val(null);
-            feedSalaryAge = null;
-        }
         for (let j = 0; j < inputType.length; j++) {
             if (inputType[j].value == $(e).data("value")) {
                 inputType[j].checked = false;
+                if (i == 0) {
+                    $("#shFeedSalaryAge").val(null);
+                    feedSalaryAge = null;
+                } else if (i == 1) {
+                    $("#shFeedType").val(null);
+                    feedType = null;
+                }
                 break;
             }
         }
@@ -295,4 +314,8 @@ removeBadge = function(e) {
     $(e).parent().remove();
     create();
     pagination();
+}
+
+allRemoveBadge = function() {
+    $("#searchBadge").empty();
 }
