@@ -317,5 +317,26 @@ removeBadge = function(e) {
 }
 
 allRemoveBadge = function() {
-    $("#searchBadge").empty();
+    let badge = document.querySelectorAll("#searchBadge li");
+    for (let i = 1; i < badge.length; i++) {
+        badge[i].remove();
+    }
 }
+
+$("#clearBtn").on("click", function() {
+    allRemoveBadge();
+    let productType = document.querySelectorAll(".product-type");
+    
+    for (let i = 0; i < productType.length; i++) {
+        let inputType = productType[i].querySelectorAll(".form-check-input");
+        for (let j = 0; j < inputType.length; j++) {
+            inputType[j].checked = false;
+        }
+    }
+    $("#shFeedSalaryAge").val(null);
+    feedSalaryAge = null;
+    $("#shFeedType").val(null);
+    feedType = null;
+    create();
+    pagination();
+});
