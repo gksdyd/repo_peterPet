@@ -303,6 +303,11 @@
 			AND a.prodDelFlag = 0
 			<if test="shFeedSalaryAge != null and !shFeedSalaryAge.equals('')">AND a.feedSalaryAge = #{shFeedSalaryAge}</if>
 			<if test="shFeedType != null and !shFeedType.equals('')">AND a.feedType = #{shFeedType}</if>
+			<if test="prodFuncArray != null and prodFuncArray.size() > 0">
+	        	<foreach collection="prodFuncArray" item="func">
+	        		AND FIND_IN_SET(#{func}, (SELECT GROUP_CONCAT(funcName) FROM func WHERE a.prodSeq = product_prodSeq)) > 0
+	        	</foreach>
+	        </if>
 	</sql>
 	
 	<select id="selectFeedList" resultMap="resultMapObj">

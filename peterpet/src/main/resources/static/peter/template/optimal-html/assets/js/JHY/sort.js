@@ -8,6 +8,7 @@ let infoPrice = [];
 let prodScore = [];
 
 let badgeArray = [];
+let prodFuncArray = [];
 
 let feedSalaryAge;
 let feedType;
@@ -47,6 +48,12 @@ $("input[name=feedType]").change(function() {
     pagination();
 });
 
+$("input[name=funcName]").change(function() {
+    checkBox();
+    create();
+    pagination();
+});
+
 checkBox = function() {
     let productType = document.querySelectorAll(".product-type");
     let badge = document.querySelectorAll("#searchBadge a");
@@ -61,6 +68,10 @@ checkBox = function() {
                 } else if (j == 1) {
                     $("#shFeedType").val(inputType[i].value);
                     feedType = inputType[i].value;
+                } else if (j == 2) {
+                    if (!prodFuncArray.includes(inputType[i].value)) {
+                        prodFuncArray.push(inputType[i].value);
+                    }
                 }
                 badgeArray.push(inputType[i].value);
                 addBadge(inputType[i].value);
@@ -70,9 +81,17 @@ checkBox = function() {
                         badge[k].parentNode.remove();
                     }
                 }
+                if (prodFuncArray.includes(inputType[i].value)) {
+                    prodFuncArray.forEach(function(func, index) {
+                        if (func == inputType[i].value) {
+                            prodFuncArray.splice(index, 1);
+                        }
+                    });
+                }
             }
         }
     }
+    $("#prodFuncArray").val(prodFuncArray);
     $("#badgeArray").val(badgeArray);
 }
 
@@ -96,7 +115,8 @@ getSettingValue = function() {
         ,cache: false
         ,type: "post"
         ,url: URL_PETER_INFO
-        ,data: { "shSortBy" : $("#shSortBy").val(), "thisPage" : $("#thisPage").val(), "shFeedSalaryAge" : feedSalaryAge, "shFeedType" : feedType }
+        ,data: { "shSortBy" : $("#shSortBy").val(), "thisPage" : $("#thisPage").val(), "shFeedSalaryAge" : feedSalaryAge, "shFeedType" : feedType,
+            "prodFuncArray" : prodFuncArray }
         ,success: function(response) {
             $("#productNum").text(response.vo.totalRows);
 
@@ -299,7 +319,8 @@ addBadge = function(code) {
 
 removeBadge = function(e) {
     let productType = document.querySelectorAll(".product-type");
-    
+    let flag = false;
+
     for (let i = 0; i < productType.length; i++) {
         let inputType = productType[i].querySelectorAll(".form-check-input");
         for (let j = 0; j < inputType.length; j++) {
@@ -311,11 +332,28 @@ removeBadge = function(e) {
                 } else if (i == 1) {
                     $("#shFeedType").val(null);
                     feedType = null;
+                } else if (i == 2) {
+                    prodFuncArray.forEach(function(func ,index) {
+                        if (func == $(e).data("value")) {
+                            prodFuncArray.splice(index, 1);
+                        }
+                    });
+                    $("#prodFuncArray").val(prodFuncArray);
                 }
+                flag = true;
+                break;
+            }
+            if (flag) {
                 break;
             }
         }
     }
+    badgeArray.forEach(function(badge, index) {
+        if (badge == $(e).data("value")) {
+            badgeArray.splice(index, 1);
+        }
+    });
+    $("#badgeArray").val(badgeArray);
     $(e).parent().remove();
     create();
     pagination();
@@ -343,13 +381,17 @@ $("#clearBtn").on("click", function() {
     feedSalaryAge = null;
     $("#shFeedType").val(null);
     feedType = null;
+    prodFuncArray = [];
+    $("#prodFuncArray").val(null);
+    badgeArray = [];
+    $("#badgeArray").val(null);
     create();
     pagination();
 });
 
 initBadge = function() {
-    badgeArray = $("#badgeArray").val().replace(/\[|\]/g, "").split(',');
-
+    badgeArray = $("#badgeArray").val().replace(/\s+/g, '').replace(/\[|\]/g, "").split(',');
+    prodFuncArray = $("#prodFuncArray").val().replace(/\s+/g, '').replace(/\[|\]/g, "").split(',');
     for (let i = 0; i < badgeArray.length; i++) {
         addBadge(badgeArray[i]);
     }

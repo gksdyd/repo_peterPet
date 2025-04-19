@@ -63,6 +63,9 @@ public class ShopPeterController extends BaseController {
 		Map<String, Object> rtMap = new HashMap<>();
 		vo.setRowNumToShow(9);
 		vo.setParamsPaging(productService.selectOneFeedCount(vo));
+		if (vo.getProdFuncArray().size() > 0) {
+			vo.getProdFuncArray().remove(0);			
+		}
 		rtMap.put("vo", vo);
 		rtMap.put("dtos", productService.selectFeedList(vo));
 		return rtMap;
