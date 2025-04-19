@@ -38,13 +38,19 @@ $("input[name=feedSalaryAge]").change(function() {
 });
 
 checkBox = function() {
+    let badge = document.querySelectorAll("#searchBadge a");
     let temp = document.querySelectorAll("input[name=feedSalaryAge]");
     for (let i = 0; i < temp.length; i++) {
         if (temp[i].checked) {
             $("#shFeedSalaryAge").val(temp[i].value);
             feedSalaryAge = temp[i].value;
-            addBadge(temp[i].value - 1);
-            break;
+            addBadge(temp[i].value);
+        } else {
+            for (let j = 1; j < badge.length; j++) {
+                if (badge[j].getAttribute("data-value") == temp[i].value) {
+                    badge[j].parentNode.remove();
+                }
+            }
         }
     }
 }
@@ -142,12 +148,12 @@ initDetail = function(seq, fName, weight, brand, name, discount, price, score) {
     let text = "";
     let detailNameText = document.createElement('a');
     detailNameText.setAttribute("href", window.href.replace('value', seq));
-    text = window.cache[brand].codeName + ' ' + name;
+    text = window.cache[brand - 1].codeName + ' ' + name;
     if (weight != null) {
         text += ' ' + weight + 'kg';
     }
     if (fName != null) {
-        text += ' ' + window.cache[fName].codeName;
+        text += ' ' + window.cache[fName - 1].codeName;
     }
     detailNameText.innerHTML = text;
 
@@ -258,8 +264,9 @@ addBadge = function(code) {
     let li = document.createElement('li');
     let a = document.createElement('a');
     a.setAttribute("href", "javascript:void(0)");
-    a.setAttribute("onclick", 'removeBadge()');
-    a.innerHTML = window.cache[code].codeName;
+    a.setAttribute("onclick", 'removeBadge(this)');
+    a.setAttribute("data-value", code);
+    a.innerHTML = window.cache[code - 1].codeName;
     let i = document.createElement('i');
     i.setAttribute("class", "an an-times-l");
 
@@ -267,4 +274,25 @@ addBadge = function(code) {
     li.append(a);
 
     $("#searchBadge").append(li);
+}
+
+removeBadge = function(e) {
+    let productType = document.querySelectorAll(".product-type");
+    
+    for (let i = 0; i < productType.length; i++) {
+        let inputType = productType[i].querySelectorAll(".form-check-input");
+        if (i == 0) {
+            $("#shFeedSalaryAge").val(null);
+            feedSalaryAge = null;
+        }
+        for (let j = 0; j < inputType.length; j++) {
+            if (inputType[j].value == $(e).data("value")) {
+                inputType[j].checked = false;
+                break;
+            }
+        }
+    }
+    $(e).parent().remove();
+    create();
+    pagination();
 }
