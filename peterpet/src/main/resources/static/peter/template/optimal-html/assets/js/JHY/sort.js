@@ -43,6 +43,7 @@ checkBox = function() {
         if (temp[i].checked) {
             $("#shFeedSalaryAge").val(temp[i].value);
             feedSalaryAge = temp[i].value;
+            addBadge(temp[i].value - 1);
             break;
         }
     }
@@ -141,12 +142,12 @@ initDetail = function(seq, fName, weight, brand, name, discount, price, score) {
     let text = "";
     let detailNameText = document.createElement('a');
     detailNameText.setAttribute("href", window.href.replace('value', seq));
-    text = window.weight.replace('1', brand) + ' ' + name;
+    text = window.cache[brand].codeName + ' ' + name;
     if (weight != null) {
         text += ' ' + weight + 'kg';
     }
     if (fName != null) {
-        text += ' ' + window.func.replace('1', fName);
+        text += ' ' + window.cache[fName].codeName;
     }
     detailNameText.innerHTML = text;
 
@@ -251,4 +252,19 @@ pagination = function() {
         li.append(a);
         pagination.append(li);
     }
+}
+
+addBadge = function(code) {
+    let li = document.createElement('li');
+    let a = document.createElement('a');
+    a.setAttribute("href", "javascript:void(0)");
+    a.setAttribute("onclick", 'removeBadge()');
+    a.innerHTML = window.cache[code].codeName;
+    let i = document.createElement('i');
+    i.setAttribute("class", "an an-times-l");
+
+    a.append(i);
+    li.append(a);
+
+    $("#searchBadge").append(li);
 }

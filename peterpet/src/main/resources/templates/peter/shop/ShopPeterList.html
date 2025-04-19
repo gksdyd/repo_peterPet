@@ -136,7 +136,7 @@
                         <!--Main Content-->
                         <div class="col-12 col-sm-12 col-md-12 col-lg-9 main-col">
                             <!--Active Filters-->
-                            <ul class="active-filters d-flex flex-wrap align-items-center m-0 list-unstyled">
+                            <ul class="active-filters d-flex flex-wrap align-items-center m-0 list-unstyled" id="searchBadge">
                                 <li><a href="#">Clear all</a></li>
                                 <li><a href="#">습식사료 <i class="an an-times-l"></i></a></li>
                                 <li><a href="#">눈/눈물 <i class="an an-times-l"></i></a></li>
@@ -335,8 +335,7 @@
             let goUrlProductList = "/peter/shop/ShopPeterList";
 
             window.href = /*[[@{/peter/shop/ShopPeterView(prodSeq=value, prodType=${vo.prodType})}]]*/ '';
-            window.func = /*[[${@codeService.selectOneCachedCode(1)}]]*/ '';
-            window.weight = /*[[${@codeService.selectOneCachedCode(1)}]]*/ '';
+            window.cache = /*[[${code}]]*/ [];
         </script>
         <script th:inline="javascript" src="/peter/template/optimal-html/assets/js/JHY/sort.js"></script>
     </body>

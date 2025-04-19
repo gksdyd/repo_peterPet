@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.peterpet.demo.module.base.BaseController;
+import com.peterpet.demo.module.code.CodeDto;
 
 @Controller
 @RequestMapping(value = "/peter/shop")
@@ -30,6 +31,7 @@ public class ShopPeterController extends BaseController {
 			dtos.get(i).calculatePrice();
 		}
 		model.addAttribute("list", dtos);
+		model.addAttribute("code", CodeDto.cachedCodeArrayList);
 		return "peter/shop/ShopPeterList";
 	}
 	
