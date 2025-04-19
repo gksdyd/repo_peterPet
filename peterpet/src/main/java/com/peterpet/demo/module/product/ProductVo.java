@@ -40,6 +40,8 @@ public class ProductVo extends BaseVo{
 	private Integer gridMethod = 0;
 	private Integer shSortBy = 0;
 	
+	private List<String> badgeArray = new ArrayList<>();
+	
 	public List<String> getProdFuncArray() {
 		return prodFuncArray;
 	}
@@ -238,6 +240,14 @@ public class ProductVo extends BaseVo{
 
 	public void setProdPetType(int prodPetType) {
 		this.prodPetType = prodPetType;
+	}
+
+	public List<String> getBadgeArray() {
+		return badgeArray;
+	}
+
+	public void setBadgeArray(List<String> badgeArray) {
+		this.badgeArray = badgeArray;
 	}
 
 	public void InitProdType() {

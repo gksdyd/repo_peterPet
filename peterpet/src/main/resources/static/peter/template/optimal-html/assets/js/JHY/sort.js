@@ -6,6 +6,9 @@ let prodName = [];
 let infoDiscount = [];
 let infoPrice = [];
 let prodScore = [];
+
+let badgeArray = [];
+
 let feedSalaryAge;
 let feedType;
 
@@ -59,6 +62,7 @@ checkBox = function() {
                     $("#shFeedType").val(inputType[i].value);
                     feedType = inputType[i].value;
                 }
+                badgeArray.push(inputType[i].value);
                 addBadge(inputType[i].value);
             } else {
                 for (let k = 1; k < badge.length; k++) {
@@ -69,6 +73,7 @@ checkBox = function() {
             }
         }
     }
+    $("#badgeArray").val(badgeArray);
 }
 
 create = function() {
@@ -318,6 +323,7 @@ removeBadge = function(e) {
 
 allRemoveBadge = function() {
     let badge = document.querySelectorAll("#searchBadge li");
+    badgeArray = [];
     for (let i = 1; i < badge.length; i++) {
         badge[i].remove();
     }
@@ -340,3 +346,11 @@ $("#clearBtn").on("click", function() {
     create();
     pagination();
 });
+
+initBadge = function() {
+    badgeArray = $("#badgeArray").val().replace(/\[|\]/g, "").split(',');
+
+    for (let i = 0; i < badgeArray.length; i++) {
+        addBadge(badgeArray[i]);
+    }
+}

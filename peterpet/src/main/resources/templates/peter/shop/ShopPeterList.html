@@ -8,6 +8,7 @@
             <input type="hidden" id="gridMethod" name="gridMethod" th:value="${vo.gridMethod}"/>
             <input type="hidden" id="shFeedSalaryAge" name="shFeedSalaryAge" th:value="${vo.shFeedSalaryAge}"/>
             <input type="hidden" id="shFeedType" name="shFeedType" th:value="${vo.shFeedType}"/>
+            <input type="hidden" id="badgeArray" name="badgeArray" th:value="${vo.badgeArray}"/>
             <!--Body Container-->
             <div id="page-content">  
                 <!--Collection Banner-->
@@ -337,5 +338,9 @@
             window.cache = /*[[${code}]]*/ [];
         </script>
         <script th:inline="javascript" src="/peter/template/optimal-html/assets/js/JHY/sort.js"></script>
+
+        <script>
+            initBadge();
+        </script>
     </body>
 </html>
