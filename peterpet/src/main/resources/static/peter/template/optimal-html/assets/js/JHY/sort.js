@@ -8,6 +8,11 @@ let infoPrice = [];
 let prodScore = [];
 let feedSalaryAge;
 
+let start;
+let end;
+let page;
+let total;
+
 function noEvent() { // 새로 고침 방지
     if (event.keyCode == 116) {
         form.action = goUrlProductList;
@@ -29,6 +34,7 @@ $("#shSortBy").on("change", function () {
 $("input[name=feedSalaryAge]").change(function() {
     checkBox();
     create();
+    pagination();
 });
 
 checkBox = function() {
@@ -65,6 +71,12 @@ getSettingValue = function() {
         ,data: { "shSortBy" : $("#shSortBy").val(), "thisPage" : $("#thisPage").val(), "shFeedSalaryAge" : feedSalaryAge }
         ,success: function(response) {
             $("#productNum").text(response.vo.totalRows);
+
+            start = response.vo.startPage;
+            end = response.vo.endPage;
+            page = response.vo.thisPage;
+            total = response.vo.totalPages;
+
             for (let i = 0; i < response.dtos.length; i++) {
                 prodSeq.push(response.dtos[i].prodSeq);
                 funcName.push(response.dtos[i].funcName);
@@ -186,4 +198,57 @@ initDetail = function(seq, fName, weight, brand, name, discount, price, score) {
     detailDelivery.innerHTML += "&emsp;빠른 배송";
     detailGroup.append(detailDelivery);
     return detailGroup;
+}
+
+pagination = function() {
+    let pagination = $(".pagination > ul");
+    pagination.empty();
+
+    if (start > 1) {
+        let li = document.createElement('li');
+        li.setAttribute("class", "prev page-item");
+
+        let a = document.createElement('a');
+        a.setAttribute("href", "javascript:void(0)");
+        a.setAttribute("onclick", `goList(${start - 1})`);
+
+        let i = document.createElement('i');
+        i.setAttribute("class", "icon align-middle an an-caret-left");
+        i.setAttribute("aria-hidden", "true")
+        
+        a.append(i);
+        li.append(a);
+        pagination.append(li);
+    }
+
+    for (let i = start; i <= end; i++) {
+        let li = document.createElement('li');
+        li.setAttribute("class", "page-item");
+        if (i === page) li.classList.add("active");
+
+        let a = document.createElement('a');
+        a.setAttribute("href", "javascript:void(0)");
+        a.setAttribute("onclick", `goList(${i})`);
+        a.innerHTML = i;
+        
+        li.append(a);
+        pagination.append(li);
+    }
+
+    if (end < total) {
+        let li = document.createElement('li');
+        li.setAttribute("class", "next page-item");
+
+        let a = document.createElement('a');
+        a.setAttribute("href", "javascript:void(0)");
+        a.setAttribute("onclick", `goList(${end + 1})`);
+
+        let i = document.createElement('i');
+        i.setAttribute("class", "icon align-middle an an-caret-right");
+        i.setAttribute("aria-hidden", "true")
+        
+        a.append(i);
+        li.append(a);
+        pagination.append(li);
+    }
 }
