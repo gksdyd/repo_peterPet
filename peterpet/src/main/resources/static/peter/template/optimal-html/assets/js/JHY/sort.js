@@ -13,6 +13,7 @@ let prodFuncArray = [];
 let feedSalaryAge;
 let feedType;
 let feedEtc;
+let feedWeight;
 
 let start;
 let end;
@@ -64,6 +65,9 @@ checkBox = function() {
                 } else if (j == 3) {
                     $("#shFeedEtc").val(inputType[i].value);
                     feedEtc = inputType[i].value;
+                } else if (j == 4) {
+                    $("#shFeedWeight").val(inputType[i].value);
+                    feedWeight = inputType[i].value;
                 }
                 badgeArray.push(inputType[i].value);
                 addBadge(inputType[i].value);
@@ -108,7 +112,7 @@ getSettingValue = function() {
         ,type: "post"
         ,url: URL_PETER_INFO
         ,data: { "shSortBy" : $("#shSortBy").val(), "thisPage" : $("#thisPage").val(), "shFeedSalaryAge" : feedSalaryAge, "shFeedType" : feedType,
-            "prodFuncArray" : prodFuncArray, "shFeedEtc" : feedEtc }
+            "prodFuncArray" : prodFuncArray, "shFeedEtc" : feedEtc, "shFeedWeight" : feedWeight }
         ,success: function(response) {
             $("#productNum").text(response.vo.totalRows);
 
@@ -334,6 +338,9 @@ removeBadge = function(e) {
                 } else if (i == 3) {
                     $("#shFeedEtc").val(null);
                     feedEtc = null;
+                } else if (i == 4) {
+                    $("#shFeedWeight").val(null);
+                    feedWeight = null;
                 }
                 flag = true;
                 break;
@@ -382,6 +389,8 @@ $("#clearBtn").on("click", function() {
     $("#badgeArray").val(null);
     $("#shFeedEtc").val(null);
     feedEtc = null;
+    $("#shFeedWeight").val(null);
+    feedWeight = null;
     create();
     pagination();
 });

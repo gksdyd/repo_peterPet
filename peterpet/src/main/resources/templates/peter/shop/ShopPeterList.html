@@ -30,6 +30,7 @@
                                 <input type="hidden" id="shFeedSalaryAge" name="shFeedSalaryAge" th:value="${vo.shFeedSalaryAge}"/>
                                 <input type="hidden" id="shFeedType" name="shFeedType" th:value="${vo.shFeedType}"/>
                                 <input type="hidden" id="shFeedEtc" name="shFeedEtc" th:value="${vo.shFeedEtc}"/>
+                                <input type="hidden" id="shFeedWeight" name="shFeedWeight" th:value="${vo.shFeedWeight}"/>
                                 <input type="hidden" id="prodFuncArray" name="prodFuncArray" th:value="${vo.prodFuncArray}"/>
                                 <!--Price Filter-->
                                 <div class="sidebar_widget filterBox filter-widget">
@@ -94,8 +95,8 @@
                                     <div class="widget-title"><h2 class="mb-0">중량</h2></div>
                                     <div class="filterDD row ms-auto">
                                         <div class="form-check col-6" th:each="weight : ${@codeService.selectListCachedCode(5)}">
-                                            <input class="form-check-input" type="checkbox" id="infoWeight" name="infoWeight" th:value="${weight.codeSeq}">
-                                            <label class="form-check-label" for="infoWeight" th:text="${weight.codeName}"></label>
+                                            <input class="form-check-input" type="radio" th:id="feedWeight + ${weight.codeSeq}" name="feedWeight" th:value="${weight.codeSeq}" th:checked="${weight.codeSeq} == ${vo.shFeedWeight}">
+                                            <label class="form-check-label" th:for="feedWeight + ${weight.codeSeq}" th:text="${weight.codeName}"></label>
                                         </div>
                                     </div>
                                 </div>

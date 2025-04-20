@@ -309,6 +309,14 @@
 	        	</foreach>
 	        </if>
 	        <if test="shFeedEtc != null and !shFeedEtc.equals('')">AND a.feedEtc = #{shFeedEtc}</if>
+	        <choose>
+				<when test="shFeedWeight == 14">AND NOT EXISTS (SELECT 1 FROM feedinfo WHERE a.prodSeq = product_prodSeq AND infoWeight >= 1)</when>
+				<when test="shFeedWeight == 15">AND NOT EXISTS (SELECT 1 FROM feedinfo WHERE a.prodSeq = product_prodSeq AND infoWeight NOT BETWEEN 1 AND 2)</when>
+				<when test="shFeedWeight == 16">AND NOT EXISTS (SELECT 1 FROM feedinfo WHERE a.prodSeq = product_prodSeq AND infoWeight NOT BETWEEN 2 AND 5)</when>
+				<when test="shFeedWeight == 17">AND NOT EXISTS (SELECT 1 FROM feedinfo WHERE a.prodSeq = product_prodSeq AND infoWeight NOT BETWEEN 5 AND 10)</when>
+				<when test="shFeedWeight == 18">AND NOT EXISTS (SELECT 1 FROM feedinfo WHERE a.prodSeq = product_prodSeq AND infoWeight NOT BETWEEN 10 AND 15)</when>
+				<when test="shFeedWeight == 19">AND NOT EXISTS (SELECT 1 FROM feedinfo WHERE a.prodSeq = product_prodSeq AND infoWeight &lt; 15)</when>
+			</choose>
 	</sql>
 	
 	<select id="selectFeedList" resultMap="resultMapObj">

@@ -39,6 +39,7 @@ public class ProductVo extends BaseVo{
 	
 	private Integer gridMethod = 0;
 	private Integer shSortBy = 0;
+	private Integer shFeedWeight;
 	
 	private List<String> badgeArray = new ArrayList<>();
 	
@@ -248,6 +249,14 @@ public class ProductVo extends BaseVo{
 
 	public void setBadgeArray(List<String> badgeArray) {
 		this.badgeArray = badgeArray;
+	}
+
+	public Integer getShFeedWeight() {
+		return shFeedWeight;
+	}
+
+	public void setShFeedWeight(Integer shFeedWeight) {
+		this.shFeedWeight = shFeedWeight;
 	}
 
 	public void InitProdType() {
