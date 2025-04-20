@@ -934,7 +934,7 @@
     /*-----------------------------------
      11. Price Range Slider
      -------------------------------------*/
-    function price_slider() {
+    window.price_slider = function() {
         let min;
         let max;
         if ($("#shMinPrice").val() === "") {

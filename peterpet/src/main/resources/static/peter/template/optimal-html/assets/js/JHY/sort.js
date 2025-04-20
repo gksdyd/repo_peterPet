@@ -448,6 +448,11 @@ $("#clearBtn").on("click", function() {
     $("#shIngredientArray").val(null);
     $("#shFeedSize").val(null);
     feedSize = null;
+
+    $("#shMinPrice").val("");
+    $("#shMaxPrice").val("");
+    $("#amount").val("￦" + "0" + " - ￦" + "400,000");
+    price_slider();
     create();
     pagination();
 });
