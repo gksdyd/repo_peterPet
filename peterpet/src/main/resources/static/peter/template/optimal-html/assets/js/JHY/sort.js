@@ -146,7 +146,7 @@ getSettingValue = function() {
         ,url: URL_PETER_INFO
         ,data: { "shSortBy" : $("#shSortBy").val(), "thisPage" : $("#thisPage").val(), "shFeedSalaryAge" : feedSalaryAge, "shFeedType" : feedType,
             "prodFuncArray" : prodFuncArray, "shFeedEtc" : feedEtc, "shFeedWeight" : feedWeight, "feedBrandArray" : feedBrandArray,
-            "shIngredientArray" : shIngredientArray, "shFeedSize" : feedSize }
+            "shIngredientArray" : shIngredientArray, "shFeedSize" : feedSize, "shMinPrice" : $("#shMinPrice").val(), "shMaxPrice" : $("#shMaxPrice").val() }
         ,success: function(response) {
             $("#productNum").text(response.vo.totalRows);
 

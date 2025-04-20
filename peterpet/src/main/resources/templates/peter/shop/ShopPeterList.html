@@ -32,6 +32,8 @@
                                 <input type="hidden" id="shFeedEtc" name="shFeedEtc" th:value="${vo.shFeedEtc}"/>
                                 <input type="hidden" id="shFeedWeight" name="shFeedWeight" th:value="${vo.shFeedWeight}"/>
                                 <input type="hidden" id="shFeedSize" name="shFeedSize" th:value="${vo.shFeedSize}"/>
+                                <input type="hidden" id="shMinPrice" name="shMinPrice" th:value="${vo.shMinPrice}"/>
+                                <input type="hidden" id="shMaxPrice" name="shMaxPrice" th:value="${vo.shMaxPrice}"/>
                                 <input type="hidden" id="prodFuncArray" name="prodFuncArray" th:value="${vo.prodFuncArray}"/>
                                 <input type="hidden" id="feedBrandArray" name="feedBrandArray" th:value="${vo.feedBrandArray}"/>
                                 <input type="hidden" id="shIngredientArray" name="shIngredientArray" th:value="${vo.shIngredientArray}"/>
@@ -39,14 +41,7 @@
                                 <div class="sidebar_widget filterBox filter-widget">
                                     <div class="widget-title"><h2 class="mb-0">Price</h2></div>
                                     <div id="slider-range" class="mt-2"></div>
-                                    <div class="row">
-                                        <div class="col-sm-12 col-lg-6 mb-2">
-                                            <p class="no-margin"><input id="amount" type="text"></p>
-                                        </div>
-                                        <div class="col-sm-12 col-lg-6 text-right margin-25px-top">
-                                            <button class="btn btn--small rounded">filter</button>
-                                        </div>
-                                    </div>
+                                    <p class="no-margin"><input id="amount" type="text" readonly></p>
                                 </div>
                                 <!--End Price Filter-->
                                 <!--age type-->

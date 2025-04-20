@@ -40,6 +40,8 @@ public class ProductVo extends BaseVo{
 	private Integer gridMethod = 0;
 	private Integer shSortBy = 0;
 	private Integer shFeedWeight;
+	private Integer shMinPrice;
+	private Integer shMaxPrice;
 	List<String> feedBrandArray = new ArrayList<>();
 	List<String> shIngredientArray = new ArrayList<>();
 	
@@ -275,6 +277,22 @@ public class ProductVo extends BaseVo{
 
 	public void setShIngredientArray(List<String> shIngredientArray) {
 		this.shIngredientArray = shIngredientArray;
+	}
+
+	public Integer getShMinPrice() {
+		return shMinPrice;
+	}
+
+	public void setShMinPrice(Integer shMinPrice) {
+		this.shMinPrice = shMinPrice;
+	}
+
+	public Integer getShMaxPrice() {
+		return shMaxPrice;
+	}
+
+	public void setShMaxPrice(Integer shMaxPrice) {
+		this.shMaxPrice = shMaxPrice;
 	}
 
 	public void InitProdType() {

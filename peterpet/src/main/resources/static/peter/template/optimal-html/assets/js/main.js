@@ -942,10 +942,29 @@
             values: [0, 400000],
             slide: function (event, ui) {
                 $("#amount").val("￦" + ui.values[0] + " - ￦" + ui.values[1]);
+            },
+            change: function(event, ui) {
+                // 값을 놓았을 때 (변경이 완료되었을 때) 호출됨
+                let temp = $("#amount").val().replace(/￦/g, "").replace(/\s+/g, '').split("-");
+                $("#shMinPrice").val(parseInt(temp[0]));
+                $("#shMaxPrice").val(parseInt(temp[1]));
+                create();
+                pagination();
             }
         });
-        $("#amount").val("￦" + $("#slider-range").slider("values", 0) +
-                " - ￦" + $("#slider-range").slider("values", 1));
+        let temp = "￦";
+        if ($("#shMinPrice").val() === "") {
+            temp += $("#slider-range").slider("values", 0);
+        } else {
+            temp += $("#shMinPrice").val();
+        }
+        temp += " - ￦";
+        if ($("#shMaxPrice").val() === "") {
+            temp += $("#slider-range").slider("values", 1);
+        } else {
+            temp += $("#shMaxPrice").val();
+        }
+        $("#amount").val(temp);
     }
     price_slider();
 
