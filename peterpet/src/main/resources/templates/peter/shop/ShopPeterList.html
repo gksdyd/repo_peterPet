@@ -32,6 +32,7 @@
                                 <input type="hidden" id="shFeedEtc" name="shFeedEtc" th:value="${vo.shFeedEtc}"/>
                                 <input type="hidden" id="shFeedWeight" name="shFeedWeight" th:value="${vo.shFeedWeight}"/>
                                 <input type="hidden" id="prodFuncArray" name="prodFuncArray" th:value="${vo.prodFuncArray}"/>
+                                <input type="hidden" id="feedBrandArray" name="feedBrandArray" th:value="${vo.feedBrandArray}"/>
                                 <!--Price Filter-->
                                 <div class="sidebar_widget filterBox filter-widget">
                                     <div class="widget-title"><h2 class="mb-0">Price</h2></div>
@@ -106,8 +107,8 @@
                                     <div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
                                     <div class="filterDD row ms-auto">
                                         <div class="form-check col-6" th:each="brand : ${@codeService.selectListCachedCode(7)}">
-                                            <input class="form-check-input" type="checkbox" id="feedBrand" name="feedBrand" th:value="${brand.codeSeq}">
-                                            <label class="form-check-label" for="feedBrand" th:text="${brand.codeName}"></label>
+                                            <input class="form-check-input" type="checkbox" th:id="feedBrand + ${brand.codeSeq}" name="feedBrand" th:value="${brand.codeSeq}" th:checked="${vo.feedBrandArray.contains(brand.codeSeq)}">
+                                            <label class="form-check-label" th:for="feedBrand + ${brand.codeSeq}" th:text="${brand.codeName}"></label>
                                         </div>
                                     </div>
                                 </div>

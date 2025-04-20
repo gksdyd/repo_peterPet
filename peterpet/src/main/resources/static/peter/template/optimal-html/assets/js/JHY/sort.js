@@ -9,6 +9,7 @@ let prodScore = [];
 
 let badgeArray = [];
 let prodFuncArray = [];
+let feedBrandArray = [];
 
 let feedSalaryAge;
 let feedType;
@@ -68,6 +69,10 @@ checkBox = function() {
                 } else if (j == 4) {
                     $("#shFeedWeight").val(inputType[i].value);
                     feedWeight = inputType[i].value;
+                } else if (j == 5) {
+                    if (!feedBrandArray.includes(inputType[i].value)) {
+                        feedBrandArray.push(inputType[i].value);
+                    }
                 }
                 badgeArray.push(inputType[i].value);
                 addBadge(inputType[i].value);
@@ -77,6 +82,7 @@ checkBox = function() {
                         badge[k].parentNode.remove();
                     }
                 }
+
                 if (prodFuncArray.includes(inputType[i].value)) {
                     prodFuncArray.forEach(function(func, index) {
                         if (func == inputType[i].value) {
@@ -84,10 +90,19 @@ checkBox = function() {
                         }
                     });
                 }
+
+                if (feedBrandArray.includes(inputType[i].value)) {
+                    feedBrandArray.forEach(function(brand, index) {
+                        if (brand == inputType[i].value) {
+                            feedBrandArray.splice(index, 1);
+                        }
+                    });
+                }
             }
         }
     }
     $("#prodFuncArray").val(prodFuncArray);
+    $("#feedBrandArray").val(feedBrandArray);
     $("#badgeArray").val(badgeArray);
 }
 
@@ -112,7 +127,7 @@ getSettingValue = function() {
         ,type: "post"
         ,url: URL_PETER_INFO
         ,data: { "shSortBy" : $("#shSortBy").val(), "thisPage" : $("#thisPage").val(), "shFeedSalaryAge" : feedSalaryAge, "shFeedType" : feedType,
-            "prodFuncArray" : prodFuncArray, "shFeedEtc" : feedEtc, "shFeedWeight" : feedWeight }
+            "prodFuncArray" : prodFuncArray, "shFeedEtc" : feedEtc, "shFeedWeight" : feedWeight, "feedBrandArray" : feedBrandArray }
         ,success: function(response) {
             $("#productNum").text(response.vo.totalRows);
 
@@ -341,6 +356,13 @@ removeBadge = function(e) {
                 } else if (i == 4) {
                     $("#shFeedWeight").val(null);
                     feedWeight = null;
+                } else if (i == 5) {
+                    feedBrandArray.forEach(function(brand ,index) {
+                        if (brand == $(e).data("value")) {
+                            feedBrandArray.splice(index, 1);
+                        }
+                    });
+                    $("#feedBrandArray").val(feedBrandArray);
                 }
                 flag = true;
                 break;
@@ -391,6 +413,8 @@ $("#clearBtn").on("click", function() {
     feedEtc = null;
     $("#shFeedWeight").val(null);
     feedWeight = null;
+    feedBrandArray = [];
+    $("#feedBrandArray").val(null);
     create();
     pagination();
 });
@@ -398,6 +422,7 @@ $("#clearBtn").on("click", function() {
 initBadge = function() {
     badgeArray = $("#badgeArray").val().replace(/\s+/g, '').replace(/\[|\]/g, "").split(',');
     prodFuncArray = $("#prodFuncArray").val().replace(/\s+/g, '').replace(/\[|\]/g, "").split(',');
+    feedBrandArray = $("#feedBrandArray").val().replace(/\s+/g, '').replace(/\[|\]/g, "").split(',');
     for (let i = 0; i < badgeArray.length; i++) {
         addBadge(badgeArray[i]);
     }

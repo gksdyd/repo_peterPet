@@ -317,6 +317,12 @@
 				<when test="shFeedWeight == 18">AND NOT EXISTS (SELECT 1 FROM feedinfo WHERE a.prodSeq = product_prodSeq AND infoWeight NOT BETWEEN 10 AND 15)</when>
 				<when test="shFeedWeight == 19">AND NOT EXISTS (SELECT 1 FROM feedinfo WHERE a.prodSeq = product_prodSeq AND infoWeight &lt; 15)</when>
 			</choose>
+			<if test="feedBrandArray != null and feedBrandArray.size() > 0">
+				AND a.feedBrand IN
+				<foreach collection="feedBrandArray" item="item" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+	        </if>
 	</sql>
 	
 	<select id="selectFeedList" resultMap="resultMapObj">
