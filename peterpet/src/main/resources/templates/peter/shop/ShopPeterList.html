@@ -6,9 +6,6 @@
             <input type="hidden" id="prodType" name="prodType" th:value="${vo.prodType}">
             <input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>
             <input type="hidden" id="gridMethod" name="gridMethod" th:value="${vo.gridMethod}"/>
-            <input type="hidden" id="shFeedSalaryAge" name="shFeedSalaryAge" th:value="${vo.shFeedSalaryAge}"/>
-            <input type="hidden" id="shFeedType" name="shFeedType" th:value="${vo.shFeedType}"/>
-            <input type="hidden" id="prodFuncArray" name="prodFuncArray" th:value="${vo.prodFuncArray}"/>
             <input type="hidden" id="badgeArray" name="badgeArray" th:value="${vo.badgeArray}"/>
             <!--Body Container-->
             <div id="page-content">  
@@ -30,6 +27,10 @@
                         <div class="col-12 col-sm-12 col-md-12 col-lg-3 sidebar filterbar">
                             <div class="closeFilter d-block d-lg-none"><i class="icon icon an an-times-r"></i></div>
                             <div class="sidebar_tags" th:if="${vo.prodType} == 1">
+                                <input type="hidden" id="shFeedSalaryAge" name="shFeedSalaryAge" th:value="${vo.shFeedSalaryAge}"/>
+                                <input type="hidden" id="shFeedType" name="shFeedType" th:value="${vo.shFeedType}"/>
+                                <input type="hidden" id="shFeedEtc" name="shFeedEtc" th:value="${vo.shFeedEtc}"/>
+                                <input type="hidden" id="prodFuncArray" name="prodFuncArray" th:value="${vo.prodFuncArray}"/>
                                 <!--Price Filter-->
                                 <div class="sidebar_widget filterBox filter-widget">
                                     <div class="widget-title"><h2 class="mb-0">Price</h2></div>
@@ -82,8 +83,8 @@
                                     <div class="widget-title"><h2 class="mb-0">기타</h2></div>
                                     <div class="filterDD row ms-auto">
                                         <div class="form-check col-6" th:each="etc : ${@codeService.selectListCachedCode(4)}">
-                                            <input class="form-check-input" type="checkbox" id="feedEtc" name="feedEtc" th:value="${etc.codeSeq}">
-                                            <label class="form-check-label" for="feedEtc" th:text="${etc.codeName}"></label>
+                                            <input class="form-check-input" type="radio" th:id="feedEtc + ${etc.codeSeq}" name="feedEtc" th:value="${etc.codeSeq}" th:checked="${etc.codeSeq} == ${vo.shFeedEtc}">
+                                            <label class="form-check-label" th:for="feedEtc + ${etc.codeSeq}" th:text="${etc.codeName}"></label>
                                         </div>
                                     </div>
                                 </div>

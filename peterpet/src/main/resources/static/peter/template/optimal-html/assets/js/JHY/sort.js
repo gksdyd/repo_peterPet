@@ -12,6 +12,7 @@ let prodFuncArray = [];
 
 let feedSalaryAge;
 let feedType;
+let feedEtc;
 
 let start;
 let end;
@@ -36,19 +37,7 @@ $("#shSortBy").on("change", function () {
     create();
 });
 
-$("input[name=feedSalaryAge]").change(function() {
-    checkBox();
-    create();
-    pagination();
-});
-
-$("input[name=feedType]").change(function() {
-    checkBox();
-    create();
-    pagination();
-});
-
-$("input[name=funcName]").change(function() {
+$(".form-check-input").change(function() {
     checkBox();
     create();
     pagination();
@@ -72,6 +61,9 @@ checkBox = function() {
                     if (!prodFuncArray.includes(inputType[i].value)) {
                         prodFuncArray.push(inputType[i].value);
                     }
+                } else if (j == 3) {
+                    $("#shFeedEtc").val(inputType[i].value);
+                    feedEtc = inputType[i].value;
                 }
                 badgeArray.push(inputType[i].value);
                 addBadge(inputType[i].value);
@@ -116,7 +108,7 @@ getSettingValue = function() {
         ,type: "post"
         ,url: URL_PETER_INFO
         ,data: { "shSortBy" : $("#shSortBy").val(), "thisPage" : $("#thisPage").val(), "shFeedSalaryAge" : feedSalaryAge, "shFeedType" : feedType,
-            "prodFuncArray" : prodFuncArray }
+            "prodFuncArray" : prodFuncArray, "shFeedEtc" : feedEtc }
         ,success: function(response) {
             $("#productNum").text(response.vo.totalRows);
 
@@ -339,6 +331,9 @@ removeBadge = function(e) {
                         }
                     });
                     $("#prodFuncArray").val(prodFuncArray);
+                } else if (i == 3) {
+                    $("#shFeedEtc").val(null);
+                    feedEtc = null;
                 }
                 flag = true;
                 break;
@@ -385,6 +380,8 @@ $("#clearBtn").on("click", function() {
     $("#prodFuncArray").val(null);
     badgeArray = [];
     $("#badgeArray").val(null);
+    $("#shFeedEtc").val(null);
+    feedEtc = null;
     create();
     pagination();
 });

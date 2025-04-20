@@ -308,6 +308,7 @@
 	        		AND FIND_IN_SET(#{func}, (SELECT GROUP_CONCAT(funcName) FROM func WHERE a.prodSeq = product_prodSeq)) > 0
 	        	</foreach>
 	        </if>
+	        <if test="shFeedEtc != null and !shFeedEtc.equals('')">AND a.feedEtc = #{shFeedEtc}</if>
 	</sql>
 	
 	<select id="selectFeedList" resultMap="resultMapObj">
