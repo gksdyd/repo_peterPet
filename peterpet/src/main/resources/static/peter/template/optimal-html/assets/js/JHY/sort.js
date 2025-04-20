@@ -464,4 +464,8 @@ initBadge = function() {
     for (let i = 0; i < badgeArray.length; i++) {
         addBadge(badgeArray[i]);
     }
+
+    let temp = $("#amount").val().replace(/￦|,/g, "").replace(/\s+/g, '').split("-");
+    $("#shMinPrice").val(parseInt(temp[0]));
+    $("#shMaxPrice").val(parseInt(temp[1]));
 }

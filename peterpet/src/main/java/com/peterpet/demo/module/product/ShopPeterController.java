@@ -29,7 +29,7 @@ public class ShopPeterController extends BaseController {
 				vo.getProdFuncArray().remove(0);				
 			}
 		}
-		vo.setParamsPaging(productService.selectOneCount(vo));
+		vo.setParamsPaging(productService.selectOneFeedCount(vo));
 		List<ProductDto> dtos = productService.selectFeedList(vo);
 		
 		for (int i = 0; i < dtos.size(); i++) {
