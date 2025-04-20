@@ -41,6 +41,7 @@ public class ProductVo extends BaseVo{
 	private Integer shSortBy = 0;
 	private Integer shFeedWeight;
 	List<String> feedBrandArray = new ArrayList<>();
+	List<String> shIngredientArray = new ArrayList<>();
 	
 	private List<String> badgeArray = new ArrayList<>();
 	
@@ -266,6 +267,14 @@ public class ProductVo extends BaseVo{
 
 	public void setFeedBrandArray(List<String> feedBrandArray) {
 		this.feedBrandArray = feedBrandArray;
+	}
+
+	public List<String> getShIngredientArray() {
+		return shIngredientArray;
+	}
+
+	public void setShIngredientArray(List<String> shIngredientArray) {
+		this.shIngredientArray = shIngredientArray;
 	}
 
 	public void InitProdType() {

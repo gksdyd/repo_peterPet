@@ -10,6 +10,7 @@ let prodScore = [];
 let badgeArray = [];
 let prodFuncArray = [];
 let feedBrandArray = [];
+let shIngredientArray = [];
 
 let feedSalaryAge;
 let feedType;
@@ -73,6 +74,10 @@ checkBox = function() {
                     if (!feedBrandArray.includes(inputType[i].value)) {
                         feedBrandArray.push(inputType[i].value);
                     }
+                } else if (j == 6) {
+                    if (!shIngredientArray.includes(inputType[i].value)) {
+                        shIngredientArray.push(inputType[i].value);
+                    }
                 }
                 badgeArray.push(inputType[i].value);
                 addBadge(inputType[i].value);
@@ -98,11 +103,20 @@ checkBox = function() {
                         }
                     });
                 }
+
+                if (shIngredientArray.includes(inputType[i].value)) {
+                    shIngredientArray.forEach(function(ingredient, index) {
+                        if (ingredient == inputType[i].value) {
+                            shIngredientArray.splice(index, 1);
+                        }
+                    });
+                }
             }
         }
     }
     $("#prodFuncArray").val(prodFuncArray);
     $("#feedBrandArray").val(feedBrandArray);
+    $("#shIngredientArray").val(shIngredientArray);
     $("#badgeArray").val(badgeArray);
 }
 
@@ -127,7 +141,8 @@ getSettingValue = function() {
         ,type: "post"
         ,url: URL_PETER_INFO
         ,data: { "shSortBy" : $("#shSortBy").val(), "thisPage" : $("#thisPage").val(), "shFeedSalaryAge" : feedSalaryAge, "shFeedType" : feedType,
-            "prodFuncArray" : prodFuncArray, "shFeedEtc" : feedEtc, "shFeedWeight" : feedWeight, "feedBrandArray" : feedBrandArray }
+            "prodFuncArray" : prodFuncArray, "shFeedEtc" : feedEtc, "shFeedWeight" : feedWeight, "feedBrandArray" : feedBrandArray,
+            "shIngredientArray" : shIngredientArray }
         ,success: function(response) {
             $("#productNum").text(response.vo.totalRows);
 
@@ -363,6 +378,13 @@ removeBadge = function(e) {
                         }
                     });
                     $("#feedBrandArray").val(feedBrandArray);
+                } else if (i == 6) {
+                    shIngredientArray.forEach(function(ingredient ,index) {
+                        if (ingredient == $(e).data("value")) {
+                            shIngredientArray.splice(index, 1);
+                        }
+                    });
+                    $("#shIngredientArray").val(shIngredientArray);
                 }
                 flag = true;
                 break;
@@ -415,14 +437,21 @@ $("#clearBtn").on("click", function() {
     feedWeight = null;
     feedBrandArray = [];
     $("#feedBrandArray").val(null);
+    shIngredientArray = [];
+    $("#shIngredientArray").val(null);
     create();
     pagination();
 });
 
 initBadge = function() {
-    badgeArray = $("#badgeArray").val().replace(/\s+/g, '').replace(/\[|\]/g, "").split(',');
-    prodFuncArray = $("#prodFuncArray").val().replace(/\s+/g, '').replace(/\[|\]/g, "").split(',');
-    feedBrandArray = $("#feedBrandArray").val().replace(/\s+/g, '').replace(/\[|\]/g, "").split(',');
+    badgeArray = $("#badgeArray").val().replace(/\[|\]/g, "").replace(/\s+/g, '').split(',');
+    $("#badgeArray").val(badgeArray);
+    prodFuncArray = $("#prodFuncArray").val().replace(/\[|\]/g, "").replace(/\s+/g, '').split(',');
+    $("#prodFuncArray").val(prodFuncArray);
+    feedBrandArray = $("#feedBrandArray").val().replace(/\[|\]/g, "").replace(/\s+/g, '').split(',');
+    $("#feedBrandArray").val(feedBrandArray);
+    shIngredientArray = $("#shIngredientArray").val().replace(/\[|\]/g, "").replace(/\s+/g, '').split(',');
+    $("#shIngredientArray").val(shIngredientArray);
     for (let i = 0; i < badgeArray.length; i++) {
         addBadge(badgeArray[i]);
     }

@@ -24,6 +24,11 @@ public class ShopPeterController extends BaseController {
 	@RequestMapping(value = "/ShopPeterList")
 	public String shopPeterList(@ModelAttribute("vo") ProductVo vo, Model model) {
 		vo.setRowNumToShow(9);
+		if (vo.getProdFuncArray().size() > 0) {
+			if (vo.getProdFuncArray().get(0).equals("")) {
+				vo.getProdFuncArray().remove(0);				
+			}
+		}
 		vo.setParamsPaging(productService.selectOneCount(vo));
 		List<ProductDto> dtos = productService.selectFeedList(vo);
 		
@@ -62,12 +67,12 @@ public class ShopPeterController extends BaseController {
 	public Map<String, Object> shopPeterInfoProc(ProductVo vo) {
 		Map<String, Object> rtMap = new HashMap<>();
 		vo.setRowNumToShow(9);
-		vo.setParamsPaging(productService.selectOneFeedCount(vo));
 		if (vo.getProdFuncArray().size() > 0) {
 			if (vo.getProdFuncArray().get(0).equals("")) {
 				vo.getProdFuncArray().remove(0);				
 			}
 		}
+		vo.setParamsPaging(productService.selectOneFeedCount(vo));
 		rtMap.put("vo", vo);
 		rtMap.put("dtos", productService.selectFeedList(vo));
 		return rtMap;

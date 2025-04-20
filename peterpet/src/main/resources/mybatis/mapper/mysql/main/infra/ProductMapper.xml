@@ -323,6 +323,12 @@
 					#{item}
 				</foreach>
 	        </if>
+	        <if test="shIngredientArray != null and shIngredientArray.size() > 0">
+				AND a.feedIngredient IN
+				<foreach collection="shIngredientArray" item="item" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+	        </if>
 	</sql>
 	
 	<select id="selectFeedList" resultMap="resultMapObj">
