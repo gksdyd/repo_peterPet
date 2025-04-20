@@ -935,17 +935,29 @@
      11. Price Range Slider
      -------------------------------------*/
     function price_slider() {
+        let min;
+        let max;
+        if ($("#shMinPrice").val() === "") {
+            min = 0;
+        } else {
+            min = Number($("#shMinPrice").val());
+        }
+        if ($("#shMaxPrice").val() === "") {
+            max = 400000;
+        } else {
+            max = Number($("#shMaxPrice").val());
+        }
         $("#slider-range").slider({
             range: true,
             min: 0,
             max: 400000,
-            values: [0, 400000],
+            values: [min, max],
             slide: function (event, ui) {
-                $("#amount").val("￦" + ui.values[0] + " - ￦" + ui.values[1]);
+                $("#amount").val("￦" + ui.values[0].toLocaleString() + " - ￦" + ui.values[1].toLocaleString());
             },
             change: function(event, ui) {
                 // 값을 놓았을 때 (변경이 완료되었을 때) 호출됨
-                let temp = $("#amount").val().replace(/￦/g, "").replace(/\s+/g, '').split("-");
+                let temp = $("#amount").val().replace(/￦|,/g, "").replace(/\s+/g, '').split("-");
                 $("#shMinPrice").val(parseInt(temp[0]));
                 $("#shMaxPrice").val(parseInt(temp[1]));
                 create();
@@ -954,15 +966,15 @@
         });
         let temp = "￦";
         if ($("#shMinPrice").val() === "") {
-            temp += $("#slider-range").slider("values", 0);
+            temp += $("#slider-range").slider("values", 0).toLocaleString();
         } else {
-            temp += $("#shMinPrice").val();
+            temp += Number($("#shMinPrice").val()).toLocaleString();
         }
         temp += " - ￦";
         if ($("#shMaxPrice").val() === "") {
-            temp += $("#slider-range").slider("values", 1);
+            temp += $("#slider-range").slider("values", 1).toLocaleString();
         } else {
-            temp += $("#shMaxPrice").val();
+            temp += Number($("#shMaxPrice").val()).toLocaleString();
         }
         $("#amount").val(temp);
     }
