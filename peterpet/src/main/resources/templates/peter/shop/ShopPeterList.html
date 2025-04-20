@@ -31,6 +31,7 @@
                                 <input type="hidden" id="shFeedType" name="shFeedType" th:value="${vo.shFeedType}"/>
                                 <input type="hidden" id="shFeedEtc" name="shFeedEtc" th:value="${vo.shFeedEtc}"/>
                                 <input type="hidden" id="shFeedWeight" name="shFeedWeight" th:value="${vo.shFeedWeight}"/>
+                                <input type="hidden" id="shFeedSize" name="shFeedSize" th:value="${vo.shFeedSize}"/>
                                 <input type="hidden" id="prodFuncArray" name="prodFuncArray" th:value="${vo.prodFuncArray}"/>
                                 <input type="hidden" id="feedBrandArray" name="feedBrandArray" th:value="${vo.feedBrandArray}"/>
                                 <input type="hidden" id="shIngredientArray" name="shIngredientArray" th:value="${vo.shIngredientArray}"/>
@@ -130,8 +131,8 @@
                                     <div class="widget-title"><h2 class="mb-0">크기</h2></div>
                                     <div class="filterDD row ms-auto">
                                         <div class="form-check col-6" th:each="size : ${@codeService.selectListCachedCode(16)}">
-                                            <input class="form-check-input" type="checkbox" id="feedSize" name="feedSize" th:value="${size.codeSeq}">
-                                            <label class="form-check-label" for="feedSize" th:text="${size.codeName}"></label>
+                                            <input class="form-check-input" type="radio" th:id="feedSize + ${size.codeSeq}" name="feedSize" th:value="${size.codeSeq}" th:checked="${size.codeSeq} == ${vo.shFeedSize}">
+                                            <label class="form-check-label" th:for="feedSize + ${size.codeSeq}" th:text="${size.codeName}"></label>
                                         </div>
                                     </div>
                                 </div>
