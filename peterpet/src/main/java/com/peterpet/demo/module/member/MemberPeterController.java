@@ -191,4 +191,19 @@ public class MemberPeterController extends BaseController {
 		httpSession.setAttribute("sessIdPeter", null);
 		httpSession.setAttribute("sessNamePeter", null);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/ReviewPeterInst")
+	public Map<String, Object> reviewPeterInst(MemberDto dto, HttpSession httpSession) {
+		Map<String, Object> rtMap = new HashMap<>();
+		
+		if (httpSession.getAttribute("sessSeqPeter") != null) {
+			dto.setUserSeq((String)httpSession.getAttribute("sessSeqPeter"));
+			memberService.reviewInsert(dto);
+			rtMap.put("rt", "success");
+		} else {
+			rtMap.put("rt", "fail");
+		}
+		return rtMap;
+	}
 }

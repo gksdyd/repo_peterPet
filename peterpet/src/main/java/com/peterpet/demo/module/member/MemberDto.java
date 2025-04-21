@@ -31,6 +31,14 @@ public class MemberDto {
 	
 	private Integer dateDiff;
 	
+	private String prodSeq;
+	private String reviSeq;
+	private Integer reviScore;
+	private String reviText;
+	private String reviRegDate;
+	private String reviModDate;
+	private Integer reviGood;
+	
 	public String getUserSeq() {
 		return userSeq;
 	}
@@ -186,5 +194,47 @@ public class MemberDto {
 	}
 	public void setUserReference(String userReference) {
 		this.userReference = userReference;
+	}
+	public String getProdSeq() {
+		return prodSeq;
+	}
+	public void setProdSeq(String prodSeq) {
+		this.prodSeq = prodSeq;
+	}
+	public Integer getReviScore() {
+		return reviScore;
+	}
+	public void setReviScore(Integer reviScore) {
+		this.reviScore = reviScore;
+	}
+	public String getReviText() {
+		return reviText;
+	}
+	public void setReviText(String reviText) {
+		this.reviText = reviText;
+	}
+	public String getReviRegDate() {
+		return reviRegDate;
+	}
+	public void setReviRegDate(String reviRegDate) {
+		this.reviRegDate = reviRegDate;
+	}
+	public String getReviModDate() {
+		return reviModDate;
+	}
+	public void setReviModDate(String reviModDate) {
+		this.reviModDate = reviModDate;
+	}
+	public Integer getReviGood() {
+		return reviGood;
+	}
+	public void setReviGood(Integer reviGood) {
+		this.reviGood = reviGood;
+	}
+	public String getReviSeq() {
+		return reviSeq;
+	}
+	public void setReviSeq(String reviSeq) {
+		this.reviSeq = reviSeq;
 	}
 }

@@ -54,4 +54,8 @@ public class MemberService {
 	public MemberDto checkPhone(MemberDto memberDto) {
 		return memberDao.checkPhone(memberDto);
 	}
+	
+	public int reviewInsert(MemberDto memberDto) {
+		return memberDao.reviewInsert(memberDto);
+	}
 }

@@ -209,4 +209,25 @@
 		WHERE 1=1
 			AND userPhone = #{userPhone}
 	</select>
+	
+	<insert id="reviewInsert">
+		INSERT INTO review(
+			reviScore,
+			reviText,
+			reviRegDate,
+			reviGood,
+			product_prodSeq,
+			user_userSeq
+		) VALUE (
+			#{reviScore},
+			#{reviText},
+			date_format(NOW(), '%Y-%m-%d %H:%i:%S'),
+			0,
+			#{prodSeq},
+			#{userSeq}
+		)
+		<selectKey resultType="String" keyProperty="reviSeq" order="AFTER">
+			SELECT last_insert_id()
+		</selectKey>
+	</insert>
 </mapper>

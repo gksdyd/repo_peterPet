@@ -211,7 +211,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <form class="product-review-form new-review-form mb-4">
+                                                    <form class="product-review-form new-review-form mb-4" id="reviewForm">
                                                         <h4 class="spr-form-title text-uppercase">Write A Review</h4>
                                                         <fieldset class="spr-form-contact">
                                                             <div class="spr-form-review-rating form-group">
@@ -224,17 +224,19 @@
                                                                         <input type="radio" name="rating" id="rating-2"><label for="rating-2"></label>
                                                                         <input type="radio" name="rating" id="rating-1"><label for="rating-1"></label>
                                                                     </div>
+                                                                    <div class="d-none" id="starValid">별점 체크바랍니다.</div>
                                                                 </div>
                                                             </div>
                                                             <div class="spr-form-review-body form-group">
-                                                                <label class="spr-form-label" for="message">리뷰 작성</label>
+                                                                <label class="spr-form-label" for="reviText">리뷰 작성</label>
                                                                 <div class="spr-form-input">
-                                                                    <textarea class="spr-form-input spr-form-input-textarea " id="message" name="message" rows="5" placeholder="1500 글자 이내"></textarea>
+                                                                    <textarea class="spr-form-input spr-form-input-textarea " id="reviText" name="reviText" rows="5" placeholder="1000 글자 이내" maxlength="1000"></textarea>
                                                                 </div>
+                                                                <div class="d-none" id="textValid">최소 10글자 이상 작성하셔야 합니다.</div>
                                                             </div>
                                                         </fieldset>
                                                         <div class="spr-form-actions clearfix">
-                                                            <button type="button" class="btn btn-primary rounded spr-button spr-button-primary">저장</button>
+                                                            <button type="button" class="btn btn-primary rounded spr-button spr-button-primary" id="reviewBtn">저장</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -855,13 +857,73 @@
                 </div>
             </div>
             <div th:replace="~{peter/include/foot :: foot}"></div>
-            <div th:replace="~{peter/include/includePeterCommon :: includePeterCommon}"></div>
+            <div th:replace="~{peter/include/modal :: modal}"></div>
             <div th:replace="~{peter/include/includePeterOriginal :: includePeterOriginal}"></div>
+            <div th:replace="~{peter/include/includePeterCommon :: includePeterCommon}"></div>
         </div>
         <!--End Page Wrapper-->
-        <script th:inline="javascript" src="/peter/template/optimal-html/assets/js/JHY/product.js"></script>
-        <script>
-            // periordTime();
+        <script th:inline="javascript">
+            let goUrlReviewInst = "/peter/member/ReviewPeterInst";
+
+            let rating = document.querySelectorAll("input[name=rating]");
+
+            let starValid = document.getElementById("starValid");
+            let textValid = document.getElementById("textValid");
+
+            let starCount;
+
+            $("#reviewBtn").on("click", function() {
+                starValid.setAttribute("class", "d-none");
+                textValid.setAttribute("class", "d-none");
+
+                starCount = 5;
+                for (let i = 0; i < rating.length; i++) {
+                    if (rating[i].checked) {
+                        break;
+                    } else {
+                        starCount--;
+                        if (starCount == 0) {
+                            starValid.style.color = "red";
+                            starValid.removeAttribute("class", "d-none");
+                            return false;
+                        }
+                    }
+                }
+                
+                if ($("#reviText").val().length < 10) {
+                    textValid.style.color = "red";
+                    textValid.removeAttribute("class", "d-none");
+                    return false;
+                }
+                review();
+            });
+
+            function review() {
+                $.ajax({
+                    async: true 
+                    ,cache: false
+                    ,type: "post"
+                    ,url: goUrlReviewInst
+                    ,data: { "prodSeq" : /*[[${item.prodSeq}]]*/'', "reviScore" : starCount, "reviText" : $("#reviText").val() }
+                    ,success: function(response) {
+                        if (response.rt == "success") {
+                            
+                        } else if (response.rt == "fail") {
+                            modalTitle.innerText = "알림";
+                            modalText.innerText = "로그인을 해야합니다.";
+                            modalCloseButton.style.display = "block";
+                            $(".bg-body-tertiary").css("backgroundColor", "#E4EEF7");
+                            $(".modal-body").css("backgroundColor", "#EBF5FF");
+                            $(".modal-footer").css("backgroundColor", "#EBF5FF");
+                            modal.style.display = "block";
+                        }
+                    }
+                    ,error : function(jqXHR){
+                        alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+                    }
+                });
+            }
         </script>
+        <script th:inline="javascript" src="/peter/template/optimal-html/assets/js/JHY/product.js"></script>
     </body>
 </html>
