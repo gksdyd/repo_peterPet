@@ -46,6 +46,7 @@ public class ShopPeterController extends BaseController {
 		dto.setWeightArray(dto.getWeightArr().split(","));
 		model.addAttribute("item", dto);
 		model.addAttribute("list", productService.selectReview(vo));
+		model.addAttribute("code", CodeDto.cachedCodeArrayList);
 		deliveryTimeCheck(vo);
 		return "peter/shop/ShopPeterView";
 	}
@@ -76,6 +77,14 @@ public class ShopPeterController extends BaseController {
 		vo.setParamsPaging(productService.selectOneFeedCount(vo));
 		rtMap.put("vo", vo);
 		rtMap.put("dtos", productService.selectFeedList(vo));
+		return rtMap;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/ReviewPeterProc")
+	public Map<String, Object> reviewPeterProc(ProductVo vo) {
+		Map<String, Object> rtMap = new HashMap<>();
+		rtMap.put("list", productService.selectReview(vo));
 		return rtMap;
 	}
 }

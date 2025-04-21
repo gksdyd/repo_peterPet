@@ -314,17 +314,17 @@
                                                             </div>
                                                         </div>
                                                         <div class="spr-summary-actions mt-3 mt-lg-0">
-                                                            <select>
-                                                                <option selected="selected">베스트순</option>
-                                                                <option>최신순</option>
-                                                                <option>높은평점순</option>
-                                                                <option>낮은평점순</option>
+                                                            <select id="sort" onchange="reviewRefresh(this)">
+                                                                <option value="1">베스트순</option>
+                                                                <option value="2">최신순</option>
+                                                                <option value="3">높은평점순</option>
+                                                                <option value="4">낮은평점순</option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                                <div class="col-12 col-sm-12 col-md-12 col-lg-12" id="reviewBody">
                                                     <div class="spr-reviews spr-header" th:each="list : ${list}">
                                                         <div class="review-inner">
                                                             <div class="spr-review">
@@ -882,6 +882,7 @@
         <!--End Page Wrapper-->
         <script th:inline="javascript">
             let goUrlReviewInst = "/peter/member/ReviewPeterInst";
+            let goUrlReviewProc = "/peter/shop/ReviewPeterProc";
 
             let rating = document.querySelectorAll("input[name=rating]");
 
@@ -889,6 +890,8 @@
             let textValid = document.getElementById("textValid");
 
             let starCount;
+
+            window.cache = /*[[${code}]]*/ [];
 
             $("#reviewBtn").on("click", function() {
                 starValid.setAttribute("class", "d-none");
@@ -962,6 +965,7 @@
                                 }
                                 progress[i].style.width = Number(scoreCnt[i].innerText) / countSum * 100 + "%";
                             }
+                            reviewRefresh($("#sort"));
                         } else if (response.rt == "fail") {
                             modalTitle.innerText = "알림";
                             modalText.innerText = "로그인을 해야합니다.";
@@ -971,6 +975,76 @@
                             $(".modal-footer").css("backgroundColor", "#EBF5FF");
                             modal.style.display = "block";
                         }
+                    }
+                    ,error : function(jqXHR){
+                        alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+                    }
+                });
+            }
+
+            function reviewCreate(score, id, name, petVarieties, petBirth, petWeight, reviModDate, reviText) {
+                let text = "<div class='spr-reviews spr-header'><div class='review-inner'>" +
+                                "<div class='spr-review'>" +
+                                    "<div class='d-flex'>" +
+                                        "<div class='profile-image'>" +
+                                            "<img src='/peter/template/optimal-html/assets/images/kitties.png'>" +
+                                        "</div>" +
+                                        "<div class='ms-3'>" +
+                                            "<div class='spr-review-header'>" +
+                                                "<span class='product-review spr-starratings'>" +
+                                                    "<span class='reviewLink'>";
+                if (score == 5) {
+                    text += "<i class='an an-star'></i><i class='an an-star'></i><i class='an an-star'></i><i class='an an-star'></i><i class='an an-star'></i>"
+                } else if (score == 4) {
+                    text += "<i class='an an-star'></i><i class='an an-star'></i><i class='an an-star'></i><i class='an an-star'></i><i class='an an-star-o'></i>"
+                } else if (score == 3) {
+                    text += "<i class='an an-star'></i><i class='an an-star'></i><i class='an an-star'></i><i class='an an-star-o'></i><i class='an an-star-o'></i>"
+                } else if (score == 2) {
+                    text += "<i class='an an-star'></i><i class='an an-star'></i><i class='an an-star-o'></i><i class='an an-star-o'></i><i class='an an-star-o'></i>"
+                } else if (score == 1) {
+                    text += "<i class='an an-star'></i><i class='an an-star-o'></i><i class='an an-star-o'></i><i class='an an-star-o'></i><i class='an an-star-o'></i>"
+                }
+
+                text += "</span>" +
+                    "</span>" +
+                    "<p class='spr-review-header-title mt-1'>" +
+                        "<span class='fw-bolder'>" + id + "</span><br>" +
+                        "<span class='fw-bolder'>" + name + "</span>" +
+                        "<span> · " + window.cache[petVarieties - 1] + " · " +
+                        (new Date().getFullYear() - Number(petBirth.substring(0,4)) + 1) + "살 · " + petWeight + "kg</span></p>" +
+                    "<span class='spr-review-header-byline'>" + reviModDate.substring(0,10) + "</span></div></div></div>" +
+                    "<div class='spr-review-content'>" +
+                        "<span class='d-flex'>" +
+                            "<div class='review-image'>" +
+                                "<a href='#'' class='reviewbox'><img src='/peter/template/optimal-html/assets/images/mypetinfo/my-account-pet-image.png'></a>" +
+                            "</div>" +
+                            "<a href='/peter/template/optimal-html/assets/video/video-placeholder.mp4'><video src='/peter/template/optimal-html/assets/video/video-placeholder.mp4' style='width: 80px; height: 80px;''></video></a>" +
+                        "</span>" +
+                        "<div class='reviewimages'>" +
+                            "<a href='/peter/template/optimal-html/assets/images/mypetinfo/my-account-pet-image.png' data-size='1000x1280'></a>" +
+                        "</div>" +
+                        "<p class='spr-review-content-body'>" + reviText + "</p></div></div></div></div>"
+
+                // $("#reviewBody").html($("#reviewBody").html() + text);
+                return text;
+            }
+
+            function reviewRefresh(e) {
+                $.ajax({
+                    async: true 
+                    ,cache: false
+                    ,type: "post"
+                    ,url: goUrlReviewProc
+                    ,data: { "shReviewSort" : $(e).val(), "prodSeq" : /*[[${item.prodSeq}]]*/'' }
+                    ,success: function(response) {
+                        $("#reviewBody").empty();
+                        let text = "";
+                        for (let i = 0; i < response.list.length; i++) {
+                            text += reviewCreate(response.list[i].reviScore, response.list[i].userId, response.list[i].petName,
+                                    response.list[i].petVarieties, response.list[i].petBirth, response.list[i].petWeight,
+                                    response.list[i].reviModDate, response.list[i].reviText);
+                        }
+                        $("#reviewBody").html(text);
                     }
                     ,error : function(jqXHR){
                         alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);

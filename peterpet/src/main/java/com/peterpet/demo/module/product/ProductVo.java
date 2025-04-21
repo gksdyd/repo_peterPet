@@ -47,6 +47,8 @@ public class ProductVo extends BaseVo{
 	
 	private List<String> badgeArray = new ArrayList<>();
 	
+	private Integer shReviewSort = 1;
+	
 	public List<String> getProdFuncArray() {
 		return prodFuncArray;
 	}
@@ -293,6 +295,14 @@ public class ProductVo extends BaseVo{
 
 	public void setShMaxPrice(Integer shMaxPrice) {
 		this.shMaxPrice = shMaxPrice;
+	}
+
+	public Integer getShReviewSort() {
+		return shReviewSort;
+	}
+
+	public void setShReviewSort(Integer shReviewSort) {
+		this.shReviewSort = shReviewSort;
 	}
 
 	public void InitProdType() {
