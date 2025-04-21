@@ -49,6 +49,12 @@ public class ProductDto {
 	private String weightArr;
 	String[] weightArray; 
 	
+	private Integer scoreOne;
+	private Integer scoreTwo;
+	private Integer scoreThree;
+	private Integer scoreFour;
+	private Integer scoreFive;
+	
 	public String getProdSeq() {
 		return prodSeq;
 	}
@@ -274,5 +280,35 @@ public class ProductDto {
 	}
 	public void setProdIsStock(Integer prodIsStock) {
 		this.prodIsStock = prodIsStock;
+	}
+	public Integer getScoreOne() {
+		return scoreOne;
+	}
+	public void setScoreOne(Integer scoreOne) {
+		this.scoreOne = scoreOne;
+	}
+	public Integer getScoreTwo() {
+		return scoreTwo;
+	}
+	public void setScoreTwo(Integer scoreTwo) {
+		this.scoreTwo = scoreTwo;
+	}
+	public Integer getScoreThree() {
+		return scoreThree;
+	}
+	public void setScoreThree(Integer scoreThree) {
+		this.scoreThree = scoreThree;
+	}
+	public Integer getScoreFour() {
+		return scoreFour;
+	}
+	public void setScoreFour(Integer scoreFour) {
+		this.scoreFour = scoreFour;
+	}
+	public Integer getScoreFive() {
+		return scoreFive;
+	}
+	public void setScoreFive(Integer scoreFive) {
+		this.scoreFive = scoreFive;
 	}
 }

@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.peterpet.demo.module.member.MemberDto;
+
 @Repository
 public interface ProductDao {
 
@@ -27,4 +29,5 @@ public interface ProductDao {
 	public int severalUelete(ProductVo vo);
 	public int severalDelete(ProductVo vo);
 	public List<ProductDto> selectFeedList(ProductVo vo);
+	public int updateScore(MemberDto dto);
 }

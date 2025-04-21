@@ -67,10 +67,10 @@
                                     <!-- Product Reviews -->
                                     <div class="product-review mb-2"><a class="reviewLink d-flex-center" href="#reviews">
                                         <span th:if="${item.prodScore} > 4"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i></span>
-                                        <span th:if="${item.prodScore} > 3"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i></span>
-                                        <span th:if="${item.prodScore} > 2"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
-                                        <span th:if="${item.prodScore} > 1"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
-                                        <span th:if="${item.prodScore} > 0"><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
+                                        <span th:if="${item.prodScore} > 3 and ${item.prodScore} le 4"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i></span>
+                                        <span th:if="${item.prodScore} > 2 and ${item.prodScore} le 3"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
+                                        <span th:if="${item.prodScore} > 1 and ${item.prodScore} le 2"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
+                                        <span th:if="${item.prodScore} > 0 and ${item.prodScore} le 1"><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
                                         <span th:if="${item.prodScore} == 0"><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
                                         <span class="spr-badge-caption ms-2" th:text="${item.reviewCount} + ' Reviews'"></span>
                                     </a></div>
@@ -246,7 +246,12 @@
                                                         <div class="text-center d-flex justify-content-center">
                                                             <span>
                                                                 <div style="font-size: xx-large; font-weight: 600;" th:text="${item.prodScore}"></div>
-                                                                <i class="icon an an-star"></i><i class="icon an an-star mx-1"></i><i class="icon an an-star"></i><i class="icon an an-star mx-1"></i><i class="icon an an-star"></i>
+                                                                <span th:if="${item.prodScore} > 4"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i></span>
+                                                                <span th:if="${item.prodScore} > 3 and ${item.prodScore} le 4"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i></span>
+                                                                <span th:if="${item.prodScore} > 2 and ${item.prodScore} le 3"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
+                                                                <span th:if="${item.prodScore} > 1 and ${item.prodScore} le 2"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
+                                                                <span th:if="${item.prodScore} > 0 and ${item.prodScore} le 1"><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
+                                                                <span th:if="${item.prodScore} == 0"><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
                                                                 <div th:text="'만족도 ' + ${item.prodScore}/5*100 + '%'"></div>
                                                             </span>
                                                             <span class="ms-3" style="width: 300px;">
@@ -255,45 +260,45 @@
                                                                         <p class="text-nowrap me-3">5점</p>
                                                                     </div>
                                                                     <div class="progress bg-200 w-100 rounded-pill" role="progressbar" aria-label="Basic example" style="height:6px;" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">
-                                                                        <div class="progress-bar rounded-pill animated-progress-bar" style="--falcon-progressbar-width:33%"></div>
+                                                                        <div class="progress-bar rounded-pill animated-progress-bar" th:style="'width:' + ${item.scoreFive} / (${item.scoreFive} + ${item.scoreFour} + ${item.scoreThree} + ${item.scoreTwo} + ${item.scoreOne}) * 100 + '%'"></div>
                                                                     </div>
-                                                                    <p class="mb-0 ps-3">33</p>
+                                                                    <p class="mb-0 ps-3" th:text="${item.scoreFive}"></p>
                                                                 </div>
                                                                 <div class="d-flex align-items-center">
                                                                     <div>
                                                                         <p class="text-nowrap me-3">4점</p>
                                                                     </div>
                                                                     <div class="progress bg-200 w-100 rounded-pill" role="progressbar" aria-label="Basic example" style="height:6px" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">
-                                                                        <div class="progress-bar rounded-pill animated-progress-bar" style="--falcon-progressbar-width:33%"></div>
+                                                                        <div class="progress-bar rounded-pill animated-progress-bar" th:style="'width:' + ${item.scoreFour} / (${item.scoreFive} + ${item.scoreFour} + ${item.scoreThree} + ${item.scoreTwo} + ${item.scoreOne}) * 100 + '%'"></div>
                                                                     </div>
-                                                                    <p class="mb-0 ps-3">33</p>
+                                                                    <p class="mb-0 ps-3" th:text="${item.scoreFour}"></p>
                                                                 </div>
                                                                 <div class="d-flex align-items-center">
                                                                     <div>
                                                                         <p class="text-nowrap me-3">3점</p>
                                                                     </div>
                                                                     <div class="progress bg-200 w-100 rounded-pill" role="progressbar" aria-label="Basic example" style="height:6px" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">
-                                                                        <div class="progress-bar rounded-pill animated-progress-bar" style="--falcon-progressbar-width:33%"></div>
+                                                                        <div class="progress-bar rounded-pill animated-progress-bar" th:style="'width:' + ${item.scoreThree} / (${item.scoreFive} + ${item.scoreFour} + ${item.scoreThree} + ${item.scoreTwo} + ${item.scoreOne}) * 100 + '%'"></div>
                                                                     </div>
-                                                                    <p class="mb-0 ps-3">33</p>
+                                                                    <p class="mb-0 ps-3" th:text="${item.scoreThree}"></p>
                                                                 </div>
                                                                 <div class="d-flex align-items-center">
                                                                     <div>
                                                                         <p class="text-nowrap me-3">2점</p>
                                                                     </div>
                                                                     <div class="progress bg-200 w-100 rounded-pill" role="progressbar" aria-label="Basic example" style="height:6px" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">
-                                                                        <div class="progress-bar rounded-pill animated-progress-bar" style="--falcon-progressbar-width:33%"></div>
+                                                                        <div class="progress-bar rounded-pill animated-progress-bar" th:style="'width:' + ${item.scoreTwo} / (${item.scoreFive} + ${item.scoreFour} + ${item.scoreThree} + ${item.scoreTwo} + ${item.scoreOne}) * 100 + '%'"></div>
                                                                     </div>
-                                                                    <p class="mb-0 ps-3">33</p>
+                                                                    <p class="mb-0 ps-3" th:text="${item.scoreTwo}"></p>
                                                                 </div>
                                                                 <div class="d-flex align-items-center">
                                                                     <div>
                                                                         <p class="text-nowrap me-3">1점</p>
                                                                     </div>
                                                                     <div class="progress bg-200 w-100 rounded-pill" role="progressbar" aria-label="Basic example" style="height:6px" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">
-                                                                        <div class="progress-bar rounded-pill animated-progress-bar" style="--falcon-progressbar-width:33%"></div>
+                                                                        <div class="progress-bar rounded-pill animated-progress-bar" th:style="'width:' + ${item.scoreOne} / (${item.scoreFive} + ${item.scoreFour} + ${item.scoreThree} + ${item.scoreTwo} + ${item.scoreOne}) * 100 + '%'"></div>
                                                                     </div>
-                                                                    <p class="mb-0 ps-3">33</p>
+                                                                    <p class="mb-0 ps-3" th:text="${item.scoreOne}"></p>
                                                                 </div>
                                                             </span>
                                                         </div>

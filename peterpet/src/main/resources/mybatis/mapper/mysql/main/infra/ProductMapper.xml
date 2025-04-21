@@ -179,6 +179,11 @@
 			prodScore,
 			prodIsStock,
 			prodPetType,
+			(SELECT COUNT(*) FROM review WHERE product_prodSeq = #{prodSeq} AND reviScore = 1) AS scoreOne,
+			(SELECT COUNT(*) FROM review WHERE product_prodSeq = #{prodSeq} AND reviScore = 2) AS scoreTwo,
+			(SELECT COUNT(*) FROM review WHERE product_prodSeq = #{prodSeq} AND reviScore = 3) AS scoreThree,
+			(SELECT COUNT(*) FROM review WHERE product_prodSeq = #{prodSeq} AND reviScore = 4) AS scoreFour,
+			(SELECT COUNT(*) FROM review WHERE product_prodSeq = #{prodSeq} AND reviScore = 5) AS scoreFive,
 			b.infoDiscount,
 			b.infoPrice,
 			b.infoWeight,
@@ -357,4 +362,12 @@
 		SELECT COUNT(*)
 		<include refid="commonFeed"></include>
 	</select>
+	
+	<update id="updateScore">
+		UPDATE product
+		SET
+			prodScore = (SELECT ROUND(SUM(reviScore) / COUNT(*), 1) FROM review WHERE product_prodSeq = #{prodSeq})
+		WHERE
+			prodSeq = #{prodSeq}
+	</update>
 </mapper>

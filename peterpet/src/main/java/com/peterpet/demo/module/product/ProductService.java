@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.peterpet.demo.module.member.MemberDto;
+
 @Service
 public class ProductService {
 
@@ -89,5 +91,9 @@ public class ProductService {
 	
 	public int selectOneFeedCount(ProductVo vo) {
 		return productDao.selectOneFeedCount(vo);
+	}
+	
+	public int updateScore(MemberDto dto) {
+		return productDao.updateScore(dto);
 	}
 }

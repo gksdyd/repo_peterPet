@@ -16,6 +16,7 @@ import com.peterpet.demo.module.base.Constants;
 import com.peterpet.demo.module.pet.PetDto;
 import com.peterpet.demo.module.pet.PetService;
 import com.peterpet.demo.module.pet.PetVo;
+import com.peterpet.demo.module.product.ProductService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -29,6 +30,8 @@ public class MemberPeterController extends BaseController {
 	PetService petService;
 	@Autowired
 	MailService mailService;
+	@Autowired
+	ProductService productService;
 	
 	@RequestMapping(value = "/LoginPeterForm")
 	public String loginPeterForm(MemberDto memberDto, Model model) {
@@ -200,6 +203,7 @@ public class MemberPeterController extends BaseController {
 		if (httpSession.getAttribute("sessSeqPeter") != null) {
 			dto.setUserSeq((String)httpSession.getAttribute("sessSeqPeter"));
 			memberService.reviewInsert(dto);
+			productService.updateScore(dto);
 			rtMap.put("rt", "success");
 		} else {
 			rtMap.put("rt", "fail");
