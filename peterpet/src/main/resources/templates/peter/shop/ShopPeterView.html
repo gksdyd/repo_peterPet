@@ -65,14 +65,14 @@
                                     </div>
                                     <h1 class="product-single__title" th:text="${item.prodName}"></h1>
                                     <!-- Product Reviews -->
-                                    <div class="product-review mb-2"><a class="reviewLink d-flex-center" href="#reviews">
+                                    <div class="product-review mb-2"><a class="reviewLink d-flex-center" href="#reviews" id="topStar">
                                         <span th:if="${item.prodScore} > 4"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i></span>
                                         <span th:if="${item.prodScore} > 3 and ${item.prodScore} le 4"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i></span>
                                         <span th:if="${item.prodScore} > 2 and ${item.prodScore} le 3"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
                                         <span th:if="${item.prodScore} > 1 and ${item.prodScore} le 2"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
                                         <span th:if="${item.prodScore} > 0 and ${item.prodScore} le 1"><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
                                         <span th:if="${item.prodScore} == 0"><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
-                                        <span class="spr-badge-caption ms-2" th:text="${item.reviewCount} + ' Reviews'"></span>
+                                        <span class="spr-badge-caption ms-2" id="topReviewCnt" th:text="${item.reviewCount}"></span>&ensp;Reviews
                                     </a></div>
                                     <!-- End Product Reviews -->
                                     <!-- Product Price -->
@@ -204,7 +204,7 @@
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                                                     <div class="spr-header clearfix d-flex-center justify-content-between">
                                                         <div class="product-review me-auto">
-                                                            <span class="spr-summary-actions-togglereviews ms-2" th:text="'리뷰 ' + ${item.reviewCount}"></span>
+                                                            <span class="spr-summary-actions-togglereviews ms-2" id="downReviewCnt" th:text="'리뷰 ' + ${item.reviewCount}"></span>
                                                         </div>
                                                         <div class="spr-summary-actions mt-3 mt-lg-0">
                                                             <a href="#" class="spr-summary-actions-newreview write-review-btn btn rounded"><i class="icon an-1x an an-pencil-alt me-2"></i>Write a review</a>
@@ -245,14 +245,14 @@
                                                     <div class="spr-header">
                                                         <div class="text-center d-flex justify-content-center">
                                                             <span>
-                                                                <div style="font-size: xx-large; font-weight: 600;" th:text="${item.prodScore}"></div>
+                                                                <div style="font-size: xx-large; font-weight: 600;" id="prodScore" th:text="${item.prodScore}"></div>
                                                                 <span th:if="${item.prodScore} > 4"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i></span>
                                                                 <span th:if="${item.prodScore} > 3 and ${item.prodScore} le 4"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i></span>
                                                                 <span th:if="${item.prodScore} > 2 and ${item.prodScore} le 3"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
                                                                 <span th:if="${item.prodScore} > 1 and ${item.prodScore} le 2"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
                                                                 <span th:if="${item.prodScore} > 0 and ${item.prodScore} le 1"><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
                                                                 <span th:if="${item.prodScore} == 0"><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
-                                                                <div th:text="'만족도 ' + ${item.prodScore}/5*100 + '%'"></div>
+                                                                <div th:text="'만족도 ' + ${#numbers.formatPercent(T(java.lang.Double).parseDouble(item.prodScore)/5,2,2)}"></div>
                                                             </span>
                                                             <span class="ms-3" style="width: 300px;">
                                                                 <div class="d-flex align-items-center">
@@ -262,7 +262,7 @@
                                                                     <div class="progress bg-200 w-100 rounded-pill" role="progressbar" aria-label="Basic example" style="height:6px;" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">
                                                                         <div class="progress-bar rounded-pill animated-progress-bar" th:style="'width:' + ${item.scoreFive} / (${item.scoreFive} + ${item.scoreFour} + ${item.scoreThree} + ${item.scoreTwo} + ${item.scoreOne}) * 100 + '%'"></div>
                                                                     </div>
-                                                                    <p class="mb-0 ps-3" th:text="${item.scoreFive}"></p>
+                                                                    <p class="mb-0 ps-3 countPerScore" th:text="${item.scoreFive}"></p>
                                                                 </div>
                                                                 <div class="d-flex align-items-center">
                                                                     <div>
@@ -271,7 +271,7 @@
                                                                     <div class="progress bg-200 w-100 rounded-pill" role="progressbar" aria-label="Basic example" style="height:6px" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">
                                                                         <div class="progress-bar rounded-pill animated-progress-bar" th:style="'width:' + ${item.scoreFour} / (${item.scoreFive} + ${item.scoreFour} + ${item.scoreThree} + ${item.scoreTwo} + ${item.scoreOne}) * 100 + '%'"></div>
                                                                     </div>
-                                                                    <p class="mb-0 ps-3" th:text="${item.scoreFour}"></p>
+                                                                    <p class="mb-0 ps-3 countPerScore" th:text="${item.scoreFour}"></p>
                                                                 </div>
                                                                 <div class="d-flex align-items-center">
                                                                     <div>
@@ -280,7 +280,7 @@
                                                                     <div class="progress bg-200 w-100 rounded-pill" role="progressbar" aria-label="Basic example" style="height:6px" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">
                                                                         <div class="progress-bar rounded-pill animated-progress-bar" th:style="'width:' + ${item.scoreThree} / (${item.scoreFive} + ${item.scoreFour} + ${item.scoreThree} + ${item.scoreTwo} + ${item.scoreOne}) * 100 + '%'"></div>
                                                                     </div>
-                                                                    <p class="mb-0 ps-3" th:text="${item.scoreThree}"></p>
+                                                                    <p class="mb-0 ps-3 countPerScore" th:text="${item.scoreThree}"></p>
                                                                 </div>
                                                                 <div class="d-flex align-items-center">
                                                                     <div>
@@ -289,7 +289,7 @@
                                                                     <div class="progress bg-200 w-100 rounded-pill" role="progressbar" aria-label="Basic example" style="height:6px" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">
                                                                         <div class="progress-bar rounded-pill animated-progress-bar" th:style="'width:' + ${item.scoreTwo} / (${item.scoreFive} + ${item.scoreFour} + ${item.scoreThree} + ${item.scoreTwo} + ${item.scoreOne}) * 100 + '%'"></div>
                                                                     </div>
-                                                                    <p class="mb-0 ps-3" th:text="${item.scoreTwo}"></p>
+                                                                    <p class="mb-0 ps-3 countPerScore" th:text="${item.scoreTwo}"></p>
                                                                 </div>
                                                                 <div class="d-flex align-items-center">
                                                                     <div>
@@ -298,7 +298,7 @@
                                                                     <div class="progress bg-200 w-100 rounded-pill" role="progressbar" aria-label="Basic example" style="height:6px" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">
                                                                         <div class="progress-bar rounded-pill animated-progress-bar" th:style="'width:' + ${item.scoreOne} / (${item.scoreFive} + ${item.scoreFour} + ${item.scoreThree} + ${item.scoreTwo} + ${item.scoreOne}) * 100 + '%'"></div>
                                                                     </div>
-                                                                    <p class="mb-0 ps-3" th:text="${item.scoreOne}"></p>
+                                                                    <p class="mb-0 ps-3 countPerScore" th:text="${item.scoreOne}"></p>
                                                                 </div>
                                                             </span>
                                                         </div>
@@ -925,7 +925,43 @@
                     ,data: { "prodSeq" : /*[[${item.prodSeq}]]*/'', "reviScore" : starCount, "reviText" : $("#reviText").val() }
                     ,success: function(response) {
                         if (response.rt == "success") {
-                            
+                            let avr = (Number($("#prodScore").text()) * Number($("#topReviewCnt").text()) + starCount) / (Number($("#topReviewCnt").text()) + 1);
+                            let text;
+                            if (avr > 4) {
+                                text = "<i class='an an-star'></i><i class='an an-star'></i><i class='an an-star'></i><i class='an an-star'></i><i class='an an-star'></i>"
+                            } else if (avr > 3) {
+                                text = "<i class='an an-star'></i><i class='an an-star'></i><i class='an an-star'></i><i class='an an-star'></i><i class='an an-star-o'></i>"
+                            } else if (avr > 2) {
+                                text = "<i class='an an-star'></i><i class='an an-star'></i><i class='an an-star'></i><i class='an an-star-o'></i><i class='an an-star-o'></i>"
+                            } else if (avr > 1) {
+                                text = "<i class='an an-star'></i><i class='an an-star'></i><i class='an an-star-o'></i><i class='an an-star-o'></i><i class='an an-star-o'></i>"
+                            } else if (avr > 0) {
+                                text = "<i class='an an-star'></i><i class='an an-star-o'></i><i class='an an-star-o'></i><i class='an an-star-o'></i><i class='an an-star-o'></i>"
+                            } else {
+                                text = "<i class='an an-star-o'></i><i class='an an-star-o'></i><i class='an an-star-o'></i><i class='an an-star-o'></i><i class='an an-star-o'></i>"
+                            }
+                            let textTop = text + "<span class='spr-badge-caption ms-2' id='topReviewCnt'>" + (Number($("#topReviewCnt").text()) + 1) + "</span>&ensp;Reviews"
+                            $("#topStar").html(textTop);
+
+                            $("#downReviewCnt").text("리뷰 " + (Number($("#topReviewCnt").text())));
+                            $("#prodScore").text(avr.toFixed(1));
+                            $("#prodScore").next().html(text);
+                            $("#prodScore").next().next().html("<div>만족도 " + (Number($("#prodScore").text()) / 5 * 100).toFixed(2) + "%</div>");
+
+                            let scoreCnt = document.querySelectorAll(".countPerScore");
+                            let countSum = 0;
+                            for (let i = 0; i < scoreCnt.length; i++) {
+                                countSum += Number(scoreCnt[i].innerText);
+                            }
+                            countSum++;
+
+                            let progress = document.querySelectorAll(".progress-bar");
+                            for (let i = 0; i < progress.length; i++) {
+                                if (starCount == 5 - i) {
+                                    scoreCnt[i].innerText = Number(scoreCnt[i].innerText) + 1;
+                                }
+                                progress[i].style.width = Number(scoreCnt[i].innerText) / countSum * 100 + "%";
+                            }
                         } else if (response.rt == "fail") {
                             modalTitle.innerText = "알림";
                             modalText.innerText = "로그인을 해야합니다.";
