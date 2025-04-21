@@ -965,6 +965,7 @@
                                 }
                                 progress[i].style.width = Number(scoreCnt[i].innerText) / countSum * 100 + "%";
                             }
+                            reviewInit();
                             reviewRefresh($("#sort"));
                         } else if (response.rt == "fail") {
                             modalTitle.innerText = "알림";
@@ -1024,8 +1025,6 @@
                             "<a href='/peter/template/optimal-html/assets/images/mypetinfo/my-account-pet-image.png' data-size='1000x1280'></a>" +
                         "</div>" +
                         "<p class='spr-review-content-body'>" + reviText + "</p></div></div></div></div>"
-
-                // $("#reviewBody").html($("#reviewBody").html() + text);
                 return text;
             }
 
@@ -1050,6 +1049,14 @@
                         alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
                     }
                 });
+            }
+
+            function reviewInit() {
+                for (let i = 0; i < rating.length; i++) {
+                    rating[i].checked = false;
+                }
+                $("#reviText").val("");
+                $(".product-review-form").slideToggle();
             }
         </script>
         <script th:inline="javascript" src="/peter/template/optimal-html/assets/js/JHY/product.js"></script>
