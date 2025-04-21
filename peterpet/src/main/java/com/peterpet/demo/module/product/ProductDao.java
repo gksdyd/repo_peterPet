@@ -30,4 +30,5 @@ public interface ProductDao {
 	public int severalDelete(ProductVo vo);
 	public List<ProductDto> selectFeedList(ProductVo vo);
 	public int updateScore(MemberDto dto);
+	public List<ProductDto> selectReview(ProductVo vo);
 }

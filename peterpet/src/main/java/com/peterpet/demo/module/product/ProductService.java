@@ -96,4 +96,8 @@ public class ProductService {
 	public int updateScore(MemberDto dto) {
 		return productDao.updateScore(dto);
 	}
+	
+	public List<ProductDto> selectReview(ProductVo vo) {
+		return productDao.selectReview(vo);
+	}
 }

@@ -325,7 +325,7 @@
                                                 </div>
 
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-                                                    <div class="spr-reviews spr-header">
+                                                    <div class="spr-reviews spr-header" th:each="list : ${list}">
                                                         <div class="review-inner">
                                                             <div class="spr-review">
                                                                 <div class="d-flex">
@@ -334,9 +334,22 @@
                                                                     </div>
                                                                     <div class="ms-3">
                                                                         <div class="spr-review-header">
-                                                                            <span class="product-review spr-starratings"><span class="reviewLink"><i class="icon an an-star"></i><i class="icon an an-star mx-1"></i><i class="icon an an-star"></i><i class="icon an an-star mx-1"></i><i class="icon an an-star-o"></i></span></span>
-                                                                            <p class="spr-review-header-title mt-1"><span class="fw-bolder">츄츄</span> · 믹스 · 1살 · 1kg</p>
-                                                                            <span class="spr-review-header-byline">2023.04.23</span>
+                                                                            <span class="product-review spr-starratings">
+                                                                                <span class="reviewLink">
+                                                                                    <span th:if="${list.reviScore} == 5"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i></span>
+                                                                                    <span th:if="${list.reviScore} == 4"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i></span>
+                                                                                    <span th:if="${list.reviScore} == 3"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
+                                                                                    <span th:if="${list.reviScore} == 2"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
+                                                                                    <span th:if="${list.reviScore} == 1"><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
+                                                                                    <span th:if="${list.reviScore} == 0"><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
+                                                                                </span>
+                                                                            </span>
+                                                                            <p class="spr-review-header-title mt-1">
+                                                                                <span class="fw-bolder" th:text="${list.userId}"></span><br>
+                                                                                <span class="fw-bolder" th:text="${list.petName}"></span>
+                                                                                <span th:text="' · ' + ${@codeService.selectOneCachedCode(list.petVarieties)} + ' · ' + ${#dates.year(#dates.createToday()) - T(java.lang.Integer).parseInt(#strings.substring(list.petBirth, 0, 4)) + 1} + '살 · ' + ${list.petWeight} + 'kg'"></span>
+                                                                            </p>
+                                                                            <span class="spr-review-header-byline" th:text="${#strings.substring(list.reviModDate,0,10)}"></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -350,7 +363,7 @@
                                                                     <div class="reviewimages">
                                                                         <a href="/peter/template/optimal-html/assets/images/mypetinfo/my-account-pet-image.png" data-size="1000x1280"></a>
                                                                     </div>
-                                                                    <p class="spr-review-content-body">우리애가 사료가 맛있는지 많이먹고 좋아해요</p>
+                                                                    <p class="spr-review-content-body" th:text="${list.reviText}"></p>
                                                                 </div>
                                                             </div>
                                                         </div>

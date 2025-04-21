@@ -370,4 +370,23 @@
 		WHERE
 			prodSeq = #{prodSeq}
 	</update>
+	
+	<select id="selectReview" resultMap="resultMapObj">
+		SELECT
+			a.reviScore,
+			a.reviText,
+			a.reviModDate,
+			a.reviGood,
+			b.userId,
+			c.petName,
+			c.petVarieties,
+			c.petBirth,
+			c.petWeight
+        FROM
+        	review a
+        	LEFT JOIN user b ON b.userSeq = a.user_userSeq
+        	LEFT JOIN pet c ON b.userSeq = c.user_userSeq AND petMain = 1
+        WHERE 1=1
+        	AND product_prodSeq = #{prodSeq}
+	</select>
 </mapper>

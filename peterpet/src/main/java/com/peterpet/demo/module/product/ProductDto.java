@@ -55,6 +55,18 @@ public class ProductDto {
 	private Integer scoreFour;
 	private Integer scoreFive;
 	
+	private String reviSeq;
+	private Integer reviScore;
+	private String reviText;
+	private String reviRegDate;
+	private String reviModDate;
+	private Integer reviGood;
+	private String userId;
+	private String petName;
+	private Integer petVarieties;
+	private String petBirth;
+	private Integer petWeight;
+	
 	public String getProdSeq() {
 		return prodSeq;
 	}
@@ -310,5 +322,71 @@ public class ProductDto {
 	}
 	public void setScoreFive(Integer scoreFive) {
 		this.scoreFive = scoreFive;
+	}
+	public String getReviSeq() {
+		return reviSeq;
+	}
+	public void setReviSeq(String reviSeq) {
+		this.reviSeq = reviSeq;
+	}
+	public Integer getReviScore() {
+		return reviScore;
+	}
+	public void setReviScore(Integer reviScore) {
+		this.reviScore = reviScore;
+	}
+	public String getReviText() {
+		return reviText;
+	}
+	public void setReviText(String reviText) {
+		this.reviText = reviText;
+	}
+	public String getReviRegDate() {
+		return reviRegDate;
+	}
+	public void setReviRegDate(String reviRegDate) {
+		this.reviRegDate = reviRegDate;
+	}
+	public String getReviModDate() {
+		return reviModDate;
+	}
+	public void setReviModDate(String reviModDate) {
+		this.reviModDate = reviModDate;
+	}
+	public Integer getReviGood() {
+		return reviGood;
+	}
+	public void setReviGood(Integer reviGood) {
+		this.reviGood = reviGood;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public String getPetName() {
+		return petName;
+	}
+	public void setPetName(String petName) {
+		this.petName = petName;
+	}
+	public Integer getPetVarieties() {
+		return petVarieties;
+	}
+	public void setPetVarieties(Integer petVarieties) {
+		this.petVarieties = petVarieties;
+	}
+	public String getPetBirth() {
+		return petBirth;
+	}
+	public void setPetBirth(String petBirth) {
+		this.petBirth = petBirth;
+	}
+	public Integer getPetWeight() {
+		return petWeight;
+	}
+	public void setPetWeight(Integer petWeight) {
+		this.petWeight = petWeight;
 	}
 }

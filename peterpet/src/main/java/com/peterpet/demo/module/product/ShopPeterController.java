@@ -45,6 +45,7 @@ public class ShopPeterController extends BaseController {
 		ProductDto dto = productService.selectOnePoduct(vo);
 		dto.setWeightArray(dto.getWeightArr().split(","));
 		model.addAttribute("item", dto);
+		model.addAttribute("list", productService.selectReview(vo));
 		deliveryTimeCheck(vo);
 		return "peter/shop/ShopPeterView";
 	}
