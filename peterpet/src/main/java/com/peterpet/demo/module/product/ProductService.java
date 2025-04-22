@@ -24,8 +24,10 @@ public class ProductService extends BaseService {
 	
 	public int insert(ProductDto productDto) throws Exception {
 		productDao.insert(productDto);
-    	uploadFilesToS3(productDto.getUploadImg1(), productDto, "infrBannerUploaded", productDto.getUploadImg1Type(), productDto.getUploadImg1MaxNumber()
+    	uploadFilesToS3(productDto.getUploadImg1(), productDto, "image", productDto.getUploadImg1Type(), productDto.getUploadImg1MaxNumber()
     			, productDto.getProdSeq(), productDao, amazonS3Client);
+//    	uploadFilesToS3(productDto.getUploadImg1(), productDto, "image", productDto.getUploadImg1Type(), productDto.getUploadImg1MaxNumber()
+//    			, productDto.getProdSeq(), productDao, amazonS3Client);
 		return 1;
 	}
 	
@@ -60,7 +62,7 @@ public class ProductService extends BaseService {
 	public int update(ProductDto productDto) throws Exception {
 		productDao.update(productDto);
 		productDao.updateUploaded(productDto);
-		uploadFilesToS3(productDto.getUploadImg1(), productDto, "infrBannerUploaded", productDto.getUploadImg1Type(), productDto.getUploadImg1MaxNumber()
+		uploadFilesToS3(productDto.getUploadImg1(), productDto, "image", productDto.getUploadImg1Type(), productDto.getUploadImg1MaxNumber()
     			, productDto.getProdSeq(), productDao, amazonS3Client);
 		return 1;
 	}
@@ -111,5 +113,9 @@ public class ProductService extends BaseService {
 	
 	public List<ProductDto> selectReview(ProductVo vo) {
 		return productDao.selectReview(vo);
+	}
+	
+	public int selectReviewCount(ProductVo vo) {
+		return productDao.selectReviewCount(vo);
 	}
 }

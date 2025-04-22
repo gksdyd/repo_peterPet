@@ -7,7 +7,7 @@
 	
 	<!-- uploaded s -->
 	<sql id="insertUploaded">
-		INSERT INTO image (
+		INSERT INTO ${tableName} (
 			type
 			,defaultNy
 			,sort

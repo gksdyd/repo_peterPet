@@ -21,7 +21,8 @@ public class BaseService {
 				
 //				String className = dto.getClass().getSimpleName().toString().toLowerCase();
 				// 접두사: 4, 접미사: uploaded (8) 삭제
-				String className = tableName.substring(4).substring(0,tableName.length()-12);		
+				String className = tableName;		
+//				String className = tableName.substring(4).substring(0,tableName.length()-12);		
 				String fileName = multipartFiles[i].getOriginalFilename();
 				String ext = fileName.substring(fileName.lastIndexOf(".") + 1);
 				String uuid = UUID.randomUUID().toString();
