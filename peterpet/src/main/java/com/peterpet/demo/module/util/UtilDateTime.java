@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
@@ -53,5 +54,10 @@ public class UtilDateTime {
 //        System.out.println(sb.toString());
 //        System.out.println(sb.toString().contains("20250101"));
         return sb.toString().contains(date);
+	}
+	
+	public static String nowString() {
+		LocalDate date = LocalDate.now();
+		return date.toString();
 	}
 }

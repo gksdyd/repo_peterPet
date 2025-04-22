@@ -12,7 +12,7 @@
               <h1>펫 상품 등록</h1>
             </div>
             <div class="card-body bg-body-tertiary">
-              <form class="needs-validation" novalidate id="product-form" name="product-form">
+              <form class="needs-validation" novalidate id="product-form" name="product-form" enctype="multipart/form-data">
                 <input type="hidden" name="registerOrModifyFlag" id="registerOrModifyFlag" th:value="${vo.registerOrModifyFlag}">
                 <input type="hidden" name="prodPetType" id="prodPetType" th:value="${item.prodPetType}">
                 <div class="row g-3">
@@ -168,6 +168,18 @@
                   </div>
                   <div class="mb-3 row g-3 ms-2 me-2">
                     <div class="col col-lg-6 col-md-10" id="createFeedInfo">
+                    </div>
+                  </div>
+                  <div class="mb-3 row g-3 ms-2 me-2">
+                    <div class="col-3">
+                      <input type="file" id="uploadImg1" name="uploadImg1" multiple>
+                      <input type="hidden" id="uploadImg1Type" name="uploadImg1Type" value="1">
+                      <input type="hidden" id="uploadImg1MaxNumber" name="uploadImg1MaxNumber" value="1">
+                    </div>
+                  </div>
+                  <div class="mb-3 row g-3 ms-2 me-2">
+                    <div class="col-3">
+                      <img th:src="${item.path}" alt="" style="width: 50%;">
                     </div>
                   </div>
                 </div>

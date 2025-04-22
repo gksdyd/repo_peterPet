@@ -395,4 +395,26 @@
 			<when test="shReviewSort == 4">ORDER BY a.reviScore</when>
 		</choose>
 	</select>
+	
+	<insert id="insertUploaded">
+		<include refid="Base.insertUploaded"></include>
+	</insert>
+	
+	<update id="updateUploaded">
+		UPDATE image
+		SET
+			delNy = 1
+		WHERE 1=1
+			AND pseq = #{prodSeq}
+	</update>
+	
+	<select id="selectImage" resultType="com.peterpet.demo.module.base.BaseDto">
+		SELECT
+			path
+		FROM
+			image
+		WHERE 1=1
+			AND #{prodSeq} = pseq
+			AND delNy = 0
+	</select>
 </mapper>

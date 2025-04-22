@@ -3,7 +3,9 @@ package com.peterpet.demo.module.product;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductDto {
+import com.peterpet.demo.module.base.BaseDto;
+
+public class ProductDto extends BaseDto {
 
 	private String prodSeq;
 	private int prodType;

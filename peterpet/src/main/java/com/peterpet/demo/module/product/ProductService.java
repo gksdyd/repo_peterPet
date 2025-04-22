@@ -5,20 +5,28 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.peterpet.demo.module.base.BaseService;
 import com.peterpet.demo.module.member.MemberDto;
 
 @Service
-public class ProductService {
+public class ProductService extends BaseService {
 
 	@Autowired
 	ProductDao productDao;
+	
+	@Autowired
+	private AmazonS3Client amazonS3Client;
 	
 	public Integer selectMaxSeq() {
 		return productDao.selectMaxSeq();
 	}
 	
-	public int insert(ProductDto productDto) {
-		return productDao.insert(productDto);
+	public int insert(ProductDto productDto) throws Exception {
+		productDao.insert(productDto);
+    	uploadFilesToS3(productDto.getUploadImg1(), productDto, "infrBannerUploaded", productDto.getUploadImg1Type(), productDto.getUploadImg1MaxNumber()
+    			, productDto.getProdSeq(), productDao, amazonS3Client);
+		return 1;
 	}
 	
 	public List<ProductDto> selectList(ProductVo vo) {
@@ -49,8 +57,12 @@ public class ProductService {
 		return productDao.selectOneInfos(vo);
 	}
 	
-	public int update(ProductDto productDto) {
-		return productDao.update(productDto);
+	public int update(ProductDto productDto) throws Exception {
+		productDao.update(productDto);
+		productDao.updateUploaded(productDto);
+		uploadFilesToS3(productDto.getUploadImg1(), productDto, "infrBannerUploaded", productDto.getUploadImg1Type(), productDto.getUploadImg1MaxNumber()
+    			, productDto.getProdSeq(), productDao, amazonS3Client);
+		return 1;
 	}
 	
 	public int infoUpdate(ProductDto productDto) {

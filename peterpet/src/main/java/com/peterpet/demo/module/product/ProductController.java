@@ -74,7 +74,7 @@ public class ProductController extends BaseController {
 	}
 
 	@RequestMapping(value = "/ProductXdmInst")
-	public String codeGroupXdmInst(ProductDto productDto) {
+	public String codeGroupXdmInst(ProductDto productDto) throws Exception {
 		productService.insert(productDto);
 		
 		for (int i = 0; i < productDto.getProdFuncArray().size(); i++) {
@@ -98,7 +98,7 @@ public class ProductController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/ProductXdmUpdt")
-	public String codeGroupXdmUpdt(ProductDto productDto) {
+	public String codeGroupXdmUpdt(ProductDto productDto) throws Exception {
 		int size;
 		int flag;
 		

@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.peterpet.demo.module.base.BaseDao;
+import com.peterpet.demo.module.base.BaseDto;
 import com.peterpet.demo.module.member.MemberDto;
 
 @Repository
-public interface ProductDao {
+public interface ProductDao extends BaseDao {
 
 	public Integer selectMaxSeq();
 	public int insert(ProductDto productDto);
@@ -31,4 +33,6 @@ public interface ProductDao {
 	public List<ProductDto> selectFeedList(ProductVo vo);
 	public int updateScore(MemberDto dto);
 	public List<ProductDto> selectReview(ProductVo vo);
+	public int insertUploaded(BaseDto dto);
+	public int updateUploaded(BaseDto dto);
 }
