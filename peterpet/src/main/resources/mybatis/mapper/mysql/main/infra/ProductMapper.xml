@@ -371,6 +371,15 @@
 			prodSeq = #{prodSeq}
 	</update>
 	
+	<sql id="commonReview">
+		FROM
+        	review a
+        	LEFT JOIN user b ON b.userSeq = a.user_userSeq
+        	LEFT JOIN pet c ON b.userSeq = c.user_userSeq AND petMain = 1
+        WHERE 1=1
+        	AND product_prodSeq = #{prodSeq}
+	</sql>
+	
 	<select id="selectReview" resultMap="resultMapObj">
 		SELECT
 			a.reviScore,
@@ -382,18 +391,19 @@
 			c.petVarieties,
 			c.petBirth,
 			c.petWeight
-        FROM
-        	review a
-        	LEFT JOIN user b ON b.userSeq = a.user_userSeq
-        	LEFT JOIN pet c ON b.userSeq = c.user_userSeq AND petMain = 1
-        WHERE 1=1
-        	AND product_prodSeq = #{prodSeq}
+		<include refid="commonReview"></include>
         <choose>
 			<when test="shReviewSort == 1">ORDER BY a.reviGood DESC</when>
 			<when test="shReviewSort == 2">ORDER BY a.reviModDate DESC</when>
 			<when test="shReviewSort == 3">ORDER BY a.reviScore DESC</when>
 			<when test="shReviewSort == 4">ORDER BY a.reviScore</when>
 		</choose>
+		limit #{rowNumToShow} offset #{startRnumForMysql}
+	</select>
+	
+	<select id="selectReviewCount" resultType="Integer">
+		SELECT COUNT(*)
+		<include refid="commonReview"></include>
 	</select>
 	
 	<insert id="insertUploaded">

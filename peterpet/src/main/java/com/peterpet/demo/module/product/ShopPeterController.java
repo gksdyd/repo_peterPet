@@ -45,6 +45,7 @@ public class ShopPeterController extends BaseController {
 		ProductDto dto = productService.selectOnePoduct(vo);
 		dto.setWeightArray(dto.getWeightArr().split(","));
 		model.addAttribute("item", dto);
+		vo.setParamsPaging(productService.selectReviewCount(vo));
 		model.addAttribute("list", productService.selectReview(vo));
 		model.addAttribute("code", CodeDto.cachedCodeArrayList);
 		deliveryTimeCheck(vo);
@@ -84,6 +85,8 @@ public class ShopPeterController extends BaseController {
 	@RequestMapping(value = "/ReviewPeterProc")
 	public Map<String, Object> reviewPeterProc(ProductVo vo) {
 		Map<String, Object> rtMap = new HashMap<>();
+		vo.setParamsPaging(productService.selectReviewCount(vo));
+		rtMap.put("vo", vo);
 		rtMap.put("list", productService.selectReview(vo));
 		return rtMap;
 	}

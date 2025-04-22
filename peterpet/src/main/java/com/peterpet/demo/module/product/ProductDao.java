@@ -35,4 +35,5 @@ public interface ProductDao extends BaseDao {
 	public List<ProductDto> selectReview(ProductVo vo);
 	public int insertUploaded(BaseDto dto);
 	public int updateUploaded(BaseDto dto);
+	public int selectReviewCount(ProductVo vo);
 }

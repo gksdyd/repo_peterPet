@@ -105,7 +105,7 @@
                                 </div>
                                 <!-- End Product Info -->
                                 <!-- Product Form -->
-                                <form method="post" action="#" class="product-form hidedropdown">
+                                <form class="product-form hidedropdown">
                                     <!-- Swatches Color/Size -->
                                     <div class="row g-2 variable-select pb-2 w-100">
                                         <!-- Swatches Size -->
@@ -212,6 +212,7 @@
                                                     </div>
 
                                                     <form class="product-review-form new-review-form mb-4" id="reviewForm">
+                                                        <input type="hidden" id="thisPage" name="thisPage" th:value="${vo.thisPage}" default="1"/>
                                                         <h4 class="spr-form-title text-uppercase">Write A Review</h4>
                                                         <fieldset class="spr-form-contact">
                                                             <div class="spr-form-review-rating form-group">
@@ -368,6 +369,23 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div class="pagination">
+                                                    <ul>
+                                                        <li class="prev page-item" th:if="${vo.startPage gt vo.pageNumToShow}">
+                                                            <a href="javascript:goReview(${vo.startPage - 1})" th:attr="onclick=|goReview('${vo.startPage - 1}')|">
+                                                                <i class="icon align-middle an an-caret-left" aria-hidden="true"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li class="page-item" th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}" th:classappend="${num eq vo.thisPage} ? active : ''">
+                                                            <a th:attr="onclick=|goReview('${num}')|" th:text="${num}"></a>
+                                                        </li>
+                                                        <li class="next page-item" th:if="${vo.endPage ne vo.totalPages}">
+                                                            <a th:attr="onclick=|goReview('${vo.endPage + 1}')|">
+                                                                <i class="icon align-middle an an-caret-right" aria-hidden="true"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>
@@ -893,6 +911,11 @@
 
             window.cache = /*[[${code}]]*/ [];
 
+            let start;
+            let end;
+            let page;
+            let total;
+
             $("#reviewBtn").on("click", function() {
                 starValid.setAttribute("class", "d-none");
                 textValid.setAttribute("class", "d-none");
@@ -1011,7 +1034,7 @@
                     "<p class='spr-review-header-title mt-1'>" +
                         "<span class='fw-bolder'>" + id + "</span><br>" +
                         "<span class='fw-bolder'>" + name + "</span>" +
-                        "<span> · " + window.cache[petVarieties - 1] + " · " +
+                        "<span> · " + window.cache[petVarieties - 1].codeName + " · " +
                         (new Date().getFullYear() - Number(petBirth.substring(0,4)) + 1) + "살 · " + petWeight + "kg</span></p>" +
                     "<span class='spr-review-header-byline'>" + reviModDate.substring(0,10) + "</span></div></div></div>" +
                     "<div class='spr-review-content'>" +
@@ -1034,8 +1057,13 @@
                     ,cache: false
                     ,type: "post"
                     ,url: goUrlReviewProc
-                    ,data: { "shReviewSort" : $(e).val(), "prodSeq" : /*[[${item.prodSeq}]]*/'' }
+                    ,data: { "shReviewSort" : $(e).val(), "prodSeq" : /*[[${item.prodSeq}]]*/'', "thisPage" : $("#thisPage").val() }
                     ,success: function(response) {
+                        start = response.vo.startPage;
+                        end = response.vo.endPage;
+                        page = response.vo.thisPage;
+                        total = response.vo.totalPages;
+
                         $("#reviewBody").empty();
                         let text = "";
                         for (let i = 0; i < response.list.length; i++) {
@@ -1044,6 +1072,7 @@
                                     response.list[i].reviModDate, response.list[i].reviText);
                         }
                         $("#reviewBody").html(text);
+                        pagination();
                     }
                     ,error : function(jqXHR){
                         alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
@@ -1057,6 +1086,64 @@
                 }
                 $("#reviText").val("");
                 $(".product-review-form").slideToggle();
+            }
+
+            function goReview(thisPage) {
+                document.querySelector("input[name=thisPage]").value = thisPage;
+                reviewRefresh($("#sort"));
+            }
+
+            function pagination() {
+                let pagination = $(".pagination > ul");
+                pagination.empty();
+                
+                if (start > 1) {
+                    let li = document.createElement('li');
+                    li.setAttribute("class", "prev page-item");
+
+                    let a = document.createElement('a');
+                    a.setAttribute("href", "javascript:void(0)");
+                    a.setAttribute("onclick", `goReview(${start - 1})`);
+
+                    let i = document.createElement('i');
+                    i.setAttribute("class", "icon align-middle an an-caret-left");
+                    i.setAttribute("aria-hidden", "true")
+                    
+                    a.append(i);
+                    li.append(a);
+                    pagination.append(li);
+                }
+
+                for (let i = start; i <= end; i++) {
+                    let li = document.createElement('li');
+                    li.setAttribute("class", "page-item");
+                    if (i == page) li.classList.add("active");
+
+                    let a = document.createElement('a');
+                    a.setAttribute("href", "javascript:void(0)");
+                    a.setAttribute("onclick", `goReview(${i})`);
+                    a.innerHTML = i;
+                    
+                    li.append(a);
+                    pagination.append(li);
+                }
+
+                if (end < total) {
+                    let li = document.createElement('li');
+                    li.setAttribute("class", "next page-item");
+
+                    let a = document.createElement('a');
+                    a.setAttribute("href", "javascript:void(0)");
+                    a.setAttribute("onclick", `goReview(${end + 1})`);
+
+                    let i = document.createElement('i');
+                    i.setAttribute("class", "icon align-middle an an-caret-right");
+                    i.setAttribute("aria-hidden", "true")
+                    
+                    a.append(i);
+                    li.append(a);
+                    pagination.append(li);
+                }
             }
         </script>
         <script th:inline="javascript" src="/peter/template/optimal-html/assets/js/JHY/product.js"></script>
