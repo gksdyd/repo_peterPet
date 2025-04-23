@@ -188,14 +188,14 @@
                     <div class="col-6">
                       <div class="row currImage1">
                         <div class="col-4" th:each="image : ${image1}">
-                          <img th:src="${image.path}" style="width: 100%;">
+                          <img th:src="${image.path}" style="width: 100%; height: 150px; object-fit:contain;">
                         </div>
                       </div>
                     </div>
                     <div class="col-6">
                       <div class="row currImage2">
                         <div class="col-4" th:each="image : ${image2}">
-                          <img th:src="${image.path}" style="width: 100%;">
+                          <img th:src="${image.path}" style="width: 100%; height: 150px; object-fit:contain;">
                         </div>
                       </div>
                     </div>

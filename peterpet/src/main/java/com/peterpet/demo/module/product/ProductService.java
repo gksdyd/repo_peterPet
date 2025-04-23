@@ -64,6 +64,8 @@ public class ProductService extends BaseService {
 		productDao.updateUploaded(productDto);
 		uploadFilesToS3(productDto.getUploadImg1(), productDto, "image", productDto.getUploadImg1Type(), productDto.getUploadImg1MaxNumber()
     			, productDto.getProdSeq(), productDao, amazonS3Client);
+		uploadFilesToS3(productDto.getUploadImg2(), productDto, "image", productDto.getUploadImg2Type(), productDto.getUploadImg2MaxNumber()
+				, productDto.getProdSeq(), productDao, amazonS3Client);
 		return 1;
 	}
 	

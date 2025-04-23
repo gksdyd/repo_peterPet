@@ -16,7 +16,7 @@ $("input[type=file]").on("change", function(event) {
     let file = files[i];
     let reader = new FileReader();
     reader.onload = function(event){
-      let text = "<div class='col-4'><img src='" + event.target.result + "' style='width: 100%;'></div>";
+      let text = "<div class='col-4'><img src='" + event.target.result + "' style='width: 100%; height: 150px; object-fit:contain;'></div>";
       currImage.html(currImage.html() + text);
     }
     reader.readAsDataURL(file);
