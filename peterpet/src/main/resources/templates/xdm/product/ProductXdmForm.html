@@ -178,8 +178,8 @@
                     </div>
                   </div>
                   <div class="mb-3 row g-3 ms-2 me-2">
-                    <div class="col-3">
-                      <img th:src="${item.path}" alt="" style="width: 50%;">
+                    <div class="col-2" th:each="image : ${image}">
+                      <img th:src="${image}" alt="" style="width: 100%;">
                     </div>
                   </div>
                 </div>

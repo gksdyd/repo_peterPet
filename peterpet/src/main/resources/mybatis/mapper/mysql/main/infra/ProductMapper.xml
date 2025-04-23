@@ -418,7 +418,7 @@
 			AND pseq = #{prodSeq}
 	</update>
 	
-	<select id="selectImage" resultType="com.peterpet.demo.module.base.BaseDto">
+	<select id="selectImage" resultType="String">
 		SELECT
 			path
 		FROM

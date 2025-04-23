@@ -24,8 +24,6 @@ public class BaseDto {
 	private Integer uploadImg1Type;
 	private Integer uploadImg1MaxNumber;
 	private String ifbnSeq;
-	
-	private String[] imagePath;
 
 	public String getTableName() {
 		return tableName;
@@ -153,13 +151,5 @@ public class BaseDto {
 
 	public void setIfbnSeq(String ifbnSeq) {
 		this.ifbnSeq = ifbnSeq;
-	}
-
-	public String[] getImagePath() {
-		return imagePath;
-	}
-
-	public void setImagePath(String[] imagePath) {
-		this.imagePath = imagePath;
 	}
 }

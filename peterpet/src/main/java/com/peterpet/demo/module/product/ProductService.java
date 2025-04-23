@@ -118,4 +118,8 @@ public class ProductService extends BaseService {
 	public int selectReviewCount(ProductVo vo) {
 		return productDao.selectReviewCount(vo);
 	}
+	
+	public List<String> selectImage(ProductVo vo) {
+		return productDao.selectImage(vo);
+	}
 }
