@@ -23,7 +23,11 @@ public class BaseDto {
 	
 	private Integer uploadImg1Type;
 	private Integer uploadImg1MaxNumber;
-	private String ifbnSeq;
+	
+	private MultipartFile[] uploadImg2;
+	
+	private Integer uploadImg2Type;
+	private Integer uploadImg2MaxNumber;
 
 	public String getTableName() {
 		return tableName;
@@ -145,11 +149,27 @@ public class BaseDto {
 		this.uploadImg1MaxNumber = uploadImg1MaxNumber;
 	}
 
-	public String getIfbnSeq() {
-		return ifbnSeq;
+	public MultipartFile[] getUploadImg2() {
+		return uploadImg2;
 	}
 
-	public void setIfbnSeq(String ifbnSeq) {
-		this.ifbnSeq = ifbnSeq;
+	public void setUploadImg2(MultipartFile[] uploadImg2) {
+		this.uploadImg2 = uploadImg2;
+	}
+
+	public Integer getUploadImg2Type() {
+		return uploadImg2Type;
+	}
+
+	public void setUploadImg2Type(Integer uploadImg2Type) {
+		this.uploadImg2Type = uploadImg2Type;
+	}
+
+	public Integer getUploadImg2MaxNumber() {
+		return uploadImg2MaxNumber;
+	}
+
+	public void setUploadImg2MaxNumber(Integer uploadImg2MaxNumber) {
+		this.uploadImg2MaxNumber = uploadImg2MaxNumber;
 	}
 }

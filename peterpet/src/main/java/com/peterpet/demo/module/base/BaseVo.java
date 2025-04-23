@@ -16,8 +16,6 @@ public class BaseVo {
 	private int endPage;										// 마지막 페이지 번호
 
 	private int startRnumForMysql = 0;							// 쿼리 시작 row
-	
-//	private String ifbnSeq;
 
 	//	search
 	private Integer shUseFlag = 1; 									/* null 값을 받아야 되는 경우가 있어서 int 대신 Integer 사용 */
@@ -101,13 +99,6 @@ public class BaseVo {
 	public void setStartRnumForMysql(int startRnumForMysql) {
 		this.startRnumForMysql = startRnumForMysql;
 	}
-	
-//	public String getIfbnSeq() {
-//		return ifbnSeq;
-//	}
-//	public void setIfbnSeq(String ifbnSeq) {
-//		this.ifbnSeq = ifbnSeq;
-//	}
 	public Integer getShUseFlag() {
 		return shUseFlag;
 	}

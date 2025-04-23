@@ -418,13 +418,27 @@
 			AND pseq = #{prodSeq}
 	</update>
 	
-	<select id="selectImage" resultType="String">
+	<select id="selectImage1" resultMap="resultMapObj">
 		SELECT
-			path
+			path,
+			originalName
 		FROM
 			image
 		WHERE 1=1
 			AND #{prodSeq} = pseq
 			AND delNy = 0
+			AND type = 1
+	</select>
+	
+	<select id="selectImage2" resultMap="resultMapObj">
+		SELECT
+			path,
+			originalName
+		FROM
+			image
+		WHERE 1=1
+			AND #{prodSeq} = pseq
+			AND delNy = 0
+			AND type = 2
 	</select>
 </mapper>

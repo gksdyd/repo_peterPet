@@ -4,9 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.peterpet.demo.module.codegroup.CodeGroupDto;
-import com.peterpet.demo.module.codegroup.CodeGroupVo;
-
 @Repository
 public interface CodeDao {
 

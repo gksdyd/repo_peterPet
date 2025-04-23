@@ -69,7 +69,8 @@ public class ProductController extends BaseController {
 				vo.getFeedWeightArray().add(dtoInfo.get(i).getInfoWeight());
 				vo.getFeedDiscountArray().add(dtoInfo.get(i).getInfoDiscount());
 			}
-			model.addAttribute("image", productService.selectImage(vo));
+			model.addAttribute("image1", productService.selectImage1(vo));
+			model.addAttribute("image2", productService.selectImage2(vo));
 		}
 		return "xdm/product/ProductXdmForm";
 	}

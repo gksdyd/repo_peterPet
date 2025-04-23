@@ -171,15 +171,33 @@
                     </div>
                   </div>
                   <div class="mb-3 row g-3 ms-2 me-2">
-                    <div class="col-3">
-                      <input type="file" id="uploadImg1" name="uploadImg1" multiple>
+                    <div class="col-6">
+                      <label class="form-label-JHY" for="formFileMultiple">상품 이미지</label>
+                      <input class="form-control form-control-sm" id="uploadImg1" name="uploadImg1" type="file" multiple="multiple" />
                       <input type="hidden" id="uploadImg1Type" name="uploadImg1Type" value="1">
                       <input type="hidden" id="uploadImg1MaxNumber" name="uploadImg1MaxNumber" value="1">
                     </div>
+                    <div class="col-6">
+                      <label class="form-label-JHY" for="formFileMultiple">설명 이미지</label>
+                      <input class="form-control form-control-sm" id="uploadImg2" name="uploadImg2" type="file" multiple="multiple" />
+                      <input type="hidden" id="uploadImg2Type" name="uploadImg2Type" value="2">
+                      <input type="hidden" id="uploadImg2MaxNumber" name="uploadImg2MaxNumber" value="1">
+                    </div>
                   </div>
                   <div class="mb-3 row g-3 ms-2 me-2">
-                    <div class="col-2" th:each="image : ${image}">
-                      <img th:src="${image}" alt="" style="width: 100%;">
+                    <div class="col-6">
+                      <div class="row currImage1">
+                        <div class="col-4" th:each="image : ${image1}">
+                          <img th:src="${image.path}" style="width: 100%;">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="row currImage2">
+                        <div class="col-4" th:each="image : ${image2}">
+                          <img th:src="${image.path}" style="width: 100%;">
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -208,6 +226,7 @@
   <div th:replace="~{xdm/include/includeXdmCommon :: includeXdmCommon}"></div>
   <div th:replace="~{xdm/include/includeXdmForm :: includeXdmForm}"></div>
   <div th:replace="~{xdm/include/includeXdmCommonProd :: includeXdmCommonProd}"></div>
+  <script src="/xdm/template/falcon-v3.23.0/assets/js/image.js"></script>
   <script type="text/javascript">
     let form = document.getElementById("product-form");
 
