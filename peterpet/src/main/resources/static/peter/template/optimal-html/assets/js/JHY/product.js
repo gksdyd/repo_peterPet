@@ -17,7 +17,8 @@ periordTime = function() {
             $("#fromDate").text(response.delivery);
         }
         ,error : function(jqXHR) {
-            alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+            // alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+            alert( $("#hour").text(response.hour + "시간 ") + $("#minute").text(response.minute + "분 "));
         }
     })
 }
