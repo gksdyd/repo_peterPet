@@ -28,6 +28,8 @@ public class BaseDto {
 	
 	private Integer uploadImg2Type;
 	private Integer uploadImg2MaxNumber;
+	
+	private String[] removeSeq;
 
 	public String getTableName() {
 		return tableName;
@@ -171,5 +173,13 @@ public class BaseDto {
 
 	public void setUploadImg2MaxNumber(Integer uploadImg2MaxNumber) {
 		this.uploadImg2MaxNumber = uploadImg2MaxNumber;
+	}
+
+	public String[] getRemoveSeq() {
+		return removeSeq;
+	}
+
+	public void setRemoveSeq(String[] removeSeq) {
+		this.removeSeq = removeSeq;
 	}
 }
