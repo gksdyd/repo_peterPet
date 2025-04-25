@@ -6,6 +6,7 @@ let prodName = [];
 let infoDiscount = [];
 let infoPrice = [];
 let prodScore = [];
+let image = [];
 
 let badgeArray = [];
 let prodFuncArray = [];
@@ -131,7 +132,7 @@ create = function() {
     for (let i = 0; i < prodSeq.length; i++) {
         let body = document.createElement('div');
         body.setAttribute("class", "col-6 col-sm-6 col-md-4 col-lg-4 item");
-        body.append(initImage(prodSeq[i]));
+        body.append(initImage(prodSeq[i], image[i]));
         body.append(initDetail(prodSeq[i], funcName[i], infoWeight[i], feedBrand[i], prodName[i], infoDiscount[i], infoPrice[i], prodScore[i]));
         createProduct.append(body);
     }
@@ -164,6 +165,7 @@ getSettingValue = function() {
                 infoDiscount.push(response.dtos[i].infoDiscount);
                 infoPrice.push(response.dtos[i].infoPrice);
                 prodScore.push(response.dtos[i].prodScore);
+                image.push(response.dtos[i].path);
             }
         }
         ,error : function(jqXHR){
@@ -181,9 +183,10 @@ initArray = function() {
     infoDiscount = [];
     infoPrice = [];
     prodScore = [];
+    image = [];
 }
 
-initImage = function(seq) {
+initImage = function(seq, path) {
     let imageGroup = document.createElement('div');
     imageGroup.setAttribute("class", "product-image");
     
@@ -192,7 +195,7 @@ initImage = function(seq) {
 
     let createImage = document.createElement('img');
     createImage.setAttribute("class", "blur-up lazyload");
-    createImage.setAttribute("src", "/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity.jpeg");
+    createImage.setAttribute("src", path);
 
     let createLabel = document.createElement("div");
     createLabel.setAttribute("class", "product-labels");
