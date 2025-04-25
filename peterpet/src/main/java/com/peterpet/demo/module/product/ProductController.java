@@ -100,7 +100,7 @@ public class ProductController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/ProductXdmUpdt")
-	public String codeGroupXdmUpdt(ProductDto productDto) throws Exception {
+	public String productXdmUpdt(ProductDto productDto) throws Exception {
 		int size;
 		int flag;
 		

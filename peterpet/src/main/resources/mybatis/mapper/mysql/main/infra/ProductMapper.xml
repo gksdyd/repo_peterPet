@@ -189,7 +189,8 @@
 			b.infoWeight,
 			(b.infoPrice * (100 - infoDiscount) / 100) AS discountPrice,
 			(SELECT COUNT(*) FROM review WHERE product_prodSeq = #{prodSeq}) AS reviewCount,
-			(SELECT GROUP_CONCAT(infoWeight) FROM feedinfo WHERE product_prodSeq = #{prodSeq} GROUP BY product_prodSeq) AS weightArr
+			(SELECT GROUP_CONCAT(infoWeight) FROM feedinfo WHERE product_prodSeq = #{prodSeq} GROUP BY product_prodSeq) AS weightArr,
+			(SELECT path FROM image WHERE #{prodSeq} = pseq AND delNy = 0 AND type = 1 ORDER BY sort LIMIT 1) AS path
         FROM
         	product
         	LEFT JOIN feedinfo b ON prodSeq = b.product_prodSeq AND infoMain = 1
@@ -347,7 +348,8 @@
 			b.infoPrice,
 			b.infoWeight,
 			b.infoDiscount,
-			c.funcName
+			c.funcName,
+			(SELECT path FROM image WHERE a.prodSeq = pseq AND delNy = 0 AND type = 1 ORDER BY sort LIMIT 1) AS path
 		<include refid="commonFeed"></include>
         <choose>
 			<when test="shSortBy == 1">ORDER BY a.prodRegDate DESC</when>

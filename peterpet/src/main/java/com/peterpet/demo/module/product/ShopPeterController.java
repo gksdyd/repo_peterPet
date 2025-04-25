@@ -47,6 +47,8 @@ public class ShopPeterController extends BaseController {
 		model.addAttribute("item", dto);
 		vo.setParamsPaging(productService.selectReviewCount(vo));
 		model.addAttribute("list", productService.selectReview(vo));
+		model.addAttribute("image1", productService.selectImage1(vo));
+		model.addAttribute("image2", productService.selectImage2(vo));
 		model.addAttribute("code", CodeDto.cachedCodeArrayList);
 		deliveryTimeCheck(vo);
 		return "peter/shop/ShopPeterView";

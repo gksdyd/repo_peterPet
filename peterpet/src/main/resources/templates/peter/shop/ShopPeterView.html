@@ -20,25 +20,13 @@
                                 <div class="product-details-img thumb-left clearfix d-flex-wrap mb-3 mb-md-0">
                                     <div class="product-thumb">
                                         <div id="gallery" class="product-dec-slider-2 product-tab-left">
-                                            <a data-image="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity.jpeg" data-zoom-image="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity.jpeg" class="slick-slide slick-cloned active">
-                                                <img class="blur-up lazyload" data-src="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity.jpeg" src="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity.jpeg" alt="product" />
-                                            </a>
-                                            <a data-image="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity-detail1.jpeg" data-zoom-image="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity-detail1.jpeg" class="slick-slide slick-cloned">
-                                                <img class="blur-up lazyload" data-src="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity-detail1.jpeg" src="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity-detail1.jpeg" alt="product" />
-                                            </a>
-                                            <a data-image="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity-detail2.jpeg" data-zoom-image="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity-detail2.jpeg" class="slick-slide slick-cloned">
-                                                <img class="blur-up lazyload" data-src="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity-detail2.jpeg" src="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity-detail2.jpeg" alt="product" />
-                                            </a>
-                                            <a data-image="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity-detail3.jpeg" data-zoom-image="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity-detail3.jpeg" class="slick-slide slick-cloned">
-                                                <img class="blur-up lazyload" data-src="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity-detail3.jpeg" src="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity-detail3.jpeg" alt="product" />
-                                            </a>
-                                            <a data-image="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity-detail4.jpeg" data-zoom-image="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity-detail4.jpeg" class="slick-slide slick-cloned">
-                                                <img class="blur-up lazyload" data-src="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity-detail4.jpeg" src="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity-detail4.jpeg" alt="product" />
+                                            <a th:each="image : ${image1}" th:data-image="${image.path}" th:data-zoom-image="${image.path}" class="slick-slide slick-cloned active">
+                                                <img class="blur-up lazyload" th:data-src="${image.path}" th:src="${image.path}" alt="product" />
                                             </a>
                                         </div>
                                     </div>
                                     <div class="zoompro-wrap product-zoom-right">
-                                        <div class="zoompro-span"><img id="zoompro" class="zoompro" src="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity.jpeg" data-zoom-image="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity.jpeg" alt="product" /></div>
+                                        <div class="zoompro-span"><img id="zoompro" class="zoompro" th:src="${item.path}" th:data-zoom-image="${item.path}" alt="product" /></div>
                                         <div class="product-labels"><span class="lbl pr-label1">new</span></div>
                                         <div class="product-wish"><a class="wishIcon wishlist rounded m-0" href="my-wishlist.html"><i class="icon an an-heart"></i><span class="tooltip-label left">찜</span></a></div>
                                         <div class="product-buttons">
@@ -47,11 +35,7 @@
                                         </div>
                                     </div>
                                     <div class="lightboximages">
-                                        <a href="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity.jpeg" data-size="1000x1280"></a>
-                                        <a href="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity-detail1.jpeg" data-size="1000x1280"></a>
-                                        <a href="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity-detail2.jpeg" data-size="1000x1280"></a>
-                                        <a href="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity-detail3.jpeg" data-size="1000x1280"></a>
-                                        <a href="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity-detail4.jpeg" data-size="1000x1280"></a>
+                                        <a th:each="image : ${image1}" th:href="${image.path}" data-size="1000x1280"></a>
                                     </div>
                                 </div>                               
                             </div>
@@ -187,13 +171,8 @@
                                     <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
                                         <div class="product-description">
                                             <div class="row pt-2">
-                                                <div class="col-12 col-sm-12 col-md-8 col-lg-8">
-                                                    <img alt="로얄캐닌 독 미니 인도어 퍼피 3kg 면역력 1번째" loading="lazy" src="https://images.pet-friends.co.kr/storage/pet_friends/product/id/f/5/5/6/8/7/2/f5568723c2fb24061648e42b3585fba1/10002/2d2dd4c4642cc7fb86eb0efb2a6dd428.jpeg">
-                                                </div>
-                                            </div>
-                                            <div class="row pt-2">
-                                                <div class="col-12 col-sm-12 col-md-8 col-lg-8">
-                                                    <img alt="로얄캐닌 독 미니 인도어 퍼피 3kg 면역력 2번째" loading="lazy" src="https://images.pet-friends.co.kr/storage/pet_friends/product/id/a/b/2/5/7/6/6/ab257661198f45d57e95c516dabc5cda/10002/6869e0516bfc5b9f6eb3122d2f38f908.jpeg">
+                                                <div class="col-12 col-sm-12 col-md-8 col-lg-8" th:each="image : ${image2}">
+                                                    <img loading="lazy" th:src="${image.path}">
                                                 </div>
                                             </div>
                                         </div>
@@ -261,7 +240,8 @@
                                                                         <p class="text-nowrap me-3">5점</p>
                                                                     </div>
                                                                     <div class="progress bg-200 w-100 rounded-pill" role="progressbar" aria-label="Basic example" style="height:6px;" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">
-                                                                        <div class="progress-bar rounded-pill animated-progress-bar" th:style="'width:' + ${item.scoreFive} / (${item.scoreFive} + ${item.scoreFour} + ${item.scoreThree} + ${item.scoreTwo} + ${item.scoreOne}) * 100 + '%'"></div>
+                                                                        <div class="progress-bar rounded-pill animated-progress-bar" th:if="${item.scoreFive} + ${item.scoreFour} + ${item.scoreThree} + ${item.scoreTwo} + ${item.scoreOne} != 0" th:style="'width:' + ${item.scoreFive} / (${item.scoreFive} + ${item.scoreFour} + ${item.scoreThree} + ${item.scoreTwo} + ${item.scoreOne}) * 100 + '%'"></div>
+                                                                        <div class="progress-bar rounded-pill animated-progress-bar" th:if="${item.scoreFive} + ${item.scoreFour} + ${item.scoreThree} + ${item.scoreTwo} + ${item.scoreOne} == 0" style="width:0"></div>
                                                                     </div>
                                                                     <p class="mb-0 ps-3 countPerScore" th:text="${item.scoreFive}"></p>
                                                                 </div>
@@ -270,7 +250,8 @@
                                                                         <p class="text-nowrap me-3">4점</p>
                                                                     </div>
                                                                     <div class="progress bg-200 w-100 rounded-pill" role="progressbar" aria-label="Basic example" style="height:6px" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">
-                                                                        <div class="progress-bar rounded-pill animated-progress-bar" th:style="'width:' + ${item.scoreFour} / (${item.scoreFive} + ${item.scoreFour} + ${item.scoreThree} + ${item.scoreTwo} + ${item.scoreOne}) * 100 + '%'"></div>
+                                                                        <div class="progress-bar rounded-pill animated-progress-bar" th:if="${item.scoreFive} + ${item.scoreFour} + ${item.scoreThree} + ${item.scoreTwo} + ${item.scoreOne} != 0" th:style="'width:' + ${item.scoreFour} / (${item.scoreFive} + ${item.scoreFour} + ${item.scoreThree} + ${item.scoreTwo} + ${item.scoreOne}) * 100 + '%'"></div>
+                                                                        <div class="progress-bar rounded-pill animated-progress-bar" th:if="${item.scoreFive} + ${item.scoreFour} + ${item.scoreThree} + ${item.scoreTwo} + ${item.scoreOne} == 0" style="width:0"></div>
                                                                     </div>
                                                                     <p class="mb-0 ps-3 countPerScore" th:text="${item.scoreFour}"></p>
                                                                 </div>
@@ -279,7 +260,8 @@
                                                                         <p class="text-nowrap me-3">3점</p>
                                                                     </div>
                                                                     <div class="progress bg-200 w-100 rounded-pill" role="progressbar" aria-label="Basic example" style="height:6px" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">
-                                                                        <div class="progress-bar rounded-pill animated-progress-bar" th:style="'width:' + ${item.scoreThree} / (${item.scoreFive} + ${item.scoreFour} + ${item.scoreThree} + ${item.scoreTwo} + ${item.scoreOne}) * 100 + '%'"></div>
+                                                                        <div class="progress-bar rounded-pill animated-progress-bar" th:if="${item.scoreFive} + ${item.scoreFour} + ${item.scoreThree} + ${item.scoreTwo} + ${item.scoreOne} != 0" th:style="'width:' + ${item.scoreThree} / (${item.scoreFive} + ${item.scoreFour} + ${item.scoreThree} + ${item.scoreTwo} + ${item.scoreOne}) * 100 + '%'"></div>
+                                                                        <div class="progress-bar rounded-pill animated-progress-bar" th:if="${item.scoreFive} + ${item.scoreFour} + ${item.scoreThree} + ${item.scoreTwo} + ${item.scoreOne} == 0" style="width:0"></div>
                                                                     </div>
                                                                     <p class="mb-0 ps-3 countPerScore" th:text="${item.scoreThree}"></p>
                                                                 </div>
@@ -288,7 +270,8 @@
                                                                         <p class="text-nowrap me-3">2점</p>
                                                                     </div>
                                                                     <div class="progress bg-200 w-100 rounded-pill" role="progressbar" aria-label="Basic example" style="height:6px" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">
-                                                                        <div class="progress-bar rounded-pill animated-progress-bar" th:style="'width:' + ${item.scoreTwo} / (${item.scoreFive} + ${item.scoreFour} + ${item.scoreThree} + ${item.scoreTwo} + ${item.scoreOne}) * 100 + '%'"></div>
+                                                                        <div class="progress-bar rounded-pill animated-progress-bar" th:if="${item.scoreFive} + ${item.scoreFour} + ${item.scoreThree} + ${item.scoreTwo} + ${item.scoreOne} != 0" th:style="'width:' + ${item.scoreTwo} / (${item.scoreFive} + ${item.scoreFour} + ${item.scoreThree} + ${item.scoreTwo} + ${item.scoreOne}) * 100 + '%'"></div>
+                                                                        <div class="progress-bar rounded-pill animated-progress-bar" th:if="${item.scoreFive} + ${item.scoreFour} + ${item.scoreThree} + ${item.scoreTwo} + ${item.scoreOne} == 0" style="width:0"></div>
                                                                     </div>
                                                                     <p class="mb-0 ps-3 countPerScore" th:text="${item.scoreTwo}"></p>
                                                                 </div>
@@ -297,7 +280,8 @@
                                                                         <p class="text-nowrap me-3">1점</p>
                                                                     </div>
                                                                     <div class="progress bg-200 w-100 rounded-pill" role="progressbar" aria-label="Basic example" style="height:6px" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">
-                                                                        <div class="progress-bar rounded-pill animated-progress-bar" th:style="'width:' + ${item.scoreOne} / (${item.scoreFive} + ${item.scoreFour} + ${item.scoreThree} + ${item.scoreTwo} + ${item.scoreOne}) * 100 + '%'"></div>
+                                                                        <div class="progress-bar rounded-pill animated-progress-bar" th:if="${item.scoreFive} + ${item.scoreFour} + ${item.scoreThree} + ${item.scoreTwo} + ${item.scoreOne} != 0" th:style="'width:' + ${item.scoreOne} / (${item.scoreFive} + ${item.scoreFour} + ${item.scoreThree} + ${item.scoreTwo} + ${item.scoreOne}) * 100 + '%'"></div>
+                                                                        <div class="progress-bar rounded-pill animated-progress-bar" th:if="${item.scoreFive} + ${item.scoreFour} + ${item.scoreThree} + ${item.scoreTwo} + ${item.scoreOne} == 0" style="width:0"></div>
                                                                     </div>
                                                                     <p class="mb-0 ps-3 countPerScore" th:text="${item.scoreOne}"></p>
                                                                 </div>
