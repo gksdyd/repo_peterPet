@@ -43,7 +43,7 @@ public class ProductController extends BaseController {
 	}
 
 	@RequestMapping(value = "/ProductXdmForm")
-	public String productXdmForm(Model model, ProductDto productDto, @ModelAttribute("vo") ProductVo vo) throws NumberFormatException, Exception {
+	public String productXdmForm(Model model, ProductDto productDto, @ModelAttribute("vo") ProductVo vo) throws Exception {
 		vo.InitProdType();
 		if (vo.getRegisterOrModifyFlag() == 1) {
 			if (productService.selectMaxSeq() == null) {
@@ -76,7 +76,7 @@ public class ProductController extends BaseController {
 	}
 
 	@RequestMapping(value = "/ProductXdmInst")
-	public String codeGroupXdmInst(ProductDto productDto) throws Exception {
+	public String codeGroupXdmInst(ProductDto productDto) {
 		productService.insert(productDto);
 		
 		for (int i = 0; i < productDto.getProdFuncArray().size(); i++) {
@@ -100,7 +100,7 @@ public class ProductController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/ProductXdmUpdt")
-	public String productXdmUpdt(ProductDto productDto) throws Exception {
+	public String productXdmUpdt(ProductDto productDto) {
 		int size;
 		int flag;
 		
@@ -236,5 +236,11 @@ public class ProductController extends BaseController {
 	@RequestMapping(value = "/ProductXdmUeltProc")
 	public void productXdmUeltProc(ProductVo vo) {
 		productService.severalUelete(vo);
+	}
+	
+	@RequestMapping(value = "/ProductXdmImageInst")
+	public String productXdmImageInst(ProductDto productDto) throws Exception {
+		productService.imageInsert(productDto);
+		return "redirect:/xdm/product/ProductXdmList";
 	}
 }

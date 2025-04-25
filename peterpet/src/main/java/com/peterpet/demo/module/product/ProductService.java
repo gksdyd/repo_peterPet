@@ -22,13 +22,8 @@ public class ProductService extends BaseService {
 		return productDao.selectMaxSeq();
 	}
 	
-	public int insert(ProductDto productDto) throws Exception {
-		productDao.insert(productDto);
-    	uploadFilesToS3(productDto.getUploadImg1(), productDto, "image", productDto.getUploadImg1Type(), productDto.getUploadImg1MaxNumber()
-    			, productDto.getProdSeq(), productDao, amazonS3Client);
-    	uploadFilesToS3(productDto.getUploadImg2(), productDto, "image", productDto.getUploadImg2Type(), productDto.getUploadImg2MaxNumber()
-    			, productDto.getProdSeq(), productDao, amazonS3Client);
-		return 1;
+	public int insert(ProductDto productDto) {
+		return productDao.insert(productDto);
 	}
 	
 	public List<ProductDto> selectList(ProductVo vo) {
@@ -59,16 +54,8 @@ public class ProductService extends BaseService {
 		return productDao.selectOneInfos(vo);
 	}
 	
-	public int update(ProductDto productDto) throws Exception {
-		productDao.update(productDto);
-
-		productDao.updateUploaded(productDto);			
-		
-		uploadFilesToS3(productDto.getUploadImg1(), productDto, "image", productDto.getUploadImg1Type(), productDto.getUploadImg1MaxNumber()
-    			, productDto.getProdSeq(), productDao, amazonS3Client);
-//		uploadFilesToS3(productDto.getUploadImg2(), productDto, "image", productDto.getUploadImg2Type(), productDto.getUploadImg2MaxNumber()
-//				, productDto.getProdSeq(), productDao, amazonS3Client);
-		return 1;
+	public int update(ProductDto productDto) {			
+		return productDao.update(productDto);
 	}
 	
 	public int infoUpdate(ProductDto productDto) {
@@ -129,5 +116,10 @@ public class ProductService extends BaseService {
 	
 	public List<ProductDto> selectImage2(ProductVo vo) {
 		return productDao.selectImage2(vo);
+	}
+	
+	public void imageInsert(ProductDto productDto) throws Exception {
+		uploadFilesToS3(productDto.getUploadImg1(), productDto, "image", productDto.getUploadImg1Type(), productDto.getUploadImg1MaxNumber()
+    			, productDto.getProdSeq(), productDao, amazonS3Client);
 	}
 }

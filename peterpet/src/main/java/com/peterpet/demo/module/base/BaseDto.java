@@ -20,16 +20,8 @@ public class BaseDto {
 	private String pseq;
 
 	private MultipartFile[] uploadImg1;
-	
 	private Integer uploadImg1Type;
 	private Integer uploadImg1MaxNumber;
-	
-	private MultipartFile[] uploadImg2;
-	
-	private Integer uploadImg2Type;
-	private Integer uploadImg2MaxNumber;
-	
-	private String[] removeSeq;
 
 	public String getTableName() {
 		return tableName;
@@ -149,37 +141,5 @@ public class BaseDto {
 
 	public void setUploadImg1MaxNumber(Integer uploadImg1MaxNumber) {
 		this.uploadImg1MaxNumber = uploadImg1MaxNumber;
-	}
-
-	public MultipartFile[] getUploadImg2() {
-		return uploadImg2;
-	}
-
-	public void setUploadImg2(MultipartFile[] uploadImg2) {
-		this.uploadImg2 = uploadImg2;
-	}
-
-	public Integer getUploadImg2Type() {
-		return uploadImg2Type;
-	}
-
-	public void setUploadImg2Type(Integer uploadImg2Type) {
-		this.uploadImg2Type = uploadImg2Type;
-	}
-
-	public Integer getUploadImg2MaxNumber() {
-		return uploadImg2MaxNumber;
-	}
-
-	public void setUploadImg2MaxNumber(Integer uploadImg2MaxNumber) {
-		this.uploadImg2MaxNumber = uploadImg2MaxNumber;
-	}
-
-	public String[] getRemoveSeq() {
-		return removeSeq;
-	}
-
-	public void setRemoveSeq(String[] removeSeq) {
-		this.removeSeq = removeSeq;
 	}
 }

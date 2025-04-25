@@ -6,150 +6,169 @@ function removeImage(e) {
   $(e).parent().remove();
 }
 
-let myDropzone = null;
+let myDropzones = [];
+
 window.Dropzone ? window.Dropzone.autoDiscover = false : '';
-var dropzoneInit = function dropzoneInit() {
-  var merge = window._.merge;
-  var Selector = {
+
+var dropzoneInit = function () {
+  const merge = window._.merge;
+  const Selector = {
     DROPZONE: '[data-dropzone]',
     DZ_ERROR_MESSAGE: '.dz-error-message',
     DZ_PREVIEW: '.dz-preview',
     DZ_PROGRESS: '.dz-preview .dz-preview-cover .dz-progress',
     DZ_PREVIEW_COVER: '.dz-preview .dz-preview-cover'
   };
-  var ClassName = {
+  const ClassName = {
     DZ_FILE_PROCESSING: 'dz-file-processing',
     DZ_FILE_COMPLETE: 'dz-file-complete',
     DZ_COMPLETE: 'dz-complete',
     DZ_PROCESSING: 'dz-processing'
   };
-  var DATA_KEY = {
-    OPTIONS: 'options'
-  };
-  var Events = {
+  const DATA_KEY = { OPTIONS: 'options' };
+  const Events = {
     ADDED_FILE: 'addedfile',
     REMOVED_FILE: 'removedfile',
     COMPLETE: 'complete'
   };
-  var dropzones = document.querySelectorAll(Selector.DROPZONE);
-  !!dropzones.length && dropzones.forEach(function (item) {
-    var userOptions = utils.getData(item, DATA_KEY.OPTIONS);
-    userOptions = userOptions || {};
-    var data = userOptions.data ? userOptions.data : {};
-    var options = merge({
-      url: '/xdm/product/ProductXdmUpdt',
-      paramName: 'uploadImg1',
-      addRemoveLinks: false,
-      previewsContainer: item.querySelector(Selector.DZ_PREVIEW),
-      previewTemplate: item.querySelector(Selector.DZ_PREVIEW).innerHTML,
-      thumbnailWidth: null,
-      thumbnailHeight: null,
-      maxFilesize: 20,
-      autoProcessQueue: false,
-      uploadMultiple: true,
-      filesizeBase: 1000,
-      init: function init() {
-        var thisDropzone = this;
-        if (data.length) {
-          data.forEach(function (v) {
-            var mockFile = {
-              name: v.name,
-              size: v.size
-            };
-            thisDropzone.options.addedfile.call(thisDropzone, mockFile);
-            thisDropzone.options.thumbnail.call(thisDropzone, mockFile, "".concat(v.url, "/").concat(v.name));
-          });
-        }
-        thisDropzone.on(Events.ADDED_FILE, function addedfile() {
-          if ('maxFiles' in userOptions) {
-            if (userOptions.maxFiles === 1 && item.querySelectorAll(Selector.DZ_PREVIEW_COVER).length > 1) {
-              item.querySelector(Selector.DZ_PREVIEW_COVER).remove();
-            }
-            if (userOptions.maxFiles === 1 && this.files.length > 1) {
-              this.removeFile(this.files[0]);
-            }
-          }
-        });
-        document.getElementById("submitBtn").addEventListener("click", function (e) {
-          e.preventDefault();
-        
-          const form = document.getElementById("product-form"); // form ID 맞게 수정
-          validationInit();
-          if (!validation()) return;
-        
-          let imageSeq = document.querySelectorAll(".imageSeq");
-          let imageArray = []
-          imageSeq.forEach(element => {
-            imageArray.push(element.getAttribute("data-seq"));
-          });
-          $("#removeSeq").val(imageArray);
 
-          // 파일이 있으면 Dropzone 전송
-          if (myDropzone && myDropzone.getAcceptedFiles().length > 0) {
-            myDropzone.on("sendingmultiple", function (files, xhr, formDataDZ) {
-              const formData = new FormData(form);
-              for (const [key, value] of formData.entries()) {
-                formDataDZ.append(key, value);
-              }
+  const dropzones = document.querySelectorAll(Selector.DROPZONE);
+
+  if (dropzones.length) {
+    dropzones.forEach((item) => {
+      const userOptions = utils.getData(item, DATA_KEY.OPTIONS) || {};
+      const data = userOptions.data || {};
+      const previewsContainer = item.querySelector(Selector.DZ_PREVIEW);
+      const previewTemplateHTML = previewsContainer.innerHTML;
+
+      // Dropzone 생성 전에 템플릿 비워주기
+      previewsContainer.innerHTML = '';
+
+      const options = merge({
+        url: '/xdm/product/ProductXdmImageInst',
+        paramName: 'uploadImg1',
+        addRemoveLinks: false,
+        previewsContainer: previewsContainer,
+        previewTemplate: previewTemplateHTML,
+        thumbnailWidth: null,
+        thumbnailHeight: null,
+        maxFilesize: 20,
+        autoProcessQueue: false,
+        uploadMultiple: true,
+        filesizeBase: 1000,
+        init: function () {
+          const dz = this;
+
+          // 기존 이미지 mock으로 등록
+          if (data.length) {
+            data.forEach((v) => {
+              const mockFile = { name: v.name, size: v.size };
+              dz.emit("addedfile", mockFile);
+              dz.emit("thumbnail", mockFile, `${v.url}/${v.name}`);
+              dz.emit("complete", mockFile);
             });
-        
-            myDropzone.processQueue();
-          } else {
-            // 파일이 없으면 기존 form submit
-            if (document.getElementById("registerOrModifyFlag").value == "1") {
-              form.action = goUrlXdmInst;
-            } else {
-              form.action = goUrlXdmUpdt;
+          }
+
+          // 단일 파일 제한 처리
+          dz.on(Events.ADDED_FILE, function () {
+            if (userOptions.maxFiles === 1) {
+              // Dropzone이 1개만 허용될 때 기존 preview 삭제
+              if (previewsContainer.querySelectorAll(Selector.DZ_PREVIEW_COVER).length > 1) {
+                previewsContainer.querySelector(Selector.DZ_PREVIEW_COVER).remove();
+              }
+              if (dz.files.length > 1) {
+                dz.removeFile(dz.files[0]);
+              }
             }
-        
-            form.method = "post";
-            form.submit();
+          });
+        },
+        error: function (file, message) {
+          if (file.previewElement) {
+            file.previewElement.classList.add('dz-error');
+            if (typeof message !== 'string' && message.error) {
+              message = message.error;
+            }
+            const errorNodes = file.previewElement.querySelectorAll('[data-dz-errormessage]');
+            errorNodes.forEach((node) => {
+              node.textContent = message;
+            });
+          }
+        }
+      }, userOptions);
+
+      const dropzone = new Dropzone(item, options);
+
+      // 썸네일 애니메이션용 class 제어
+      dropzone.on(Events.ADDED_FILE, () => {
+        if (item.querySelector(Selector.DZ_PREVIEW_COVER)) {
+          item.querySelector(Selector.DZ_PREVIEW_COVER).classList.remove(ClassName.DZ_FILE_COMPLETE);
+        }
+        item.classList.add(ClassName.DZ_FILE_PROCESSING);
+      });
+
+      dropzone.on(Events.REMOVED_FILE, () => {
+        if (item.querySelector(Selector.DZ_PREVIEW_COVER)) {
+          item.querySelector(Selector.DZ_PREVIEW_COVER).classList.remove(ClassName.DZ_PROCESSING);
+        }
+        item.classList.add(ClassName.DZ_FILE_COMPLETE);
+      });
+
+      dropzone.on(Events.COMPLETE, () => {
+        if (item.querySelector(Selector.DZ_PREVIEW_COVER)) {
+          item.querySelector(Selector.DZ_PREVIEW_COVER).classList.remove(ClassName.DZ_PROCESSING);
+        }
+        item.classList.add(ClassName.DZ_FILE_COMPLETE);
+      });
+
+      // 업로드 완료 후 체크
+      dropzone.on("successmultiple", function () {
+        dropzone._uploaded = true;
+        if (myDropzones.every(dz => dz.getAcceptedFiles().length === 0 || dz._uploaded)) {
+          const form = document.getElementById("product-form");
+          form.action = document.getElementById("registerOrModifyFlag").value == "1" ? goUrlXdmInst : goUrlXdmUpdt;
+          form.method = "post";
+          form.submit();
+        }
+      });
+
+      myDropzones.push(dropzone);
+    });
+  }
+
+  // Submit 버튼 이벤트
+  document.getElementById("submitBtn").addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const pForm = document.getElementById("product-form");
+    const dForm = document.getElementById("dropzone-form");
+
+    validationInit();
+    if (!validation()) return;
+
+    const dropzonesToUpload = myDropzones.filter(dz => dz.getAcceptedFiles().length > 0);
+    myDropzones.forEach(dz => dz._uploaded = false);
+
+    if (dropzonesToUpload.length > 0) {
+      dropzonesToUpload.forEach((dz) => {
+        const type = dz.element.getAttribute("data-upload-type");
+        document.getElementById("uploadImg1Type").value = type;
+
+        dz.on("sendingmultiple", function (files, xhr, formDataDZ) {
+          const formData = new FormData(dForm);
+          for (const [key, value] of formData.entries()) {
+            formDataDZ.append(key, value);
           }
         });
 
-        thisDropzone.on("successmultiple", function (files, response) {
-          // console.log("업로드 완료", response);
-          // alert("저장 완료!");
-          window.location.href = "/xdm/product/ProductXdmList"; // 원하는 경로로 이동
-        });
-      },
-      error: function error(file, message) {
-        if (file.previewElement) {
-          file.previewElement.classList.add('dz-error');
-          if (typeof message !== 'string' && message.error) {
-            message = message.error;
-          }
-          var errorNodes = Array.from(file.previewElement.querySelectorAll('[data-dz-errormessage]'));
-          errorNodes.forEach(function (node) {
-            node.textContent = message;
-          });
-        }
-      }
-    }, userOptions);
-    item.querySelector(Selector.DZ_PREVIEW).innerHTML = '';
-    var dropzone = new window.Dropzone(item, options);
-    if (!myDropzone)  {
-      myDropzone = dropzone;
+        dz.processQueue();
+      });
+    } else {
+      pForm.action = document.getElementById("registerOrModifyFlag").value == "1" ? goUrlXdmInst : goUrlXdmUpdt;
+      pForm.method = "post";
+      pForm.submit();
     }
-    dropzone.on(Events.ADDED_FILE, function () {
-      if (item.querySelector(Selector.DZ_PREVIEW_COVER)) {
-        item.querySelector(Selector.DZ_PREVIEW_COVER).classList.remove(ClassName.DZ_FILE_COMPLETE);
-      }
-      item.classList.add(ClassName.DZ_FILE_PROCESSING);
-    });
-    dropzone.on(Events.REMOVED_FILE, function () {
-      if (item.querySelector(Selector.DZ_PREVIEW_COVER)) {
-        item.querySelector(Selector.DZ_PREVIEW_COVER).classList.remove(ClassName.DZ_PROCESSING);
-      }
-      item.classList.add(ClassName.DZ_FILE_COMPLETE);
-    });
-    dropzone.on(Events.COMPLETE, function () {
-      if (item.querySelector(Selector.DZ_PREVIEW_COVER)) {
-        item.querySelector(Selector.DZ_PREVIEW_COVER).classList.remove(ClassName.DZ_PROCESSING);
-      }
-      item.classList.add(ClassName.DZ_FILE_COMPLETE);
-    });
   });
 };
+
 
 dropzoneInit();
