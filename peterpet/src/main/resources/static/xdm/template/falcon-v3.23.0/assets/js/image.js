@@ -4,6 +4,20 @@
 
 function removeImage(e) {
   $(e).parent().remove();
+
+  $.ajax({
+    async: true 
+    ,cache: false
+    ,type: "post"
+    ,url: "/xdm/product/ProductXdmImageDeleProc"
+    ,data: { "seq" : $(e).attr("data-seq") }
+    ,success: function(response) {
+
+    }
+    ,error : function(jqXHR){
+      alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+    }
+  });
 }
 
 let myDropzones = [];

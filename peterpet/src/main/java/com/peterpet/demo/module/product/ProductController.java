@@ -243,4 +243,10 @@ public class ProductController extends BaseController {
 		productService.imageInsert(productDto);
 		return "redirect:/xdm/product/ProductXdmList";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/ProductXdmImageDeleProc")
+	public void productXdmImageDeleProc(ProductDto dto) {
+		productService.updateUploaded(dto);
+	}
 }
