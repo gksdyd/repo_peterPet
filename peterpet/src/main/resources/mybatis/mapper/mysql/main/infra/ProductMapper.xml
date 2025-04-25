@@ -417,10 +417,13 @@
 		SET
 			delNy = 1
 		WHERE 1=1
-			AND pseq NOT IN
+			AND #{prodSeq} = pseq
+		<if test="removeSeq != null and removeSeq.length > 0">
+			AND seq NOT IN
 			<foreach collection="removeSeq" open="(" separator="," close=")" item="seq">
 				#{seq}
 			</foreach>
+		</if>
 	</update>
 	
 	<select id="selectImage1" resultMap="resultMapObj">

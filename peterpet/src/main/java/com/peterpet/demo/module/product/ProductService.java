@@ -61,11 +61,9 @@ public class ProductService extends BaseService {
 	
 	public int update(ProductDto productDto) throws Exception {
 		productDao.update(productDto);
-		if (productDto.getRemoveSeq() != null && productDto.getRemoveSeq().length != 0) {
-			productDao.updateUploaded(productDto);			
-		}
+
+		productDao.updateUploaded(productDto);			
 		
-//		if (productDto.get)
 		uploadFilesToS3(productDto.getUploadImg1(), productDto, "image", productDto.getUploadImg1Type(), productDto.getUploadImg1MaxNumber()
     			, productDto.getProdSeq(), productDao, amazonS3Client);
 //		uploadFilesToS3(productDto.getUploadImg2(), productDto, "image", productDto.getUploadImg2Type(), productDto.getUploadImg2MaxNumber()
