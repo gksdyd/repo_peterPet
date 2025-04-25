@@ -14132,7 +14132,7 @@ docReady(progressAnimationToggle);
 docReady(glightboxInit);
 docReady(plyrInit);
 docReady(initMap);
-docReady(dropzoneInit);
+// docReady(dropzoneInit);
 docReady(choicesInit);
 docReady(formValidationInit);
 docReady(barChartInit);

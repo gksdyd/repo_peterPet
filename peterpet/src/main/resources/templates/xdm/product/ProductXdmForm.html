@@ -176,7 +176,7 @@
                       <input type="hidden" id="uploadImg1Type" name="uploadImg1Type" value="1">
                       <input type="hidden" id="uploadImg1MaxNumber" name="uploadImg1MaxNumber" value="1">
                       <div class="fallback">
-                        <input name="uploadImg1" type="file" multiple="multiple" />
+                        <input name="file" type="file" multiple="multiple" />
                       </div>
                       <div class="dz-message" data-dz-message="data-dz-message"> <img class="me-2" src="/xdm/template/falcon-v3.23.0/assets/img/icons/cloud-upload.svg" width="25" alt="" />Drop your files here</div>
                       <div class="dz-preview dz-preview-multiple m-0 d-flex flex-column">
@@ -197,7 +197,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-6" data-dropzone="data-dropzone">
+                    <!-- <div class="col-6" data-dropzone="data-dropzone">
                       <label class="form-label-JHY">설명 이미지</label>
                       <input type="hidden" id="uploadImg2Type" name="uploadImg2Type" value="2">
                       <input type="hidden" id="uploadImg2MaxNumber" name="uploadImg2MaxNumber" value="1">
@@ -222,7 +222,7 @@
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                   <input type="hidden" id="removeSeq" name="removeSeq">
                   <div class="mb-3 row g-3 ms-2 me-2">
@@ -255,7 +255,7 @@
                     <button class="btn btn-danger btn-sm" type="button" id="ueleteBtn" th:if="${vo.registerOrModifyFlag != 1}"><span class="far fa-trash-alt"></span></button>
                   </div>
                   <div class="col" style="text-align: right;">
-                    <button class="btn btn-primary btn-sm" type="button" id="btnSubmit"><span class="fas fa-database"></span></button>
+                    <button class="btn btn-primary btn-sm" type="button" id="submitBtn"><span class="fas fa-database"></span></button>
                   </div>
                 </div>
               </form>
@@ -272,10 +272,10 @@
   <div th:replace="~{xdm/include/includeXdmFalcon :: includeXdmFalcon}"></div>
   <div th:replace="~{xdm/include/includeXdmCommon :: includeXdmCommon}"></div>
   <script src="/xdm/template/falcon-v3.23.0/assets/js/image.js"></script>
-  <div th:replace="~{xdm/include/includeXdmForm :: includeXdmForm}"></div>
+  <script th:inline="javascript" src="/xdm/template/falcon-v3.23.0/assets/js/validation.js"></script>
+  <script th:inline="javascript" src="/xdm/template/falcon-v3.23.0/assets/js/delete.js"></script>
   <div th:replace="~{xdm/include/includeXdmCommonProd :: includeXdmCommonProd}"></div>
   <script type="text/javascript">
-    let form = document.getElementById("product-form");
 
     let goUrlXdmInst = "/xdm/product/ProductXdmInst";
     let goUrlXdmUpdt = "/xdm/product/ProductXdmUpdt";
