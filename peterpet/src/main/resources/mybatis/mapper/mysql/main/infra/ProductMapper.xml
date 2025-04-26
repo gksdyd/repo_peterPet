@@ -392,7 +392,8 @@
 			c.petName,
 			c.petVarieties,
 			c.petBirth,
-			c.petWeight
+			c.petWeight,
+			(SELECT path FROM image WHERE pseq = c.petSeq AND delNy = 0 AND type = 3) AS path
 		<include refid="commonReview"></include>
         <choose>
 			<when test="shReviewSort == 1">ORDER BY a.reviGood DESC</when>
