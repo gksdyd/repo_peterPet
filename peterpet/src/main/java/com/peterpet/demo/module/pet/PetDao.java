@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.peterpet.demo.module.base.BaseDao;
+import com.peterpet.demo.module.base.BaseDto;
+
 @Repository
-public interface PetDao {
+public interface PetDao extends BaseDao {
 
 	public List<PetDto> selectList(PetVo vo);
 	public List<PetDto> selectListOneUser(PetVo vo);
@@ -25,4 +28,6 @@ public interface PetDao {
 	public int deletePersonal(PetDto petDto);
 	public int deleteDisease(PetDto petDto);
 	public int uelete(PetVo vo);
+	public int insertUploaded(BaseDto dto);
+	public int updateUploaded(BaseDto dto);
 }

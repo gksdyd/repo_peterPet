@@ -3,7 +3,9 @@ package com.peterpet.demo.module.pet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PetDto {
+import com.peterpet.demo.module.base.BaseDto;
+
+public class PetDto extends BaseDto {
 
 	private String petSeq;
 	private Integer petType;

@@ -118,28 +118,22 @@
         $('[data-toggle="tooltip"]').tooltip();
     });
 
-    $(function(){
-        $("#file-area").hide();  
-        $("#presentimg").click(function(){
-            $("#presentimg1").click();	
-        })
-    })
+    $(document).on("click", ".petImage", function(){
+        if ($(this).parent().attr("data-toggle") != null) {
+            $("#uploadImg1").click();	
+        }
+    });
 
-    function loadImg(inputFile,num){
-
+    function loadImg(inputFile){
         if(inputFile.files.length == 1){
-        
-            var reader = new FileReader();
-        
-            reader.readAsDataURL(inputFile.files[0]);
+            var reader = new FileReader();        
             reader.onload = function(e){
-                $("#presentimg").attr("src",e.target.result);
+                $(".petImage").attr("src", e.target.result);
             }
-        
-            } else {
-                $("#presentimg").attr("src",null);
-            }
-        
+        } else {
+            $(".petImage").attr("src", "/peter/template/optimal-html/assets/images/mypetinfo/my-account-pet-image.png");
+        }
+        reader.readAsDataURL(inputFile.files[0]);
     }
 
 var contentA = document.getElementById("pet-list");
@@ -171,6 +165,11 @@ $('.detail').click(function(){
             $("#userPetGender").text(response.gender);
             $("#userPetBirth").text(response.dto.petBirth);
             $("#userPetWeight").text(response.dto.petWeight + "kg");
+            if (response.dto.path != null) {
+                $(".petImage").attr("src", response.dto.path);
+            } else {
+                $(".petImage").attr("src", "/peter/template/optimal-html/assets/images/mypetinfo/my-account-pet-image.png");
+            }
 
             if (response.dto.petVaccinationFlag == 1) {
                 $("#userPetVaccin").text("예");
@@ -289,6 +288,8 @@ $('.register').click(function(){
                 alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
             }
         })
+    } else {
+        $(".petImage").attr("src", "/peter/template/optimal-html/assets/images/mypetinfo/my-account-pet-image.png");
     }
 });
 

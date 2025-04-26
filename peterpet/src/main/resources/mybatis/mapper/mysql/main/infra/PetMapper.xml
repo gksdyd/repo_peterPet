@@ -122,7 +122,8 @@
 			petWeight,
 			petVaccinationFlag,
 			petNeuteringFlag,
-			petDelFlag
+			petDelFlag,
+			(SELECT path FROM image WHERE #{petSeq} = pseq AND delNy = 0 AND type = 3) AS path
 		FROM
 			pet
 		WHERE 1=1
@@ -161,7 +162,8 @@
 			petBirth,
 			petWeight,
 			petVaccinationFlag,
-			petNeuteringFlag
+			petNeuteringFlag,
+			(SELECT path FROM image WHERE petSeq = pseq AND delNy = 0 AND type = 3) AS path
 		FROM
 			pet
 		WHERE 1=1
@@ -287,5 +289,17 @@
 			petModDate = date_format(NOW(), '%Y-%m-%d %H:%i:%S')
 		WHERE 1=1
 			AND petSeq = #{petSeq}
+	</update>
+	
+	<insert id="insertUploaded">
+		<include refid="Base.insertUploaded"></include>
+	</insert>
+	
+	<update id="updateUploaded">
+		UPDATE image
+		SET
+			delNy = 1
+		WHERE 1=1
+			AND #{petSeq} = pseq
 	</update>
 </mapper>

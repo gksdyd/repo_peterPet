@@ -5,11 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.peterpet.demo.module.base.BaseService;
+
 @Service
-public class PetService {
+public class PetService extends BaseService{
 
 	@Autowired
 	PetDao petDao;
+	
+	@Autowired
+	private AmazonS3Client amazonS3Client;
 	
 	public List<PetDto> selectList(PetVo vo) {
 		return petDao.selectList(vo);
@@ -43,8 +49,11 @@ public class PetService {
 		return petDao.selectListPeterPets(vo);
 	}
 	
-	public int insert(PetDto petDto) {
-		return petDao.insert(petDto);
+	public int insert(PetDto petDto) throws Exception {
+		petDao.insert(petDto);
+		uploadFilesToS3(petDto.getUploadImg1(), petDto, "image", petDto.getUploadImg1Type(), petDto.getUploadImg1MaxNumber()
+    			, petDto.getPetSeq(), petDao, amazonS3Client);
+		return 1;
 	}
 	
 	public int personalInsert(PetDto petDto) {
@@ -59,8 +68,12 @@ public class PetService {
 		return petDao.selectMaxSeq();
 	}
 	
-	public int update(PetDto petDto) {
-		return petDao.update(petDto);
+	public int update(PetDto petDto) throws Exception {
+		petDao.update(petDto);
+		petDao.updateUploaded(petDto);
+		uploadFilesToS3(petDto.getUploadImg1(), petDto, "image", petDto.getUploadImg1Type(), petDto.getUploadImg1MaxNumber()
+    			, petDto.getPetSeq(), petDao, amazonS3Client);
+		return 1;
 	}
 	
 	public int updatePersonal(PetDto petDto) {

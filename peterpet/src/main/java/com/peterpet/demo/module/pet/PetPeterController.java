@@ -54,7 +54,7 @@ public class PetPeterController {
 	}
 	
 	@RequestMapping(value = "/InsertPeterForm")
-	public String insertPeterForm(PetDto petDto, HttpSession httpSession) {
+	public String insertPeterForm(PetDto petDto, HttpSession httpSession) throws Exception {
 		petDto.setUser_userSeq((String) httpSession.getAttribute("sessSeqPeter"));
 		petService.insert(petDto);
 		
@@ -72,7 +72,7 @@ public class PetPeterController {
 	}
 	
 	@RequestMapping(value = "/UpdatePeterForm")
-	public String updatePeterForm(PetDto petDto, HttpSession httpSession) {
+	public String updatePeterForm(PetDto petDto, HttpSession httpSession) throws Exception {
 		int size;
 		int flag;
 		
