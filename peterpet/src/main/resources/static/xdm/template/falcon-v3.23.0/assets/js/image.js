@@ -69,6 +69,7 @@ var dropzoneInit = function () {
         maxFilesize: 20,
         autoProcessQueue: false,
         uploadMultiple: true,
+        parallelUploads: 10,
         filesizeBase: 1000,
         init: function () {
           const dz = this;
