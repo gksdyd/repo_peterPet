@@ -22,6 +22,9 @@ public class BaseDto {
 	private MultipartFile[] uploadImg1;
 	private Integer uploadImg1Type;
 	private Integer uploadImg1MaxNumber;
+	
+	private String temp;
+	private String[] paths;
 
 	public String getTableName() {
 		return tableName;
@@ -141,5 +144,21 @@ public class BaseDto {
 
 	public void setUploadImg1MaxNumber(Integer uploadImg1MaxNumber) {
 		this.uploadImg1MaxNumber = uploadImg1MaxNumber;
+	}
+
+	public String[] getPaths() {
+		return paths;
+	}
+
+	public void setPaths(String[] paths) {
+		this.paths = paths;
+	}
+
+	public String getTemp() {
+		return temp;
+	}
+
+	public void setTemp(String temp) {
+		this.temp = temp;
 	}
 }

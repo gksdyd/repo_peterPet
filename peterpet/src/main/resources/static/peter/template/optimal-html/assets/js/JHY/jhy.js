@@ -399,46 +399,50 @@ initPetInfo = function() {
           lightBox.init();
       });
   });
-  $(function () {
-      var $pswp = $('.pswp')[0],
-              image = [],
-              getItems = function () {
-                  var items = [];
-                  $('.reviewimages a').each(function () {
-                      var $href = $(this).attr('href'),
-                              $size = $(this).data('size').split('x'),
-                              item = {
-                                  src: $href,
-                                  w: $size[0],
-                                  h: $size[1]
-                              };
-                      items.push(item);
-                  });
-                  return items;
-              };
-      var items = getItems();
-
-      $.each(items, function (index, value) {
-          image[index] = new Image();
-          image[index].src = value['src'];
-      });
-      $('.reviewbox').on('click', function (event) {
-          event.preventDefault();
-
-          var $index = $(".active-thumb").parent().attr('data-slick-index');
-          $index++;
-          $index = $index - 1;
-
-          var options = {
-              index: $index,
-              bgOpacity: 0.7,
-              showHideOpacity: true
-          };
-          var lightBox = new PhotoSwipe($pswp, PhotoSwipeUI_Default, items, options);
-          lightBox.init();
-      });
-  });
   
+$(function () {
+    var $pswp = $('.pswp')[0];
+
+    // 이미지 항목들을 가져오는 함수
+    var getItems = function () {
+        var items = [];
+        $('.reviewimages a').each(function () {
+            var $href = $(this).attr('href'),
+                $size = $(this).data('size').split('x'),
+                item = {
+                    src: $href,
+                    w: $size[0],
+                    h: $size[1]
+                };
+            items.push(item);
+        });
+        return items;
+    };
+
+    $(document).on('click', '.reviewbox', function (event) {
+        event.preventDefault();
+
+        var items = getItems();
+
+        // 클릭한 .reviewbox와 연결된 .reviewimages 항목을 찾음
+        var $index = $(this).index('.reviewbox'); // .reviewbox 내부에서 인덱스를 찾음
+
+        if ($index === -1) {
+            console.log("이미지를 찾을 수 없습니다.");
+            return;
+        }
+
+        var options = {
+            index: $index,
+            bgOpacity: 0.7,
+            showHideOpacity: true
+        };
+
+        var lightBox = new PhotoSwipe($pswp, PhotoSwipeUI_Default, items, options);
+        lightBox.init();
+    });
+});
+
   $(function () {
       var $pswp = $('.pswp')[0],
               image = [],

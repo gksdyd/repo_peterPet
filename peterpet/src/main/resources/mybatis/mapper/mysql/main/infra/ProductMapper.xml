@@ -374,8 +374,6 @@
 	</update>
 	
 	<sql id="commonReview">
-		FROM
-        	review a
         	LEFT JOIN user b ON b.userSeq = a.user_userSeq
         	LEFT JOIN pet c ON b.userSeq = c.user_userSeq AND petMain = 1
         WHERE 1=1
@@ -393,8 +391,13 @@
 			c.petVarieties,
 			c.petBirth,
 			c.petWeight,
-			(SELECT path FROM image WHERE pseq = c.petSeq AND delNy = 0 AND type = 3) AS path
+			(SELECT path FROM image WHERE pseq = c.petSeq AND delNy = 0 AND type = 3) AS path,
+			GROUP_CONCAT(d.path) AS temp
+		FROM
+        	review a
+        LEFT JOIN image d ON d.pseq = a.reviSeq AND d.delNy = 0 AND d.type = 4
 		<include refid="commonReview"></include>
+		GROUP BY a.reviSeq, c.petName, c.petVarieties, c.petBirth, c.petWeight, c.petSeq
         <choose>
 			<when test="shReviewSort == 1">ORDER BY a.reviGood DESC</when>
 			<when test="shReviewSort == 2">ORDER BY a.reviModDate DESC</when>
@@ -406,6 +409,8 @@
 	
 	<select id="selectReviewCount" resultType="Integer">
 		SELECT COUNT(*)
+		FROM
+        	review a
 		<include refid="commonReview"></include>
 	</select>
 	

@@ -354,14 +354,12 @@
                                                                 </div>
                                                                 <div class="spr-review-content">
                                                                     <span class="d-flex">
-                                                                        <div class="review-image">
-                                                                            <a href="#" class="reviewbox"><img src="/peter/template/optimal-html/assets/images/mypetinfo/my-account-pet-image.png"></a>
+                                                                        <a th:each="reviewPath : ${list.paths}" class="reviewbox"><img th:src="${reviewPath}" style="width: 80px; height: 80px; object-fit:fill;"></a>
+                                                                        <div class="reviewimages" th:each="reviewPath : ${list.paths}">
+                                                                            <a th:href="${reviewPath}" data-size="1000x1280"></a>
                                                                         </div>
                                                                         <a href="/peter/template/optimal-html/assets/video/video-placeholder.mp4"><video src="/peter/template/optimal-html/assets/video/video-placeholder.mp4" style="width: 80px; height: 80px;"></video></a>
                                                                     </span>
-                                                                    <div class="reviewimages">
-                                                                        <a href="/peter/template/optimal-html/assets/images/mypetinfo/my-account-pet-image.png" data-size="1000x1280"></a>
-                                                                    </div>
                                                                     <p class="spr-review-content-body" th:text="${list.reviText}"></p>
                                                                 </div>
                                                             </div>
@@ -948,7 +946,7 @@
                         formData.append("uploadImg1[]", input.files[0]);
                     }
                 });
-                
+
                 formData.append("uploadImg1Type", 4);
                 formData.append("uploadImg1MaxNumber", 1);
                 formData.append("prodSeq", /*[[${item.prodSeq}]]*/ '');
@@ -1020,12 +1018,12 @@
                 });
             }
 
-            function reviewCreate(score, id, name, petVarieties, petBirth, petWeight, reviModDate, reviText) {
+            function reviewCreate(score, id, name, petVarieties, petBirth, petWeight, reviModDate, reviText, path, images) {
                 let text = "<div class='spr-reviews spr-header'><div class='review-inner'>" +
                                 "<div class='spr-review'>" +
                                     "<div class='d-flex'>" +
                                         "<div class='profile-image'>" +
-                                            "<img src='/peter/template/optimal-html/assets/images/kitties.png'>" +
+                                            "<img src=" + path + ">" +
                                         "</div>" +
                                         "<div class='ms-3'>" +
                                             "<div class='spr-review-header'>" +
@@ -1052,16 +1050,24 @@
                         (new Date().getFullYear() - Number(petBirth.substring(0,4)) + 1) + "살 · " + petWeight + "kg</span></p>" +
                     "<span class='spr-review-header-byline'>" + reviModDate.substring(0,10) + "</span></div></div></div>" +
                     "<div class='spr-review-content'>" +
-                        "<span class='d-flex'>" +
-                            "<div class='review-image'>" +
-                                "<a href='#'' class='reviewbox'><img src='/peter/template/optimal-html/assets/images/mypetinfo/my-account-pet-image.png'></a>" +
-                            "</div>" +
-                            "<a href='/peter/template/optimal-html/assets/video/video-placeholder.mp4'><video src='/peter/template/optimal-html/assets/video/video-placeholder.mp4' style='width: 80px; height: 80px;''></video></a>" +
+                        "<span class='d-flex'>";
+
+                        if (images != null) {
+                            for (let i = 0; i < images.length; i++) {
+                                text += "<a class='reviewbox'><img src='" + images[i] + "' style='width: 80px; height: 80px; object-fit:fill;''></a>";
+                            }
+                        }
+
+                        if (images != null) {
+                            for (let i = 0; i < images.length; i++) {
+                                text += "<div class='reviewimages'>" +
+                                            "<a href='" + images[i] + "' data-size='1000x1280'></a>" +
+                                        "</div>";
+                            }
+                        }
+                        text += "<a href='/peter/template/optimal-html/assets/video/video-placeholder.mp4'><video src='/peter/template/optimal-html/assets/video/video-placeholder.mp4' style='width: 80px; height: 80px;''></video></a>" +
                         "</span>" +
-                        "<div class='reviewimages'>" +
-                            "<a href='/peter/template/optimal-html/assets/images/mypetinfo/my-account-pet-image.png' data-size='1000x1280'></a>" +
-                        "</div>" +
-                        "<p class='spr-review-content-body'>" + reviText + "</p></div></div></div></div>"
+                        "<p class='spr-review-content-body'>" + reviText + "</p></div></div></div></div>";
                 return text;
             }
 
@@ -1083,7 +1089,7 @@
                         for (let i = 0; i < response.list.length; i++) {
                             text += reviewCreate(response.list[i].reviScore, response.list[i].userId, response.list[i].petName,
                                     response.list[i].petVarieties, response.list[i].petBirth, response.list[i].petWeight,
-                                    response.list[i].reviModDate, response.list[i].reviText);
+                                    response.list[i].reviModDate, response.list[i].reviText, response.list[i].path, response.list[i].paths);
                         }
                         $("#reviewBody").html(text);
                         pagination();

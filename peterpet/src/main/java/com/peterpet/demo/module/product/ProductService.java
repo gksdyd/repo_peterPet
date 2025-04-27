@@ -103,7 +103,13 @@ public class ProductService extends BaseService {
 	}
 	
 	public List<ProductDto> selectReview(ProductVo vo) {
-		return productDao.selectReview(vo);
+		List<ProductDto> dtos = productDao.selectReview(vo);
+		for(ProductDto dto : dtos) {
+			if (dto.getTemp() != null) {
+				dto.setPaths(dto.getTemp().split(","));				
+			}
+		}
+		return dtos;
 	}
 	
 	public int selectReviewCount(ProductVo vo) {
