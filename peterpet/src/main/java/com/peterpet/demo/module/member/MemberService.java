@@ -5,11 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.peterpet.demo.module.base.BaseService;
+
 @Service
-public class MemberService {
+public class MemberService extends BaseService {
 
 	@Autowired
 	MemberDao memberDao;
+	
+	@Autowired
+	private AmazonS3Client amazonS3Client;
 	
 	public List<MemberDto> selectList(MemberVo vo) {
 		return memberDao.selectList(vo);
@@ -55,7 +61,10 @@ public class MemberService {
 		return memberDao.checkPhone(memberDto);
 	}
 	
-	public int reviewInsert(MemberDto memberDto) {
-		return memberDao.reviewInsert(memberDto);
+	public int reviewInsert(MemberDto memberDto) throws Exception {
+		memberDao.reviewInsert(memberDto);
+		uploadFilesToS3(memberDto.getUploadImg1(), memberDto, "image", memberDto.getUploadImg1Type(), memberDto.getUploadImg1MaxNumber()
+    			, memberDto.getReviSeq(), memberDao, amazonS3Client);
+		return 1;
 	}
 }

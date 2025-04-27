@@ -232,4 +232,8 @@
 			SELECT last_insert_id()
 		</selectKey>
 	</insert>
+	
+	<insert id="insertUploaded">
+		<include refid="Base.insertUploaded"></include>
+	</insert>
 </mapper>

@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.peterpet.demo.module.base.BaseDao;
+import com.peterpet.demo.module.base.BaseDto;
+
 @Repository
-public interface MemberDao {
+public interface MemberDao extends BaseDao {
 
 	public List<MemberDto> selectList(MemberVo vo);
 	public int selectOneCount(MemberVo vo);
@@ -19,4 +22,5 @@ public interface MemberDao {
 	public int uelete(MemberDto memberDto);
 	public MemberDto checkPhone(MemberDto memberDto);
 	public int reviewInsert(MemberDto memberDto);
+	public int insertUploaded(BaseDto dto);
 }

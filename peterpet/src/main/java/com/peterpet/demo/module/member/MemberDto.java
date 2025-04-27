@@ -1,6 +1,8 @@
 package com.peterpet.demo.module.member;
 
-public class MemberDto {
+import com.peterpet.demo.module.base.BaseDto;
+
+public class MemberDto extends BaseDto {
 
 	private String userSeq;	
 	private int userGender;	

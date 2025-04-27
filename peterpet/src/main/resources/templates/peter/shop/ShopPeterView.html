@@ -190,7 +190,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <form class="product-review-form new-review-form mb-4" id="reviewForm">
+                                                    <form class="product-review-form new-review-form mb-4" id="reviewForm" enctype="multipart/form-data">
                                                         <input type="hidden" id="thisPage" name="thisPage" th:value="${vo.thisPage}" default="1"/>
                                                         <h4 class="spr-form-title text-uppercase">Write A Review</h4>
                                                         <fieldset class="spr-form-contact">
@@ -205,6 +205,20 @@
                                                                         <input type="radio" name="rating" id="rating-1"><label for="rating-1"></label>
                                                                     </div>
                                                                     <div class="d-none" id="starValid">별점 체크바랍니다.</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="spr-form-review-body form-group">
+                                                                <div class="row g-2 thumb-upload-set px-3 mb-4">
+                                                                    <div class="col-2 col-sm-2 col-md-2 col-lg-2 thumb-upload">
+                                                                        <div class="thumb-preview position-relative border p-1">
+                                                                            <img class="thumb-preview" src="/peter/template/optimal-html/assets/images/vendor/vender-upload-preview.jpg" alt="edit">
+                                                                            <div class="thumb-edit">
+                                                                                <label class="removeImage d-flex-center justify-content-center position-absolute top-0 start-0 p-2 border-0 rounded-circle shadow btn d-none"><i class="icon an an-times-r an-1x"></i></label>
+                                                                                <label for="thumbUpload1" class="d-flex-center justify-content-center position-absolute top-0 end-0 p-2 border-0 rounded-circle shadow btn"><i class="icon an an-pencil-l an-1x"></i></label>
+                                                                                <input type="file" id="thumbUpload1" class="vd-image-upload d-none" accept=".png, .jpg, .jpeg">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <div class="spr-form-review-body form-group">
@@ -880,6 +894,7 @@
             <div th:replace="~{peter/include/modal :: modal}"></div>
             <div th:replace="~{peter/include/includePeterOriginal :: includePeterOriginal}"></div>
             <div th:replace="~{peter/include/includePeterCommon :: includePeterCommon}"></div>
+            <script src="/peter/template/optimal-html/assets/js/JHY/image.js"></script>
         </div>
         <!--End Page Wrapper-->
         <script th:inline="javascript">
@@ -927,12 +942,27 @@
             });
 
             function review() {
+                let formData = new FormData();
+                $("input[type=file]").each(function(index, input) {
+                    if (input.files.length > 0) {
+                        formData.append("uploadImg1[]", input.files[0]);
+                    }
+                });
+                
+                formData.append("uploadImg1Type", 4);
+                formData.append("uploadImg1MaxNumber", 1);
+                formData.append("prodSeq", /*[[${item.prodSeq}]]*/ '');
+                formData.append("reviScore", starCount);
+                formData.append("reviText", $("#reviText").val());
+
                 $.ajax({
                     async: true 
                     ,cache: false
                     ,type: "post"
                     ,url: goUrlReviewInst
-                    ,data: { "prodSeq" : /*[[${item.prodSeq}]]*/'', "reviScore" : starCount, "reviText" : $("#reviText").val() }
+                    ,data: formData
+                    ,processData: false
+                    ,contentType: false
                     ,success: function(response) {
                         if (response.rt == "success") {
                             let avr = (Number($("#prodScore").text()) * Number($("#topReviewCnt").text()) + starCount) / (Number($("#topReviewCnt").text()) + 1);

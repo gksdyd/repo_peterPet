@@ -197,7 +197,7 @@ public class MemberPeterController extends BaseController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/ReviewPeterInst")
-	public Map<String, Object> reviewPeterInst(MemberDto dto, HttpSession httpSession) {
+	public Map<String, Object> reviewPeterInst(MemberDto dto, HttpSession httpSession) throws Exception {
 		Map<String, Object> rtMap = new HashMap<>();
 		
 		if (httpSession.getAttribute("sessSeqPeter") != null) {
