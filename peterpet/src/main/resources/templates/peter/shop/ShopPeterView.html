@@ -212,10 +212,11 @@
                                                                     <div class="col-2 col-sm-2 col-md-2 col-lg-2 thumb-upload">
                                                                         <div class="thumb-preview position-relative border p-1">
                                                                             <img class="thumb-preview" src="/peter/template/optimal-html/assets/images/vendor/vender-upload-preview.jpg" alt="edit">
+                                                                            <video class="thumb-preview d-none" src=""></video>
                                                                             <div class="thumb-edit">
                                                                                 <label class="removeImage d-flex-center justify-content-center position-absolute top-0 start-0 p-2 border-0 rounded-circle shadow btn d-none"><i class="icon an an-times-r an-1x"></i></label>
                                                                                 <label for="thumbUpload1" class="d-flex-center justify-content-center position-absolute top-0 end-0 p-2 border-0 rounded-circle shadow btn"><i class="icon an an-pencil-l an-1x"></i></label>
-                                                                                <input type="file" id="thumbUpload1" class="vd-image-upload d-none" accept=".png, .jpg, .jpeg">
+                                                                                <input type="file" id="thumbUpload1" class="vd-image-upload d-none" accept=".png, .jpg, .jpeg, .mp4">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -353,11 +354,11 @@
                                                                 </div>
                                                                 <div class="spr-review-content">
                                                                     <span class="d-flex">
-                                                                        <a th:each="reviewPath : ${list.paths}" class="reviewbox"><img th:src="${reviewPath}" style="width: 80px; height: 80px; object-fit:fill;"></a>
+                                                                        <a th:each="reviewPath : ${list.paths}" th:if="!${#strings.endsWith(reviewPath,'mp4')}" class="reviewbox"><img th:src="${reviewPath}" style="width: 80px; height: 80px; object-fit:fill;"></a>
+                                                                        <a th:each="reviewPath : ${list.paths}" th:if="${#strings.endsWith(reviewPath,'mp4')}" th:href="${reviewPath}"><video th:src="${reviewPath}" style="width: 80px; height: 80px;"></video></a>
                                                                         <div class="reviewimages" th:each="reviewPath : ${list.paths}">
                                                                             <a th:href="${reviewPath}" data-size="1000x1280"></a>
                                                                         </div>
-                                                                        <a href="/peter/template/optimal-html/assets/video/video-placeholder.mp4"><video src="/peter/template/optimal-html/assets/video/video-placeholder.mp4" style="width: 80px; height: 80px;"></video></a>
                                                                     </span>
                                                                     <p class="spr-review-content-body" th:text="${list.reviText}"></p>
                                                                 </div>
@@ -1053,19 +1054,26 @@
 
                         if (images != null) {
                             for (let i = 0; i < images.length; i++) {
-                                text += "<a class='reviewbox'><img src='" + images[i] + "' style='width: 80px; height: 80px; object-fit:fill;''></a>";
+                                let ext = images[i].split('.').pop().toLowerCase();
+                                if (ext == "mp4") {
+                                    text += "<a href='" + images[i] + "'><video src='" + images[i] + "' style='width: 80px; height: 80px;'></video></a>";
+                                } else {
+                                    text += "<a class='reviewbox'><img src='" + images[i] + "' style='width: 80px; height: 80px; object-fit:fill;''></a>";
+                                }
                             }
                         }
 
                         if (images != null) {
                             for (let i = 0; i < images.length; i++) {
-                                text += "<div class='reviewimages'>" +
-                                            "<a href='" + images[i] + "' data-size='1000x1280'></a>" +
-                                        "</div>";
+                                let ext = images[i].split('.').pop().toLowerCase();
+                                if (ext != "mp4") {
+                                    text += "<div class='reviewimages'>" +
+                                                "<a href='" + images[i] + "' data-size='1000x1280'></a>" +
+                                            "</div>";
+                                }
                             }
                         }
-                        text += "<a href='/peter/template/optimal-html/assets/video/video-placeholder.mp4'><video src='/peter/template/optimal-html/assets/video/video-placeholder.mp4' style='width: 80px; height: 80px;''></video></a>" +
-                        "</span>" +
+                        text += "</span>" +
                         "<p class='spr-review-content-body'>" + reviText + "</p></div></div></div></div>";
                 return text;
             }
