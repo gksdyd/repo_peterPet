@@ -248,6 +248,7 @@
 			LEFT JOIN user c ON a.user_userSeq = c.userSeq
 		WHERE
 			c.userSeq = #{userSeq}
+		ORDER BY reviSeq DESC
 		limit #{rowNumToShow} offset #{startRnumForMysql}
 	</select>
 	

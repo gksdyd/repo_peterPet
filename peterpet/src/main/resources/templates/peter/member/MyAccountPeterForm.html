@@ -183,7 +183,7 @@
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id="reviewBody">
                                                 <tr th:each="review : ${reviews}">
                                                     <td th:text="${reviewStat.count}"></td>
                                                     <td th:text="${@codeService.selectOneCachedCode(review.feedBrand)}"></td>
@@ -1326,6 +1326,8 @@
                 $(".myPage").on("click", function() {
                     initPostcode();
                 });
+
+                window.cache = /*[[${code}]]*/ [];
                 
                 let userform = document.getElementById("userInfoForm");
                 let petform = document.getElementById("petInfoForm");
@@ -1625,6 +1627,98 @@
                     $("#collapseEtc").hide();
                 }
             })
+
+            function goReview(thisPage) {
+                $.ajax({
+                    async: true 
+                    ,cache: false
+                    ,type: "post"
+                    ,url: "/peter/member/ReviewPeterProc"
+                    ,data: { "thisPage" : thisPage, "userSeq" : [[${session.sessSeqPeter}]] }
+                    ,success: function(response) {
+                        start = response.vo.startPage;
+                        end = response.vo.endPage;
+                        page = response.vo.thisPage;
+                        total = response.vo.totalPages;
+
+                        $("#reviewBody").empty();
+                        let text = "";
+
+                        for (let i = 0; i < response.list.length; i++) {
+                            text += reviewCreate(i + 1, response.list[i].reviModDate, response.list[i].prodName, response.list[i].feedBrand);
+                        }
+                        $("#reviewBody").html(text);
+                        pagination(start, end, page, total);
+                    }
+                    ,error : function(jqXHR){
+                        alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+                    }
+                });
+            }
+
+            function reviewCreate(n, reviModDate, prodName, feedBrand) {
+                let text = "<tr>" +
+                                "<td>" + n + "</td>" +
+                                "<td>" + window.cache[feedBrand - 1].codeName + "</td>" +
+                                "<td>" + prodName + "</td>" +
+                                "<td>" + reviModDate + "</td>" +
+                                "<td><a class='link-underline view' href='cart-style1.html'>View</a></td>" +
+                            "</tr>";
+                return text;
+            }
+
+            function pagination(start, end, page, total) {
+                let pagination = $(".pagination > ul");
+                pagination.empty();
+                
+                if (start > 1) {
+                    let li = document.createElement('li');
+                    li.setAttribute("class", "prev page-item");
+
+                    let a = document.createElement('a');
+                    a.setAttribute("href", "javascript:void(0)");
+                    a.setAttribute("onclick", `goReview(${start - 1})`);
+
+                    let i = document.createElement('i');
+                    i.setAttribute("class", "icon align-middle an an-caret-left");
+                    i.setAttribute("aria-hidden", "true")
+                    
+                    a.append(i);
+                    li.append(a);
+                    pagination.append(li);
+                }
+
+                for (let i = start; i <= end; i++) {
+                    let li = document.createElement('li');
+                    li.setAttribute("class", "page-item");
+                    if (i == page) li.classList.add("active");
+
+                    let a = document.createElement('a');
+                    a.setAttribute("href", "javascript:void(0)");
+                    a.setAttribute("onclick", `goReview(${i})`);
+                    a.innerHTML = i;
+                    
+                    li.append(a);
+                    pagination.append(li);
+                }
+
+                if (end < total) {
+                    let li = document.createElement('li');
+                    li.setAttribute("class", "next page-item");
+
+                    let a = document.createElement('a');
+                    a.setAttribute("href", "javascript:void(0)");
+                    a.setAttribute("onclick", `goReview(${end + 1})`);
+
+                    let i = document.createElement('i');
+                    i.setAttribute("class", "icon align-middle an an-caret-right");
+                    i.setAttribute("aria-hidden", "true")
+                    
+                    a.append(i);
+                    li.append(a);
+                    pagination.append(li);
+                }
+            }
             </script>
         </div>
         <!--End Page Wrapper-->

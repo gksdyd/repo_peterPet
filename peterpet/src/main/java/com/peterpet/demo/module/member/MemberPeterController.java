@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.peterpet.demo.module.base.BaseController;
 import com.peterpet.demo.module.base.Constants;
+import com.peterpet.demo.module.code.CodeDto;
 import com.peterpet.demo.module.pet.PetDto;
 import com.peterpet.demo.module.pet.PetService;
 import com.peterpet.demo.module.pet.PetVo;
@@ -86,6 +87,7 @@ public class MemberPeterController extends BaseController {
 		model.addAttribute("item", memberService.selectOne(memberDto));
 		model.addAttribute("list", pets);
 		model.addAttribute("reviews", memberService.reviewList(memberVo));
+		model.addAttribute("code", CodeDto.cachedCodeArrayList);
 		return "peter/member/MyAccountPeterForm";
 	}
 	
@@ -213,6 +215,16 @@ public class MemberPeterController extends BaseController {
 		} else {
 			rtMap.put("rt", "fail");
 		}
+		return rtMap;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/ReviewPeterProc")
+	public Map<String, Object> MyAccountPeterForm(MemberVo memberVo) {
+		Map<String, Object> rtMap = new HashMap<>();
+		memberVo.setParamsPaging(memberService.reviewCount(memberVo));
+		rtMap.put("list", memberService.reviewList(memberVo));
+		rtMap.put("vo", memberVo);
 		return rtMap;
 	}
 }
