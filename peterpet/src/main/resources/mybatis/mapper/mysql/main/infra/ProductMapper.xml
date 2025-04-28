@@ -399,10 +399,9 @@
 		<include refid="commonReview"></include>
 		GROUP BY a.reviSeq, c.petName, c.petVarieties, c.petBirth, c.petWeight, c.petSeq
         <choose>
-			<when test="shReviewSort == 1">ORDER BY a.reviGood DESC</when>
-			<when test="shReviewSort == 2">ORDER BY a.reviModDate DESC</when>
-			<when test="shReviewSort == 3">ORDER BY a.reviScore DESC</when>
-			<when test="shReviewSort == 4">ORDER BY a.reviScore</when>
+			<when test="shReviewSort == 1">ORDER BY a.reviModDate DESC</when>
+			<when test="shReviewSort == 2">ORDER BY a.reviScore DESC</when>
+			<when test="shReviewSort == 3">ORDER BY a.reviScore</when>
 		</choose>
 		limit #{rowNumToShow} offset #{startRnumForMysql}
 	</select>
