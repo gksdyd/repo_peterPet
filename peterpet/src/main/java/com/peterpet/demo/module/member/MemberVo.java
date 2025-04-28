@@ -5,6 +5,7 @@ import com.peterpet.demo.module.base.BaseVo;
 public class MemberVo extends BaseVo {
 
 	private Integer shSecession;
+	private String userSeq;
 
 	public Integer getShSecession() {
 		return shSecession;
@@ -14,6 +15,14 @@ public class MemberVo extends BaseVo {
 		this.shSecession = shSecession;
 	}
 	
+	public String getUserSeq() {
+		return userSeq;
+	}
+
+	public void setUserSeq(String userSeq) {
+		this.userSeq = userSeq;
+	}
+
 	public String ranCertification() {
 		String rt = "";
 		for (int i = 0; i < 6; i++) {

@@ -27,9 +27,10 @@
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#orderstracking">Orders tracking</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#downloads">Downloads</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#address">Addresses</a></li>
+                                <li><a class="nav-link" data-bs-toggle="tab" href="#wishlist">Wishlist</a></li>
+                                <li><a class="nav-link" data-bs-toggle="tab" href="#review">리뷰페이지</a></li>
                                 <li><a class="nav-link myPage" data-bs-toggle="tab" href="#account-details">마이페이지</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#pet-page">반려동물목록</a></li>
-                                <li><a class="nav-link" data-bs-toggle="tab" href="#wishlist">Wishlist</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#change-password">비밀번호 변경</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#withdraw">탈퇴</a></li>
                             </ul>
@@ -167,6 +168,51 @@
                                     </div>
                                 </div>
                                 <!-- End Orders -->
+
+                                <!-- Review -->
+                                <div id="review" class="product-order tab-pane fade">
+                                    <h3>Review</h3>
+                                    <div class="table-responsive order-table mb-3">
+                                        <table class="table table-bordered table-hover align-middle text-center mb-0">
+                                            <thead class="alt-font">
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Brand</th>
+                                                    <th>Product</th>
+                                                    <th>Date</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr th:each="review : ${reviews}">
+                                                    <td th:text="${reviewStat.count}"></td>
+                                                    <td th:text="${@codeService.selectOneCachedCode(review.feedBrand)}"></td>
+                                                    <td th:text="${review.prodName}"></td>
+                                                    <td th:text="${review.reviModDate}"></td>
+                                                    <td><a class="link-underline view" href="cart-style1.html">View</a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="pagination">
+                                        <ul>
+                                            <li class="prev page-item" th:if="${vo.startPage gt vo.pageNumToShow}">
+                                                <a href="javascript:goReview(${vo.startPage - 1})" th:attr="onclick=|goReview('${vo.startPage - 1}')|">
+                                                    <i class="icon align-middle an an-caret-left" aria-hidden="true"></i>
+                                                </a>
+                                            </li>
+                                            <li class="page-item" th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}" th:classappend="${num eq vo.thisPage} ? active : ''">
+                                                <a th:attr="onclick=|goReview('${num}')|" th:text="${num}"></a>
+                                            </li>
+                                            <li class="next page-item" th:if="${vo.endPage ne vo.totalPages}">
+                                                <a th:attr="onclick=|goReview('${vo.endPage + 1}')|">
+                                                    <i class="icon align-middle an an-caret-right" aria-hidden="true"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- End Review -->
 
                                 <!-- Orders tracking -->
                                 <div id="orderstracking" class="order-tracking tab-pane fade">

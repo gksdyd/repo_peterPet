@@ -67,4 +67,12 @@ public class MemberService extends BaseService {
     			, memberDto.getReviSeq(), memberDao, amazonS3Client);
 		return 1;
 	}
+	
+	public List<MemberDto> reviewList(MemberVo memberVo) {
+		return memberDao.reviewList(memberVo);
+	}
+	
+	public int reviewCount(MemberVo vo) {
+		return memberDao.reviewCount(vo);
+	}
 }

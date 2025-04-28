@@ -236,4 +236,29 @@
 	<insert id="insertUploaded">
 		<include refid="Base.insertUploaded"></include>
 	</insert>
+	
+	<select id="reviewList" resultMap="resultMapObj">
+		SELECT
+			a.reviModDate,
+			b.prodName,
+			b.feedBrand
+		FROM
+			review a
+			LEFT JOIN product b ON a.product_prodSeq = b.prodSeq
+			LEFT JOIN user c ON a.user_userSeq = c.userSeq
+		WHERE
+			c.userSeq = #{userSeq}
+		limit #{rowNumToShow} offset #{startRnumForMysql}
+	</select>
+	
+	<select id="reviewCount" resultType="Integer">
+		SELECT
+			COUNT(*)
+		FROM
+			review a
+			LEFT JOIN product b ON a.product_prodSeq = b.prodSeq
+			LEFT JOIN user c ON a.user_userSeq = c.userSeq
+		WHERE
+			c.userSeq = #{userSeq}
+	</select>
 </mapper>

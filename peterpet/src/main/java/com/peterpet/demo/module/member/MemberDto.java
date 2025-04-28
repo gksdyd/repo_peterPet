@@ -41,6 +41,9 @@ public class MemberDto extends BaseDto {
 	private String reviModDate;
 	private Integer reviGood;
 	
+	private String prodName;
+	private Integer feedBrand;
+	
 	public String getUserSeq() {
 		return userSeq;
 	}
@@ -238,5 +241,17 @@ public class MemberDto extends BaseDto {
 	}
 	public void setReviSeq(String reviSeq) {
 		this.reviSeq = reviSeq;
+	}
+	public String getProdName() {
+		return prodName;
+	}
+	public void setProdName(String prodName) {
+		this.prodName = prodName;
+	}
+	public Integer getFeedBrand() {
+		return feedBrand;
+	}
+	public void setFeedBrand(Integer feedBrand) {
+		this.feedBrand = feedBrand;
 	}
 }

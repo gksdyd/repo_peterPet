@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -69,18 +70,22 @@ public class MemberPeterController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/MyAccountPeterForm")
-	public String MyAccountPeterForm(MemberDto memberDto, PetVo petVo,
+	public String MyAccountPeterForm(MemberDto memberDto, PetVo petVo, @ModelAttribute("vo") MemberVo memberVo,
 			Model model, HttpSession httpSession) {
 		List<PetDto> pets = new ArrayList<>();
 		
 		memberDto.setUserSeq((String)httpSession.getAttribute("sessSeqPeter"));
 		petVo.setUserSeq((String)httpSession.getAttribute("sessSeqPeter"));
+		memberVo.setUserSeq((String)httpSession.getAttribute("sessSeqPeter"));
 		
 		pets = petService.selectListPeterPets(petVo);
 		petVo.calculateAge(pets);
 		
+		memberVo.setParamsPaging(memberService.reviewCount(memberVo));
+		
 		model.addAttribute("item", memberService.selectOne(memberDto));
 		model.addAttribute("list", pets);
+		model.addAttribute("reviews", memberService.reviewList(memberVo));
 		return "peter/member/MyAccountPeterForm";
 	}
 	
