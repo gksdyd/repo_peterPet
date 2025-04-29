@@ -75,7 +75,7 @@
 			#{prodUseFlag},
 			#{prodName},
 			0,
-			date_format(NOW(), '%Y-%m-%d %H:%i:%S'),
+			DATE_FORMAT(CONVERT_TZ(NOW(), 'UTC', 'Asia/Seoul'), '%Y-%m-%d %H:%i:%S'),
 			#{feedSalaryAge},
 			#{feedType},
 			#{feedEtc},
@@ -104,7 +104,7 @@
 			#{infoWeight},
 			#{infoDiscount},
 			0,
-			date_format(NOW(), '%Y-%m-%d %H:%i:%S'),
+			DATE_FORMAT(CONVERT_TZ(NOW(), 'UTC', 'Asia/Seoul'), '%Y-%m-%d %H:%i:%S'),
 			#{infoMain},
 			#{prodSeq}
 		)
@@ -227,7 +227,7 @@
 		SET
 			prodUseFlag = #{prodUseFlag},
 			prodName = #{prodName},
-			prodModDate = date_format(NOW(), '%Y-%m-%d %H:%i:%S'),
+			prodModDate = DATE_FORMAT(CONVERT_TZ(NOW(), 'UTC', 'Asia/Seoul'), '%Y-%m-%d %H:%i:%S'),
 			feedSalaryAge = #{feedSalaryAge},
 			feedType = #{feedType},
 			feedEtc = #{feedEtc},

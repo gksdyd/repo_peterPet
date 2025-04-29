@@ -85,7 +85,7 @@
 			#{cogrUseFlag},
 			#{cogrOrder},
 			#{cogrDisc},
-			date_format(NOW(), '%Y-%m-%d %H:%i:%S'),
+			DATE_FORMAT(CONVERT_TZ(NOW(), 'UTC', 'Asia/Seoul'), '%Y-%m-%d %H:%i:%S'),
 			0,
 			#{cogrNum}
 		)
@@ -107,7 +107,7 @@
 			cogrUseFlag = #{cogrUseFlag},
 			cogrOrder = #{cogrOrder},
 			cogrDisc = #{cogrDisc},
-			cogrModDate = date_format(NOW(), '%Y-%m-%d %H:%i:%S'),
+			cogrModDate = DATE_FORMAT(CONVERT_TZ(NOW(), 'UTC', 'Asia/Seoul'), '%Y-%m-%d %H:%i:%S'),
 			cogrNum = #{cogrNum}
 		WHERE
 			cogrSeq = #{cogrSeq}

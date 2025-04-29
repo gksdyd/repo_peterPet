@@ -88,7 +88,9 @@ public class MemberService extends BaseService {
 	}
 	
 	public int updateReview(MemberDto memberDto) throws Exception {
-		memberDao.deleteImage(memberDto);
+		if (memberDto.getImageSeq() != null) {
+			memberDao.deleteImage(memberDto);			
+		}
 		uploadFilesToS3(memberDto.getUploadImg1(), memberDto, "image", memberDto.getUploadImg1Type(), memberDto.getUploadImg1MaxNumber()
     			, memberDto.getReviSeq(), memberDao, amazonS3Client);
 		memberDao.updateReview(memberDto);

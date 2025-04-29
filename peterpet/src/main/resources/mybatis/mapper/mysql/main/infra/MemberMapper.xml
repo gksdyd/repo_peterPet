@@ -103,7 +103,7 @@
 		UPDATE user
 		SET 
 			userName = #{userName},
-			userModDate = date_format(NOW(), '%Y-%m-%d %H:%i:%S'),
+			userModDate = DATE_FORMAT(CONVERT_TZ(NOW(), 'UTC', 'Asia/Seoul'), '%Y-%m-%d %H:%i:%S'),
 			userEmail = #{userEmail},
 			userPhone = #{userPhone},
 			userRecvNotiFlag = #{userRecvNotiFlag},
@@ -158,7 +158,7 @@
 			#{userLongitude},
 			0,
 			0,
-			date_format(NOW(), '%Y-%m-%d %H:%i:%S')
+			DATE_FORMAT(CONVERT_TZ(NOW(), 'UTC', 'Asia/Seoul'), '%Y-%m-%d %H:%i:%S')
 		)
 		<selectKey resultType="String" keyProperty="userSeq" order="AFTER">
 			SELECT last_insert_id()
@@ -195,7 +195,7 @@
 			userDelFlag = 1,
 			userSecession = #{userSecession},
 			userEtcReason = #{userEtcReason},
-			userModDate = date_format(NOW(), '%Y-%m-%d %H:%i:%S')
+			userModDate = DATE_FORMAT(CONVERT_TZ(NOW(), 'UTC', 'Asia/Seoul'), '%Y-%m-%d %H:%i:%S')
 		WHERE
 			userSeq = #{userSeq}
 	</update>
@@ -203,7 +203,7 @@
 	<select id="checkPhone" resultMap="resultMapObj">
 		SELECT
 			userDelFlag,
-			TIMESTAMPDIFF(DAY, userModDate, date_format(NOW(), '%Y-%m-%d %H:%i:%S')) AS dateDiff
+			TIMESTAMPDIFF(DAY, userModDate, DATE_FORMAT(CONVERT_TZ(NOW(), 'UTC', 'Asia/Seoul'), '%Y-%m-%d %H:%i:%S')) AS dateDiff
 		FROM
 			user
 		WHERE 1=1
@@ -223,8 +223,8 @@
 		) VALUE (
 			#{reviScore},
 			#{reviText},
-			date_format(NOW(), '%Y-%m-%d %H:%i:%S'),
-			date_format(NOW(), '%Y-%m-%d %H:%i:%S'),
+			DATE_FORMAT(CONVERT_TZ(NOW(), 'UTC', 'Asia/Seoul'), '%Y-%m-%d %H:%i:%S'),
+			DATE_FORMAT(CONVERT_TZ(NOW(), 'UTC', 'Asia/Seoul'), '%Y-%m-%d %H:%i:%S'),
 			0,
 			0,
 			#{prodSeq},
@@ -288,7 +288,7 @@
 		SET
 			reviScore = #{reviScore},
 			reviText = #{reviText},
-			reviModDate = date_format(NOW(), '%Y-%m-%d %H:%i:%S')
+			reviModDate = DATE_FORMAT(CONVERT_TZ(NOW(), 'UTC', 'Asia/Seoul'), '%Y-%m-%d %H:%i:%S')
 		WHERE 1=1
 		AND reviSeq = #{reviSeq}
 	</update>

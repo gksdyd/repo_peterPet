@@ -195,7 +195,7 @@
 			#{petWeight},
 			#{petVaccinationFlag},
 			#{petNeuteringFlag},
-			date_format(NOW(), '%Y-%m-%d %H:%i:%S'),
+			DATE_FORMAT(CONVERT_TZ(NOW(), 'UTC', 'Asia/Seoul'), '%Y-%m-%d %H:%i:%S'),
 			0,
 			#{user_userSeq}
 		)
@@ -249,7 +249,7 @@
 			petWeight = #{petWeight},
 			petVaccinationFlag = #{petVaccinationFlag},
 			petNeuteringFlag = #{petNeuteringFlag},
-			petModDate = date_format(NOW(), '%Y-%m-%d %H:%i:%S')
+			petModDate = DATE_FORMAT(CONVERT_TZ(NOW(), 'UTC', 'Asia/Seoul'), '%Y-%m-%d %H:%i:%S')
 		WHERE 1=1
 			AND petSeq = #{petSeq}
 	</update>
@@ -286,7 +286,7 @@
 		UPDATE pet
 		SET
 			petDelFlag = 1,
-			petModDate = date_format(NOW(), '%Y-%m-%d %H:%i:%S')
+			petModDate = DATE_FORMAT(CONVERT_TZ(NOW(), 'UTC', 'Asia/Seoul'), '%Y-%m-%d %H:%i:%S')
 		WHERE 1=1
 			AND petSeq = #{petSeq}
 	</update>

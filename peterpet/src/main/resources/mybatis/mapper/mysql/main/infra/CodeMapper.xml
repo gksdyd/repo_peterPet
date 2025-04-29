@@ -103,7 +103,7 @@
 			#{codeUseFlag},
 			#{codeOrder},
 			#{codeDisc},
-			date_format(NOW(), '%Y-%m-%d %H:%i:%S'),
+			DATE_FORMAT(CONVERT_TZ(NOW(), 'UTC', 'Asia/Seoul'), '%Y-%m-%d %H:%i:%S'),
 			0,
 			#{codeGroup_cogrSeq}
 		)
@@ -138,7 +138,7 @@
 			codeUseFlag = #{codeUseFlag},
 			codeOrder = #{codeOrder},
 			codeDisc = #{codeDisc},
-			codeModDate = date_format(NOW(), '%Y-%m-%d %H:%i:%S'),
+			codeModDate = DATE_FORMAT(CONVERT_TZ(NOW(), 'UTC', 'Asia/Seoul'), '%Y-%m-%d %H:%i:%S'),
 			codeGroup_cogrSeq = #{codeGroup_cogrSeq}
 		where
 			codeSeq = #{codeSeq}
