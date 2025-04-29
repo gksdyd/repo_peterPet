@@ -211,7 +211,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <form class="mt-2 mb-4" id="reviewForm" enctype="multipart/form-data">
+                                    <form class="mt-2 mb-4 d-none" id="reviewForm" enctype="multipart/form-data">
                                         <fieldset class="spr-form-contact">
                                             <div class="spr-form-review-rating form-group">
                                                 <label class="spr-form-label">Rating</label>
@@ -239,7 +239,8 @@
                                             </div>
                                         </fieldset>
                                         <div class="spr-form-actions clearfix">
-                                            <button type="button" class="btn btn-primary rounded spr-button spr-button-primary" id="reviewBtn">저장</button>
+                                            <button type="button" class="btn btn-primary rounded spr-button spr-button-primary" id="reviewUpBtn">저장</button>
+                                            <button type="button" class="btn btn-danger rounded spr-button spr-button-primary" id="reviewDelBtn">삭제</button>
                                         </div>
                                     </form>
                                 </div>
@@ -1760,6 +1761,7 @@
                     ,url: "/peter/member/ReviewPeterViewProc"
                     ,data: { "reviSeq" : seq }
                     ,success: function(response) {
+                        $("#reviewForm").removeClass("d-none");
                         $("input[name=rating]").checked = false;
                         for (let i = 0; i < response.item.reviScore; i++) {
                             $("input[name=rating]")[4 - i].checked = true;
