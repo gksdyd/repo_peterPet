@@ -220,11 +220,19 @@ public class MemberPeterController extends BaseController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/ReviewPeterProc")
-	public Map<String, Object> MyAccountPeterForm(MemberVo memberVo) {
+	public Map<String, Object> reviewPeterProc(MemberVo memberVo) {
 		Map<String, Object> rtMap = new HashMap<>();
 		memberVo.setParamsPaging(memberService.reviewCount(memberVo));
 		rtMap.put("list", memberService.reviewList(memberVo));
 		rtMap.put("vo", memberVo);
+		return rtMap;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/ReviewPeterViewProc")
+	public Map<String, Object> reviewPeterViewProc(MemberVo memberVo) {
+		Map<String, Object> rtMap = new HashMap<>();
+		rtMap.put("item", memberService.selectOneReview(memberVo));
 		return rtMap;
 	}
 }

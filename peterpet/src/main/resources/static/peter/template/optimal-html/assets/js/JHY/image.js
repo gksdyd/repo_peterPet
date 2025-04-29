@@ -16,6 +16,8 @@ $(document).on("change", ".vd-image-upload", function() {
                 $(input).parent().prev().removeClass("d-none");
                 $(input).parent().prev().attr("src", e.target.result);
             } else if ($.inArray(ext, ['jpg','jpeg','png']) != -1) {
+                $(input).parent().prev().prev().removeClass("d-none");
+                $(input).parent().prev().addClass("d-none");
                 $(input).parent().prev().prev().attr("src", e.target.result);
             }
 
@@ -36,6 +38,8 @@ $(document).on("change", ".vd-image-upload", function() {
                                     "</div>" +
                                 "</div>";
                     $(".thumb-upload-set").append(text);
+                } else if (count == 5) {
+                    count = 6;
                 }
             }
         }
@@ -45,5 +49,20 @@ $(document).on("change", ".vd-image-upload", function() {
 
 $(document).on("click", ".removeImage", function() {
     $(this).parent().parent().parent().remove();
+    if (count == 6) {
+        num++;
+        let text = "<div class='col-2 col-sm-2 col-md-2 col-lg-2 thumb-upload'>" +
+                        "<div class='thumb-preview position-relative border p-1'>" +
+                            "<img class='thumb-preview' src='/peter/template/optimal-html/assets/images/vendor/vender-upload-preview.jpg' alt='edit'>" +
+                            "<video class='thumb-preview d-none' src=''></video>" +
+                            "<div class='thumb-edit'>" +
+                                "<label class='removeImage d-flex-center justify-content-center position-absolute top-0 start-0 p-2 border-0 rounded-circle shadow btn d-none'><i class='icon an an-times-r an-1x'></i></label>" +
+                                "<label for='thumbUpload" + num + "' class='d-flex-center justify-content-center position-absolute top-0 end-0 p-2 border-0 rounded-circle shadow btn'><i class='icon an an-pencil-l an-1x'></i></label>" +
+                                "<input type='file' id='thumbUpload" + num + "' class='vd-image-upload d-none' accept='.png, .jpg, .jpeg, .mp4'>" +
+                            "</div>" +
+                        "</div>" +
+                    "</div>";
+        $(".thumb-upload-set").append(text);
+    }
     count--;
 });

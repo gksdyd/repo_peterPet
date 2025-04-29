@@ -189,7 +189,7 @@
                                                     <td th:text="${@codeService.selectOneCachedCode(review.feedBrand)}"></td>
                                                     <td th:text="${review.prodName}"></td>
                                                     <td th:text="${review.reviModDate}"></td>
-                                                    <td><a class="link-underline view" href="cart-style1.html">View</a></td>
+                                                    <td><a class="link-underline view" href="javascript:void(0);" th:onclick="reviewView([[${review.reviSeq}]])">View</a></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -211,6 +211,37 @@
                                             </li>
                                         </ul>
                                     </div>
+                                    <form class="mt-2 mb-4" id="reviewForm" enctype="multipart/form-data">
+                                        <fieldset class="spr-form-contact">
+                                            <div class="spr-form-review-rating form-group">
+                                                <label class="spr-form-label">Rating</label>
+                                                <div class="product-review pt-1">
+                                                    <div class="review-rating">
+                                                        <input type="radio" name="rating" id="rating-5"><label for="rating-5"></label>
+                                                        <input type="radio" name="rating" id="rating-4"><label for="rating-4"></label>
+                                                        <input type="radio" name="rating" id="rating-3"><label for="rating-3"></label>
+                                                        <input type="radio" name="rating" id="rating-2"><label for="rating-2"></label>
+                                                        <input type="radio" name="rating" id="rating-1"><label for="rating-1"></label>
+                                                    </div>
+                                                    <div class="d-none" id="starValid">별점 체크바랍니다.</div>
+                                                </div>
+                                            </div>
+                                            <div class="spr-form-review-body form-group">
+                                                <div class="row g-2 thumb-upload-set px-3 mb-4">
+                                                </div>
+                                            </div>
+                                            <div class="spr-form-review-body form-group">
+                                                <label class="spr-form-label" for="reviText">리뷰 작성</label>
+                                                <div class="spr-form-input">
+                                                    <textarea class="spr-form-input spr-form-input-textarea " id="reviText" name="reviText" rows="5" placeholder="1000 글자 이내" maxlength="1000"></textarea>
+                                                </div>
+                                                <div class="d-none" id="textValid">최소 10글자 이상 작성하셔야 합니다.</div>
+                                            </div>
+                                        </fieldset>
+                                        <div class="spr-form-actions clearfix">
+                                            <button type="button" class="btn btn-primary rounded spr-button spr-button-primary" id="reviewBtn">저장</button>
+                                        </div>
+                                    </form>
                                 </div>
                                 <!-- End Review -->
 
@@ -1321,6 +1352,7 @@
             <div th:replace="~{peter/include/includePeterOriginal :: includePeterOriginal}"></div>
             <div th:replace="~{peter/include/includePeterCommon :: includePeterCommon}"></div>
             <div th:replace="~{peter/include/includePeterRegister :: includePeterRegister}"></div>
+            <script src="/peter/template/optimal-html/assets/js/JHY/image.js"></script>
 
             <script type="text/javascript" th:inline="javascript">
                 $(".myPage").on("click", function() {
@@ -1645,7 +1677,7 @@
                         let text = "";
 
                         for (let i = 0; i < response.list.length; i++) {
-                            text += reviewCreate(i + 1, response.list[i].reviModDate, response.list[i].prodName, response.list[i].feedBrand);
+                            text += reviewCreate(i + 1, response.list[i].reviModDate, response.list[i].prodName, response.list[i].feedBrand, response.list[i].reviSeq);
                         }
                         $("#reviewBody").html(text);
                         pagination(start, end, page, total);
@@ -1656,13 +1688,13 @@
                 });
             }
 
-            function reviewCreate(n, reviModDate, prodName, feedBrand) {
+            function reviewCreate(n, reviModDate, prodName, feedBrand, seq) {
                 let text = "<tr>" +
                                 "<td>" + n + "</td>" +
                                 "<td>" + window.cache[feedBrand - 1].codeName + "</td>" +
                                 "<td>" + prodName + "</td>" +
                                 "<td>" + reviModDate + "</td>" +
-                                "<td><a class='link-underline view' href='cart-style1.html'>View</a></td>" +
+                                "<td><a class='link-underline view' href='javascript:void(0);' onclick='reviewView(" + seq + ")'>View</a></td>" +
                             "</tr>";
                 return text;
             }
@@ -1718,6 +1750,67 @@
                     li.append(a);
                     pagination.append(li);
                 }
+            }
+
+            function reviewView(seq) {
+                $.ajax({
+                    async: true 
+                    ,cache: false
+                    ,type: "post"
+                    ,url: "/peter/member/ReviewPeterViewProc"
+                    ,data: { "reviSeq" : seq }
+                    ,success: function(response) {
+                        $("input[name=rating]").checked = false;
+                        for (let i = 0; i < response.item.reviScore; i++) {
+                            $("input[name=rating]")[4 - i].checked = true;
+                        }
+
+                        $(".thumb-upload-set").empty();
+                        let text = "";
+                        if (response.item.paths != null) {
+                            num = response.item.paths.length + 1;
+                            count = response.item.paths.length + 1;
+                            for (let i = 0; i < response.item.paths.length; i++) {
+                                let ext = response.item.paths[i].split('.').pop().toLowerCase();
+                                text += "<div class='col-2 col-sm-2 col-md-2 col-lg-2 thumb-upload'>" +
+                                            "<div class='thumb-preview position-relative border p-1'>";
+                                if (ext == "mp4") {
+                                    text += "<img class='thumb-preview d-none' src='' alt='edit'>" +
+                                            "<video class='thumb-preview' src='" + response.item.paths[i] + "'></video>";
+                                } else {
+                                    text += "<img class='thumb-preview' src='" + response.item.paths[i] + "' alt='edit'>" +
+                                            "<video class='thumb-preview d-none' src=''></video>";
+                                }
+                                text += "<div class='thumb-edit'>" +
+                                            "<label class='removeImage d-flex-center justify-content-center position-absolute top-0 start-0 p-2 border-0 rounded-circle shadow btn'><i class='icon an an-times-r an-1x'></i></label>" +
+                                            "<label for='thumbUpload" + (i + 1) + "' class='d-flex-center justify-content-center position-absolute top-0 end-0 p-2 border-0 rounded-circle shadow btn'><i class='icon an an-pencil-l an-1x'></i></label>" +
+                                            "<input type='file' id='thumbUpload" + (i + 1) + "' class='vd-image-upload d-none' accept='.png, .jpg, .jpeg, .mp4'>" +
+                                        "</div>" +
+                                    "</div>" +
+                                "</div>";
+                            }
+                        }
+                        if (count < 5) {
+                            text += "<div class='col-2 col-sm-2 col-md-2 col-lg-2 thumb-upload'>" +
+                                "<div class='thumb-preview position-relative border p-1'>" +
+                                    "<img class='thumb-preview' src='/peter/template/optimal-html/assets/images/vendor/vender-upload-preview.jpg' alt='edit'>" +
+                                    "<video class='thumb-preview d-none' src=''></video>" +
+                                    "<div class='thumb-edit'>" +
+                                        "<label class='removeImage d-flex-center justify-content-center position-absolute top-0 start-0 p-2 border-0 rounded-circle shadow btn d-none'><i class='icon an an-times-r an-1x'></i></label>" +
+                                        "<label for='thumbUpload" + num + "' class='d-flex-center justify-content-center position-absolute top-0 end-0 p-2 border-0 rounded-circle shadow btn'><i class='icon an an-pencil-l an-1x'></i></label>" +
+                                        "<input type='file' id='thumbUpload" + num + "' class='vd-image-upload d-none' accept='.png, .jpg, .jpeg, .mp4'>" +
+                                    "</div>" +
+                                "</div>" +
+                            "</div>";
+                        }
+                        $(".thumb-upload-set").append(text);
+
+                        $("#reviText").val(response.item.reviText);
+                    }
+                    ,error : function(jqXHR){
+                        alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+                    }
+                });
             }
             </script>
         </div>

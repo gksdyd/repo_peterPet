@@ -239,6 +239,7 @@
 	
 	<select id="reviewList" resultMap="resultMapObj">
 		SELECT
+			a.reviSeq,
 			a.reviModDate,
 			b.prodName,
 			b.feedBrand
@@ -261,5 +262,19 @@
 			LEFT JOIN user c ON a.user_userSeq = c.userSeq
 		WHERE
 			c.userSeq = #{userSeq}
+	</select>
+	
+	<select id="selectOneReview" resultMap="resultMapObj">
+		SELECT
+			a.reviSeq,
+			a.reviScore,
+			a.reviText,
+			GROUP_CONCAT(b.path) AS temp
+		FROM
+			review a
+			LEFT JOIN image b ON b.pseq = a.reviSeq AND b.delNy = 0 AND b.type = 4
+		WHERE
+			reviSeq = #{reviSeq}
+		GROUP BY a.reviSeq, a.reviScore, a.reviText
 	</select>
 </mapper>

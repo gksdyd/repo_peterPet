@@ -6,6 +6,7 @@ public class MemberVo extends BaseVo {
 
 	private Integer shSecession;
 	private String userSeq;
+	private String reviSeq;
 
 	public Integer getShSecession() {
 		return shSecession;
@@ -21,6 +22,14 @@ public class MemberVo extends BaseVo {
 
 	public void setUserSeq(String userSeq) {
 		this.userSeq = userSeq;
+	}
+
+	public String getReviSeq() {
+		return reviSeq;
+	}
+
+	public void setReviSeq(String reviSeq) {
+		this.reviSeq = reviSeq;
 	}
 
 	public String ranCertification() {

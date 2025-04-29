@@ -75,4 +75,12 @@ public class MemberService extends BaseService {
 	public int reviewCount(MemberVo vo) {
 		return memberDao.reviewCount(vo);
 	}
+	
+	public MemberDto selectOneReview(MemberVo memberVo) {
+		MemberDto dto = memberDao.selectOneReview(memberVo);
+		if (dto.getTemp() != null) {
+			dto.setPaths(dto.getTemp().split(","));				
+		}
+		return dto;
+	}
 }
