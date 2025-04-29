@@ -1889,6 +1889,27 @@
                     }
                 });
             }
+
+            $("#reviewDelBtn").on("click", function() {
+                $.ajax({
+                    async: true 
+                    ,cache: false
+                    ,type: "post"
+                    ,url: "/peter/member/ReviewPeterDeltProc"
+                    ,data: { "reviSeq" : $(this).val() }
+                    ,success: function(response) {
+                        $(".page-item").each(function(index, el) {
+                            if ($(el).hasClass("active")) {
+                                goReview($(el).children().text());
+                            }
+                        })
+                        $("#reviewForm").addClass("d-none");
+                    }
+                    ,error : function(jqXHR){
+                        alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+                    }
+                });
+            });
             </script>
         </div>
         <!--End Page Wrapper-->

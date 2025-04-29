@@ -179,16 +179,16 @@
 			prodScore,
 			prodIsStock,
 			prodPetType,
-			(SELECT COUNT(*) FROM review WHERE product_prodSeq = #{prodSeq} AND reviScore = 1) AS scoreOne,
-			(SELECT COUNT(*) FROM review WHERE product_prodSeq = #{prodSeq} AND reviScore = 2) AS scoreTwo,
-			(SELECT COUNT(*) FROM review WHERE product_prodSeq = #{prodSeq} AND reviScore = 3) AS scoreThree,
-			(SELECT COUNT(*) FROM review WHERE product_prodSeq = #{prodSeq} AND reviScore = 4) AS scoreFour,
-			(SELECT COUNT(*) FROM review WHERE product_prodSeq = #{prodSeq} AND reviScore = 5) AS scoreFive,
+			(SELECT COUNT(*) FROM review WHERE product_prodSeq = #{prodSeq} AND reviScore = 1 AND reviDelFlag = 0) AS scoreOne,
+			(SELECT COUNT(*) FROM review WHERE product_prodSeq = #{prodSeq} AND reviScore = 2 AND reviDelFlag = 0) AS scoreTwo,
+			(SELECT COUNT(*) FROM review WHERE product_prodSeq = #{prodSeq} AND reviScore = 3 AND reviDelFlag = 0) AS scoreThree,
+			(SELECT COUNT(*) FROM review WHERE product_prodSeq = #{prodSeq} AND reviScore = 4 AND reviDelFlag = 0) AS scoreFour,
+			(SELECT COUNT(*) FROM review WHERE product_prodSeq = #{prodSeq} AND reviScore = 5 AND reviDelFlag = 0) AS scoreFive,
 			b.infoDiscount,
 			b.infoPrice,
 			b.infoWeight,
 			(b.infoPrice * (100 - infoDiscount) / 100) AS discountPrice,
-			(SELECT COUNT(*) FROM review WHERE product_prodSeq = #{prodSeq}) AS reviewCount,
+			(SELECT COUNT(*) FROM review WHERE product_prodSeq = #{prodSeq} AND reviDelFlag = 0) AS reviewCount,
 			(SELECT GROUP_CONCAT(infoWeight) FROM feedinfo WHERE product_prodSeq = #{prodSeq} GROUP BY product_prodSeq) AS weightArr,
 			(SELECT path FROM image WHERE #{prodSeq} = pseq AND delNy = 0 AND type = 1 ORDER BY sort LIMIT 1) AS path
         FROM
@@ -353,7 +353,7 @@
 		<include refid="commonFeed"></include>
         <choose>
 			<when test="shSortBy == 1">ORDER BY a.prodRegDate DESC</when>
-			<when test="shSortBy == 2">ORDER BY (SELECT COUNT(*) FROM review WHERE a.prodSeq = product_prodSeq)</when>
+			<when test="shSortBy == 2">ORDER BY (SELECT COUNT(*) FROM review WHERE a.prodSeq = product_prodSeq AND reviDelFlag = 0) DESC</when>
 			<when test="shSortBy == 3">ORDER BY b.infoPrice * (100 - infoDiscount) / 100</when>
 			<when test="shSortBy == 4">ORDER BY b.infoPrice * (100 - infoDiscount) / 100 DESC</when>
 		</choose>
@@ -368,7 +368,7 @@
 	<update id="updateScore">
 		UPDATE product
 		SET
-			prodScore = (SELECT ROUND(SUM(reviScore) / COUNT(*), 1) FROM review WHERE product_prodSeq = #{prodSeq})
+			prodScore = (SELECT ROUND(SUM(reviScore) / COUNT(*), 1) FROM review WHERE product_prodSeq = #{prodSeq} AND reviDelFlag = 0)
 		WHERE
 			prodSeq = #{prodSeq}
 	</update>
@@ -378,6 +378,7 @@
         	LEFT JOIN pet c ON b.userSeq = c.user_userSeq AND petMain = 1
         WHERE 1=1
         	AND product_prodSeq = #{prodSeq}
+        	AND reviDelFlag = 0
 	</sql>
 	
 	<select id="selectReview" resultMap="resultMapObj">

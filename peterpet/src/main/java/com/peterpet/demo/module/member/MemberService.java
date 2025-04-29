@@ -94,4 +94,8 @@ public class MemberService extends BaseService {
 		memberDao.updateReview(memberDto);
 		return 1;
 	}
+	
+	public int deleteReview(MemberDto memberDto) {
+		return memberDao.deleteReview(memberDto);
+	}
 }

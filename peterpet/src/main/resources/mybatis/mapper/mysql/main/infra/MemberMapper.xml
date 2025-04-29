@@ -217,6 +217,7 @@
 			reviRegDate,
 			reviModDate,
 			reviGood,
+			reviDelFlag,
 			product_prodSeq,
 			user_userSeq
 		) VALUE (
@@ -224,6 +225,7 @@
 			#{reviText},
 			date_format(NOW(), '%Y-%m-%d %H:%i:%S'),
 			date_format(NOW(), '%Y-%m-%d %H:%i:%S'),
+			0,
 			0,
 			#{prodSeq},
 			#{userSeq}
@@ -247,8 +249,9 @@
 			review a
 			LEFT JOIN product b ON a.product_prodSeq = b.prodSeq
 			LEFT JOIN user c ON a.user_userSeq = c.userSeq
-		WHERE
-			c.userSeq = #{userSeq}
+		WHERE 1=1
+			AND a.reviDelFlag = 0
+			AND c.userSeq = #{userSeq}
 		ORDER BY reviModDate DESC
 		limit #{rowNumToShow} offset #{startRnumForMysql}
 	</select>
@@ -260,8 +263,9 @@
 			review a
 			LEFT JOIN product b ON a.product_prodSeq = b.prodSeq
 			LEFT JOIN user c ON a.user_userSeq = c.userSeq
-		WHERE
-			c.userSeq = #{userSeq}
+		WHERE 1=1
+			AND a.reviDelFlag = 0
+			AND c.userSeq = #{userSeq}
 	</select>
 	
 	<select id="selectOneReview" resultMap="resultMapObj">
@@ -299,5 +303,13 @@
 		<foreach collection="imageSeq" open="(" separator="," close=")" item="seq">
 			#{seq}
 		</foreach>
+	</update>
+	
+	<update id="deleteReview">
+		UPDATE review
+		SET
+			reviDelFlag = 1
+		WHERE 1=1
+		AND reviSeq = #{reviSeq}
 	</update>
 </mapper>

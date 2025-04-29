@@ -241,4 +241,10 @@ public class MemberPeterController extends BaseController {
 	public void reviewPeterUpdtProc(MemberDto memberDto) throws Exception {
 		memberService.updateReview(memberDto);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/ReviewPeterDeltProc")
+	public void reviewPeterDeltProc(MemberDto memberDto) {
+		memberService.deleteReview(memberDto);
+	}
 }
