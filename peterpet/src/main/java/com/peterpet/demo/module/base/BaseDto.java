@@ -24,7 +24,9 @@ public class BaseDto {
 	private Integer uploadImg1MaxNumber;
 	
 	private String temp;
+	private String temp2;
 	private String[] paths;
+	private String[] imageSeq;
 
 	public String getTableName() {
 		return tableName;
@@ -160,5 +162,21 @@ public class BaseDto {
 
 	public void setTemp(String temp) {
 		this.temp = temp;
+	}
+
+	public String[] getImageSeq() {
+		return imageSeq;
+	}
+
+	public void setImageSeq(String[] imageSeq) {
+		this.imageSeq = imageSeq;
+	}
+
+	public String getTemp2() {
+		return temp2;
+	}
+
+	public void setTemp2(String temp2) {
+		this.temp2 = temp2;
 	}
 }

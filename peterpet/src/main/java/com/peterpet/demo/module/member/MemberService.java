@@ -81,6 +81,17 @@ public class MemberService extends BaseService {
 		if (dto.getTemp() != null) {
 			dto.setPaths(dto.getTemp().split(","));				
 		}
+		if (dto.getTemp2() != null) {
+			dto.setImageSeq(dto.getTemp2().split(","));				
+		}
 		return dto;
+	}
+	
+	public int updateReview(MemberDto memberDto) throws Exception {
+		memberDao.deleteImage(memberDto);
+		uploadFilesToS3(memberDto.getUploadImg1(), memberDto, "image", memberDto.getUploadImg1Type(), memberDto.getUploadImg1MaxNumber()
+    			, memberDto.getReviSeq(), memberDao, amazonS3Client);
+		memberDao.updateReview(memberDto);
+		return 1;
 	}
 }

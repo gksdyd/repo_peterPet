@@ -249,7 +249,7 @@
 			LEFT JOIN user c ON a.user_userSeq = c.userSeq
 		WHERE
 			c.userSeq = #{userSeq}
-		ORDER BY reviSeq DESC
+		ORDER BY reviModDate DESC
 		limit #{rowNumToShow} offset #{startRnumForMysql}
 	</select>
 	
@@ -269,7 +269,8 @@
 			a.reviSeq,
 			a.reviScore,
 			a.reviText,
-			GROUP_CONCAT(b.path) AS temp
+			GROUP_CONCAT(b.path) AS temp,
+			GROUP_CONCAT(b.seq) AS temp2
 		FROM
 			review a
 			LEFT JOIN image b ON b.pseq = a.reviSeq AND b.delNy = 0 AND b.type = 4
@@ -277,4 +278,26 @@
 			reviSeq = #{reviSeq}
 		GROUP BY a.reviSeq, a.reviScore, a.reviText
 	</select>
+	
+	<update id="updateReview">
+		UPDATE review
+		SET
+			reviScore = #{reviScore},
+			reviText = #{reviText},
+			reviModDate = date_format(NOW(), '%Y-%m-%d %H:%i:%S')
+		WHERE 1=1
+		AND reviSeq = #{reviSeq}
+	</update>
+	
+	<update id="deleteImage">
+		UPDATE image
+		SET
+			delNy = 1
+		WHERE 1=1
+		AND pseq = #{reviSeq}
+		AND seq NOT IN
+		<foreach collection="imageSeq" open="(" separator="," close=")" item="seq">
+			#{seq}
+		</foreach>
+	</update>
 </mapper>

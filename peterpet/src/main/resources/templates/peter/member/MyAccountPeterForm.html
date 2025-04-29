@@ -1754,6 +1754,8 @@
             }
 
             function reviewView(seq) {
+                $("#reviewUpBtn").val(seq);
+                $("#reviewDelBtn").val(seq);
                 $.ajax({
                     async: true 
                     ,cache: false
@@ -1784,7 +1786,7 @@
                                             "<video class='thumb-preview d-none' src=''></video>";
                                 }
                                 text += "<div class='thumb-edit'>" +
-                                            "<label class='removeImage d-flex-center justify-content-center position-absolute top-0 start-0 p-2 border-0 rounded-circle shadow btn'><i class='icon an an-times-r an-1x'></i></label>" +
+                                            "<label class='removeImage d-flex-center justify-content-center position-absolute top-0 start-0 p-2 border-0 rounded-circle shadow btn' value='" + response.item.imageSeq[i] + "'><i class='icon an an-times-r an-1x'></i></label>" +
                                             "<label for='thumbUpload" + (i + 1) + "' class='d-flex-center justify-content-center position-absolute top-0 end-0 p-2 border-0 rounded-circle shadow btn'><i class='icon an an-pencil-l an-1x'></i></label>" +
                                             "<input type='file' id='thumbUpload" + (i + 1) + "' class='vd-image-upload d-none' accept='.png, .jpg, .jpeg, .mp4'>" +
                                         "</div>" +
@@ -1808,6 +1810,79 @@
                         $(".thumb-upload-set").append(text);
 
                         $("#reviText").val(response.item.reviText);
+                    }
+                    ,error : function(jqXHR){
+                        alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+                    }
+                });
+            }
+
+            let starValid = document.getElementById("starValid");
+            let textValid = document.getElementById("textValid");
+            let rating = document.querySelectorAll("input[name=rating]");
+            let starCount;
+
+            $("#reviewUpBtn").on("click", function() {
+                starValid.setAttribute("class", "d-none");
+                textValid.setAttribute("class", "d-none");
+
+                starCount = 5;
+                for (let i = 0; i < rating.length; i++) {
+                    if (rating[i].checked) {
+                        break;
+                    } else {
+                        starCount--;
+                        if (starCount == 0) {
+                            starValid.style.color = "red";
+                            starValid.removeAttribute("class", "d-none");
+                            return false;
+                        }
+                    }
+                }
+                
+                if ($("#reviText").val().length < 10) {
+                    textValid.style.color = "red";
+                    textValid.removeAttribute("class", "d-none");
+                    return false;
+                }
+                review($(this).val());
+            });
+
+            function review(seq) {
+                let formData = new FormData();
+                $("input[type=file]").each(function(index, input) {
+                    if (input.files.length > 0) {
+                        formData.append("uploadImg1[]", input.files[0]);
+                    }
+                });
+
+                $(".removeImage").each(function(index, el) {
+                    if ($(el).attr("value") != null) {
+                        formData.append("imageSeq[]", $(el).attr("value"));
+                    }
+                });
+
+                formData.append("reviSeq", seq);
+                formData.append("uploadImg1Type", 4);
+                formData.append("uploadImg1MaxNumber", 1);
+                formData.append("reviScore", starCount);
+                formData.append("reviText", $("#reviText").val());
+
+                $.ajax({
+                    async: true 
+                    ,cache: false
+                    ,type: "post"
+                    ,url: "/peter/member/ReviewPeterUpdtProc"
+                    ,data: formData
+                    ,processData: false
+                    ,contentType: false
+                    ,success: function(response) {
+                        $(".page-item").each(function(index, el) {
+                            if ($(el).hasClass("active")) {
+                                goReview($(el).children().text());
+                            }
+                        })
+                        $("#reviewForm").addClass("d-none");
                     }
                     ,error : function(jqXHR){
                         alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);

@@ -26,4 +26,6 @@ public interface MemberDao extends BaseDao {
 	public List<MemberDto> reviewList(MemberVo memberVo);
 	public int reviewCount(MemberVo vo);
 	public MemberDto selectOneReview(MemberVo memberVo);
+	public int updateReview(MemberDto memberDto);
+	public int deleteImage(MemberDto memberDto);
 }

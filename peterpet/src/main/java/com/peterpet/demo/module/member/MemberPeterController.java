@@ -235,4 +235,10 @@ public class MemberPeterController extends BaseController {
 		rtMap.put("item", memberService.selectOneReview(memberVo));
 		return rtMap;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/ReviewPeterUpdtProc")
+	public void reviewPeterUpdtProc(MemberDto memberDto) throws Exception {
+		memberService.updateReview(memberDto);
+	}
 }
