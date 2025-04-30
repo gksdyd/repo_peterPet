@@ -48,6 +48,7 @@ public class ProductVo extends BaseVo{
 	private List<String> badgeArray = new ArrayList<>();
 	
 	private Integer shReviewSort = 1;
+	private Boolean shReviewImage = false;
 	
 	public List<String> getProdFuncArray() {
 		return prodFuncArray;
@@ -303,6 +304,14 @@ public class ProductVo extends BaseVo{
 
 	public void setShReviewSort(Integer shReviewSort) {
 		this.shReviewSort = shReviewSort;
+	}
+
+	public Boolean getShReviewImage() {
+		return shReviewImage;
+	}
+
+	public void setShReviewImage(Boolean shReviewImage) {
+		this.shReviewImage = shReviewImage;
 	}
 
 	public void InitProdType() {

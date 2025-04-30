@@ -1084,7 +1084,7 @@
                     ,cache: false
                     ,type: "post"
                     ,url: goUrlReviewProc
-                    ,data: { "shReviewSort" : $(e).val(), "prodSeq" : /*[[${item.prodSeq}]]*/'', "thisPage" : $("#thisPage").val() }
+                    ,data: { "shReviewSort" : $(e).val(), "prodSeq" : /*[[${item.prodSeq}]]*/'', "thisPage" : $("#thisPage").val(), "shReviewImage" : $("#formcheckoutCheckboxPictureNy").is(":checked") }
                     ,success: function(response) {
                         start = response.vo.startPage;
                         end = response.vo.endPage;
@@ -1188,6 +1188,10 @@
                     pagination.append(li);
                 }
             }
+
+            $("#formcheckoutCheckboxPictureNy").on("click", function() {
+                reviewRefresh($("#sort"));
+            });
         </script>
         <script th:inline="javascript" src="/peter/template/optimal-html/assets/js/JHY/product.js"></script>
     </body>

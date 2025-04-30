@@ -379,6 +379,9 @@
         WHERE 1=1
         	AND product_prodSeq = #{prodSeq}
         	AND reviDelFlag = 0
+        	<if test="shReviewImage == true">
+        		AND (SELECT COUNT(*) FROM image WHERE pseq = a.reviSeq) > 0
+        	</if>
 	</sql>
 	
 	<select id="selectReview" resultMap="resultMapObj">
