@@ -360,7 +360,7 @@
                                                                             <a th:href="${reviewPath}" data-size="1000x1280"></a>
                                                                         </div>
                                                                     </span>
-                                                                    <p class="spr-review-content-body" th:text="${list.reviText}"></p>
+                                                                    <p class="spr-review-content-body" th:utext="${#strings.replace(list.reviText, '\n', '<br/>')}"></p>
                                                                 </div>
                                                             </div>
                                                         </div>

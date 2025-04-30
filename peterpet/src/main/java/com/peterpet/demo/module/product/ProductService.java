@@ -108,6 +108,11 @@ public class ProductService extends BaseService {
 			if (dto.getTemp() != null) {
 				dto.setPaths(dto.getTemp().split(","));				
 			}
+			StringBuffer str = new StringBuffer(dto.getReviText());
+			for (int j = 100; j < str.length(); j += 101) {
+				str.insert(j, "\n");			
+			}
+			dto.setReviText(str.toString());
 		}
 		return dtos;
 	}
