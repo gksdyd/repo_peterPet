@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.peterpet.demo.module.base.BaseDao;
 import com.peterpet.demo.module.base.BaseDto;
+import com.peterpet.demo.module.product.ProductVo;
 
 @Repository
 public interface MemberDao extends BaseDao {
@@ -13,6 +14,7 @@ public interface MemberDao extends BaseDao {
 	public List<MemberDto> selectList(MemberVo vo);
 	public int selectOneCount(MemberVo vo);
 	public MemberDto selectOne(MemberDto memberDto);
+	public MemberDto selectOne(ProductVo productVo);
 	public MemberDto selectOneLogin(MemberDto memberDto);
 	public int update(MemberDto memberDto);
 	public int insert(MemberDto memberDto);

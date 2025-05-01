@@ -50,6 +50,10 @@ public class ProductVo extends BaseVo{
 	private Integer shReviewSort = 1;
 	private Boolean shReviewImage = false;
 	
+	private String userSeq;
+	private Integer prodCount;
+	private Double infoWeight;
+	
 	public List<String> getProdFuncArray() {
 		return prodFuncArray;
 	}
@@ -312,6 +316,30 @@ public class ProductVo extends BaseVo{
 
 	public void setShReviewImage(Boolean shReviewImage) {
 		this.shReviewImage = shReviewImage;
+	}
+
+	public String getUserSeq() {
+		return userSeq;
+	}
+
+	public void setUserSeq(String userSeq) {
+		this.userSeq = userSeq;
+	}
+
+	public Integer getProdCount() {
+		return prodCount;
+	}
+
+	public void setProdCount(Integer prodCount) {
+		this.prodCount = prodCount;
+	}
+
+	public Double getInfoWeight() {
+		return infoWeight;
+	}
+
+	public void setInfoWeight(Double infoWeight) {
+		this.infoWeight = infoWeight;
 	}
 
 	public void InitProdType() {

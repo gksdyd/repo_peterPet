@@ -96,7 +96,7 @@
                                         <div class="col-6 col-sm-6 col-md-6 col-lg-6">
                                             <div class="swatch clearfix swatch-1 option1" data-option-index="0">
                                                 <label class="label d-flex">중량:<span class="required d-none">*</span><span class="slVariant ms-1 fw-bold" th:text="${item.infoWeight} + 'kg'"></span></label>
-                                                <select>
+                                                <select id="selectWeight">
                                                     <option>중량 선택</option>
                                                     <option th:each="weight : ${item.weightArray}" th:text="${weight} + 'kg'" th:value="${weight}" th:selected="${#strings.toString(item.infoWeight)} == ${weight}"></option>
                                                 </select>
@@ -110,7 +110,7 @@
                                         <div class="product-form__item--quantity d-flex-center mb-3">
                                             <div class="qtyField">
                                                 <a class="qtyBtn minus" href="javascript:void(0);"><i class="icon an an-minus-r" aria-hidden="true"></i></a>
-                                                <input type="text" name="quantity" value="1" class="product-form__input qty">
+                                                <input type="text" name="quantity" value="1" class="product-form__input qty" id="prodCount">
                                                 <a class="qtyBtn plus" href="javascript:void(0);"><i class="icon an an-plus-r" aria-hidden="true"></i></a>
                                             </div>
                                             <div class="pro-stockLbl ms-3">
@@ -126,7 +126,7 @@
                                             </div>
                                             <div class="col-12 col-sm-6 col-md-6 col-lg-6">
                                                 <div class="product-form__item--buyit clearfix">
-                                                    <a href="checkout.html"><button type="button" class="btn rounded btn-outline-primary proceed-to-checkout">지금 바로 구매</button></a>
+                                                    <a href="javascript:void(0);" onclick="goToPayment()"><button type="button" class="btn rounded btn-outline-primary proceed-to-checkout">지금 바로 구매</button></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -1192,6 +1192,15 @@
             $("#formcheckoutCheckboxPictureNy").on("click", function() {
                 reviewRefresh($("#sort"));
             });
+
+            function goToPayment() {
+                let count = $("#prodCount").val();
+                let weight = $("#selectWeight").val();
+                let prodSeq = /*[[${item.prodSeq}]]*/"";
+                let userSeq = /*[[${session.sessSeqPeter}]]*/"";
+                let url = `/peter/shop/ShopPeterPayment?prodSeq=${prodSeq}&userSeq=${userSeq}&prodCount=${count}&infoWeight=${weight}`;
+                window.location.href = url;
+            }
         </script>
         <script th:inline="javascript" src="/peter/template/optimal-html/assets/js/JHY/product.js"></script>
     </body>

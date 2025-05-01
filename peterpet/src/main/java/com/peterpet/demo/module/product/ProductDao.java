@@ -19,6 +19,7 @@ public interface ProductDao extends BaseDao {
 	public int infoInsert(ProductDto productDto);
 	public int funcInsert(ProductDto productDto);
 	public ProductDto selectOnePoduct(ProductVo vo);
+	public ProductDto selectPurchase(ProductVo vo);
 	public List<ProductDto> selectOneFunctions(ProductVo vo);
 	public List<ProductDto> selectOneInfos(ProductVo vo);
 	public int update(ProductDto productDto);

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.peterpet.demo.module.base.BaseService;
+import com.peterpet.demo.module.product.ProductVo;
 
 @Service
 public class MemberService extends BaseService {
@@ -27,6 +28,10 @@ public class MemberService extends BaseService {
 	
 	public MemberDto selectOne(MemberDto memberDto) {
 		return memberDao.selectOne(memberDto);
+	}
+	
+	public MemberDto selectOne(ProductVo productVo) {
+		return memberDao.selectOne(productVo);
 	}
 	
 	public MemberDto selectOneLogin(MemberDto memberDto) {

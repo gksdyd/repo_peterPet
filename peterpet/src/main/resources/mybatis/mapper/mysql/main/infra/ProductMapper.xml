@@ -458,4 +458,19 @@
 			AND type = 2
 		ORDER BY sort
 	</select>
+	
+	<select id="selectPurchase" resultMap="resultMapObj">
+		SELECT
+			a.prodName,
+			a.feedBrand,
+			a.feedIngredient,
+			b.infoPrice,
+			b.infoDiscount,
+			(b.infoPrice * (100 - infoDiscount) / 100) AS discountPrice
+		FROM
+			product a
+			LEFT JOIN feedinfo b ON a.prodSeq = b.product_prodSeq AND infoWeight = #{infoWeight}
+		WHERE 1=1
+			AND #{prodSeq} = prodSeq
+	</select>
 </mapper>

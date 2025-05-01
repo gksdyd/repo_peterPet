@@ -137,4 +137,8 @@ public class ProductService extends BaseService {
 	public int updateUploaded(ProductDto productDto) {
 		return productDao.updateUploaded(productDto);
 	}
+	
+	public ProductDto selectPurchase(ProductVo vo) {
+		return productDao.selectPurchase(vo);
+	}
 }
