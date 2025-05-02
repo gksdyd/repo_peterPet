@@ -22,8 +22,8 @@
                         <div class="col-xl-3 col-lg-2 col-md-12 mb-4 mb-lg-0">
                             <!-- Nav tabs -->
                             <ul class="nav flex-column bg-light h-100 dashboard-list" role="tablist">
-                                <li><a class="nav-link active" data-bs-toggle="tab" href="#dashboard">Dashboard</a></li>
-                                <li><a class="nav-link" data-bs-toggle="tab" href="#orders">Orders</a></li>
+                                <li><a class="nav-link active" data-bs-toggle="tab" href="#orders">주문내역</a></li>
+                                <li><a class="nav-link" data-bs-toggle="tab" href="#dashboard">Dashboard</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#orderstracking">Orders tracking</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#downloads">Downloads</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#address">Addresses</a></li>
@@ -41,7 +41,7 @@
                             <!-- Tab panes -->
                             <div class="tab-content dashboard-content">
                                 <!-- Dashboard -->
-                                <div id="dashboard" class="tab-pane fade active show">
+                                <div id="dashboard" class="tab-pane fade">
                                     <h3>Dashboard </h3>
                                     <p>From your account dashboard. you can easily check &amp; view your
                                         <a class="text-decoration-underline" href="#">recent orders</a>, manage your
@@ -116,55 +116,52 @@
                                 <!-- End Dashboard -->
 
                                 <!-- Orders -->
-                                <div id="orders" class="product-order tab-pane fade">
+                                <div id="orders" class="product-order tab-pane fade active show">
                                     <h3>Orders</h3>
-                                    <div class="table-responsive order-table">
+                                    <div class="table-responsive order-table mb-3">
                                         <table class="table table-bordered table-hover align-middle text-center mb-0">
                                             <thead class="alt-font">
                                                 <tr>
-                                                    <th>Order</th>
-                                                    <th>Product</th>
-                                                    <th>Date</th>
-                                                    <th>Status</th>
-                                                    <th>Total</th>
-                                                    <th>Actions</th>
+                                                    <th>#</th>
+                                                    <th>주문번호</th>
+                                                    <th>상품명</th>
+                                                    <th>주문금액</th>
+                                                    <th>수량</th>
+                                                    <th>결제방식</th>
+                                                    <th>상태</th>
+                                                    <th>날짜</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Long Sleeve T-shirts</td>
-                                                    <td>March 04, 2021</td>
-                                                    <td class="text-success">Completed</td>
-                                                    <td>$165.00 for 1 item </td>
-                                                    <td><a class="link-underline view" href="cart-style1.html">View</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Floral Crop Top</td>
-                                                    <td>May 19, 2021</td>
-                                                    <td class="text-success">Completed</td>
-                                                    <td>$150.00 for 1 item </td>
-                                                    <td><a class="link-underline view" href="cart-style1.html">View</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>Bodysuit Black</td>
-                                                    <td>June 24, 2021</td>
-                                                    <td class="text-danger">Processing</td>
-                                                    <td>$190.00 for 2 item </td>
-                                                    <td><a class="link-underline view" href="cart-style1.html">View</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>Hoodie Sweatshirt</td>
-                                                    <td>July 28, 2021</td>
-                                                    <td class="text-danger">Processing</td>
-                                                    <td>$170.00 for 1 item </td>
-                                                    <td><a class="link-underline view" href="cart-style1.html">View</a></td>
+                                                <tr th:each="pay : ${pays}">
+                                                    <th th:text="${payStat.count}"></th>
+                                                    <th th:text="${pay.orderId}"></th>
+                                                    <th th:text="${pay.orderName}"></th>
+                                                    <th th:text="${#numbers.formatInteger(pay.amount,3,'COMMA')}"></th>
+                                                    <th th:text="${pay.quantity}"></th>
+                                                    <th th:text="${pay.easyPay}"></th>
+                                                    <th th:text="${@codeService.selectOneCachedCode(pay.payStatus)}"></th>
+                                                    <th th:text="${pay.payModDate}"></th>
                                                 </tr>
                                             </tbody>
                                         </table>
+                                    </div>
+                                    <div class="pagination">
+                                        <ul>
+                                            <li class="prev page-item" th:if="${vo2.startPage gt vo2.pageNumToShow}">
+                                                <a href="javascript:goReview2(${vo2.startPage - 1})" th:attr="onclick=|goReview2('${vo2.startPage - 1}')|">
+                                                    <i class="icon align-middle an an-caret-left" aria-hidden="true"></i>
+                                                </a>
+                                            </li>
+                                            <li class="page-item" th:each="num: ${#numbers.sequence(vo2.startPage, vo2.endPage)}" th:classappend="${num eq vo2.thisPage} ? active : ''">
+                                                <a th:attr="onclick=|goReview2('${num}')|" th:text="${num}"></a>
+                                            </li>
+                                            <li class="next page-item" th:if="${vo2.endPage ne vo2.totalPages}">
+                                                <a th:attr="onclick=|goReview2('${vo2.endPage + 1}')|">
+                                                    <i class="icon align-middle an an-caret-right" aria-hidden="true"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                                 <!-- End Orders -->
@@ -1667,7 +1664,7 @@
                     ,cache: false
                     ,type: "post"
                     ,url: "/peter/member/ReviewPeterProc"
-                    ,data: { "thisPage" : thisPage, "userSeq" : [[${session.sessSeqPeter}]] }
+                    ,data: { "thisPage" : thisPage, "userSeq" : /*[[${session.sessSeqPeter}]]*/"" }
                     ,success: function(response) {
                         start = response.vo.startPage;
                         end = response.vo.endPage;
@@ -1686,6 +1683,21 @@
                     ,error : function(jqXHR){
                         alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
                     }
+                });
+            }
+
+            function goReview2(thisPage) {
+                fetch('/PaymentPeterProc', {    // payList fragment만 반환하는 컨트롤러
+                    method: 'POST',  // POST 요청
+                    body: new URLSearchParams({  // POST 데이터 설정
+                        'thisPage': thisPage,
+                        'userSeq': /*[[${session.sessSeqPeter}]]*/ ""  // 예시로 session 변수 사용
+                    })
+                })
+                .then(res => res.text())
+                .then(html => {
+                    document.getElementById('orders').innerHTML = "";
+                    document.getElementById('orders').innerHTML = html;
                 });
             }
 

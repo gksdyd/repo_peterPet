@@ -33,4 +33,31 @@
 			SELECT last_insert_id()
 		</selectKey>
 	</insert>
+	
+	<select id="selectList" resultMap="resultMapObj">
+		SELECT
+			orderId,  
+			payModDate, 
+			payStatus,
+			amount,
+			quantity,
+			orderName,
+			easyPay,
+			vat
+		FROM
+			payment
+		WHERE 1=1
+			AND user_userSeq = #{userSeq}
+		ORDER BY paySeq DESC
+		limit #{rowNumToShow} offset #{startRnumForMysql}
+	</select>
+	
+	<select id="selectCount" resultType="Integer">
+		SELECT
+			COUNT(*)
+		FROM
+			payment
+		WHERE 1=1
+			AND user_userSeq = #{userSeq}
+	</select>
 </mapper>

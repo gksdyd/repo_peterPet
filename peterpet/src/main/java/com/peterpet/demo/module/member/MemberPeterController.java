@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.peterpet.demo.module.base.BaseController;
 import com.peterpet.demo.module.base.Constants;
 import com.peterpet.demo.module.code.CodeDto;
+import com.peterpet.demo.module.payment.PaymentService;
+import com.peterpet.demo.module.payment.PaymentVo;
 import com.peterpet.demo.module.pet.PetDto;
 import com.peterpet.demo.module.pet.PetService;
 import com.peterpet.demo.module.pet.PetVo;
@@ -34,6 +36,8 @@ public class MemberPeterController extends BaseController {
 	MailService mailService;
 	@Autowired
 	ProductService productService;
+	@Autowired
+	PaymentService paymentService;
 	
 	@RequestMapping(value = "/LoginPeterForm")
 	public String loginPeterForm(MemberDto memberDto, Model model) {
@@ -72,22 +76,25 @@ public class MemberPeterController extends BaseController {
 	
 	@RequestMapping(value = "/MyAccountPeterForm")
 	public String MyAccountPeterForm(MemberDto memberDto, PetVo petVo, @ModelAttribute("vo") MemberVo memberVo,
-			Model model, HttpSession httpSession) {
+			@ModelAttribute("vo2") PaymentVo paymentVo, Model model, HttpSession httpSession) {
 		List<PetDto> pets = new ArrayList<>();
 		
 		memberDto.setUserSeq((String)httpSession.getAttribute("sessSeqPeter"));
 		petVo.setUserSeq((String)httpSession.getAttribute("sessSeqPeter"));
 		memberVo.setUserSeq((String)httpSession.getAttribute("sessSeqPeter"));
+		paymentVo.setUserSeq((String)httpSession.getAttribute("sessSeqPeter"));
 		
 		pets = petService.selectListPeterPets(petVo);
 		petVo.calculateAge(pets);
 		
 		memberVo.setParamsPaging(memberService.reviewCount(memberVo));
+		paymentVo.setParamsPaging(paymentService.selectCount(paymentVo));
 		
 		model.addAttribute("item", memberService.selectOne(memberDto));
 		model.addAttribute("list", pets);
 		model.addAttribute("reviews", memberService.reviewList(memberVo));
 		model.addAttribute("code", CodeDto.cachedCodeArrayList);
+		model.addAttribute("pays", paymentService.selectList(paymentVo));
 		return "peter/member/MyAccountPeterForm";
 	}
 	

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="payList">
+    <h3>Orders</h3>
+    <div class="table-responsive order-table mb-3">
+        <table class="table table-bordered table-hover align-middle text-center mb-0">
+            <thead class="alt-font">
+                <tr>
+                    <th>#</th>
+                    <th>주문번호</th>
+                    <th>상품명</th>
+                    <th>주문금액</th>
+                    <th>수량</th>
+                    <th>결제방식</th>
+                    <th>상태</th>
+                    <th>날짜</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="pay : ${pays}">
+                    <th th:text="${payStat.count}"></th>
+                    <th th:text="${pay.orderId}"></th>
+                    <th th:text="${pay.orderName}"></th>
+                    <th th:text="${#numbers.formatInteger(pay.amount,3,'COMMA')}"></th>
+                    <th th:text="${pay.quantity}"></th>
+                    <th th:text="${pay.easyPay}"></th>
+                    <th th:text="${@codeService.selectOneCachedCode(pay.payStatus)}"></th>
+                    <th th:text="${pay.payModDate}"></th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="pagination">
+        <ul>
+            <li class="prev page-item" th:if="${vo2.startPage gt vo2.pageNumToShow}">
+                <a href="javascript:goReview2(${vo2.startPage - 1})" th:attr="onclick=|goReview2('${vo2.startPage - 1}')|">
+                    <i class="icon align-middle an an-caret-left" aria-hidden="true"></i>
+                </a>
+            </li>
+            <li class="page-item" th:each="num: ${#numbers.sequence(vo2.startPage, vo2.endPage)}" th:classappend="${num eq vo2.thisPage} ? active : ''">
+                <a th:attr="onclick=|goReview2('${num}')|" th:text="${num}"></a>
+            </li>
+            <li class="next page-item" th:if="${vo2.endPage ne vo2.totalPages}">
+                <a th:attr="onclick=|goReview2('${vo2.endPage + 1}')|">
+                    <i class="icon align-middle an an-caret-right" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</th:block>

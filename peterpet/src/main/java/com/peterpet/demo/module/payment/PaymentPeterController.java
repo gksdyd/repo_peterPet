@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -100,4 +101,12 @@ public class PaymentPeterController {
 
         return json.substring(startIndex, endIndex).replace("\"", "").trim(); // 따옴표 제거하고 반환
     }
+	
+	@RequestMapping(value = "/PaymentPeterProc")
+	public String paymentPeterProc(@ModelAttribute("vo2") PaymentVo paymentVo, Model model) {
+		paymentVo.setParamsPaging(paymentService.selectCount(paymentVo));
+		model.addAttribute("pays", paymentService.selectList(paymentVo));
+	    
+	    return "peter/include/payList :: payList";
+	}
 }

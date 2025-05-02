@@ -14,6 +14,8 @@ public class PaymentDto {
 	private String userSeq;
 	private String requestedAt;
 	private String approvedAt;
+	private String payRegDate;
+	private String payModDate;
 	
 	public String getPaySeq() {
 		return paySeq;
@@ -86,5 +88,17 @@ public class PaymentDto {
 	}
 	public void setPayStatus(Integer payStatus) {
 		this.payStatus = payStatus;
+	}
+	public String getPayRegDate() {
+		return payRegDate;
+	}
+	public void setPayRegDate(String payRegDate) {
+		this.payRegDate = payRegDate;
+	}
+	public String getPayModDate() {
+		return payModDate;
+	}
+	public void setPayModDate(String payModDate) {
+		this.payModDate = payModDate;
 	}
 }
