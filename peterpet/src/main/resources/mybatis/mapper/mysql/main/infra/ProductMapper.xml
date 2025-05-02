@@ -145,7 +145,7 @@
 			(SELECT
 				COUNT(*)
 			FROM
-				feedInfo
+				feedinfo
 			WHERE 1=1
 				AND prodSeq = product_prodSeq) AS infoCount,
 			(SELECT

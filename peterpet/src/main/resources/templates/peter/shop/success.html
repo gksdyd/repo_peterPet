@@ -81,7 +81,7 @@
       const amountElement = document.getElementById("amount");
 
       orderIdElement.textContent = urlParams.get("orderId");
-      amountElement.textContent = urlParams.get("amount") + "원";
+      amountElement.textContent = Number(urlParams.get("amount")).toLocaleString('ko-KR') + "원";
       paymentKeyElement.textContent = urlParams.get("paymentKey");
     </script>
   </body>
