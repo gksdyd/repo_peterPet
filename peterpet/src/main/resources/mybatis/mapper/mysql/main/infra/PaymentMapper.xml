@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+				 
+<mapper namespace="com.peterpet.demo.module.payment.PaymentDao">
+
+	<resultMap type="com.peterpet.demo.module.payment.PaymentDto" id="resultMapObj"></resultMap>
+	
+	<insert id="insert">
+		INSERT INTO payment (
+			orderId, 
+			payRegDate, 
+			payModDate, 
+			payStatus,
+			amount,
+			quantity,
+			orderName,
+			easyPay,
+			vat,
+			user_userSeq
+		) VALUE (
+			#{orderId},
+			#{requestedAt},
+			#{approvedAt},
+			#{payStatus},
+			#{amount},
+			#{quantity},
+			#{orderName},
+			#{easyPay},
+			#{vat},
+			#{userSeq}
+		)
+		<selectKey resultType="String" keyProperty="paySeq" order="AFTER">
+			SELECT last_insert_id()
+		</selectKey>
+	</insert>
+</mapper>
