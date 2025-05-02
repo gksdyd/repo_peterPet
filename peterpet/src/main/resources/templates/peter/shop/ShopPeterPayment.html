@@ -310,7 +310,6 @@
                 // 토스페이먼츠에 회원가입하기 전이라면 아래 키는 문서 테스트 키입니다.
                 // 토스페이먼츠에 회원가입하고 로그인한 상태라면 아래 키는 내 테스트 키입니다.
                 const clientKey = "test_ck_yL0qZ4G1VOPWzGv6w0QYroWb2MQY";
-                const secretKey = "test_sk_kYG57Eba3GRvzjDE0DEk8pWDOxmA";
                 const customerKey = "7_3UlTVNs56z9M53O2-RV";
                 const tossPayments = TossPayments(clientKey);
 
@@ -328,6 +327,15 @@
                 let email = /*[[${user.userEmail}]]*/"";
                 let userName = /*[[${user.userName}]]*/"";
                 let userPhone = /*[[${user.userPhone}]]*/"";
+
+                    let now = new Date();
+                    let serialNum = 
+                    String(now.getFullYear()).slice(2) + // '25'
+                    String(now.getMonth() + 1).padStart(2, '0') + // '04'
+                    String(now.getDate()).padStart(2, '0') + // '29'
+                    String(now.getHours()).padStart(2, '0') + // '14'
+                    String(now.getMinutes()).padStart(2, '0') + // '35'
+                    String(now.getSeconds()).padStart(2, '0'); // '07'
                 // ------ '결제하기' 버튼 누르면 결제창 띄우기 ------
                 // @docs https://docs.tosspayments.com/sdk/v2/js#paymentrequestpayment
                 async function requestPayment() {
@@ -339,7 +347,7 @@
                             currency: "KRW",
                             value: price,
                         },
-                        orderId: "ilj_0wY23IKZkuXrxw0Wx", // 고유 주문번호
+                        orderId: serialNum, // 고유 주문번호
                         orderName: orderName,
                         successUrl: window.location.origin + "/success", // 결제 요청이 성공하면 리다이렉트되는 URL
                         failUrl: window.location.origin + "/fail", // 결제 요청이 실패하면 리다이렉트되는 URL
