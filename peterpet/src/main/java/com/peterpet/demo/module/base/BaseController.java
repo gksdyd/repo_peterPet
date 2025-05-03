@@ -94,7 +94,7 @@ public class BaseController {
 		}
 		
 		vo.setDiffDay(ChronoUnit.DAYS.between(startDateTime, endDateTime));
-		vo.setDiffHour(ChronoUnit.HOURS.between(startDateTime, endDateTime));
+		vo.setDiffHour(ChronoUnit.HOURS.between(startDateTime, endDateTime) % 24);
 		vo.setDiffMinute(ChronoUnit.MINUTES.between(startDateTime, endDateTime) % 60);
 		vo.setDiffSecond(ChronoUnit.SECONDS.between(startDateTime, endDateTime) % 60);		
 	}
