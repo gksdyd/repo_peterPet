@@ -141,4 +141,8 @@ public class ProductService extends BaseService {
 	public ProductDto selectPurchase(ProductVo vo) {
 		return productDao.selectPurchase(vo);
 	}
+	
+	public ProductDto selectFeedInfo(ProductVo vo) {
+		return productDao.selectFeedInfo(vo);
+	}
 }

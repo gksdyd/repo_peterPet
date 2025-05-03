@@ -473,4 +473,16 @@
 		WHERE 1=1
 			AND #{prodSeq} = prodSeq
 	</select>
+	
+	<select id="selectFeedInfo" resultMap="resultMapObj">
+		SELECT
+			infoPrice,
+			infoDiscount,
+			(infoPrice * (100 - infoDiscount) / 100) AS discountPrice
+		FROM
+			feedinfo
+		WHERE 1=1
+			AND product_prodSeq = #{prodSeq}
+			AND infoWeight = #{infoWeight}
+	</select>
 </mapper>

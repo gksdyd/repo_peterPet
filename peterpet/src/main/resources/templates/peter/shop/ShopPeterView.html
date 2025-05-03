@@ -96,8 +96,8 @@
                                         <div class="col-6 col-sm-6 col-md-6 col-lg-6">
                                             <div class="swatch clearfix swatch-1 option1" data-option-index="0">
                                                 <label class="label d-flex">중량:<span class="required d-none">*</span><span class="slVariant ms-1 fw-bold" th:text="${item.infoWeight} + 'kg'"></span></label>
-                                                <select id="selectWeight">
-                                                    <option>중량 선택</option>
+                                                <select id="selectWeight" onchange="changeWeigth(this)">
+                                                    <option value="">중량 선택</option>
                                                     <option th:each="weight : ${item.weightArray}" th:text="${weight} + 'kg'" th:value="${weight}" th:selected="${#strings.toString(item.infoWeight)} == ${weight}"></option>
                                                 </select>
                                             </div>
@@ -1187,6 +1187,36 @@
                     li.append(a);
                     pagination.append(li);
                 }
+            }
+
+            function changeWeigth(e) {
+                if ($(e).val() === "") {
+                    return;
+                }
+                $.ajax({
+                    async: true 
+                    ,cache: false
+                    ,type: "post"
+                    ,url: "/peter/shop/ShopPeterChangeWeight"
+                    ,data: { "prodSeq" : /*[[${item.prodSeq}]]*/'', "infoWeight" : $(e).val() }
+                    ,success: function(response) {
+                        let text = "";
+                        if (response.item.infoDiscount != 0) {
+                            text += "<span class='product-price__discount'>" + response.item.infoDiscount + "% </span>" +
+                                    "<span class='product-price-old-price'>" + response.item.infoPrice.toLocaleString() + "원</span>";
+                        }
+                         text += "<span class='product-price__price product-price__sale-d'>" + response.item.discountPrice.toLocaleString() + "원</span>";
+                        $(".product-price__sale--single").empty();
+                        $(".product-price__sale--single").append(text);
+
+                        $(".strong-style").text((Math.round(response.item.discountPrice * 0.01)) + "원");
+
+                        $(".slVariant").text($(e).val() + "kg");
+                    }
+                    ,error : function(jqXHR){
+                        alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+                    }
+                });
             }
 
             $("#formcheckoutCheckboxPictureNy").on("click", function() {

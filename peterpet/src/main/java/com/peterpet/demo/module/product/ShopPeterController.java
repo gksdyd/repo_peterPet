@@ -104,4 +104,12 @@ public class ShopPeterController extends BaseController {
 		model.addAttribute("prod", productService.selectPurchase(vo));
 		return "peter/shop/ShopPeterPayment";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/ShopPeterChangeWeight")
+	public Map<String, Object> shopPeterChangeWeight(ProductVo vo) {
+		Map<String, Object> rtMap = new HashMap<>();
+		rtMap.put("item", productService.selectFeedInfo(vo));
+		return rtMap;
+	}
 }
