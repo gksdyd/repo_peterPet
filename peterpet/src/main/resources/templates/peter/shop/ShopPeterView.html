@@ -841,8 +841,8 @@
                 <div class="container">
                     <form method="post" action="#" id="stickycart-form" class="d-flex-center justify-content-center">
                         <div class="img"><img src="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity.jpeg" class="product-featured-img" alt="product" /></div>
-                        <select name="id" id="variantOptions1" class="product-form__variants selectbox no-js ms-3">
-                            <option>중량 선택</option>
+                        <select name="id" id="variantOptions1" class="product-form__variants selectbox no-js ms-3" onchange="changeWeigth(this)">
+                            <option value="">중량 선택</option>
                             <option th:each="weight : ${item.weightArray}" th:text="${weight} + 'kg'" th:value="${weight}" th:selected="${#strings.toString(item.infoWeight)} == ${weight}"></option>
                         </select>
                         <div class="qtyField mx-2" title="Quantity">
@@ -1190,6 +1190,8 @@
             }
 
             function changeWeigth(e) {
+                $("#selectWeight").val($(e).val()).prop("selected", true);
+                $("#variantOptions1").val($(e).val()).prop("selected", true);
                 if ($(e).val() === "") {
                     return;
                 }
