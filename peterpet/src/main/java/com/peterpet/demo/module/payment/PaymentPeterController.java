@@ -78,8 +78,8 @@ public class PaymentPeterController {
 	    	dto.setEasyPay(extractValueFromJson(responseBody, "cardType"));
 	    }
     	
-    	dto.setRequestedAt(extractValueFromJson(responseBody, "requestedAt").substring(0, 10));
-    	dto.setApprovedAt(extractValueFromJson(responseBody, "approvedAt").substring(0, 10));
+    	dto.setRequestedAt(extractValueFromJson(responseBody, "requestedAt").substring(0, 19).replace("T", " "));
+    	dto.setApprovedAt(extractValueFromJson(responseBody, "approvedAt").substring(0, 19).replace("T", " "));
     	dto.setPayStatus(273);
     	
     	paymentService.insert(dto);
