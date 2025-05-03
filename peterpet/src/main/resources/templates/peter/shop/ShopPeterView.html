@@ -1227,6 +1227,16 @@
             });
 
             function goToPayment() {
+                if ($("#selectWeight").val() === "") {
+                    modalTitle.innerText = "알림";
+                    modalText.innerText = "상품 중량을 선택해주세요.";
+                    modalCloseButton.style.display = "block";
+                    $(".bg-body-tertiary").css("backgroundColor", "#E4EEF7");
+                    $(".modal-body").css("backgroundColor", "#EBF5FF");
+                    $(".modal-footer").css("backgroundColor", "#EBF5FF");
+                    modal.style.display = "block";
+                    return;
+                }
                 let count = $("#prodCount").val();
                 let weight = $("#selectWeight").val();
                 let prodSeq = /*[[${item.prodSeq}]]*/"";
