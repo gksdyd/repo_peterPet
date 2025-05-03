@@ -1353,6 +1353,9 @@
      ------------------------------------*/
     function qnt_incre() {
         $(".qtyBtn").on("click", function () {
+            if ($("#selectWeight").val() === "") {
+                return;
+            }
             var qtyField = $(this).parent(".qtyField"),
                     oldValue = $(qtyField).find(".qty").val(),
                     newVal = 1;

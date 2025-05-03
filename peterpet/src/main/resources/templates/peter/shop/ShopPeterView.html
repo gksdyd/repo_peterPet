@@ -1192,6 +1192,7 @@
             function changeWeigth(e) {
                 $("#selectWeight").val($(e).val()).prop("selected", true);
                 $("#variantOptions1").val($(e).val()).prop("selected", true);
+                $("input[name=quantity]").val("1");
                 if ($(e).val() === "") {
                     return;
                 }
