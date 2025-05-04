@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.peterpet.demo.module.base.BaseController;
 import com.peterpet.demo.module.base.Constants;
 import com.peterpet.demo.module.code.CodeDto;
+import com.peterpet.demo.module.delivery.DeliveryService;
+import com.peterpet.demo.module.delivery.DeliveryVo;
 import com.peterpet.demo.module.payment.PaymentService;
 import com.peterpet.demo.module.payment.PaymentVo;
 import com.peterpet.demo.module.pet.PetDto;
@@ -38,6 +40,8 @@ public class MemberPeterController extends BaseController {
 	ProductService productService;
 	@Autowired
 	PaymentService paymentService;
+	@Autowired
+	DeliveryService deliveryService;
 	
 	@RequestMapping(value = "/LoginPeterForm")
 	public String loginPeterForm(MemberDto memberDto, Model model) {
@@ -76,13 +80,15 @@ public class MemberPeterController extends BaseController {
 	
 	@RequestMapping(value = "/MyAccountPeterForm")
 	public String MyAccountPeterForm(MemberDto memberDto, PetVo petVo, @ModelAttribute("vo") MemberVo memberVo,
-			@ModelAttribute("vo2") PaymentVo paymentVo, Model model, HttpSession httpSession) {
+			@ModelAttribute("vo2") PaymentVo paymentVo, DeliveryVo deliveryVo,
+			Model model, HttpSession httpSession) {
 		List<PetDto> pets = new ArrayList<>();
 		
 		memberDto.setUserSeq((String)httpSession.getAttribute("sessSeqPeter"));
 		petVo.setUserSeq((String)httpSession.getAttribute("sessSeqPeter"));
 		memberVo.setUserSeq((String)httpSession.getAttribute("sessSeqPeter"));
 		paymentVo.setUserSeq((String)httpSession.getAttribute("sessSeqPeter"));
+		deliveryVo.setUserSeq((String)httpSession.getAttribute("sessSeqPeter"));
 		
 		pets = petService.selectListPeterPets(petVo);
 		petVo.calculateAge(pets);
@@ -95,6 +101,7 @@ public class MemberPeterController extends BaseController {
 		model.addAttribute("reviews", memberService.reviewList(memberVo));
 		model.addAttribute("code", CodeDto.cachedCodeArrayList);
 		model.addAttribute("pays", paymentService.selectList(paymentVo));
+		model.addAttribute("deliveries", deliveryService.selectList(deliveryVo));
 		return "peter/member/MyAccountPeterForm";
 	}
 	

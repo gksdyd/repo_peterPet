@@ -26,9 +26,9 @@
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#dashboard">Dashboard</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#orderstracking">Orders tracking</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#downloads">Downloads</a></li>
-                                <li><a class="nav-link" data-bs-toggle="tab" href="#address">Addresses</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#wishlist">Wishlist</a></li>
-                                <li><a class="nav-link" data-bs-toggle="tab" href="#review">리뷰페이지</a></li>
+                                <li><a class="nav-link" data-bs-toggle="tab" href="#address">배송관리</a></li>
+                                <li><a class="nav-link" data-bs-toggle="tab" href="#review">리뷰관리</a></li>
                                 <li><a class="nav-link myPage" data-bs-toggle="tab" href="#account-details">마이페이지</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#pet-page">반려동물목록</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#change-password">비밀번호 변경</a></li>
@@ -407,183 +407,96 @@
                                 <!-- Address -->
                                 <div id="address" class="address tab-pane">
                                     <h3>Addresses</h3>
-                                    <p class="xs-fon-13 margin-10px-bottom">The following addresses will be used on the checkout page by default.</p>
                                     <div class="row">
-                                        <div class="col-12 col-sm-6">
-                                            <h4 class="billing-address">Shipping address</h4>
-                                            <a class="link-underline view" href="#">Edit</a>
-                                            <p>No 40 Baria Sreet <br> 133/2 NewYork City, <br> NY, United States.</p>
-
-                                            <div class="accordion add-address mt-3" id="address1">
-                                                <button class="collapsed btn btn--small rounded" type="button" data-bs-toggle="collapse" data-bs-target="#shipping" aria-expanded="false" aria-controls="shipping">Add Address</button>
-                                                <div id="shipping" class="accordion-collapse collapse" data-bs-parent="#address">
-                                                    <form class="address-from mt-3" method="post" action="#">
-                                                        <fieldset>
-                                                            <h2 class="login-title mb-3">Shipping details</h2>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                                                                    <label for="input-firstname1" class="d-none">First Name <span class="required-f">*</span></label>
-                                                                    <input name="firstname" placeholder="First Name" value="" id="input-firstname1" type="text">
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                                                                    <label for="input-lastname1" class="d-none">Last Name <span class="required-f">*</span></label>
-                                                                    <input name="lastname" placeholder="Last Name" value="" id="input-lastname1" type="text">
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                                                                    <label for="input-email1" class="d-none">Email <span class="required-f">*</span></label>
-                                                                    <input name="email" placeholder="Email" value="" id="input-email1" type="email" required>
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                                                                    <label for="input-telephone1" class="d-none">Telephone <span class="required-f">*</span></label>
-                                                                    <input name="telephone" placeholder="Telephone" value="" id="input-telephone1" type="tel">
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                                                                    <label for="input-company1" class="d-none">Company</label>
-                                                                    <input name="company" placeholder="Company" value="" id="input-company1" type="text">
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                                                                    <label for="input-address-11" class="d-none">Address <span class="required-f">*</span></label>
-                                                                    <input name="address_1" placeholder="Address" value="" id="input-address-11" type="text">
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                                                                    <label for="input-address-21" class="d-none">Apartment <span class="required-f">*</span></label>
-                                                                    <input name="address_2" placeholder="Apartment" value="" id="input-address-21" type="text">
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                                                                    <label for="input-city1" class="d-none">City <span class="required-f">*</span></label>
-                                                                    <input name="city" placeholder="City" value="" id="input-city1" type="text">
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                                                                    <label for="input-postcode1" class="d-none">Post Code <span class="required-f">*</span></label>
-                                                                    <input name="postcode" placeholder="Post Code" value="" id="input-postcode1" type="text">
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                                                                    <label for="input-country1" class="d-none">Country <span class="required-f">*</span></label>
-                                                                    <select name="country_id" id="input-country1">
-                                                                        <option value="">Select Country</option>
-                                                                        <option value="244">Aaland Islands</option>
-                                                                        <option value="1">Afghanistan</option>
-                                                                        <option value="2">Albania</option>
-                                                                        <option value="3">Algeria</option>
-                                                                        <option value="4">American Samoa</option>
-                                                                        <option value="5">Andorra</option>
-                                                                        <option value="6">Angola</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-12 col-lg-12 col-xl-12">
-                                                                    <label for="input-zone1" class="d-none">Region / State <span class="required-f">*</span></label>
-                                                                    <select name="zone_id" id="input-zone1">
-                                                                        <option value="">Select Region / State</option>
-                                                                        <option value="3513">Aberdeen</option>
-                                                                        <option value="3514">Aberdeenshire</option>
-                                                                        <option value="3515">Anglesey</option>
-                                                                        <option value="3516">Angus</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <button type="submit" class="btn rounded mt-1"><span>Add Address</span></button>
-                                                        </fieldset>
-                                                    </form>
-                                                </div>
-                                            </div>
+                                        <div class="col-12 col-sm-6" th:each="delivery : ${deliveries}">
+                                            <p th:text="'받는 분 : ' + ${delivery.deliRecvName}"></p>
+                                            <p th:text="'전화번호 : ' + ${delivery.deliRecvPhone}"></p>
+                                            <p th:text="'주소 : ' + ${delivery.deliRoadAddr}"></p>
+                                            <p th:text="'상세주소 : ' + ${delivery.deliDetailAddr}"></p>
+                                            <p th:text="${delivery.deliText} != null ? '요청사항 : ' + ${delivery.deliText} : '요청사항 :'"></p>
+                                            <a class="link-underline view" href="#">수정</a>
                                         </div>
-                                        <div class="col-12 col-sm-6">
-                                            <h4 class="billing-address">Billing address</h4>
-                                            <a class="link-underline view" href="#">Edit</a>
-                                            <p>No 40 Baria Sreet <br> 133/2 NewYork City, <br> NY, United States.</p>
-
-                                            <div class="accordion add-address mt-3" id="address2">
-                                                <button class="collapsed btn btn--small rounded" type="button" data-bs-toggle="collapse" data-bs-target="#billing" aria-expanded="false" aria-controls="billing">Add Address</button>
-                                                <div id="billing" class="accordion-collapse collapse" data-bs-parent="#address">
-                                                    <form class="address-from mt-3" method="post" action="#">
-                                                        <fieldset>
-                                                            <h2 class="login-title mb-3">Billing details</h2>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                                                                    <label for="input-firstname2" class="d-none">First Name <span class="required-f">*</span></label>
-                                                                    <input name="firstname" placeholder="First Name" value="" id="input-firstname2" type="text">
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                                                                    <label for="input-lastname2" class="d-none">Last Name <span class="required-f">*</span></label>
-                                                                    <input name="lastname" placeholder="Last Name" value="" id="input-lastname2" type="text">
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                                                                    <label for="input-email2" class="d-none">Email <span class="required-f">*</span></label>
-                                                                    <input name="email" placeholder="Email" id="input-email2" type="email" required>
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                                                                    <label for="input-telephone2" class="d-none">Telephone <span class="required-f">*</span></label>
-                                                                    <input name="telephone" placeholder="Telephone" value="" id="input-telephone2" type="tel">
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                                                                    <label for="input-company2" class="d-none">Company</label>
-                                                                    <input name="company" placeholder="Company" value="" id="input-company2" type="text">
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                                                                    <label for="input-address-12" class="d-none">Address <span class="required-f">*</span></label>
-                                                                    <input name="address_1" placeholder="Address" value="" id="input-address-12" type="text">
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                                                                    <label for="input-address-22" class="d-none">Apartment <span class="required-f">*</span></label>
-                                                                    <input name="address_2" placeholder="Apartment" value="" id="input-address-22" type="text">
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                                                                    <label for="input-city2" class="d-none">City <span class="required-f">*</span></label>
-                                                                    <input name="city" placeholder="City" value="" id="input-city2" type="text">
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                                                                    <label for="input-postcode2" class="d-none">Post Code <span class="required-f">*</span></label>
-                                                                    <input name="postcode" placeholder="Post Code" value="" id="input-postcode2" type="text">
-                                                                </div>
-                                                                <div class="form-group col-md-6 col-lg-6 col-xl-6">
-                                                                    <label for="input-country2" class="d-none">Country <span class="required-f">*</span></label>
-                                                                    <select name="country_id" id="input-country2">
-                                                                        <option value="">Select Country</option>
-                                                                        <option value="244">Aaland Islands</option>
-                                                                        <option value="1">Afghanistan</option>
-                                                                        <option value="2">Albania</option>
-                                                                        <option value="3">Algeria</option>
-                                                                        <option value="4">American Samoa</option>
-                                                                        <option value="5">Andorra</option>
-                                                                        <option value="6">Angola</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="form-group col-md-12 col-lg-12 col-xl-12">
-                                                                    <label for="input-zone2" class="d-none">Region / State <span class="required-f">*</span></label>
-                                                                    <select name="zone_id" id="input-zone2">
-                                                                        <option value="">Select Region / State</option>
-                                                                        <option value="3513">Aberdeen</option>
-                                                                        <option value="3514">Aberdeenshire</option>
-                                                                        <option value="3515">Anglesey</option>
-                                                                        <option value="3516">Angus</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <button type="submit" class="btn rounded mt-1"><span>Add Address</span></button>
-                                                        </fieldset>
-                                                    </form>
-                                                </div>
-                                            </div>
+                                    </div>
+                                    <div class="accordion add-address mt-3" id="address1">
+                                        <button class="collapsed btn btn--small rounded" type="button" data-bs-toggle="collapse" data-bs-target="#shipping" aria-expanded="false" aria-controls="shipping">Add Address</button>
+                                        <div id="shipping" class="accordion-collapse collapse" data-bs-parent="#address">
+                                            <form class="address-from mt-3" method="post" action="#">
+                                                <fieldset>
+                                                    <h2 class="login-title mb-3">Shipping details</h2>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                            <label for="input-firstname1" class="d-none">First Name <span class="required-f">*</span></label>
+                                                            <input name="firstname" placeholder="First Name" value="" id="input-firstname1" type="text">
+                                                        </div>
+                                                        <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                            <label for="input-lastname1" class="d-none">Last Name <span class="required-f">*</span></label>
+                                                            <input name="lastname" placeholder="Last Name" value="" id="input-lastname1" type="text">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                            <label for="input-email1" class="d-none">Email <span class="required-f">*</span></label>
+                                                            <input name="email" placeholder="Email" value="" id="input-email1" type="email" required>
+                                                        </div>
+                                                        <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                            <label for="input-telephone1" class="d-none">Telephone <span class="required-f">*</span></label>
+                                                            <input name="telephone" placeholder="Telephone" value="" id="input-telephone1" type="tel">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                            <label for="input-company1" class="d-none">Company</label>
+                                                            <input name="company" placeholder="Company" value="" id="input-company1" type="text">
+                                                        </div>
+                                                        <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                            <label for="input-address-11" class="d-none">Address <span class="required-f">*</span></label>
+                                                            <input name="address_1" placeholder="Address" value="" id="input-address-11" type="text">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                            <label for="input-address-21" class="d-none">Apartment <span class="required-f">*</span></label>
+                                                            <input name="address_2" placeholder="Apartment" value="" id="input-address-21" type="text">
+                                                        </div>
+                                                        <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                            <label for="input-city1" class="d-none">City <span class="required-f">*</span></label>
+                                                            <input name="city" placeholder="City" value="" id="input-city1" type="text">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                            <label for="input-postcode1" class="d-none">Post Code <span class="required-f">*</span></label>
+                                                            <input name="postcode" placeholder="Post Code" value="" id="input-postcode1" type="text">
+                                                        </div>
+                                                        <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                            <label for="input-country1" class="d-none">Country <span class="required-f">*</span></label>
+                                                            <select name="country_id" id="input-country1">
+                                                                <option value="">Select Country</option>
+                                                                <option value="244">Aaland Islands</option>
+                                                                <option value="1">Afghanistan</option>
+                                                                <option value="2">Albania</option>
+                                                                <option value="3">Algeria</option>
+                                                                <option value="4">American Samoa</option>
+                                                                <option value="5">Andorra</option>
+                                                                <option value="6">Angola</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-12 col-lg-12 col-xl-12">
+                                                            <label for="input-zone1" class="d-none">Region / State <span class="required-f">*</span></label>
+                                                            <select name="zone_id" id="input-zone1">
+                                                                <option value="">Select Region / State</option>
+                                                                <option value="3513">Aberdeen</option>
+                                                                <option value="3514">Aberdeenshire</option>
+                                                                <option value="3515">Anglesey</option>
+                                                                <option value="3516">Angus</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <button type="submit" class="btn rounded mt-1"><span>Add Address</span></button>
+                                                </fieldset>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

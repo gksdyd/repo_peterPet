@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+				 
+<mapper namespace="com.peterpet.demo.module.delivery.DeliveryDao">
+
+	<resultMap type="com.peterpet.demo.module.delivery.DeliveryDto" id="resultMapObj"></resultMap>
+	
+	<select id="selectList" resultMap="resultMapObj">
+		SELECT
+			deliRoadAddr,
+			deliDetailAddr,
+			deliRecvName,
+			deliRecvPhone,
+			deliText,
+			deliMain
+		FROM
+			delivery
+		WHERE 1=1
+			AND deliDelFlag = 0
+			AND user_userSeq = #{userSeq}
+	</select>
+</mapper>
