@@ -176,6 +176,7 @@
 			deliRegDate,
 			deliModDate,
 			deliDelFlag,
+			deliMain,
 			user_userSeq
 		) VALUE (
 			#{userAddr},
@@ -187,6 +188,7 @@
 			DATE_FORMAT(CONVERT_TZ(NOW(), 'UTC', 'Asia/Seoul'), '%Y-%m-%d %H:%i:%S'),
 			DATE_FORMAT(CONVERT_TZ(NOW(), 'UTC', 'Asia/Seoul'), '%Y-%m-%d %H:%i:%S'),
 			0,
+			1,
 			#{userSeq}
 		)
 	</insert>
