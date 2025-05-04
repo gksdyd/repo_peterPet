@@ -422,6 +422,8 @@
                                     <div class="accordion add-address mt-3" id="address1">
                                         <div id="shipping" class="accordion-collapse collapse" data-bs-parent="#address">
                                             <form class="address-from mt-3" method="post" action="#">
+                                                <input type="hidden" id="receiveLatitude" />
+                                                <input type="hidden" id="receiveLongitude" />
                                                 <fieldset>
                                                     <h2 class="login-title mb-3">배송지 등록/수정</h2>
                                                     <div class="row">
@@ -437,7 +439,7 @@
                                                     <div class="row">
                                                         <div class="form-group col-md-6 col-lg-6 col-xl-6">
                                                             <label for="receiveAddr" class="d-none">주소<span class="required-f">*</span></label>
-                                                            <input name="receiveAddr" placeholder="주소" value="" id="receiveAddr" type="text" required>
+                                                            <input name="receiveAddr" placeholder="주소" value="" id="receiveAddr" type="text" onclick="daumPostcode2()" readonly required>
                                                         </div>
                                                         <div class="form-group col-md-6 col-lg-6 col-xl-6">
                                                             <label for="receiveDetailAddr" class="d-none">상세주소<span class="required-f">*</span></label>

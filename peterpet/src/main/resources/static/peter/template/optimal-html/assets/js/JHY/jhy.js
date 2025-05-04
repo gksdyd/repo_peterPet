@@ -86,6 +86,28 @@
         }).open();
     }
 
+    function daumPostcode2() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById("receiveAddr").value = data.roadAddress;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById("receiveDetailAddr").focus();
+
+                var geocoder = new kakao.maps.services.Geocoder();
+                var callback = function(result, status) {
+                    if (status === kakao.maps.services.Status.OK) {
+                        var results = result[0];
+
+                        document.getElementById("receiveLatitude").value = results.y;
+                        document.getElementById("receiveLongitude").value = results.x;
+                    }
+                };
+                geocoder.addressSearch(data.roadAddress, callback);
+            }
+        }).open();
+    }
+
     function initPostcode() {
         var container = document.getElementById('map'),
             options = {
