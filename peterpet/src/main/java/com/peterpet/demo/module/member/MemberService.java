@@ -43,7 +43,9 @@ public class MemberService extends BaseService {
 	}
 	
 	public int insert(MemberDto memberDto) {
-		return memberDao.insert(memberDto);
+		memberDao.insert(memberDto);
+		memberDao.deliverInsert(memberDto);
+		return 1;
 	}
 	
 	public int checkId(MemberDto memberDto) {
