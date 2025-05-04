@@ -433,7 +433,7 @@
                                                         </div>
                                                         <div class="form-group col-md-6 col-lg-6 col-xl-6">
                                                             <label for="receivePhone" class="d-none">전화번호<span class="required-f">*</span></label>
-                                                            <input name="receivePhone" placeholder="전화번호" value="" id="receivePhone" type="text">
+                                                            <input name="receivePhone" placeholder="전화번호" value="" id="receivePhone" type="text" oninput="autoPhoneNum(this)" maxlength="13">
                                                         </div>
                                                     </div>
                                                     <div class="row">
@@ -458,7 +458,7 @@
                                                             <label class="ms-2" for="receiveDefault">기본 배송지</label>
                                                         </div>
                                                     </div>
-                                                    <button type="button" class="btn rounded mt-1"><span>저장</span></button>
+                                                    <button type="button" class="btn rounded mt-1" onclick="deliverySave()"><span>저장</span></button>
                                                 </fieldset>
                                             </form>
                                         </div>
@@ -1228,6 +1228,7 @@
             <div th:replace="~{peter/include/includePeterCommon :: includePeterCommon}"></div>
             <div th:replace="~{peter/include/includePeterRegister :: includePeterRegister}"></div>
             <script src="/peter/template/optimal-html/assets/js/JHY/image.js"></script>
+            <script src="/peter/template/optimal-html/assets/js/JHY/delivery.js"></script>
 
             <script type="text/javascript" th:inline="javascript">
                 $(".myPage").on("click", function() {
