@@ -12,6 +12,7 @@
             <p th:text="${delivery.deliText} != null ? '요청사항 : ' + ${delivery.deliText} : '요청사항 :'"></p>
             <p th:if="${delivery.deliMain} == 1" style="color: blue;">기본 배송지</p>
             <a class="link-underline view" href="javascript:void(0);" th:data-value="${delivery.deliSeq}" onclick="deliveryModify(this)">수정</a>
+            <a class="link-underline view" href="javascript:void(0);" th:data-value="${delivery.deliSeq}" onclick="deliveryDelete(this)">삭제</a>
         </div>
     </div>
     <button class="collapsed btn btn--small rounded mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#shipping" aria-expanded="false" aria-controls="shipping">배송지 추가</button>

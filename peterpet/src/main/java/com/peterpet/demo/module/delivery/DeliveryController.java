@@ -43,4 +43,12 @@ public class DeliveryController {
 		
 		return "/peter/include/delivery :: delivery";
 	}
+	
+	@RequestMapping(value = "/DeliveryPeterDeltProc")
+	public String deliveryPeterDeltProc(DeliveryVo vo, Model model) {
+		deliveryService.delete(vo);
+		model.addAttribute("deliveries", deliveryService.selectList(vo));
+		
+		return "/peter/include/delivery :: delivery";
+	}
 }

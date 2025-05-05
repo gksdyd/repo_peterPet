@@ -41,4 +41,8 @@ public class DeliveryService extends BaseService {
 		}
 		return deliveryDao.update(dto);
 	}
+	
+	public int delete(DeliveryVo vo) {
+		return deliveryDao.delete(vo);
+	}
 }

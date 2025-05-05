@@ -16,4 +16,5 @@ public interface DeliveryDao extends BaseDao {
 	public DeliveryDto selectOne(DeliveryVo vo);
 	public int update(DeliveryDto dto);
 	public DeliveryDto mainCheck(DeliveryDto dto);
+	public int delete(DeliveryVo vo);
 }

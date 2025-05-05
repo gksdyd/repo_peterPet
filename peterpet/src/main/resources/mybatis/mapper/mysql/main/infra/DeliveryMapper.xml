@@ -100,4 +100,13 @@
 		WHERE 1=1
 			AND deliSeq = #{deliSeq}
 	</select>
+	
+	<update id="delete">
+		UPDATE delivery
+		SET
+			deliDelFlag = 1,
+			deliModDate = DATE_FORMAT(CONVERT_TZ(NOW(), 'UTC', 'Asia/Seoul'), '%Y-%m-%d %H:%i:%S')
+		WHERE
+			deliSeq = #{deliSeq}
+	</update>
 </mapper>

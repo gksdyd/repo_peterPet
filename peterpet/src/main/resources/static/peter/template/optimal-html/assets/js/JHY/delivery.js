@@ -122,3 +122,36 @@ function addDelivery() {
     $("#shipping").slideDown();
     initForm();
 }
+
+function deliveryDelete(e) {
+    if (!mainCheck(e)) {
+        return;
+    }
+
+    fetch('/peter/delivery/DeliveryPeterDeltProc', {    // payList fragment만 반환하는 컨트롤러
+        method: 'POST',  // POST 요청
+        body: new URLSearchParams({  // POST 데이터 설정
+            'userSeq': sessionSeq,  // 예시로 session 변수 사용
+            'deliSeq': $(e).data('value')  // 예시로 session 변수 사용
+        })
+    })
+    .then(res => res.text())
+    .then(html => {
+        document.getElementById('address').innerHTML = "";
+        document.getElementById('address').innerHTML = html;
+    });
+}
+
+function mainCheck(e) {
+    if ($(e).prev().prev().html() === "기본 배송지") {
+        modalTitle.innerText = "알림";
+        modalText.innerText = "기본 배송지를 변경해주세요.";
+        modalCloseButton.style.display = "block";
+        $(".bg-body-tertiary").css("backgroundColor", "#E4EEF7");
+        $(".modal-body").css("backgroundColor", "#EBF5FF");
+        $(".modal-footer").css("backgroundColor", "#EBF5FF");
+        modal.style.display = "block";
+        return false;
+    }
+    return true;
+}
