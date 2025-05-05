@@ -7,6 +7,7 @@
 	
 	<select id="selectList" resultMap="resultMapObj">
 		SELECT
+			deliSeq,
 			deliRoadAddr,
 			deliDetailAddr,
 			deliRecvName,
@@ -58,4 +59,20 @@
 		WHERE
 			user_userSeq = #{userSeq}
 	</update>
+	
+	<select id="selectOne" resultMap="resultMapObj">
+		SELECT
+			deliRoadAddr,
+			deliDetailAddr,
+			deliLatitude,
+			deliLongtitude,
+			deliRecvName,
+			deliRecvPhone,
+			deliText,
+			deliMain
+		FROM
+			delivery
+		WHERE 1=1
+			AND deliSeq = #{deliSeq}
+	</select>
 </mapper>

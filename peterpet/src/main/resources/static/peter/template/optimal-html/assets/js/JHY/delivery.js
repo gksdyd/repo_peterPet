@@ -64,3 +64,50 @@ function deliveryInfoTrans() {
         document.getElementById('address').innerHTML = html;
     });
 }
+
+function deliveryModify(e) {
+    $("#shipping").slideUp();
+    $("#shipping").slideDown();
+    
+    $.ajax({
+        async: true 
+        ,cache: false
+        ,type: "post"
+        ,url: "/peter/delivery/DeliveryPeterModifyProc"
+        ,data: { "deliSeq" : $(e).data('value') }
+        ,success: function(response) {
+            $("#receiveLatitude").val(response.dto.deliLatitude);
+            $("#receiveLongitude").val(response.dto.deliLongtitude);
+            $("#receiveName").val(response.dto.deliRecvName);
+            $("#receivePhone").val(response.dto.deliRecvPhone);
+            $("#receiveAddr").val(response.dto.deliRoadAddr);
+            $("#receiveDetailAddr").val(response.dto.deliDetailAddr);
+            $("#receiveText").val(response.dto.deliText);
+            if (response.dto.deliMain == 1) {
+                $("#receiveDefault").attr("checked", true);
+            } else {
+                $("#receiveDefault").attr("checked", false);
+            }
+        }
+        ,error : function(jqXHR) {
+            alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+        }
+    });
+}
+
+function initForm() {
+    $("#receiveLatitude").val("");
+    $("#receiveLongitude").val("");
+    $("#receiveName").val("");
+    $("#receivePhone").val("");
+    $("#receiveAddr").val("");
+    $("#receiveDetailAddr").val("");
+    $("#receiveText").val("");
+    $("#receiveDefault").attr("checked", false);
+}
+
+function addDelivery() {
+    $("#shipping").slideUp();
+    $("#shipping").slideDown();
+    initForm();
+}

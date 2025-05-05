@@ -28,4 +28,8 @@ public class DeliveryService extends BaseService {
 	public int mainUpdate(DeliveryDto dto) {
 		return deliveryDao.mainUpdate(dto);
 	}
+	
+	public DeliveryDto selectOne(DeliveryVo vo) {
+		return deliveryDao.selectOne(vo);
+	}
 }
