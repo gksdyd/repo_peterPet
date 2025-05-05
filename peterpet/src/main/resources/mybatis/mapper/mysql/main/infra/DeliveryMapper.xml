@@ -75,4 +75,29 @@
 		WHERE 1=1
 			AND deliSeq = #{deliSeq}
 	</select>
+	
+	<update id="update">
+		UPDATE delivery
+		SET
+			deliRoadAddr = #{deliRoadAddr},
+			deliDetailAddr = #{deliDetailAddr},
+			deliLatitude = #{deliLatitude},
+			deliLongtitude = #{deliLongtitude},
+			deliRecvName = #{deliRecvName},
+			deliRecvPhone = #{deliRecvPhone},
+			deliText = #{deliText},
+			deliMain = #{deliMain},
+			deliModDate = DATE_FORMAT(CONVERT_TZ(NOW(), 'UTC', 'Asia/Seoul'), '%Y-%m-%d %H:%i:%S')
+		WHERE
+			deliSeq = #{deliSeq}
+	</update>
+	
+	<select id="mainCheck" resultMap="resultMapObj">
+		SELECT
+			deliMain
+		FROM
+			delivery
+		WHERE 1=1
+			AND deliSeq = #{deliSeq}
+	</select>
 </mapper>

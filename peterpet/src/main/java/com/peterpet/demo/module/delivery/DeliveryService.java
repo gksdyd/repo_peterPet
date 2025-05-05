@@ -32,4 +32,13 @@ public class DeliveryService extends BaseService {
 	public DeliveryDto selectOne(DeliveryVo vo) {
 		return deliveryDao.selectOne(vo);
 	}
+	
+	public int update(DeliveryDto dto) {
+		if (deliveryDao.mainCheck(dto).getDeliMain() == 1) {
+			dto.setDeliMain(1);
+		} else if (dto.getDeliMain() == 1) {
+			deliveryDao.mainUpdate(dto);
+		}
+		return deliveryDao.update(dto);
+	}
 }

@@ -35,4 +35,12 @@ public class DeliveryController {
 		rtMap.put("dto", deliveryService.selectOne(vo));
 		return rtMap;
 	}
+	
+	@RequestMapping(value = "/DeliveryPeterTransProc")
+	public String deliveryPeterTransProc(DeliveryDto dto, Model model) {
+		deliveryService.update(dto);
+		model.addAttribute("deliveries", deliveryService.selectList(dto));
+		
+		return "/peter/include/delivery :: delivery";
+	}
 }
