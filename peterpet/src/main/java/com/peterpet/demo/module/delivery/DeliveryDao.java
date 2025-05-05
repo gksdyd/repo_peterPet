@@ -10,4 +10,7 @@ import com.peterpet.demo.module.base.BaseDao;
 public interface DeliveryDao extends BaseDao {
 
 	public List<DeliveryDto> selectList(DeliveryVo vo);
+	public List<DeliveryDto> selectList(DeliveryDto dto);
+	public int insert(DeliveryDto dto);
+	public int mainUpdate(DeliveryDto dto);
 }

@@ -1,6 +1,9 @@
 function deliverySave() {
     deliveryValidInit();
-    deliveryValidation();
+    if (!deliveryValidation()) {
+        return;
+    }
+    deliveryInfoTrans();
 }
 
 function deliveryValidation() {
@@ -34,4 +37,30 @@ function deliveryValidInit() {
     $("#receiveName").next().remove();
     $("#receivePhone").next().remove();
     $("#receiveAddr").next().remove();
+}
+
+function deliveryInfoTrans() {
+    let check = 0;
+    if ($("#receiveDefault").is(":checked")) {
+        check = 1;
+    }
+    fetch('/peter/delivery/DeliveryPeterProc', {    // payList fragment만 반환하는 컨트롤러
+        method: 'POST',  // POST 요청
+        body: new URLSearchParams({  // POST 데이터 설정
+            'deliRecvName': $("#receiveName").val(),
+            'deliRecvPhone': $("#receivePhone").val(),
+            'deliLatitude': parseFloat($("#receiveLatitude").val()),
+            'deliLongtitude': parseFloat($("#receiveLongitude").val()),
+            'deliRoadAddr': $("#receiveAddr").val(),
+            'deliDetailAddr': $("#receiveDetailAddr").val(),
+            'deliText': $("#receiveText").val(),
+            'deliMain': check,
+            'userSeq': sessionSeq  // 예시로 session 변수 사용
+        })
+    })
+    .then(res => res.text())
+    .then(html => {
+        document.getElementById('address').innerHTML = "";
+        document.getElementById('address').innerHTML = html;
+    });
 }

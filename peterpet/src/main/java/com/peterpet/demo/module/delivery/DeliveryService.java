@@ -16,4 +16,16 @@ public class DeliveryService extends BaseService {
 	public List<DeliveryDto> selectList(DeliveryVo vo) {
 		return deliveryDao.selectList(vo);
 	}
+	
+	public List<DeliveryDto> selectList(DeliveryDto dto) {
+		return deliveryDao.selectList(dto);
+	}
+	
+	public int insert(DeliveryDto dto) {
+		return deliveryDao.insert(dto);
+	}
+	
+	public int mainUpdate(DeliveryDto dto) {
+		return deliveryDao.mainUpdate(dto);
+	}
 }

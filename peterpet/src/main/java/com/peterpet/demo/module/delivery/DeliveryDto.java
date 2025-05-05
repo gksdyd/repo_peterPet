@@ -17,6 +17,8 @@ public class DeliveryDto extends BaseDto {
 	private Integer deliDelFlag;
 	private Integer deliMain;
 	
+	private String userSeq;
+	
 	public String getDeliSeq() {
 		return deliSeq;
 	}
@@ -88,5 +90,11 @@ public class DeliveryDto extends BaseDto {
 	}
 	public void setDeliMain(Integer deliMain) {
 		this.deliMain = deliMain;
+	}
+	public String getUserSeq() {
+		return userSeq;
+	}
+	public void setUserSeq(String userSeq) {
+		this.userSeq = userSeq;
 	}
 }

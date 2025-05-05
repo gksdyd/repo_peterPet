@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="delivery">
+    <h3>Addresses</h3>
+    <div class="row">
+        <div class="col-12 col-sm-6" th:each="delivery : ${deliveries}">
+            <p th:text="'받는 분 : ' + ${delivery.deliRecvName}"></p>
+            <p th:text="'전화번호 : ' + ${delivery.deliRecvPhone}"></p>
+            <p th:text="'주소 : ' + ${delivery.deliRoadAddr}"></p>
+            <p th:text="'상세주소 : ' + ${delivery.deliDetailAddr}"></p>
+            <p th:text="${delivery.deliText} != null ? '요청사항 : ' + ${delivery.deliText} : '요청사항 :'"></p>
+            <p th:if="${delivery.deliMain} == 1" style="color: blue;">기본 배송지</p>
+            <a class="link-underline view" href="#">수정</a>
+        </div>
+    </div>
+    <button class="collapsed btn btn--small rounded mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#shipping" aria-expanded="false" aria-controls="shipping">배송지 추가</button>
+    <div class="accordion add-address mt-3" id="address1">
+        <div id="shipping" class="accordion-collapse collapse" data-bs-parent="#address">
+            <form class="address-from mt-3" method="post" action="#">
+                <input type="hidden" id="receiveLatitude" />
+                <input type="hidden" id="receiveLongitude" />
+                <fieldset>
+                    <h2 class="login-title mb-3">배송지 등록/수정</h2>
+                    <div class="row">
+                        <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                            <label for="receiveName" class="d-none">받는 분<span class="required-f">*</span></label>
+                            <input name="receiveName" placeholder="받는 분 이름" value="" id="receiveName" type="text">
+                        </div>
+                        <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                            <label for="receivePhone" class="d-none">전화번호<span class="required-f">*</span></label>
+                            <input name="receivePhone" placeholder="전화번호" value="" id="receivePhone" type="text" oninput="autoPhoneNum(this)" maxlength="13">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                            <label for="receiveAddr" class="d-none">주소<span class="required-f">*</span></label>
+                            <input name="receiveAddr" placeholder="주소" value="" id="receiveAddr" type="text" onclick="daumPostcode2()" readonly required>
+                        </div>
+                        <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                            <label for="receiveDetailAddr" class="d-none">상세주소<span class="required-f">*</span></label>
+                            <input name="receiveDetailAddr" placeholder="상세주소" value="" id="receiveDetailAddr" type="text">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col">
+                            <label for="receiveText" class="d-none">요청사항</label>
+                            <input name="receiveText" placeholder="요청사항" value="" id="receiveText" type="text">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-check col d-flex-center">
+                            <input name="receiveDefault" value="" id="receiveDefault" type="checkbox">
+                            <label class="ms-2" for="receiveDefault">기본 배송지</label>
+                        </div>
+                    </div>
+                    <button type="button" class="btn rounded mt-1" onclick="deliverySave()"><span>저장</span></button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</th:block>

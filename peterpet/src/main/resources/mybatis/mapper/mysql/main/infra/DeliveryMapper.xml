@@ -19,4 +19,41 @@
 			AND deliDelFlag = 0
 			AND user_userSeq = #{userSeq}
 	</select>
+	
+	<insert id="insert">
+		INSERT INTO delivery (
+			deliRoadAddr,
+			deliDetailAddr,
+			deliLatitude,
+			deliLongtitude,
+			deliRecvName,
+			deliRecvPhone,
+			deliRegDate,
+			deliModDate,
+			deliDelFlag,
+			deliMain,
+			user_userSeq
+		) VALUE (
+			#{deliRoadAddr},
+			#{deliDetailAddr},
+			#{deliLatitude},
+			#{deliLongtitude},
+			#{deliRecvName},
+			#{deliRecvPhone},
+			DATE_FORMAT(CONVERT_TZ(NOW(), 'UTC', 'Asia/Seoul'), '%Y-%m-%d %H:%i:%S'),
+			DATE_FORMAT(CONVERT_TZ(NOW(), 'UTC', 'Asia/Seoul'), '%Y-%m-%d %H:%i:%S'),
+			0,
+			#{deliMain},
+			#{userSeq}
+		)
+	</insert>
+	
+	<update id="mainUpdate">
+		UPDATE delivery
+		SET
+			deliMain = 0,
+			deliModDate = DATE_FORMAT(CONVERT_TZ(NOW(), 'UTC', 'Asia/Seoul'), '%Y-%m-%d %H:%i:%S')
+		WHERE
+			user_userSeq = #{userSeq}
+	</update>
 </mapper>
