@@ -73,17 +73,14 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <div class="card deliver-destination-card">
-                                                <div class="card-body" th:each="list : ${list}">
+                                            <div class="card deliver-destination-card" th:each="list : ${list}">
+                                                <div class="card-body">
                                                     <h5 class="card-title" th:text="${list.deliRecvName}"></h5>
                                                     <p class="card-text" th:text="${list.deliRoadAddr} + ', ' + ${list.deliDetailAddr}"></p>
                                                     <p th:text="${list.deliRecvPhone}"></p>
                                                     <p th:text="'요청사항 : ' + ${list.deliText}"></p>
                                                     <p th:if="${list.deliMain} == 1">기본 배송지</p>
                                                     <div class="row">
-                                                        <div class="col text-left">
-                                                            <button type="button" class="fs-6 btn btn-small rounded text-white" id="button-modify" onclick="showModal('modify')" th:value="${list.deliSeq}">수정</button>
-                                                        </div>
                                                         <div class="col text-right">
                                                             <button type="button" class="fs-6 btn btn-small rounded text-white text-end" th:value="${list.deliSeq}">선택</button>
                                                         </div>
@@ -91,64 +88,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row modal-footer">
-                                            <div class="text-center">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="button-add"  onclick="showModal('modify')"><i class="an an-plus-r me-2"></i>배송지 추가</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="modal fade" id="modify-destination" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">배송지 등록/수정</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <form id="form" method="post" action="#" accept-charset="UTF-8" class="needs-validation customer-form" novalidate>
-                                        <div class="modal-body">
-                                                <div class="card deliver-destination-card">
-                                                    <div class="card-body">
-                                                        <div class="input-group form-group">
-                                                            <span class="input-group-text" id="basic-addon1"><i class="an an-user-expand"></i></span>
-                                                            <input type="text" class="form-control" id="receiveName" required>
-                                                        </div>
-                                                        <div class="d-none" style="color: red;">이름을 입력해주세요.</div>
-                                                        <div class="input-group form-group">
-                                                            <span class="input-group-text" id="basic-addon1"><i class="an an-map-marker-al"></i></span>
-                                                            <span class="col">
-                                                                <input type="text" class="form-control" id="receiveAddr" placeholder="주소" required>
-                                                                <input type="text" id="receiveDetailAddr" placeholder="상세주소">
-                                                                <input type="hidden" id="receiveLatitude">
-                                                                <input type="hidden" id="receiveLongitude">
-                                                            </span>
-                                                            <button type="button" class="input-group-text" id="basic-addon1" onclick="daumPostcode2()"><i class="an an-search-sis"></i></button>
-                                                        </div>
-                                                        <div class="d-none" style="color: red;">주소를 입력해주세요.</div>
-                                                        <div class="input-group form-group">
-                                                            <span class="input-group-text" id="basic-addon1"><i class="an an-mobile-alt"></i></span>
-                                                            <input type="text" class="form-control" id="receivePhone" required>
-                                                        </div>
-                                                        <div class="d-none" style="color: red;">전화번호를 입력해주세요.</div>
-                                                        <div class="input-group">
-                                                            <span class="input-group-text" id="basic-addon1"><i class="an an-comment-al"></i></span>
-                                                            <Span class="col">
-                                                                <input type="text">
-                                                            </Span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row modal-footer">
-                                                <div class="row">
-                                                    <div class="text-center">
-                                                        <input type="button" class="fs-6 btn btn-small rounded text-white" id="button-modify" onclick="deliveryPaySave()" value="저장">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -302,6 +241,7 @@
             <script src="/peter/template/optimal-html/assets/js/JHY/delivery.js"></script>
             <script src="https://js.tosspayments.com/v2/standard"></script>
             <script th:inline="javascript">
+                let sessionSeq = /*[[${session.sessSeqPeter}]]*/"";
                 window.cache = /*[[${code}]]*/ [];
                 // API 개별 테스트 연동 키
                 // 토스페이먼츠에 회원가입하기 전이라면 아래 키는 문서 테스트 키입니다.

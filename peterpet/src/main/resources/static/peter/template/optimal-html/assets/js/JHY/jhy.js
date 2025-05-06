@@ -358,19 +358,6 @@ initPetInfo = function() {
         document.querySelectorAll(".selDisease a")[j].style.display = 'block';
     }
 }
-
-  function showModal(modal) {  
-    // 내용 숨김
-    $('#select-destination').modal('hide');
-    $('#modify-destination').modal('hide');
-  
-    // 선택한 내용 보이기
-    if (modal === "select") {
-        $('#select-destination').modal('show');
-    } else if (modal === "modify") {
-        $('#modify-destination').modal('show');
-    }
-  }
   
   $(function () {
       var $pswp = $('.pswp')[0],
