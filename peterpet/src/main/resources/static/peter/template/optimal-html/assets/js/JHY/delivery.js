@@ -155,3 +155,18 @@ function mainCheck(e) {
     }
     return true;
 }
+
+function selectDelivery(e) {
+    fetch('/peter/delivery/DeliveryPeterPayProc', {    // payList fragment만 반환하는 컨트롤러
+        method: 'POST',  // POST 요청
+        body: new URLSearchParams({  // POST 데이터 설정
+            'deliSeq': $(e).val()  // 예시로 session 변수 사용
+        })
+    })
+    .then(res => res.text())
+    .then(html => {
+        document.getElementById('receiveInfo').innerHTML = "";
+        document.getElementById('receiveInfo').innerHTML = html;
+    });
+    $('#select-destination').modal('hide');
+}

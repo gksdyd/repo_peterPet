@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="deliveryPay">
+    <h2 class="fs-4">받는 사람 정보<button type="button" class="fs-6 btn btn-small rounded text-white ms-3" data-bs-toggle="modal" data-bs-target="#select-destination">배송지 변경</button></h2>                            
+    <div class="row">
+        <div class="col-6">
+            <label class="fs-6">이름</label>
+            <div class="form-group"><input type="text" th:value="${delivery.deliRecvName}" placeholder="이름" class="form-control" disabled></div>
+        </div>
+        <div class="col-6">
+            <label class="fs-6">배송주소</label>
+            <div class="form-group"><input type="text" th:value="${delivery.deliRoadAddr} + ', ' + ${delivery.deliDetailAddr}" placeholder="주소" class="form-control" disabled></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label class="fs-6">연락처</label>
+            <div class="form-group"><input type="text" th:value="${delivery.deliRecvPhone}" placeholder="연락처" class="form-control" disabled></div>
+        </div>
+        <div class="col-6">
+            <label class="fs-6">배송 요청사항</label>
+            <div class="form-group"><input type="text" placeholder="요청 사항" class="form-control" th:value="${delivery.deliText}" disabled></div>
+        </div>
+    </div>
+</th:block>

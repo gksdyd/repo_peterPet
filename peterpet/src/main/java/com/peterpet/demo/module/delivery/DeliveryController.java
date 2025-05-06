@@ -51,4 +51,11 @@ public class DeliveryController {
 		
 		return "/peter/include/delivery :: delivery";
 	}
+	
+	@RequestMapping(value = "/DeliveryPeterPayProc")
+	public String deliveryPeterPayProc(DeliveryVo vo, Model model) {
+		model.addAttribute("delivery", deliveryService.selectOne(vo));
+		
+		return "/peter/include/deliveryPay :: deliveryPay";
+	}
 }
