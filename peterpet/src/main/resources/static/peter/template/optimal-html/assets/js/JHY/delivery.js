@@ -6,6 +6,15 @@ function deliverySave() {
     deliveryInfoTrans();
 }
 
+function deliveryPaySave() {
+    deliveryPayValidInit();
+    if (!deliveryPayValidation()) {
+        return;
+    }
+    // deliveryInfoTrans();
+    showModal('select');
+}
+
 function deliveryValidation() {
     let temp = $("#receiveName").val();
     if (!checkLength(temp) || !onlyKo(temp)) {
@@ -33,10 +42,40 @@ function deliveryValidation() {
     return true;
 }
 
+function deliveryPayValidation() {
+    let temp = $("#receiveName").val();
+    if (!checkLength(temp) || !onlyKo(temp)) {
+        $("#receiveName").parent().next().removeClass("d-none");
+        $("#receiveName").focus();
+        return false;
+    }
+
+    temp = $("#receiveAddr").val();
+    if (!checkLength(temp)) {
+        $("#receiveAddr").parent().parent().next().removeClass("d-none");
+        $("#receiveAddr").focus();
+        return false;
+    }
+
+    temp = $("#receivePhone").val();
+    if (!checkLength(temp) || !onlyPhone(temp)) {
+        $("#receivePhone").parent().next().removeClass("d-none");
+        $("#receivePhone").focus();
+        return false;
+    }
+    return true;
+}
+
 function deliveryValidInit() {
     $("#receiveName").next().remove();
     $("#receivePhone").next().remove();
     $("#receiveAddr").next().remove();
+}
+
+function deliveryPayValidInit() {
+    $("#receiveName").parent().next().addClass("d-none");
+    $("#receivePhone").parent().next().addClass("d-none");
+    $("#receiveAddr").parent().parent().next().addClass("d-none");
 }
 
 function deliveryInfoTrans() {

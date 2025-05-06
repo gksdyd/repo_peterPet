@@ -104,37 +104,35 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">배송지 수정</h1>
+                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">배송지 등록/수정</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <form id="form" method="post" action="#" accept-charset="UTF-8" class="needs-validation customer-form" novalidate>
                                         <div class="modal-body">
                                                 <div class="card deliver-destination-card">
                                                     <div class="card-body">
-                                                        <div class="input-group mb-3 form-group">
+                                                        <div class="input-group form-group">
                                                             <span class="input-group-text" id="basic-addon1"><i class="an an-user-expand"></i></span>
-                                                            <input type="text" class="form-control" required>
-                                                            <div class="invalid-feedback">
-                                                                이름을 입력해주세요.
-                                                            </div>
+                                                            <input type="text" class="form-control" id="receiveName" required>
                                                         </div>
-                                                        <div class="input-group mb-3 form-group">
+                                                        <div class="d-none" style="color: red;">이름을 입력해주세요.</div>
+                                                        <div class="input-group form-group">
                                                             <span class="input-group-text" id="basic-addon1"><i class="an an-map-marker-al"></i></span>
                                                             <span class="col">
-                                                                <input type="text" class="form-control d-none" id="sample6_postcode" placeholder="우편번호">
-                                                                <input type="text" class="form-control" id="sample6_address" placeholder="주소" required>
-                                                                <input type="text" id="sample6_detailAddress" placeholder="상세주소">
+                                                                <input type="text" class="form-control" id="receiveAddr" placeholder="주소" required>
+                                                                <input type="text" id="receiveDetailAddr" placeholder="상세주소">
+                                                                <input type="hidden" id="receiveLatitude">
+                                                                <input type="hidden" id="receiveLongitude">
                                                             </span>
-                                                            <button type="button" class="input-group-text" id="basic-addon1" onclick="sample6_execDaumPostcode()"><i class="an an-search-sis"></i></button>
+                                                            <button type="button" class="input-group-text" id="basic-addon1" onclick="daumPostcode2()"><i class="an an-search-sis"></i></button>
                                                         </div>
-                                                        <div class="input-group mb-3 form-group">
+                                                        <div class="d-none" style="color: red;">주소를 입력해주세요.</div>
+                                                        <div class="input-group form-group">
                                                             <span class="input-group-text" id="basic-addon1"><i class="an an-mobile-alt"></i></span>
-                                                            <input type="text" class="form-control" required>
-                                                            <div class="invalid-feedback">
-                                                                전화번호를 입력해주세요.
-                                                            </div>
+                                                            <input type="text" class="form-control" id="receivePhone" required>
                                                         </div>
-                                                        <div class="input-group mb-3">
+                                                        <div class="d-none" style="color: red;">전화번호를 입력해주세요.</div>
+                                                        <div class="input-group">
                                                             <span class="input-group-text" id="basic-addon1"><i class="an an-comment-al"></i></span>
                                                             <Span class="col">
                                                                 <input type="text">
@@ -145,11 +143,8 @@
                                             </div>
                                             <div class="row modal-footer">
                                                 <div class="row">
-                                                    <div class="col text-left">
-                                                        <input type="button" class="fs-6 btn btn-small rounded text-white" id="button-modify" onclick="showModal('select')" value="저장">
-                                                    </div>
-                                                    <div class="col text-right">
-                                                        <input type="button" class="fs-6 btn btn-small rounded text-white text-end" value="삭제">
+                                                    <div class="text-center">
+                                                        <input type="button" class="fs-6 btn btn-small rounded text-white" id="button-modify" onclick="deliveryPaySave()" value="저장">
                                                     </div>
                                                 </div>
                                             </div>
@@ -304,6 +299,7 @@
             <div th:replace="~{peter/include/foot :: foot}"></div>
             <div th:replace="~{peter/include/includePeterOriginal :: includePeterOriginal}"></div>
             <div th:replace="~{peter/include/includePeterCommon :: includePeterCommon}"></div>
+            <script src="/peter/template/optimal-html/assets/js/JHY/delivery.js"></script>
             <script src="https://js.tosspayments.com/v2/standard"></script>
             <script th:inline="javascript">
                 window.cache = /*[[${code}]]*/ [];
