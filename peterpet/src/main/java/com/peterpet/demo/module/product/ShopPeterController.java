@@ -106,6 +106,7 @@ public class ShopPeterController extends BaseController {
 		model.addAttribute("code", CodeDto.cachedCodeArrayList);
 		model.addAttribute("user", memberService.selectOne(vo));
 		model.addAttribute("delivery", deliveryService.selectMain(vo));
+		model.addAttribute("list", deliveryService.selectList(vo));
 		model.addAttribute("prod", productService.selectPurchase(vo));
 		return "peter/shop/ShopPeterPayment";
 	}

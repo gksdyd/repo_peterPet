@@ -74,17 +74,18 @@
                                         </div>
                                         <div class="modal-body">
                                             <div class="card deliver-destination-card">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">정한용</h5>
-                                                    <p class="card-text">서울특별시 노원구 동일로 207길 18, 102동 606호</p>
-                                                    <p>010-6435-8224</p>
-                                                    <p>요청사항 : 문 앞 (60*******) / 새벽 : 문 앞 (60******)</p>
+                                                <div class="card-body" th:each="list : ${list}">
+                                                    <h5 class="card-title" th:text="${list.deliRecvName}"></h5>
+                                                    <p class="card-text" th:text="${list.deliRoadAddr} + ', ' + ${list.deliDetailAddr}"></p>
+                                                    <p th:text="${list.deliRecvPhone}"></p>
+                                                    <p th:text="'요청사항 : ' + ${list.deliText}"></p>
+                                                    <p th:if="${list.deliMain} == 1">기본 배송지</p>
                                                     <div class="row">
                                                         <div class="col text-left">
-                                                            <input type="button" class="fs-6 btn btn-small rounded text-white" id="button-modify" onclick="showModal('modify')" value="수정">
+                                                            <button type="button" class="fs-6 btn btn-small rounded text-white" id="button-modify" onclick="showModal('modify')" th:value="${list.deliSeq}">수정</button>
                                                         </div>
                                                         <div class="col text-right">
-                                                            <input type="button" class="fs-6 btn btn-small rounded text-white text-end" value="선택">
+                                                            <button type="button" class="fs-6 btn btn-small rounded text-white text-end" th:value="${list.deliSeq}">선택</button>
                                                         </div>
                                                     </div>
                                                 </div>

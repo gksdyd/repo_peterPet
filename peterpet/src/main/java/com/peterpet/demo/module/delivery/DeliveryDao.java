@@ -12,6 +12,7 @@ public interface DeliveryDao extends BaseDao {
 
 	public List<DeliveryDto> selectList(DeliveryVo vo);
 	public List<DeliveryDto> selectList(DeliveryDto dto);
+	public List<DeliveryDto> selectList(ProductVo vo);
 	public int insert(DeliveryDto dto);
 	public int mainUpdate(DeliveryDto dto);
 	public DeliveryDto selectOne(DeliveryVo vo);
