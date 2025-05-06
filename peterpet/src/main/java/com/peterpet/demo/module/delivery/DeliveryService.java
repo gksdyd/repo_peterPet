@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.peterpet.demo.module.base.BaseService;
+import com.peterpet.demo.module.product.ProductVo;
 
 @Service
 public class DeliveryService extends BaseService {
@@ -44,5 +45,9 @@ public class DeliveryService extends BaseService {
 	
 	public int delete(DeliveryVo vo) {
 		return deliveryDao.delete(vo);
+	}
+	
+	public DeliveryDto selectMain(ProductVo vo) {
+		return deliveryDao.selectMain(vo);
 	}
 }

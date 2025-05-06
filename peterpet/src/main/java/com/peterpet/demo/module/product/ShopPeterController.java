@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.peterpet.demo.module.base.BaseController;
 import com.peterpet.demo.module.code.CodeDto;
+import com.peterpet.demo.module.delivery.DeliveryService;
 import com.peterpet.demo.module.member.MemberService;
 
 @Controller
@@ -24,6 +25,9 @@ public class ShopPeterController extends BaseController {
 	
 	@Autowired
 	MemberService memberService;
+	
+	@Autowired
+	DeliveryService deliveryService;
 	
 	@RequestMapping(value = "/ShopPeterList")
 	public String shopPeterList(@ModelAttribute("vo") ProductVo vo, Model model) {
@@ -101,6 +105,7 @@ public class ShopPeterController extends BaseController {
 	public String shopPeterPayment(@ModelAttribute("vo") ProductVo vo, Model model) {
 		model.addAttribute("code", CodeDto.cachedCodeArrayList);
 		model.addAttribute("user", memberService.selectOne(vo));
+		model.addAttribute("delivery", deliveryService.selectMain(vo));
 		model.addAttribute("prod", productService.selectPurchase(vo));
 		return "peter/shop/ShopPeterPayment";
 	}

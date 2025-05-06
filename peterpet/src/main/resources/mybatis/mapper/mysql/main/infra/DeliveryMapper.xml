@@ -109,4 +109,18 @@
 		WHERE
 			deliSeq = #{deliSeq}
 	</update>
+	
+	<select id="selectMain">
+		SELECT
+			deliRoadAddr,
+			deliDetailAddr,
+			deliRecvName,
+			deliRecvPhone,
+			deliText
+		FROM
+			delivery
+		WHERE 1=1
+			AND user_userSeq = #{userSeq}
+			AND deliMain = 1
+	</select>
 </mapper>

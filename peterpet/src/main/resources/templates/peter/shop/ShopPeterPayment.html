@@ -160,21 +160,21 @@
                             <div class="row">
                                 <div class="col-6">
                                     <label class="fs-6">이름</label>
-                                    <div class="form-group"><input type="text" th:value="${user.userName}" placeholder="이름" class="form-control" disabled></div>
+                                    <div class="form-group"><input type="text" th:value="${delivery.deliRecvName}" placeholder="이름" class="form-control" disabled></div>
                                 </div>
                                 <div class="col-6">
                                     <label class="fs-6">배송주소</label>
-                                    <div class="form-group"><input type="text" th:value="${user.userJibunAddr} + ${user.userDetailAddr}" placeholder="주소" class="form-control" disabled></div>
+                                    <div class="form-group"><input type="text" th:value="${delivery.deliRoadAddr} + ', ' + ${delivery.deliDetailAddr}" placeholder="주소" class="form-control" disabled></div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-6">
                                     <label class="fs-6">연락처</label>
-                                    <div class="form-group"><input type="text" th:value="${user.userPhone}" placeholder="연락처" class="form-control" disabled></div>
+                                    <div class="form-group"><input type="text" th:value="${delivery.deliRecvPhone}" placeholder="연락처" class="form-control" disabled></div>
                                 </div>
                                 <div class="col-6">
                                     <label class="fs-6">배송 요청사항</label>
-                                    <div class="form-group"><input type="text" placeholder="요청 사항" class="form-control" value="문 앞" disabled></div>
+                                    <div class="form-group"><input type="text" placeholder="요청 사항" class="form-control" th:value="${delivery.deliText}" disabled></div>
                                 </div>
                             </div>
                         </div>
