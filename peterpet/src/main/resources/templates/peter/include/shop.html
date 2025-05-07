@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="shop">
+<!--Active Filters-->
+<ul class="active-filters d-flex flex-wrap align-items-center m-0 list-unstyled" id="searchBadge">
+    <li><a href="javascript:void(0)" id="clearBtn" onclick="allRemoveBadge()">Clear all</a></li>
+    <li th:each="badge : ${vo.badgeArray}">
+        <a href="javascript:void(0)" onclick="removeBadge(this)" th:data-value="${badge}" th:utext="${@codeService.selectOneCachedCode(badge)} + '<i class=\'an an-times-l\'></i>'"></a>
+    </li>
+</ul>
+<!--End Active Filters-->
+<!--Toolbar-->
+<div class="toolbar">
+    <div class="filters-toolbar-wrapper">
+        <ul class="list-unstyled d-flex align-items-center">
+            <li class="product-count d-flex align-items-center">
+                <button type="button" class="btn btn-filter an an-slider-3 d-inline-flex d-lg-none me-2 me-sm-3"><span class="hidden">Filter</span></button>
+                <div class="filters-toolbar__item">
+                    <span class="filters-toolbar__product-count d-none d-sm-block">Showing: <span id="productNum" th:text="${vo.totalRows}"></span> products</span>
+                </div>
+            </li>
+            <li class="collection-view ms-sm-auto">
+                <div class="filters-toolbar__item collection-view-as d-flex align-items-center me-3">
+                    <a href="javascript:void(0)" class="change-view prd-grid"><i class="icon an an-th" aria-hidden="true"></i><span class="tooltip-label">Grid View</span></a>
+                    <a href="javascript:void(0)" class="change-view prd-list"><i class="icon an an-th-list" aria-hidden="true"></i><span class="tooltip-label">List View</span></a>
+                </div>
+            </li>
+            <li class="filters-sort ms-auto ms-sm-0">
+                <div class="filters-toolbar__item">
+                    <label for="shSortBy" class="hidden">Sort by:</label>
+                    <select name="shSortBy" id="shSortBy" onchange="sort()" class="filters-toolbar__input filters-toolbar__input--sort">
+                        <option value="" th:selected="${vo.shSortBy == null}">정렬</option>
+                        <option value="1" th:selected="${vo.shSortBy == 1}">최신순</option>
+                        <option value="2" th:selected="${vo.shSortBy == 2}">리뷰많은순</option>
+                        <option value="3" th:selected="${vo.shSortBy == 3}">낮은가격순</option>
+                        <option value="4" th:selected="${vo.shSortBy == 4}">높은가격순</option>
+                    </select>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<!--End Toolbar-->
+
+<!--Product Grid-->
+<div class="grid-products grid--view-items prd-grid">
+    <div class="row productInfo"  th:if="${vo.prodType} == 1">
+        <div class="col-6 col-sm-6 col-md-4 col-lg-4 item" th:each="list : ${list}">
+            <!--Start Product Image-->
+            <div class="product-image">
+                <!--Start Product Image-->
+                <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${vo.prodType})}">
+                    <img class="blur-up lazyload" th:src="${list.path}">
+                    <!-- product label -->
+                    <div class="product-labels"><span class="lbl on-sale rounded">최저가도전!</span></div>
+                    <!-- End product label -->
+                </a>
+                <!--End Product Image-->
+            </div>
+            <!--End Product Image-->
+            <!--Start Product Details-->
+            <div class="product-details text-center">
+                <!--Product Name-->
+                <div class="product-name text-uppercase">
+                    <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${vo.prodType})}" th:if="${list.funcName} == null and ${list.infoWeight} == null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName}"></a>
+                    <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${vo.prodType})}" th:if="${list.funcName} != null and ${list.infoWeight} == null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName} + ' ' + ${@codeService.selectOneCachedCode(list.funcName)}"></a>
+                    <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${vo.prodType})}" th:if="${list.funcName} == null and ${list.infoWeight} != null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName} + ' ' + ${list.infoWeight} + 'kg'"></a>
+                    <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${vo.prodType})}" th:if="${list.funcName} != null and ${list.infoWeight} != null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName} + ' ' + ${list.infoWeight} + 'kg' + ' ' + ${@codeService.selectOneCachedCode(list.funcName)}"></a>
+                </div>
+                <!--End Product Name-->
+                <!--Product Price-->
+                <div class="product-price">
+                    <div class="old-price" th:if="${list.infoDiscount} != 0" th:text="${list.infoPrice}"></div>
+                    <span class="price" th:if="${list.infoDiscount} == 0" th:text="${list.infoPrice}"></span>
+                    <span class="price" th:if="${list.infoDiscount} != 0" th:text="${list.infoDiscount} + '% ' + ${list.discountPrice}"></span>
+                </div>
+                <!--End Product Price-->
+                <!--Product Review-->
+                <div class="product-review d-flex align-items-center justify-content-center">
+                    <span th:if="${list.prodScore} > 4"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i></span>
+                    <span th:if="${list.prodScore} > 3 and 4 >= ${list.prodScore}"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i></span>
+                    <span th:if="${list.prodScore} > 2 and 3 >= ${list.prodScore}"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
+                    <span th:if="${list.prodScore} > 1 and 2 >= ${list.prodScore}"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
+                    <span th:if="${list.prodScore} > 0 and 1 >= ${list.prodScore}"><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
+                    <span th:if="${list.prodScore} == 0"><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
+                </div>
+                <!--End Product Review-->
+                <!--deliver-->
+                <div class="product-review d-flex align-items-center justify-content-center" style="color: rgb(229, 135, 151);">
+                    <i class="an an-ship-fast fs-4"></i>&emsp;빠른 배송
+                </div>
+                <!--End deliver-->
+            </div>
+            <!--End Product Details-->
+        </div>
+    </div>
+</div>
+<!--End Product Grid-->
+
+<!--Pagination Classic-->
+<hr class="clear">
+<div class="pagination">
+    <ul>
+        <li class="prev page-item" th:if="${vo.startPage gt vo.pageNumToShow}">
+            <a href="javascript:goShop(${vo.startPage - 1})" th:attr="onclick=|goShop('${vo.startPage - 1}')|">
+                <i class="icon align-middle an an-caret-left" aria-hidden="true"></i>
+            </a>
+        </li>
+        <li class="page-item" th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}" th:classappend="${num eq vo.thisPage} ? active : ''">
+            <a th:attr="onclick=|goShop('${num}')|" th:text="${num}"></a>
+        </li>
+        <li class="next page-item" th:if="${vo.endPage ne vo.totalPages}">
+            <a th:attr="onclick=|goShop('${vo.endPage + 1}')|">
+                <i class="icon align-middle an an-caret-right" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+</th:block>

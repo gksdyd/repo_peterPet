@@ -960,22 +960,10 @@
                 let temp = $("#amount").val().replace(/￦|,/g, "").replace(/\s+/g, '').split("-");
                 $("#shMinPrice").val(parseInt(temp[0]));
                 $("#shMaxPrice").val(parseInt(temp[1]));
-                create();
-                pagination();
+                shop();
             }
         });
-        let temp = "￦";
-        if ($("#shMinPrice").val() === "") {
-            temp += $("#slider-range").slider("values", 0).toLocaleString();
-        } else {
-            temp += Number($("#shMinPrice").val()).toLocaleString();
-        }
-        temp += " - ￦";
-        if ($("#shMaxPrice").val() === "") {
-            temp += $("#slider-range").slider("values", 1).toLocaleString();
-        } else {
-            temp += Number($("#shMaxPrice").val()).toLocaleString();
-        }
+        let temp = "￦" + min.toLocaleString() + " - ￦" + max.toLocaleString();
         $("#amount").val(temp);
     }
     price_slider();
@@ -1640,7 +1628,7 @@
         }else if ($("#gridMethod").val() == 1) {
             $('.grid--view-items').removeClass('prd-grid').addClass('prd-list');
         }
-        $('.change-view').on('click', function (e) {
+        $(document).on('click', '.change-view', function () {
             if ($(this).hasClass('prd-grid')) {
                 $('.grid--view-items').removeClass('prd-list').addClass('prd-grid');
                 $("#gridMethod").val(0);
@@ -1648,9 +1636,6 @@
                 $('.grid--view-items').removeClass('prd-grid').addClass('prd-list');
                 $("#gridMethod").val(1);
             }
-        });
-
-        $('.change-view').on('click', function () {
             $('.change-view').removeClass('change-view--active');
             $(this).addClass('change-view--active');
         });

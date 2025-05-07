@@ -4,7 +4,7 @@
 <div th:replace="~{peter/include/head :: head}"></div>
         <form id="productPagination">
             <input type="hidden" id="prodType" name="prodType" th:value="${vo.prodType}">
-            <input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>
+            <input type="hidden" id="thisPage" name="thisPage" th:value="${vo.thisPage}" default="1"/>
             <input type="hidden" id="gridMethod" name="gridMethod" th:value="${vo.gridMethod}"/>
             <input type="hidden" id="badgeArray" name="badgeArray" th:value="${vo.badgeArray}"/>
             <!--Body Container-->
@@ -49,7 +49,7 @@
                                     <div class="widget-title"><h2 class="mb-0">급여 연령</h2></div>
                                     <div class="filterDD row ms-auto">
                                         <div class="form-check col-lg-6" th:each="salaryAge : ${@codeService.selectListCachedCode(2)}">
-                                            <input class="form-check-input" type="radio" th:id="feedSalaryAge + ${salaryAge.codeSeq}" name="feedSalaryAge" th:value="${salaryAge.codeSeq}" th:checked="${salaryAge.codeSeq} == ${vo.shFeedSalaryAge}">
+                                            <input class="form-check-input" type="radio" th:id="feedSalaryAge + ${salaryAge.codeSeq}" name="feedSalaryAge" th:value="${salaryAge.codeSeq}" th:checked="${salaryAge.codeSeq} == ${vo.shFeedSalaryAge}" onclick="radio(this)">
                                             <label class="form-check-label" th:for="feedSalaryAge + ${salaryAge.codeSeq}" th:text="${salaryAge.codeName}"></label>
                                         </div>
                                     </div>
@@ -60,7 +60,7 @@
                                     <div class="widget-title"><h2 class="mb-0">종류</h2></div>
                                     <div class="filterDD row ms-auto">
                                         <div class="form-check col-6" th:each="type : ${@codeService.selectListCachedCode(3)}">
-                                            <input class="form-check-input" type="radio" th:id="feedType + ${type.codeSeq}" name="feedType" th:value="${type.codeSeq}" th:checked="${type.codeSeq} == ${vo.shFeedType}">
+                                            <input class="form-check-input" type="radio" th:id="feedType + ${type.codeSeq}" name="feedType" th:value="${type.codeSeq}" th:checked="${type.codeSeq} == ${vo.shFeedType}" onclick="radio(this)">
                                             <label class="form-check-label" th:for="feedType + ${type.codeSeq}" th:text="${type.codeName}"></label>
                                         </div>
                                     </div>
@@ -71,7 +71,7 @@
                                     <div class="widget-title"><h2 class="mb-0">기능</h2></div>
                                     <div class="filterDD row ms-auto">
                                         <div class="form-check col-6" th:each="function : ${@codeService.selectListCachedCode(6)}">
-                                            <input class="form-check-input" type="checkbox" th:id="funcName + ${function.codeSeq}" name="funcName" th:value="${function.codeSeq}" th:checked="${vo.prodFuncArray.contains(function.codeSeq)}">
+                                            <input class="form-check-input" type="checkbox" th:id="funcName + ${function.codeSeq}" name="funcName" th:value="${function.codeSeq}" th:checked="${vo.prodFuncArray.contains(function.codeSeq)}" onclick="check(this)">
                                             <label class="form-check-label" th:for="funcName + ${function.codeSeq}" th:text="${function.codeName}"></label>
                                         </div>
                                     </div>
@@ -82,7 +82,7 @@
                                     <div class="widget-title"><h2 class="mb-0">기타</h2></div>
                                     <div class="filterDD row ms-auto">
                                         <div class="form-check col-6" th:each="etc : ${@codeService.selectListCachedCode(4)}">
-                                            <input class="form-check-input" type="radio" th:id="feedEtc + ${etc.codeSeq}" name="feedEtc" th:value="${etc.codeSeq}" th:checked="${etc.codeSeq} == ${vo.shFeedEtc}">
+                                            <input class="form-check-input" type="radio" th:id="feedEtc + ${etc.codeSeq}" name="feedEtc" th:value="${etc.codeSeq}" th:checked="${etc.codeSeq} == ${vo.shFeedEtc}" onclick="radio(this)">
                                             <label class="form-check-label" th:for="feedEtc + ${etc.codeSeq}" th:text="${etc.codeName}"></label>
                                         </div>
                                     </div>
@@ -93,7 +93,7 @@
                                     <div class="widget-title"><h2 class="mb-0">중량</h2></div>
                                     <div class="filterDD row ms-auto">
                                         <div class="form-check col-6" th:each="weight : ${@codeService.selectListCachedCode(5)}">
-                                            <input class="form-check-input" type="radio" th:id="feedWeight + ${weight.codeSeq}" name="feedWeight" th:value="${weight.codeSeq}" th:checked="${weight.codeSeq} == ${vo.shFeedWeight}">
+                                            <input class="form-check-input" type="radio" th:id="feedWeight + ${weight.codeSeq}" name="feedWeight" th:value="${weight.codeSeq}" th:checked="${weight.codeSeq} == ${vo.shFeedWeight}" onclick="radio(this)">
                                             <label class="form-check-label" th:for="feedWeight + ${weight.codeSeq}" th:text="${weight.codeName}"></label>
                                         </div>
                                     </div>
@@ -104,7 +104,7 @@
                                     <div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
                                     <div class="filterDD row ms-auto">
                                         <div class="form-check col-6" th:each="brand : ${@codeService.selectListCachedCode(7)}">
-                                            <input class="form-check-input" type="checkbox" th:id="feedBrand + ${brand.codeSeq}" name="feedBrand" th:value="${brand.codeSeq}" th:checked="${vo.feedBrandArray.contains(brand.codeSeq)}">
+                                            <input class="form-check-input" type="checkbox" th:id="feedBrand + ${brand.codeSeq}" name="feedBrand" th:value="${brand.codeSeq}" th:checked="${vo.feedBrandArray.contains(brand.codeSeq)}" onclick="check(this)">
                                             <label class="form-check-label" th:for="feedBrand + ${brand.codeSeq}" th:text="${brand.codeName}"></label>
                                         </div>
                                     </div>
@@ -115,7 +115,7 @@
                                     <div class="widget-title"><h2 class="mb-0">주원료</h2></div>
                                     <div class="filterDD row ms-auto">
                                         <div class="form-check col-6" th:each="ingredient : ${@codeService.selectListCachedCode(8)}">
-                                            <input class="form-check-input" type="checkbox" th:id="feedIngredient + ${ingredient.codeSeq}" name="feedIngredient" th:value="${ingredient.codeSeq}" th:checked="${vo.shIngredientArray.contains(ingredient.codeSeq)}">
+                                            <input class="form-check-input" type="checkbox" th:id="feedIngredient + ${ingredient.codeSeq}" name="feedIngredient" th:value="${ingredient.codeSeq}" th:checked="${vo.shIngredientArray.contains(ingredient.codeSeq)}" onclick="check(this)">
                                             <label class="form-check-label" th:for="feedIngredient + ${ingredient.codeSeq}" th:text="${ingredient.codeName}"></label>
                                         </div>
                                     </div>
@@ -126,7 +126,7 @@
                                     <div class="widget-title"><h2 class="mb-0">크기</h2></div>
                                     <div class="filterDD row ms-auto">
                                         <div class="form-check col-6" th:each="size : ${@codeService.selectListCachedCode(16)}">
-                                            <input class="form-check-input" type="radio" th:id="feedSize + ${size.codeSeq}" name="feedSize" th:value="${size.codeSeq}" th:checked="${size.codeSeq} == ${vo.shFeedSize}">
+                                            <input class="form-check-input" type="radio" th:id="feedSize + ${size.codeSeq}" name="feedSize" th:value="${size.codeSeq}" th:checked="${size.codeSeq} == ${vo.shFeedSize}" onclick="radio(this)">
                                             <label class="form-check-label" th:for="feedSize + ${size.codeSeq}" th:text="${size.codeName}"></label>
                                         </div>
                                     </div>
@@ -137,10 +137,13 @@
                         <!--End Sidebar-->
 
                         <!--Main Content-->
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-9 main-col">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-9 main-col" id="main">
                             <!--Active Filters-->
                             <ul class="active-filters d-flex flex-wrap align-items-center m-0 list-unstyled" id="searchBadge">
-                                <li><a href="javascript:void(0)" id="clearBtn">Clear all</a></li>
+                                <li><a href="javascript:void(0)" id="clearBtn" onclick="allRemoveBadge()">Clear all</a></li>
+                                <li th:each="badge : ${vo.badgeArray}">
+                                    <a href="javascript:void(0)" onclick="removeBadge(this)" th:data-value="${badge}" th:utext="${@codeService.selectOneCachedCode(badge)} + '<i class=\'an an-times-l\'></i>'"></a>
+                                </li>
                             </ul>
                             <!--End Active Filters-->
                             <!--Toolbar-->
@@ -162,7 +165,7 @@
                                         <li class="filters-sort ms-auto ms-sm-0">
                                             <div class="filters-toolbar__item">
                                                 <label for="shSortBy" class="hidden">Sort by:</label>
-                                                <select name="shSortBy" id="shSortBy" class="filters-toolbar__input filters-toolbar__input--sort">
+                                                <select name="shSortBy" id="shSortBy" onchange="sort()" class="filters-toolbar__input filters-toolbar__input--sort">
                                                     <option value="" th:selected="${vo.shSortBy == null}">정렬</option>
                                                     <option value="1" th:selected="${vo.shSortBy == 1}">최신순</option>
                                                     <option value="2" th:selected="${vo.shSortBy == 2}">리뷰많은순</option>
@@ -233,7 +236,23 @@
 
                             <!--Pagination Classic-->
                             <hr class="clear">
-                            <div th:replace="~{peter/include/pagination :: pagination}"></div>
+                            <div class="pagination">
+                                <ul>
+                                    <li class="prev page-item" th:if="${vo.startPage gt vo.pageNumToShow}">
+                                        <a href="javascript:goShop(${vo.startPage - 1})" th:attr="onclick=|goShop('${vo.startPage - 1}')|">
+                                            <i class="icon align-middle an an-caret-left" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li class="page-item" th:each="num: ${#numbers.sequence(vo.startPage, vo.endPage)}" th:classappend="${num eq vo.thisPage} ? active : ''">
+                                        <a th:attr="onclick=|goShop('${num}')|" th:text="${num}"></a>
+                                    </li>
+                                    <li class="next page-item" th:if="${vo.endPage ne vo.totalPages}">
+                                        <a th:attr="onclick=|goShop('${vo.endPage + 1}')|">
+                                            <i class="icon align-middle an an-caret-right" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                         <!--End Main Content-->
                     </div>
@@ -330,17 +349,8 @@
             <div th:replace="~{peter/include/includePeterOriginal :: includePeterOriginal}"></div>
         </div>
         <!--End Page Wrapper-->
+        <script src="/peter/template/optimal-html/assets/js/JHY/sort.js"></script>
         <script th:inline="javascript">
-            let form = document.getElementById("productPagination");
-
-            let goUrlProductList = "/peter/shop/ShopPeterList";
-
-            window.href = /*[[@{/peter/shop/ShopPeterView(prodSeq=value, prodType=${vo.prodType})}]]*/ '';
-            window.cache = /*[[${code}]]*/ [];
-        </script>
-        <script th:inline="javascript" src="/peter/template/optimal-html/assets/js/JHY/sort.js"></script>
-
-        <script>
             initBadge();
         </script>
     </body>
