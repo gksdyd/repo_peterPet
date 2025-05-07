@@ -43,7 +43,9 @@
 			quantity,
 			orderName,
 			easyPay,
-			vat
+			vat,
+			deliveryNum,
+			deliveryCode
 		FROM
 			payment
 		WHERE 1=1

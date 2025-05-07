@@ -116,6 +116,11 @@
                                 <!-- End Dashboard -->
 
                                 <!-- Orders -->
+                                 <form action="https://info.sweettracker.co.kr/tracking/5" method="post" id="deliveryCheck" target="popupWindow">
+                                    <input type="hidden" name="t_key">
+                                    <input type="hidden" name="t_code">
+                                    <input type="hidden" name="t_invoice">
+                                 </form>
                                 <div id="orders" class="product-order tab-pane fade active show">
                                     <h3>Orders</h3>
                                     <div class="table-responsive order-table mb-3">
@@ -124,12 +129,13 @@
                                                 <tr>
                                                     <th>#</th>
                                                     <th>주문번호</th>
-                                                    <th style="width: 30%;">상품명</th>
+                                                    <th style="width: 25%;">상품명</th>
                                                     <th>주문금액</th>
                                                     <th>수량</th>
                                                     <th>결제방식</th>
                                                     <th>상태</th>
-                                                    <th>날짜</th>
+                                                    <th style="width: 15%;">날짜</th>
+                                                    <th>운송장번호</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -142,6 +148,7 @@
                                                     <th th:text="${pay.easyPay}"></th>
                                                     <th th:text="${@codeService.selectOneCachedCode(pay.payStatus)}"></th>
                                                     <th th:text="${pay.payModDate}"></th>
+                                                    <th><a href="javascript:void(0);" th:data-value="${pay.deliveryCode}" th:text="${pay.deliveryNum}" onclick="deliveryCheck(this)"></a></th>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -1802,6 +1809,16 @@
                     }
                 });
             });
+
+            function deliveryCheck(e) {
+                const popup = window.open("", "popupWindow", "width=400,height=600");
+                $("input[name=t_key]").val(/*[[${deliveryKey}]]*/"");
+                $("input[name=t_code]").val($(e).data("value"));
+                $("input[name=t_invoice]").val($(e).text());
+
+                $("#deliveryCheck").target = "popupWindow";
+                $("#deliveryCheck").submit();
+            }
             </script>
         </div>
         <!--End Page Wrapper-->

@@ -9,6 +9,8 @@ public class PaymentDto {
 	private String orderName;
 	private String easyPay;
 	private Integer vat;
+	private String deliveryNum;
+	private String deliveryCode;
 	private Integer quantity;
 	private Integer payStatus;
 	private String userSeq;
@@ -100,5 +102,17 @@ public class PaymentDto {
 	}
 	public void setPayModDate(String payModDate) {
 		this.payModDate = payModDate;
+	}
+	public String getDeliveryNum() {
+		return deliveryNum;
+	}
+	public void setDeliveryNum(String deliveryNum) {
+		this.deliveryNum = deliveryNum;
+	}
+	public String getDeliveryCode() {
+		return deliveryCode;
+	}
+	public void setDeliveryCode(String deliveryCode) {
+		this.deliveryCode = deliveryCode;
 	}
 }

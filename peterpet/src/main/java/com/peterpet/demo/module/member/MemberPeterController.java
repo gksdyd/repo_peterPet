@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -42,6 +43,9 @@ public class MemberPeterController extends BaseController {
 	PaymentService paymentService;
 	@Autowired
 	DeliveryService deliveryService;
+	
+	@Value("${delivery-key}")
+	private String deliveryKey;
 	
 	@RequestMapping(value = "/LoginPeterForm")
 	public String loginPeterForm(MemberDto memberDto, Model model) {
@@ -102,6 +106,7 @@ public class MemberPeterController extends BaseController {
 		model.addAttribute("code", CodeDto.cachedCodeArrayList);
 		model.addAttribute("pays", paymentService.selectList(paymentVo));
 		model.addAttribute("deliveries", deliveryService.selectList(deliveryVo));
+		model.addAttribute("deliveryKey", deliveryKey);
 		return "peter/member/MyAccountPeterForm";
 	}
 	
