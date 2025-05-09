@@ -17,7 +17,7 @@
         	AND prodType = #{prodType}
         	AND a.prodName LIKE CONCAT('%',#{shValue},'%')
 		        <if test="shDelFlag != null and !shDelFlag.equals('')">AND a.prodDelFlag = #{shDelFlag}</if>
-		        <if test="prodPetType != null and !prodPetType.equals('')">AND a.prodPetType = #{prodPetType}</if>
+		        <if test="prodPetType != null and prodPetType != 0 and !prodPetType.equals('')">AND a.prodPetType = #{prodPetType}</if>
 		        
 	        	<if test="prodType == 1">
 			        <if test="shFeedSalaryAge != null and !shFeedSalaryAge.equals('')">AND a.feedSalaryAge = #{shFeedSalaryAge}</if>
