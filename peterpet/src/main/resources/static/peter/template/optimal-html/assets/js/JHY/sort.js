@@ -41,6 +41,12 @@ function radio(e) {
     let current;
     let name = $(e).attr("name");
     
+    if (name === "petType") {
+        prodPetType = $(e).val();
+        shop();
+        return;
+    }
+
     for (let i = 0; i < $("input[name=" + name + "]").length; i++) {
         if (badgeArray.includes($("input[name=" + name + "]").eq(i).val())) {
             for (let j = 0; badgeArray.length; j++) {
@@ -69,8 +75,6 @@ function radio(e) {
             feedWeight = null;
         } else if (name === "feedSize") {
             feedSize = null;
-        } else if (name === "petType") {
-            prodPetType = null;
         }
     } else {
         badgeArray.push($(e).val());
@@ -84,8 +88,6 @@ function radio(e) {
             feedWeight = $(e).val();
         } else if (name === "feedSize") {
             feedSize = $(e).val();
-        } else if (name === "petType") {
-            prodPetType = $(e).val();
         }
     }
     shop();
@@ -263,13 +265,6 @@ removeBadge = function(e) {
                     $("input[name=feedSize]").eq(i).prop("checked", false);
                 }
             }
-        } else if (prodPetType == value) {
-            prodPetType = null;
-            for (let i = 0; i < $("input[name=petType]").length; i++) {
-                if ($("input[name=petType]").eq(i).val() == value) {
-                    $("input[name=petType]").eq(i).prop("checked", false);
-                }
-            }
         }
     }
     shop();
@@ -286,7 +281,6 @@ allRemoveBadge = function() {
     feedEtc = null;
     feedWeight = null;
     feedSize = null;
-    prodPetType = null;
 
     let min = 0;
     let max = 400000;
@@ -295,7 +289,9 @@ allRemoveBadge = function() {
     let temp = "￦" + min.toLocaleString() + " - ￦" + max.toLocaleString();
     $("#amount").val(temp);
 
-    $(".form-check-input").prop("checked", false);
+    if ($(".form-check-input").attr("name") !== "petType") {
+        $(".form-check-input").prop("checked", false);
+    }
     price_slider();
 }
 

@@ -20,7 +20,7 @@ public class ProductVo extends BaseVo{
 	
 	private String prodSeq;
 	private int prodType;
-	private Integer prodPetType;
+	private Integer prodPetType = 239;
 	
 	private Integer prodFunction;	// 선택한 기능을 저장하기 위한 매개체
 	
