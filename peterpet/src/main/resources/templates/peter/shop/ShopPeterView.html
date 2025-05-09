@@ -32,6 +32,7 @@
                                         <div class="product-buttons">
                                             <a href="#" class="btn rounded"><i class="icon an an-share-alt1"></i><span class="tooltip-label">공유</span></a>
                                             <a href="#" class="btn rounded prlightbox"><i class="icon an an-expand-l-arrows"></i><span class="tooltip-label">확대</span></a>
+                                            <a href="javascript:void(0);" onclick="ai()" class="btn rounded"><i class="icon an an-refresh"></i><span class="tooltip-label">랜덤 이미지</span></a>
                                         </div>
                                     </div>
                                     <div class="lightboximages">
@@ -893,6 +894,7 @@
             <div th:replace="~{peter/include/includePeterOriginal :: includePeterOriginal}"></div>
             <div th:replace="~{peter/include/includePeterCommon :: includePeterCommon}"></div>
             <script src="/peter/template/optimal-html/assets/js/JHY/image.js"></script>
+            <script src="/peter/template/optimal-html/assets/js/JHY/AI.js"></script>
         </div>
         <!--End Page Wrapper-->
         <script th:inline="javascript">
@@ -907,6 +909,7 @@
             let starCount;
 
             window.cache = /*[[${code}]]*/ [];
+            let imageAiKey = /*[[${imageKey}]]*/"";
 
             let start;
             let end;

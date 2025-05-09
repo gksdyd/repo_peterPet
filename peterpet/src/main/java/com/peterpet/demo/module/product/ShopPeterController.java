@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,6 +29,9 @@ public class ShopPeterController extends BaseController {
 	
 	@Autowired
 	DeliveryService deliveryService;
+	
+	@Value("${image-key}")
+	private String imageKey;
 	
 	@RequestMapping(value = "/ShopPeterList")
 	public String shopPeterList(@ModelAttribute("vo") ProductVo vo, Model model) {
@@ -53,6 +57,7 @@ public class ShopPeterController extends BaseController {
 		model.addAttribute("image1", productService.selectImage1(vo));
 		model.addAttribute("image2", productService.selectImage2(vo));
 		model.addAttribute("code", CodeDto.cachedCodeArrayList);
+		model.addAttribute("imageKey", imageKey);
 		deliveryTimeCheck(vo);
 		return "peter/shop/ShopPeterView";
 	}
