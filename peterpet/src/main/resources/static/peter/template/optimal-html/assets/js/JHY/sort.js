@@ -8,6 +8,7 @@ let feedType;
 let feedEtc;
 let feedWeight;
 let feedSize;
+let prodPetType;
 
 function noEvent(event) {
     let form = document.getElementById("productPagination");
@@ -21,6 +22,7 @@ function noEvent(event) {
     $("#shFeedEtc").val(feedEtc);
     $("#shFeedWeight").val(feedWeight);
     $("#shFeedSize").val(feedSize);
+    $("#prodPetType").val(prodPetType);
 
     if (event.keyCode === 116 || (event.ctrlKey && (event.keyCode === 78 || event.keyCode === 82))) {
         event.preventDefault(); // 기본 동작 막기
@@ -67,6 +69,8 @@ function radio(e) {
             feedWeight = null;
         } else if (name === "feedSize") {
             feedSize = null;
+        } else if (name === "petType") {
+            prodPetType = null;
         }
     } else {
         badgeArray.push($(e).val());
@@ -80,6 +84,8 @@ function radio(e) {
             feedWeight = $(e).val();
         } else if (name === "feedSize") {
             feedSize = $(e).val();
+        } else if (name === "petType") {
+            prodPetType = $(e).val();
         }
     }
     shop();
@@ -153,6 +159,8 @@ function shop() {
     value = parseInt($("#shSortBy").val());
     params.append('shSortBy', isNaN(value) ? '' : value);
     params.append('thisPage', $("#thisPage").val());
+    value = parseInt(prodPetType);
+    params.append('prodPetType', isNaN(value) ? '' : value);
 
     fetch('/peter/shop/ShopPeterSearch', {    // payList fragment만 반환하는 컨트롤러
         method: 'POST',  // POST 요청
@@ -255,6 +263,13 @@ removeBadge = function(e) {
                     $("input[name=feedSize]").eq(i).prop("checked", false);
                 }
             }
+        } else if (prodPetType == value) {
+            prodPetType = null;
+            for (let i = 0; i < $("input[name=petType]").length; i++) {
+                if ($("input[name=petType]").eq(i).val() == value) {
+                    $("input[name=petType]").eq(i).prop("checked", false);
+                }
+            }
         }
     }
     shop();
@@ -271,6 +286,7 @@ allRemoveBadge = function() {
     feedEtc = null;
     feedWeight = null;
     feedSize = null;
+    prodPetType = null;
 
     let min = 0;
     let max = 400000;
@@ -334,4 +350,5 @@ initBadge = function() {
     feedEtc = $("#shFeedEtc").val();
     feedWeight = $("#shFeedWeight").val();
     feedSize = $("#shFeedSize").val();
+    prodPetType = $("#prodPetType").val();
 }

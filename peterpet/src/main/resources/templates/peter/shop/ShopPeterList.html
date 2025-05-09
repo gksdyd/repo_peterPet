@@ -37,6 +37,7 @@
                                 <input type="hidden" id="prodFuncArray" name="prodFuncArray" th:value="${vo.prodFuncArray}"/>
                                 <input type="hidden" id="feedBrandArray" name="feedBrandArray" th:value="${vo.feedBrandArray}"/>
                                 <input type="hidden" id="shIngredientArray" name="shIngredientArray" th:value="${vo.shIngredientArray}"/>
+                                <input type="hidden" id="prodPetType" name="prodPetType" th:value="${vo.prodPetType}"/>
                                 <!--Price Filter-->
                                 <div class="sidebar_widget filterBox filter-widget">
                                     <div class="widget-title"><h2 class="mb-0">Price</h2></div>
@@ -44,6 +45,17 @@
                                     <p class="no-margin"><input id="amount" type="text" readonly></p>
                                 </div>
                                 <!--End Price Filter-->
+                                <!--pet type-->
+                                <div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+                                    <div class="widget-title"><h2 class="mb-0">반려 동물</h2></div>
+                                    <div class="filterDD row ms-auto">
+                                        <div class="form-check col-lg-6" th:each="pet : ${@codeService.selectListCachedCode(26)}">
+                                            <input class="form-check-input" type="radio" th:id="pet + ${pet.codeSeq}" name="petType" th:value="${pet.codeSeq}" th:checked="${pet.codeSeq} == ${vo.prodPetType}" onclick="radio(this)">
+                                            <label class="form-check-label" th:for="pet + ${pet.codeSeq}" th:text="${pet.codeName}"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--End pet type-->
                                 <!--age type-->
                                 <div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
                                     <div class="widget-title"><h2 class="mb-0">급여 연령</h2></div>

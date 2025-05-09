@@ -20,7 +20,7 @@ public class ProductVo extends BaseVo{
 	
 	private String prodSeq;
 	private int prodType;
-	private int prodPetType;
+	private Integer prodPetType;
 	
 	private Integer prodFunction;	// 선택한 기능을 저장하기 위한 매개체
 	
@@ -246,11 +246,11 @@ public class ProductVo extends BaseVo{
 		this.shSortBy = shSortBy;
 	}
 
-	public int getProdPetType() {
+	public Integer getProdPetType() {
 		return prodPetType;
 	}
 
-	public void setProdPetType(int prodPetType) {
+	public void setProdPetType(Integer prodPetType) {
 		this.prodPetType = prodPetType;
 	}
 

@@ -310,6 +310,7 @@
 			<if test="shMinPrice != null and shMaxPrice != null">AND (b.infoPrice * (100 - b.infoDiscount) / 100) BETWEEN #{shMinPrice} AND #{shMaxPrice}</if>
 			<if test="shFeedSalaryAge != null and !shFeedSalaryAge.equals('')">AND a.feedSalaryAge = #{shFeedSalaryAge}</if>
 			<if test="shFeedType != null and !shFeedType.equals('')">AND a.feedType = #{shFeedType}</if>
+			<if test="prodPetType != null and !prodPetType.equals('')">AND a.prodPetType = #{prodPetType}</if>
 			<if test="prodFuncArray != null and prodFuncArray.size() > 0">
 	        	<foreach collection="prodFuncArray" item="func">
 	        		AND FIND_IN_SET(#{func}, (SELECT GROUP_CONCAT(funcName) FROM func WHERE a.prodSeq = product_prodSeq)) > 0
