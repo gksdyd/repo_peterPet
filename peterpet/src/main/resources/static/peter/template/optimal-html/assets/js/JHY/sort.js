@@ -26,6 +26,7 @@ function noEvent(event) {
 
     if (event.keyCode === 116 || (event.ctrlKey && (event.keyCode === 78 || event.keyCode === 82))) {
         event.preventDefault(); // 기본 동작 막기
+        form.method = "post";
         form.action = "/peter/shop/ShopPeterList"; // form이 전역에 없을 경우
         form.submit();
     }
