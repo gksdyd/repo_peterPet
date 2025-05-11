@@ -82,6 +82,8 @@ public class ProductController extends BaseController {
 		for (int i = 0; i < productDto.getProdFuncArray().size(); i++) {
 			if (i == 0) {
 				productDto.setFuncMain(1);
+			} else {
+				productDto.setFuncMain(0);
 			}
 			productDto.setFuncName(productDto.getProdFuncArray().get(i));
 			productService.funcInsert(productDto);
@@ -90,6 +92,8 @@ public class ProductController extends BaseController {
 		for (int i = 0; i < productDto.getFeedPriceArray().size(); i++) {
 			if (i == 0) {
 				productDto.setInfoMain(1);
+			} else {
+				productDto.setInfoMain(0);
 			}
 			productDto.setInfoPrice(productDto.getFeedPriceArray().get(i));
 			productDto.setInfoWeight(productDto.getFeedWeightArray().get(i));
@@ -122,6 +126,8 @@ public class ProductController extends BaseController {
 		for (int i = 0; i < size; i++) {
 			if (i == 0) {
 				productDto.setFuncMain(1);
+			} else {
+				productDto.setFuncMain(0);
 			}
 			if (flag == Constants.PRODUCT_UPDATE_COUNT_DECREASE) {
 				if (i < productDto.getProdFuncArray().size()) {
@@ -164,6 +170,8 @@ public class ProductController extends BaseController {
 		for (int i = 0; i < size; i++) {
 			if (i == 0) {
 				productDto.setInfoMain(1);
+			} else {
+				productDto.setInfoMain(0);
 			}
 			if (flag == Constants.PRODUCT_UPDATE_COUNT_DECREASE) {
 				if (i < productDto.getFeedPriceArray().size()) {
