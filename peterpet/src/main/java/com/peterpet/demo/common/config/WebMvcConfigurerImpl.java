@@ -19,6 +19,7 @@ public class WebMvcConfigurerImpl implements WebMvcConfigurer {
 				"/static/**",
 				"/xdm/member/LoginXdmForm",
 				"/xdm/member/LoginXdmProc",
+				"/xdm/member/ProductXdmFilterProc",
 				"/peter/member/LoginPeterForm",
 				"/peter/member/SignupPeterForm",
 				"/peter/index/IndexPeterView",

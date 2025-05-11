@@ -75,10 +75,6 @@ function changeFilter(e) {
   })
   .then(res => res.text())
   .then(html => {
-    if (sessionSeq == null) {
-      location = "xdm/member/LoginXdmForm";
-      return;
-    }
       document.getElementById('filter').innerHTML = "";
       document.getElementById('filter').innerHTML = html;
   });
