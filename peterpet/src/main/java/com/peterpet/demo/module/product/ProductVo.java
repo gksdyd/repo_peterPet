@@ -31,11 +31,7 @@ public class ProductVo extends BaseVo{
 	private Integer shFeedBrand;
 	private Integer shFeedIngredient;
 	
-	private Integer shSnackType;
-	private Integer shSnackSalaryAge;
-	private Integer shSnackMaterial;
-	private Integer shSnackBrand;
-	private Integer shSnackIngredient;
+	private Integer shSnckFeature;
 	
 	private Integer gridMethod = 0;
 	private Integer shSortBy = 0;
@@ -149,47 +145,14 @@ public class ProductVo extends BaseVo{
 	public void setShFeedIngredient(Integer shFeedIngredient) {
 		this.shFeedIngredient = shFeedIngredient;
 	}
-
-	public Integer getShSnackType() {
-		return shSnackType;
+	public Integer getShSnckFeature() {
+		return shSnckFeature;
 	}
 
-	public void setShSnackType(Integer shSnackType) {
-		this.shSnackType = shSnackType;
+	public void setShSnckFeature(Integer shSnckFeature) {
+		this.shSnckFeature = shSnckFeature;
 	}
 
-	public Integer getShSnackSalaryAge() {
-		return shSnackSalaryAge;
-	}
-
-	public void setShSnackSalaryAge(Integer shSnackSalaryAge) {
-		this.shSnackSalaryAge = shSnackSalaryAge;
-	}
-
-	public Integer getShSnackMaterial() {
-		return shSnackMaterial;
-	}
-
-	public void setShSnackMaterial(Integer shSnackMaterial) {
-		this.shSnackMaterial = shSnackMaterial;
-	}
-
-	public Integer getShSnackBrand() {
-		return shSnackBrand;
-	}
-
-	public void setShSnackBrand(Integer shSnackBrand) {
-		this.shSnackBrand = shSnackBrand;
-	}
-
-	public Integer getShSnackIngredient() {
-		return shSnackIngredient;
-	}
-
-	public void setShSnackIngredient(Integer shSnackIngredient) {
-		this.shSnackIngredient = shSnackIngredient;
-	}
-	
 	public List<Integer> getFeedPriceArray() {
 		return feedPriceArray;
 	}

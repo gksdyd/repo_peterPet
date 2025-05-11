@@ -136,25 +136,25 @@
                 <div class="mb-2 row g-3 me-2 ms-2 mt-0">
                   <div class="col-4">
                     <div class="form-group">
-                      <select class="form-select-JHY" id="shSnackType" name="shSnackType">
-                        <option value="" th:selected="${vo.shSnackType == null}">간식종류</option>
-                        <option th:each="snackType : ${@codeService.selectListCachedCode(17)}" th:value="${snackType.codeSeq}" th:text="${snackType.codeName}" th:selected="${vo.shSnackType} == ${snackType.codeSeq}"></option>
+                      <select class="form-select-JHY" id="shFeedType" name="shFeedType">
+                        <option value="" th:selected="${vo.shFeedType == null}">간식종류</option>
+                        <option th:each="snackType : ${@codeService.selectListCachedCode(17)}" th:value="${snackType.codeSeq}" th:text="${snackType.codeName}" th:selected="${vo.shFeedType} == ${snackType.codeSeq}"></option>
                       </select>
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="form-group">
-                      <select class="form-select-JHY" id="shSnackMaterial" name="shSnackMaterial">
-                        <option value="" th:selected="${vo.shSnackMaterial == null}">원료특징</option>
-                        <option th:each="snackMaterial : ${@codeService.selectListCachedCode(18)}" th:value="${snackMaterial.codeSeq}" th:text="${snackMaterial.codeName}" th:selected="${vo.shSnackMaterial} == ${snackMaterial.codeSeq}"></option>
+                      <select class="form-select-JHY" id="shSnckFeature" name="shSnckFeature">
+                        <option value="" th:selected="${vo.shSnckFeature == null}">원료특징</option>
+                        <option th:each="snckFeature : ${@codeService.selectListCachedCode(18)}" th:value="${snckFeature.codeSeq}" th:text="${snckFeature.codeName}" th:selected="${vo.shSnckFeature} == ${snckFeature.codeSeq}"></option>
                       </select>
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="form-group mb-2">
-                      <select class="form-select-JHY" id="shSnackIngredient" name="shSnackIngredient">
-                        <option value="" th:selected="${vo.shSnackIngredient == null}">주원료</option>
-                        <option th:each="snackIngredient : ${@codeService.selectListCachedCode(8)}" th:value="${snackIngredient.codeSeq}" th:text="${snackIngredient.codeName}" th:selected="${vo.shSnackIngredient} == ${snackIngredient.codeSeq}"></option>
+                      <select class="form-select-JHY" id="shFeedIngredient" name="shFeedIngredient">
+                        <option value="" th:selected="${vo.shFeedIngredient == null}">주원료</option>
+                        <option th:each="snackIngredient : ${@codeService.selectListCachedCode(8)}" th:value="${snackIngredient.codeSeq}" th:text="${snackIngredient.codeName}" th:selected="${vo.shFeedIngredient} == ${snackIngredient.codeSeq}"></option>
                       </select>
                     </div>
                   </div>
@@ -170,9 +170,9 @@
                   </div>
                   <div class="col-4">
                     <div class="form-group">
-                      <select class="form-select-JHY" id="shSnackBrand" name="shSnackBrand">
-                        <option value="" th:selected="${vo.shSnackBrand == null}">브랜드</option>
-                        <option th:each="snackBrand : ${@codeService.selectListCachedCode(21)}" th:value="${snackBrand.codeSeq}" th:text="${snackBrand.codeName}" th:selected="${vo.shSnackBrand} == ${snackBrand.codeSeq}"></option>
+                      <select class="form-select-JHY" id="shFeedBrand" name="shFeedBrand">
+                        <option value="" th:selected="${vo.shFeedBrand == null}">브랜드</option>
+                        <option th:each="snackBrand : ${@codeService.selectListCachedCode(21)}" th:value="${snackBrand.codeSeq}" th:text="${snackBrand.codeName}" th:selected="${vo.shFeedBrand} == ${snackBrand.codeSeq}"></option>
                       </select>
                     </div>
                   </div>
