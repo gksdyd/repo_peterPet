@@ -254,4 +254,9 @@ public class ProductController extends BaseController {
 	public String productXdmFilterProc(@ModelAttribute("vo") ProductVo vo) {
 		return "xdm/include/feedFilter :: feedFilter";
 	}
+	
+	@RequestMapping(value = "/ProductXdmFormProc")
+	public String productXdmFormProc(@ModelAttribute("vo") ProductVo vo) {
+		return "xdm/include/feedForm :: feedForm";
+	}
 }

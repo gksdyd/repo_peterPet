@@ -11,6 +11,7 @@
 changeProductType = function (formId, address) {
   let form = document.querySelector("form[name=" + formId + "]");
   form.action = address;
+  form.method = "post";
   form.submit();
 }
 
@@ -18,7 +19,7 @@ changeProductType = function (formId, address) {
 var funcArray = [];
 var funcNameArray = [];
 
-$("#prodFunction").change(function(){
+$(document).on('change', '#prodFunction', function(){
   $.ajax({
     async: true 
     ,cache: false
@@ -66,20 +67,6 @@ $(document).on('click', '.removeFunc', function(){
   }
 });
 
-function changeFilter(e) {
-  fetch("/xdm/product/ProductXdmFilterProc", {    // payList fragment만 반환하는 컨트롤러
-    method: 'POST',  // POST 요청
-    body: new URLSearchParams({  // POST 데이터 설정
-        "prodPetType" : $(e).val()
-    })
-  })
-  .then(res => res.text())
-  .then(html => {
-      document.getElementById('filter').innerHTML = "";
-      document.getElementById('filter').innerHTML = html;
-  });
-}
-
 /* ===============================================-->
                           List
    ===============================================--> */
@@ -96,6 +83,20 @@ $("#btnSearch").on('click', function() {
   search();
 });
 
+function changeFilter(e) {
+  fetch("/xdm/product/ProductXdmFilterProc", {    // payList fragment만 반환하는 컨트롤러
+    method: 'POST',  // POST 요청
+    body: new URLSearchParams({  // POST 데이터 설정
+        "prodPetType" : $(e).val()
+    })
+  })
+  .then(res => res.text())
+  .then(html => {
+      document.getElementById('filter').innerHTML = "";
+      document.getElementById('filter').innerHTML = html;
+  });
+}
+
 /* ===============================================-->
                           Form
    ===============================================--> */
@@ -110,7 +111,7 @@ let feedDiscountArray = document.getElementById("feedDiscountArray");
 var num = 1;
 
 // 사료 가격, 무게, 할인율 추가 버튼
-$("#feedInfoSaveBtn").on('click', function() {
+$(document).on('click', '#feedInfoSaveBtn', function() {
   validationInit();
   if (!infoValidation()) {
       return false;
@@ -303,6 +304,44 @@ initInfo = function() {
       createFeedInfo.appendChild(inputGroup);
     }
   } 
+}
+
+function changePet(e) {
+  fetch("/xdm/product/ProductXdmFormProc", {    // payList fragment만 반환하는 컨트롤러
+    method: 'POST',  // POST 요청
+    body: new URLSearchParams({  // POST 데이터 설정
+        "prodPetType" : $(e).val(),
+        "prodSeq" : $("#prodSeq").val()
+    })
+  })
+  .then(res => res.text())
+  .then(html => {
+      document.getElementById('changeForm').innerHTML = "";
+      document.getElementById('changeForm').innerHTML = html;
+      name = document.getElementById("prodName");
+      useFlag = document.getElementById("prodUseFlag");
+      feedPrice = document.getElementById("feedPrice");
+      feedWeight = document.getElementById("feedWeight");
+      feedDiscount = document.getElementById("feedDiscount");
+      
+      nameValid = document.getElementById("prodNameValid");
+      useFlagValid = document.getElementById("prodUseFlagValid");
+      feedPriceValid = document.getElementById("feedPriceValid");
+      feedWeightValid = document.getElementById("feedWeightValid");
+      feedDiscountValid = document.getElementById("feedDiscountValid");
+
+      createFeedInfo = document.getElementById("createFeedInfo");
+      createDelBtn = document.getElementById("createDelBtn");
+
+      feedPriceArray = document.getElementById("feedPriceArray");
+      feedWeightArray = document.getElementById("feedWeightArray");
+      feedDiscountArray = document.getElementById("feedDiscountArray");
+
+      num = 1;
+
+      funcArray = [];
+      funcNameArray = [];
+  });
 }
 
 initFuncBadge();

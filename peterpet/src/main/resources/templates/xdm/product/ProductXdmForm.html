@@ -31,16 +31,16 @@
                   </div>
                   <div class="col-3 d-flex">
                     <div class="form-check">
-                      <input class="form-check-input" id="dog" type="radio" name="petType" value="239" />
-                      <label class="form-check-label" for="flexRadioDefault1">강아지</label>
+                      <input class="form-check-input" id="dog" type="radio" name="petType" value="239" onchange="changePet(this)" />
+                      <label class="form-check-label" for="dog">강아지</label>
                     </div>
                     <div class="form-check ms-3">
-                      <input class="form-check-input" id="cat" type="radio" name="petType" value="240" />
-                      <label class="form-check-label" for="flexRadioDefault2">고양이</label>
+                      <input class="form-check-input" id="cat" type="radio" name="petType" value="240" onchange="changePet(this)" />
+                      <label class="form-check-label" for="cat">고양이</label>
                     </div>
                   </div>
                 </div>
-                <div class="card border h-100 border-primary mb-3" th:if="${vo.prodType} == '1'">
+                <div class="card border h-100 border-primary mb-3" id="changeForm" th:if="${vo.prodType} == '1'">
                   <input type="hidden" id="prodFuncArray" name="prodFuncArray" th:value="${vo.prodFuncArray}">
                   <input type="hidden" id="prodFuncNameArray" name="prodFuncNameArray" th:value="${vo.prodFuncNameArray}" disabled>
                   <input type="hidden" id="feedPriceArray" name="feedPriceArray" th:value="${vo.feedPriceArray}">
@@ -81,7 +81,8 @@
                       <div class="form-group">
                         <select class="form-select-JHY" id="feedSalaryAge" name="feedSalaryAge">
                           <option value="">급여 연령</option>
-                          <option th:each="feedSalaryAge : ${@codeService.selectListCachedCode(2)}" th:selected="${item.feedSalaryAge} == ${feedSalaryAge.codeSeq}" th:text="${feedSalaryAge.codeName}" th:value="${feedSalaryAge.codeSeq}"></option>
+                          <option th:if="${item.prodPetType == 239}" th:each="feedSalaryAge : ${@codeService.selectListCachedCode(2)}" th:selected="${item.feedSalaryAge} == ${feedSalaryAge.codeSeq}" th:text="${feedSalaryAge.codeName}" th:value="${feedSalaryAge.codeSeq}"></option>
+                          <option th:if="${item.prodPetType == 240}" th:each="feedSalaryAge : ${@codeService.selectListCachedCode(33)}" th:selected="${item.feedSalaryAge} == ${feedSalaryAge.codeSeq}" th:text="${feedSalaryAge.codeName}" th:value="${feedSalaryAge.codeSeq}"></option>
                         </select>
                       </div>
                     </div>
@@ -89,7 +90,8 @@
                       <div class="form-group">
                         <select class="form-select-JHY" id="feedType" name="feedType">
                           <option value="">종류</option>
-                          <option th:each="feedType : ${@codeService.selectListCachedCode(3)}" th:selected="${item.feedType} == ${feedType.codeSeq}" th:text="${feedType.codeName}" th:value="${feedType.codeSeq}"></option>
+                          <option th:if="${item.prodPetType == 239}" th:each="feedType : ${@codeService.selectListCachedCode(3)}" th:selected="${item.feedType} == ${feedType.codeSeq}" th:text="${feedType.codeName}" th:value="${feedType.codeSeq}"></option>
+                          <option th:if="${item.prodPetType == 240}" th:each="feedType : ${@codeService.selectListCachedCode(34)}" th:selected="${item.feedType} == ${feedType.codeSeq}" th:text="${feedType.codeName}" th:value="${feedType.codeSeq}"></option>
                         </select>
                       </div>
                     </div>
@@ -97,7 +99,8 @@
                       <div class="form-group">
                         <select class="form-select-JHY" id="feedEtc" name="feedEtc">
                           <option value="">기타</option>
-                          <option th:each="feedEtc : ${@codeService.selectListCachedCode(4)}" th:selected="${item.feedEtc} == ${feedEtc.codeSeq}" th:text="${feedEtc.codeName}" th:value="${feedEtc.codeSeq}"></option>
+                          <option th:if="${item.prodPetType == 239}" th:each="feedEtc : ${@codeService.selectListCachedCode(4)}" th:selected="${item.feedEtc} == ${feedEtc.codeSeq}" th:text="${feedEtc.codeName}" th:value="${feedEtc.codeSeq}"></option>
+                          <option th:if="${item.prodPetType == 240}" th:each="feedEtc : ${@codeService.selectListCachedCode(36)}" th:selected="${item.feedEtc} == ${feedEtc.codeSeq}" th:text="${feedEtc.codeName}" th:value="${feedEtc.codeSeq}"></option>
                         </select>
                       </div>
                     </div>
@@ -115,7 +118,8 @@
                       <div class="form-group">
                         <select class="form-select-JHY" name="prodFunction" id="prodFunction">
                           <option value="">기능</option>
-                          <option th:each="prodFunction : ${@codeService.selectListCachedCode(6)}" th:text="${prodFunction.codeName}" th:value="${prodFunction.codeSeq}" th:disabled="${#strings.contains(vo.prodFuncArray, prodFunction.codeSeq)} ? 'disabled' : null"></option>
+                          <option th:if="${item.prodPetType == 239}" th:each="prodFunction : ${@codeService.selectListCachedCode(6)}" th:text="${prodFunction.codeName}" th:value="${prodFunction.codeSeq}" th:disabled="${#strings.contains(vo.prodFuncArray, prodFunction.codeSeq)} ? 'disabled' : null"></option>
+                          <option th:if="${item.prodPetType == 240}" th:each="prodFunction : ${@codeService.selectListCachedCode(35)}" th:text="${prodFunction.codeName}" th:value="${prodFunction.codeSeq}" th:disabled="${#strings.contains(vo.prodFuncArray, prodFunction.codeSeq)} ? 'disabled' : null"></option>
                         </select>
                         <input type="hidden" name="prodFunction" id="prodFunction" value="0">
                       </div>
