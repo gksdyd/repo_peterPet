@@ -260,7 +260,7 @@ public class ProductController extends BaseController {
 	
 	@RequestMapping(value = "/ProductXdmFilterProc")
 	public String productXdmFilterProc(@ModelAttribute("vo") ProductVo vo) {
-		return "xdm/include/feedFilter :: feedFilter";
+		return "xdm/include/filter :: filter";
 	}
 	
 	@RequestMapping(value = "/ProductXdmFormProc")

@@ -130,7 +130,7 @@
               </div>
 
               <!-- 간식 필터 -->
-              <div class="card border h-100 border-primary mb-3" th:if="${vo.prodType} == '2'">
+              <div class="card border h-100 border-primary mb-3" id="filter" th:if="${vo.prodType} == '2'">
                 <input type="hidden" id="prodFuncArray" name="prodFuncArray">
                 <input type="hidden" id="prodFuncNameArray" name="prodFuncNameArray">
                 <div class="mb-2 row g-3 me-2 ms-2 mt-0">
@@ -138,7 +138,8 @@
                     <div class="form-group">
                       <select class="form-select-JHY" id="shFeedType" name="shFeedType">
                         <option value="" th:selected="${vo.shFeedType == null}">간식종류</option>
-                        <option th:each="snackType : ${@codeService.selectListCachedCode(17)}" th:value="${snackType.codeSeq}" th:text="${snackType.codeName}" th:selected="${vo.shFeedType} == ${snackType.codeSeq}"></option>
+                        <option th:if="${vo.prodPetType == 239}" th:each="snackType : ${@codeService.selectListCachedCode(17)}" th:value="${snackType.codeSeq}" th:text="${snackType.codeName}" th:selected="${vo.shFeedType} == ${snackType.codeSeq}"></option>
+                        <option th:if="${vo.prodPetType == 240}" th:each="snackType : ${@codeService.selectListCachedCode(37)}" th:value="${snackType.codeSeq}" th:text="${snackType.codeName}" th:selected="${vo.shFeedType} == ${snackType.codeSeq}"></option>
                       </select>
                     </div>
                   </div>
@@ -164,7 +165,8 @@
                     <div class="form-group">
                       <select class="form-select-JHY" name="prodFunction" id="prodFunction">
                         <option value="">기능</option>
-                        <option th:each="prodFunction : ${@codeService.selectListCachedCode(6)}" th:value="${prodFunction.codeSeq}" th:text="${prodFunction.codeName}"></option>
+                        <option th:if="${vo.prodPetType == 239}" th:each="prodFunction : ${@codeService.selectListCachedCode(6)}" th:value="${prodFunction.codeSeq}" th:text="${prodFunction.codeName}" th:disabled="${#arrays.contains(vo.prodFuncArray, prodFunction.codeSeq)} ? 'disabled' : null"></option>
+                        <option th:if="${vo.prodPetType == 240}" th:each="prodFunction : ${@codeService.selectListCachedCode(35)}" th:value="${prodFunction.codeSeq}" th:text="${prodFunction.codeName}" th:disabled="${#arrays.contains(vo.prodFuncArray, prodFunction.codeSeq)} ? 'disabled' : null"></option>
                       </select>
                     </div>
                   </div>

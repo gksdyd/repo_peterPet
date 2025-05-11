@@ -87,7 +87,8 @@ function changeFilter(e) {
   fetch("/xdm/product/ProductXdmFilterProc", {    // payList fragment만 반환하는 컨트롤러
     method: 'POST',  // POST 요청
     body: new URLSearchParams({  // POST 데이터 설정
-        "prodPetType" : $(e).val()
+        "prodPetType" : $(e).val(),
+        "prodType" : $("#prodType").val()
     })
   })
   .then(res => res.text())
