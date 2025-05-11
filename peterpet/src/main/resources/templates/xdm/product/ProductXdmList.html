@@ -131,6 +131,8 @@
 
               <!-- 간식 필터 -->
               <div class="card border h-100 border-primary mb-3" th:if="${vo.prodType} == '2'">
+                <input type="hidden" id="prodFuncArray" name="prodFuncArray">
+                <input type="hidden" id="prodFuncNameArray" name="prodFuncNameArray">
                 <div class="mb-2 row g-3 me-2 ms-2 mt-0">
                   <div class="col-4">
                     <div class="form-group">
@@ -142,36 +144,9 @@
                   </div>
                   <div class="col-4">
                     <div class="form-group">
-                      <select class="form-select-JHY" id="shSnackSalaryAge" name="shSnackSalaryAge">
-                        <option value="" th:selected="${vo.shSnackSalaryAge == null}">급여 연령</option>
-                        <option th:each="snackSalaryAge : ${@codeService.selectListCachedCode(2)}" th:value="${snackSalaryAge.codeSeq}" th:text="${snackSalaryAge.codeName}" th:selected="${vo.shSnackSalaryAge} == ${snackSalaryAge.codeSeq}"></option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-4">
-                    <div class="form-group">
                       <select class="form-select-JHY" id="shSnackMaterial" name="shSnackMaterial">
                         <option value="" th:selected="${vo.shSnackMaterial == null}">원료특징</option>
                         <option th:each="snackMaterial : ${@codeService.selectListCachedCode(18)}" th:value="${snackMaterial.codeSeq}" th:text="${snackMaterial.codeName}" th:selected="${vo.shSnackMaterial} == ${snackMaterial.codeSeq}"></option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="mb-2 row g-3 me-2 ms-2">
-                  <div class="col-4">
-                    <div class="form-group">
-                      <select class="form-select-JHY" onchange="funcSelect(ADD_FUNCTION)">
-                        <option value="">기능</option>
-                        <option th:each="prodFunction : ${@codeService.selectListCachedCode(6)}" th:value="${prodFunction.codeSeq}" th:text="${prodFunction.codeName}"></option>
-                      </select>
-                      <input type="hidden" name="prodFunction" id="prodFunction" value="0">
-                    </div>
-                  </div>
-                  <div class="col-4">
-                    <div class="form-group">
-                      <select class="form-select-JHY" id="shSnackBrand" name="shSnackBrand">
-                        <option value="" th:selected="${vo.shSnackBrand == null}">브랜드</option>
-                        <option th:each="snackBrand : ${@codeService.selectListCachedCode(19)}" th:value="${snackBrand.codeSeq}" th:text="${snackBrand.codeName}" th:selected="${vo.shSnackBrand} == ${snackBrand.codeSeq}"></option>
                       </select>
                     </div>
                   </div>
@@ -185,7 +160,25 @@
                   </div>
                 </div>
                 <div class="mb-2 row g-3 me-2 ms-2">
-                  <div class="col-2">
+                  <div class="col-4">
+                    <div class="form-group">
+                      <select class="form-select-JHY" name="prodFunction" id="prodFunction">
+                        <option value="">기능</option>
+                        <option th:each="prodFunction : ${@codeService.selectListCachedCode(6)}" th:value="${prodFunction.codeSeq}" th:text="${prodFunction.codeName}"></option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group">
+                      <select class="form-select-JHY" id="shSnackBrand" name="shSnackBrand">
+                        <option value="" th:selected="${vo.shSnackBrand == null}">브랜드</option>
+                        <option th:each="snackBrand : ${@codeService.selectListCachedCode(21)}" th:value="${snackBrand.codeSeq}" th:text="${snackBrand.codeName}" th:selected="${vo.shSnackBrand} == ${snackBrand.codeSeq}"></option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-2 row g-3 me-2 ms-2">
+                  <div class="col" id="createFunction">
                   </div>
                 </div>
               </div>
@@ -242,6 +235,61 @@
                       <td class="etc" th:if="${list.feedEtc} == null"></td>
                       <td class="size" th:if="${list.feedSize} != null" th:text="${@codeService.selectOneCachedCode(list.feedSize)}"></td>
                       <td class="size" th:if="${list.feedSize} == null"></td>
+                      <td class="function" th:text="${list.funcCount}"></td>
+                      <td class="brand" th:if="${list.feedBrand} != null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)}"></td>
+                      <td class="brand" th:if="${list.feedBrand} == null"></td>
+                      <td class="ingredient" th:if="${list.feedIngredient} != null" th:text="${@codeService.selectOneCachedCode(list.feedIngredient)}"></td>
+                      <td class="ingredient" th:if="${list.feedIngredient} == null"></td>
+                      <td class="count" th:text="${list.infoCount}"></td>
+                      <td class="register-date" th:text="${list.prodRegDate}"></td>
+                      <td class="modify-date text-end" th:text="${list.prodModDate}"></td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <table class="table mb-0 data-table fs-10 align-middle-JHY" data-datatables="data-datatables" th:if="${vo.prodType} == '2'">
+                  <thead class="bg-200">
+                    <tr>
+                      <th>
+                        <div class="form-check fs-9 mb-0 d-flex align-items-center">
+                          <input class="form-check-input" id="checkbox-bulk-customers-select" type="checkbox" data-bulk-select='{"body":"table-customers-body","actions":"table-customers-actions","replacedElement":"table-customers-replace-element"}' />
+                        </div>
+                      </th>
+                      <th class="text-900 sort white-nowrap" data-sort="#">#</th>
+                      <th class="text-900 sort white-nowrap" data-sort="use">사용</th>
+                      <th class="text-900 sort white-nowrap" data-sort="name">이름</th>
+                      <th class="text-900 sort white-nowrap" data-sort="type">종류</th>
+                      <th class="text-900 sort white-nowrap" data-sort="feature">원료특징</th>
+                      <th class="text-900 sort white-nowrap" data-sort="function">기능</th>
+                      <th class="text-900 sort white-nowrap" data-sort="brand">브랜드</th>
+                      <th class="text-900 sort white-nowrap" data-sort="ingredient">주원료</th>
+                      <th class="text-900 sort white-nowrap" data-sort="count">사료 타입</th>
+                      <th class="text-900 sort white-nowrap" data-sort="resist-date">등록일</th>
+                      <th class="text-900 sort white-nowrap text-end" data-sort="modify-date">수정일</th>
+                    </tr>
+                  </thead>
+                  <tbody class="list" id="table-customers-body">
+                    <tr th:if="${#lists.isEmpty(list)}">
+                      <td>
+                      	<div class="fs-9 mb-0">
+                        	There are no data!
+                        </div>
+                      </td>
+                    </tr>
+                    <tr th:if="${!#lists.isEmpty(list)}" class="btn-reveal-trigger" th:each="list : ${list}">
+                      <td>
+                        <div class="form-check fs-9 mb-0 d-flex align-items-center">
+                          <input class="form-check-input listCheckBox" type="checkbox" id="customer-0" th:value="${list.prodSeq}" data-bulk-select-row="data-bulk-select-row" />
+                        </div>
+                      </td>
+                      <td class="#" th:text="${vo.totalRows - ((vo.thisPage - 1) * vo.rowNumToShow + listStat.index)}"></td>
+                      <td class="use" th:if="${list.prodUseFlag} == '1'">Y</td>
+                      <td class="use" th:if="${list.prodUseFlag} == '0'">N</td>
+                      <td class="name"><a th:href="@{/xdm/product/ProductXdmForm(prodSeq=${list.prodSeq})}" th:text="${list.prodName}"></a></td>
+                      <td class="type" th:if="${list.feedType} != null" th:text="${@codeService.selectOneCachedCode(list.feedType)}"></td>
+                      <td class="type" th:if="${list.feedType} == null"></td>
+                      <td class="size" th:if="${list.snckFeature} != null" th:text="${@codeService.selectOneCachedCode(list.snckFeature)}"></td>
+                      <td class="size" th:if="${list.snckFeature} == null"></td>
                       <td class="function" th:text="${list.funcCount}"></td>
                       <td class="brand" th:if="${list.feedBrand} != null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)}"></td>
                       <td class="brand" th:if="${list.feedBrand} == null"></td>

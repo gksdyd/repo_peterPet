@@ -68,6 +68,7 @@
 			feedBrand,
 			feedIngredient,
 			feedSize,
+			snckFeature,
 			prodIsStock,
 			prodDelFlag,
 			prodPetType
@@ -83,6 +84,7 @@
 			#{feedBrand},
 			#{feedIngredient},
 			#{feedSize},
+			#{snckFeature},
 			271,
 			0,
 			#{prodPetType}
@@ -143,6 +145,7 @@
 			feedBrand,
 			feedIngredient,
 			feedSize,
+			snckFeature,
 			prodPetType,
 			(SELECT
 				COUNT(*)
@@ -236,6 +239,7 @@
 			feedBrand = #{feedBrand},
 			feedIngredient = #{feedIngredient},
 			feedSize = #{feedSize},
+			snckFeature = #{snckFeature},
 			prodPetType = #{prodPetType}
 		WHERE
 			prodSeq = #{prodSeq}

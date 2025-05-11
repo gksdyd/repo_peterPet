@@ -18,6 +18,7 @@ public class ProductDto extends BaseDto {
 	private Integer feedBrand;
 	private Integer feedIngredient;
 	private Integer feedSize;
+	private Integer snckFeature;
 	private Integer prodPetType;
 	private Integer prodIsStock;
 	private String prodRegDate;
@@ -390,5 +391,11 @@ public class ProductDto extends BaseDto {
 	}
 	public void setPetWeight(Integer petWeight) {
 		this.petWeight = petWeight;
+	}
+	public Integer getSnckFeature() {
+		return snckFeature;
+	}
+	public void setSnckFeature(Integer snckFeature) {
+		this.snckFeature = snckFeature;
 	}
 }
