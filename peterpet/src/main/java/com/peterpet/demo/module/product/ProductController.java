@@ -249,4 +249,9 @@ public class ProductController extends BaseController {
 	public void productXdmImageDeleProc(ProductDto dto) {
 		productService.updateUploaded(dto);
 	}
+	
+	@RequestMapping(value = "/ProductXdmFilterProc")
+	public String productXdmFilterProc(@ModelAttribute("vo") ProductVo vo) {
+		return "xdm/include/feedFilter :: feedFilter";
+	}
 }

@@ -47,14 +47,14 @@
                   </select>
                 </div>
                 <div class="col-4">
-                  <select class="form-select-JHY" aria-label="Default select example" name="prodPetType" id="prodPetType">
-                    <option value="0" th:selected="${vo.prodPetType == 0}">반려동물 유형</option>
+                  <select class="form-select-JHY" aria-label="Default select example" name="prodPetType" id="prodPetType" onchange="changeFilter(this)">
+                    <option value="0" th:selected="${vo.prodPetType == 0}" disabled="disabled">반려동물 유형</option>
                     <option th:each="productPetType : ${@codeService.selectListCachedCode(26)}" th:text="${productPetType.codeName}" th:value="${productPetType.codeSeq}" th:selected="${vo.prodPetType} == ${productPetType.codeSeq}"></option>
                   </select>
                 </div>
               </div>
               <!-- 사료 필터 -->
-              <div class="card border h-100 border-primary mb-3" th:if="${vo.prodType} == '1'">
+              <div class="card border h-100 border-primary mb-3" id="filter" th:if="${vo.prodType} == '1'">
                 <input type="hidden" id="prodFuncArray" name="prodFuncArray">
                 <input type="hidden" id="prodFuncNameArray" name="prodFuncNameArray">
                 <div class="mb-2 row g-3 me-2 ms-2 mt-0">
@@ -62,7 +62,8 @@
                     <div class="form-group">
                       <select class="form-select-JHY" id="shFeedSalaryAge" name="shFeedSalaryAge">
                         <option value="" th:selected="${vo.shFeedSalaryAge == null}">급여 연령</option>
-                        <option th:each="feedSalaryAge : ${@codeService.selectListCachedCode(2)}" th:value="${feedSalaryAge.codeSeq}" th:text="${feedSalaryAge.codeName}" th:selected="${vo.shFeedSalaryAge} == ${feedSalaryAge.codeSeq}"></option>
+                        <option th:if="${vo.prodPetType == 239}" th:each="feedSalaryAge : ${@codeService.selectListCachedCode(2)}" th:value="${feedSalaryAge.codeSeq}" th:text="${feedSalaryAge.codeName}" th:selected="${vo.shFeedSalaryAge} == ${feedSalaryAge.codeSeq}"></option>
+                        <option th:if="${vo.prodPetType == 240}" th:each="feedSalaryAge : ${@codeService.selectListCachedCode(33)}" th:value="${feedSalaryAge.codeSeq}" th:text="${feedSalaryAge.codeName}" th:selected="${vo.shFeedSalaryAge} == ${feedSalaryAge.codeSeq}"></option>
                       </select>
                     </div>
                   </div>
@@ -70,7 +71,8 @@
                     <div class="form-group">
                       <select class="form-select-JHY" id="shFeedType" name="shFeedType">
                         <option value="" th:selected="${vo.shFeedType == null}">종류</option>
-                        <option th:each="feedType : ${@codeService.selectListCachedCode(3)}" th:value="${feedType.codeSeq}" th:text="${feedType.codeName}" th:selected="${vo.shFeedType} == ${feedType.codeSeq}"></option>
+                        <option th:if="${vo.prodPetType == 239}" th:each="feedType : ${@codeService.selectListCachedCode(3)}" th:value="${feedType.codeSeq}" th:text="${feedType.codeName}" th:selected="${vo.shFeedType} == ${feedType.codeSeq}"></option>
+                        <option th:if="${vo.prodPetType == 240}" th:each="feedType : ${@codeService.selectListCachedCode(34)}" th:value="${feedType.codeSeq}" th:text="${feedType.codeName}" th:selected="${vo.shFeedType} == ${feedType.codeSeq}"></option>
                       </select>
                     </div>
                   </div>
@@ -78,7 +80,8 @@
                     <div class="form-group">
                       <select class="form-select-JHY" id="shFeedEtc" name="shFeedEtc">
                         <option value="" th:selected="${vo.shFeedType == null}">기타</option>
-                        <option th:each="feedEtc : ${@codeService.selectListCachedCode(4)}" th:value="${feedEtc.codeSeq}" th:text="${feedEtc.codeName}" th:selected="${vo.shFeedEtc} == ${feedEtc.codeSeq}"></option>
+                        <option th:if="${vo.prodPetType == 239}" th:each="feedEtc : ${@codeService.selectListCachedCode(4)}" th:value="${feedEtc.codeSeq}" th:text="${feedEtc.codeName}" th:selected="${vo.shFeedEtc} == ${feedEtc.codeSeq}"></option>
+                        <option th:if="${vo.prodPetType == 240}" th:each="feedEtc : ${@codeService.selectListCachedCode(36)}" th:value="${feedEtc.codeSeq}" th:text="${feedEtc.codeName}" th:selected="${vo.shFeedEtc} == ${feedEtc.codeSeq}"></option>
                       </select>
                     </div>
                   </div>
@@ -96,7 +99,8 @@
                     <div class="form-group">
                       <select class="form-select-JHY" name="prodFunction" id="prodFunction">
                         <option value="">기능</option>
-                        <option th:each="prodFunction : ${@codeService.selectListCachedCode(6)}" th:value="${prodFunction.codeSeq}" th:text="${prodFunction.codeName}" th:disabled="${#arrays.contains(vo.prodFuncArray, prodFunction.codeSeq)} ? 'disabled' : null"></option>
+                        <option th:if="${vo.prodPetType == 239}" th:each="prodFunction : ${@codeService.selectListCachedCode(6)}" th:value="${prodFunction.codeSeq}" th:text="${prodFunction.codeName}" th:disabled="${#arrays.contains(vo.prodFuncArray, prodFunction.codeSeq)} ? 'disabled' : null"></option>
+                        <option th:if="${vo.prodPetType == 240}" th:each="prodFunction : ${@codeService.selectListCachedCode(35)}" th:value="${prodFunction.codeSeq}" th:text="${prodFunction.codeName}" th:disabled="${#arrays.contains(vo.prodFuncArray, prodFunction.codeSeq)} ? 'disabled' : null"></option>
                       </select>
                     </div>
                   </div>
@@ -284,8 +288,9 @@
       let goUrlXdmDeltProc = "/xdm/product/ProductXdmDeltProc";
       let goUrlXdmUeltProc = "/xdm/product/ProductXdmUeltProc";
 
-      funcArray = [[${vo.prodFuncArray}]];
-      funcNameArray = [[${vo.prodFuncNameArray}]];
+      funcArray = /*[[${vo.prodFuncArray}]]*/"";
+      funcNameArray = /*[[${vo.prodFuncNameArray}]]*/"";
+      sessionSeq = /*[[${session.sessSeqXdm}]]*/"";
 
       for (let i = 0; i < funcArray.length; i++) {
         let funcBadge = $("<span></span>").addClass("badge").addClass("rounded-pill").addClass("badge-subtle-primary");

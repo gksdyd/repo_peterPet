@@ -66,6 +66,23 @@ $(document).on('click', '.removeFunc', function(){
   }
 });
 
+function changeFilter(e) {
+  fetch("/xdm/product/ProductXdmFilterProc", {    // payList fragment만 반환하는 컨트롤러
+    method: 'POST',  // POST 요청
+    body: new URLSearchParams({  // POST 데이터 설정
+        "prodPetType" : $(e).val()
+    })
+  })
+  .then(res => res.text())
+  .then(html => {
+    if (sessionSeq == null) {
+      location = "xdm/member/LoginXdmForm";
+      return;
+    }
+      document.getElementById('filter').innerHTML = "";
+      document.getElementById('filter').innerHTML = html;
+  });
+}
 
 /* ===============================================-->
                           List
