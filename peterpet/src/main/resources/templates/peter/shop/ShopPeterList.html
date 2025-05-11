@@ -26,7 +26,7 @@
                         <!--Sidebar-->
                         <div class="col-12 col-sm-12 col-md-12 col-lg-3 sidebar filterbar">
                             <div class="closeFilter d-block d-lg-none"><i class="icon icon an an-times-r"></i></div>
-                            <div class="sidebar_tags" th:if="${vo.prodType} == 1">
+                            <div class="sidebar_tags" id="filter" th:if="${vo.prodType} == 1">
                                 <input type="hidden" id="shFeedSalaryAge" name="shFeedSalaryAge" th:value="${vo.shFeedSalaryAge}"/>
                                 <input type="hidden" id="shFeedType" name="shFeedType" th:value="${vo.shFeedType}"/>
                                 <input type="hidden" id="shFeedEtc" name="shFeedEtc" th:value="${vo.shFeedEtc}"/>
@@ -60,8 +60,8 @@
                                 <div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
                                     <div class="widget-title"><h2 class="mb-0">급여 연령</h2></div>
                                     <div class="filterDD row ms-auto">
-                                        <div class="form-check col-lg-6" th:each="salaryAge : ${@codeService.selectListCachedCode(2)}">
-                                            <input class="form-check-input" type="radio" th:id="feedSalaryAge + ${salaryAge.codeSeq}" name="feedSalaryAge" th:value="${salaryAge.codeSeq}" th:checked="${salaryAge.codeSeq} == ${vo.shFeedSalaryAge}" onclick="radio(this)">
+                                        <div class="form-check col-lg-6" th:each="salaryAge : ${@codeService.selectListCachedCode(vo.prodPetType == 239 ? 2 : 33)}">
+                                        <input class="form-check-input" type="radio" th:id="feedSalaryAge + ${salaryAge.codeSeq}" name="feedSalaryAge" th:value="${salaryAge.codeSeq}" th:checked="${salaryAge.codeSeq} == ${vo.shFeedSalaryAge}" onclick="radio(this)">
                                             <label class="form-check-label" th:for="feedSalaryAge + ${salaryAge.codeSeq}" th:text="${salaryAge.codeName}"></label>
                                         </div>
                                     </div>
@@ -71,7 +71,7 @@
                                 <div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
                                     <div class="widget-title"><h2 class="mb-0">종류</h2></div>
                                     <div class="filterDD row ms-auto">
-                                        <div class="form-check col-6" th:each="type : ${@codeService.selectListCachedCode(3)}">
+                                        <div class="form-check col-6" th:each="type : ${@codeService.selectListCachedCode(vo.prodPetType == 239 ? 3 : 34)}">
                                             <input class="form-check-input" type="radio" th:id="feedType + ${type.codeSeq}" name="feedType" th:value="${type.codeSeq}" th:checked="${type.codeSeq} == ${vo.shFeedType}" onclick="radio(this)">
                                             <label class="form-check-label" th:for="feedType + ${type.codeSeq}" th:text="${type.codeName}"></label>
                                         </div>
@@ -82,7 +82,7 @@
                                 <div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
                                     <div class="widget-title"><h2 class="mb-0">기능</h2></div>
                                     <div class="filterDD row ms-auto">
-                                        <div class="form-check col-6" th:each="function : ${@codeService.selectListCachedCode(6)}">
+                                        <div class="form-check col-6" th:each="function : ${@codeService.selectListCachedCode(vo.prodPetType == 239 ? 6 : 35)}">
                                             <input class="form-check-input" type="checkbox" th:id="funcName + ${function.codeSeq}" name="funcName" th:value="${function.codeSeq}" th:checked="${vo.prodFuncArray.contains(function.codeSeq)}" onclick="check(this)">
                                             <label class="form-check-label" th:for="funcName + ${function.codeSeq}" th:text="${function.codeName}"></label>
                                         </div>
@@ -93,7 +93,7 @@
                                 <div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
                                     <div class="widget-title"><h2 class="mb-0">기타</h2></div>
                                     <div class="filterDD row ms-auto">
-                                        <div class="form-check col-6" th:each="etc : ${@codeService.selectListCachedCode(4)}">
+                                        <div class="form-check col-6" th:each="etc : ${@codeService.selectListCachedCode(vo.prodPetType == 239 ? 4 : 36)}">
                                             <input class="form-check-input" type="radio" th:id="feedEtc + ${etc.codeSeq}" name="feedEtc" th:value="${etc.codeSeq}" th:checked="${etc.codeSeq} == ${vo.shFeedEtc}" onclick="radio(this)">
                                             <label class="form-check-label" th:for="feedEtc + ${etc.codeSeq}" th:text="${etc.codeName}"></label>
                                         </div>

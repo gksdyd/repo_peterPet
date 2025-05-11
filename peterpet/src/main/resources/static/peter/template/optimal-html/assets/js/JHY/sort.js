@@ -44,6 +44,8 @@ function radio(e) {
     
     if (name === "petType") {
         prodPetType = $(e).val();
+        allRemoveBadge();
+        filter();
         shop();
         return;
     }
@@ -348,4 +350,22 @@ initBadge = function() {
     feedWeight = $("#shFeedWeight").val();
     feedSize = $("#shFeedSize").val();
     prodPetType = $("#prodPetType").val();
+}
+
+function filter() {
+    let value;
+    const params = new URLSearchParams();
+    value = parseInt(prodPetType);
+    params.append('prodPetType', isNaN(value) ? '' : value);
+
+    fetch('/peter/shop/ShopPeterFilter', {    // payList fragment만 반환하는 컨트롤러
+        method: 'POST',  // POST 요청
+        body: params
+    })
+    .then(res => res.text())
+    .then(html => {
+        document.getElementById('filter').innerHTML = "";
+        document.getElementById('filter').innerHTML = html;
+        price_slider();
+    });
 }

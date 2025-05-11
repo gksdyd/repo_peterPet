@@ -131,4 +131,9 @@ public class ShopPeterController extends BaseController {
 		model.addAttribute("list", dtos);
 		return "peter/include/shop :: shop";
 	}
+	
+	@RequestMapping(value = "/ShopPeterFilter")
+	public String shopPeterFilter(@ModelAttribute("vo") ProductVo vo) {
+		return "peter/include/feedFilter :: feedFilter";
+	}
 }
