@@ -68,6 +68,7 @@
 			feedBrand,
 			feedIngredient,
 			feedSize,
+			prodIsStock,
 			prodDelFlag,
 			prodPetType
 		) VALUE (
@@ -82,6 +83,7 @@
 			#{feedBrand},
 			#{feedIngredient},
 			#{feedSize},
+			271,
 			0,
 			#{prodPetType}
 		)
