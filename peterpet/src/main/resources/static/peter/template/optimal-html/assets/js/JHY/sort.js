@@ -274,17 +274,6 @@ removeBadge = function(e) {
 }
 
 allRemoveBadge = function() {
-    badgeArray = [];
-    prodFuncArray = [];
-    feedBrandArray = [];
-    shIngredientArray = [];
-
-    feedSalaryAge = null;
-    feedType = null;
-    feedEtc = null;
-    feedWeight = null;
-    feedSize = null;
-
     let min = 0;
     let max = 400000;
     $("#shMinPrice").val("");
@@ -292,9 +281,11 @@ allRemoveBadge = function() {
     let temp = "￦" + min.toLocaleString() + " - ￦" + max.toLocaleString();
     $("#amount").val(temp);
 
-    if ($(".form-check-input").attr("name") !== "petType") {
-        $(".form-check-input").prop("checked", false);
+    let badge = $("#searchBadge li a");
+    for (let i = 1; i < badge.length; i++) {
+        removeBadge(badge[i]);
     }
+
     price_slider();
 }
 
