@@ -357,6 +357,7 @@ function filter() {
     const params = new URLSearchParams();
     value = parseInt(prodPetType);
     params.append('prodPetType', isNaN(value) ? '' : value);
+    params.append('prodType', $("#prodType").val());
 
     fetch('/peter/shop/ShopPeterFilter', {    // payList fragment만 반환하는 컨트롤러
         method: 'POST',  // POST 요청

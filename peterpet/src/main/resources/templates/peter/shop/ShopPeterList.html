@@ -145,6 +145,102 @@
                                 </div>
                                 <!--End material type-->
                             </div>
+
+                            <div class="sidebar_tags" id="filter" th:if="${vo.prodType} == 2">
+                                <input type="hidden" id="shFeedType" name="shFeedType" th:value="${vo.shFeedType}"/>
+                                <input type="hidden" id="shSnckFeature" name="shSnckFeature" th:value="${vo.shSnckFeature}"/>
+                                <input type="hidden" id="shFeedWeight" name="shFeedWeight" th:value="${vo.shFeedWeight}"/>
+                                <input type="hidden" id="shMinPrice" name="shMinPrice" th:value="${vo.shMinPrice}"/>
+                                <input type="hidden" id="shMaxPrice" name="shMaxPrice" th:value="${vo.shMaxPrice}"/>
+                                <input type="hidden" id="prodFuncArray" name="prodFuncArray" th:value="${vo.prodFuncArray}"/>
+                                <input type="hidden" id="feedBrandArray" name="feedBrandArray" th:value="${vo.feedBrandArray}"/>
+                                <input type="hidden" id="shIngredientArray" name="shIngredientArray" th:value="${vo.shIngredientArray}"/>
+                                <input type="hidden" id="prodPetType" name="prodPetType" th:value="${vo.prodPetType}"/>
+                                <!--Price Filter-->
+                                <div class="sidebar_widget filterBox filter-widget">
+                                    <div class="widget-title"><h2 class="mb-0">Price</h2></div>
+                                    <div id="slider-range" class="mt-2"></div>
+                                    <p class="no-margin"><input id="amount" type="text" readonly></p>
+                                </div>
+                                <!--End Price Filter-->
+                                <!--pet type-->
+                                <div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+                                    <div class="widget-title"><h2 class="mb-0">반려 동물</h2></div>
+                                    <div class="filterDD row ms-auto">
+                                        <div class="form-check col-lg-6" th:each="pet : ${@codeService.selectListCachedCode(26)}">
+                                            <input class="form-check-input" type="radio" th:id="pet + ${pet.codeSeq}" name="petType" th:value="${pet.codeSeq}" th:checked="${pet.codeSeq} == ${vo.prodPetType}" onclick="radio(this)">
+                                            <label class="form-check-label" th:for="pet + ${pet.codeSeq}" th:text="${pet.codeName}"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--End pet type-->
+                                <!--kind type-->
+                                <div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+                                    <div class="widget-title"><h2 class="mb-0">종류</h2></div>
+                                    <div class="filterDD row ms-auto">
+                                        <div class="form-check col-6" th:each="type : ${@codeService.selectListCachedCode(vo.prodPetType == 239 ? 17 : 37)}">
+                                            <input class="form-check-input" type="radio" th:id="feedType + ${type.codeSeq}" name="feedType" th:value="${type.codeSeq}" th:checked="${type.codeSeq} == ${vo.shFeedType}" onclick="radio(this)">
+                                            <label class="form-check-label" th:for="feedType + ${type.codeSeq}" th:text="${type.codeName}"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--End kind type-->
+                                <!--function type-->
+                                <div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+                                    <div class="widget-title"><h2 class="mb-0">기능</h2></div>
+                                    <div class="filterDD row ms-auto">
+                                        <div class="form-check col-6" th:each="function : ${@codeService.selectListCachedCode(vo.prodPetType == 239 ? 6 : 35)}">
+                                            <input class="form-check-input" type="checkbox" th:id="funcName + ${function.codeSeq}" name="funcName" th:value="${function.codeSeq}" th:checked="${vo.prodFuncArray.contains(function.codeSeq)}" onclick="check(this)">
+                                            <label class="form-check-label" th:for="funcName + ${function.codeSeq}" th:text="${function.codeName}"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--End function type-->
+                                <!--etc type-->
+                                <div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+                                    <div class="widget-title"><h2 class="mb-0">특징</h2></div>
+                                    <div class="filterDD row ms-auto">
+                                        <div class="form-check col-6" th:each="feature : ${@codeService.selectListCachedCode(18)}">
+                                            <input class="form-check-input" type="radio" th:id="feature + ${feature.codeSeq}" name="feature" th:value="${feature.codeSeq}" th:checked="${feature.codeSeq} == ${vo.shSnckFeature}" onclick="radio(this)">
+                                            <label class="form-check-label" th:for="feature + ${feature.codeSeq}" th:text="${feature.codeName}"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--End etc type-->
+                                <!--weight type-->
+                                <div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+                                    <div class="widget-title"><h2 class="mb-0">중량</h2></div>
+                                    <div class="filterDD row ms-auto">
+                                        <div class="form-check col-6" th:each="weight : ${@codeService.selectListCachedCode(5)}">
+                                            <input class="form-check-input" type="radio" th:id="feedWeight + ${weight.codeSeq}" name="feedWeight" th:value="${weight.codeSeq}" th:checked="${weight.codeSeq} == ${vo.shFeedWeight}" onclick="radio(this)">
+                                            <label class="form-check-label" th:for="feedWeight + ${weight.codeSeq}" th:text="${weight.codeName}"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--End weight type-->
+                                <!--brand type-->
+                                <div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+                                    <div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+                                    <div class="filterDD row ms-auto">
+                                        <div class="form-check col-6" th:each="brand : ${@codeService.selectListCachedCode(21)}">
+                                            <input class="form-check-input" type="checkbox" th:id="feedBrand + ${brand.codeSeq}" name="feedBrand" th:value="${brand.codeSeq}" th:checked="${vo.feedBrandArray.contains(brand.codeSeq)}" onclick="check(this)">
+                                            <label class="form-check-label" th:for="feedBrand + ${brand.codeSeq}" th:text="${brand.codeName}"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--End brand type-->
+                                <!--ingredient type-->
+                                <div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+                                    <div class="widget-title"><h2 class="mb-0">주원료</h2></div>
+                                    <div class="filterDD row ms-auto">
+                                        <div class="form-check col-6" th:each="ingredient : ${@codeService.selectListCachedCode(8)}">
+                                            <input class="form-check-input" type="checkbox" th:id="feedIngredient + ${ingredient.codeSeq}" name="feedIngredient" th:value="${ingredient.codeSeq}" th:checked="${vo.shIngredientArray.contains(ingredient.codeSeq)}" onclick="check(this)">
+                                            <label class="form-check-label" th:for="feedIngredient + ${ingredient.codeSeq}" th:text="${ingredient.codeName}"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--End ingredient type-->
+                            </div>
                         </div>
                         <!--End Sidebar-->
 
