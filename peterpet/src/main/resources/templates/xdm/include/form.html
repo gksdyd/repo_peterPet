@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en-US" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="form">
+	<th:block th:if="${vo.prodType} == '1'">
+		<input type="hidden" id="prodFuncArray" name="prodFuncArray">
+		<input type="hidden" id="prodFuncNameArray" name="prodFuncNameArray" disabled>
+		<input type="hidden" id="feedPriceArray" name="feedPriceArray">
+		<input type="hidden" id="feedWeightArray" name="feedWeightArray">
+		<input type="hidden" id="feedDiscountArray" name="feedDiscountArray">
+		<input type="hidden" id="prodFuncSeqArray" name="prodFuncSeqArray">
+		<input type="hidden" id="feedInfoSeqArray" name="feedInfoSeqArray">
+		<div class="row g-3 mt-0 ms-2 me-2">
+		<div class="col-3">
+			<label class="form-label-JHY" for="pordSeq">사료 코드<span style="color: red;">*</span></label>
+		</div>
+		<div class="col-3">
+			<label class="form-label-JHY" for="prodName">사료 이름<span style="color: red;">*</span></label>
+		</div>
+		<div class="col-3">
+			<label class="form-label-JHY" for="prodUseFlag">사용여부<span style="color: red;">*</span></label>
+		</div>
+		</div>
+		<div class="mb-3 row g-3 ms-2 me-2">
+		<div class="col-3">
+			<input class="form-control-JHY" name="prodSeq" id="prodSeq" th:value="${vo.prodSeq}" type="text" placeholder="자동생성" readonly />
+		</div>
+		<div class="col-3">
+			<input class="form-control-JHY" name="prodName" id="prodName" type="text" />
+			<div class="invalid-feedback" id="prodNameValid">이름을 입력해주세요.</div>
+		</div>
+		<div class="col-3">
+			<select class="form-select-JHY" id="prodUseFlag" name="prodUseFlag" required="">
+			<option value="">선택하세요</option>
+			<option value="1">사용</option>
+			<option value="0">미사용</option>
+			</select>
+			<div class="invalid-feedback" id="prodUseFlagValid">사용 여부를 선택해주세요.</div>
+		</div>
+		</div>
+		<div class="mb-3 row g-3 ms-2 me-2">
+		<div class="col-3">
+			<div class="form-group">
+			<select class="form-select-JHY" id="feedSalaryAge" name="feedSalaryAge">
+				<option value="">급여 연령</option>
+				<option th:if="${vo.prodPetType == 239}" th:each="feedSalaryAge : ${@codeService.selectListCachedCode(2)}" th:text="${feedSalaryAge.codeName}" th:value="${feedSalaryAge.codeSeq}"></option>
+				<option th:if="${vo.prodPetType == 240}" th:each="feedSalaryAge : ${@codeService.selectListCachedCode(33)}" th:text="${feedSalaryAge.codeName}" th:value="${feedSalaryAge.codeSeq}"></option>
+			</select>
+			</div>
+		</div>
+		<div class="col-3">
+			<div class="form-group">
+			<select class="form-select-JHY" id="feedType" name="feedType">
+				<option value="">종류</option>
+				<option th:if="${vo.prodPetType == 239}" th:each="feedType : ${@codeService.selectListCachedCode(3)}" th:text="${feedType.codeName}" th:value="${feedType.codeSeq}"></option>
+				<option th:if="${vo.prodPetType == 240}" th:each="feedType : ${@codeService.selectListCachedCode(34)}" th:text="${feedType.codeName}" th:value="${feedType.codeSeq}"></option>
+			</select>
+			</div>
+		</div>
+		<div class="col-3">
+			<div class="form-group">
+			<select class="form-select-JHY" id="feedEtc" name="feedEtc">
+				<option value="">기타</option>
+				<option th:if="${vo.prodPetType == 239}" th:each="feedEtc : ${@codeService.selectListCachedCode(4)}" th:text="${feedEtc.codeName}" th:value="${feedEtc.codeSeq}"></option>
+				<option th:if="${vo.prodPetType == 240}" th:each="feedEtc : ${@codeService.selectListCachedCode(36)}" th:text="${feedEtc.codeName}" th:value="${feedEtc.codeSeq}"></option>
+			</select>
+			</div>
+		</div>
+		<div class="col-3">
+			<div class="form-group">
+			<select class="form-select-JHY" id="feedSize" name="feedSize">
+				<option value="">크기</option>
+				<option th:each="feedSize : ${@codeService.selectListCachedCode(16)}" th:text="${feedSize.codeName}" th:value="${feedSize.codeSeq}"></option>
+			</select>
+			</div>
+		</div>
+		</div>
+		<div class="mb-3 row g-3 ms-2 me-2">
+		<div class="col-3">
+			<div class="form-group">
+			<select class="form-select-JHY" name="prodFunction" id="prodFunction">
+				<option value="">기능</option>
+				<option th:if="${vo.prodPetType == 239}" th:each="prodFunction : ${@codeService.selectListCachedCode(6)}" th:text="${prodFunction.codeName}" th:value="${prodFunction.codeSeq}" th:disabled="${#strings.contains(vo.prodFuncArray, prodFunction.codeSeq)} ? 'disabled' : null"></option>
+				<option th:if="${vo.prodPetType == 240}" th:each="prodFunction : ${@codeService.selectListCachedCode(35)}" th:text="${prodFunction.codeName}" th:value="${prodFunction.codeSeq}" th:disabled="${#strings.contains(vo.prodFuncArray, prodFunction.codeSeq)} ? 'disabled' : null"></option>
+			</select>
+			<input type="hidden" name="prodFunction" id="prodFunction" value="0">
+			</div>
+		</div>
+		<div class="col-3">
+			<div class="form-group">
+			<select class="form-select-JHY" id="feedBrand" name="feedBrand">
+				<option value="">브랜드</option>
+				<option th:each="feedBrand : ${@codeService.selectListCachedCode(7)}" th:text="${feedBrand.codeName}" th:value="${feedBrand.codeSeq}"></option>
+			</select>
+			</div>
+		</div>
+		<div class="col-3">
+			<div class="form-group mb-2">
+			<select class="form-select-JHY" id="feedIngredient" name="feedIngredient">
+				<option value="">주원료</option>
+				<option th:each="feedIngredient : ${@codeService.selectListCachedCode(8)}" th:text="${feedIngredient.codeName}" th:value="${feedIngredient.codeSeq}"></option>
+			</select>
+			</div>
+		</div>
+		</div>
+		<div class="mb-3 row g-3 ms-2 me-2">
+		<div class="col" id="createFunction">
+		</div>
+		</div>
+		<div class="mb-3 row g-3 ms-2 me-2">
+		<div class="col-3">
+			<div class="input-group">
+			<input class="form-control fs-11" style="text-align: right;" type="text" id="feedPrice" name="feedPrice" placeholder="가격" aria-describedby="basic-addon2" /><span class="input-group-text fs-11" id="basic-addon2">원</span>
+			<div class="invalid-feedback" id="feedPriceValid">가격을 입력해주세요.</div>
+			</div>
+		</div>
+		<div class="col-3">
+			<div class="input-group">
+			<input class="form-control fs-11" style="text-align: right;" type="text" id="feedWeight" name="feedWeight" placeholder="무게" aria-describedby="basic-addon2" maxlength="5" /><span class="input-group-text fs-11" id="basic-addon2">kg</span>
+			<div class="invalid-feedback" id="feedWeightValid">무게를 입력해주세요.</div>
+			</div>
+		</div>
+		<div class="col-3">
+			<div class="input-group">
+			<input class="form-control fs-11" style="text-align: right;" type="text" id="feedDiscount" name="feedDiscount" placeholder="할인율" aria-describedby="basic-addon2" maxlength="3" /><span class="input-group-text fs-11" id="basic-addon2">%</span>
+			<div class="invalid-feedback" id="feedDiscountValid">할인율을 입력해주세요.</div>
+			</div>
+		</div>
+		<div class="col-3">
+			<button class="btn btn-outline-primary me-1 mb-1 fs-11" type="button" id="feedInfoSaveBtn">
+			<span class="fas fa-plus me-1" data-fa-transform="shrink-3"></span>저장
+			</button>
+		</div>
+		</div>
+		<div class="mb-3 row g-3 ms-2 me-2">
+		<div class="col col-lg-6 col-md-10" id="createFeedInfo">
+		</div>
+		</div>
+	</th:block>
+
+	<th:block th:if="${vo.prodType} == '2'">
+		<input type="hidden" id="prodFuncArray" name="prodFuncArray">
+		<input type="hidden" id="prodFuncNameArray" name="prodFuncNameArray" disabled>
+		<input type="hidden" id="feedPriceArray" name="feedPriceArray">
+		<input type="hidden" id="feedWeightArray" name="feedWeightArray">
+		<input type="hidden" id="feedDiscountArray" name="feedDiscountArray">
+		<input type="hidden" id="prodFuncSeqArray" name="prodFuncSeqArray">
+		<input type="hidden" id="feedInfoSeqArray" name="feedInfoSeqArray">
+		<div class="row g-3 mt-0 ms-2 me-2">
+		<div class="col-3">
+			<label class="form-label-JHY" for="pordSeq">간식 코드<span style="color: red;">*</span></label>
+		</div>
+		<div class="col-3">
+			<label class="form-label-JHY" for="prodName">간식 이름<span style="color: red;">*</span></label>
+		</div>
+		<div class="col-3">
+			<label class="form-label-JHY" for="prodUseFlag">사용여부<span style="color: red;">*</span></label>
+		</div>
+		</div>
+		<div class="mb-3 row g-3 ms-2 me-2">
+		<div class="col-3">
+			<input class="form-control-JHY" name="prodSeq" id="prodSeq" th:value="${vo.prodSeq}" type="text" placeholder="자동생성" readonly />
+		</div>
+		<div class="col-3">
+			<input class="form-control-JHY" name="prodName" id="prodName" type="text" />
+			<div class="invalid-feedback" id="prodNameValid">이름을 입력해주세요.</div>
+		</div>
+		<div class="col-3">
+			<select class="form-select-JHY" id="prodUseFlag" name="prodUseFlag" required="">
+			<option value="">선택하세요</option>
+			<option value="1">사용</option>
+			<option value="0">미사용</option>
+			</select>
+			<div class="invalid-feedback" id="prodUseFlagValid">사용 여부를 선택해주세요.</div>
+		</div>
+		</div>
+		<div class="mb-3 row g-3 ms-2 me-2">
+		<div class="col-3">
+			<div class="form-group">
+			<select class="form-select-JHY" id="feedType" name="feedType">
+				<option value="">종류</option>
+				<option th:if="${vo.prodPetType == 239}" th:each="feedType : ${@codeService.selectListCachedCode(17)}" th:text="${feedType.codeName}" th:value="${feedType.codeSeq}"></option>
+				<option th:if="${vo.prodPetType == 240}" th:each="feedType : ${@codeService.selectListCachedCode(37)}" th:text="${feedType.codeName}" th:value="${feedType.codeSeq}"></option>
+			</select>
+			</div>
+		</div>
+		<div class="col-3">
+			<div class="form-group">
+			<select class="form-select-JHY" id="snckFeature" name="snckFeature">
+				<option value="">원료특징</option>
+				<option th:each="feature : ${@codeService.selectListCachedCode(18)}" th:text="${feature.codeName}" th:value="${feature.codeSeq}"></option>
+			</select>
+			</div>
+		</div>
+		<div class="col-3">
+			<div class="form-group">
+			<select class="form-select-JHY" id="feedBrand" name="feedBrand">
+				<option value="">브랜드</option>
+				<option th:each="feedBrand : ${@codeService.selectListCachedCode(21)}" th:text="${feedBrand.codeName}" th:value="${feedBrand.codeSeq}"></option>
+			</select>
+			</div>
+		</div>
+		<div class="col-3">
+			<div class="form-group mb-2">
+			<select class="form-select-JHY" id="feedIngredient" name="feedIngredient">
+				<option value="">주원료</option>
+				<option th:each="feedIngredient : ${@codeService.selectListCachedCode(8)}" th:text="${feedIngredient.codeName}" th:value="${feedIngredient.codeSeq}"></option>
+			</select>
+			</div>
+		</div>
+		</div>
+		<div class="mb-3 row g-3 ms-2 me-2">
+		<div class="col-3">
+			<div class="form-group">
+			<select class="form-select-JHY" name="prodFunction" id="prodFunction">
+				<option value="">기능</option>
+				<option th:if="${vo.prodPetType == 239}" th:each="prodFunction : ${@codeService.selectListCachedCode(6)}" th:text="${prodFunction.codeName}" th:value="${prodFunction.codeSeq}" th:disabled="${#strings.contains(vo.prodFuncArray, prodFunction.codeSeq)} ? 'disabled' : null"></option>
+				<option th:if="${vo.prodPetType == 240}" th:each="prodFunction : ${@codeService.selectListCachedCode(35)}" th:text="${prodFunction.codeName}" th:value="${prodFunction.codeSeq}" th:disabled="${#strings.contains(vo.prodFuncArray, prodFunction.codeSeq)} ? 'disabled' : null"></option>
+			</select>
+			<input type="hidden" name="prodFunction" id="prodFunction" value="0">
+			</div>
+		</div>
+		</div>
+		<div class="mb-3 row g-3 ms-2 me-2">
+		<div class="col" id="createFunction">
+		</div>
+		</div>
+		<div class="mb-3 row g-3 ms-2 me-2">
+		<div class="col-3">
+			<div class="input-group">
+			<input class="form-control fs-11" style="text-align: right;" type="text" id="feedPrice" name="feedPrice" placeholder="가격" aria-describedby="basic-addon2" /><span class="input-group-text fs-11" id="basic-addon2">원</span>
+			<div class="invalid-feedback" id="feedPriceValid">가격을 입력해주세요.</div>
+			</div>
+		</div>
+		<div class="col-3">
+			<div class="input-group">
+			<input class="form-control fs-11" style="text-align: right;" type="text" id="feedWeight" name="feedWeight" placeholder="무게" aria-describedby="basic-addon2" maxlength="5" /><span class="input-group-text fs-11" id="basic-addon2">kg</span>
+			<div class="invalid-feedback" id="feedWeightValid">무게를 입력해주세요.</div>
+			</div>
+		</div>
+		<div class="col-3">
+			<div class="input-group">
+			<input class="form-control fs-11" style="text-align: right;" type="text" id="feedDiscount" name="feedDiscount" placeholder="할인율" aria-describedby="basic-addon2" maxlength="3" /><span class="input-group-text fs-11" id="basic-addon2">%</span>
+			<div class="invalid-feedback" id="feedDiscountValid">할인율을 입력해주세요.</div>
+			</div>
+		</div>
+		<div class="col-3">
+			<button class="btn btn-outline-primary me-1 mb-1 fs-11" type="button" id="feedInfoSaveBtn">
+			<span class="fas fa-plus me-1" data-fa-transform="shrink-3"></span>저장
+			</button>
+		</div>
+		</div>
+		<div class="mb-3 row g-3 ms-2 me-2">
+		<div class="col col-lg-6 col-md-10" id="createFeedInfo">
+		</div>
+		</div>
+	</th:block>
+</th:block>

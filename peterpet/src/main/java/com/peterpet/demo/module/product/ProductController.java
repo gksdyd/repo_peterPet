@@ -265,6 +265,6 @@ public class ProductController extends BaseController {
 	
 	@RequestMapping(value = "/ProductXdmFormProc")
 	public String productXdmFormProc(@ModelAttribute("vo") ProductVo vo) {
-		return "xdm/include/feedForm :: feedForm";
+		return "xdm/include/form :: form";
 	}
 }

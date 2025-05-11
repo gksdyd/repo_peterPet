@@ -312,7 +312,8 @@ function changePet(e) {
     method: 'POST',  // POST 요청
     body: new URLSearchParams({  // POST 데이터 설정
         "prodPetType" : $(e).val(),
-        "prodSeq" : $("#prodSeq").val()
+        "prodSeq" : $("#prodSeq").val(),
+        "prodType" : $("#prodType").val()
     })
   })
   .then(res => res.text())

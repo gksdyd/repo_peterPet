@@ -218,7 +218,7 @@
                         <select class="form-select-JHY" id="feedType" name="feedType">
                           <option value="">종류</option>
                           <option th:if="${item.prodPetType == 239}" th:each="feedType : ${@codeService.selectListCachedCode(17)}" th:selected="${item.feedType} == ${feedType.codeSeq}" th:text="${feedType.codeName}" th:value="${feedType.codeSeq}"></option>
-                          <option th:if="${item.prodPetType == 240}" th:each="feedType : ${@codeService.selectListCachedCode(34)}" th:selected="${item.feedType} == ${feedType.codeSeq}" th:text="${feedType.codeName}" th:value="${feedType.codeSeq}"></option>
+                          <option th:if="${item.prodPetType == 240}" th:each="feedType : ${@codeService.selectListCachedCode(37)}" th:selected="${item.feedType} == ${feedType.codeSeq}" th:text="${feedType.codeName}" th:value="${feedType.codeSeq}"></option>
                         </select>
                       </div>
                     </div>
