@@ -50,6 +50,18 @@ public class ProductVo extends BaseVo{
 	private Integer prodCount;
 	private Double infoWeight;
 	
+	private Integer shProdFunction;
+	private Integer shProdSmell;
+	private Integer shProdSound;
+	private Integer shProdColor;
+	private Integer shProdFormulation;
+	private Integer shProdCategory;
+	private Integer shProdCategoryType;
+	private Integer shProdWidth;
+	private Integer shProdLength;
+	private Integer shProdHeight;
+	private Integer shWearMethod;
+	
 	public List<String> getProdFuncArray() {
 		return prodFuncArray;
 	}
@@ -303,6 +315,94 @@ public class ProductVo extends BaseVo{
 
 	public void setInfoWeight(Double infoWeight) {
 		this.infoWeight = infoWeight;
+	}
+
+	public Integer getShProdFunction() {
+		return shProdFunction;
+	}
+
+	public void setShProdFunction(Integer shProdFunction) {
+		this.shProdFunction = shProdFunction;
+	}
+
+	public Integer getShProdSmell() {
+		return shProdSmell;
+	}
+
+	public void setShProdSmell(Integer shProdSmell) {
+		this.shProdSmell = shProdSmell;
+	}
+
+	public Integer getShProdSound() {
+		return shProdSound;
+	}
+
+	public void setShProdSound(Integer shProdSound) {
+		this.shProdSound = shProdSound;
+	}
+
+	public Integer getShProdColor() {
+		return shProdColor;
+	}
+
+	public void setShProdColor(Integer shProdColor) {
+		this.shProdColor = shProdColor;
+	}
+
+	public Integer getShProdFormulation() {
+		return shProdFormulation;
+	}
+
+	public void setShProdFormulation(Integer shProdFormulation) {
+		this.shProdFormulation = shProdFormulation;
+	}
+
+	public Integer getShProdCategory() {
+		return shProdCategory;
+	}
+
+	public void setShProdCategory(Integer shProdCategory) {
+		this.shProdCategory = shProdCategory;
+	}
+
+	public Integer getShProdCategoryType() {
+		return shProdCategoryType;
+	}
+
+	public void setShProdCategoryType(Integer shProdCategoryType) {
+		this.shProdCategoryType = shProdCategoryType;
+	}
+
+	public Integer getShProdWidth() {
+		return shProdWidth;
+	}
+
+	public void setShProdWidth(Integer shProdWidth) {
+		this.shProdWidth = shProdWidth;
+	}
+
+	public Integer getShProdLength() {
+		return shProdLength;
+	}
+
+	public void setShProdLength(Integer shProdLength) {
+		this.shProdLength = shProdLength;
+	}
+
+	public Integer getShProdHeight() {
+		return shProdHeight;
+	}
+
+	public void setShProdHeight(Integer shProdHeight) {
+		this.shProdHeight = shProdHeight;
+	}
+
+	public Integer getShWearMethod() {
+		return shWearMethod;
+	}
+
+	public void setShWearMethod(Integer shWearMethod) {
+		this.shWearMethod = shWearMethod;
 	}
 
 	public void InitProdType() {

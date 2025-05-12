@@ -346,5 +346,21 @@ function changePet(e) {
   });
 }
 
+function changeSupply(e) {
+  $.ajax({
+    async: true 
+    ,cache: false
+    ,type: "post"
+    ,url: "/xdm/product/ProductXdmSupplyProc"
+    ,data: { "shFeedType" : $(e).val() }
+    ,success: function(response) {
+      $("#supply").html(response);
+    }
+    ,error : function(jqXHR){
+      alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+    }
+  });
+}
+
 initFuncBadge();
 initInfo();
