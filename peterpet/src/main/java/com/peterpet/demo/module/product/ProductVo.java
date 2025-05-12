@@ -50,6 +50,7 @@ public class ProductVo extends BaseVo{
 	private Integer prodCount;
 	private Double infoWeight;
 	
+	private Integer feedType;
 	private Integer shProdFunction;
 	private Integer shProdSmell;
 	private Integer shProdSound;
@@ -403,6 +404,14 @@ public class ProductVo extends BaseVo{
 
 	public void setShWearMethod(Integer shWearMethod) {
 		this.shWearMethod = shWearMethod;
+	}
+
+	public Integer getFeedType() {
+		return feedType;
+	}
+
+	public void setFeedType(Integer feedType) {
+		this.feedType = feedType;
 	}
 
 	public void InitProdType() {

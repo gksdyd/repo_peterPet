@@ -362,5 +362,21 @@ function changeSupply(e) {
   });
 }
 
+function changeSupplyForm(e) {
+  $.ajax({
+    async: true 
+    ,cache: false
+    ,type: "post"
+    ,url: "/xdm/product/ProductXdmSupplyFormProc"
+    ,data: { "feedType" : $(e).val() }
+    ,success: function(response) {
+      $("#supply").html(response);
+    }
+    ,error : function(jqXHR){
+      alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+    }
+  });
+}
+
 initFuncBadge();
 initInfo();

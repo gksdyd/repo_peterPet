@@ -255,4 +255,49 @@
 		</div>
 		</div>
 	</th:block>
+
+	<th:block th:if="${vo.prodType} == '3'">
+		<div class="row g-3 mt-0 ms-2 me-2">
+		<div class="col-3">
+			<label class="form-label-JHY" for="pordSeq">용품 코드<span style="color: red;">*</span></label>
+		</div>
+		<div class="col-3">
+			<label class="form-label-JHY" for="prodName">용품 이름<span style="color: red;">*</span></label>
+		</div>
+		<div class="col-3">
+			<label class="form-label-JHY" for="prodUseFlag">사용여부<span style="color: red;">*</span></label>
+		</div>
+		</div>
+		<div class="mb-3 row g-3 ms-2 me-2">
+		<div class="col-3">
+			<input class="form-control-JHY" name="prodSeq" id="prodSeq" th:value="${vo.prodSeq}" type="text" placeholder="자동생성" readonly />
+		</div>
+		<div class="col-3">
+			<input class="form-control-JHY" name="prodName" id="prodName" type="text" />
+			<div class="invalid-feedback" id="prodNameValid">이름을 입력해주세요.</div>
+		</div>
+		<div class="col-3">
+			<select class="form-select-JHY" id="prodUseFlag" name="prodUseFlag" required="">
+			<option value="">선택하세요</option>
+			<option value="1">사용</option>
+			<option value="0">미사용</option>
+			</select>
+			<div class="invalid-feedback" id="prodUseFlagValid">사용 여부를 선택해주세요.</div>
+		</div>
+		</div>
+		<div class="mb-3 row g-3 ms-2 me-2">
+		<div class="col-3">
+			<div class="form-group">
+			<select class="form-select-JHY" id="feedType" name="feedType">
+				<option value="">용품 종류</option>
+				<option th:if="${vo.prodPetType == 239}" th:each="feedType : ${@codeService.selectListCachedCode(38)}" th:text="${feedType.codeName}" th:value="${feedType.codeSeq}"></option>
+				<option th:if="${vo.prodPetType == 240}" th:each="feedType : ${@codeService.selectListCachedCode(37)}" th:text="${feedType.codeName}" th:value="${feedType.codeSeq}"></option>
+			</select>
+			</div>
+		</div>
+		</div>
+		<div class="mb-3 row g-3 ms-2 me-2">
+		</div>
+		</div>
+	</th:block>
 </th:block>

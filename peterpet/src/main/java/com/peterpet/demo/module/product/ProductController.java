@@ -272,4 +272,9 @@ public class ProductController extends BaseController {
 	public String productXdmSupplyProc(@ModelAttribute("vo") ProductVo vo) {
 		return "xdm/include/supplies";
 	}
+	
+	@RequestMapping(value = "/ProductXdmSupplyFormProc")
+	public String productXdmSupplyFormProc(@ModelAttribute("vo") ProductVo vo) {
+		return "xdm/include/suppliesForm";
+	}
 }
