@@ -79,14 +79,16 @@ public class ProductController extends BaseController {
 	public String codeGroupXdmInst(ProductDto productDto) {
 		productService.insert(productDto);
 		
-		for (int i = 0; i < productDto.getProdFuncArray().size(); i++) {
-			if (i == 0) {
-				productDto.setFuncMain(1);
-			} else {
-				productDto.setFuncMain(0);
+		if (!productDto.getProdFuncArray().isEmpty()) {
+			for (int i = 0; i < productDto.getProdFuncArray().size(); i++) {
+				if (i == 0) {
+					productDto.setFuncMain(1);
+				} else {
+					productDto.setFuncMain(0);
+				}
+				productDto.setFuncName(productDto.getProdFuncArray().get(i));
+				productService.funcInsert(productDto);
 			}
-			productDto.setFuncName(productDto.getProdFuncArray().get(i));
-			productService.funcInsert(productDto);
 		}
 		
 		for (int i = 0; i < productDto.getFeedPriceArray().size(); i++) {
@@ -96,7 +98,9 @@ public class ProductController extends BaseController {
 				productDto.setInfoMain(0);
 			}
 			productDto.setInfoPrice(productDto.getFeedPriceArray().get(i));
-			productDto.setInfoWeight(productDto.getFeedWeightArray().get(i));
+			if (productDto.getProdType() != 3) {
+				productDto.setInfoWeight(productDto.getFeedWeightArray().get(i));				
+			}
 			productDto.setInfoDiscount(productDto.getFeedDiscountArray().get(i));
 			productService.infoInsert(productDto);
 		}

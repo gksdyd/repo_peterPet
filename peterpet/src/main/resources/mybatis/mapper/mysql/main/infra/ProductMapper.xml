@@ -75,7 +75,18 @@
 			snckFeature,
 			prodIsStock,
 			prodDelFlag,
-			prodPetType
+			prodPetType,
+			prodSound,
+			prodSmell,
+			prodColor,
+			prodCategory,
+			prodFormulation,
+			prodCategoryType,
+			prodWidth,
+			prodLength,
+			prodHeight,
+			prodWearMethod,
+			prodFunction
 		) VALUE (
 			#{prodType},
 			#{prodUseFlag},
@@ -91,7 +102,18 @@
 			#{snckFeature},
 			271,
 			0,
-			#{prodPetType}
+			#{prodPetType},
+			#{prodSound},
+			#{prodSmell},
+			#{prodColor},
+			#{prodCategory},
+			#{prodFormulation},
+			#{prodCategoryType},
+			#{prodWidth},
+			#{prodLength},
+			#{prodHeight},
+			#{prodWearMethod},
+			#{prodFunction}
 		)
 		<selectKey resultType="String" keyProperty="prodSeq" order="AFTER">
 			SELECT last_insert_id()

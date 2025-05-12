@@ -198,18 +198,31 @@ feedInfoSave = function() {
   let weightArray = [];
   let discountArray = [];
 
-  let feedPrice = document.querySelectorAll(".feedPrice");
-  let feedWeight = document.querySelectorAll(".feedWeight");
-  let feedDiscount = document.querySelectorAll(".feedDiscount");
+  let feedPrice;
+  let feedWeight;
+  let feedDiscount;
+
+  if ($("#prodType").val() != 3) {
+    feedPrice = document.querySelectorAll(".feedPrice");
+    feedWeight = document.querySelectorAll(".feedWeight");
+    feedDiscount = document.querySelectorAll(".feedDiscount");
+  } else {
+    feedPrice = document.querySelectorAll("#feedPrice");
+    feedDiscount = document.querySelectorAll("#feedDiscount");
+  }
   
   for (let i = 0; i < feedPrice.length; i++) {
     priceArray.push(feedPrice[i].value);
-    weightArray.push(feedWeight[i].value);
+    if ($("#prodType").val() != 3) {
+      weightArray.push(feedWeight[i].value);
+    }
     discountArray.push(feedDiscount[i].value);
   }
   
   feedPriceArray.value = priceArray;
-  feedWeightArray.value = weightArray;
+  if ($("#prodType").val() != 3) {
+    feedWeightArray.value = weightArray;
+  }
   feedDiscountArray.value = discountArray;
 }
 
@@ -378,5 +391,7 @@ function changeSupplyForm(e) {
   });
 }
 
-initFuncBadge();
-initInfo();
+if ($("#prodType").val() != 3) {
+  initFuncBadge();
+  initInfo();
+}

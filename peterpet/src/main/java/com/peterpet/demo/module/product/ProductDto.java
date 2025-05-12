@@ -70,6 +70,18 @@ public class ProductDto extends BaseDto {
 	private String petBirth;
 	private Integer petWeight;
 	
+	private Integer prodSound;
+	private Integer prodSmell;
+	private Integer prodColor;
+	private Integer prodCategory;
+	private Integer prodFormulation;
+	private Integer prodCategoryType;
+	private Double prodWidth;
+	private Double prodLength;
+	private Double prodHeight;
+	private Integer prodWearMethod;
+	private Integer prodFunction;
+	
 	public String getProdSeq() {
 		return prodSeq;
 	}
@@ -397,5 +409,71 @@ public class ProductDto extends BaseDto {
 	}
 	public void setSnckFeature(Integer snckFeature) {
 		this.snckFeature = snckFeature;
+	}
+	public Integer getProdSound() {
+		return prodSound;
+	}
+	public void setProdSound(Integer prodSound) {
+		this.prodSound = prodSound;
+	}
+	public Integer getProdSmell() {
+		return prodSmell;
+	}
+	public void setProdSmell(Integer prodSmell) {
+		this.prodSmell = prodSmell;
+	}
+	public Integer getProdColor() {
+		return prodColor;
+	}
+	public void setProdColor(Integer prodColor) {
+		this.prodColor = prodColor;
+	}
+	public Integer getProdCategory() {
+		return prodCategory;
+	}
+	public void setProdCategory(Integer prodCategory) {
+		this.prodCategory = prodCategory;
+	}
+	public Integer getProdFormulation() {
+		return prodFormulation;
+	}
+	public void setProdFormulation(Integer prodFormulation) {
+		this.prodFormulation = prodFormulation;
+	}
+	public Integer getProdCategoryType() {
+		return prodCategoryType;
+	}
+	public void setProdCategoryType(Integer prodCategoryType) {
+		this.prodCategoryType = prodCategoryType;
+	}
+	public Double getProdWidth() {
+		return prodWidth;
+	}
+	public void setProdWidth(Double prodWidth) {
+		this.prodWidth = prodWidth;
+	}
+	public Double getProdLength() {
+		return prodLength;
+	}
+	public void setProdLength(Double prodLength) {
+		this.prodLength = prodLength;
+	}
+	public Double getProdHeight() {
+		return prodHeight;
+	}
+	public void setProdHeight(Double prodHeight) {
+		this.prodHeight = prodHeight;
+	}
+	public Integer getProdWearMethod() {
+		return prodWearMethod;
+	}
+	public void setProdWearMethod(Integer prodWearMethod) {
+		this.prodWearMethod = prodWearMethod;
+	}
+	public Integer getProdFunction() {
+		return prodFunction;
+	}
+	public void setProdFunction(Integer prodFunction) {
+		this.prodFunction = prodFunction;
 	}
 }

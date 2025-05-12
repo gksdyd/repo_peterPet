@@ -257,6 +257,8 @@
 	</th:block>
 
 	<th:block th:if="${vo.prodType} == '3'">
+		<input type="hidden" id="feedPriceArray" name="feedPriceArray" th:value="${vo.feedPriceArray}">
+		<input type="hidden" id="feedDiscountArray" name="feedDiscountArray" th:value="${vo.feedDiscountArray}">
 		<div class="row g-3 mt-0 ms-2 me-2">
 		<div class="col-3">
 			<label class="form-label-JHY" for="pordSeq">용품 코드<span style="color: red;">*</span></label>
@@ -288,7 +290,7 @@
 		<div class="mb-3 row g-3 ms-2 me-2">
 		<div class="col-3">
 			<div class="form-group">
-			<select class="form-select-JHY" id="feedType" name="feedType">
+			<select class="form-select-JHY" id="feedType" name="feedType" onchange="changeSupplyForm(this)">
 				<option value="">용품 종류</option>
 				<option th:if="${vo.prodPetType == 239}" th:each="feedType : ${@codeService.selectListCachedCode(38)}" th:text="${feedType.codeName}" th:value="${feedType.codeSeq}"></option>
 				<option th:if="${vo.prodPetType == 240}" th:each="feedType : ${@codeService.selectListCachedCode(37)}" th:text="${feedType.codeName}" th:value="${feedType.codeSeq}"></option>
@@ -296,8 +298,22 @@
 			</div>
 		</div>
 		</div>
-		<div class="mb-3 row g-3 ms-2 me-2">
+		<div class="mb-3 row g-3 ms-2 me-2" id="supply">
 		</div>
+		<div class="mb-3 row g-3 ms-2 me-2">
+			<div class="col-3">
+			  <div class="input-group">
+				<input class="form-control fs-11" style="text-align: right;" type="text" id="feedPrice" name="feedPrice" placeholder="가격" aria-describedby="basic-addon2" /><span class="input-group-text fs-11" id="basic-addon2">원</span>
+				<div class="invalid-feedback" id="feedPriceValid">가격을 입력해주세요.</div>
+			  </div>
+			</div>
+			<div class="col-3">
+			  <div class="input-group">
+				<input class="form-control fs-11" style="text-align: right;" type="text" id="feedDiscount" name="feedDiscount" placeholder="할인율" aria-describedby="basic-addon2" maxlength="3" /><span class="input-group-text fs-11" id="basic-addon2">%</span>
+				<div class="invalid-feedback" id="feedDiscountValid">할인율을 입력해주세요.</div>
+			  </div>
+			</div>
+		  </div>
 		</div>
 	</th:block>
 </th:block>
