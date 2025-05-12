@@ -349,6 +349,7 @@
 				</foreach>
 	        </if>
 	        <if test="shFeedSize != null and !shFeedSize.equals('')">AND a.feedSize = #{shFeedSize}</if>
+	        <if test="shSnckFeature != null and !shSnckFeature.equals('')">AND a.snckFeature = #{shSnckFeature}</if>
 	</sql>
 	
 	<select id="selectFeedList" resultMap="resultMapObj">

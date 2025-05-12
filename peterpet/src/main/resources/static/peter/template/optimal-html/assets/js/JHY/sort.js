@@ -9,6 +9,7 @@ let feedEtc;
 let feedWeight;
 let feedSize;
 let prodPetType;
+let snckFeature;
 
 function noEvent(event) {
     let form = document.getElementById("productPagination");
@@ -23,6 +24,7 @@ function noEvent(event) {
     $("#shFeedWeight").val(feedWeight);
     $("#shFeedSize").val(feedSize);
     $("#prodPetType").val(prodPetType);
+    $("#shSnckFeature").val(snckFeature);
 
     if (event.keyCode === 116 || (event.ctrlKey && (event.keyCode === 78 || event.keyCode === 82))) {
         event.preventDefault(); // 기본 동작 막기
@@ -78,6 +80,8 @@ function radio(e) {
             feedWeight = null;
         } else if (name === "feedSize") {
             feedSize = null;
+        } else if (name === "feature") {
+            snckFeature = null;
         }
     } else {
         badgeArray.push($(e).val());
@@ -91,6 +95,8 @@ function radio(e) {
             feedWeight = $(e).val();
         } else if (name === "feedSize") {
             feedSize = $(e).val();
+        } else if (name === "feature") {
+            snckFeature = $(e).val();
         }
     }
     shop();
@@ -166,6 +172,8 @@ function shop() {
     params.append('thisPage', $("#thisPage").val());
     value = parseInt(prodPetType);
     params.append('prodPetType', isNaN(value) ? '' : value);
+    value = parseInt(snckFeature);
+    params.append('shSnckFeature', isNaN(value) ? '' : value);
 
     fetch('/peter/shop/ShopPeterSearch', {    // payList fragment만 반환하는 컨트롤러
         method: 'POST',  // POST 요청
@@ -268,6 +276,13 @@ removeBadge = function(e) {
                     $("input[name=feedSize]").eq(i).prop("checked", false);
                 }
             }
+        } else if (snckFeature == value) {
+            snckFeature = null;
+            for (let i = 0; i < $("input[name=feature]").length; i++) {
+                if ($("input[name=feature]").eq(i).val() == value) {
+                    $("input[name=feature]").eq(i).prop("checked", false);
+                }
+            }
         }
     }
     shop();
@@ -341,6 +356,7 @@ initBadge = function() {
     feedWeight = $("#shFeedWeight").val();
     feedSize = $("#shFeedSize").val();
     prodPetType = $("#prodPetType").val();
+    snckFeature = $("#shSnckFeature").val();
 }
 
 function filter() {
