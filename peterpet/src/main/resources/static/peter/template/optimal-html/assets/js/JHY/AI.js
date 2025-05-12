@@ -11,7 +11,7 @@ function ai(prodType, petType) {
     } else if (prodType == 2) {
         text += "간식 ";
     } else {
-        text += "장난감 ";
+        text += "용품 ";
     }
     text += "이미지를 랜덤하게 그려줘";
     
