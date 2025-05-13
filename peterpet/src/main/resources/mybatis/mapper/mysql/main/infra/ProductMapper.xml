@@ -13,6 +13,7 @@
         	FROM
         		func
         	GROUP BY product_prodSeq) AS b ON a.prodSeq = b.product_prodSeq
+        LEFT JOIN feedinfo c ON c.product_prodSeq = a.prodSeq AND infoMain = 1
         WHERE 1=1
         	AND prodType = #{prodType}
         	AND a.prodName LIKE CONCAT('%',#{shValue},'%')
@@ -43,6 +44,13 @@
 			        		AND FIND_IN_SET(#{func}, funcName) > 0
 			        	</foreach>
 			        </if>
+				</if>
+				
+				<if test="prodType == 3">
+			        <if test="shFeedType != null and !shFeedType.equals('')">AND a.feedType = #{shFeedType}</if>
+			        <if test="shSnckFeature != null and !shSnckFeature.equals('')">AND a.snckFeature = #{shSnckFeature}</if>
+			        <if test="shFeedIngredient != null and !shFeedIngredient.equals('')">AND a.feedIngredient = #{shFeedIngredient}</if>
+			        <if test="shFeedBrand != null and !shFeedBrand.equals('')">AND a.feedBrand = #{shFeedBrand}</if>
 				</if>
 			
 				<choose>
@@ -184,7 +192,9 @@
 			FROM
 				func
 			WHERE 1=1
-				AND prodSeq = product_prodSeq) AS funcCount
+				AND prodSeq = product_prodSeq) AS funcCount,
+			c.infoPrice,
+			c.infoDiscount
 		<include refid="selectCommon"></include>
 		ORDER BY prodSeq DESC
 		limit #{rowNumToShow} offset #{startRnumForMysql}
