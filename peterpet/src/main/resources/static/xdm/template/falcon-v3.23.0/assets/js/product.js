@@ -259,7 +259,6 @@ initInfo = function() {
   feedPriceArray.value = priceArray;
   feedWeightArray.value = weightArray;
   feedDiscountArray.value = discountArray;
-  $("#feedInfoSeqArray").val($("#feedInfoSeqArray").val().replace(/\[|\]/g, "").split(','));
 
   if (priceArray != "") {
     for (let i = 0; i < priceArray.length; i++) {
@@ -391,6 +390,7 @@ function changeSupplyForm(e) {
   });
 }
 
+$("#feedInfoSeqArray").val($("#feedInfoSeqArray").val().replace(/\[|\]/g, "").split(','));
 if ($("#prodType").val() != 3) {
   initFuncBadge();
   initInfo();

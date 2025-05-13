@@ -310,7 +310,18 @@
 			feedIngredient = #{feedIngredient},
 			feedSize = #{feedSize},
 			snckFeature = #{snckFeature},
-			prodPetType = #{prodPetType}
+			prodPetType = #{prodPetType},
+			prodSound = #{prodSound},
+			prodSmell = #{prodSmell},
+			prodColor = #{prodColor},
+			prodCategory = #{prodCategory},
+			prodFormulation = #{prodFormulation},
+			prodCategoryType = #{prodCategoryType},
+			prodWidth = #{prodWidth},
+			prodLength = #{prodLength},
+			prodHeight = #{prodHeight},
+			prodWearMethod = #{prodWearMethod},
+			prodFunction = #{prodFunction}
 		WHERE
 			prodSeq = #{prodSeq}
 	</update>

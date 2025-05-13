@@ -297,6 +297,8 @@
                 <div class="card border h-100 border-primary mb-3" id="changeForm" th:if="${vo.prodType} == '3'">
                   <input type="hidden" id="feedPriceArray" name="feedPriceArray" th:value="${vo.feedPriceArray}">
                   <input type="hidden" id="feedDiscountArray" name="feedDiscountArray" th:value="${vo.feedDiscountArray}">
+                  <input type="hidden" id="feedInfoSeqArray" name="feedInfoSeqArray" th:value="${vo.feedInfoSeqArray}">
+                  <input type="hidden" name="prodType" th:value="${vo.prodType}">
                   <div class="row g-3 mt-0 ms-2 me-2">
                     <div class="col-3">
                       <label class="form-label-JHY" for="pordSeq">용품 코드<span style="color: red;">*</span></label>
