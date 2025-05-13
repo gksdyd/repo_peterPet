@@ -254,7 +254,18 @@
 			(b.infoPrice * (100 - infoDiscount) / 100) AS discountPrice,
 			(SELECT COUNT(*) FROM review WHERE product_prodSeq = #{prodSeq} AND reviDelFlag = 0) AS reviewCount,
 			(SELECT GROUP_CONCAT(infoWeight) FROM feedinfo WHERE product_prodSeq = #{prodSeq} GROUP BY product_prodSeq) AS weightArr,
-			(SELECT path FROM image WHERE #{prodSeq} = pseq AND delNy = 0 AND type = 1 ORDER BY sort LIMIT 1) AS path
+			(SELECT path FROM image WHERE #{prodSeq} = pseq AND delNy = 0 AND type = 1 ORDER BY sort LIMIT 1) AS path,
+			prodSound,
+			prodSmell,
+			prodColor,
+			prodCategory,
+			prodFormulation,
+			prodCategoryType,
+			prodWidth,
+			prodLength,
+			prodHeight,
+			prodWearMethod,
+			prodFunction
         FROM
         	product
         	LEFT JOIN feedinfo b ON prodSeq = b.product_prodSeq AND infoMain = 1
