@@ -130,4 +130,21 @@
 			</div>
 		</div>
 	</th:block>
+
+	<th:block  th:if="${vo.prodType} == '3'">
+		<div class="mb-2 row g-3 me-2 ms-2 mt-0">
+			<div class="col-4">
+				<div class="form-group">
+					<select class="form-select-JHY" id="shFeedType" name="shFeedType" onchange="changeSupply(this)">
+					<option value="" th:selected="${vo.shFeedType == null}">용품종류</option>
+					<option th:if="${vo.prodPetType == 239}" th:each="snackType : ${@codeService.selectListCachedCode(38)}" th:value="${snackType.codeSeq}" th:text="${snackType.codeName}" th:selected="${vo.shFeedType} == ${snackType.codeSeq}"></option>
+					<option th:if="${vo.prodPetType == 240}" th:each="snackType : ${@codeService.selectListCachedCode(37)}" th:value="${snackType.codeSeq}" th:text="${snackType.codeName}" th:selected="${vo.shFeedType} == ${snackType.codeSeq}"></option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="mb-4 row g-3 me-2 ms-2" id="supply">
+			<div th:replace="~{xdm/include/supplies :: supplies}"></div>
+		</div>
+	</th:block>
 </th:block>
