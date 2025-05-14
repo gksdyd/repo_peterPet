@@ -295,7 +295,7 @@
 			<select class="form-select-JHY" id="feedType" name="feedType" onchange="changeSupplyForm(this)">
 				<option value="">용품 종류</option>
 				<option th:if="${vo.prodPetType == 239}" th:each="feedType : ${@codeService.selectListCachedCode(38)}" th:text="${feedType.codeName}" th:value="${feedType.codeSeq}"></option>
-				<option th:if="${vo.prodPetType == 240}" th:each="feedType : ${@codeService.selectListCachedCode(37)}" th:text="${feedType.codeName}" th:value="${feedType.codeSeq}"></option>
+				<option th:if="${vo.prodPetType == 240}" th:each="feedType : ${@codeService.selectListCachedCode(109)}" th:text="${feedType.codeName}" th:value="${feedType.codeSeq}"></option>
 			</select>
 			</div>
 		</div>
