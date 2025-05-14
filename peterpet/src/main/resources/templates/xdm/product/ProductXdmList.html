@@ -362,8 +362,8 @@
                       <td class="type" th:if="${list.feedType} == null"></td>
                       <td class="brand" th:if="${list.feedBrand} != null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)}"></td>
                       <td class="brand" th:if="${list.feedBrand} == null"></td>
-                      <td class="count" th:text="${list.infoPrice}"></td>
-                      <td class="count" th:text="${list.infoDiscount}"></td>
+                      <td class="count" th:text="${#numbers.formatInteger(list.infoPrice,3,'COMMA')} + '원'"></td>
+                      <td class="count" th:text="${list.infoDiscount} + ' %'"></td>
                       <td class="register-date" th:text="${list.prodRegDate}"></td>
                       <td class="modify-date" th:text="${list.prodModDate}"></td>
                     </tr>
