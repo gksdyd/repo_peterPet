@@ -115,7 +115,7 @@ public class ProductController extends BaseController {
 		productService.update(productDto);
 		
 		// 사료의 기능 갯수 증가, 감소 여부 체크
-		if (!productDto.getProdFuncSeqArray().isEmpty()) {
+		if (productDto.getProdType() != 3) {
 			if (productDto.getProdFuncSeqArray().size() > productDto.getProdFuncArray().size()) {
 				size = productDto.getProdFuncSeqArray().size();
 				flag = Constants.PRODUCT_UPDATE_COUNT_DECREASE;
@@ -164,7 +164,7 @@ public class ProductController extends BaseController {
 		}
 		
 		// 사료의 정보 갯수 증가, 감소 여부 체크
-		if (!productDto.getFeedInfoSeqArray().isEmpty()) {
+		if (productDto.getProdType() != 3) {
 			if (productDto.getFeedInfoSeqArray().size() > productDto.getFeedPriceArray().size()) {
 				size = productDto.getFeedInfoSeqArray().size();
 				flag = Constants.PRODUCT_UPDATE_COUNT_DECREASE;
@@ -176,8 +176,19 @@ public class ProductController extends BaseController {
 				flag = Constants.PRODUCT_UPDATE_COUNT_MAINTAIN;
 			}
 		} else {
-			size = 1;
+			size = 0;
 			flag = 0;
+			if (productDto.getFeedInfoSeqArray().isEmpty()) {
+				productDto.setInfoMain(1);
+				productDto.setInfoPrice(productDto.getFeedPriceArray().get(0));
+				productDto.setInfoDiscount(productDto.getFeedDiscountArray().get(0));
+				productService.infoInsert(productDto);
+			} else {
+				productDto.setInfoSeq(productDto.getFeedInfoSeqArray().get(0));
+				productDto.setInfoPrice(productDto.getFeedPriceArray().get(0));
+				productDto.setInfoDiscount(productDto.getFeedDiscountArray().get(0));
+				productService.infoUpdate(productDto);
+			}
 		}
 		
 		// 사료의 정보 갯수 증가, 감소에 따른 insert, update, delete
@@ -214,9 +225,7 @@ public class ProductController extends BaseController {
 			} else if (flag == Constants.PRODUCT_UPDATE_COUNT_MAINTAIN) {
 				productDto.setInfoSeq(productDto.getFeedInfoSeqArray().get(i));
 				productDto.setInfoPrice(productDto.getFeedPriceArray().get(i));
-				if (productDto.getProdType() != 3) {
-					productDto.setInfoWeight(productDto.getFeedWeightArray().get(i));					
-				}
+				productDto.setInfoWeight(productDto.getFeedWeightArray().get(i));					
 				productDto.setInfoDiscount(productDto.getFeedDiscountArray().get(i));
 				productService.infoUpdate(productDto);
 			}

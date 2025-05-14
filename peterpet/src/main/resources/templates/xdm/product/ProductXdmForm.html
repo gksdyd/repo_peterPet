@@ -521,6 +521,12 @@
         return false;
       }
 
+      if ($("#prodType").val() == 3) {
+         if (!infoValidation()) {
+          return false;
+         }
+      }
+
       feedInfoSave();
       if ($("#prodType").val() != 3) {
         feedFuncSave();
@@ -540,12 +546,14 @@
         return false;
       }
 
-      temp = dotRemove(feedWeight.value);
-      if (!checkLength(temp) || !onlyNum(temp)) {
-        feedWeightValid.style.display = "block";
-        feedWeight.style.outlineColor = "red";
-        feedWeight.focus();
-        return false;
+      if ($("#prodType").val() != 3) {
+        temp = dotRemove(feedWeight.value);
+        if (!checkLength(temp) || !onlyNum(temp)) {
+          feedWeightValid.style.display = "block";
+          feedWeight.style.outlineColor = "red";
+          feedWeight.focus();
+          return false;
+        }
       }
 
       temp = bothSidesGapRemove(feedDiscount.value);
@@ -554,6 +562,8 @@
         feedDiscount.style.outlineColor = "red";
         feedDiscount.focus();
         return false;
+      } else if (!checkLength(temp)) {
+        feedDiscount.value = 0;
       }
       return true;
     }
