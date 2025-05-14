@@ -57,6 +57,7 @@
 			        <if test="shProdCategoryType != null and !shProdCategoryType.equals('')">AND a.prodCategoryType = #{shProdCategoryType}</if>
 			        <if test="shWearMethod != null and !shWearMethod.equals('')">AND a.prodWearMethod = #{shWearMethod}</if>
 			        <if test="shProdFunction != null and !shProdFunction.equals('')">AND a.prodFunction = #{shProdFunction}</if>
+			        <if test="shFeedIngredient != null and !shFeedIngredient.equals('')">AND a.feedIngredient = #{shFeedIngredient}</if>
 			        <choose>
 						<when test="shProdWidth == 1">AND a.prodWidth &lt; 500</when>
 						<when test="shProdWidth == 2">AND a.prodWidth BETWEEN 500 AND 699</when>

@@ -728,4 +728,871 @@
 			</div>
 		</div>
 	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 730}">
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shFeedBrand" id="shFeedBrand">
+				<option value="">브랜드</option>
+				<option th:each="prodBrand : ${@codeService.selectListCachedCode(110)}" th:value="${prodBrand.codeSeq}" th:text="${prodBrand.codeName}" th:selected="${vo.shFeedBrand} == ${prodBrand.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shFeedIngredient" id="shFeedIngredient">
+				<option value="">주원료</option>
+				<option th:each="feedIngredient : ${@codeService.selectListCachedCode(111)}" th:value="${feedIngredient.codeSeq}" th:text="${feedIngredient.codeName}" th:selected="${vo.shFeedIngredient} == ${feedIngredient.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdSmell" id="shProdSmell">
+				<option value="">향</option>
+				<option th:each="prodSmell : ${@codeService.selectListCachedCode(112)}" th:value="${prodSmell.codeSeq}" th:text="${prodSmell.codeName}" th:selected="${vo.shProdSmell} == ${prodSmell.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdCategory" id="shProdCategory">
+				<option value="">첨가재료</option>
+				<option th:each="ingredient : ${@codeService.selectListCachedCode(113)}" th:value="${ingredient.codeSeq}" th:text="${ingredient.codeName}" th:selected="${vo.shProdCategory} == ${ingredient.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shWearMethod" id="shWearMethod">
+				<option value="">포장방식</option>
+				<option th:each="packageMethod : ${@codeService.selectListCachedCode(114)}" th:value="${packageMethod.codeSeq}" th:text="${packageMethod.codeName}" th:selected="${vo.shWearMethod} == ${packageMethod.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 731}">
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shFeedBrand" id="shFeedBrand">
+				<option value="">브랜드</option>
+				<option th:each="prodBrand : ${@codeService.selectListCachedCode(115)}" th:value="${prodBrand.codeSeq}" th:text="${prodBrand.codeName}" th:selected="${vo.shFeedBrand} == ${prodBrand.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shFeedIngredient" id="shFeedIngredient">
+				<option value="">주소재</option>
+				<option th:each="feedIngredient : ${@codeService.selectListCachedCode(116)}" th:value="${feedIngredient.codeSeq}" th:text="${feedIngredient.codeName}" th:selected="${vo.shFeedIngredient} == ${feedIngredient.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdSound" id="shProdSound">
+				<option value="">소리</option>
+				<option th:each="prodSound : ${@codeService.selectListCachedCode(118)}" th:value="${prodSound.codeSeq}" th:text="${prodSound.codeName}" th:selected="${vo.shProdSound} == ${prodSound.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdCategoryType" id="shProdCategoryType">
+				<option value="">장난감 종류</option>
+				<option th:each="prodCategory : ${@codeService.selectListCachedCode(117)}" th:value="${prodCategory.codeSeq}" th:text="${prodCategory.codeName}" th:selected="${vo.shProdCategoryType} == ${prodCategory.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdCategory" id="shProdCategory">
+				<option value="">유형</option>
+				<option th:each="prodType : ${@codeService.selectListCachedCode(119)}" th:value="${prodType.codeSeq}" th:text="${prodType.codeName}" th:selected="${vo.shProdCategory} == ${prodType.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 732}">
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shFeedBrand" id="shFeedBrand">
+				<option value="">브랜드</option>
+				<option th:each="prodBrand : ${@codeService.selectListCachedCode(120)}" th:value="${prodBrand.codeSeq}" th:text="${prodBrand.codeName}" th:selected="${vo.shFeedBrand} == ${prodBrand.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shFeedIngredient" id="shFeedIngredient">
+				<option value="">주소재</option>
+				<option th:each="feedIngredient : ${@codeService.selectListCachedCode(121)}" th:value="${feedIngredient.codeSeq}" th:text="${feedIngredient.codeName}" th:selected="${vo.shFeedIngredient} == ${feedIngredient.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdSound" id="shProdSound">
+				<option value="">소리</option>
+				<option th:each="prodSound : ${@codeService.selectListCachedCode(122)}" th:value="${prodSound.codeSeq}" th:text="${prodSound.codeName}" th:selected="${vo.shProdSound} == ${prodSound.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdSmell" id="shProdSmell">
+				<option value="">향</option>
+				<option th:each="prodSmell : ${@codeService.selectListCachedCode(123)}" th:value="${prodSmell.codeSeq}" th:text="${prodSmell.codeName}" th:selected="${vo.shProdSmell} == ${prodSmell.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdCategory" id="shProdCategory">
+				<option value="">유형</option>
+				<option th:each="prodType : ${@codeService.selectListCachedCode(124)}" th:value="${prodType.codeSeq}" th:text="${prodType.codeName}" th:selected="${vo.shProdCategory} == ${prodType.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 733}">
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shFeedBrand" id="shFeedBrand">
+				<option value="">브랜드</option>
+				<option th:each="prodBrand : ${@codeService.selectListCachedCode(125)}" th:value="${prodBrand.codeSeq}" th:text="${prodBrand.codeName}" th:selected="${vo.shFeedBrand} == ${prodBrand.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shFeedIngredient" id="shFeedIngredient">
+				<option value="">주소재</option>
+				<option th:each="feedIngredient : ${@codeService.selectListCachedCode(126)}" th:value="${feedIngredient.codeSeq}" th:text="${feedIngredient.codeName}" th:selected="${vo.shFeedIngredient} == ${feedIngredient.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdSound" id="shProdSound">
+				<option value="">소리</option>
+				<option th:each="prodSound : ${@codeService.selectListCachedCode(128)}" th:value="${prodSound.codeSeq}" th:text="${prodSound.codeName}" th:selected="${vo.shProdSound} == ${prodSound.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdCategoryType" id="shProdCategoryType">
+				<option value="">터널 모양</option>
+				<option th:each="prodCategory : ${@codeService.selectListCachedCode(117)}" th:value="${prodCategory.codeSeq}" th:text="${prodCategory.codeName}" th:selected="${vo.shProdCategoryType} == ${prodCategory.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdCategory" id="shProdCategory">
+				<option value="">유형</option>
+				<option th:each="prodType : ${@codeService.selectListCachedCode(129)}" th:value="${prodType.codeSeq}" th:text="${prodType.codeName}" th:selected="${vo.shProdCategory} == ${prodType.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdColor" id="shProdColor">
+				<option value="">색상</option>
+				<option th:each="prodColor : ${@codeService.selectListCachedCode(45)}" th:value="${prodColor.codeSeq}" th:text="${prodColor.codeName}" th:selected="${vo.shProdColor} == ${prodColor.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 734}">
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shFeedBrand" id="shFeedBrand">
+				<option value="">브랜드</option>
+				<option th:each="prodBrand : ${@codeService.selectListCachedCode(130)}" th:value="${prodBrand.codeSeq}" th:text="${prodBrand.codeName}" th:selected="${vo.shFeedBrand} == ${prodBrand.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shFeedIngredient" id="shFeedIngredient">
+				<option value="">주소재</option>
+				<option th:each="feedIngredient : ${@codeService.selectListCachedCode(131)}" th:value="${feedIngredient.codeSeq}" th:text="${feedIngredient.codeName}" th:selected="${vo.shFeedIngredient} == ${feedIngredient.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdCategoryType" id="shProdCategoryType">
+				<option value="">특징</option>
+				<option th:each="prodCategory : ${@codeService.selectListCachedCode(132)}" th:value="${prodCategory.codeSeq}" th:text="${prodCategory.codeName}" th:selected="${vo.shProdCategoryType} == ${prodCategory.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdCategory" id="shProdCategory">
+				<option value="">유형</option>
+				<option th:each="prodType : ${@codeService.selectListCachedCode(133)}" th:value="${prodType.codeSeq}" th:text="${prodType.codeName}" th:selected="${vo.shProdCategory} == ${prodType.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdColor" id="shProdColor">
+				<option value="">색상</option>
+				<option th:each="prodColor : ${@codeService.selectListCachedCode(45)}" th:value="${prodColor.codeSeq}" th:text="${prodColor.codeName}" th:selected="${vo.shProdColor} == ${prodColor.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 735}">
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shFeedBrand" id="shFeedBrand">
+				<option value="">브랜드</option>
+				<option th:each="prodBrand : ${@codeService.selectListCachedCode(49)}" th:value="${prodBrand.codeSeq}" th:text="${prodBrand.codeName}" th:selected="${vo.shFeedBrand} == ${prodBrand.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdSmell" id="shProdSmell">
+				<option value="">향</option>
+				<option th:each="prodSmell : ${@codeService.selectListCachedCode(50)}" th:value="${prodSmell.codeSeq}" th:text="${prodSmell.codeName}" th:selected="${vo.shProdSmell} == ${prodSmell.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdColor" id="shProdColor">
+				<option value="">색상</option>
+				<option th:each="prodColor : ${@codeService.selectListCachedCode(51)}" th:value="${prodColor.codeSeq}" th:text="${prodColor.codeName}" th:selected="${vo.shProdColor} == ${prodColor.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdCategory" id="shProdCategory">
+				<option value="">유형</option>
+				<option th:each="prodType : ${@codeService.selectListCachedCode(65)}" th:value="${prodType.codeSeq}" th:text="${prodType.codeName}" th:selected="${vo.shProdCategory} == ${prodType.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 736}">
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shFeedBrand" id="shFeedBrand">
+				<option value="">브랜드</option>
+				<option th:each="prodBrand : ${@codeService.selectListCachedCode(52)}" th:value="${prodBrand.codeSeq}" th:text="${prodBrand.codeName}" th:selected="${vo.shFeedBrand} == ${prodBrand.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdCategoryType" id="shProdCategoryType">
+				<option value="">종류</option>
+				<option th:each="prodType : ${@codeService.selectListCachedCode(53)}" th:value="${prodType.codeSeq}" th:text="${prodType.codeName}" th:selected="${vo.shProdCategoryType} == ${prodType.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdSmell" id="shProdSmell">
+				<option value="">향</option>
+				<option th:each="prodSmell : ${@codeService.selectListCachedCode(54)}" th:value="${prodSmell.codeSeq}" th:text="${prodSmell.codeName}" th:selected="${vo.shProdSmell} == ${prodSmell.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdColor" id="shProdColor">
+				<option value="">색상</option>
+				<option th:each="prodColor : ${@codeService.selectListCachedCode(55)}" th:value="${prodColor.codeSeq}" th:text="${prodColor.codeName}" th:selected="${vo.shProdColor} == ${prodColor.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdCategory" id="shProdCategory">
+				<option value="">유형</option>
+				<option th:each="prodType : ${@codeService.selectListCachedCode(66)}" th:value="${prodType.codeSeq}" th:text="${prodType.codeName}" th:selected="${vo.shProdCategory} == ${prodType.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 737}">
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shFeedBrand" id="shFeedBrand">
+				<option value="">브랜드</option>
+				<option th:each="prodBrand : ${@codeService.selectListCachedCode(56)}" th:value="${prodBrand.codeSeq}" th:text="${prodBrand.codeName}" th:selected="${vo.shFeedBrand} == ${prodBrand.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdSmell" id="shProdSmell">
+				<option value="">향</option>
+				<option th:each="prodSmell : ${@codeService.selectListCachedCode(57)}" th:value="${prodSmell.codeSeq}" th:text="${prodSmell.codeName}" th:selected="${vo.shProdSmell} == ${prodSmell.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdCategory" id="shProdCategory">
+				<option value="">유형</option>
+				<option th:each="prodType : ${@codeService.selectListCachedCode(67)}" th:value="${prodType.codeSeq}" th:text="${prodType.codeName}" th:selected="${vo.shProdCategory} == ${prodType.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 738}">
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shFeedBrand" id="shFeedBrand">
+				<option value="">브랜드</option>
+				<option th:each="prodBrand : ${@codeService.selectListCachedCode(46)}" th:value="${prodBrand.codeSeq}" th:text="${prodBrand.codeName}" th:selected="${vo.shFeedBrand} == ${prodBrand.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdFormulation" id="shProdFormulation">
+				<option value="">제형</option>
+				<option th:each="prodFormulation : ${@codeService.selectListCachedCode(47)}" th:value="${prodFormulation.codeSeq}" th:text="${prodFormulation.codeName}" th:selected="${vo.shProdFormulation} == ${prodFormulation.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdSmell" id="shProdSmell">
+				<option value="">향</option>
+				<option th:each="prodSmell : ${@codeService.selectListCachedCode(48)}" th:value="${prodSmell.codeSeq}" th:text="${prodSmell.codeName}" th:selected="${vo.shProdSmell} == ${prodSmell.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdCategory" id="shProdCategory">
+				<option value="">유형</option>
+				<option th:each="prodType : ${@codeService.selectListCachedCode(64)}" th:value="${prodType.codeSeq}" th:text="${prodType.codeName}" th:selected="${vo.shProdCategory} == ${prodType.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 739}">
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shFeedBrand" id="shFeedBrand">
+				<option value="">브랜드</option>
+				<option th:each="prodBrand : ${@codeService.selectListCachedCode(85)}" th:value="${prodBrand.codeSeq}" th:text="${prodBrand.codeName}" th:selected="${vo.shFeedBrand} == ${prodBrand.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdCategory" id="shProdCategory">
+				<option value="">유형</option>
+				<option th:each="prodType : ${@codeService.selectListCachedCode(86)}" th:value="${prodType.codeSeq}" th:text="${prodType.codeName}" th:selected="${vo.shProdCategory} == ${prodType.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdColor" id="shProdColor">
+				<option value="">색상</option>
+				<option th:each="prodColor : ${@codeService.selectListCachedCode(45)}" th:value="${prodColor.codeSeq}" th:text="${prodColor.codeName}" th:selected="${vo.shProdColor} == ${prodColor.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 740}">
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shFeedBrand" id="shFeedBrand">
+				<option value="">브랜드</option>
+				<option th:each="prodBrand : ${@codeService.selectListCachedCode(134)}" th:value="${prodBrand.codeSeq}" th:text="${prodBrand.codeName}" th:selected="${vo.shFeedBrand} == ${prodBrand.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdColor" id="shProdColor">
+				<option value="">색상</option>
+				<option th:each="prodColor : ${@codeService.selectListCachedCode(45)}" th:value="${prodColor.codeSeq}" th:text="${prodColor.codeName}" th:selected="${vo.shProdColor} == ${prodColor.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 741}">
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shFeedBrand" id="shFeedBrand">
+				<option value="">브랜드</option>
+				<option th:each="prodBrand : ${@codeService.selectListCachedCode(77)}" th:value="${prodBrand.codeSeq}" th:text="${prodBrand.codeName}" th:selected="${vo.shFeedBrand} == ${prodBrand.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdCategory" id="shProdCategory">
+				<option value="">유형</option>
+				<option th:each="prodType : ${@codeService.selectListCachedCode(80)}" th:value="${prodType.codeSeq}" th:text="${prodType.codeName}" th:selected="${vo.shProdCategory} == ${prodType.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdFunction" id="shProdFunction">
+				<option value="">기능</option>
+				<option th:each="prodFunction : ${@codeService.selectListCachedCode(78)}" th:value="${prodFunction.codeSeq}" th:text="${prodFunction.codeName}" th:selected="${vo.shProdFunction} == ${prodFunction.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdCategoryType" id="shProdCategoryType">
+				<option value="">종류</option>
+				<option th:each="prodType : ${@codeService.selectListCachedCode(79)}" th:value="${prodType.codeSeq}" th:text="${prodType.codeName}" th:selected="${vo.shProdCategoryType} == ${prodType.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdColor" id="shProdColor">
+				<option value="">색상</option>
+				<option th:each="prodColor : ${@codeService.selectListCachedCode(45)}" th:value="${prodColor.codeSeq}" th:text="${prodColor.codeName}" th:selected="${vo.shProdColor} == ${prodColor.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 742}">
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shFeedBrand" id="shFeedBrand">
+				<option value="">브랜드</option>
+				<option th:each="prodBrand : ${@codeService.selectListCachedCode(87)}" th:value="${prodBrand.codeSeq}" th:text="${prodBrand.codeName}" th:selected="${vo.shFeedBrand} == ${prodBrand.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdCategory" id="shProdCategory">
+				<option value="">유형</option>
+				<option th:each="prodType : ${@codeService.selectListCachedCode(89)}" th:value="${prodType.codeSeq}" th:text="${prodType.codeName}" th:selected="${vo.shProdCategory} == ${prodType.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdFunction" id="shProdFunction">
+				<option value="">기능</option>
+				<option th:each="prodFunction : ${@codeService.selectListCachedCode(88)}" th:value="${prodFunction.codeSeq}" th:text="${prodFunction.codeName}" th:selected="${vo.shProdFunction} == ${prodFunction.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdColor" id="shProdColor">
+				<option value="">색상</option>
+				<option th:each="prodColor : ${@codeService.selectListCachedCode(45)}" th:value="${prodColor.codeSeq}" th:text="${prodColor.codeName}" th:selected="${vo.shProdColor} == ${prodColor.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 743}">
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shFeedBrand" id="shFeedBrand">
+				<option value="">브랜드</option>
+				<option th:each="prodBrand : ${@codeService.selectListCachedCode(90)}" th:value="${prodBrand.codeSeq}" th:text="${prodBrand.codeName}" th:selected="${vo.shFeedBrand} == ${prodBrand.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdCategory" id="shProdCategory">
+				<option value="">유형</option>
+				<option th:each="prodType : ${@codeService.selectListCachedCode(91)}" th:value="${prodType.codeSeq}" th:text="${prodType.codeName}" th:selected="${vo.shProdCategory} == ${prodType.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdColor" id="shProdColor">
+				<option value="">색상</option>
+				<option th:each="prodColor : ${@codeService.selectListCachedCode(45)}" th:value="${prodColor.codeSeq}" th:text="${prodColor.codeName}" th:selected="${vo.shProdColor} == ${prodColor.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 744}">
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shFeedBrand" id="shFeedBrand">
+				<option value="">브랜드</option>
+				<option th:each="prodBrand : ${@codeService.selectListCachedCode(135)}" th:value="${prodBrand.codeSeq}" th:text="${prodBrand.codeName}" th:selected="${vo.shFeedBrand} == ${prodBrand.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdCategory" id="shProdCategory">
+				<option value="">유형</option>
+				<option th:each="prodType : ${@codeService.selectListCachedCode(138)}" th:value="${prodType.codeSeq}" th:text="${prodType.codeName}" th:selected="${vo.shProdCategory} == ${prodType.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdColor" id="shProdColor">
+				<option value="">색상</option>
+				<option th:each="prodColor : ${@codeService.selectListCachedCode(45)}" th:value="${prodColor.codeSeq}" th:text="${prodColor.codeName}" th:selected="${vo.shProdColor} == ${prodColor.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shFeedIngredient" id="shFeedIngredient">
+				<option value="">주소재</option>
+				<option th:each="feedIngredient : ${@codeService.selectListCachedCode(136)}" th:value="${feedIngredient.codeSeq}" th:text="${feedIngredient.codeName}" th:selected="${vo.shFeedIngredient} == ${feedIngredient.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdSmell" id="shProdSmell">
+				<option value="">향</option>
+				<option th:each="prodSmell : ${@codeService.selectListCachedCode(137)}" th:value="${prodSmell.codeSeq}" th:text="${prodSmell.codeName}" th:selected="${vo.shProdSmell} == ${prodSmell.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 745}">
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shFeedBrand" id="shFeedBrand">
+				<option value="">브랜드</option>
+				<option th:each="prodBrand : ${@codeService.selectListCachedCode(68)}" th:value="${prodBrand.codeSeq}" th:text="${prodBrand.codeName}" th:selected="${vo.shFeedBrand} == ${prodBrand.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdWidth" id="shProdWidth">
+				<option value="">크기(가로)</option>
+				<option th:each="prodWidth : ${@codeService.selectListCachedCode(69)}" th:value="${prodWidthStat.count}" th:text="${prodWidth.codeName}" th:selected="${vo.shProdWidth} == ${prodWidthStat.count}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdLength" id="shProdLength">
+				<option value="">크기(세로)</option>
+				<option th:each="prodLength : ${@codeService.selectListCachedCode(70)}" th:value="${prodLengthStat.count}" th:text="${prodLength.codeName}" th:selected="${vo.shProdLength} == ${prodLengthStat.count}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdHeight" id="shProdHeight">
+				<option value="">크기(높이)</option>
+				<option th:each="prodHeight : ${@codeService.selectListCachedCode(71)}" th:value="${prodHeightStat.count}" th:text="${prodHeight.codeName}" th:selected="${vo.shProdHeight} == ${prodHeightStat.count}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdCategory" id="shProdCategory">
+				<option value="">유형</option>
+				<option th:each="prodType : ${@codeService.selectListCachedCode(73)}" th:value="${prodType.codeSeq}" th:text="${prodType.codeName}" th:selected="${vo.shProdCategory} == ${prodType.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdFunction" id="shProdFunction">
+				<option value="">기능</option>
+				<option th:each="prodFunction : ${@codeService.selectListCachedCode(72)}" th:value="${prodFunction.codeSeq}" th:text="${prodFunction.codeName}" th:selected="${vo.shProdFunction} == ${prodFunction.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdColor" id="shProdColor">
+				<option value="">색상</option>
+				<option th:each="prodColor : ${@codeService.selectListCachedCode(45)}" th:value="${prodColor.codeSeq}" th:text="${prodColor.codeName}" th:selected="${vo.shProdColor} == ${prodColor.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 746}">
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shFeedBrand" id="shFeedBrand">
+				<option value="">브랜드</option>
+				<option th:each="prodBrand : ${@codeService.selectListCachedCode(139)}" th:value="${prodBrand.codeSeq}" th:text="${prodBrand.codeName}" th:selected="${vo.shFeedBrand} == ${prodBrand.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdCategory" id="shProdCategory">
+				<option value="">유형</option>
+				<option th:each="prodType : ${@codeService.selectListCachedCode(141)}" th:value="${prodType.codeSeq}" th:text="${prodType.codeName}" th:selected="${vo.shProdCategory} == ${prodType.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdColor" id="shProdColor">
+				<option value="">색상</option>
+				<option th:each="prodColor : ${@codeService.selectListCachedCode(45)}" th:value="${prodColor.codeSeq}" th:text="${prodColor.codeName}" th:selected="${vo.shProdColor} == ${prodColor.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdCategoryType" id="shProdCategoryType">
+				<option value="">구성 및 특징</option>
+				<option th:each="prodType : ${@codeService.selectListCachedCode(140)}" th:value="${prodType.codeSeq}" th:text="${prodType.codeName}" th:selected="${vo.shProdCategoryType} == ${prodType.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 747}">
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shFeedBrand" id="shFeedBrand">
+				<option value="">브랜드</option>
+				<option th:each="prodBrand : ${@codeService.selectListCachedCode(96)}" th:value="${prodBrand.codeSeq}" th:text="${prodBrand.codeName}" th:selected="${vo.shFeedBrand} == ${prodBrand.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdCategory" id="shProdCategory">
+				<option value="">유형</option>
+				<option th:each="prodType : ${@codeService.selectListCachedCode(97)}" th:value="${prodType.codeSeq}" th:text="${prodType.codeName}" th:selected="${vo.shProdCategory} == ${prodType.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 748}">
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shFeedBrand" id="shFeedBrand">
+				<option value="">브랜드</option>
+				<option th:each="prodBrand : ${@codeService.selectListCachedCode(98)}" th:value="${prodBrand.codeSeq}" th:text="${prodBrand.codeName}" th:selected="${vo.shFeedBrand} == ${prodBrand.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdCategory" id="shProdCategory">
+				<option value="">유형</option>
+				<option th:each="prodType : ${@codeService.selectListCachedCode(101)}" th:value="${prodType.codeSeq}" th:text="${prodType.codeName}" th:selected="${vo.shProdCategory} == ${prodType.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shWearMethod" id="shWearMethod">
+				<option value="">착용 방법</option>
+				<option th:each="prodWearMethod : ${@codeService.selectListCachedCode(99)}" th:value="${prodWearMethod.codeSeq}" th:text="${prodWearMethod.codeName}" th:selected="${vo.shWearMethod} == ${prodWearMethod.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdFunction" id="shProdFunction">
+				<option value="">기능</option>
+				<option th:each="prodFunction : ${@codeService.selectListCachedCode(100)}" th:value="${prodFunction.codeSeq}" th:text="${prodFunction.codeName}" th:selected="${vo.shProdFunction} == ${prodFunction.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdColor" id="shProdColor">
+				<option value="">색상</option>
+				<option th:each="prodColor : ${@codeService.selectListCachedCode(45)}" th:value="${prodColor.codeSeq}" th:text="${prodColor.codeName}" th:selected="${vo.shProdColor} == ${prodColor.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 749}">
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shFeedBrand" id="shFeedBrand">
+				<option value="">브랜드</option>
+				<option th:each="prodBrand : ${@codeService.selectListCachedCode(102)}" th:value="${prodBrand.codeSeq}" th:text="${prodBrand.codeName}" th:selected="${vo.shFeedBrand} == ${prodBrand.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdCategory" id="shProdCategory">
+				<option value="">유형</option>
+				<option th:each="prodType : ${@codeService.selectListCachedCode(103)}" th:value="${prodType.codeSeq}" th:text="${prodType.codeName}" th:selected="${vo.shProdCategory} == ${prodType.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdColor" id="shProdColor">
+				<option value="">색상</option>
+				<option th:each="prodColor : ${@codeService.selectListCachedCode(45)}" th:value="${prodColor.codeSeq}" th:text="${prodColor.codeName}" th:selected="${vo.shProdColor} == ${prodColor.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 750}">
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shFeedBrand" id="shFeedBrand">
+				<option value="">브랜드</option>
+				<option th:each="prodBrand : ${@codeService.selectListCachedCode(104)}" th:value="${prodBrand.codeSeq}" th:text="${prodBrand.codeName}" th:selected="${vo.shFeedBrand} == ${prodBrand.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 751}">
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shFeedBrand" id="shFeedBrand">
+				<option value="">브랜드</option>
+				<option th:each="prodBrand : ${@codeService.selectListCachedCode(74)}" th:value="${prodBrand.codeSeq}" th:text="${prodBrand.codeName}" th:selected="${vo.shFeedBrand} == ${prodBrand.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdCategory" id="shProdCategory">
+				<option value="">유형</option>
+				<option th:each="prodType : ${@codeService.selectListCachedCode(76)}" th:value="${prodType.codeSeq}" th:text="${prodType.codeName}" th:selected="${vo.shProdCategory} == ${prodType.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdFunction" id="shProdFunction">
+				<option value="">기능</option>
+				<option th:each="prodFunction : ${@codeService.selectListCachedCode(75)}" th:value="${prodFunction.codeSeq}" th:text="${prodFunction.codeName}" th:selected="${vo.shProdFunction} == ${prodFunction.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 752}">
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shFeedBrand" id="shFeedBrand">
+				<option value="">브랜드</option>
+				<option th:each="prodBrand : ${@codeService.selectListCachedCode(142)}" th:value="${prodBrand.codeSeq}" th:text="${prodBrand.codeName}" th:selected="${vo.shFeedBrand} == ${prodBrand.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdCategory" id="shProdCategory">
+				<option value="">유형</option>
+				<option th:each="prodType : ${@codeService.selectListCachedCode(143)}" th:value="${prodType.codeSeq}" th:text="${prodType.codeName}" th:selected="${vo.shProdCategory} == ${prodType.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdColor" id="shProdColor">
+				<option value="">색상</option>
+				<option th:each="prodColor : ${@codeService.selectListCachedCode(45)}" th:value="${prodColor.codeSeq}" th:text="${prodColor.codeName}" th:selected="${vo.shProdColor} == ${prodColor.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 753}">
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shFeedBrand" id="shFeedBrand">
+				<option value="">브랜드</option>
+				<option th:each="prodBrand : ${@codeService.selectListCachedCode(106)}" th:value="${prodBrand.codeSeq}" th:text="${prodBrand.codeName}" th:selected="${vo.shFeedBrand} == ${prodBrand.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdCategory" id="shProdCategory">
+				<option value="">유형</option>
+				<option th:each="prodType : ${@codeService.selectListCachedCode(108)}" th:value="${prodType.codeSeq}" th:text="${prodType.codeName}" th:selected="${vo.shProdCategory} == ${prodType.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdFunction" id="shProdFunction">
+				<option value="">기능</option>
+				<option th:each="prodFunction : ${@codeService.selectListCachedCode(107)}" th:value="${prodFunction.codeSeq}" th:text="${prodFunction.codeName}" th:selected="${vo.shProdFunction} == ${prodFunction.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 754}">
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shFeedBrand" id="shFeedBrand">
+				<option value="">브랜드</option>
+				<option th:each="prodBrand : ${@codeService.selectListCachedCode(144)}" th:value="${prodBrand.codeSeq}" th:text="${prodBrand.codeName}" th:selected="${vo.shFeedBrand} == ${prodBrand.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdCategory" id="shProdCategory">
+				<option value="">유형</option>
+				<option th:each="prodType : ${@codeService.selectListCachedCode(146)}" th:value="${prodType.codeSeq}" th:text="${prodType.codeName}" th:selected="${vo.shProdCategory} == ${prodType.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdSound" id="shProdSound">
+				<option value="">소리</option>
+				<option th:each="prodSound : ${@codeService.selectListCachedCode(145)}" th:value="${prodSound.codeSeq}" th:text="${prodSound.codeName}" th:selected="${vo.shProdSound} == ${prodSound.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+			  <select class="form-select-JHY" name="shProdColor" id="shProdColor">
+				<option value="">색상</option>
+				<option th:each="prodColor : ${@codeService.selectListCachedCode(45)}" th:value="${prodColor.codeSeq}" th:text="${prodColor.codeName}" th:selected="${vo.shProdColor} == ${prodColor.codeSeq}"></option>
+			  </select>
+			</div>
+		</div>
+	</th:block>
 </th:block>
