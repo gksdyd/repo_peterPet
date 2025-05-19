@@ -149,4 +149,8 @@ public class ProductService extends BaseService {
 	public List<ProductDto> selectSameProducts(ProductVo vo) {
 		return productDao.selectSameProducts(vo);
 	}
+	
+	public List<ProductDto> selectAllProducts() {
+		return productDao.selectAllProducts();
+	}
 }

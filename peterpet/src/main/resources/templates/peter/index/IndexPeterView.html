@@ -96,12 +96,12 @@
                     <div class="container">
                         <div class="grid-products">
                             <div class="row">
-                                <div class="item col-lg-3 col-md-4 col-6">
+                                <div class="item col-lg-3 col-md-4 col-6" th:each="list : ${list}">
                                     <!--Start Product Image-->
                                     <div class="product-image">
                                         <!--Start Product Image-->
-                                        <a href="product-page.html" class="product-img">
-                                            <img class="blur-up lazyload" data-src="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity.jpeg" src="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity.jpeg" alt="image" title="">
+                                        <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${list.prodType})}">
+                                            <img class="blur-up lazyload" th:src="${list.path}">
                                             <!-- product label -->
                                             <!-- <div class="product-labels"><span class="lbl on-sale rounded">최저가도전!</span></div> -->
                                             <!-- End product label -->
@@ -113,430 +113,36 @@
                                     <div class="product-details text-center">
                                         <!--Product Name-->
                                         <div class="product-name text-uppercase">
-                                            <a href="product-page.html">로얄캐닌 독 미니 인도어 퍼피 3kg 면역력</a>
+                                            <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${list.prodType})}" th:if="${list.funcName} == null and ${list.infoWeight} == null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName}"></a>
+                                            <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${list.prodType})}" th:if="${list.funcName} != null and ${list.infoWeight} == null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName} + ' ' + ${@codeService.selectOneCachedCode(list.funcName)}"></a>
+                                            <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${list.prodType})}" th:if="${list.funcName} == null and ${list.infoWeight} != null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName} + ' ' + ${list.infoWeight} + 'kg'"></a>
+                                            <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${list.prodType})}" th:if="${list.funcName} != null and ${list.infoWeight} != null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName} + ' ' + ${list.infoWeight} + 'kg' + ' ' + ${@codeService.selectOneCachedCode(list.funcName)}"></a>
                                         </div>
                                         <!--End Product Name-->
                                         <!--Product Price-->
                                         <div class="product-price">
-                                            <div class="old-price">49,700원</div>
-                                            <span class="price">6% 46.500원</span>
+                                            <div class="old-price" th:if="${list.infoDiscount} != 0" th:text="${list.infoPrice}"></div>
+                                            <span class="price" th:if="${list.infoDiscount} == 0" th:text="${list.infoPrice}"></span>
+                                            <span class="price" th:if="${list.infoDiscount} != 0" th:text="${list.infoDiscount} + '% ' + ${list.discountPrice}"></span>
                                         </div>
                                         <!--End Product Price-->
                                         <!--Product Review-->
                                         <div class="product-review d-flex align-items-center justify-content-center">
-                                            <i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i>
+                                            <span th:if="${list.prodScore} > 4"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i></span>
+                                            <span th:if="${list.prodScore} > 3 and 4 >= ${list.prodScore}"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i></span>
+                                            <span th:if="${list.prodScore} > 2 and 3 >= ${list.prodScore}"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
+                                            <span th:if="${list.prodScore} > 1 and 2 >= ${list.prodScore}"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
+                                            <span th:if="${list.prodScore} > 0 and 1 >= ${list.prodScore}"><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
+                                            <span th:if="${list.prodScore} == 0"><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
                                         </div>
                                         <!--End Product Review-->
                                         <!--deliver-->
-                                        <div class="d-flex align-items-center justify-content-center" style="color: rgb(229, 135, 151);">
+                                        <div class="product-review d-flex align-items-center justify-content-center" style="color: rgb(229, 135, 151);">
                                             <i class="an an-ship-fast fs-4"></i>&emsp;빠른 배송
                                         </div>
                                         <!--End deliver-->
                                     </div>
                                     <!--End Product Details-->
-                                </div>
-                                <div class="item col-lg-3 col-md-4 col-6">
-                                    <!--Start Product Image-->
-                                    <div class="product-image">
-                                        <!--Start Product Image-->
-                                        <a href="product-layout1.html" class="product-img">
-                                            <!--Image-->
-                                            <img class="primary blur-up lazyload rounded" data-src="/peter/template/optimal-html/assets/images/products/800x800.jpg" src="/peter/template/optimal-html/assets/images/products/800x800.jpg" alt="image" title="">
-                                            <!--End Image-->
-                                            <!--Hover Image-->
-                                            <img class="hover blur-up lazyload rounded" data-src="/peter/template/optimal-html/assets/images/products/800x800.jpg" src="/peter/template/optimal-html/assets/images/products/800x800.jpg" alt="image" title="">
-                                            <!--End Hover Image-->
-                                        </a>
-                                        <!--End Product Image-->
-                                        <!--Product Button-->
-                                        <div class="button-set style0 d-none d-md-block">
-                                            <ul>
-                                                <!--Cart Button-->
-                                                <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label top">Add to Cart</span></a></li>
-                                                <!--End Cart Button-->
-                                                <!--Quick View Button-->
-                                                <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label top">Quick View</span></a></li>
-                                                <!--End Quick View Button-->
-                                                <!--Wishlist Button-->
-                                                <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
-                                                <!--End Wishlist Button-->
-                                                <!--Compare Button-->
-                                                <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label top">Add to Compare</span></a></li>
-                                                <!--End Compare Button-->
-                                            </ul>
-                                        </div>
-                                        <!--End Product Button-->
-                                    </div>
-                                    <!--End Product Image-->
-                                    <!--Start Product Details-->
-                                    <div class="product-details text-center">
-                                        <!--Product Name-->
-                                        <div class="product-name text-uppercase">
-                                            <a href="product-layout1.html" class="fw-normal">LED Curtain Garland</a>
-                                        </div>
-                                        <!--End Product Name-->
-                                        <!--Product Price-->
-                                        <div class="product-price">
-                                            <span class="price">$13.42</span>
-                                        </div>
-                                        <!-- End Product Price-->
-                                        <!--Product Review-->
-                                        <div class="product-review d-flex-center justify-content-center mb-0">
-                                            <i class="an an-star"></i>
-                                            <i class="an an-star"></i>
-                                            <i class="an an-star"></i>
-                                            <i class="an an-star"></i>
-                                            <i class="an an-star-o"></i>
-                                        </div>
-                                        <!--End Product Review-->
-                                    </div>
-                                    <!-- End product details -->
-                                </div>
-                                <div class="item col-lg-3 col-md-4 col-6">
-                                    <!--Start Product Image-->
-                                    <div class="product-image">
-                                        <!--Start Product Image-->
-                                        <a href="product-layout1.html" class="product-img">
-                                            <!--Image-->
-                                            <img class="primary blur-up lazyload rounded" data-src="/peter/template/optimal-html/assets/images/products/800x800.jpg" src="/peter/template/optimal-html/assets/images/products/800x800.jpg" alt="image" title="">
-                                            <!--End Image-->
-                                            <!--Hover Image-->
-                                            <img class="hover blur-up lazyload rounded" data-src="/peter/template/optimal-html/assets/images/products/800x800.jpg" src="/peter/template/optimal-html/assets/images/products/800x800.jpg" alt="image" title="">
-                                            <!--End Hover Image-->
-                                        </a>
-                                        <!--End Product Image-->
-                                        <!-- product label -->
-                                        <div class="product-labels"><span class="lbl on-sale rounded-1">Sale</span></div>
-                                        <!-- End product label -->
-
-                                        <!--Product Button-->
-                                        <div class="button-set style0 d-none d-md-block">
-                                            <ul>
-                                                <!--Cart Button-->
-                                                <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label top">Add to Cart</span></a></li>
-                                                <!--End Cart Button-->
-                                                <!--Quick View Button-->
-                                                <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label top">Quick View</span></a></li>
-                                                <!--End Quick View Button-->
-                                                <!--Wishlist Button-->
-                                                <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
-                                                <!--End Wishlist Button-->
-                                                <!--Compare Button-->
-                                                <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label top">Add to Compare</span></a></li>
-                                                <!--End Compare Button-->
-                                            </ul>
-                                        </div>
-                                        <!--End Product Button-->
-                                    </div>
-                                    <!--End Product Image-->
-                                    <!--Start Product Details-->
-                                    <div class="product-details text-center">
-                                        <!--Product Name-->
-                                        <div class="product-name text-uppercase">
-                                            <a href="product-layout1.html" class="fw-normal">Snowman Lantern Light</a>
-                                        </div>
-                                        <!--End Product Name-->
-                                        <!--Product Price-->
-                                        <div class="product-price">
-                                            <span class="price">$8.00</span>
-                                        </div>
-                                        <!-- End Product Price-->
-                                        <!--Product Review-->
-                                        <div class="product-review d-flex-center justify-content-center mb-0">
-                                            <i class="an an-star"></i>
-                                            <i class="an an-star"></i>
-                                            <i class="an an-star"></i>
-                                            <i class="an an-star"></i>
-                                            <i class="an an-star"></i>
-                                        </div>
-                                        <!--End Product Review-->
-                                    </div>
-                                    <!-- End product details -->
-                                </div>
-                                <div class="item col-lg-3 col-md-4 col-6">
-                                    <!--Start Product Image-->
-                                    <div class="product-image">
-                                        <!--Start Product Image-->
-                                        <a href="product-layout1.html" class="product-img">
-                                            <!--Image-->
-                                            <img class="primary blur-up lazyload rounded" data-src="/peter/template/optimal-html/assets/images/products/800x800.jpg" src="/peter/template/optimal-html/assets/images/products/800x800.jpg" alt="image" title="">
-                                            <!--End Image-->
-                                            <!--Hover Image-->
-                                            <img class="hover blur-up lazyload rounded" data-src="/peter/template/optimal-html/assets/images/products/800x800.jpg" src="/peter/template/optimal-html/assets/images/products/800x800.jpg" alt="image" title="">
-                                            <!--End Hover Image-->
-                                        </a>
-                                        <!--End Product Image-->
-                                        <!--Product Button-->
-                                        <div class="button-set style0 d-none d-md-block">
-                                            <ul>
-                                                <!--Cart Button-->
-                                                <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label top">Add to Cart</span></a></li>
-                                                <!--End Cart Button-->
-                                                <!--Quick View Button-->
-                                                <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label top">Quick View</span></a></li>
-                                                <!--End Quick View Button-->
-                                                <!--Wishlist Button-->
-                                                <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
-                                                <!--End Wishlist Button-->
-                                                <!--Compare Button-->
-                                                <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label top">Add to Compare</span></a></li>
-                                                <!--End Compare Button-->
-                                            </ul>
-                                        </div>
-                                        <!--End Product Button-->
-                                    </div>
-                                    <!--End Product Image-->
-                                    <!--Start Product Details-->
-                                    <div class="product-details text-center">
-                                        <!--Product Name-->
-                                        <div class="product-name text-uppercase">
-                                            <a href="product-layout1.html" class="fw-normal">Glitter Artificial Flowers</a>
-                                        </div>
-                                        <!--End Product Name-->
-                                        <!--Product Price-->
-                                        <div class="product-price">
-                                            <span class="price">$3.00</span>
-                                        </div>
-                                        <!-- End Product Price-->
-                                        <!--Product Review-->
-                                        <div class="product-review d-flex-center justify-content-center mb-0">
-                                            <i class="an an-star"></i>
-                                            <i class="an an-star"></i>
-                                            <i class="an an-star"></i>
-                                            <i class="an an-star"></i>
-                                            <i class="an an-star-o"></i>
-                                        </div>
-                                        <!--End Product Review-->
-                                    </div>
-                                    <!-- End product details -->
-                                </div>
-                                <div class="item col-lg-3 col-md-4 col-6">
-                                    <!--Start Product Image-->
-                                    <div class="product-image">
-                                        <!--Start Product Image-->
-                                        <a href="product-layout1.html" class="product-img">
-                                            <!--Image-->
-                                            <img class="primary blur-up lazyload rounded" data-src="/peter/template/optimal-html/assets/images/products/800x800.jpg" src="/peter/template/optimal-html/assets/images/products/800x800.jpg" alt="image" title="">
-                                            <!--End Image-->
-                                            <!--Hover Image-->
-                                            <img class="hover blur-up lazyload rounded" data-src="/peter/template/optimal-html/assets/images/products/800x800.jpg" src="/peter/template/optimal-html/assets/images/products/800x800.jpg" alt="image" title="">
-                                            <!--End Hover Image-->
-                                        </a>
-                                        <!--End Product Image-->
-                                        <!--Product Button-->
-                                        <div class="button-set style0 d-none d-md-block">
-                                            <ul>
-                                                <!--Cart Button-->
-                                                <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label top">Add to Cart</span></a></li>
-                                                <!--End Cart Button-->
-                                                <!--Quick View Button-->
-                                                <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label top">Quick View</span></a></li>
-                                                <!--End Quick View Button-->
-                                                <!--Wishlist Button-->
-                                                <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
-                                                <!--End Wishlist Button-->
-                                                <!--Compare Button-->
-                                                <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label top">Add to Compare</span></a></li>
-                                                <!--End Compare Button-->
-                                            </ul>
-                                        </div>
-                                        <!--End Product Button-->
-                                    </div>
-                                    <!--End Product Image-->
-                                    <!--Start Product Details-->
-                                    <div class="product-details text-center">
-                                        <!--Product Name-->
-                                        <div class="product-name text-uppercase">
-                                            <a href="product-layout1.html" class="fw-normal">Wall Window Stickers</a>
-                                        </div>
-                                        <!--End Product Name-->
-                                        <!--Product Price-->
-                                        <div class="product-price">
-                                            <span class="price">$8.00</span>
-                                        </div>
-                                        <!-- End Product Price-->
-                                        <!--Product Review-->
-                                        <div class="product-review d-flex-center justify-content-center mb-0">
-                                            <i class="an an-star"></i>
-                                            <i class="an an-star"></i>
-                                            <i class="an an-star"></i>
-                                            <i class="an an-star"></i>
-                                            <i class="an an-star-o"></i>
-                                        </div>
-                                        <!--End Product Review-->
-                                    </div>
-                                    <!-- End product details -->
-                                </div>
-                                <div class="item col-lg-3 col-md-4 col-6">
-                                    <!--Start Product Image-->
-                                    <div class="product-image">
-                                        <!--Start Product Image-->
-                                        <a href="product-layout1.html" class="product-img">
-                                            <!--Image-->
-                                            <img class="primary blur-up lazyload rounded" data-src="/peter/template/optimal-html/assets/images/products/800x800.jpg" src="/peter/template/optimal-html/assets/images/products/800x800.jpg" alt="image" title="">
-                                            <!--End Image-->
-                                            <!--Hover Image-->
-                                            <img class="hover blur-up lazyload rounded" data-src="/peter/template/optimal-html/assets/images/products/800x800.jpg" src="/peter/template/optimal-html/assets/images/products/800x800.jpg" alt="image" title="">
-                                            <!--End Hover Image-->
-                                        </a>
-                                        <!--End Product Image-->
-                                        <!--Product Button-->
-                                        <div class="button-set style0 d-none d-md-block">
-                                            <ul>
-                                                <!--Cart Button-->
-                                                <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label top">Add to Cart</span></a></li>
-                                                <!--End Cart Button-->
-                                                <!--Quick View Button-->
-                                                <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label top">Quick View</span></a></li>
-                                                <!--End Quick View Button-->
-                                                <!--Wishlist Button-->
-                                                <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
-                                                <!--End Wishlist Button-->
-                                                <!--Compare Button-->
-                                                <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label top">Add to Compare</span></a></li>
-                                                <!--End Compare Button-->
-                                            </ul>
-                                        </div>
-                                        <!--End Product Button-->
-                                    </div>
-                                    <!--End Product Image-->
-                                    <!--Start Product Details-->
-                                    <div class="product-details text-center">
-                                        <!--Product Name-->
-                                        <div class="product-name text-uppercase">
-                                            <a href="product-layout1.html" class="fw-normal">Pillowcase Decorations</a>
-                                        </div>
-                                        <!--End Product Name-->
-                                        <!--Product Price-->
-                                        <div class="product-price">
-                                            <span class="price">$6.00</span>
-                                        </div>
-                                        <!-- End Product Price-->
-                                        <!--Product Review-->
-                                        <div class="product-review d-flex-center justify-content-center mb-0">
-                                            <i class="an an-star"></i>
-                                            <i class="an an-star"></i>
-                                            <i class="an an-star"></i>
-                                            <i class="an an-star"></i>
-                                            <i class="an an-star-o"></i>
-                                        </div>
-                                        <!--End Product Review-->
-                                    </div>
-                                    <!-- End product details -->
-                                </div>
-                                <div class="item col-lg-3 col-md-4 col-6">
-                                    <!--Start Product Image-->
-                                    <div class="product-image">
-                                        <!--Start Product Image-->
-                                        <a href="product-layout1.html" class="product-img">
-                                            <!--Image-->
-                                            <img class="primary blur-up lazyload rounded" data-src="/peter/template/optimal-html/assets/images/products/800x800.jpg" src="/peter/template/optimal-html/assets/images/products/800x800.jpg" alt="image" title="">
-                                            <!--End Image-->
-                                            <!--Hover Image-->
-                                            <img class="hover blur-up lazyload rounded" data-src="/peter/template/optimal-html/assets/images/products/800x800.jpg" src="/peter/template/optimal-html/assets/images/products/800x800.jpg" alt="image" title="">
-                                            <!--End Hover Image-->
-                                        </a>
-                                        <!--End Product Image-->
-                                        <!--Product Button-->
-                                        <div class="button-set style0 d-none d-md-block">
-                                            <ul>
-                                                <!--Cart Button-->
-                                                <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label top">Add to Cart</span></a></li>
-                                                <!--End Cart Button-->
-                                                <!--Quick View Button-->
-                                                <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label top">Quick View</span></a></li>
-                                                <!--End Quick View Button-->
-                                                <!--Wishlist Button-->
-                                                <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
-                                                <!--End Wishlist Button-->
-                                                <!--Compare Button-->
-                                                <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label top">Add to Compare</span></a></li>
-                                                <!--End Compare Button-->
-                                            </ul>
-                                        </div>
-                                        <!--End Product Button-->
-                                    </div>
-                                    <!--End Product Image-->
-                                    <!--Start Product Details-->
-                                    <div class="product-details text-center">
-                                        <!--Product Name-->
-                                        <div class="product-name text-uppercase">
-                                            <a href="product-layout1.html" class="fw-normal">Santa Claus Window Stickers</a>
-                                        </div>
-                                        <!--End Product Name-->
-                                        <!--Product Price-->
-                                        <div class="product-price">
-                                            <span class="price">$3.00</span>
-                                        </div>
-                                        <!-- End Product Price-->
-                                        <!--Product Review-->
-                                        <div class="product-review d-flex-center justify-content-center mb-0">
-                                            <i class="an an-star"></i>
-                                            <i class="an an-star"></i>
-                                            <i class="an an-star"></i>
-                                            <i class="an an-star"></i>
-                                            <i class="an an-star"></i>
-                                        </div>
-                                        <!--End Product Review-->
-                                    </div>
-                                    <!-- End product details -->
-                                </div>
-                                <div class="item col-lg-3 col-md-4 col-6">
-                                    <!--Start Product Image-->
-                                    <div class="product-image">
-                                        <!--Start Product Image-->
-                                        <a href="product-layout1.html" class="product-img">
-                                            <!--Image-->
-                                            <img class="primary blur-up lazyload rounded" data-src="/peter/template/optimal-html/assets/images/products/800x800.jpg" src="/peter/template/optimal-html/assets/images/products/800x800.jpg" alt="image" title="">
-                                            <!--End Image-->
-                                            <!--Hover Image-->
-                                            <img class="hover blur-up lazyload rounded" data-src="/peter/template/optimal-html/assets/images/products/800x800.jpg" src="/peter/template/optimal-html/assets/images/products/800x800.jpg" alt="image" title="">
-                                            <!--End Hover Image-->
-                                        </a>
-                                        <!--End Product Image-->
-                                        <!--Product Button-->
-                                        <div class="button-set style0 d-none d-md-block">
-                                            <ul>
-                                                <!--Cart Button-->
-                                                <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label top">Add to Cart</span></a></li>
-                                                <!--End Cart Button-->
-                                                <!--Quick View Button-->
-                                                <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label top">Quick View</span></a></li>
-                                                <!--End Quick View Button-->
-                                                <!--Wishlist Button-->
-                                                <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
-                                                <!--End Wishlist Button-->
-                                                <!--Compare Button-->
-                                                <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label top">Add to Compare</span></a></li>
-                                                <!--End Compare Button-->
-                                            </ul>
-                                        </div>
-                                        <!--End Product Button-->
-                                    </div>
-                                    <!--End Product Image-->
-                                    <!--Start Product Details-->
-                                    <div class="product-details text-center">
-                                        <!--Product Name-->
-                                        <div class="product-name text-uppercase">
-                                            <a href="product-layout1.html" class="fw-normal">Door Hanging Oranments</a>
-                                        </div>
-                                        <!--End Product Name-->
-                                        <!--Product Price-->
-                                        <div class="product-price">
-                                            <span class="price">$8.00</span>
-                                        </div>
-                                        <!-- End Product Price-->
-                                        <!--Product Review-->
-                                        <div class="product-review d-flex-center justify-content-center mb-0">
-                                            <i class="an an-star"></i>
-                                            <i class="an an-star"></i>
-                                            <i class="an an-star"></i>
-                                            <i class="an an-star"></i>
-                                            <i class="an an-star-o"></i>
-                                        </div>
-                                        <!--End Product Review-->
-                                    </div>
-                                    <!-- End product details -->
                                 </div>
                             </div>
                         </div>
