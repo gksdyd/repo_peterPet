@@ -27,7 +27,7 @@
                                     </div>
                                     <div class="zoompro-wrap product-zoom-right">
                                         <div class="zoompro-span"><img id="zoompro" class="zoompro" th:src="${item.path}" th:data-zoom-image="${item.path}" alt="product" /></div>
-                                        <div class="product-labels"><span class="lbl pr-label1">new</span></div>
+                                        <!-- <div class="product-labels"><span class="lbl pr-label1">new</span></div> -->
                                         <div class="product-wish"><a class="wishIcon wishlist rounded m-0" href="my-wishlist.html"><i class="icon an an-heart"></i><span class="tooltip-label left">찜</span></a></div>
                                         <div class="product-buttons">
                                             <a href="#" class="btn rounded"><i class="icon an an-share-alt1"></i><span class="tooltip-label">공유</span></a>
@@ -415,15 +415,17 @@
                             </div>
                         </div>
                         <div class="productSlider grid-products">
-                            <div class="item">
+                            <div th:if="${#lists.isEmpty(sameProd)}" class="item">
+                                <p>상품을 준비중입니다.</p>
+                            </div>
+                            <div th:if="${!#lists.isEmpty(sameProd)}" class="item" th:each="list : ${sameProd}">
                                 <!--Start Product Image-->
                                 <div class="product-image">
                                     <!--Start Product Image-->
-                                    <a href="product-page.html" class="product-img">
-                                        <img class="blur-up lazyload" data-src="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity.jpeg" src="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity.jpeg" alt="image" title="">
+                                    <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${vo.prodType})}">
+                                        <img class="blur-up lazyload" th:src="${list.path}">
+                                        <!-- <div class="product-labels"><span class="lbl on-sale rounded">최저가도전!</span></div> -->
                                         <!-- product label -->
-                                        <div class="product-labels"><span class="lbl on-sale rounded">최저가도전!</span></div>
-                                        <!-- End product label -->
                                     </a>
                                     <!--End Product Image-->
                                 </div>
@@ -432,269 +434,34 @@
                                 <div class="product-details text-center">
                                     <!--Product Name-->
                                     <div class="product-name text-uppercase">
-                                        <a href="product-page.html">로얄캐닌 독 미니 인도어 퍼피 3kg 면역력</a>
+                                        <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${vo.prodType})}" th:if="${list.funcName} == null and ${list.infoWeight} == null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName}"></a>
+                                        <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${vo.prodType})}" th:if="${list.funcName} != null and ${list.infoWeight} == null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName} + ' ' + ${@codeService.selectOneCachedCode(list.funcName)}"></a>
+                                        <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${vo.prodType})}" th:if="${list.funcName} == null and ${list.infoWeight} != null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName} + ' ' + ${list.infoWeight} + 'kg'"></a>
+                                        <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${vo.prodType})}" th:if="${list.funcName} != null and ${list.infoWeight} != null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName} + ' ' + ${list.infoWeight} + 'kg' + ' ' + ${@codeService.selectOneCachedCode(list.funcName)}"></a>
                                     </div>
                                     <!--End Product Name-->
                                     <!--Product Price-->
                                     <div class="product-price">
-                                        <div class="old-price">49,700원</div>
-                                        <span class="price">6% 46.500원</span>
+                                        <div class="old-price" th:if="${list.infoDiscount} != 0" th:text="${list.infoPrice}"></div>
+                                        <span class="price" th:if="${list.infoDiscount} == 0" th:text="${list.infoPrice}"></span>
+                                        <span class="price" th:if="${list.infoDiscount} != 0" th:text="${list.infoDiscount} + '% ' + ${list.discountPrice}"></span>
                                     </div>
                                     <!--End Product Price-->
                                     <!--Product Review-->
                                     <div class="product-review d-flex align-items-center justify-content-center">
-                                        <i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i>
+                                        <span th:if="${list.prodScore} > 4"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i></span>
+                                        <span th:if="${list.prodScore} > 3 and 4 >= ${list.prodScore}"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i></span>
+                                        <span th:if="${list.prodScore} > 2 and 3 >= ${list.prodScore}"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
+                                        <span th:if="${list.prodScore} > 1 and 2 >= ${list.prodScore}"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
+                                        <span th:if="${list.prodScore} > 0 and 1 >= ${list.prodScore}"><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
+                                        <span th:if="${list.prodScore} == 0"><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
                                     </div>
                                     <!--End Product Review-->
                                     <!--deliver-->
-                                    <div class="d-flex align-items-center justify-content-center" style="color: rgb(229, 135, 151);">
+                                    <div class="product-review d-flex align-items-center justify-content-center" style="color: rgb(229, 135, 151);">
                                         <i class="an an-ship-fast fs-4"></i>&emsp;빠른 배송
                                     </div>
                                     <!--End deliver-->
-                                </div>
-                                <!--End Product Details-->
-                            </div>
-                            <div class="item">
-                                <!--Start Product Image-->
-                                <div class="product-image">
-                                    <!--Start Product Image-->
-                                    <a href="product-layout1.html" class="product-img">
-                                        <!-- image -->
-                                        <img class="primary blur-up lazyload" data-src="/peter/template/optimal-html/assets/images/products/product-1.jpg" src="/peter/template/optimal-html/assets/images/products/product-1.jpg" alt="" title="">
-                                        <!-- End image -->
-                                        <!-- Hover image -->
-                                        <img class="hover blur-up lazyload" data-src="/peter/template/optimal-html/assets/images/products/product-1-1.jpg" src="/peter/template/optimal-html/assets/images/products/product-1-1.jpg" alt="" title="">
-                                        <!-- End hover image -->
-                                    </a>
-                                    <!--End Product Image-->
-
-                                    <!--Countdown Timer-->
-                                    <div class="saleTime desktop" data-countdown="2024/10/01"></div>
-                                    <!--End Countdown Timer-->
-
-                                    <!--Product Button-->
-                                    <div class="button-set style0 d-none d-md-block">
-                                        <ul>
-                                            <!--Cart Button-->
-                                            <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label top">Add to Cart</span></a></li>
-                                            <!--End Cart Button-->
-                                            <!--Quick View Button-->
-                                            <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label top">Quick View</span></a></li>
-                                            <!--End Quick View Button-->
-                                            <!--Wishlist Button-->
-                                            <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
-                                            <!--End Wishlist Button-->
-                                            <!--Compare Button-->
-                                            <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label top">Add to Compare</span></a></li>
-                                            <!--End Compare Button-->
-                                        </ul>
-                                    </div>
-                                    <!--End Product Button-->
-                                </div>
-                                <!--End Product Image-->
-                                <!--Start Product Details-->
-                                <div class="product-details text-center">
-                                    <!--Product Name-->
-                                    <div class="product-name text-uppercase">
-                                        <a href="product-layout1.html">Long Sleeve T-shirts</a>
-                                    </div>
-                                    <!--End Product Name-->
-                                    <!--Product Price-->
-                                    <div class="product-price">
-                                        <span class="price">$199.00</span>
-                                    </div>
-                                    <!--End Product Price-->
-                                    <!--Product Review-->
-                                    <div class="product-review d-flex align-items-center justify-content-center"><i class="an an-star"></i> <i class="an an-star"></i> <i class="an an-star"></i><i class="an an-star"></i> <i class="an an-star"></i></div>
-                                    <!--End Product Review-->
-                                    <!-- Color Variant -->
-                                    <ul class="swatches">
-                                        <li class="swatch medium rounded black"><span class="tooltip-label">Black</span></li>
-                                        <li class="swatch medium rounded navy"><span class="tooltip-label">Navy</span></li>
-                                        <li class="swatch medium rounded purple"><span class="tooltip-label">Purple</span></li>
-                                    </ul>
-                                    <!-- End Variant -->
-                                </div>
-                                <!--End Product Details-->
-                            </div>
-                            <div class="item">
-                                <!--Start Product Image-->
-                                <div class="product-image">
-                                    <!--Start Product Image-->
-                                    <a href="product-layout1.html" class="product-img">
-                                        <!-- image -->
-                                        <img class="primary blur-up lazyload" data-src="/peter/template/optimal-html/assets/images/products/product-1.jpg" src="/peter/template/optimal-html/assets/images/products/product-1.jpg" alt="" title="">
-                                        <!-- End image -->
-                                        <!-- Hover image -->
-                                        <img class="hover blur-up lazyload" data-src="/peter/template/optimal-html/assets/images/products/product-1-1.jpg" src="/peter/template/optimal-html/assets/images/products/product-1-1.jpg" alt="" title="">
-                                        <!-- End hover image -->
-                                    </a>
-                                    <!--End Product Image-->
-                                    <!--Product label-->
-                                    <div class="product-labels"><span class="lbl pr-label1">New</span></div>
-                                    <!--Product label-->
-
-                                    <!--Product Button-->
-                                    <div class="button-set style0 d-none d-md-block">
-                                        <ul>
-                                            <!--Cart Button-->
-                                            <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label top">Add to Cart</span></a></li>
-                                            <!--End Cart Button-->
-                                            <!--Quick View Button-->
-                                            <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label top">Quick View</span></a></li>
-                                            <!--End Quick View Button-->
-                                            <!--Wishlist Button-->
-                                            <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
-                                            <!--End Wishlist Button-->
-                                            <!--Compare Button-->
-                                            <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label top">Add to Compare</span></a></li>
-                                            <!--End Compare Button-->
-                                        </ul>
-                                    </div>
-                                    <!--End Product Button-->
-                                </div>
-                                <!--End Product Image-->
-                                <!--Start Product Details-->
-                                <div class="product-details text-center">
-                                    <!--Product Name-->
-                                    <div class="product-name text-uppercase">
-                                        <a href="product-layout1.html">Button Up Top Black</a>
-                                    </div>
-                                    <!--End Product Name-->
-                                    <!--Product Price-->
-                                    <div class="product-price">
-                                        <span class="price">$99.00</span>
-                                    </div>
-                                    <!--End Product Price-->
-                                    <!--Product Review-->
-                                    <div class="product-review d-flex align-items-center justify-content-center"><i class="an an-star"></i> <i class="an an-star"></i> <i class="an an-star-o"></i> <i class="an an-star-o"></i> <i class="an an-star-o"></i></div>
-                                    <!--End Product Review-->
-                                    <!--Color Variant -->
-                                    <ul class="swatches">
-                                        <li class="swatch medium rounded red"><span class="tooltip-label">red</span></li>
-                                        <li class="swatch medium rounded orange"><span class="tooltip-label">orange</span></li>
-                                        <li class="swatch medium rounded yellow"><span class="tooltip-label">yellow</span></li>
-                                    </ul>
-                                    <!-- End Variant -->
-                                </div>
-                                <!--End Product Details-->
-                            </div>
-                            <div class="item">
-                                <!--Start Product Image-->
-                                <div class="product-image">
-                                    <!--Start Product Image-->
-                                    <a href="product-layout1.html" class="product-img">
-                                        <!-- image -->
-                                        <img class="primary blur-up lazyload" data-src="/peter/template/optimal-html/assets/images/products/product-1.jpg" src="/peter/template/optimal-html/assets/images/products/product-1.jpg" alt="" title="">
-                                        <!-- End image -->
-                                        <!-- Hover image -->
-                                        <img class="hover blur-up lazyload" data-src="/peter/template/optimal-html/assets/images/products/product-1-1.jpg" src="/peter/template/optimal-html/assets/images/products/product-1-1.jpg" alt="" title="">
-                                        <!-- End hover image -->
-                                    </a>
-                                    <!--End Product Image-->
-
-                                    <!--Product Button-->
-                                    <div class="button-set style0 d-none d-md-block">
-                                        <ul>
-                                            <!--Cart Button-->
-                                            <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label top">Add to Cart</span></a></li>
-                                            <!--End Cart Button-->
-                                            <!--Quick View Button-->
-                                            <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label top">Quick View</span></a></li>
-                                            <!--End Quick View Button-->
-                                            <!--Wishlist Button-->
-                                            <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
-                                            <!--End Wishlist Button-->
-                                            <!--Compare Button-->
-                                            <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label top">Add to Compare</span></a></li>
-                                            <!--End Compare Button-->
-                                        </ul>
-                                    </div>
-                                    <!--End Product Button-->
-                                </div>
-                                <!--End Product Image-->
-                                <!--Start Product Details-->
-                                <div class="product-details text-center">
-                                    <!--Product Name-->
-                                    <div class="product-name text-uppercase">
-                                        <a href="product-layout1.html">Sunset Sleep Scarf Top</a>
-                                    </div>
-                                    <!--End Product Name-->
-                                    <!--Product Price-->
-                                    <div class="product-price">
-                                        <span class="price">$88.00</span>
-                                    </div>
-                                    <!--End Product Price-->
-                                    <!--Product Review-->
-                                    <div class="product-review d-flex align-items-center justify-content-center"><i class="an an-star"></i> <i class="an an-star-o"></i> <i class="an an-star-o"></i> <i class="an an-star-o"></i> <i class="an an-star-o"></i></div>
-                                    <!--End Product Review-->
-                                    <!-- Color Variant -->
-                                    <ul class="image-swatches swatches">
-                                        <li class="rounded yellow medium"><span class="swacth-btn"></span><span class="tooltip-label">Yellow</span></li>
-                                        <li class="rounded blue medium"><span class="swacth-btn"></span><span class="tooltip-label">Blue</span></li>
-                                        <li class="rounded pink medium"><span class="swacth-btn"></span><span class="tooltip-label">Pink</span></li>
-                                        <li class="rounded red medium"><span class="swacth-btn"></span><span class="tooltip-label">Red</span></li>
-                                    </ul>
-                                    <!-- End Variant -->
-                                </div>
-                                <!--End Product Details-->
-                            </div>
-                            <div class="item">
-                                <!--Start Product Image-->
-                                <div class="product-image">
-                                    <!--Start Product Image-->
-                                    <a href="product-layout1.html" class="product-img">
-                                        <!-- image -->
-                                        <img class="primary blur-up lazyload" data-src="/peter/template/optimal-html/assets/images/products/product-1.jpg" src="/peter/template/optimal-html/assets/images/products/product-1.jpg" alt="" title="">
-                                        <!-- End image -->
-                                        <!-- Hover image -->
-                                        <img class="hover blur-up lazyload" data-src="/peter/template/optimal-html/assets/images/products/product-1-1.jpg" src="/peter/template/optimal-html/assets/images/products/product-1-1.jpg" alt="" title="">
-                                        <!-- End hover image -->
-                                    </a>
-                                    <!--End Product Image-->
-
-                                    <!--Product Button-->
-                                    <div class="button-set style0 d-none d-md-block">
-                                        <ul>
-                                            <!--Cart Button-->
-                                            <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label top">Add to Cart</span></a></li>
-                                            <!--End Cart Button-->
-                                            <!--Quick View Button-->
-                                            <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label top">Quick View</span></a></li>
-                                            <!--End Quick View Button-->
-                                            <!--Wishlist Button-->
-                                            <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Add To Wishlist</span></a></li>
-                                            <!--End Wishlist Button-->
-                                            <!--Compare Button-->
-                                            <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label top">Add to Compare</span></a></li>
-                                            <!--End Compare Button-->
-                                        </ul>
-                                    </div>
-                                    <!--End Product Button-->   
-                                </div>
-                                <!--End Product Image-->
-                                <!--Start Product Details-->
-                                <div class="product-details text-center">
-                                    <!--Product Name-->
-                                    <div class="product-name text-uppercase">
-                                        <a href="product-layout1.html">Backpack With Contrast Bow</a>
-                                    </div>
-                                    <!--End Product Name-->
-                                    <!--Product Price-->
-                                    <div class="product-price">
-                                        <span class="price">$39.20</span>
-                                    </div>
-                                    <!--End Product Price-->
-                                    <!--Product Review-->
-                                    <div class="product-review d-flex align-items-center justify-content-center"><i class="an an-star"></i> <i class="an an-star"></i> <i class="an an-star"></i> <i class="an an-star"></i> <i class="an an-star-o"></i></div>
-                                    <!--End Product Review-->
-                                    <!-- Color Variant -->
-                                    <ul class="swatches">
-                                        <li class="swatch medium rounded black"><span class="tooltip-label">black</span></li>
-                                        <li class="swatch medium rounded navy"><span class="tooltip-label">navy</span></li>
-                                        <li class="swatch medium rounded darkgreen"><span class="tooltip-label">darkgreen</span></li>
-                                    </ul>
-                                    <!-- End Variant -->
                                 </div>
                                 <!--End Product Details-->
                             </div>

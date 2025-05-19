@@ -145,4 +145,8 @@ public class ProductService extends BaseService {
 	public ProductDto selectFeedInfo(ProductVo vo) {
 		return productDao.selectFeedInfo(vo);
 	}
+	
+	public List<ProductDto> selectSameProducts(ProductVo vo) {
+		return productDao.selectSameProducts(vo);
+	}
 }

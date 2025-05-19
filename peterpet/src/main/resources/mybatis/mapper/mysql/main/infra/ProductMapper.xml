@@ -81,7 +81,6 @@
 					<when test="shOptionDate == 1">AND a.prodRegDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
 					<when test="shOptionDate == 2">AND a.prodModDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
 				</choose>
- 
     </sql>
     
 	<select id="selectMaxSeq" resultType="Integer">
@@ -604,5 +603,28 @@
 		WHERE 1=1
 			AND product_prodSeq = #{prodSeq}
 			AND infoWeight = #{infoWeight}
+	</select>
+	
+	<select id="selectSameProducts" resultMap="resultMapObj">
+		SELECT
+			a.prodSeq,
+			a.prodName,
+			a.prodScore,
+			a.feedBrand,
+			b.infoPrice,
+			b.infoWeight,
+			b.infoDiscount,
+			c.funcName,
+			(SELECT path FROM image WHERE a.prodSeq = pseq AND delNy = 0 AND type = 1 ORDER BY sort LIMIT 1) AS path
+		FROM product a
+			LEFT JOIN feedinfo b ON a.prodSeq = b.product_prodSeq AND infoMain = 1
+			LEFT JOIN func c ON a.prodSeq = c.product_prodSeq AND funcMain = 1
+		WHERE 1=1
+			AND a.prodSeq != #{prodSeq}
+			AND a.prodDelFlag = 0
+			AND a.prodType = #{prodType}
+			AND a.feedType = (SELECT feedType FROM product WHERE prodSeq = #{prodSeq})
+		ORDER BY (SELECT COUNT(*) FROM review WHERE a.prodSeq = product_prodSeq AND reviDelFlag = 0) DESC
+		limit 5 offset 0
 	</select>
 </mapper>

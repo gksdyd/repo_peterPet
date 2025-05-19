@@ -60,6 +60,12 @@ public class ShopPeterController extends BaseController {
 		model.addAttribute("image2", productService.selectImage2(vo));
 		model.addAttribute("code", CodeDto.cachedCodeArrayList);
 		model.addAttribute("imageKey", imageKey);
+		
+		List<ProductDto> dtos = productService.selectSameProducts(vo);
+		for (int i = 0; i < dtos.size(); i++) {
+			dtos.get(i).calculatePrice();
+		}
+		model.addAttribute("sameProd", dtos);
 		deliveryTimeCheck(vo);
 		return "peter/shop/ShopPeterView";
 	}

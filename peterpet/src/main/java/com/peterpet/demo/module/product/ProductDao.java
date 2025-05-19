@@ -40,4 +40,5 @@ public interface ProductDao extends BaseDao {
 	public List<ProductDto> selectImage1(ProductVo vo);
 	public List<ProductDto> selectImage2(ProductVo vo);
 	public ProductDto selectFeedInfo(ProductVo vo);
+	public List<ProductDto> selectSameProducts(ProductVo vo);
 }
