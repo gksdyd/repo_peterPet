@@ -428,6 +428,35 @@
 	        </if>
 	        <if test="shFeedSize != null and !shFeedSize.equals('')">AND a.feedSize = #{shFeedSize}</if>
 	        <if test="shSnckFeature != null and !shSnckFeature.equals('')">AND a.snckFeature = #{shSnckFeature}</if>
+	        
+	        <if test="shFeedType != null and !shFeedType.equals('')">AND a.feedType = #{shFeedType}</if>
+	        <if test="shFeedBrand != null and !shFeedBrand.equals('')">AND a.feedBrand = #{shFeedBrand}</if>
+	        <if test="shProdSound != null and !shProdSound.equals('')">AND a.prodSound = #{shProdSound}</if>
+	        <if test="shProdSmell != null and !shProdSmell.equals('')">AND a.prodSmell = #{shProdSmell}</if>
+	        <if test="shProdColor != null and !shProdColor.equals('')">AND a.prodColor = #{shProdColor}</if>
+	        <if test="shProdCategory != null and !shProdCategory.equals('')">AND a.prodCategory = #{shProdCategory}</if>
+	        <if test="shProdFormulation != null and !shProdFormulation.equals('')">AND a.prodFormulation = #{shProdFormulation}</if>
+	        <if test="shProdCategoryType != null and !shProdCategoryType.equals('')">AND a.prodCategoryType = #{shProdCategoryType}</if>
+	        <if test="shWearMethod != null and !shWearMethod.equals('')">AND a.prodWearMethod = #{shWearMethod}</if>
+	        <if test="shProdFunction != null and !shProdFunction.equals('')">AND a.prodFunction = #{shProdFunction}</if>
+	        <if test="shFeedIngredient != null and !shFeedIngredient.equals('')">AND a.feedIngredient = #{shFeedIngredient}</if>
+	        <choose>
+				<when test="shProdWidth == 1">AND a.prodWidth &lt; 500</when>
+				<when test="shProdWidth == 2">AND a.prodWidth BETWEEN 500 AND 699</when>
+				<when test="shProdWidth == 3">AND a.prodWidth BETWEEN 700 AND 999</when>
+				<when test="shProdWidth == 4">AND a.prodWidth &gt;= 1000</when>
+			</choose>
+			<choose>
+				<when test="shProdLength == 1">AND a.prodLength &lt; 400</when>
+				<when test="shProdLength == 2">AND a.prodLength BETWEEN 400 AND 499</when>
+				<when test="shProdLength == 3">AND a.prodLength BETWEEN 500 AND 599</when>
+				<when test="shProdLength == 4">AND a.prodLength &gt;= 600</when>
+			</choose>
+			<choose>
+				<when test="shProdHeight == 1">AND a.prodHeight &lt; 200</when>
+				<when test="shProdHeight == 2">AND a.prodHeight BETWEEN 200 AND 399</when>
+				<when test="shProdHeight == 3">AND a.prodHeight &gt;= 400</when>
+			</choose>
 	</sql>
 	
 	<select id="selectFeedList" resultMap="resultMapObj">

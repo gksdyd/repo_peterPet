@@ -136,4 +136,9 @@ public class ShopPeterController extends BaseController {
 	public String shopPeterFilter(@ModelAttribute("vo") ProductVo vo) {
 		return "peter/include/filter :: filter";
 	}
+	
+	@RequestMapping(value = "/ShopPeterSupplyProc")
+	public String productXdmSupplyProc(@ModelAttribute("vo") ProductVo vo) {
+		return "peter/include/supplies";
+	}
 }

@@ -7,6 +7,30 @@
             <input type="hidden" id="thisPage" name="thisPage" th:value="${vo.thisPage}" default="1"/>
             <input type="hidden" id="gridMethod" name="gridMethod" th:value="${vo.gridMethod}"/>
             <input type="hidden" id="badgeArray" name="badgeArray" th:value="${vo.badgeArray}"/>
+            <input type="hidden" id="shFeedSalaryAge" name="shFeedSalaryAge" th:value="${vo.shFeedSalaryAge}"/>
+            <input type="hidden" id="shFeedType" name="shFeedType" th:value="${vo.shFeedType}"/>
+            <input type="hidden" id="shFeedEtc" name="shFeedEtc" th:value="${vo.shFeedEtc}"/>
+            <input type="hidden" id="shFeedWeight" name="shFeedWeight" th:value="${vo.shFeedWeight}"/>
+            <input type="hidden" id="shFeedSize" name="shFeedSize" th:value="${vo.shFeedSize}"/>
+            <input type="hidden" id="shMinPrice" name="shMinPrice" th:value="${vo.shMinPrice}"/>
+            <input type="hidden" id="shMaxPrice" name="shMaxPrice" th:value="${vo.shMaxPrice}"/>
+            <input type="hidden" id="prodFuncArray" name="prodFuncArray" th:value="${vo.prodFuncArray}"/>
+            <input type="hidden" id="feedBrandArray" name="feedBrandArray" th:value="${vo.feedBrandArray}"/>
+            <input type="hidden" id="shIngredientArray" name="shIngredientArray" th:value="${vo.shIngredientArray}"/>
+            <input type="hidden" id="prodPetType" name="prodPetType" th:value="${vo.prodPetType}"/>
+            <input type="hidden" id="shSnckFeature" name="shSnckFeature" th:value="${vo.shSnckFeature}"/>
+            <input type="hidden" id="shProdSound" name="shProdSound" th:value="${vo.shProdSound}"/>
+            <input type="hidden" id="shProdSmell" name="shProdSmell" th:value="${vo.shProdSmell}"/>
+            <input type="hidden" id="shProdColor" name="shProdColor" th:value="${vo.shProdColor}"/>
+            <input type="hidden" id="shProdCategory" name="shProdCategory" th:value="${vo.shProdCategory}"/>
+            <input type="hidden" id="shProdFunction" name="shProdFunction" th:value="${vo.shProdFunction}"/>
+            <input type="hidden" id="shProdFormulation" name="shProdFormulation" th:value="${vo.shProdFormulation}"/>
+            <input type="hidden" id="shProdCategoryType" name="shProdCategoryType" th:value="${vo.shProdCategoryType}"/>
+            <input type="hidden" id="shProdWidth" name="shProdWidth" th:value="${vo.shProdWidth}"/>
+            <input type="hidden" id="shProdLength" name="shProdLength" th:value="${vo.shProdLength}"/>
+            <input type="hidden" id="shProdHeight" name="shProdHeight" th:value="${vo.shProdHeight}"/>
+            <input type="hidden" id="shWearMethod" name="shWearMethod" th:value="${vo.shWearMethod}"/>
+            <input type="hidden" id="shFeedIngredient" name="shFeedIngredient" th:value="${vo.shFeedIngredient}"/>
             <!--Body Container-->
             <div id="page-content">  
                 <!--Collection Banner-->
@@ -27,17 +51,6 @@
                         <div class="col-12 col-sm-12 col-md-12 col-lg-3 sidebar filterbar">
                             <div class="closeFilter d-block d-lg-none"><i class="icon icon an an-times-r"></i></div>
                             <div class="sidebar_tags" id="filter" th:if="${vo.prodType} == 1">
-                                <input type="hidden" id="shFeedSalaryAge" name="shFeedSalaryAge" th:value="${vo.shFeedSalaryAge}"/>
-                                <input type="hidden" id="shFeedType" name="shFeedType" th:value="${vo.shFeedType}"/>
-                                <input type="hidden" id="shFeedEtc" name="shFeedEtc" th:value="${vo.shFeedEtc}"/>
-                                <input type="hidden" id="shFeedWeight" name="shFeedWeight" th:value="${vo.shFeedWeight}"/>
-                                <input type="hidden" id="shFeedSize" name="shFeedSize" th:value="${vo.shFeedSize}"/>
-                                <input type="hidden" id="shMinPrice" name="shMinPrice" th:value="${vo.shMinPrice}"/>
-                                <input type="hidden" id="shMaxPrice" name="shMaxPrice" th:value="${vo.shMaxPrice}"/>
-                                <input type="hidden" id="prodFuncArray" name="prodFuncArray" th:value="${vo.prodFuncArray}"/>
-                                <input type="hidden" id="feedBrandArray" name="feedBrandArray" th:value="${vo.feedBrandArray}"/>
-                                <input type="hidden" id="shIngredientArray" name="shIngredientArray" th:value="${vo.shIngredientArray}"/>
-                                <input type="hidden" id="prodPetType" name="prodPetType" th:value="${vo.prodPetType}"/>
                                 <!--Price Filter-->
                                 <div class="sidebar_widget filterBox filter-widget">
                                     <div class="widget-title"><h2 class="mb-0">Price</h2></div>
@@ -147,15 +160,6 @@
                             </div>
 
                             <div class="sidebar_tags" id="filter" th:if="${vo.prodType} == 2">
-                                <input type="hidden" id="shFeedType" name="shFeedType" th:value="${vo.shFeedType}"/>
-                                <input type="hidden" id="shSnckFeature" name="shSnckFeature" th:value="${vo.shSnckFeature}"/>
-                                <input type="hidden" id="shFeedWeight" name="shFeedWeight" th:value="${vo.shFeedWeight}"/>
-                                <input type="hidden" id="shMinPrice" name="shMinPrice" th:value="${vo.shMinPrice}"/>
-                                <input type="hidden" id="shMaxPrice" name="shMaxPrice" th:value="${vo.shMaxPrice}"/>
-                                <input type="hidden" id="prodFuncArray" name="prodFuncArray" th:value="${vo.prodFuncArray}"/>
-                                <input type="hidden" id="feedBrandArray" name="feedBrandArray" th:value="${vo.feedBrandArray}"/>
-                                <input type="hidden" id="shIngredientArray" name="shIngredientArray" th:value="${vo.shIngredientArray}"/>
-                                <input type="hidden" id="prodPetType" name="prodPetType" th:value="${vo.prodPetType}"/>
                                 <!--Price Filter-->
                                 <div class="sidebar_widget filterBox filter-widget">
                                     <div class="widget-title"><h2 class="mb-0">Price</h2></div>
@@ -240,6 +244,39 @@
                                     </div>
                                 </div>
                                 <!--End ingredient type-->
+                            </div>
+
+                            <div class="sidebar_tags" id="filter" th:if="${vo.prodType} == 3">
+                                <!--Price Filter-->
+                                <div class="sidebar_widget filterBox filter-widget">
+                                    <div class="widget-title"><h2 class="mb-0">Price</h2></div>
+                                    <div id="slider-range" class="mt-2"></div>
+                                    <p class="no-margin"><input id="amount" type="text" readonly></p>
+                                </div>
+                                <!--End Price Filter-->
+                                <!--pet type-->
+                                <div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+                                    <div class="widget-title"><h2 class="mb-0">반려 동물</h2></div>
+                                    <div class="filterDD row ms-auto">
+                                        <div class="form-check col-lg-6" th:each="pet : ${@codeService.selectListCachedCode(26)}">
+                                            <input class="form-check-input" type="radio" th:id="pet + ${pet.codeSeq}" name="petType" th:value="${pet.codeSeq}" th:checked="${pet.codeSeq} == ${vo.prodPetType}" onclick="radio(this)">
+                                            <label class="form-check-label" th:for="pet + ${pet.codeSeq}" th:text="${pet.codeName}"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--End pet type-->
+                                <!--kind type-->
+                                <div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+                                    <div class="widget-title"><h2 class="mb-0">종류</h2></div>
+                                    <div class="filterDD row ms-auto">
+                                        <select class="form-select-JHY" onchange="changeSupply(this)">
+                                            <option value="" th:selected="${vo.shFeedType == null}">용품종류</option>
+                                            <option th:each="snackType : ${@codeService.selectListCachedCode(vo.prodPetType == 239 ? 38 : 109)}" th:value="${snackType.codeSeq}" th:text="${snackType.codeName}" th:selected="${vo.shFeedType} == ${snackType.codeSeq}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div id="supply"></div>
+                                <div th:replace="~{peter/include/supplies :: supplies}"></div>
                             </div>
                         </div>
                         <!--End Sidebar-->
