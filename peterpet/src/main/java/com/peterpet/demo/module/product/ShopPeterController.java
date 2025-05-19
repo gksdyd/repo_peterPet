@@ -50,7 +50,9 @@ public class ShopPeterController extends BaseController {
 	@RequestMapping(value = "/ShopPeterView")
 	public String shopPeterView(@ModelAttribute("vo") ProductVo vo, Model model) throws Exception {
 		ProductDto dto = productService.selectOnePoduct(vo);
-		dto.setWeightArray(dto.getWeightArr().split(","));
+		if (vo.getProdType() != 3) {
+			dto.setWeightArray(dto.getWeightArr().split(","));			
+		}
 		model.addAttribute("item", dto);
 		vo.setParamsPaging(productService.selectReviewCount(vo));
 		model.addAttribute("list", productService.selectReview(vo));

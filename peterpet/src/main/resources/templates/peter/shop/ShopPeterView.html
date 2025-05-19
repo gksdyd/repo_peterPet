@@ -92,7 +92,7 @@
                                 <!-- Product Form -->
                                 <form class="product-form hidedropdown">
                                     <!-- Swatches Color/Size -->
-                                    <div class="row g-2 variable-select pb-2 w-100">
+                                    <div class="row g-2 variable-select pb-2 w-100" th:if="${vo.prodType != 3}">
                                         <!-- Swatches Size -->
                                         <div class="col-6 col-sm-6 col-md-6 col-lg-6">
                                             <div class="swatch clearfix swatch-1 option1" data-option-index="0">
@@ -842,7 +842,7 @@
                 <div class="container">
                     <form method="post" action="#" id="stickycart-form" class="d-flex-center justify-content-center">
                         <div class="img"><img src="/peter/template/optimal-html/assets/images/사료/loyalcanin-dog-indore-puppy-3kg-immunity.jpeg" class="product-featured-img" alt="product" /></div>
-                        <select name="id" id="variantOptions1" class="product-form__variants selectbox no-js ms-3" onchange="changeWeigth(this)">
+                        <select name="id" id="variantOptions1" class="product-form__variants selectbox no-js ms-3" onchange="changeWeigth(this)" th:if="${vo.prodType != 3}">
                             <option value="">중량 선택</option>
                             <option th:each="weight : ${item.weightArray}" th:text="${weight} + 'kg'" th:value="${weight}" th:selected="${#strings.toString(item.infoWeight)} == ${weight}"></option>
                         </select>
