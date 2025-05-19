@@ -30,7 +30,7 @@
                                         <!-- <div class="product-labels"><span class="lbl pr-label1">new</span></div> -->
                                         <div class="product-wish"><a class="wishIcon wishlist rounded m-0" href="my-wishlist.html"><i class="icon an an-heart"></i><span class="tooltip-label left">찜</span></a></div>
                                         <div class="product-buttons">
-                                            <a href="#" class="btn rounded"><i class="icon an an-share-alt1"></i><span class="tooltip-label">공유</span></a>
+                                            <a href="javascript:void(0);" class="btn rounded" onclick="copy()"><i class="icon an an-share-alt1"></i><span class="tooltip-label">공유</span></a>
                                             <a href="#" class="btn rounded prlightbox"><i class="icon an an-expand-l-arrows"></i><span class="tooltip-label">확대</span></a>
                                             <a href="javascript:void(0);" th:onclick="'ai(' + ${vo.prodType} + ', ' + ${item.prodPetType} + ')'" class="btn rounded"><i class="icon an an-refresh"></i><span class="tooltip-label">랜덤 이미지</span></a>
                                         </div>
@@ -1023,6 +1023,16 @@
                 let prodSeq = /*[[${item.prodSeq}]]*/"";
                 let url = `/peter/shop/ShopPeterPayment?prodSeq=${prodSeq}&userSeq=${sessionSeq}&prodCount=${count}&infoWeight=${weight}`;
                 window.location.href = url;
+            }
+
+            function copy(e) {
+                navigator.clipboard.writeText(document.location.href)
+                .then(
+                    $("#copyMessage").stop(true, true).fadeIn(200), // 빠르게 표시
+                    setTimeout(() => {
+                        $("#copyMessage").fadeOut(1000); // 천천히 사라지게 (1초)
+                    }, 300) // 300ms 후 사라지기 시작
+                );
             }
         </script>
         <script th:inline="javascript" src="/peter/template/optimal-html/assets/js/JHY/product.js"></script>
