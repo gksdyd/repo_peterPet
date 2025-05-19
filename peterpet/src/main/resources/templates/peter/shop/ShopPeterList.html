@@ -275,8 +275,9 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div id="supply"></div>
-                                <div th:replace="~{peter/include/supplies :: supplies}"></div>
+                                <div id="supply">
+                                    <div th:replace="~{peter/include/supplies :: supplies}"></div>
+                                </div>
                             </div>
                         </div>
                         <!--End Sidebar-->
@@ -326,7 +327,7 @@
 
                             <!--Product Grid-->
                             <div class="grid-products grid--view-items prd-grid">
-                                <div class="row productInfo"  th:if="${vo.prodType} == 1 or ${vo.prodType} == 2">
+                                <div class="row productInfo">
                                     <div class="col-6 col-sm-6 col-md-4 col-lg-4 item" th:each="list : ${list}">
                                         <!--Start Product Image-->
                                         <div class="product-image">

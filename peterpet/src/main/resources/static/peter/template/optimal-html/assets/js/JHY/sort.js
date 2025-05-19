@@ -582,6 +582,7 @@ function changeSupply(e) {
         $("#supply").html(response);
         feedType = $(e).val();
         allRemoveBadge();
+        shop();
       }
       ,error : function(jqXHR){
         alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
