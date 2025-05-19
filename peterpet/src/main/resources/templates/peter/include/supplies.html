@@ -1,0 +1,2131 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en-US" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="supplies">
+	<th:block th:if="${vo.shFeedType == null}"></th:block>
+
+	<th:block th:if="${vo.shFeedType == 305}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(42)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--sound type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">소리</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodSound : ${@codeService.selectListCachedCode(43)}">
+					<input class="form-check-input" type="radio" th:id="prodSound + ${prodSound.codeSeq}" name="prodSound" th:value="${prodSound.codeSeq}" th:checked="${prodSound.codeSeq} == ${vo.shProdSound}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodSound + ${prodSound.codeSeq}" th:text="${prodSound.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End sound type-->
+		<!--smell type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">향</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodSmell : ${@codeService.selectListCachedCode(44)}">
+					<input class="form-check-input" type="radio" th:id="prodSmell + ${prodSmell.codeSeq}" name="prodSmell" th:value="${prodSmell.codeSeq}" th:checked="${prodSmell.codeSeq} == ${vo.shProdSmell}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodSmell + ${prodSmell.codeSeq}" th:text="${prodSmell.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End smell type-->
+		<!--color type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">색상</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodColor : ${@codeService.selectListCachedCode(45)}">
+					<input class="form-check-input" type="radio" th:id="prodColor + ${prodColor.codeSeq}" name="prodColor" th:value="${prodColor.codeSeq}" th:checked="${prodColor.codeSeq} == ${vo.shProdColor}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodColor + ${prodColor.codeSeq}" th:text="${prodColor.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End color type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(62)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 306}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(39)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--function type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">기능</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodFunction : ${@codeService.selectListCachedCode(40)}">
+					<input class="form-check-input" type="radio" th:id="prodFunction + ${prodFunction.codeSeq}" name="prodFunction" th:value="${prodFunction.codeSeq}" th:checked="${prodFunction.codeSeq} == ${vo.shProdFunction}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodFunction + ${prodFunction.codeSeq}" th:text="${prodFunction.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End function type-->
+		<!--smell type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">향</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodSmell : ${@codeService.selectListCachedCode(41)}">
+					<input class="form-check-input" type="radio" th:id="prodSmell + ${prodSmell.codeSeq}" name="prodSmell" th:value="${prodSmell.codeSeq}" th:checked="${prodSmell.codeSeq} == ${vo.shProdSmell}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodSmell + ${prodSmell.codeSeq}" th:text="${prodSmell.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End smell type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(63)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 307}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(46)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--formulation type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">제형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodFormulation : ${@codeService.selectListCachedCode(47)}">
+					<input class="form-check-input" type="radio" th:id="prodFormulation + ${prodFormulation.codeSeq}" name="prodFormulation" th:value="${prodFormulation.codeSeq}" th:checked="${prodFormulation.codeSeq} == ${vo.shProdFormulation}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodFormulation + ${prodFormulation.codeSeq}" th:text="${prodFormulation.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End formulation type-->
+		<!--smell type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">향</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodSmell : ${@codeService.selectListCachedCode(48)}">
+					<input class="form-check-input" type="radio" th:id="prodSmell + ${prodSmell.codeSeq}" name="prodSmell" th:value="${prodSmell.codeSeq}" th:checked="${prodSmell.codeSeq} == ${vo.shProdSmell}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodSmell + ${prodSmell.codeSeq}" th:text="${prodSmell.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End smell type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(64)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 308}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(49)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--smell type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">향</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodSmell : ${@codeService.selectListCachedCode(50)}">
+					<input class="form-check-input" type="radio" th:id="prodSmell + ${prodSmell.codeSeq}" name="prodSmell" th:value="${prodSmell.codeSeq}" th:checked="${prodSmell.codeSeq} == ${vo.shProdSmell}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodSmell + ${prodSmell.codeSeq}" th:text="${prodSmell.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End smell type-->
+		<!--color type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">색상</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodColor : ${@codeService.selectListCachedCode(51)}">
+					<input class="form-check-input" type="radio" th:id="prodColor + ${prodColor.codeSeq}" name="prodColor" th:value="${prodColor.codeSeq}" th:checked="${prodColor.codeSeq} == ${vo.shProdColor}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodColor + ${prodColor.codeSeq}" th:text="${prodColor.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End color type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(65)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 309}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(52)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--categoryType type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">종류</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategoryType : ${@codeService.selectListCachedCode(53)}">
+					<input class="form-check-input" type="radio" th:id="prodCategoryType + ${prodCategoryType.codeSeq}" name="prodCategoryType" th:value="${prodCategoryType.codeSeq}" th:checked="${prodCategoryType.codeSeq} == ${vo.shProdCategoryType}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategoryType + ${prodCategoryType.codeSeq}" th:text="${prodCategoryType.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End categoryType type-->
+		<!--smell type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">향</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodSmell : ${@codeService.selectListCachedCode(54)}">
+					<input class="form-check-input" type="radio" th:id="prodSmell + ${prodSmell.codeSeq}" name="prodSmell" th:value="${prodSmell.codeSeq}" th:checked="${prodSmell.codeSeq} == ${vo.shProdSmell}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodSmell + ${prodSmell.codeSeq}" th:text="${prodSmell.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End smell type-->
+		<!--color type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">색상</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodColor : ${@codeService.selectListCachedCode(55)}">
+					<input class="form-check-input" type="radio" th:id="prodColor + ${prodColor.codeSeq}" name="prodColor" th:value="${prodColor.codeSeq}" th:checked="${prodColor.codeSeq} == ${vo.shProdColor}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodColor + ${prodColor.codeSeq}" th:text="${prodColor.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End color type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(66)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+		</div>
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 310}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(56)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--smell type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">향</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodSmell : ${@codeService.selectListCachedCode(57)}">
+					<input class="form-check-input" type="radio" th:id="prodSmell + ${prodSmell.codeSeq}" name="prodSmell" th:value="${prodSmell.codeSeq}" th:checked="${prodSmell.codeSeq} == ${vo.shProdSmell}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodSmell + ${prodSmell.codeSeq}" th:text="${prodSmell.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End smell type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(67)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 311}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(42)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(58)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+		<!--sound type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">소리</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodSound : ${@codeService.selectListCachedCode(43)}">
+					<input class="form-check-input" type="radio" th:id="prodSound + ${prodSound.codeSeq}" name="prodSound" th:value="${prodSound.codeSeq}" th:checked="${prodSound.codeSeq} == ${vo.shProdSound}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodSound + ${prodSound.codeSeq}" th:text="${prodSound.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End sound type-->
+		<!--color type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">색상</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodColor : ${@codeService.selectListCachedCode(45)}">
+					<input class="form-check-input" type="radio" th:id="prodColor + ${prodColor.codeSeq}" name="prodColor" th:value="${prodColor.codeSeq}" th:checked="${prodColor.codeSeq} == ${vo.shProdColor}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodColor + ${prodColor.codeSeq}" th:text="${prodColor.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End color type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 312}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(59)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 313}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(60)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--color type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">색상</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodColor : ${@codeService.selectListCachedCode(45)}">
+					<input class="form-check-input" type="radio" th:id="prodColor + ${prodColor.codeSeq}" name="prodColor" th:value="${prodColor.codeSeq}" th:checked="${prodColor.codeSeq} == ${vo.shProdColor}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodColor + ${prodColor.codeSeq}" th:text="${prodColor.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End color type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(61)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 314}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(68)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--size(width) type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">크기(가로)</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodWidth : ${@codeService.selectListCachedCode(69)}">
+					<input class="form-check-input" type="radio" th:id="prodWidth + ${prodWidth.codeSeq}" name="prodWidth" th:value="${prodWidth.codeSeq}" th:checked="${prodWidth.codeSeq} == ${vo.shProdWidth}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodWidth + ${prodWidth.codeSeq}" th:text="${prodWidth.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End size(length) type-->
+		<!--size(length) type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">크기(세로)</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodLength : ${@codeService.selectListCachedCode(70)}">
+					<input class="form-check-input" type="radio" th:id="prodLength + ${prodLength.codeSeq}" name="prodLength" th:value="${prodLength.codeSeq}" th:checked="${prodLength.codeSeq} == ${vo.shProdLength}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodLength + ${prodLength.codeSeq}" th:text="${prodLength.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End size(width) type-->
+		<!--size(height) type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">크기(높이)</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodHeight : ${@codeService.selectListCachedCode(71)}">
+					<input class="form-check-input" type="radio" th:id="prodHeight + ${prodHeight.codeSeq}" name="prodHeight" th:value="${prodHeight.codeSeq}" th:checked="${prodHeight.codeSeq} == ${vo.shProdHeight}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodHeight + ${prodHeight.codeSeq}" th:text="${prodHeight.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End size(height) type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(73)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+		<!--function type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">기능</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodFunction : ${@codeService.selectListCachedCode(72)}">
+					<input class="form-check-input" type="radio" th:id="prodFunction + ${prodFunction.codeSeq}" name="prodFunction" th:value="${prodFunction.codeSeq}" th:checked="${prodFunction.codeSeq} == ${vo.shProdFunction}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodFunction + ${prodFunction.codeSeq}" th:text="${prodFunction.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End function type-->
+		<!--color type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">색상</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodColor : ${@codeService.selectListCachedCode(45)}">
+					<input class="form-check-input" type="radio" th:id="prodColor + ${prodColor.codeSeq}" name="prodColor" th:value="${prodColor.codeSeq}" th:checked="${prodColor.codeSeq} == ${vo.shProdColor}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodColor + ${prodColor.codeSeq}" th:text="${prodColor.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End color type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 315}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(74)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(76)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+		<!--function type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">기능</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodFunction : ${@codeService.selectListCachedCode(75)}">
+					<input class="form-check-input" type="radio" th:id="prodFunction + ${prodFunction.codeSeq}" name="prodFunction" th:value="${prodFunction.codeSeq}" th:checked="${prodFunction.codeSeq} == ${vo.shProdFunction}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodFunction + ${prodFunction.codeSeq}" th:text="${prodFunction.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End function type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 316}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(77)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(80)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+		<!--function type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">기능</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodFunction : ${@codeService.selectListCachedCode(78)}">
+					<input class="form-check-input" type="radio" th:id="prodFunction + ${prodFunction.codeSeq}" name="prodFunction" th:value="${prodFunction.codeSeq}" th:checked="${prodFunction.codeSeq} == ${vo.shProdFunction}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodFunction + ${prodFunction.codeSeq}" th:text="${prodFunction.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End function type-->
+		<!--categoryType type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">종류</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategoryType : ${@codeService.selectListCachedCode(79)}">
+					<input class="form-check-input" type="radio" th:id="prodCategoryType + ${prodCategoryType.codeSeq}" name="prodCategoryType" th:value="${prodCategoryType.codeSeq}" th:checked="${prodCategoryType.codeSeq} == ${vo.shProdCategoryType}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategoryType + ${prodCategoryType.codeSeq}" th:text="${prodCategoryType.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End categoryType type-->
+		<!--color type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">색상</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodColor : ${@codeService.selectListCachedCode(45)}">
+					<input class="form-check-input" type="radio" th:id="prodColor + ${prodColor.codeSeq}" name="prodColor" th:value="${prodColor.codeSeq}" th:checked="${prodColor.codeSeq} == ${vo.shProdColor}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodColor + ${prodColor.codeSeq}" th:text="${prodColor.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End color type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 317}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(81)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(84)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+		<!--function type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">기능</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodFunction : ${@codeService.selectListCachedCode(82)}">
+					<input class="form-check-input" type="radio" th:id="prodFunction + ${prodFunction.codeSeq}" name="prodFunction" th:value="${prodFunction.codeSeq}" th:checked="${prodFunction.codeSeq} == ${vo.shProdFunction}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodFunction + ${prodFunction.codeSeq}" th:text="${prodFunction.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End function type-->
+		<!--color type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">색상</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodColor : ${@codeService.selectListCachedCode(83)}">
+					<input class="form-check-input" type="radio" th:id="prodColor + ${prodColor.codeSeq}" name="prodColor" th:value="${prodColor.codeSeq}" th:checked="${prodColor.codeSeq} == ${vo.shProdColor}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodColor + ${prodColor.codeSeq}" th:text="${prodColor.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End color type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 318}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(85)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(86)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+		<!--color type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">색상</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodColor : ${@codeService.selectListCachedCode(45)}">
+					<input class="form-check-input" type="radio" th:id="prodColor + ${prodColor.codeSeq}" name="prodColor" th:value="${prodColor.codeSeq}" th:checked="${prodColor.codeSeq} == ${vo.shProdColor}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodColor + ${prodColor.codeSeq}" th:text="${prodColor.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End color type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 319}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(87)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(89)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+		<!--function type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">기능</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodFunction : ${@codeService.selectListCachedCode(88)}">
+					<input class="form-check-input" type="radio" th:id="prodFunction + ${prodFunction.codeSeq}" name="prodFunction" th:value="${prodFunction.codeSeq}" th:checked="${prodFunction.codeSeq} == ${vo.shProdFunction}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodFunction + ${prodFunction.codeSeq}" th:text="${prodFunction.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End function type-->
+		<!--color type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">색상</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodColor : ${@codeService.selectListCachedCode(45)}">
+					<input class="form-check-input" type="radio" th:id="prodColor + ${prodColor.codeSeq}" name="prodColor" th:value="${prodColor.codeSeq}" th:checked="${prodColor.codeSeq} == ${vo.shProdColor}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodColor + ${prodColor.codeSeq}" th:text="${prodColor.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End color type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 320}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(90)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(91)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+		<!--color type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">색상</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodColor : ${@codeService.selectListCachedCode(45)}">
+					<input class="form-check-input" type="radio" th:id="prodColor + ${prodColor.codeSeq}" name="prodColor" th:value="${prodColor.codeSeq}" th:checked="${prodColor.codeSeq} == ${vo.shProdColor}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodColor + ${prodColor.codeSeq}" th:text="${prodColor.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End color type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 321}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(92)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(95)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+		<!--categoryType type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">형태</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategoryType : ${@codeService.selectListCachedCode(93)}">
+					<input class="form-check-input" type="radio" th:id="prodCategoryType + ${prodCategoryType.codeSeq}" name="prodCategoryType" th:value="${prodCategoryType.codeSeq}" th:checked="${prodCategoryType.codeSeq} == ${vo.shProdCategoryType}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategoryType + ${prodCategoryType.codeSeq}" th:text="${prodCategoryType.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End categoryType type-->
+		<!--smell type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">향</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodSmell : ${@codeService.selectListCachedCode(94)}">
+					<input class="form-check-input" type="radio" th:id="prodSmell + ${prodSmell.codeSeq}" name="prodSmell" th:value="${prodSmell.codeSeq}" th:checked="${prodSmell.codeSeq} == ${vo.shProdSmell}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodSmell + ${prodSmell.codeSeq}" th:text="${prodSmell.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End smell type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 322}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(96)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(97)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 323}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(98)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(101)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+		<!--wearMethod type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">착용 방법</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodWearMethod : ${@codeService.selectListCachedCode(99)}">
+					<input class="form-check-input" type="radio" th:id="prodWearMethod + ${prodWearMethod.codeSeq}" name="prodWearMethod" th:value="${prodWearMethod.codeSeq}" th:checked="${prodWearMethod.codeSeq} == ${vo.shWearMethod}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodWearMethod + ${prodWearMethod.codeSeq}" th:text="${prodWearMethod.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End wearMethod type-->
+		<!--function type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">기능</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodFunction : ${@codeService.selectListCachedCode(100)}">
+					<input class="form-check-input" type="radio" th:id="prodFunction + ${prodFunction.codeSeq}" name="prodFunction" th:value="${prodFunction.codeSeq}" th:checked="${prodFunction.codeSeq} == ${vo.shProdFunction}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodFunction + ${prodFunction.codeSeq}" th:text="${prodFunction.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End function type-->
+		<!--color type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">색상</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodColor : ${@codeService.selectListCachedCode(45)}">
+					<input class="form-check-input" type="radio" th:id="prodColor + ${prodColor.codeSeq}" name="prodColor" th:value="${prodColor.codeSeq}" th:checked="${prodColor.codeSeq} == ${vo.shProdColor}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodColor + ${prodColor.codeSeq}" th:text="${prodColor.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End color type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 324}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(102)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(103)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+		<!--color type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">색상</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodColor : ${@codeService.selectListCachedCode(45)}">
+					<input class="form-check-input" type="radio" th:id="prodColor + ${prodColor.codeSeq}" name="prodColor" th:value="${prodColor.codeSeq}" th:checked="${prodColor.codeSeq} == ${vo.shProdColor}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodColor + ${prodColor.codeSeq}" th:text="${prodColor.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End color type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 325}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(104)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 326}">
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(105)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 327}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(106)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(108)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+		<!--function type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">기능</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodFunction : ${@codeService.selectListCachedCode(107)}">
+					<input class="form-check-input" type="radio" th:id="prodFunction + ${prodFunction.codeSeq}" name="prodFunction" th:value="${prodFunction.codeSeq}" th:checked="${prodFunction.codeSeq} == ${vo.shProdFunction}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodFunction + ${prodFunction.codeSeq}" th:text="${prodFunction.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End function type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 730}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(110)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--ingredient type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">주원료</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="feedIngredient : ${@codeService.selectListCachedCode(111)}">
+					<input class="form-check-input" type="radio" th:id="feedIngredient + ${feedIngredient.codeSeq}" name="feedIngredient" th:value="${feedIngredient.codeSeq}" th:checked="${feedIngredient.codeSeq} == ${vo.shFeedIngredient}" onclick="radio(this)">
+					<label class="form-check-label" th:for="feedIngredient + ${feedIngredient.codeSeq}" th:text="${feedIngredient.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End ingredient type-->
+		<!--smell type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">향</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodSmell : ${@codeService.selectListCachedCode(112)}">
+					<input class="form-check-input" type="radio" th:id="prodSmell + ${prodSmell.codeSeq}" name="prodSmell" th:value="${prodSmell.codeSeq}" th:checked="${prodSmell.codeSeq} == ${vo.shProdSmell}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodSmell + ${prodSmell.codeSeq}" th:text="${prodSmell.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End smell type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">첨가재료</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(113)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+		<!--wearMethod type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">포장 방식</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodWearMethod : ${@codeService.selectListCachedCode(114)}">
+					<input class="form-check-input" type="radio" th:id="prodWearMethod + ${prodWearMethod.codeSeq}" name="prodWearMethod" th:value="${prodWearMethod.codeSeq}" th:checked="${prodWearMethod.codeSeq} == ${vo.shWearMethod}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodWearMethod + ${prodWearMethod.codeSeq}" th:text="${prodWearMethod.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End wearMethod type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 731}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(115)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--ingredient type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">주소재</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="feedIngredient : ${@codeService.selectListCachedCode(116)}">
+					<input class="form-check-input" type="radio" th:id="feedIngredient + ${feedIngredient.codeSeq}" name="feedIngredient" th:value="${feedIngredient.codeSeq}" th:checked="${feedIngredient.codeSeq} == ${vo.shFeedIngredient}" onclick="radio(this)">
+					<label class="form-check-label" th:for="feedIngredient + ${feedIngredient.codeSeq}" th:text="${feedIngredient.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End ingredient type-->
+		<!--sound type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">소리</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodSound : ${@codeService.selectListCachedCode(118)}">
+					<input class="form-check-input" type="radio" th:id="prodSound + ${prodSound.codeSeq}" name="prodSound" th:value="${prodSound.codeSeq}" th:checked="${prodSound.codeSeq} == ${vo.shProdSound}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodSound + ${prodSound.codeSeq}" th:text="${prodSound.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End sound type-->
+		<!--categoryType type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">장난감 종류</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategoryType : ${@codeService.selectListCachedCode(117)}">
+					<input class="form-check-input" type="radio" th:id="prodCategoryType + ${prodCategoryType.codeSeq}" name="prodCategoryType" th:value="${prodCategoryType.codeSeq}" th:checked="${prodCategoryType.codeSeq} == ${vo.shProdCategoryType}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategoryType + ${prodCategoryType.codeSeq}" th:text="${prodCategoryType.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End categoryType type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(119)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 732}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(120)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--ingredient type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">주소재</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="feedIngredient : ${@codeService.selectListCachedCode(121)}">
+					<input class="form-check-input" type="radio" th:id="feedIngredient + ${feedIngredient.codeSeq}" name="feedIngredient" th:value="${feedIngredient.codeSeq}" th:checked="${feedIngredient.codeSeq} == ${vo.shFeedIngredient}" onclick="radio(this)">
+					<label class="form-check-label" th:for="feedIngredient + ${feedIngredient.codeSeq}" th:text="${feedIngredient.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End ingredient type-->
+		<!--sound type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">소리</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodSound : ${@codeService.selectListCachedCode(122)}">
+					<input class="form-check-input" type="radio" th:id="prodSound + ${prodSound.codeSeq}" name="prodSound" th:value="${prodSound.codeSeq}" th:checked="${prodSound.codeSeq} == ${vo.shProdSound}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodSound + ${prodSound.codeSeq}" th:text="${prodSound.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End sound type-->
+		<!--smell type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">향</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodSmell : ${@codeService.selectListCachedCode(123)}">
+					<input class="form-check-input" type="radio" th:id="prodSmell + ${prodSmell.codeSeq}" name="prodSmell" th:value="${prodSmell.codeSeq}" th:checked="${prodSmell.codeSeq} == ${vo.shProdSmell}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodSmell + ${prodSmell.codeSeq}" th:text="${prodSmell.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End smell type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(124)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 733}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(125)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--ingredient type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">주소재</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="feedIngredient : ${@codeService.selectListCachedCode(126)}">
+					<input class="form-check-input" type="radio" th:id="feedIngredient + ${feedIngredient.codeSeq}" name="feedIngredient" th:value="${feedIngredient.codeSeq}" th:checked="${feedIngredient.codeSeq} == ${vo.shFeedIngredient}" onclick="radio(this)">
+					<label class="form-check-label" th:for="feedIngredient + ${feedIngredient.codeSeq}" th:text="${feedIngredient.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End ingredient type-->
+		<!--sound type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">소리</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodSound : ${@codeService.selectListCachedCode(128)}">
+					<input class="form-check-input" type="radio" th:id="prodSound + ${prodSound.codeSeq}" name="prodSound" th:value="${prodSound.codeSeq}" th:checked="${prodSound.codeSeq} == ${vo.shProdSound}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodSound + ${prodSound.codeSeq}" th:text="${prodSound.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End sound type-->
+		<!--categoryType type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">터널 모양</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategoryType : ${@codeService.selectListCachedCode(127)}">
+					<input class="form-check-input" type="radio" th:id="prodCategoryType + ${prodCategoryType.codeSeq}" name="prodCategoryType" th:value="${prodCategoryType.codeSeq}" th:checked="${prodCategoryType.codeSeq} == ${vo.shProdCategoryType}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategoryType + ${prodCategoryType.codeSeq}" th:text="${prodCategoryType.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End categoryType type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(129)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+		<!--color type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">색상</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodColor : ${@codeService.selectListCachedCode(45)}">
+					<input class="form-check-input" type="radio" th:id="prodColor + ${prodColor.codeSeq}" name="prodColor" th:value="${prodColor.codeSeq}" th:checked="${prodColor.codeSeq} == ${vo.shProdColor}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodColor + ${prodColor.codeSeq}" th:text="${prodColor.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End color type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 734}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(130)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--ingredient type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">주소재</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="feedIngredient : ${@codeService.selectListCachedCode(131)}">
+					<input class="form-check-input" type="radio" th:id="feedIngredient + ${feedIngredient.codeSeq}" name="feedIngredient" th:value="${feedIngredient.codeSeq}" th:checked="${feedIngredient.codeSeq} == ${vo.shFeedIngredient}" onclick="radio(this)">
+					<label class="form-check-label" th:for="feedIngredient + ${feedIngredient.codeSeq}" th:text="${feedIngredient.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End ingredient type-->
+		<!--categoryType type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">특징</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategoryType : ${@codeService.selectListCachedCode(132)}">
+					<input class="form-check-input" type="radio" th:id="prodCategoryType + ${prodCategoryType.codeSeq}" name="prodCategoryType" th:value="${prodCategoryType.codeSeq}" th:checked="${prodCategoryType.codeSeq} == ${vo.shProdCategoryType}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategoryType + ${prodCategoryType.codeSeq}" th:text="${prodCategoryType.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End categoryType type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(133)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+		<!--color type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">색상</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodColor : ${@codeService.selectListCachedCode(45)}">
+					<input class="form-check-input" type="radio" th:id="prodColor + ${prodColor.codeSeq}" name="prodColor" th:value="${prodColor.codeSeq}" th:checked="${prodColor.codeSeq} == ${vo.shProdColor}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodColor + ${prodColor.codeSeq}" th:text="${prodColor.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End color type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 735}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(49)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--smell type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">향</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodSmell : ${@codeService.selectListCachedCode(50)}">
+					<input class="form-check-input" type="radio" th:id="prodSmell + ${prodSmell.codeSeq}" name="prodSmell" th:value="${prodSmell.codeSeq}" th:checked="${prodSmell.codeSeq} == ${vo.shProdSmell}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodSmell + ${prodSmell.codeSeq}" th:text="${prodSmell.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End smell type-->
+		<!--color type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">색상</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodColor : ${@codeService.selectListCachedCode(51)}">
+					<input class="form-check-input" type="radio" th:id="prodColor + ${prodColor.codeSeq}" name="prodColor" th:value="${prodColor.codeSeq}" th:checked="${prodColor.codeSeq} == ${vo.shProdColor}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodColor + ${prodColor.codeSeq}" th:text="${prodColor.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End color type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(65)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 736}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(52)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--categoryType type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">종류</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategoryType : ${@codeService.selectListCachedCode(53)}">
+					<input class="form-check-input" type="radio" th:id="prodCategoryType + ${prodCategoryType.codeSeq}" name="prodCategoryType" th:value="${prodCategoryType.codeSeq}" th:checked="${prodCategoryType.codeSeq} == ${vo.shProdCategoryType}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategoryType + ${prodCategoryType.codeSeq}" th:text="${prodCategoryType.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End categoryType type-->
+		<!--smell type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">향</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodSmell : ${@codeService.selectListCachedCode(54)}">
+					<input class="form-check-input" type="radio" th:id="prodSmell + ${prodSmell.codeSeq}" name="prodSmell" th:value="${prodSmell.codeSeq}" th:checked="${prodSmell.codeSeq} == ${vo.shProdSmell}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodSmell + ${prodSmell.codeSeq}" th:text="${prodSmell.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End smell type-->
+		<!--color type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">색상</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodColor : ${@codeService.selectListCachedCode(55)}">
+					<input class="form-check-input" type="radio" th:id="prodColor + ${prodColor.codeSeq}" name="prodColor" th:value="${prodColor.codeSeq}" th:checked="${prodColor.codeSeq} == ${vo.shProdColor}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodColor + ${prodColor.codeSeq}" th:text="${prodColor.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End color type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(66)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 737}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(56)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--smell type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">향</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodSmell : ${@codeService.selectListCachedCode(57)}">
+					<input class="form-check-input" type="radio" th:id="prodSmell + ${prodSmell.codeSeq}" name="prodSmell" th:value="${prodSmell.codeSeq}" th:checked="${prodSmell.codeSeq} == ${vo.shProdSmell}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodSmell + ${prodSmell.codeSeq}" th:text="${prodSmell.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End smell type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(67)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 738}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(46)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--formulation type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">제형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodFormulation : ${@codeService.selectListCachedCode(47)}">
+					<input class="form-check-input" type="radio" th:id="prodFormulation + ${prodFormulation.codeSeq}" name="prodFormulation" th:value="${prodFormulation.codeSeq}" th:checked="${prodFormulation.codeSeq} == ${vo.shProdFormulation}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodFormulation + ${prodFormulation.codeSeq}" th:text="${prodFormulation.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End formulation type-->
+		<!--smell type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">향</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodSmell : ${@codeService.selectListCachedCode(48)}">
+					<input class="form-check-input" type="radio" th:id="prodSmell + ${prodSmell.codeSeq}" name="prodSmell" th:value="${prodSmell.codeSeq}" th:checked="${prodSmell.codeSeq} == ${vo.shProdSmell}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodSmell + ${prodSmell.codeSeq}" th:text="${prodSmell.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End smell type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(64)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 739}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(85)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(86)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+		<!--color type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">색상</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodColor : ${@codeService.selectListCachedCode(45)}">
+					<input class="form-check-input" type="radio" th:id="prodColor + ${prodColor.codeSeq}" name="prodColor" th:value="${prodColor.codeSeq}" th:checked="${prodColor.codeSeq} == ${vo.shProdColor}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodColor + ${prodColor.codeSeq}" th:text="${prodColor.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End color type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 740}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(134)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--color type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">색상</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodColor : ${@codeService.selectListCachedCode(45)}">
+					<input class="form-check-input" type="radio" th:id="prodColor + ${prodColor.codeSeq}" name="prodColor" th:value="${prodColor.codeSeq}" th:checked="${prodColor.codeSeq} == ${vo.shProdColor}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodColor + ${prodColor.codeSeq}" th:text="${prodColor.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End color type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 741}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(77)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(80)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+		<!--function type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">기능</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodFunction : ${@codeService.selectListCachedCode(78)}">
+					<input class="form-check-input" type="radio" th:id="prodFunction + ${prodFunction.codeSeq}" name="prodFunction" th:value="${prodFunction.codeSeq}" th:checked="${prodFunction.codeSeq} == ${vo.shProdFunction}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodFunction + ${prodFunction.codeSeq}" th:text="${prodFunction.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End function type-->
+		<!--categoryType type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">종류</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategoryType : ${@codeService.selectListCachedCode(79)}">
+					<input class="form-check-input" type="radio" th:id="prodCategoryType + ${prodCategoryType.codeSeq}" name="prodCategoryType" th:value="${prodCategoryType.codeSeq}" th:checked="${prodCategoryType.codeSeq} == ${vo.shProdCategoryType}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategoryType + ${prodCategoryType.codeSeq}" th:text="${prodCategoryType.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End categoryType type-->
+		<!--color type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">색상</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodColor : ${@codeService.selectListCachedCode(45)}">
+					<input class="form-check-input" type="radio" th:id="prodColor + ${prodColor.codeSeq}" name="prodColor" th:value="${prodColor.codeSeq}" th:checked="${prodColor.codeSeq} == ${vo.shProdColor}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodColor + ${prodColor.codeSeq}" th:text="${prodColor.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End color type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 742}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(87)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(89)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+		<!--function type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">기능</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodFunction : ${@codeService.selectListCachedCode(88)}">
+					<input class="form-check-input" type="radio" th:id="prodFunction + ${prodFunction.codeSeq}" name="prodFunction" th:value="${prodFunction.codeSeq}" th:checked="${prodFunction.codeSeq} == ${vo.shProdFunction}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodFunction + ${prodFunction.codeSeq}" th:text="${prodFunction.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End function type-->
+		<!--color type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">색상</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodColor : ${@codeService.selectListCachedCode(45)}">
+					<input class="form-check-input" type="radio" th:id="prodColor + ${prodColor.codeSeq}" name="prodColor" th:value="${prodColor.codeSeq}" th:checked="${prodColor.codeSeq} == ${vo.shProdColor}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodColor + ${prodColor.codeSeq}" th:text="${prodColor.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End color type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 743}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(90)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(91)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+		<!--color type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">색상</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodColor : ${@codeService.selectListCachedCode(45)}">
+					<input class="form-check-input" type="radio" th:id="prodColor + ${prodColor.codeSeq}" name="prodColor" th:value="${prodColor.codeSeq}" th:checked="${prodColor.codeSeq} == ${vo.shProdColor}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodColor + ${prodColor.codeSeq}" th:text="${prodColor.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End color type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 744}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(135)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(138)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+		<!--color type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">색상</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodColor : ${@codeService.selectListCachedCode(45)}">
+					<input class="form-check-input" type="radio" th:id="prodColor + ${prodColor.codeSeq}" name="prodColor" th:value="${prodColor.codeSeq}" th:checked="${prodColor.codeSeq} == ${vo.shProdColor}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodColor + ${prodColor.codeSeq}" th:text="${prodColor.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End color type-->
+		<!--ingredient type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">주소재</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="feedIngredient : ${@codeService.selectListCachedCode(136)}">
+					<input class="form-check-input" type="radio" th:id="feedIngredient + ${feedIngredient.codeSeq}" name="feedIngredient" th:value="${feedIngredient.codeSeq}" th:checked="${feedIngredient.codeSeq} == ${vo.shFeedIngredient}" onclick="radio(this)">
+					<label class="form-check-label" th:for="feedIngredient + ${feedIngredient.codeSeq}" th:text="${feedIngredient.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End ingredient type-->
+		<!--smell type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">향</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodSmell : ${@codeService.selectListCachedCode(137)}">
+					<input class="form-check-input" type="radio" th:id="prodSmell + ${prodSmell.codeSeq}" name="prodSmell" th:value="${prodSmell.codeSeq}" th:checked="${prodSmell.codeSeq} == ${vo.shProdSmell}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodSmell + ${prodSmell.codeSeq}" th:text="${prodSmell.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End smell type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 745}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(68)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--size(width) type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">크기(가로)</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodWidth : ${@codeService.selectListCachedCode(69)}">
+					<input class="form-check-input" type="radio" th:id="prodWidth + ${prodWidth.codeSeq}" name="prodWidth" th:value="${prodWidth.codeSeq}" th:checked="${prodWidth.codeSeq} == ${vo.shProdWidth}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodWidth + ${prodWidth.codeSeq}" th:text="${prodWidth.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End size(length) type-->
+		<!--size(length) type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">크기(세로)</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodLength : ${@codeService.selectListCachedCode(70)}">
+					<input class="form-check-input" type="radio" th:id="prodLength + ${prodLength.codeSeq}" name="prodLength" th:value="${prodLength.codeSeq}" th:checked="${prodLength.codeSeq} == ${vo.shProdLength}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodLength + ${prodLength.codeSeq}" th:text="${prodLength.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End size(width) type-->
+		<!--size(height) type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">크기(높이)</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodHeight : ${@codeService.selectListCachedCode(71)}">
+					<input class="form-check-input" type="radio" th:id="prodHeight + ${prodHeight.codeSeq}" name="prodHeight" th:value="${prodHeight.codeSeq}" th:checked="${prodHeight.codeSeq} == ${vo.shProdHeight}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodHeight + ${prodHeight.codeSeq}" th:text="${prodHeight.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End size(height) type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(73)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+		<!--function type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">기능</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodFunction : ${@codeService.selectListCachedCode(72)}">
+					<input class="form-check-input" type="radio" th:id="prodFunction + ${prodFunction.codeSeq}" name="prodFunction" th:value="${prodFunction.codeSeq}" th:checked="${prodFunction.codeSeq} == ${vo.shProdFunction}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodFunction + ${prodFunction.codeSeq}" th:text="${prodFunction.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End function type-->
+		<!--color type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">색상</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodColor : ${@codeService.selectListCachedCode(45)}">
+					<input class="form-check-input" type="radio" th:id="prodColor + ${prodColor.codeSeq}" name="prodColor" th:value="${prodColor.codeSeq}" th:checked="${prodColor.codeSeq} == ${vo.shProdColor}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodColor + ${prodColor.codeSeq}" th:text="${prodColor.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End color type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 746}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(139)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(141)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+		<!--color type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">색상</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodColor : ${@codeService.selectListCachedCode(45)}">
+					<input class="form-check-input" type="radio" th:id="prodColor + ${prodColor.codeSeq}" name="prodColor" th:value="${prodColor.codeSeq}" th:checked="${prodColor.codeSeq} == ${vo.shProdColor}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodColor + ${prodColor.codeSeq}" th:text="${prodColor.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End color type-->
+		<!--categoryType type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">구성 및 특징</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategoryType : ${@codeService.selectListCachedCode(140)}">
+					<input class="form-check-input" type="radio" th:id="prodCategoryType + ${prodCategoryType.codeSeq}" name="prodCategoryType" th:value="${prodCategoryType.codeSeq}" th:checked="${prodCategoryType.codeSeq} == ${vo.shProdCategoryType}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategoryType + ${prodCategoryType.codeSeq}" th:text="${prodCategoryType.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End categoryType type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 747}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(96)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(97)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 748}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(98)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(101)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+		<!--wearMethod type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">착용 방법</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodWearMethod : ${@codeService.selectListCachedCode(99)}">
+					<input class="form-check-input" type="radio" th:id="prodWearMethod + ${prodWearMethod.codeSeq}" name="prodWearMethod" th:value="${prodWearMethod.codeSeq}" th:checked="${prodWearMethod.codeSeq} == ${vo.shWearMethod}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodWearMethod + ${prodWearMethod.codeSeq}" th:text="${prodWearMethod.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End wearMethod type-->
+		<!--function type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">기능</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodFunction : ${@codeService.selectListCachedCode(100)}">
+					<input class="form-check-input" type="radio" th:id="prodFunction + ${prodFunction.codeSeq}" name="prodFunction" th:value="${prodFunction.codeSeq}" th:checked="${prodFunction.codeSeq} == ${vo.shProdFunction}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodFunction + ${prodFunction.codeSeq}" th:text="${prodFunction.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End function type-->
+		<!--color type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">색상</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodColor : ${@codeService.selectListCachedCode(45)}">
+					<input class="form-check-input" type="radio" th:id="prodColor + ${prodColor.codeSeq}" name="prodColor" th:value="${prodColor.codeSeq}" th:checked="${prodColor.codeSeq} == ${vo.shProdColor}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodColor + ${prodColor.codeSeq}" th:text="${prodColor.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End color type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 749}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(102)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(103)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+		<!--color type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">색상</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodColor : ${@codeService.selectListCachedCode(45)}">
+					<input class="form-check-input" type="radio" th:id="prodColor + ${prodColor.codeSeq}" name="prodColor" th:value="${prodColor.codeSeq}" th:checked="${prodColor.codeSeq} == ${vo.shProdColor}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodColor + ${prodColor.codeSeq}" th:text="${prodColor.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End color type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 750}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(104)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 751}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(74)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(76)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+		<!--function type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">기능</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodFunction : ${@codeService.selectListCachedCode(75)}">
+					<input class="form-check-input" type="radio" th:id="prodFunction + ${prodFunction.codeSeq}" name="prodFunction" th:value="${prodFunction.codeSeq}" th:checked="${prodFunction.codeSeq} == ${vo.shProdFunction}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodFunction + ${prodFunction.codeSeq}" th:text="${prodFunction.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End function type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 752}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(142)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(143)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+		<!--color type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">색상</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodColor : ${@codeService.selectListCachedCode(45)}">
+					<input class="form-check-input" type="radio" th:id="prodColor + ${prodColor.codeSeq}" name="prodColor" th:value="${prodColor.codeSeq}" th:checked="${prodColor.codeSeq} == ${vo.shProdColor}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodColor + ${prodColor.codeSeq}" th:text="${prodColor.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End color type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 753}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(106)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(108)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+		<!--function type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">기능</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodFunction : ${@codeService.selectListCachedCode(107)}">
+					<input class="form-check-input" type="radio" th:id="prodFunction + ${prodFunction.codeSeq}" name="prodFunction" th:value="${prodFunction.codeSeq}" th:checked="${prodFunction.codeSeq} == ${vo.shProdFunction}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodFunction + ${prodFunction.codeSeq}" th:text="${prodFunction.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End function type-->
+	</th:block>
+
+	<th:block th:if="${vo.shFeedType == 754}">
+		<!--brand type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">브랜드</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodBrand : ${@codeService.selectListCachedCode(144)}">
+					<input class="form-check-input" type="checkbox" th:id="feedBrand + ${prodBrand.codeSeq}" name="feedBrand" th:value="${prodBrand.codeSeq}" th:checked="${vo.feedBrandArray.contains(prodBrand.codeSeq)}" onclick="check(this)">
+					<label class="form-check-label" th:for="feedBrand + ${prodBrand.codeSeq}" th:text="${prodBrand.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End brand type-->
+		<!--category type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">유형</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodCategory : ${@codeService.selectListCachedCode(146)}">
+					<input class="form-check-input" type="radio" th:id="prodCategory + ${prodCategory.codeSeq}" name="prodCategory" th:value="${prodCategory.codeSeq}" th:checked="${prodCategory.codeSeq} == ${vo.shProdCategory}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodCategory + ${prodCategory.codeSeq}" th:text="${prodCategory.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End category type-->
+		<!--sound type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">소리</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodSound : ${@codeService.selectListCachedCode(145)}">
+					<input class="form-check-input" type="radio" th:id="prodSound + ${prodSound.codeSeq}" name="prodSound" th:value="${prodSound.codeSeq}" th:checked="${prodSound.codeSeq} == ${vo.shProdSound}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodSound + ${prodSound.codeSeq}" th:text="${prodSound.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End sound type-->
+		<!--color type-->
+		<div class="sidebar_widget filterBox filter-widget size-swacthes product-type">
+			<div class="widget-title"><h2 class="mb-0">색상</h2></div>
+			<div class="filterDD row ms-auto">
+				<div class="form-check col-6" th:each="prodColor : ${@codeService.selectListCachedCode(45)}">
+					<input class="form-check-input" type="radio" th:id="prodColor + ${prodColor.codeSeq}" name="prodColor" th:value="${prodColor.codeSeq}" th:checked="${prodColor.codeSeq} == ${vo.shProdColor}" onclick="radio(this)">
+					<label class="form-check-label" th:for="prodColor + ${prodColor.codeSeq}" th:text="${prodColor.codeName}"></label>
+				</div>
+			</div>
+		</div>
+		<!--End color type-->
+	</th:block>
+</th:block>

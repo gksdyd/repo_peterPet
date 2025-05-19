@@ -11,6 +11,19 @@ let feedSize;
 let prodPetType;
 let snckFeature;
 
+let prodSound;
+let prodSmell;
+let prodColor;
+let prodCategory;
+let prodFunction;
+let prodFormulation;
+let prodCategoryType;
+let prodWidth;
+let prodLength;
+let prodHeight;
+let prodWearMethod;
+let feedIngredient;
+
 function noEvent(event) {
     let form = document.getElementById("productPagination");
 
@@ -25,7 +38,19 @@ function noEvent(event) {
     $("#shFeedSize").val(feedSize);
     $("#prodPetType").val(prodPetType);
     $("#shSnckFeature").val(snckFeature);
-
+    $("#shProdSound").val(prodSound);
+    $("#shProdSmell").val(prodSmell);
+    $("#shProdColor").val(prodColor);
+    $("#shProdCategory").val(prodCategory);
+    $("#shProdFunction").val(prodFunction);
+    $("#shProdFormulation").val(prodFormulation);
+    $("#shProdCategoryType").val(prodCategoryType);
+    $("#shProdWidth").val(prodWidth);
+    $("#shProdLength").val(prodLength);
+    $("#shProdHeight").val(prodHeight);
+    $("#shWearMethod").val(prodWearMethod);
+    $("#shFeedIngredient").val(feedIngredient);
+    
     if (event.keyCode === 116 || (event.ctrlKey && (event.keyCode === 78 || event.keyCode === 82))) {
         event.preventDefault(); // 기본 동작 막기
         form.method = "post";
@@ -82,6 +107,30 @@ function radio(e) {
             feedSize = null;
         } else if (name === "feature") {
             snckFeature = null;
+        } else if (name === "prodSound") {
+            prodSound = null;
+        } else if (name === "prodSmell") {
+            prodSmell = null;
+        } else if (name === "prodColor") {
+            prodColor = null;
+        } else if (name === "prodCategory") {
+            prodCategory = null;
+        } else if (name === "prodFunction") {
+            prodCategory = null;
+        } else if (name === "prodFormulation") {
+            prodCategory = null;
+        } else if (name === "prodCategoryType") {
+            prodCategoryType = null;
+        } else if (name === "prodWidth") {
+            prodWidth = null;
+        } else if (name === "prodLength") {
+            prodLength = null;
+        } else if (name === "prodHeight") {
+            prodHeight = null;
+        } else if (name === "prodWearMethod") {
+            prodWearMethod = null;
+        } else if (name === "feedIngredient") {
+            feedIngredient = null;
         }
     } else {
         badgeArray.push($(e).val());
@@ -97,6 +146,30 @@ function radio(e) {
             feedSize = $(e).val();
         } else if (name === "feature") {
             snckFeature = $(e).val();
+        } else if (name === "prodSound") {
+            prodSound = $(e).val();
+        } else if (name === "prodSmell") {
+            prodSmell = $(e).val();
+        } else if (name === "prodColor") {
+            prodColor = $(e).val();
+        } else if (name === "prodCategory") {
+            prodCategory = $(e).val();
+        } else if (name === "prodFunction") {
+            prodFunction = $(e).val();
+        } else if (name === "prodFormulation") {
+            prodFormulation = $(e).val();
+        } else if (name === "prodCategoryType") {
+            prodCategoryType = $(e).val();
+        } else if (name === "prodWidth") {
+            prodWidth = $(e).val();
+        } else if (name === "prodLength") {
+            prodLength = $(e).val();
+        } else if (name === "prodHeight") {
+            prodHeight = $(e).val();
+        } else if (name === "prodWearMethod") {
+            prodWearMethod = $(e).val();
+        } else if (name === "feedIngredient") {
+            feedIngredient = $(e).val();
         }
     }
     shop();
@@ -174,6 +247,30 @@ function shop() {
     params.append('prodPetType', isNaN(value) ? '' : value);
     value = parseInt(snckFeature);
     params.append('shSnckFeature', isNaN(value) ? '' : value);
+    value = parseInt(prodSound);
+    params.append('shProdSound', isNaN(value) ? '' : value);
+    value = parseInt(prodSmell);
+    params.append('shProdSmell', isNaN(value) ? '' : value);
+    value = parseInt(prodColor);
+    params.append('shProdColor', isNaN(value) ? '' : value);
+    value = parseInt(prodCategory);
+    params.append('shProdCategory', isNaN(value) ? '' : value);
+    value = parseInt(prodFunction);
+    params.append('shProdFunction', isNaN(value) ? '' : value);
+    value = parseInt(prodFormulation);
+    params.append('shProdFormulation', isNaN(value) ? '' : value);
+    value = parseInt(prodCategoryType);
+    params.append('shProdCategoryType', isNaN(value) ? '' : value);
+    value = parseInt(prodWidth);
+    params.append('shProdWidth', isNaN(value) ? '' : value);
+    value = parseInt(prodLength);
+    params.append('shProdLength', isNaN(value) ? '' : value);
+    value = parseInt(prodHeight);
+    params.append('shProdHeight', isNaN(value) ? '' : value);
+    value = parseInt(prodWearMethod);
+    params.append('shWearMethod', isNaN(value) ? '' : value);
+    value = parseInt(feedIngredient);
+    params.append('shFeedIngredient', isNaN(value) ? '' : value);
 
     fetch('/peter/shop/ShopPeterSearch', {    // payList fragment만 반환하는 컨트롤러
         method: 'POST',  // POST 요청
@@ -283,6 +380,90 @@ removeBadge = function(e) {
                     $("input[name=feature]").eq(i).prop("checked", false);
                 }
             }
+        } else if (prodSound == value) {
+            prodSound = null;
+            for (let i = 0; i < $("input[name=prodSound]").length; i++) {
+                if ($("input[name=prodSound]").eq(i).val() == value) {
+                    $("input[name=prodSound]").eq(i).prop("checked", false);
+                }
+            }
+        } else if (prodSmell == value) {
+            prodSmell = null;
+            for (let i = 0; i < $("input[name=prodSmell]").length; i++) {
+                if ($("input[name=prodSmell]").eq(i).val() == value) {
+                    $("input[name=prodSmell]").eq(i).prop("checked", false);
+                }
+            }
+        } else if (prodColor == value) {
+            prodColor = null;
+            for (let i = 0; i < $("input[name=prodColor]").length; i++) {
+                if ($("input[name=prodColor]").eq(i).val() == value) {
+                    $("input[name=prodColor]").eq(i).prop("checked", false);
+                }
+            }
+        } else if (prodCategory == value) {
+            prodCategory = null;
+            for (let i = 0; i < $("input[name=prodCategory]").length; i++) {
+                if ($("input[name=prodCategory]").eq(i).val() == value) {
+                    $("input[name=prodCategory]").eq(i).prop("checked", false);
+                }
+            }
+        } else if (prodFunction == value) {
+            prodFunction = null;
+            for (let i = 0; i < $("input[name=prodFunction]").length; i++) {
+                if ($("input[name=prodFunction]").eq(i).val() == value) {
+                    $("input[name=prodFunction]").eq(i).prop("checked", false);
+                }
+            }
+        } else if (prodFormulation == value) {
+            prodFormulation = null;
+            for (let i = 0; i < $("input[name=prodFormulation]").length; i++) {
+                if ($("input[name=prodFormulation]").eq(i).val() == value) {
+                    $("input[name=prodFormulation]").eq(i).prop("checked", false);
+                }
+            }
+        } else if (prodCategoryType == value) {
+            prodCategoryType = null;
+            for (let i = 0; i < $("input[name=prodCategoryType]").length; i++) {
+                if ($("input[name=prodCategoryType]").eq(i).val() == value) {
+                    $("input[name=prodCategoryType]").eq(i).prop("checked", false);
+                }
+            }
+        } else if (prodWidth == value) {
+            prodWidth = null;
+            for (let i = 0; i < $("input[name=prodWidth]").length; i++) {
+                if ($("input[name=prodWidth]").eq(i).val() == value) {
+                    $("input[name=prodWidth]").eq(i).prop("checked", false);
+                }
+            }
+        } else if (prodLength == value) {
+            prodLength = null;
+            for (let i = 0; i < $("input[name=prodLength]").length; i++) {
+                if ($("input[name=prodLength]").eq(i).val() == value) {
+                    $("input[name=prodLength]").eq(i).prop("checked", false);
+                }
+            }
+        } else if (prodHeight == value) {
+            prodHeight = null;
+            for (let i = 0; i < $("input[name=prodHeight]").length; i++) {
+                if ($("input[name=prodHeight]").eq(i).val() == value) {
+                    $("input[name=prodHeight]").eq(i).prop("checked", false);
+                }
+            }
+        } else if (prodWearMethod == value) {
+            prodWearMethod = null;
+            for (let i = 0; i < $("input[name=prodWearMethod]").length; i++) {
+                if ($("input[name=prodWearMethod]").eq(i).val() == value) {
+                    $("input[name=prodWearMethod]").eq(i).prop("checked", false);
+                }
+            }
+        } else if (feedIngredient == value) {
+            feedIngredient = null;
+            for (let i = 0; i < $("input[name=feedIngredient]").length; i++) {
+                if ($("input[name=feedIngredient]").eq(i).val() == value) {
+                    $("input[name=feedIngredient]").eq(i).prop("checked", false);
+                }
+            }
         }
     }
     shop();
@@ -357,6 +538,18 @@ initBadge = function() {
     feedSize = $("#shFeedSize").val();
     prodPetType = $("#prodPetType").val();
     snckFeature = $("#shSnckFeature").val();
+    prodSound = $("#shProdSound").val();
+    prodSmell = $("#shProdSmell").val();
+    prodColor = $("#shProdColor").val();
+    prodCategory = $("#shProdCategory").val();
+    prodFunction = $("#shProdFunction").val();
+    prodFormulation = $("#shProdFormulation").val();
+    prodCategoryType = $("#shProdCategoryType").val();
+    prodWidth = $("#shProdWidth").val();
+    prodLength = $("#shProdLength").val();
+    prodHeight = $("#shProdHeight").val();
+    prodWearMethod = $("#shWearMethod").val();
+    feedIngredient = $("#shFeedIngredient").val();
 }
 
 function filter() {
@@ -377,3 +570,21 @@ function filter() {
         price_slider();
     });
 }
+
+function changeSupply(e) {
+    $.ajax({
+      async: true 
+      ,cache: false
+      ,type: "post"
+      ,url: "/peter/shop/ShopPeterSupplyProc"
+      ,data: { "shFeedType" : $(e).val() }
+      ,success: function(response) {
+        $("#supply").html(response);
+        feedType = $(e).val();
+        allRemoveBadge();
+      }
+      ,error : function(jqXHR){
+        alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+      }
+    });
+  }

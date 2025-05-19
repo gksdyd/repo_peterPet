@@ -872,7 +872,7 @@
 			<div class="form-group">
 			  <select class="form-select-JHY" name="prodCategoryType" id="prodCategoryType">
 				<option value="">터널 모양</option>
-				<option th:each="prodCategory : ${@codeService.selectListCachedCode(117)}" th:value="${prodCategory.codeSeq}" th:text="${prodCategory.codeName}" th:selected="${item.prodCategoryType} == ${prodCategory.codeSeq}"></option>
+				<option th:each="prodCategory : ${@codeService.selectListCachedCode(127)}" th:value="${prodCategory.codeSeq}" th:text="${prodCategory.codeName}" th:selected="${item.prodCategoryType} == ${prodCategory.codeSeq}"></option>
 			  </select>
 			</div>
 		</div>
