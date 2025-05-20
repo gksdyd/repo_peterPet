@@ -23,7 +23,9 @@ import com.peterpet.demo.module.payment.PaymentVo;
 import com.peterpet.demo.module.pet.PetDto;
 import com.peterpet.demo.module.pet.PetService;
 import com.peterpet.demo.module.pet.PetVo;
+import com.peterpet.demo.module.product.ProductDto;
 import com.peterpet.demo.module.product.ProductService;
+import com.peterpet.demo.module.product.ProductVo;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -84,7 +86,7 @@ public class MemberPeterController extends BaseController {
 	
 	@RequestMapping(value = "/MyAccountPeterForm")
 	public String MyAccountPeterForm(MemberDto memberDto, PetVo petVo, @ModelAttribute("vo") MemberVo memberVo,
-			@ModelAttribute("vo2") PaymentVo paymentVo, DeliveryVo deliveryVo,
+			@ModelAttribute("vo2") PaymentVo paymentVo, DeliveryVo deliveryVo, ProductVo productVo,
 			Model model, HttpSession httpSession) {
 		List<PetDto> pets = new ArrayList<>();
 		
@@ -93,6 +95,7 @@ public class MemberPeterController extends BaseController {
 		memberVo.setUserSeq((String)httpSession.getAttribute("sessSeqPeter"));
 		paymentVo.setUserSeq((String)httpSession.getAttribute("sessSeqPeter"));
 		deliveryVo.setUserSeq((String)httpSession.getAttribute("sessSeqPeter"));
+		productVo.setUserSeq((String)httpSession.getAttribute("sessSeqPeter"));
 		
 		pets = petService.selectListPeterPets(petVo);
 		petVo.calculateAge(pets);
@@ -107,6 +110,12 @@ public class MemberPeterController extends BaseController {
 		model.addAttribute("pays", paymentService.selectList(paymentVo));
 		model.addAttribute("deliveries", deliveryService.selectList(deliveryVo));
 		model.addAttribute("deliveryKey", deliveryKey);
+		
+		List<ProductDto> dtos = productService.selectWishlists(productVo);
+		for (int i = 0; i < dtos.size(); i++) {
+			dtos.get(i).calculatePrice();
+		}
+		model.addAttribute("wishlists", dtos);
 		return "peter/member/MyAccountPeterForm";
 	}
 	

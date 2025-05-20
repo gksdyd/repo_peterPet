@@ -873,189 +873,50 @@
                                     <!-- Grid Product -->
                                     <div class="grid-products grid--view-items wishlist-grid mt-4">
                                         <div class="row">
-                                            <div class="col-6 col-sm-6 col-md-3 col-lg-3 item position-relative">
+                                            <div class="col-6 col-sm-6 col-md-3 col-lg-3 item position-relative" th:each="list : ${wishlists}">
                                                 <button type="button" class="btn remove-icon close-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="icon an an-times-r"></i></button>
                                                 <!-- Product Image -->
                                                 <div class="product-image">
-                                                    <!-- Product Image -->
-                                                    <a href="product-layout1.html" class="product-img">
-                                                        <!-- image -->
-                                                        <img class="primary blur-up lazyload" data-src="assets/images/products/product-1.jpg" src="assets/images/products/product-1.jpg" alt="product" title="product" />
-                                                        <!-- End image -->
-                                                        <!-- Hover image -->
-                                                        <img class="hover blur-up lazyload" data-src="assets/images/products/product-1-1.jpg" src="assets/images/products/product-1-1.jpg" alt="product" title="product" />
-                                                        <!-- End hover image -->
+                                                    <!--Start Product Image-->
+                                                    <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${list.prodType})}">
+                                                        <img class="blur-up lazyload" th:src="${list.path}">
                                                         <!-- product label -->
-                                                        <div class="product-labels rectangular"><span class="lbl pr-label3">Low in stock</span></div>
+                                                        <!-- <div class="product-labels"><span class="lbl on-sale rounded">최저가도전!</span></div> -->
                                                         <!-- End product label -->
                                                     </a>
-                                                    <!-- End Product Image -->
+                                                    <!--End Product Image-->
                                                 </div>
-                                                <!-- End Product Image -->
-
-                                                <!-- Product Details -->
+                                                <!--End Product Image-->
+                                                <!--Start Product Details-->
                                                 <div class="product-details text-center">
-                                                    <!-- Product Name -->
-                                                    <div class="product-name">
-                                                        <a href="product-layout1.html">Martha Knit Top</a>
+                                                    <!--Product Name-->
+                                                    <div class="product-name text-uppercase">
+                                                        <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${list.prodType})}" th:if="${list.funcName} == null and ${list.infoWeight} == null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName}"></a>
+                                                        <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${list.prodType})}" th:if="${list.funcName} != null and ${list.infoWeight} == null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName} + ' ' + ${@codeService.selectOneCachedCode(list.funcName)}"></a>
+                                                        <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${list.prodType})}" th:if="${list.funcName} == null and ${list.infoWeight} != null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName} + ' ' + ${list.infoWeight} + 'kg'"></a>
+                                                        <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${list.prodType})}" th:if="${list.funcName} != null and ${list.infoWeight} != null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName} + ' ' + ${list.infoWeight} + 'kg' + ' ' + ${@codeService.selectOneCachedCode(list.funcName)}"></a>
                                                     </div>
-                                                    <!-- End Product Name -->
-                                                    <!-- Product Price -->
+                                                    <!--End Product Name-->
+                                                    <!--Product Price-->
                                                     <div class="product-price">
-                                                        <span class="old-price">$199.00</span>
-                                                        <span class="price">$150.00</span>
+                                                        <div class="old-price" th:if="${list.infoDiscount} != 0" th:text="${list.infoPrice}"></div>
+                                                        <span class="price" th:if="${list.infoDiscount} == 0" th:text="${list.infoPrice}"></span>
+                                                        <span class="price" th:if="${list.infoDiscount} != 0" th:text="${list.infoDiscount} + '% ' + ${list.discountPrice}"></span>
                                                     </div>
-                                                    <!-- End Product Price -->
-                                                    <!-- Product Review -->
+                                                    <!--End Product Price-->
+                                                    <!--Product Review-->
                                                     <div class="product-review d-flex align-items-center justify-content-center">
-                                                        <i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i> <i class="an an-star-o"></i>
-                                                        <span class="caption hidden ms-2">9 reviews</span>
+                                                        <span th:if="${list.prodScore} > 4"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i></span>
+                                                        <span th:if="${list.prodScore} > 3 and 4 >= ${list.prodScore}"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i></span>
+                                                        <span th:if="${list.prodScore} > 2 and 3 >= ${list.prodScore}"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
+                                                        <span th:if="${list.prodScore} > 1 and 2 >= ${list.prodScore}"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
+                                                        <span th:if="${list.prodScore} > 0 and 1 >= ${list.prodScore}"><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
+                                                        <span th:if="${list.prodScore} == 0"><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
                                                     </div>
-                                                    <!-- End Product Review -->
-                                                    <!-- Product Button -->
-                                                    <form method="post" action="/cart/add" class="cart-form mt-3" enctype="multipart/form-data">
-                                                        <a href="cart-style1.html" class="btn btn--small rounded product-form__cart-submit"><span>Add to cart</span></a>
-                                                    </form>
-                                                    <!-- End Product Button -->
+                                                    <!--End Product Review-->
+                                                    <a href="cart-style1.html" class="btn btn--small rounded product-form__cart-submit"><span>Add to cart</span></a>
                                                 </div>
-                                                <!-- End Product Details -->
-                                            </div>
-                                            <div class="col-6 col-sm-6 col-md-3 col-lg-3 item position-relative">
-                                                <button type="button" class="btn remove-icon close-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="icon an an-times-r"></i></button>
-                                                <!-- Product Image -->
-                                                <div class="product-image">
-                                                    <!-- Product Image -->
-                                                    <a href="product-layout1.html" class="product-img">
-                                                        <!-- image -->
-                                                        <img class="primary blur-up lazyload" data-src="assets/images/products/product-1.jpg" src="assets/images/products/product-1.jpg" alt="product" title="product" />
-                                                        <!-- End image -->
-                                                        <!-- Hover image -->
-                                                        <img class="hover blur-up lazyload" data-src="assets/images/products/product-1-1.jpg" src="assets/images/products/product-1-1.jpg" alt="product" title="product" />
-                                                        <!-- End hover image -->
-                                                        <!-- Product Label -->
-                                                        <div class="product-labels rectangular"><span class="lbl pr-label2">New</span></div>
-                                                        <!-- End Product Label -->
-                                                    </a>
-                                                    <!-- End Product Image -->
-                                                </div>
-                                                <!-- End Product Image -->
-                                                <!-- Product Details -->
-                                                <div class="product-details text-center">
-                                                    <!-- Product Name -->
-                                                    <div class="product-name">
-                                                        <a href="product-layout1.html">Long Sleeve T-shirts</a>
-                                                    </div>
-                                                    <!-- End Product Name -->
-                                                    <!-- Product Price -->
-                                                    <div class="product-price">
-                                                        <span class="price">$199.00</span>
-                                                    </div>
-                                                    <!-- End Product Price -->
-                                                    <!-- Product Review -->
-                                                    <div class="product-review d-flex align-items-center justify-content-center">
-                                                        <i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i>
-                                                        <span class="caption hidden ms-2">20 reviews</span>
-                                                    </div>
-                                                    <!-- End Product Review -->
-                                                    <!-- Product Button -->
-                                                    <form method="post" action="/cart/add" class="cart-form mt-3" enctype="multipart/form-data">
-                                                        <a href="cart-style1.html" class="btn btn--small rounded product-form__cart-submit"><span>Add to cart</span></a>
-                                                    </form>
-                                                    <!-- End Product Button -->
-                                                </div>
-                                                <!-- End Product Details -->
-                                            </div>
-                                            <div class="col-6 col-sm-6 col-md-3 col-lg-3 item position-relative">
-                                                <button type="button" class="btn remove-icon close-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="icon an an-times-r"></i></button>
-                                                <!-- Product Image -->
-                                                <div class="product-image">
-                                                    <!-- Product Image -->
-                                                    <a href="product-layout1.html" class="product-img">
-                                                        <!-- image -->
-                                                        <img class="primary blur-up lazyload" data-src="assets/images/products/product-1.jpg" src="assets/images/products/product-1.jpg" alt="product" title="product" />
-                                                        <!-- End image -->
-                                                        <!-- Hover image -->
-                                                        <img class="hover blur-up lazyload" data-src="assets/images/products/product-1-1.jpg" src="assets/images/products/product-1-1.jpg" alt="product" title="product" />
-                                                        <!-- End hover image -->
-                                                        <!-- Product Label -->
-                                                        <div class="product-labels rectangular"><span class="lbl on-sale">Out of stock</span></div>
-                                                        <!-- End Product Label -->
-                                                    </a>
-                                                    <!-- End Product Image -->
-                                                </div>
-                                                <!-- End Product Image -->
-                                                <!-- Product Details -->
-                                                <div class="product-details text-center">
-                                                    <!-- Product Name -->
-                                                    <div class="product-name">
-                                                        <a href="product-layout1.html">Stand Collar Slim Shirt</a>
-                                                    </div>
-                                                    <!-- End Product Name -->
-                                                    <!-- Product Price -->
-                                                    <div class="product-price">
-                                                        <span class="price">$399.00</span>
-                                                    </div>
-                                                    <!-- End Product Price -->
-                                                    <!-- Product Review -->
-                                                    <div class="product-review d-flex align-items-center justify-content-center">
-                                                        <i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i>
-                                                        <span class="caption hidden ms-2">19 reviews</span>
-                                                    </div>
-                                                    <!-- End Product Review -->
-                                                    <!-- Product Button -->
-                                                    <form method="post" action="/cart/add" class="cart-form mt-3" enctype="multipart/form-data">
-                                                        <a href="cart-style1.html" class="btn btn--small rounded product-form__cart-submit soldOutBtn disabled"><span>Out Of stock</span></a>
-                                                    </form>
-                                                    <!-- End Product Button -->
-                                                </div>
-                                                <!-- End Product Details -->
-                                            </div>
-                                            <div class="col-6 col-sm-6 col-md-3 col-lg-3 item position-relative">
-                                                <button type="button" class="btn remove-icon close-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="icon an an-times-r"></i></button>
-                                                <!-- Product Image -->
-                                                <div class="product-image">
-                                                    <!-- Product Image -->
-                                                    <a href="product-layout1.html" class="product-img">
-                                                        <!-- image -->
-                                                        <img class="primary blur-up lazyload" data-src="assets/images/products/product-1.jpg" src="assets/images/products/product-1.jpg" alt="product" title="product" />
-                                                        <!-- End image -->
-                                                        <!-- Hover image -->
-                                                        <img class="hover blur-up lazyload" data-src="assets/images/products/product-1-1.jpg" src="assets/images/products/product-1-1.jpg" alt="product" title="product" />
-                                                        <!-- End hover image -->
-                                                        <!-- Product Label -->
-                                                        <div class="product-labels"><span class="lbl pr-label1">Sale</span></div>
-                                                        <!-- End Product Label -->
-                                                    </a>
-                                                    <!-- End Product Image -->
-                                                </div>
-                                                <!-- End Product Image -->
-
-                                                <!-- Product Details -->
-                                                <div class="product-details text-center">
-                                                    <!-- Product Name -->
-                                                    <div class="product-name">
-                                                        <a href="product-layout1.html">Backpack With Contrast</a>
-                                                    </div>
-                                                    <!-- End Product Name -->
-                                                    <!-- Product Price -->
-                                                    <div class="product-price">
-                                                        <span class="old-price">$99.00</span>
-                                                        <span class="price">$88.00</span>
-                                                    </div>
-                                                    <!-- End Product Price -->
-                                                    <!-- Product Review -->
-                                                    <div class="product-review d-flex align-items-center justify-content-center">
-                                                        <i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i>
-                                                        <span class="caption hidden ms-2">2 reviews</span>
-                                                    </div>
-                                                    <!-- End Product Review -->
-                                                    <!-- Product Button -->
-                                                    <form method="post" action="/cart/add" class="cart-form mt-3" enctype="multipart/form-data">
-                                                        <a href="cart-style1.html" class="btn btn--small rounded product-form__cart-submit"><span>Add to cart</span></a>
-                                                    </form>
-                                                    <!-- End Product Button -->
-                                                </div>
-                                                <!-- End Product Details -->
+                                                <!--End Product Details-->
                                             </div>
                                         </div>
                                     </div>
