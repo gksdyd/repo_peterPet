@@ -82,6 +82,8 @@ public class ProductDto extends BaseDto {
 	private Integer prodWearMethod;
 	private Integer prodFunction;
 	
+	private Integer wishFlag;
+	
 	public String getProdSeq() {
 		return prodSeq;
 	}
@@ -475,5 +477,11 @@ public class ProductDto extends BaseDto {
 	}
 	public void setProdFunction(Integer prodFunction) {
 		this.prodFunction = prodFunction;
+	}
+	public Integer getWishFlag() {
+		return wishFlag;
+	}
+	public void setWishFlag(Integer wishFlag) {
+		this.wishFlag = wishFlag;
 	}
 }

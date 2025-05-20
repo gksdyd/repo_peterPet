@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+				 
+<mapper namespace="com.peterpet.demo.module.wishlist.WishlistDao">
+
+	<resultMap type="com.peterpet.demo.module.wishlist.WishlistDto" id="resultMapObj"></resultMap>
+	
+	<insert id="insert">
+		INSERT INTO wishlist (
+			user_userSeq,
+			product_prodSeq,
+			wishDelFlag
+		) VALUE (
+			#{userSeq},
+			#{prodSeq},
+			0
+		)
+	</insert>
+	
+	<update id="uelete">
+		UPDATE wishlist
+		SET
+			wishDelFlag = 1
+		WHERE 1=1
+			AND user_userSeq = #{userSeq}
+			AND product_prodSeq = #{prodSeq}
+	</update>
+</mapper>

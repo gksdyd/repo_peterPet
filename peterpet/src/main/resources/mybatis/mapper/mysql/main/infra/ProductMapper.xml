@@ -265,7 +265,8 @@
 			prodLength,
 			prodHeight,
 			prodWearMethod,
-			prodFunction
+			prodFunction,
+			(SELECT COUNT(*) FROM wishlist WHERE wishDelFlag = 0 AND user_userSeq = #{userSeq} AND product_prodSeq = #{prodSeq}) AS wishFlag
         FROM
         	product
         	LEFT JOIN feedinfo b ON prodSeq = b.product_prodSeq AND infoMain = 1

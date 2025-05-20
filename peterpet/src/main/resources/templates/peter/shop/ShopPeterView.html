@@ -28,7 +28,13 @@
                                     <div class="zoompro-wrap product-zoom-right">
                                         <div class="zoompro-span"><img id="zoompro" class="zoompro" th:src="${item.path}" th:data-zoom-image="${item.path}" alt="product" /></div>
                                         <!-- <div class="product-labels"><span class="lbl pr-label1">new</span></div> -->
-                                        <div class="product-wish"><a class="wishIcon wishlist rounded m-0" href="my-wishlist.html"><i class="icon an an-heart"></i><span class="tooltip-label left">찜</span></a></div>
+                                        <div class="product-wish">
+                                            <a class="wishIcon wishlist rounded m-0" href="javascript:void(0);" onclick="wishlist(this)">
+                                                <i th:if="${item.wishFlag == 0}" class="icon an an-heart"></i>
+                                                <i th:if="${item.wishFlag == 1}" class="icon an an-heart wishActive"></i>
+                                                <span class="tooltip-label left">찜</span>
+                                            </a>
+                                        </div>
                                         <div class="product-buttons">
                                             <a href="javascript:void(0);" class="btn rounded" onclick="copy()"><i class="icon an an-share-alt1"></i><span class="tooltip-label">공유</span></a>
                                             <a href="#" class="btn rounded prlightbox"><i class="icon an an-expand-l-arrows"></i><span class="tooltip-label">확대</span></a>
@@ -1033,6 +1039,44 @@
                         $("#copyMessage").fadeOut(1000); // 천천히 사라지게 (1초)
                     }, 300) // 300ms 후 사라지기 시작
                 );
+            }
+
+            function wishlist(e) {
+                let url;
+
+                if ($(e).children().hasClass("wishActive")) {
+                    url = "/peter/wishlist/WishlistPeterDeltProc"
+                } else {
+                    url = "/peter/wishlist/WishlistPeterProc";
+                }
+
+                $.ajax({
+                    async: true 
+                    ,cache: false
+                    ,type: "post"
+                    ,url: url
+                    ,data: { "userSeq" : /*[[${session.sessSeqPeter}]]*/"", "prodSeq" :  /*[[${item.prodSeq}]]*/""}
+                    ,success: function(response) {
+                        if (response.result === "success") {
+                            if ($(e).children().hasClass("wishActive")) {
+                                $(e).children().removeClass("wishActive");
+                            } else {
+                                $(e).children().addClass("wishActive");
+                            }
+                        } else if (response.result === "fail") {
+                            modalTitle.innerText = "알림";
+                            modalText.innerText = "로그인을 해야합니다.";
+                            modalCloseButton.style.display = "block";
+                            $(".bg-body-tertiary").css("backgroundColor", "#E4EEF7");
+                            $(".modal-body").css("backgroundColor", "#EBF5FF");
+                            $(".modal-footer").css("backgroundColor", "#EBF5FF");
+                            modal.style.display = "block";
+                        }
+                    }
+                    ,error : function(jqXHR){
+                        alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+                    }
+                });
             }
         </script>
         <script th:inline="javascript" src="/peter/template/optimal-html/assets/js/JHY/product.js"></script>

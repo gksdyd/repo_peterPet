@@ -17,6 +17,8 @@ import com.peterpet.demo.module.code.CodeDto;
 import com.peterpet.demo.module.delivery.DeliveryService;
 import com.peterpet.demo.module.member.MemberService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping(value = "/peter/shop")
 public class ShopPeterController extends BaseController {
@@ -48,7 +50,11 @@ public class ShopPeterController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/ShopPeterView")
-	public String shopPeterView(@ModelAttribute("vo") ProductVo vo, Model model) throws Exception {
+	public String shopPeterView(@ModelAttribute("vo") ProductVo vo, Model model, HttpSession httpSession) throws Exception {
+		if (httpSession.getAttribute("sessSeqPeter") != null) {
+			vo.setUserSeq(httpSession.getAttribute("sessSeqPeter").toString());			
+		}
+		
 		ProductDto dto = productService.selectOnePoduct(vo);
 		if (vo.getProdType() != 3) {
 			dto.setWeightArray(dto.getWeightArr().split(","));			
