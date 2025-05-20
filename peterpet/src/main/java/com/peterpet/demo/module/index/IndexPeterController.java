@@ -29,6 +29,7 @@ public class IndexPeterController {
 			if (i == 0) {
 				index[i] = temp;
 				selectDtos.add(dtos.get(temp));
+				selectDtos.get(i).calculatePrice();
 			}
 			for (int j = 0; j < i; j++) {
 				if (temp == index[j]) {
@@ -37,6 +38,7 @@ public class IndexPeterController {
 				} else if (j == i - 1) {
 					index[i] = temp;
 					selectDtos.add(dtos.get(temp));
+					selectDtos.get(i).calculatePrice();
 				}
 			}
 		}
