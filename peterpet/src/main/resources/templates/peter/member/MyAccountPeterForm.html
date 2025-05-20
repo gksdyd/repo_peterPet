@@ -872,52 +872,8 @@
                                     <h3>My Wishlist</h3>
                                     <!-- Grid Product -->
                                     <div class="grid-products grid--view-items wishlist-grid mt-4">
-                                        <div class="row">
-                                            <div class="col-6 col-sm-6 col-md-3 col-lg-3 item position-relative" th:each="list : ${wishlists}">
-                                                <button type="button" class="btn remove-icon close-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="icon an an-times-r"></i></button>
-                                                <!-- Product Image -->
-                                                <div class="product-image">
-                                                    <!--Start Product Image-->
-                                                    <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${list.prodType})}">
-                                                        <img class="blur-up lazyload" th:src="${list.path}">
-                                                        <!-- product label -->
-                                                        <!-- <div class="product-labels"><span class="lbl on-sale rounded">최저가도전!</span></div> -->
-                                                        <!-- End product label -->
-                                                    </a>
-                                                    <!--End Product Image-->
-                                                </div>
-                                                <!--End Product Image-->
-                                                <!--Start Product Details-->
-                                                <div class="product-details text-center">
-                                                    <!--Product Name-->
-                                                    <div class="product-name text-uppercase">
-                                                        <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${list.prodType})}" th:if="${list.funcName} == null and ${list.infoWeight} == null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName}"></a>
-                                                        <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${list.prodType})}" th:if="${list.funcName} != null and ${list.infoWeight} == null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName} + ' ' + ${@codeService.selectOneCachedCode(list.funcName)}"></a>
-                                                        <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${list.prodType})}" th:if="${list.funcName} == null and ${list.infoWeight} != null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName} + ' ' + ${list.infoWeight} + 'kg'"></a>
-                                                        <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${list.prodType})}" th:if="${list.funcName} != null and ${list.infoWeight} != null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName} + ' ' + ${list.infoWeight} + 'kg' + ' ' + ${@codeService.selectOneCachedCode(list.funcName)}"></a>
-                                                    </div>
-                                                    <!--End Product Name-->
-                                                    <!--Product Price-->
-                                                    <div class="product-price">
-                                                        <div class="old-price" th:if="${list.infoDiscount} != 0" th:text="${list.infoPrice}"></div>
-                                                        <span class="price" th:if="${list.infoDiscount} == 0" th:text="${list.infoPrice}"></span>
-                                                        <span class="price" th:if="${list.infoDiscount} != 0" th:text="${list.infoDiscount} + '% ' + ${list.discountPrice}"></span>
-                                                    </div>
-                                                    <!--End Product Price-->
-                                                    <!--Product Review-->
-                                                    <div class="product-review d-flex align-items-center justify-content-center">
-                                                        <span th:if="${list.prodScore} > 4"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i></span>
-                                                        <span th:if="${list.prodScore} > 3 and 4 >= ${list.prodScore}"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i></span>
-                                                        <span th:if="${list.prodScore} > 2 and 3 >= ${list.prodScore}"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
-                                                        <span th:if="${list.prodScore} > 1 and 2 >= ${list.prodScore}"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
-                                                        <span th:if="${list.prodScore} > 0 and 1 >= ${list.prodScore}"><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
-                                                        <span th:if="${list.prodScore} == 0"><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
-                                                    </div>
-                                                    <!--End Product Review-->
-                                                    <a href="cart-style1.html" class="btn btn--small rounded product-form__cart-submit"><span>Add to cart</span></a>
-                                                </div>
-                                                <!--End Product Details-->
-                                            </div>
+                                        <div class="row" id="wishlistPage">
+                                            <div th:replace="~{peter/include/wishlist :: wishlist}"></div>
                                         </div>
                                     </div>
                                     <!-- End Grid Product-->
@@ -1679,6 +1635,22 @@
 
                 $("#deliveryCheck").target = "popupWindow";
                 $("#deliveryCheck").submit();
+            }
+
+            function removeWish(seq) {
+                $.ajax({
+                    async: true 
+                    ,cache: false
+                    ,type: "post"
+                    ,url: "/peter/wishlist/WishlistMypagePeterDeltProc"
+                    ,data: { "userSeq" : /*[[${session.sessSeqPeter}]]*/"", "prodSeq" :  seq}
+                    ,success: function(response) {
+                        $("#wishlistPage").html(response);
+                    }
+                    ,error : function(jqXHR){
+                        alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+                    }
+                });
             }
             </script>
         </div>

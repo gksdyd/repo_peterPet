@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.peterpet.demo.module.base.BaseDao;
 import com.peterpet.demo.module.base.BaseDto;
 import com.peterpet.demo.module.member.MemberDto;
+import com.peterpet.demo.module.wishlist.WishlistVo;
 
 @Repository
 public interface ProductDao extends BaseDao {
@@ -43,4 +44,5 @@ public interface ProductDao extends BaseDao {
 	public List<ProductDto> selectSameProducts(ProductVo vo);
 	public List<ProductDto> selectAllProducts();
 	public List<ProductDto> selectWishlists(ProductVo vo);
+	public List<ProductDto> selectWishlists(WishlistVo vo);
 }

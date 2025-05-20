@@ -1,14 +1,18 @@
 package com.peterpet.demo.module.wishlist;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.peterpet.demo.module.base.BaseController;
+import com.peterpet.demo.module.product.ProductDto;
+import com.peterpet.demo.module.product.ProductService;
 
 @Controller
 @RequestMapping(value = "/peter/wishlist")
@@ -16,6 +20,9 @@ public class WishlistController extends BaseController {
 
 	@Autowired
 	WishlistService wishlistService;
+	
+	@Autowired
+	ProductService productService;
 	
 	@ResponseBody
 	@RequestMapping(value = "/WishlistPeterProc")
@@ -38,5 +45,16 @@ public class WishlistController extends BaseController {
 		wishlistService.uelete(vo);
 		rtMap.put("result", "success");
 		return rtMap;
+	}
+	
+	@RequestMapping(value = "/WishlistMypagePeterDeltProc")
+	public String wishlistMypagePeterDeltProc(WishlistVo vo, Model model) throws Exception {
+		wishlistService.uelete(vo);
+		List<ProductDto> dtos = productService.selectWishlists(vo);
+		for (int i = 0; i < dtos.size(); i++) {
+			dtos.get(i).calculatePrice();
+		}
+		model.addAttribute("wishlists", dtos);
+		return "/peter/include/wishlist";
 	}
 }

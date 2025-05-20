@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.peterpet.demo.module.base.BaseService;
 import com.peterpet.demo.module.member.MemberDto;
+import com.peterpet.demo.module.wishlist.WishlistVo;
 
 @Service
 public class ProductService extends BaseService {
@@ -155,6 +156,10 @@ public class ProductService extends BaseService {
 	}
 	
 	public List<ProductDto> selectWishlists(ProductVo vo) {
+		return productDao.selectWishlists(vo);
+	}
+	
+	public List<ProductDto> selectWishlists(WishlistVo vo) {
 		return productDao.selectWishlists(vo);
 	}
 }
