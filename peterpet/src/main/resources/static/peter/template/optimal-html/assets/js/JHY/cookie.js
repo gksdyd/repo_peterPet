@@ -4,6 +4,10 @@ function setCookie(value) {
     today.setDate(today.getDate() + 7); //만료값 지정
     var cookie_value = value + "; path=/; exerpires=" + today.toUTCString() + ";"; 
     document.cookie = "product" + value + "=" + cookie_value;
+    $("#cartMessage").stop(true, true).fadeIn(200), // 빠르게 표시
+    setTimeout(() => {
+        $("#cartMessage").fadeOut(1000); // 천천히 사라지게 (1초)
+    }, 300) // 300ms 후 사라지기 시작
 }
 
 function getCookie() {  
@@ -43,6 +47,7 @@ function getCookie() {
         return;
     }
     setCookie(seq);
+    getCookie();
  }
 
  getCookie();
