@@ -121,9 +121,9 @@
                                         <!--End Product Name-->
                                         <!--Product Price-->
                                         <div class="product-price">
-                                            <div class="old-price" th:if="${list.infoDiscount} != 0" th:text="${list.infoPrice}"></div>
-                                            <span class="price" th:if="${list.infoDiscount} == 0" th:text="${list.infoPrice}"></span>
-                                            <span class="price" th:if="${list.infoDiscount} != 0" th:text="${list.infoDiscount} + '% ' + ${list.discountPrice}"></span>
+                                            <div class="old-price" th:if="${list.infoDiscount} != 0" th:text="${#numbers.formatInteger(list.infoPrice,3,'COMMA')} + '원'"></div>
+                                            <span class="price" th:if="${list.infoDiscount} == 0" th:text="${#numbers.formatInteger(list.infoPrice,3,'COMMA')} + '원'"></span>
+                                            <span class="price" th:if="${list.infoDiscount} != 0" th:text="${list.infoDiscount} + '% ' + ${#numbers.formatInteger(list.discountPrice,3,'COMMA')} + '원'"></span>
                                         </div>
                                         <!--End Product Price-->
                                         <!--Product Review-->
