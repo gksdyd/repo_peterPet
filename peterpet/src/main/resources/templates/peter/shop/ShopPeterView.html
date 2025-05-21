@@ -448,9 +448,9 @@
                                     <!--End Product Name-->
                                     <!--Product Price-->
                                     <div class="product-price">
-                                        <div class="old-price" th:if="${list.infoDiscount} != 0" th:text="${list.infoPrice}"></div>
-                                        <span class="price" th:if="${list.infoDiscount} == 0" th:text="${list.infoPrice}"></span>
-                                        <span class="price" th:if="${list.infoDiscount} != 0" th:text="${list.infoDiscount} + '% ' + ${list.discountPrice}"></span>
+                                        <div class="old-price" th:if="${list.infoDiscount} != 0" th:text="${#numbers.formatInteger(list.infoPrice,3,'COMMA')} + '원'"></div>
+                                        <span class="price" th:if="${list.infoDiscount} == 0" th:text="${#numbers.formatInteger(list.infoPrice,3,'COMMA')} + '원'"></span>
+                                        <span class="price" th:if="${list.infoDiscount} != 0" th:text="${list.infoDiscount} + '% ' + ${#numbers.formatInteger(list.discountPrice,3,'COMMA')} + '원'"></span>
                                     </div>
                                     <!--End Product Price-->
                                     <!--Product Review-->
@@ -690,6 +690,18 @@
             let end;
             let page;
             let total;
+
+            let discount;
+            let price;
+            function initCookie() {
+                discount = /*[[${item.infoDiscount}]]*/"";
+                if (discount == 0) {
+                    price = /*[[${item.infoPrice}]]*/"";
+                } else {
+                    price = /*[[${item.discountPrice}]]*/"";
+                }
+            }
+            initCookie();
 
             $("#reviewBtn").on("click", function() {
                 starValid.setAttribute("class", "d-none");
@@ -993,6 +1005,7 @@
                         $(".strong-style").text((Math.round(response.item.discountPrice * 0.01)) + "원");
 
                         $(".slVariant").text($(e).val() + "kg");
+                        initCookie();
                     }
                     ,error : function(jqXHR){
                         alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);

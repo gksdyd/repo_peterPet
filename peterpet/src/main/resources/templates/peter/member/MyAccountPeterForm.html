@@ -635,6 +635,7 @@
                                     <!-- Grid Product -->
                                     <div class="grid-products grid--view-items wishlist-grid mt-4">
                                         <div class="row" id="cartPage"></div>
+                                        <button type="button" class="btn rounded me-auto" id="purchase" onclick="goToPayment()">구매</button>
                                     </div>
                                     <!-- End Grid Product-->
                                 </div>
@@ -1426,6 +1427,17 @@
                     }
                 });
             }
+
+            function goToPayment() {
+
+                // let count = $("#prodCount").val();
+                // let weight = $("#selectWeight").val();
+                // let prodSeq = /*[[${item.prodSeq}]]*/"";
+                // let url = `/peter/shop/ShopPeterPayment?prodSeq=${prodSeq}&userSeq=${sessionSeq}&prodCount=${count}&infoWeight=${weight}`;
+                // window.location.href = url;
+            }
+
+            getCookie();
             </script>
         </div>
         <!--End Page Wrapper-->

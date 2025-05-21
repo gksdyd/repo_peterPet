@@ -62,7 +62,9 @@ public class WishlistController extends BaseController {
 	public String cartPeterProc(WishlistVo vo, Model model) throws Exception {
 		List<ProductDto> dtos = productService.selectCart(vo);
 		for (int i = 0; i < dtos.size(); i++) {
-			dtos.get(i).calculatePrice();
+			dtos.get(i).setInfoCount(vo.getCounts().get(i));
+			dtos.get(i).setInfoWeight(vo.getWeights().get(i));
+			dtos.get(i).setInfoPrice(vo.getPrices().get(i));
 		}
 		model.addAttribute("cart", dtos);
 		return "/peter/include/cart";

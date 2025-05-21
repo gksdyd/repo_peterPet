@@ -3,6 +3,7 @@
 
 <th:block th:fragment="cart">
     <div class="col-6 col-sm-6 col-md-3 col-lg-3 item position-relative" th:each="list : ${cart}">
+        <input type="checkbox" style="float: left;" id="cartCheckBox">
         <button type="button" class="btn remove-icon close-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove" th:onclick="removeCookie(/*[[${list.prodSeq}]]*/'')"><i class="icon an an-times-r"></i></button>
         <!-- Product Image -->
         <div class="product-image">
@@ -20,28 +21,17 @@
         <div class="product-details text-center">
             <!--Product Name-->
             <div class="product-name text-uppercase">
-                <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${list.prodType})}" th:if="${list.funcName} == null and ${list.infoWeight} == null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName}"></a>
-                <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${list.prodType})}" th:if="${list.funcName} != null and ${list.infoWeight} == null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName} + ' ' + ${@codeService.selectOneCachedCode(list.funcName)}"></a>
-                <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${list.prodType})}" th:if="${list.funcName} == null and ${list.infoWeight} != null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName} + ' ' + ${list.infoWeight} + 'kg'"></a>
-                <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${list.prodType})}" th:if="${list.funcName} != null and ${list.infoWeight} != null" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName} + ' ' + ${list.infoWeight} + 'kg' + ' ' + ${@codeService.selectOneCachedCode(list.funcName)}"></a>
+                <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${list.prodType})}" th:if="${list.funcName} == null and ${list.infoWeight} == 0" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName}"></a>
+                <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${list.prodType})}" th:if="${list.funcName} != null and ${list.infoWeight} == 0" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName} + ' ' + ${@codeService.selectOneCachedCode(list.funcName)}"></a>
+                <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${list.prodType})}" th:if="${list.funcName} == null and ${list.infoWeight} != 0" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName} + ' ' + ${list.infoWeight} + 'kg'"></a>
+                <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${list.prodType})}" th:if="${list.funcName} != null and ${list.infoWeight} != 0" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName} + ' ' + ${list.infoWeight} + 'kg' + ' ' + ${@codeService.selectOneCachedCode(list.funcName)}"></a>
             </div>
             <!--End Product Name-->
             <!--Product Price-->
             <div class="product-price">
-                <div class="old-price" th:if="${list.infoDiscount} != 0" th:text="${list.infoPrice}"></div>
-                <span class="price" th:if="${list.infoDiscount} == 0" th:text="${list.infoPrice}"></span>
-                <span class="price" th:if="${list.infoDiscount} != 0" th:text="${list.infoDiscount} + '% ' + ${list.discountPrice}"></span>
+                <span class="price" th:text="${#numbers.formatInteger(list.infoPrice,3,'COMMA')} + '원'"></span>
             </div>
             <!--End Product Price-->
-            <!--Product Review-->
-            <div class="product-review d-flex align-items-center justify-content-center">
-                <span th:if="${list.prodScore} > 4"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i></span>
-                <span th:if="${list.prodScore} > 3 and 4 >= ${list.prodScore}"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i></span>
-                <span th:if="${list.prodScore} > 2 and 3 >= ${list.prodScore}"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
-                <span th:if="${list.prodScore} > 1 and 2 >= ${list.prodScore}"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
-                <span th:if="${list.prodScore} > 0 and 1 >= ${list.prodScore}"><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
-                <span th:if="${list.prodScore} == 0"><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></span>
-            </div>
         </div>
         <!--End Product Details-->
     </div>

@@ -9,7 +9,10 @@ public class WishlistVo extends BaseVo {
 	private String userSeq;
 	private String prodSeq;
 	private String wishSeq;
-	private ArrayList<Integer> cart;
+	private ArrayList<Integer> products;
+	private ArrayList<Integer> counts;
+	private ArrayList<Double> weights;
+	private ArrayList<Integer> prices;
 	
 	public String getUserSeq() {
 		return userSeq;
@@ -29,10 +32,28 @@ public class WishlistVo extends BaseVo {
 	public void setWishSeq(String wishSeq) {
 		this.wishSeq = wishSeq;
 	}
-	public ArrayList<Integer> getCart() {
-		return cart;
+	public ArrayList<Integer> getProducts() {
+		return products;
 	}
-	public void setCart(ArrayList<Integer> cart) {
-		this.cart = cart;
+	public void setProducts(ArrayList<Integer> products) {
+		this.products = products;
+	}
+	public ArrayList<Integer> getCounts() {
+		return counts;
+	}
+	public void setCounts(ArrayList<Integer> counts) {
+		this.counts = counts;
+	}
+	public ArrayList<Double> getWeights() {
+		return weights;
+	}
+	public void setWeights(ArrayList<Double> weights) {
+		this.weights = weights;
+	}
+	public ArrayList<Integer> getPrices() {
+		return prices;
+	}
+	public void setPrices(ArrayList<Integer> prices) {
+		this.prices = prices;
 	}
 }

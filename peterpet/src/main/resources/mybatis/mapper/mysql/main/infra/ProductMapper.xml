@@ -680,18 +680,14 @@
 			a.prodScore,
 			a.feedBrand,
 			a.prodType,
-			b.infoPrice,
-			b.infoWeight,
-			b.infoDiscount,
 			c.funcName,
 			(SELECT path FROM image WHERE a.prodSeq = pseq AND delNy = 0 AND type = 1 ORDER BY sort LIMIT 1) AS path
 		FROM product a
-			LEFT JOIN feedinfo b ON a.prodSeq = b.product_prodSeq AND infoMain = 1
 			LEFT JOIN func c ON a.prodSeq = c.product_prodSeq AND funcMain = 1
 		WHERE 1=1
 			AND a.prodDelFlag = 0
 			AND a.prodSeq IN
-				<foreach collection="cart" item="item" open="(" separator="," close=")">
+				<foreach collection="products" item="item" open="(" separator="," close=")">
 					#{item}
 				</foreach>
 	</select>
