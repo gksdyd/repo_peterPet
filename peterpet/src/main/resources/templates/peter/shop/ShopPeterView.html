@@ -1005,7 +1005,9 @@
             });
 
             function goToPayment() {
-                if ($("#selectWeight").val() === "") {
+                let type = /*[[${vo.prodType}]]*/"";
+
+                if ((type != 3) && $("#selectWeight").val() === "") {
                     modalTitle.innerText = "알림";
                     modalText.innerText = "상품 중량을 선택해주세요.";
                     modalCloseButton.style.display = "block";
@@ -1026,7 +1028,12 @@
                 }
 
                 let count = $("#prodCount").val();
-                let weight = $("#selectWeight").val();
+                let weight;
+                if (type != 3) {
+                    weight = $("#selectWeight").val();
+                } else {
+                    weight = 0;
+                }
                 let prodSeq = /*[[${item.prodSeq}]]*/"";
                 let url = `/peter/shop/ShopPeterPayment?prodSeq=${prodSeq}&userSeq=${sessionSeq}&prodCount=${count}&infoWeight=${weight}`;
                 window.location.href = url;

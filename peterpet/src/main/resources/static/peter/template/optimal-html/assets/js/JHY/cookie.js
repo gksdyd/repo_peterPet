@@ -47,7 +47,6 @@ function getCookie() {
         return;
     }
     setCookie(seq);
-    getCookie();
  }
 
  getCookie();

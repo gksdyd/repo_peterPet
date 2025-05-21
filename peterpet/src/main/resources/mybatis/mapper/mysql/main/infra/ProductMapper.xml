@@ -589,7 +589,12 @@
 			(b.infoPrice * (100 - infoDiscount) / 100) AS discountPrice
 		FROM
 			product a
-			LEFT JOIN feedinfo b ON a.prodSeq = b.product_prodSeq AND infoWeight = #{infoWeight}
+			<if test="infoWeight != 0">
+				LEFT JOIN feedinfo b ON a.prodSeq = b.product_prodSeq AND infoWeight = #{infoWeight}			
+			</if>
+			<if test="infoWeight == 0">
+				LEFT JOIN feedinfo b ON a.prodSeq = b.product_prodSeq			
+			</if>
 		WHERE 1=1
 			AND #{prodSeq} = prodSeq
 	</select>
