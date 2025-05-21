@@ -24,6 +24,7 @@
                             <ul class="nav flex-column bg-light h-100 dashboard-list" role="tablist">
                                 <li><a class="nav-link active" data-bs-toggle="tab" href="#orders">주문내역</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#wishlist">위시리스트</a></li>
+                                <li><a class="nav-link" data-bs-toggle="tab" href="#cart">장바구니</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#address">배송관리</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#review">리뷰관리</a></li>
                                 <li><a class="nav-link myPage" data-bs-toggle="tab" href="#account-details">마이페이지</a></li>
@@ -628,6 +629,17 @@
                                 </div>
                                 <!-- End Change Password -->
                                  
+                                <!-- cart -->
+                                <div id="cart" class="product-wishlist tab-pane fade">
+                                    <h3>My Shopping Cart</h3>
+                                    <!-- Grid Product -->
+                                    <div class="grid-products grid--view-items wishlist-grid mt-4">
+                                        <div class="row" id="cartPage"></div>
+                                    </div>
+                                    <!-- End Grid Product-->
+                                </div>
+                                <!-- End cart -->
+
                                 <!-- Wishlist -->
                                 <div id="wishlist" class="product-wishlist tab-pane fade">
                                     <h3>My Wishlist</h3>
@@ -815,6 +827,7 @@
             <div th:replace="~{peter/include/includePeterRegister :: includePeterRegister}"></div>
             <script src="/peter/template/optimal-html/assets/js/JHY/image.js"></script>
             <script src="/peter/template/optimal-html/assets/js/JHY/delivery.js"></script>
+            <script src="/peter/template/optimal-html/assets/js/JHY/cookie.js"></script>
 
             <script type="text/javascript" th:inline="javascript">
                 $(".myPage").on("click", function() {

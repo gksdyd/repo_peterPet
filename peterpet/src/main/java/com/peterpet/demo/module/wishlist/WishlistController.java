@@ -57,4 +57,14 @@ public class WishlistController extends BaseController {
 		model.addAttribute("wishlists", dtos);
 		return "/peter/include/wishlist";
 	}
+	
+	@RequestMapping(value = "/CartPeterProc")
+	public String cartPeterProc(WishlistVo vo, Model model) throws Exception {
+		List<ProductDto> dtos = productService.selectCart(vo);
+		for (int i = 0; i < dtos.size(); i++) {
+			dtos.get(i).calculatePrice();
+		}
+		model.addAttribute("cart", dtos);
+		return "/peter/include/cart";
+	}
 }

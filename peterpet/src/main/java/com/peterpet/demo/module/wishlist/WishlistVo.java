@@ -1,5 +1,7 @@
 package com.peterpet.demo.module.wishlist;
 
+import java.util.ArrayList;
+
 import com.peterpet.demo.module.base.BaseVo;
 
 public class WishlistVo extends BaseVo {
@@ -7,6 +9,7 @@ public class WishlistVo extends BaseVo {
 	private String userSeq;
 	private String prodSeq;
 	private String wishSeq;
+	private ArrayList<Integer> cart;
 	
 	public String getUserSeq() {
 		return userSeq;
@@ -25,5 +28,11 @@ public class WishlistVo extends BaseVo {
 	}
 	public void setWishSeq(String wishSeq) {
 		this.wishSeq = wishSeq;
+	}
+	public ArrayList<Integer> getCart() {
+		return cart;
+	}
+	public void setCart(ArrayList<Integer> cart) {
+		this.cart = cart;
 	}
 }
