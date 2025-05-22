@@ -1,9 +1,18 @@
 package com.peterpet.demo.module.product;
 
+import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +22,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.peterpet.demo.common.common.Constants;
 import com.peterpet.demo.module.base.BaseController;
+import com.peterpet.demo.module.code.CodeDto;
 import com.peterpet.demo.module.code.CodeService;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping(value = "/xdm/product")
@@ -302,4 +314,246 @@ public class ProductController extends BaseController {
 	public String productXdmSupplyFormProc(@ModelAttribute("item") ProductDto dto) {
 		return "xdm/include/suppliesForm";
 	}
+	
+	@RequestMapping("/excelDownload")
+    public void excelDownload(ProductVo vo, HttpServletResponse httpServletResponse) throws Exception {
+		
+		initSearchTime(vo);
+		vo.setParamsPaging(productService.selectOneCount(vo));
+
+		if (vo.getTotalRows() > 0) {
+			List<ProductDto> list = productService.selectList(vo);
+			
+//			Workbook workbook = new HSSFWorkbook();	// for xls
+	        Workbook workbook = new XSSFWorkbook();
+	        Sheet sheet = workbook.createSheet(vo.getName());
+	        CellStyle cellStyle = workbook.createCellStyle();        
+	        Row row = null;
+	        Cell cell = null;
+	        int rowNum = 0;
+			
+//	        each column width setting
+	        sheet.setColumnWidth(0, 2100);
+	        sheet.setColumnWidth(1, 3100);
+
+	        row = sheet.createRow(rowNum++);
+			for(int i=0; i<vo.getHeader().size(); i++) {
+				cell = row.createCell(i);
+	        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	        	cell.setCellStyle(cellStyle);
+				cell.setCellValue(vo.getHeader().get(i));
+			}
+
+//	        Body
+			DecimalFormat format = new DecimalFormat("###,###");
+			int num = 1;
+	        for (int i=0; i<list.size(); i++) {
+	            row = sheet.createRow(rowNum++);
+	            
+//	            String type: null 전달 되어도 ok
+//	            int, date type: null 시 오류 발생 하므로 null check
+//	            String type 이지만 정수형 데이터가 전체인 seq 의 경우 캐스팅
+	            if (vo.getProdType() == 1) {
+	            	cell = row.createCell(0);
+	            	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            	cell.setCellStyle(cellStyle);
+	            	cell.setCellValue(num);
+	            	
+	            	cell = row.createCell(1);
+	            	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            	cell.setCellStyle(cellStyle);
+	            	cell.setCellValue(list.get(i).getProdUseFlag() == 1 ? "Y" : "N");
+	            	
+	            	cell = row.createCell(2);
+	            	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            	cell.setCellStyle(cellStyle);
+	            	cell.setCellValue(list.get(i).getProdName());
+	            	
+	            	cell = row.createCell(3);
+	            	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            	cell.setCellStyle(cellStyle);
+	            	if (list.get(i).getFeedSalaryAge() != null) {
+	            		cell.setCellValue(CodeDto.cachedCodeArrayList.get(list.get(i).getFeedSalaryAge() - 1).getCodeName());	            		
+	            	}
+	            	
+	            	cell = row.createCell(4);
+	            	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            	cell.setCellStyle(cellStyle);
+	            	if (list.get(i).getFeedType() != null) {
+	            		cell.setCellValue(CodeDto.cachedCodeArrayList.get(list.get(i).getFeedType() - 1).getCodeName());	            		
+	            	}
+	            	
+	            	cell = row.createCell(5);
+	            	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            	cell.setCellStyle(cellStyle);
+	            	if (list.get(i).getFeedEtc() != null) {
+	            		cell.setCellValue(CodeDto.cachedCodeArrayList.get(list.get(i).getFeedEtc() - 1).getCodeName());	            		
+	            	}
+	            	
+	            	cell = row.createCell(6);
+	            	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            	cell.setCellStyle(cellStyle);
+	            	if (list.get(i).getFeedSize() != null) {
+	            		cell.setCellValue(CodeDto.cachedCodeArrayList.get(list.get(i).getFeedSize() - 1).getCodeName());	            		
+	            	}
+	            	
+	            	cell = row.createCell(7);
+	            	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            	cell.setCellStyle(cellStyle);
+	            	cell.setCellValue(list.get(i).getFuncCount());
+	            	
+	            	cell = row.createCell(8);
+	            	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            	cell.setCellStyle(cellStyle);
+	            	if (list.get(i).getFeedBrand() != null) {
+	            		cell.setCellValue(CodeDto.cachedCodeArrayList.get(list.get(i).getFeedBrand() - 1).getCodeName());	            		
+	            	}
+	            	
+	            	cell = row.createCell(9);
+	            	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            	cell.setCellStyle(cellStyle);
+	            	if (list.get(i).getFeedIngredient() != null) {
+	            		cell.setCellValue(CodeDto.cachedCodeArrayList.get(list.get(i).getFeedIngredient() - 1).getCodeName());	            		
+	            	}
+	            	
+	            	cell = row.createCell(10);
+	            	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            	cell.setCellStyle(cellStyle);
+	            	cell.setCellValue(list.get(i).getInfoCount());
+	            	
+	            	cell = row.createCell(11);
+		        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+		        	cell.setCellStyle(cellStyle);
+		        	if(list.get(i).getProdRegDate() != null) cell.setCellValue(list.get(i).getProdRegDate());
+		        	
+		        	cell = row.createCell(12);
+		        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+		        	cell.setCellStyle(cellStyle);
+		        	if(list.get(i).getProdModDate() != null) cell.setCellValue(list.get(i).getProdModDate());
+	            } else if (vo.getProdType() == 2) {
+	            	cell = row.createCell(0);
+	            	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            	cell.setCellStyle(cellStyle);
+	            	cell.setCellValue(num);
+	            	
+	            	cell = row.createCell(1);
+	            	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            	cell.setCellStyle(cellStyle);
+	            	cell.setCellValue(list.get(i).getProdUseFlag() == 1 ? "Y" : "N");
+	            	
+	            	cell = row.createCell(2);
+	            	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            	cell.setCellStyle(cellStyle);
+	            	cell.setCellValue(list.get(i).getProdName());
+	            	
+	            	cell = row.createCell(3);
+	            	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            	cell.setCellStyle(cellStyle);
+	            	if (list.get(i).getFeedType() != null) {
+	            		cell.setCellValue(CodeDto.cachedCodeArrayList.get(list.get(i).getFeedType() - 1).getCodeName());	            		
+	            	}
+	            	
+	            	cell = row.createCell(4);
+	            	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            	cell.setCellStyle(cellStyle);
+	            	if (list.get(i).getSnckFeature() != null) {
+	            		cell.setCellValue(CodeDto.cachedCodeArrayList.get(list.get(i).getSnckFeature() - 1).getCodeName());	            		
+	            	}
+	            	
+	            	cell = row.createCell(5);
+	            	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            	cell.setCellStyle(cellStyle);
+	            	cell.setCellValue(list.get(i).getFuncCount());
+	            	
+	            	cell = row.createCell(6);
+	            	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            	cell.setCellStyle(cellStyle);
+	            	if (list.get(i).getFeedBrand() != null) {
+	            		cell.setCellValue(CodeDto.cachedCodeArrayList.get(list.get(i).getFeedBrand() - 1).getCodeName());	            		
+	            	}
+	            	
+	            	cell = row.createCell(7);
+	            	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            	cell.setCellStyle(cellStyle);
+	            	if (list.get(i).getFeedIngredient() != null) {
+	            		cell.setCellValue(CodeDto.cachedCodeArrayList.get(list.get(i).getFeedIngredient() - 1).getCodeName());	            		
+	            	}
+	            	
+	            	cell = row.createCell(8);
+	            	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            	cell.setCellStyle(cellStyle);
+	            	cell.setCellValue(list.get(i).getInfoCount());
+	            	
+	            	cell = row.createCell(9);
+		        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+		        	cell.setCellStyle(cellStyle);
+		        	if(list.get(i).getProdRegDate() != null) cell.setCellValue(list.get(i).getProdRegDate());
+		        	
+		        	cell = row.createCell(10);
+		        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+		        	cell.setCellStyle(cellStyle);
+		        	if(list.get(i).getProdModDate() != null) cell.setCellValue(list.get(i).getProdModDate());
+	            } else if (vo.getProdType() == 3) {
+	            	cell = row.createCell(0);
+	            	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            	cell.setCellStyle(cellStyle);
+	            	cell.setCellValue(num);
+	            	
+	            	cell = row.createCell(1);
+	            	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            	cell.setCellStyle(cellStyle);
+	            	cell.setCellValue(list.get(i).getProdUseFlag() == 1 ? "Y" : "N");
+	            	
+	            	cell = row.createCell(2);
+	            	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            	cell.setCellStyle(cellStyle);
+	            	cell.setCellValue(list.get(i).getProdName());
+	            	
+	            	cell = row.createCell(3);
+	            	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            	cell.setCellStyle(cellStyle);
+	            	if (list.get(i).getFeedType() != null) {
+	            		cell.setCellValue(CodeDto.cachedCodeArrayList.get(list.get(i).getFeedType() - 1).getCodeName());	            		
+	            	}
+	            	
+	            	cell = row.createCell(4);
+	            	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            	cell.setCellStyle(cellStyle);
+	            	if (list.get(i).getFeedBrand() != null) {
+	            		cell.setCellValue(CodeDto.cachedCodeArrayList.get(list.get(i).getFeedBrand() - 1).getCodeName());	            		
+	            	}
+	            	
+	            	cell = row.createCell(5);
+	            	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            	cell.setCellStyle(cellStyle);
+	            	cell.setCellValue(format.format(list.get(i).getInfoPrice()));
+	            	
+	            	cell = row.createCell(6);
+	            	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+	            	cell.setCellStyle(cellStyle);
+	            	cell.setCellValue(list.get(i).getInfoDiscount() + "%");
+	            	
+	            	cell = row.createCell(7);
+		        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+		        	cell.setCellStyle(cellStyle);
+		        	if(list.get(i).getProdRegDate() != null) cell.setCellValue(list.get(i).getProdRegDate());
+		        	
+		        	cell = row.createCell(8);
+		        	cellStyle.setAlignment(HorizontalAlignment.CENTER);
+		        	cell.setCellStyle(cellStyle);
+		        	if(list.get(i).getProdModDate() != null) cell.setCellValue(list.get(i).getProdModDate());
+	            }
+	            num++;
+	        }
+
+	        LocalDate now = LocalDate.now();
+	        
+	        httpServletResponse.setContentType("ms-vnd/excel");
+//	        httpServletResponse.setHeader("Content-Disposition", "attachment;filename=example.xls");	// for xls
+	        httpServletResponse.setHeader("Content-Disposition", "attachment;filename=" + vo.getName() + now + ".xlsx");
+
+	        workbook.write(httpServletResponse.getOutputStream());
+	        workbook.close();
+		}
+    }
 }

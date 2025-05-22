@@ -25,3 +25,17 @@ function excelSpring(name) {
     
     form.submit();
 }
+
+function excelPoi(name) {
+    form.method = "POST";
+    form.action = "/xdm/product/excelDownload";
+    let head = $(".text-900");
+    let arr = [];
+    for (let i = 0; i < head.length; i++) {
+        arr.push(head.eq(i).text());
+    }
+    $("#header").attr("value", arr);
+    $("#name").attr("value", name);
+    
+    form.submit();
+}

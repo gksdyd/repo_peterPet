@@ -6,6 +6,8 @@
           <input type="hidden" name="registerOrModifyFlag" id="registerOrModifyFlag" value="0">
           <input type="hidden" name="thisPage" th:value="${vo.thisPage}" default="1"/>
           <input type="hidden" id="rowNumToShow" name="rowNumToShow" th:value="${vo.rowNumToShow}"/>
+          <input type="hidden" id="header" name="header"/>
+          <input type="hidden" id="name" name="name"/>
           <div class="card mb-3" id="customersTable" data-list='{"valueNames":["#", "use", "name", "salary-age","type","etc", "size", "function", "brand", "ingredient", "count", "picture", "resist-date", "modify-date"]}'>
             <div class="card-header">
               <div class="mb-2 row g-3">
@@ -378,7 +380,7 @@
                 <button class="btn btn-danger btn-sm" type="button" id="ueleteBtn" value="1"><span class="far fa-trash-alt"></span></button>
               </div>
               <div class="col" style="text-align: right;">
-                <button class="btn btn-success btn-sm" type="button"><span class="far fa-file-excel"></span></button>
+                <button class="btn btn-success btn-sm" type="button"><span class="far fa-file-excel" onclick="excelPoi('Product')"></span></button>
                 <button class="btn btn-primary btn-sm" type="button" id="registerBtn"><span class="fas fa-plus"></span></button>
               </div>
             </div>
@@ -396,6 +398,7 @@
     <div th:replace="~{xdm/include/includeXdmCommon :: includeXdmCommon}"></div>
     <div th:replace="~{xdm/include/includeXdmList :: includeXdmList}"></div>
     <div th:replace="~{xdm/include/includeXdmCommonProd :: includeXdmCommonProd}"></div>
+    <script th:inline="javascript" src="/xdm/template/falcon-v3.23.0/assets/js/excel.js"></script>
     <script th:inline="javascript">
       let form = document.querySelector("form[name=formList]");
 
