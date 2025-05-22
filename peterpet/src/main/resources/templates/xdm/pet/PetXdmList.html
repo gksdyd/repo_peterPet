@@ -87,7 +87,7 @@
             </div>
             <div class="card-body p-0">
               <div class="table-responsive scrollbar">
-                <table class="table mb-0 data-table fs-10 align-middle-JHY" data-datatables="data-datatables">
+                <table class="table mb-0 data-table fs-10 align-middle-JHY" data-datatables="data-datatables" data-value="Pet">
                   <thead class="bg-200">
                     <tr>
                       <th>
@@ -148,14 +148,9 @@
             </div>
             <div th:replace="~{xdm/include/pagination :: pagination}"></div>
             <div class="mb-2 row g-3 ms-1 me-1">
-              <div class="col">
-                <button class="btn btn-danger btn-sm" type="button"><span class="bi-x"></span></button>
-                <button class="btn btn-danger btn-sm" type="button"><span class="far fa-trash-alt"></span></button>
-              </div>
               <div class="col" style="text-align: right;">
                 <button class="btn btn-primary btn-sm" type="button">U</button>
-                <button class="btn btn-success btn-sm" type="button"><span class="far fa-file-excel"></span></button>
-                <a href="/xdm/code/CodeXdmForm"><button class="btn btn-primary btn-sm" type="button"><span class="fas fa-plus"></span></button></a>
+                <button class="btn btn-success btn-sm" type="button" onclick="excel()"><span class="far fa-file-excel"></span></button>
               </div>
             </div>
           </div>
@@ -164,17 +159,19 @@
         </div>
       </div>
     </main>
+    <div th:replace="~{xdm/include/includeXdmFalcon :: includeXdmFalcon}"></div>
+    <div th:replace="~{xdm/include/includeXdmCommon :: includeXdmCommon}"></div>
+    <div th:replace="~{xdm/include/includeXdmList :: includeXdmList}"></div>
   <!-- ===============================================-->
   <!--    End of Main Content-->
   <!-- ===============================================-->
+  <script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+  <script src="/xdm/template/falcon-v3.23.0/assets/js/excel.js"></script>
   <script>
     let form = document.querySelector("form[name=formList]");
 
     let goUrlXdmList = "/xdm/pet/PetXdmList";
   </script>
-    <div th:replace="~{xdm/include/includeXdmFalcon :: includeXdmFalcon}"></div>
-    <div th:replace="~{xdm/include/includeXdmCommon :: includeXdmCommon}"></div>
-    <div th:replace="~{xdm/include/includeXdmList :: includeXdmList}"></div>
   </body>
   
   </html>
