@@ -63,12 +63,12 @@
             </div>
             <div class="card-body p-0">
               <div class="table-responsive scrollbar">
-                <table class="table mb-0 data-table fs-10 align-middle-JHY" data-datatables="data-datatables">
+                <table class="table mb-0 data-table fs-10 align-middle-JHY" data-datatables="data-datatables" data-value="CodeGroup">
                   <thead class="bg-200">
                     <tr>
                       <th>
                         <div class="form-check fs-9 mb-0 d-flex align-items-center">
-                          <input class="form-check-input" id="checkbox-bulk-customers-select" type="checkbox" data-bulk-select='{"body":"table-customers-body","actions":"table-customers-actions","replacedElement":"table-customers-replace-element"}' />
+                          <input class="form-check-input" id="checkbox-bulk-customers-select" type="checkbox" value="seq" data-bulk-select='{"body":"table-customers-body","actions":"table-customers-actions","replacedElement":"table-customers-replace-element"}' />
                         </div>
                       </th>
                       <th class="text-900 sort white-nowrap" data-sort="#">#</th>
@@ -119,7 +119,7 @@
                 <button class="btn btn-danger btn-sm" type="button" id="ueleteBtn" value="1"><span class="far fa-trash-alt"></span></button>
               </div>
               <div class="col" style="text-align: right;">
-                <button class="btn btn-success btn-sm" type="button"><span class="far fa-file-excel"></span></button>
+                <button class="btn btn-success btn-sm" type="button" onclick="excel()"><span class="far fa-file-excel"></span></button>
                 <button class="btn btn-primary btn-sm" type="button" id="registerBtn"><span class="fas fa-plus"></span></button>
               </div>
             </div>
@@ -136,6 +136,8 @@
 <!-- ===============================================-->
 <!--    End of Main Content-->
 <!-- ===============================================-->
+<script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+<script th:inline="javascript" src="/xdm/template/falcon-v3.23.0/assets/js/excel.js"></script>
  <script>
     let form = document.querySelector("form[name=formList]");
    

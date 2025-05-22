@@ -36,6 +36,9 @@ public class BaseVo {
 	private long diffSecond;
 	private String deliveryTime;
 	
+	private List<String> header;
+	private String name;
+	
 	public int getThisPage() {
 		return thisPage;
 	}
@@ -196,6 +199,22 @@ public class BaseVo {
 
 	public void setDeliveryTime(String deliveryTime) {
 		this.deliveryTime = deliveryTime;
+	}
+
+	public List<String> getHeader() {
+		return header;
+	}
+
+	public void setHeader(List<String> header) {
+		this.header = header;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public void setParamsPaging(int totalRows) {
