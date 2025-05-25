@@ -429,7 +429,6 @@
 	        <if test="shFeedSize != null and !shFeedSize.equals('')">AND a.feedSize = #{shFeedSize}</if>
 	        <if test="shSnckFeature != null and !shSnckFeature.equals('')">AND a.snckFeature = #{shSnckFeature}</if>
 	        
-	        <if test="shFeedType != null and !shFeedType.equals('')">AND a.feedType = #{shFeedType}</if>
 	        <if test="shFeedBrand != null and !shFeedBrand.equals('')">AND a.feedBrand = #{shFeedBrand}</if>
 	        <if test="shProdSound != null and !shProdSound.equals('')">AND a.prodSound = #{shProdSound}</if>
 	        <if test="shProdSmell != null and !shProdSmell.equals('')">AND a.prodSmell = #{shProdSmell}</if>

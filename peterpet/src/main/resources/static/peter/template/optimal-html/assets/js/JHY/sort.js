@@ -71,6 +71,7 @@ function radio(e) {
     
     if (name === "petType") {
         prodPetType = $(e).val();
+        feedType = null;
         allRemoveBadge();
         filter();
         shop();
