@@ -9,18 +9,12 @@
           <div class="card mb-3" id="customersTable" data-list='{"valueNames":["#","name", "gender", "id","email", "phone", "address", "petCnt", "resist-date", "modify-date"]}'>
             <div class="card-header">
               <div class="mb-2 row g-3">
-                <h1>회원 목록</h1>
+                <h1>회원 가져오기</h1>
                 <div class="col-4">
                   <select class="form-select-JHY" id="shDelFlag" name="shDelFlag" aria-label="Default select example">
                     <option value="" th:selected="${vo.shDelFlag == null}">삭제여부</option>
                     <option value="1" th:selected="${vo.shDelFlag == 1}">Y</option>
                     <option value="0" th:selected="${vo.shDelFlag == 0}">N</option>  
-                  </select>
-                </div>
-                <div class="col-4">
-                  <select class="form-select-JHY" id="shSecession" name="shSecession" aria-label="Default select example">
-                    <option value="" th:selected="${vo.shDelFlag == null}">탈퇴이유</option>
-                    <option th:each="WithdrawReason : ${@codeService.selectListCachedCode(30)}" th:value="${WithdrawReason.codeSeq}" th:text="${WithdrawReason.codeName}" th:selected="${WithdrawReason.codeSeq} == ${vo.shSecession}"></option>
                   </select>
                 </div>
               </div>
@@ -83,14 +77,12 @@
                     </tr>
                   </thead>
                   <tbody class="list" id="table-customers-body">
-                    <tr th:if="${#lists.isEmpty(list)}">
-                      <td>
-                        <div class="fs-9 mb-0">
-                          There are no data!
-                        </div>
+                    <tr>
+                      <td class="fs-9">
+                        There are no data!
                       </td>
                     </tr>
-                    <tr th:if="${!#lists.isEmpty(list)}" class="btn-reveal-trigger" th:each="list : ${list}">
+                    <!-- <tr class="btn-reveal-trigger" th:each="list : ${list}">
                       <td>
                         <div class="form-check fs-9 mb-0 d-flex align-items-center">
                           <input class="form-check-input" type="checkbox" id="customer-0" data-bulk-select-row="data-bulk-select-row" />
@@ -106,17 +98,17 @@
                       <td class="petCnt"><a th:href="@{/xdm/pet/PetXdmListSelectUser(userSeq=${list.userSeq})}" th:text="${list.petCount}"></a></td>
                       <td class="resist-date" th:text="${list.userRegDate}"></td>
                       <td class="modify-date text-end" th:text="${list.userModDate}"></td>
-                    </tr>
+                    </tr> -->
                   </tbody>
                 </table>
               </div>
             </div>
-            <div th:replace="~{xdm/include/pagination :: pagination}"></div>
+            <!-- <div th:replace="~{xdm/include/pagination :: pagination}"></div> -->
             <div class="mb-2 row g-3 ms-1 me-1">
               <div class="col" style="text-align: right;">
-                <button class="btn btn-primary btn-sm" type="button">U</button>
-                <button class="btn btn-warning btn-sm" type="button" onclick="moveUploadForm()"><span class="fas fa-file-upload"></span></button>
-                <button class="btn btn-success btn-sm" type="button"><span class="far fa-file-excel" onclick="excel()"></span></button>
+                <button class="btn btn-outline-warning btn-sm" type="button" onclick="insertFile()"><span class="fas fa-file-import"></span></button>
+                <input class="form-control form-control-sm d-none" id="customFileSm" type="file" onchange="viewFile(this)" />
+                <a href="/xdm/member/MemberXdmList"><button class="btn btn-outline-dark btn-sm" type="button"><span class="fas fa-list-ul"></span></button></a>
               </div>
             </div>
           </div>
@@ -125,6 +117,7 @@
         </div>
       </div>
     </main>
+    <div th:replace="~{xdm/include/modal :: modal}"></div>
     <div th:replace="~{xdm/include/includeXdmFalcon :: includeXdmFalcon}"></div>
     <div th:replace="~{xdm/include/includeXdmCommon :: includeXdmCommon}"></div>
     <div th:replace="~{xdm/include/includeXdmList :: includeXdmList}"></div>
@@ -137,10 +130,6 @@
     let form = document.querySelector("form[name=formList]");
     
     let goUrlXdmList = "/xdm/member/MemberXdmList";
-
-    function moveUploadForm() {
-      location.href = "/xdm/member/UploadXdmForm";
-    }
    </script>
   </body>
   
