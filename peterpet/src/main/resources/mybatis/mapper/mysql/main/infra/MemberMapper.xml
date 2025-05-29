@@ -340,4 +340,16 @@
 		WHERE 1=1
 		AND reviSeq = #{reviSeq}
 	</update>
+	
+	<select id="naverLogin" resultMap="resultMapObj">
+		SELECT
+			userSeq,
+			userName,
+			userId
+		FROM
+			user
+		WHERE 1=1
+			AND userName = #{userName}
+			AND userPhone = #{userPhone}
+	</select>
 </mapper>

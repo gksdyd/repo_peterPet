@@ -41,7 +41,9 @@ public class WebMvcConfigurerImpl implements WebMvcConfigurer {
 				"/peter/shop/ShopPeterFilter",
 				"/peter/shop/ShopPeterSupplyProc",
 				"/peter/shop/ShopPeterChangeWeight",
-				"/peter/wishlist/WishlistPeterProc"
+				"/peter/wishlist/WishlistPeterProc",
+				"/naver/xdm/NaverXdmCallback",
+				"/naver/xdm/NaverXdmToken"
 		);
 	}
 

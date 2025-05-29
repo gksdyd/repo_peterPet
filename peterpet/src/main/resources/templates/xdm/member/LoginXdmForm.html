@@ -26,6 +26,8 @@
     <meta name="theme-color" content="#ffffff">
     <script src="/xdm/template/falcon-v3.23.0/assets/js/config.js"></script>
     <script src="/xdm/template/falcon-v3.23.0/vendors/simplebar/simplebar.min.js"></script>
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 
     <!-- ===============================================-->
@@ -120,8 +122,9 @@
                         <div class="divider-content-center">or log in with</div>
                       </div>
                       <div class="row g-2 mt-2">
-                        <div class="col-sm-6"><a class="btn btn-outline-google-plus btn-sm d-block w-100" href="#"><span class="fab fa-google-plus-g me-2" data-fa-transform="grow-8"></span> google</a></div>
+                        <div class="col-sm-6"><a class="btn btn-outline-naver btn-sm d-block w-100" onclick="naverLogin()" href="javascript:void(0);"><img src="/xdm/template/falcon-v3.23.0/assets/img/nav-icons/btnG_icon_circle.png" class="me-2" style="width: 20px;" alt=""> Naver</a></div>
                         <div class="col-sm-6"><a class="btn btn-outline-facebook btn-sm d-block w-100" href="#"><span class="fab fa-facebook-square me-2" data-fa-transform="grow-8"></span> facebook</a></div>
+                        <div id="naver_id_login" style="opacity: 0"></div>
                       </div>
                     </div>
                   </div>
@@ -218,6 +221,21 @@
     <div th:replace="~{xdm/include/includeXdmCommon :: includeXdmCommon}"></div>
     <div th:replace="~{xdm/include/includeXdmForm :: includeXdmForm}"></div>
 
+    <script type="text/javascript">
+      function naverLogin() {
+        const clientId = "l2LBJPseHaUsiRBqlepc";
+        const redirectUri = encodeURIComponent("http://localhost:8080/naver/xdm/NaverXdmCallback");
+        const state = generateRandomString();
+        const loginUrl = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&state=${state}`;
+
+        // 팝업 열기
+        window.open(loginUrl, "_blank", "width=450,height=600");
+      }
+
+      function generateRandomString() {
+        return Math.random().toString(36).substring(2, 15);
+      }
+  </script>
   </body>
 
 </html>

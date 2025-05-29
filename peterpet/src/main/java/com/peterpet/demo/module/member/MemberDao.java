@@ -32,4 +32,5 @@ public interface MemberDao extends BaseDao {
 	public int updateReview(MemberDto memberDto);
 	public int deleteImage(MemberDto memberDto);
 	public int deleteReview(MemberDto memberDto);
+	public MemberDto naverLogin(MemberDto memberDto);
 }

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    </head>
+    <body>
+        <script>            
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get("code");
+            const state = urlParams.get("state");
+
+            fetch("/naver/xdm/NaverXdmToken", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ code, state })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.rt === "success") {
+                    window.opener.location.href = "/xdm/index/IndexXdmView";
+                }
+                window.close();
+            })
+            .catch(err => {
+                console.error("Error:", err);
+            });
+
+          </script>
+    </body>
+</html>

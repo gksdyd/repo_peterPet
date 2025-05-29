@@ -107,4 +107,8 @@ public class MemberService extends BaseService {
 	public int deleteReview(MemberDto memberDto) {
 		return memberDao.deleteReview(memberDto);
 	}
+	
+	public MemberDto naverLogin(MemberDto memberDto) {
+		return memberDao.naverLogin(memberDto);
+	}
 }
