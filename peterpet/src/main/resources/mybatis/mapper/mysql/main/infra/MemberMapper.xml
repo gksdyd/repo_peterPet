@@ -352,4 +352,15 @@
 			AND userName = #{userName}
 			AND userPhone = #{userPhone}
 	</select>
+	
+	<select id="kakaoLogin" resultMap="resultMapObj">
+		SELECT
+			userSeq,
+			userName,
+			userId
+		FROM
+			user
+		WHERE 1=1
+			AND userName = #{userName}
+	</select>
 </mapper>

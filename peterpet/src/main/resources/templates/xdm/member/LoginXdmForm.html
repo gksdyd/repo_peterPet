@@ -28,6 +28,10 @@
     <script src="/xdm/template/falcon-v3.23.0/vendors/simplebar/simplebar.min.js"></script>
     <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.5/kakao.min.js" integrity="sha384-dok87au0gKqJdxs7msEdBPNnKSRT+/mhTVzq+qOhcL464zXwvcrpjeWvyj1kCdq6" crossorigin="anonymous"></script>
+    <script>
+      Kakao.init('f2f7e6e53740de949bdcafe061e92431');  // 사용하려는 앱의 JavaScript 키 입력
+    </script>
 
 
     <!-- ===============================================-->
@@ -123,7 +127,7 @@
                       </div>
                       <div class="row g-2 mt-2">
                         <div class="col-sm-6"><a class="btn btn-outline-naver btn-sm d-block w-100" onclick="naverLogin()" href="javascript:void(0);"><img src="/xdm/template/falcon-v3.23.0/assets/img/nav-icons/btnG_icon_circle.png" class="me-2" style="width: 20px;" alt=""> Naver</a></div>
-                        <div class="col-sm-6"><a class="btn btn-outline-facebook btn-sm d-block w-100" href="#"><span class="fab fa-facebook-square me-2" data-fa-transform="grow-8"></span> facebook</a></div>
+                        <div class="col-sm-6"><a class="btn btn-outline-kakao btn-sm d-block w-100" href="javascript:loginWithKakao()"><img src="/xdm/template/falcon-v3.23.0/assets/img/nav-icons/kakao.png" style="width: 20px;" class="me-2" alt=""> Kakao</a></div>
                         <div id="naver_id_login" style="opacity: 0"></div>
                       </div>
                     </div>
@@ -236,6 +240,14 @@
         return Math.random().toString(36).substring(2, 15);
       }
   </script>
+
+<script>
+  function loginWithKakao() {
+    Kakao.Auth.authorize({
+      redirectUri: 'http://localhost:8080/kakao/xdm/KakaoXdmCallback',  // 앱에 등록된 카카오 로그인에서 사용할 Redirect URI 입력
+    });
+  }
+</script>
   </body>
 
 </html>

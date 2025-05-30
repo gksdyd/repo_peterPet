@@ -111,4 +111,8 @@ public class MemberService extends BaseService {
 	public MemberDto naverLogin(MemberDto memberDto) {
 		return memberDao.naverLogin(memberDto);
 	}
+	
+	public MemberDto kakaoLogin(MemberDto memberDto) {
+		return memberDao.kakaoLogin(memberDto);
+	}
 }
