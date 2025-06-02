@@ -71,6 +71,6 @@ public class WishlistController extends BaseController {
 		} else {
 			model.addAttribute("cart", null);
 		}
-		return "/peter/include/cart";
+		return "peter/include/cart";
 	}
 }
