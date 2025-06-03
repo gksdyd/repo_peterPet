@@ -50,4 +50,4 @@ jobs:
           docker pull ${{ secrets.DOCKER_USERNAME }}/peterpet:peterpet_$DATE
           docker stop peterpet || true
           docker rm peterpet || true
-          docker run -d --name my-app -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/peterpet:peterpet_$DATE
+          docker run -d --name peterpet -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/peterpet:peterpet_$DATE
