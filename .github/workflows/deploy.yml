@@ -18,6 +18,9 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
 
+    - name: Add execute permission to gradlew
+      run: chmod +x ./peterpet/gradlew
+
     - name: Build with Gradle
       working-directory: peterpet
       run: ./gradlew build
