@@ -35,7 +35,9 @@ jobs:
         docker build -t ${{ secrets.DOCKER_USERNAME }}/peterpet:peterpet_$DATE .
 
     - name: Push Docker image
-      run: docker push ${{ secrets.DOCKER_USERNAME }}/my-app:latest
+      run: |
+        DATE=$(date +'%Y%m%d')
+        docker push ${{ secrets.DOCKER_USERNAME }}/peterpet:peterpet_$DATE
 
     - name: Deploy to Remote Server via SSH
       uses: appleboy/ssh-action@v1.0.0
@@ -44,7 +46,8 @@ jobs:
         username: ${{ secrets.SSH_USER }}
         key: ${{ secrets.SSH_KEY }}
         script: |
-          docker pull ${{ secrets.DOCKER_USERNAME }}/my-app:latest
-          docker stop my-app || true
-          docker rm my-app || true
-          docker run -d --name my-app -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/my-app:latest
+          DATE=$(date +'%Y%m%d')
+          docker pull ${{ secrets.DOCKER_USERNAME }}/peterpet:peterpet_$DATE
+          docker stop peterpet || true
+          docker rm peterpet || true
+          docker run -d --name my-app -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/peterpet:peterpet_$DATE
