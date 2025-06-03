@@ -50,4 +50,20 @@ jobs:
           docker pull ${{ secrets.DOCKER_USERNAME }}/peterpet:peterpet_$DATE
           docker stop peterpet || true
           docker rm peterpet || true
-          docker run -d --name peterpet -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/peterpet:peterpet_$DATE
+          docker run -d --name peterpet -p 8080:8080 \
+            -e MYSQL_MAIN_JDBC_URL="${{ secrets.MYSQL_MAIN_JDBC_URL }}" \
+            -e MYSQL_MAIN_USERNAME="${{ secrets.MYSQL_MAIN_USERNAME }}" \
+            -e MYSQL_MAIN_PASSWORD="${{ secrets.MYSQL_MAIN_PASSWORD }}" \
+            -e GOOGLE_MAIL_USERNAME="${{ secrets.GOOGLE_MAIL_USERNAME }}" \
+            -e GOOGLE_APP_PASSWORD="${{ secrets.GOOGLE_APP_PASSWORD }}" \
+            -e CLOUD_AWS_REGION="${{ secrets.CLOUD_AWS_REGION }}" \
+            -e CLOUD_AWS_BUCKET="${{ secrets.CLOUD_AWS_BUCKET }}" \
+            -e CLOUD_AWS_CREDENTIALS_ACCESS_KEY="${{ secrets.CLOUD_AWS_CREDENTIALS_ACCESS_KEY }}" \
+            -e CLOUD_AWS_CREDENTIALS_SECRET_ACCESS_KEY="${{ secrets.CLOUD_AWS_CREDENTIALS_SECRET_ACCESS_KEY }}" \
+            -e TEST_SK_TESTKEY="${{ secrets.TEST_SK_TESTKEY }}" \
+            -e TEST_CK_TESTKEY="${{ secrets.TEST_CK_TESTKEY }}" \
+            -e GOOGLE_AI_IMAGE_KEY="${{ secrets.GOOGLE_AI_IMAGE_KEY }}" \
+            -e DELIVERY_KEY="${{ secrets.DELIVERY_KEY }}" \
+            -e CLIENT_ID="${{ secrets.CLIENT_ID }}" \
+            -e CLIENT_SECRET="${{ secrets.CLIENT_SECRET }}" \
+            ${{ secrets.DOCKER_USERNAME }}/peterpet:peterpet_$DATE
