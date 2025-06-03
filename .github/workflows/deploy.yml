@@ -19,6 +19,7 @@ jobs:
         distribution: 'temurin'
 
     - name: Build with Gradle
+      working-directory: peterpet
       run: ./gradlew build
 
     - name: Log in to Docker Hub
