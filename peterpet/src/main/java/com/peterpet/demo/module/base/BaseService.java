@@ -10,7 +10,7 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.peterpet.demo.module.util.UtilDateTime;
 
 public class BaseService {
-	@Value("${cloud_aws_bucket}")
+	@Value("${cloud.aws.s3.bucket}")
 	private String bucket;
 	
 	public void uploadFilesToS3(MultipartFile[] multipartFiles, BaseDto dto, String tableName, int type, int maxNumber, String pSeq, BaseDao dao, AmazonS3Client amazonS3Client) throws Exception {
