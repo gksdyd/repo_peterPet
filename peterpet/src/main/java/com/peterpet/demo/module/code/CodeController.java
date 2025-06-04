@@ -6,16 +6,24 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.peterpet.demo.module.base.BaseController;
+import com.peterpet.demo.module.member.MemberVo;
 
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -140,5 +148,95 @@ public class CodeController extends BaseController {
 	
 	private String defaultString(Object obj) {
 	    return obj == null ? "" : obj.toString();
+	}
+	
+	@RequestMapping(value = "/UploadXdmForm")
+	public String uploadXdmForm(@ModelAttribute("vo") MemberVo vo) {
+		return "xdm/code/CodeXdmUpload";
+	}
+	
+	@RequestMapping(value = "/ReadXdmExcel")
+	public String readXdmExcel(@RequestParam("file") MultipartFile file, Model model) throws Exception { 		
+		XSSFWorkbook workbook = new XSSFWorkbook(file.getInputStream());
+		XSSFSheet worksheet = workbook.getSheetAt(0);
+		
+		List<CodeDto> dtos = new ArrayList<>();
+		
+		int errFlag = 0;
+		for(int i=1;i<worksheet.getPhysicalNumberOfRows() ;i++) { 
+			int flag = 0;
+		    DataFormatter formatter = new DataFormatter();		        
+		    XSSFRow row = worksheet.getRow(i);
+		    	    	
+		    String name = formatter.formatCellValue(row.getCell(0));
+		    String engName = formatter.formatCellValue(row.getCell(1));
+		    String num = formatter.formatCellValue(row.getCell(2));
+		    String useFlag = formatter.formatCellValue(row.getCell(3));
+		    String order = formatter.formatCellValue(row.getCell(4));
+		    String discription = formatter.formatCellValue(row.getCell(5));
+		    String pseq = formatter.formatCellValue(row.getCell(6));
+			
+	        if (name == null || name.equals("")) {
+	        	errFlag = 1;
+	        	flag = 1;
+	        }
+	        
+	        if (useFlag == null || useFlag.equals("")) {
+	        	errFlag = 1;
+	        	flag = 1;
+	        }
+			
+			try {
+				if (pseq == null || pseq.equals("") || Integer.parseInt(pseq) <= 0) {
+					errFlag = 1;
+					flag = 1;
+				}				
+			} catch(NumberFormatException e) {
+				errFlag = 1;
+				flag = 1;
+			}
+			
+			try {
+				if (Integer.parseInt(order) <= 0) {
+					errFlag = 1;
+					flag = 1;
+				}
+			} catch (NumberFormatException e) {
+				errFlag = 1;
+				flag = 1;
+			}
+			
+			CodeDto excel = new CodeDto();
+			if (flag == 0) {
+				if (useFlag.toUpperCase().equals("N")) {
+					useFlag = "0";
+				} else if (useFlag.toUpperCase().equals("Y")) {
+					useFlag = "1";
+				}
+				
+				excel.setCodeName(name);
+				excel.setCodeNameEng(engName);
+				excel.setCodeNum(num);
+				excel.setCodeUseFlag(Integer.parseInt(useFlag));
+				excel.setCodeOrder(Integer.parseInt(order));
+				excel.setCodeDisc(discription);
+				excel.setCodeGroup_cogrSeq(pseq);
+				
+				codeService.insert(excel);
+			} else {
+				excel.setCodeName(name);
+				excel.setCodeNameEng(engName);
+				excel.setCodeNum(num);
+				excel.setErrUseFlag(useFlag);
+				excel.setErrOrder(order);
+				excel.setCodeDisc(discription);
+				excel.setCodeGroup_cogrSeq(pseq);
+				
+				dtos.add(excel);
+			}
+		}
+		
+		model.addAttribute("list", dtos);
+		return "xdm/code/UploadErrFile";			
 	}
 }

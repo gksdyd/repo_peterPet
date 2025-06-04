@@ -115,7 +115,6 @@
             <div class="mb-2 row g-3 ms-1 me-1">
               <div class="col" style="text-align: right;">
                 <button class="btn btn-primary btn-sm" type="button">U</button>
-                <button class="btn btn-warning btn-sm" type="button" onclick="moveUploadForm()"><span class="fas fa-file-upload"></span></button>
                 <button class="btn btn-success btn-sm" type="button"><span class="far fa-file-excel" onclick="excel()"></span></button>
               </div>
             </div>
@@ -137,10 +136,6 @@
     let form = document.querySelector("form[name=formList]");
     
     let goUrlXdmList = "/xdm/member/MemberXdmList";
-
-    function moveUploadForm() {
-      location.href = "/xdm/member/UploadXdmForm";
-    }
    </script>
   </body>
   

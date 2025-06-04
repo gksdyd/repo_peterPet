@@ -61,6 +61,8 @@ function viewFile(inputFile) {
                 warningModal(text);
                 return;
             }
+
+            fileCheck();
         }
     }
     reader.readAsDataURL(inputFile.files[0]);
@@ -71,7 +73,7 @@ function fileExtCheck() {
     let fileName = filePath.substring(filePath.lastIndexOf('\\')+1, filePath.length)
     let fileExt = fileName.split(".");
 
-    if (fileExt[1] !== "xls" && fileExt !== "xlsx") {
+    if (fileExt[1] !== "xls" && fileExt[1] !== "xlsx") {
         return false;
     }
     return true;
@@ -95,4 +97,29 @@ function warningModal(text) {
 
 modalCloseButton.onclick = function() {
     modal.style.display = "none";
+}
+
+function fileCheck() {
+    let formData = new FormData();
+    formData.append("file", $("#customFileSm")[0].files[0]);
+
+    $.ajax({
+        async: true 
+        ,cache: false
+        ,type: "post"
+        ,url: "/xdm/code/ReadXdmExcel"
+        ,data: formData
+        ,processData: false
+        ,contentType: false
+        ,success: function(response) {
+            $("table").html(response);
+
+            if ($("tbody").html().trim() == "") {
+                location.href = "/xdm/code/CodeXdmList"
+            }
+        }
+        ,error : function(jqXHR){
+          alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+        }
+    });
 }

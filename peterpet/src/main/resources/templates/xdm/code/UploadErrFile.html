@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en-US" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+
+<thead class="bg-200">
+    <tr>
+        <th class="text-900 sort white-nowrap">#</th>
+        <th class="text-900 sort white-nowrap">사용</th>
+        <th class="text-900 sort white-nowrap">코드그룹 코드</th>
+        <th class="text-900 sort white-nowrap">대체 코드</th>
+        <th class="text-900 sort white-nowrap">코드 이름</th>
+        <th class="text-900 sort white-nowrap">코드 이름(영문)</th>
+        <th class="text-900 sort white-nowrap">순서</th>
+    </tr>
+</thead>
+<tbody class="list" id="table-customers-body">
+    <tr class="btn-reveal-trigger" th:each="list : ${list}">
+        <td class="#" th:text="${listStat.count}"></td>
+        <td class="use" th:text="${list.errUseFlag}"></td>
+        <td class="code-group-code" th:text="${list.codeGroup_cogrSeq}"></td>
+        <td class="instead-code" th:text="${list.codeNum}"></td>
+        <td class="code-name" th:text="${list.codeName}"></td>
+        <td class="code-name-eng" th:text="${list.codeNameEng}"></td>
+        <td class="order" th:text="${list.errOrder}"></td>
+    </tr>
+</tbody>

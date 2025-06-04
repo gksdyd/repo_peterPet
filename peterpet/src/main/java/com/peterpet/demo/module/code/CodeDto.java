@@ -21,6 +21,9 @@ public class CodeDto {
 	private Integer cogrNum;
 	private String cogrName;
 	
+	private String errUseFlag;
+	private String errOrder;
+	
 	public String getCodeSeq() {
 		return codeSeq;
 	}
@@ -105,7 +108,19 @@ public class CodeDto {
 	public void setCogrSeq(String cogrSeq) {
 		this.cogrSeq = cogrSeq;
 	}
-	
+	public String getErrUseFlag() {
+		return errUseFlag;
+	}
+	public void setErrUseFlag(String errUseFlag) {
+		this.errUseFlag = errUseFlag;
+	}
+	public String getErrOrder() {
+		return errOrder;
+	}
+	public void setErrOrder(String errOrder) {
+		this.errOrder = errOrder;
+	}
+
 	//	for cache
 	public static List<CodeDto> cachedCodeArrayList = new ArrayList<CodeDto>();
 }

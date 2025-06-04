@@ -74,9 +74,4 @@ public class MemberController extends BaseController {
 		returnMap.put("rt", "success");
 		return returnMap;
 	}
-	
-	@RequestMapping(value = "/UploadXdmForm")
-	public String uploadXdmForm(@ModelAttribute("vo") MemberVo vo) {
-		return "xdm/member/MemberXdmUpload";
-	}
 }

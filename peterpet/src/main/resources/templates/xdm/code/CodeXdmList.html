@@ -128,6 +128,7 @@
               </div>
               <div class="col" style="text-align: right;">
                 <button class="btn btn-primary btn-sm" type="button">U</button>
+                <button class="btn btn-warning btn-sm" type="button" onclick="moveUploadForm()"><span class="fas fa-file-upload"></span></button>
                 <button class="btn btn-success btn-sm" type="button" onclick="excelSpring('Code')"><span class="far fa-file-excel"></span></button>
                 <button class="btn btn-primary btn-sm" type="button" id="registerBtn"><span class="fas fa-plus"></span></button>
               </div>
@@ -153,6 +154,10 @@
     let goUrlXdmList = "/xdm/code/CodeXdmList";
     let goUrlXdmDeltProc = "/xdm/code/CodeXdmDeltProc";
     let goUrlXdmUeltProc = "/xdm/code/CodeXdmUeltProc";
+
+    function moveUploadForm() {
+      location.href = "/xdm/code/UploadXdmForm";
+    }
   </script>
   </body>
   
