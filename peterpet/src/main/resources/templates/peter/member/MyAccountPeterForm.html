@@ -22,8 +22,8 @@
                         <div class="col-xl-3 col-lg-2 col-md-12 mb-4 mb-lg-0">
                             <!-- Nav tabs -->
                             <ul class="nav flex-column bg-light h-100 dashboard-list" role="tablist">
-                                <li><a class="nav-link active" data-bs-toggle="tab" href="#orders">주문내역</a></li>
-                                <li><a class="nav-link" data-bs-toggle="tab" href="#wishlist">위시리스트</a></li>
+                                <li><a class="nav-link" th:classappend="${wish != 1 ? ' active' : ''}" data-bs-toggle="tab" href="#orders">주문내역</a></li>
+                                <li><a class="nav-link" th:classappend="${wish == 1 ? ' active' : ''}" data-bs-toggle="tab" href="#wishlist">위시리스트</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#cart">장바구니</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#address">배송관리</a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#review">리뷰관리</a></li>
@@ -44,7 +44,7 @@
                                     <input type="hidden" name="t_code">
                                     <input type="hidden" name="t_invoice">
                                  </form>
-                                <div id="orders" class="product-order tab-pane fade active show">
+                                <div id="orders" class="product-order tab-pane fade show" th:classappend="${wish != 1 ? ' active' : ''}">
                                     <h3>Orders</h3>
                                     <div class="table-responsive order-table mb-3">
                                         <table class="table table-bordered table-hover align-middle text-center mb-0" style="width: 100%;">
@@ -642,7 +642,7 @@
                                 <!-- End cart -->
 
                                 <!-- Wishlist -->
-                                <div id="wishlist" class="product-wishlist tab-pane fade">
+                                <div id="wishlist" class="product-wishlist tab-pane fade" th:classappend="${wish == 1 ? ' active show' : ''}">
                                     <h3>My Wishlist</h3>
                                     <!-- Grid Product -->
                                     <div class="grid-products grid--view-items wishlist-grid mt-4">
@@ -1421,6 +1421,7 @@
                     ,data: { "userSeq" : /*[[${session.sessSeqPeter}]]*/"", "prodSeq" :  seq}
                     ,success: function(response) {
                         $("#wishlistPage").html(response);
+                        $(".wishlist-count").text($(".wishlist-count").text() - 1);
                     }
                     ,error : function(jqXHR){
                         alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);

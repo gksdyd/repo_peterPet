@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.peterpet.demo.module.base.BaseService;
+import com.peterpet.demo.module.member.MemberDto;
 
 @Service
 public class WishlistService extends BaseService {
@@ -17,5 +18,9 @@ public class WishlistService extends BaseService {
 	
 	public int uelete(WishlistVo vo) {
 		return wishlistDao.uelete(vo);
+	}
+	
+	public int count(MemberDto dto) {
+		return wishlistDao.count(dto);
 	}
 }

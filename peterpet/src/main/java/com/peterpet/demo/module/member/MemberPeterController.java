@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.peterpet.demo.module.base.BaseController;
@@ -26,6 +27,7 @@ import com.peterpet.demo.module.pet.PetVo;
 import com.peterpet.demo.module.product.ProductDto;
 import com.peterpet.demo.module.product.ProductService;
 import com.peterpet.demo.module.product.ProductVo;
+import com.peterpet.demo.module.wishlist.WishlistService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -45,6 +47,8 @@ public class MemberPeterController extends BaseController {
 	PaymentService paymentService;
 	@Autowired
 	DeliveryService deliveryService;
+	@Autowired
+	WishlistService wishlistService;
 	
 	@Value("${delivery-key}")
 	private String deliveryKey;
@@ -87,7 +91,7 @@ public class MemberPeterController extends BaseController {
 	@RequestMapping(value = "/MyAccountPeterForm")
 	public String MyAccountPeterForm(MemberDto memberDto, PetVo petVo, @ModelAttribute("vo") MemberVo memberVo,
 			@ModelAttribute("vo2") PaymentVo paymentVo, DeliveryVo deliveryVo, ProductVo productVo,
-			Model model, HttpSession httpSession) {
+			Model model, @RequestParam(value = "wish", defaultValue = "0") int wish, HttpSession httpSession) {
 		List<PetDto> pets = new ArrayList<>();
 		
 		memberDto.setUserSeq((String)httpSession.getAttribute("sessSeqPeter"));
@@ -116,6 +120,7 @@ public class MemberPeterController extends BaseController {
 			dtos.get(i).calculatePrice();
 		}
 		model.addAttribute("wishlists", dtos);
+		model.addAttribute("wish", wish);
 		return "peter/member/MyAccountPeterForm";
 	}
 	
@@ -200,6 +205,7 @@ public class MemberPeterController extends BaseController {
 			httpSession.setAttribute("sessSeqPeter", rtMember.getUserSeq());
 			httpSession.setAttribute("sessIdPeter", rtMember.getUserId());
 			httpSession.setAttribute("sessNamePeter", rtMember.getUserName());
+			httpSession.setAttribute("sessWishPeter", wishlistService.count(rtMember));
 			
 			returnMap.put("rt", "success");
 		} else {
@@ -216,6 +222,7 @@ public class MemberPeterController extends BaseController {
 		httpSession.setAttribute("sessSeqPeter", null);
 		httpSession.setAttribute("sessIdPeter", null);
 		httpSession.setAttribute("sessNamePeter", null);
+		httpSession.setAttribute("sessWishPeter", null);
 		returnMap.put("rt", "success");
 		return returnMap;
 	}

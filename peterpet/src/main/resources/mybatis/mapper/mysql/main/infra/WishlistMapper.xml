@@ -25,4 +25,14 @@
 			AND user_userSeq = #{userSeq}
 			AND product_prodSeq = #{prodSeq}
 	</update>
+	
+	<select id="count" resultType="Integer">
+		SELECT
+			COUNT(*)
+		FROM
+			wishlist
+		WHERE 1=1
+			AND user_userSeq = #{userSeq}
+			AND wishDelFlag = 0
+	</select>
 </mapper>

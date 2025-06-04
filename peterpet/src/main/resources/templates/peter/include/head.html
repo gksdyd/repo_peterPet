@@ -63,7 +63,7 @@
                             <!--End Search-->
                             <!--Wishlist-->
                             <div class="wishlist-link iconset">
-                                <a href="my-wishlist.html"><i class="icon an an-heart-l"></i><span class="wishlist-count counter d-flex-center justify-content-center position-absolute translate-middle rounded-circle">0</span><span class="tooltip-label">Wishlist</span></a>
+                                <a href="/peter/member/MyAccountPeterForm?wish=1"><i class="icon an an-heart-l"></i><span class="wishlist-count counter d-flex-center justify-content-center position-absolute translate-middle rounded-circle" th:text="${session.sessWishPeter != null ? session.sessWishPeter : 0}"></span><span class="tooltip-label">Wishlist</span></a>
                             </div>
                             <!--End Wishlist-->
                             <!--Setting Dropdown-->
@@ -73,9 +73,7 @@
                                     <li><a href="/peter/member/MyAccountPeterForm" th:if="${session.sessSeqPeter} != null"><span class="an an-user-expand me-2"></span><span th:text="${session.sessIdPeter}"></span></a></li>
                                     <li><a href="/peter/member/LoginPeterForm" th:if="${session.sessSeqPeter} == null">로그인</a></li>
                                     <li><a href="/peter/member/SignupPeterForm" th:if="${session.sessSeqPeter} == null">회원가입</a></li>
-                                    <li><a href="my-wishlist.html" th:if="${session.sessSeqPeter} != null">Wishlist</a></li>
-                                    <li><a href="compare-style1.html" th:if="${session.sessSeqPeter} != null">Compare</a></li>
-                                    <li><a href="javascript:void(0);" id="btnLogout" th:if="${session.sessSeqPeter} != null">LogOut</a></li>
+                                    <li><a href="javascript:void(0);" id="btnLogout" th:if="${session.sessSeqPeter} != null">로그아웃</a></li>
                                 </ul>
                             </div>
                             <!--End Setting Dropdown-->
