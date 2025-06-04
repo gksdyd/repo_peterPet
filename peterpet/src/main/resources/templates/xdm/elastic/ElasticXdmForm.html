@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en-US" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+
+		<div th:replace="~{xdm/include/head :: head}"></div>
+          <div class="card mb-3">
+            <div class="bg-holder d-none d-lg-block bg-card" style="background-image:url(../assets/img/icons/spot-illustrations/corner-4.png);">
+            </div>
+            <!--/.bg-holder-->
+          </div>
+          <div class="card mb-3">
+            <div class="card-header">
+              <h1>Code</h1>
+            </div>
+            <div class="card-body bg-body-tertiary">
+              <div class="row g-3">
+                <div class="col-3">
+                  <label class="form-label-JHY" for="index"> index<span style="color: red;">*</span></label>
+                </div>
+              </div>
+              <div class="mb-3 row g-3">
+                <div class="col-3">
+                  <select class="form-select-JHY" id="index" name="index" onchange="changeIndex()">
+                    <option value="">선택하세요</option>
+                    <option th:each="dto : ${dtos}" th:text="${dto.index}" th:value="${dto.index}"></option>
+                  </select>
+                </div>
+              </div>
+              <blockquote></blockquote>
+              <div class="mb-3 row g-3">
+                <div class="col">
+                  <a href="/elastic/xdm/ElasticXdmList"><button class="btn btn-outline-dark btn-sm" type="button"><span class="fas fa-list-ul"></span></button></a>
+                </div>
+                <div class="col" style="text-align: right;">
+                  <button class="btn btn-primary btn-sm" type="button" onclick="elasticDoc()"><span class="fas fa-database"></span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div th:replace="~{xdm/include/footer :: footer}"><div>
+        </div>
+      </div>
+    </main>
+    <div th:replace="~{xdm/include/modal :: modal}"></div>
+  <!-- ===============================================-->
+  <!--    End of Main Content-->
+  <!-- ===============================================-->
+    <div th:replace="~{xdm/include/includeXdmFalcon :: includeXdmFalcon}"></div>
+    <div th:replace="~{xdm/include/includeXdmCommon :: includeXdmCommon}"></div>
+    <script src="/xdm/template/falcon-v3.23.0/assets/js/elasticSearch.js"></script>
+  </body>
+  
+  </html>

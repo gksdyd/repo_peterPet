@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="ko" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="loveIs" th:if="${index == 'loveis'}">
+	<div class="row g-3">
+        <div class="col-3">
+            <label class="form-label-JHY" for="id">id<span style="color: red;">*</span></label>
+        </div>
+        <div class="col-3">
+            <label class="form-label-JHY" for="name">name<span style="color: red;">*</span></label>
+        </div>
+        <div class="col-3">
+            <label class="form-label-JHY" for="engName">engName<span style="color: red;">*</span></label>
+        </div>
+        <div class="col-3">
+            <label class="form-label-JHY" for="url">URL<span style="color: red;">*</span></label>
+        </div>
+    </div>
+    <div class="mb-3 row g-3">
+        <div class="col-3">
+            <input class="form-control-JHY" id="id" name="id" type="text" th:value="${num}" placeholder="자동생성" readonly />
+        </div>
+        <div class="col-3">
+            <input class="form-control-JHY" id="name" name="name" type="text" />
+        </div>
+        <div class="col-3">
+            <input class="form-control-JHY" id="engName" name="engName" type="text" />
+        </div>
+        <div class="col-3">
+            <input class="form-control-JHY" id="url" name="url" type="text" />
+        </div>
+    </div>
+</th:block>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="ko" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="index">
+	<div class="card-body p-0">
+        <div class="table-responsive scrollbar">
+            <table class="table mb-0 data-table fs-10 align-middle-JHY" data-datatables="data-datatables">
+                <thead class="bg-200">
+                    <tr>
+                        <th>
+                            <div class="form-check fs-9 mb-0 d-flex align-items-center">
+                              <input class="form-check-input" id="checkbox-bulk" type="checkbox" onchange="elasticAllCheck(this)" />
+                            </div>
+                        </th>
+                        <th class="text-900 sort white-nowrap" data-sort="#" th:each="head : ${dtos[0].contents}" th:text="${head}"></th>
+                    </tr>
+                </thead>
+                <tbody class="list" id="table-customers-body">
+                    <tr class="btn-reveal-trigger" th:if="${dtoStat.index > 0}" th:each="dto, dtoStat : ${dtos}">
+                        <td>
+                            <div class="form-check fs-9 mb-0 d-flex align-items-center">
+                              <input class="form-check-input listCheckBox" type="checkbox" id="customer-0" data-bulk-select-row="data-bulk-select-row" />
+                            </div>
+                        </td>
+                        <td class="content" th:each="val : ${dto.contents}" th:text="${val}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</th:block>

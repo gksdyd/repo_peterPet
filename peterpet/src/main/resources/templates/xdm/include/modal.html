@@ -29,25 +29,25 @@
 		</div>
 	  </div>
 
-	  <!-- <div class="modal" id="modalLogin" tabindex="-1">
-		<div class="modal-dialog mt-6" role="document">
-		  <div class="modal-content border-0">
-			<div class="modal-body p-0">
-			  <div class="bg-body-tertiary rounded-top-3 py-3 ps-4 pe-6">
-				<h4 class="mb-1" id="tooltippopoversLabel">WARNING</h4>
-			  </div>
-			  <div class="p-4 pb-0 mb-3">
-				<div class="row">
-				  <div class="col">
-					<h5>회원 정보가 일치하지 않습니다!</h5>
-				  </div>
+	  	<div class="modal" id="elasticModal" tabindex="-1">
+			<div class="modal-dialog mt-6" role="document">
+				<div class="modal-content border-0">
+					<div class="modal-body p-0">
+						<div class="bg-body-tertiary rounded-top-3 py-3 ps-4 pe-6">
+							<h4 class="mb-1" id="tooltippopoversLabel">Register</h4>
+							<div class="position-absolute top-0 end-0 mt-2 me-2 z-1">
+								<button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base" onclick="elasticlose()"></button>
+							</div>
+						</div>
+						<div class="p-4 pb-0 mb-3">
+							<label class="form-label" for="indexText"> index<span style="color: red;">*</span></label>
+							<input class="form-control" id="indexText" name="indexText" type="text" />
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-primary" type="button" onclick="indexRegister()">등록</button>
+					</div>
 				</div>
-			  </div>
 			</div>
-			<div class="modal-footer">
-			  <button class="btn btn-primary" type="button" id="modalCheckBtn">확인</button>
-			</div>
-		  </div>
 		</div>
-	  </div> -->
 </th:block>
