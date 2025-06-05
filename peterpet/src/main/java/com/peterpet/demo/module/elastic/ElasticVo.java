@@ -12,6 +12,7 @@ import com.peterpet.demo.module.base.Constants;
 public class ElasticVo extends BaseVo {
 
 	private String index;
+	private String id;
 
 	public String getIndex() {
 		return index;
@@ -21,6 +22,14 @@ public class ElasticVo extends BaseVo {
 		this.index = index;
 	}
 	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public int totalDoc() throws JsonMappingException, JsonProcessingException {
 		String url = Constants.LOCAL_ADDRESS + index + "/_search?pretty";
 		

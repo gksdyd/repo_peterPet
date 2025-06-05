@@ -242,3 +242,19 @@ function goList(thisPage) {
         }
     });
 }
+
+function updateDoc() {
+    $.ajax({
+        async: true 
+        ,cache: false
+        ,type: "post"
+        ,url: "/elastic/xdm/ElasticXdmUpdateDoc"
+        ,data: { "index" : $("#index").val(), "id" : id }
+        ,success: function(response) {
+            $("blockquote").html(response);
+        }
+        ,error : function(jqXHR){
+            $("blockquote").html("");
+        }
+    });
+}

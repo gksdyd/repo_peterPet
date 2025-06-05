@@ -99,6 +99,7 @@ public class ElasticController {
 			dto.setUrl(docContentsNode.path("url").asText());
 			dto.setType(docContentsNode.path("type").asText());
 			dto.setBrand(docContentsNode.path("brand").asText());
+			dto.setPet(docContentsNode.path("pet").asText());
 			
 			dtos.add(dto);
 		}
@@ -108,7 +109,7 @@ public class ElasticController {
 	}
 	
 	@RequestMapping(value = "/ElasticXdmForm")
-	public String elasticXdmForm(Model model) {
+	public String elasticXdmForm(Model model, @ModelAttribute("vo") ElasticVo vo) {
 		String url = Constants.LOCAL_ADDRESS + "_cat/indices?v";
 		
 		RestTemplate restTemplate = new RestTemplate();
@@ -137,7 +138,7 @@ public class ElasticController {
 	}
 	
 	@RequestMapping(value = "/ElasticXdmIndexChange")
-	public String elasticXdmIndexChange(ElasticDto dto, Model model) 
+	public String elasticXdmIndexChange(@ModelAttribute("item") ElasticDto dto) 
 			throws JsonMappingException, JsonProcessingException {
 		String url = Constants.LOCAL_ADDRESS + dto.getIndex() + "/_search?pretty";
 
@@ -148,8 +149,7 @@ public class ElasticController {
 		
 		ObjectMapper objectMapper = new ObjectMapper();
 
-		model.addAttribute("index", dto.getIndex());
-		model.addAttribute("num", objectMapper.readTree(responseBody).path("hits").path("total").path("value").asInt() + 1);
+		dto.setId((objectMapper.readTree(responseBody).path("hits").path("total").path("value").asInt() + 1 + ""));
 		
 		return "/xdm/elastic/ElasticXdmPeterPet";
 	}
@@ -252,5 +252,26 @@ public class ElasticController {
 	public String elasticXdmTypeBrand(@RequestParam(value = "type") int type, Model model) {
 		model.addAttribute("type", type);
 		return "xdm/elastic/ElasticXdmBrand";
+	}
+	
+	@RequestMapping(value = "/ElasticXdmUpdateDoc")
+	public String elasticXdmUpdateDoc(@ModelAttribute("item") ElasticDto dto) 
+			throws JsonMappingException, JsonProcessingException {
+		String url = Constants.LOCAL_ADDRESS + dto.getIndex() + "/_doc/" + dto.getId();
+
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+		
+		String responseBody = response.getBody();
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		JsonNode docNode = objectMapper.readTree(responseBody).path("_source");
+		System.out.println(docNode);
+		dto.setName(docNode.path("name").asText());
+		dto.setType(docNode.path("type").asText());
+		dto.setBrand(docNode.path("brand").asText());
+		dto.setPet(docNode.path("pet").asText());
+		
+		return "/xdm/elastic/ElasticXdmPeterPet";
 	}
 }

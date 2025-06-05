@@ -28,7 +28,7 @@
                         <td class="documentId" th:text="${dto.id}"></td>
                         <td th:text="${dto.name}"></td>
                         <td th:text="${dto.engName}"></td>
-                        <td><a th:href="${dto.url}" th:text="${dto.url}"></a></td>
+                        <td><a th:href="${'http://43.201.16.176:8070' + dto.url}" th:text="${'http://43.201.16.176:8070' + dto.url}"></a></td>
                     </tr>
                 </tbody>
             </table>
@@ -49,6 +49,7 @@
                         <th class="text-900 white-nowrap"> name</th>
                         <th class="text-900 white-nowrap"> type</th>
                         <th class="text-900 white-nowrap"> brand</th>
+                        <th class="text-900 white-nowrap"> type</th>
                     </tr>
                 </thead>
                 <tbody class="list" id="table-customers-body">
@@ -59,9 +60,10 @@
                             </div>
                         </td>
                         <td class="documentId" th:text="${dto.id}"></td>
-                        <td th:text="${dto.name}"></td>
+                        <td><a th:href="@{/elastic/xdm/ElasticXdmForm(index=peterpet, id=${dto.id})}" th:text="${dto.name}"></a></td>
                         <td th:text="${@codeService.selectOneCachedCode(dto.type)}"></td>
                         <td th:text="${@codeService.selectOneCachedCode(dto.brand)}"></td>
+                        <td th:text="${@codeService.selectOneCachedCode(dto.pet)}"></td>
                     </tr>
                 </tbody>
             </table>

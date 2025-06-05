@@ -17,20 +17,21 @@
 </div>
 <div class="mb-3 row g-3">
     <div class="col-3">
-        <input class="form-control-JHY" id="id" name="id" type="text" th:value="${num}" placeholder="자동생성" readonly />
+        <input class="form-control-JHY" id="id" name="id" type="text" th:value="${item.id}" placeholder="자동생성" readonly />
     </div>
     <div class="col-3">
-        <input class="form-control-JHY" id="name" name="name" type="text" />
+        <input class="form-control-JHY" id="name" name="name" type="text" th:value="${item.name}" />
     </div>
     <div class="col-3">
         <select class="form-select-JHY" name="type" id="type" onchange="typeChange(this)">
-            <option th:each="productType : ${@codeService.selectListCachedCode(1)}" th:text="${productType.codeName}" th:value="${productType.codeSeq}"></option>
+            <option th:each="productType : ${@codeService.selectListCachedCode(1)}" th:text="${productType.codeName}" th:value="${productType.codeSeq}" th:selected="${item.type == productType.codeSeq}"></option>
         </select>
     </div>
     <div class="col-3">
         <select class="form-select-JHY" id="brand" name="brand">
             <option value="">브랜드</option>
-            <option th:each="feedBrand : ${@codeService.selectListCachedCode(7)}" th:text="${feedBrand.codeName}" th:value="${feedBrand.codeSeq}"></option>
+            <option th:if="${item.type} == 1" th:each="feedBrand : ${@codeService.selectListCachedCode(7)}" th:text="${feedBrand.codeName}" th:value="${feedBrand.codeSeq}" th:selected="${item.brand == feedBrand.codeSeq}"></option>
+            <option th:if="${item.type} == 2" th:each="feedBrand : ${@codeService.selectListCachedCode(21)}" th:text="${feedBrand.codeName}" th:value="${feedBrand.codeSeq}" th:selected="${item.brand == feedBrand.codeSeq}"></option>
         </select>
     </div>
 </div>
@@ -42,7 +43,7 @@
 <div class="mb-3 row g-3">
     <div class="col-3">
         <select class="form-select-JHY" name="pet" id="pet">
-            <option th:each="productPetType : ${@codeService.selectListCachedCode(26)}" th:text="${productPetType.codeName}" th:value="${productPetType.codeSeq}"></option>
+            <option th:each="productPetType : ${@codeService.selectListCachedCode(26)}" th:text="${productPetType.codeName}" th:value="${productPetType.codeSeq}" th:selected="${item.pet == productPetType.codeSeq}"></option>
         </select>
     </div>
 </div>

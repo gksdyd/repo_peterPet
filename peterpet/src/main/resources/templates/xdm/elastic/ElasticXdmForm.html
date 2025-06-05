@@ -22,7 +22,7 @@
                 <div class="col-3">
                   <select class="form-select-JHY" id="index" name="index" onchange="changeIndex()">
                     <option value="">선택하세요</option>
-                    <option th:each="dto : ${dtos}" th:text="${dto.index}" th:value="${dto.index}"></option>
+                    <option th:each="dto : ${dtos}" th:text="${dto.index}" th:value="${dto.index}" th:selected="${vo.index == dto.index}"></option>
                   </select>
                 </div>
               </div>
@@ -48,6 +48,13 @@
     <div th:replace="~{xdm/include/includeXdmFalcon :: includeXdmFalcon}"></div>
     <div th:replace="~{xdm/include/includeXdmCommon :: includeXdmCommon}"></div>
     <script src="/xdm/template/falcon-v3.23.0/assets/js/elasticSearch.js"></script>
+
+    <script th:inline="javascript">
+      let id = /*[[${vo.id}]]*/"";
+      if (/*[[${vo.index}]]*/"" != null) {
+        updateDoc();
+      }
+    </script>
   </body>
   
   </html>
