@@ -166,4 +166,8 @@ public class ProductService extends BaseService {
 	public List<ProductDto> selectCart(WishlistVo vo) {
 		return productDao.selectCart(vo);
 	}
+	
+	public List<ProductDto> searchList(ProductVo vo) {
+		return productDao.searchList(vo);
+	}
 }

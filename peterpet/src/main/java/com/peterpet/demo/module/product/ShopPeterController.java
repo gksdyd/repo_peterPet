@@ -6,15 +6,26 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.peterpet.demo.module.base.BaseController;
+import com.peterpet.demo.module.base.Constants;
 import com.peterpet.demo.module.code.CodeDto;
 import com.peterpet.demo.module.delivery.DeliveryService;
+import com.peterpet.demo.module.elastic.ElasticDto;
 import com.peterpet.demo.module.member.MemberService;
 
 import jakarta.servlet.http.HttpSession;
@@ -154,5 +165,61 @@ public class ShopPeterController extends BaseController {
 	@RequestMapping(value = "/ShopPeterSupplyProc")
 	public String productXdmSupplyProc(@ModelAttribute("vo") ProductVo vo) {
 		return "peter/include/supplies";
+	}
+	
+	@RequestMapping(value = "/SearchPeterProduct")
+	public String searchPeterProduct(ElasticDto dto, Model model) 
+			throws JsonMappingException, JsonProcessingException {
+		String url = Constants.LOCAL_ADDRESS + "peterpet/_search?pretty";
+		
+		String json = null;
+		if (!dto.getType().equals("00")) {
+			json = String.format("""
+				{
+				  "query": {
+				    "bool": {
+				      "must": [
+				        { "match": { "type": "%s" }},
+				        { "regexp": { "name": ".*%s.*" }}
+				      ]
+				    }
+				  }
+				}
+				""", dto.getType(), dto.getName());	
+		} else {
+			json = String.format("""
+					{
+					  "query": {
+					    "regexp": {
+					      "name": ".*%s.*"
+					    }
+					  }
+					}
+					""", dto.getName());	
+		}
+
+		HttpHeaders headers = new HttpHeaders();
+	    headers.setContentType(MediaType.APPLICATION_JSON);
+	    
+	    HttpEntity<String> request = new HttpEntity<>(json, headers);
+	    
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
+		
+		String responseBody = response.getBody();
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		JsonNode documentNode = objectMapper.readTree(responseBody).path("hits").path("hits");
+		
+		ProductVo vo = new ProductVo();
+		for (int i = 0; i < documentNode.size(); i++) {
+			vo.getSearchArray().add(documentNode.get(i).path("_source").path("seq").asText());
+		}
+		
+		if (vo.getSearchArray().size() > 0) {
+			model.addAttribute("list", productService.searchList(vo));
+		}
+		
+		return "peter/shop/ShopPeterSearchList";
 	}
 }

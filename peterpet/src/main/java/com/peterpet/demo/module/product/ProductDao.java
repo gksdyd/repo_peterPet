@@ -46,4 +46,5 @@ public interface ProductDao extends BaseDao {
 	public List<ProductDto> selectWishlists(ProductVo vo);
 	public List<ProductDto> selectWishlists(WishlistVo vo);
 	public List<ProductDto> selectCart(WishlistVo vo);
+	public List<ProductDto> searchList(ProductVo vo);
 }

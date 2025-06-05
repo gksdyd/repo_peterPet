@@ -63,6 +63,8 @@ public class ProductVo extends BaseVo{
 	private Integer shProdHeight;
 	private Integer shWearMethod;
 	
+	private List<String> searchArray = new ArrayList<>();
+	
 	public List<String> getProdFuncArray() {
 		return prodFuncArray;
 	}
@@ -412,6 +414,14 @@ public class ProductVo extends BaseVo{
 
 	public void setFeedType(Integer feedType) {
 		this.feedType = feedType;
+	}
+
+	public List<String> getSearchArray() {
+		return searchArray;
+	}
+
+	public void setSearchArray(List<String> searchArray) {
+		this.searchArray = searchArray;
 	}
 
 	public void InitProdType() {
