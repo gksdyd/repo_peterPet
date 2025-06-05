@@ -15,6 +15,7 @@ public class ElasticDto {
 	
 	private String type;
 	private String brand;
+	private String pet;
 
 	public List<String> getContents() {
 		return contents;
@@ -84,5 +85,13 @@ public class ElasticDto {
 
 	public void setBrand(String brand) {
 		this.brand = brand;
+	}
+
+	public String getPet() {
+		return pet;
+	}
+
+	public void setPet(String pet) {
+		this.pet = pet;
 	}
 }

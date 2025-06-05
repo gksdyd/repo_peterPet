@@ -103,7 +103,8 @@ function elasticDoc() {
         ,cache: false
         ,type: "post"
         ,url: "/elastic/xdm/ElasticXdmDocRegister"
-        ,data: { "index" : $("#index").val(), "id" : $("#id").val(), "name" : $("#name").val(), "type" : $("#type").val(), "brand" : $("#brand").val() }
+        ,data: { "index" : $("#index").val(), "id" : $("#id").val(), "name" : $("#name").val(), "type" : $("#type").val(), "brand" : $("#brand").val(),
+            "pet" : $("#pet").val() }
         ,success: function(response) {
             window.location.href = "/elastic/xdm/ElasticXdmList";
         }

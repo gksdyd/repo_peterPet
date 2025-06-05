@@ -163,6 +163,7 @@ public class ElasticController {
 		String json = "{\"id\":\"" + dto.getId() + 
 				"\", \"name\":\"" + dto.getName() + 
 				"\", \"type\":\"" + dto.getType() + 
+				"\", \"pet\":\"" + dto.getPet() + 
 				"\", \"brand\":\"" + dto.getBrand() + "\"}";
 		
 		HttpHeaders headers = new HttpHeaders();
