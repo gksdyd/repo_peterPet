@@ -2,7 +2,7 @@
 <html data-bs-theme="light" lang="ko" dir="ltr" xmlns:th="http://www.thymeleaf.org">
 
 <th:block th:fragment="document">
-	<div class="card-body p-0" th:if="${index == 'loveis'}">
+	<div class="card-body p-0" th:if="${vo.index == 'loveis'}">
         <div class="table-responsive scrollbar">
             <table class="table mb-0 data-table fs-10 align-middle-JHY" data-datatables="data-datatables">
                 <thead class="bg-200">
@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    <div class="card-body p-0" th:if="${index == 'peterpet'}">
+    <div class="card-body p-0" th:if="${vo.index == 'peterpet'}">
         <div class="table-responsive scrollbar">
             <table class="table mb-0 data-table fs-10 align-middle-JHY" data-datatables="data-datatables">
                 <thead class="bg-200">
@@ -67,4 +67,6 @@
             </table>
         </div>
     </div>
+
+    <div th:replace="~{xdm/include/pagination :: pagination}"></div>
 </th:block>

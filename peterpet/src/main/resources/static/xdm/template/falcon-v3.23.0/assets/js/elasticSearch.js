@@ -1,4 +1,5 @@
 var mode = 0;
+var fixedIndex = "";
 
 function indexSearch() {
     $.ajax({
@@ -10,6 +11,7 @@ function indexSearch() {
         ,success: function(response) {
             $(".card-body").html(response);
             mode = 1;
+            fixedIndex = "";
         }
         ,error : function(jqXHR){
             alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
@@ -21,6 +23,7 @@ function docSearch() {
     if ($("#shIndex").val() === "") {
         $(".card-body").html("");
         mode = 0;
+        fixedIndex = "";
         return;
     }
 
@@ -33,6 +36,7 @@ function docSearch() {
         ,success: function(response) {
             $(".card-body").html(response);
             mode = 2;
+            fixedIndex = $("#shIndex").val();
         }
         ,error : function(jqXHR){
             alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
@@ -215,6 +219,22 @@ function typeChange(e) {
         ,data: { "type" : $(e).val() }
         ,success: function(response) {
             $("#brand").html(response);
+        }
+        ,error : function(jqXHR){
+            alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+        }
+    });
+}
+
+function goList(thisPage) {
+    $.ajax({
+        async: true 
+        ,cache: false
+        ,type: "post"
+        ,url: "/elastic/xdm/ElasticXdmDocSearch"
+        ,data: { "index" : fixedIndex, "thisPage" : thisPage }
+        ,success: function(response) {
+            $(".card-body").html(response);
         }
         ,error : function(jqXHR){
             alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
