@@ -94,9 +94,12 @@ public class ElasticController {
 			dto.setName(docContentsNode.path("name").asText());
 			dto.setEngName(docContentsNode.path("engName").asText());
 			dto.setUrl(docContentsNode.path("url").asText());
+			dto.setType(docContentsNode.path("type").asText());
+			dto.setBrand(docContentsNode.path("brand").asText());
 			dtos.add(dto);
 		}
 		
+		model.addAttribute("index", index);
 		model.addAttribute("dtos", dtos);
 		return "xdm/elastic/ElasticXdmDocContents";
 	}

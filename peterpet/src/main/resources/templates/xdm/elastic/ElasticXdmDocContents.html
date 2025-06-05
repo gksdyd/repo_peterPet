@@ -2,7 +2,7 @@
 <html data-bs-theme="light" lang="ko" dir="ltr" xmlns:th="http://www.thymeleaf.org">
 
 <th:block th:fragment="document">
-	<div class="card-body p-0">
+	<div class="card-body p-0" th:if="${index == 'loveis'}">
         <div class="table-responsive scrollbar">
             <table class="table mb-0 data-table fs-10 align-middle-JHY" data-datatables="data-datatables">
                 <thead class="bg-200">
@@ -29,6 +29,39 @@
                         <td th:text="${dto.name}"></td>
                         <td th:text="${dto.engName}"></td>
                         <td><a th:href="${dto.url}" th:text="${dto.url}"></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card-body p-0" th:if="${index == 'peterpet'}">
+        <div class="table-responsive scrollbar">
+            <table class="table mb-0 data-table fs-10 align-middle-JHY" data-datatables="data-datatables">
+                <thead class="bg-200">
+                    <tr>
+                        <th>
+                            <div class="form-check fs-9 mb-0 d-flex align-items-center">
+                              <input class="form-check-input" id="checkbox-bulk" type="checkbox" onchange="elasticAllCheck(this)" />
+                            </div>
+                        </th>
+                        <th class="text-900 sort white-nowrap" data-sort="#"> id</th>
+                        <th class="text-900 sort white-nowrap" data-sort="#"> name</th>
+                        <th class="text-900 sort white-nowrap" data-sort="#"> type</th>
+                        <th class="text-900 sort white-nowrap" data-sort="#"> brand</th>
+                    </tr>
+                </thead>
+                <tbody class="list" id="table-customers-body">
+                    <tr class="btn-reveal-trigger" th:each="dto : ${dtos}">
+                        <td>
+                            <div class="form-check fs-9 mb-0 d-flex align-items-center">
+                              <input class="form-check-input listCheckBox" type="checkbox" id="customer-0" data-bulk-select-row="data-bulk-select-row" />
+                            </div>
+                        </td>
+                        <td class="documentId" th:text="${dto.id}"></td>
+                        <td th:text="${dto.name}"></td>
+                        <td th:text="${@codeService.selectOneCachedCode(dto.type)}"></td>
+                        <td th:text="${@codeService.selectOneCachedCode(dto.brand)}"></td>
                     </tr>
                 </tbody>
             </table>
