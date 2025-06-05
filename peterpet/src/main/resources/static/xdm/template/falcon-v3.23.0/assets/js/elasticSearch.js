@@ -80,7 +80,7 @@ function validation() {
         return false;
     }
 
-    if ($("#type").val() !== 3) {
+    if ($("#type").val() !== "3") {
         if ($("#brand").val() === "") {
             text = text.replace("text", "brand 선택해주세요!");
             $("#brand").parent().append(text);
