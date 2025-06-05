@@ -1,0 +1,6 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="ko" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+
+<option value="">브랜드</option>
+<option th:if="${type == 1}" th:each="feedBrand : ${@codeService.selectListCachedCode(7)}" th:text="${feedBrand.codeName}" th:value="${feedBrand.codeSeq}"></option>
+<option th:if="${type == 2}" th:each="feedBrand : ${@codeService.selectListCachedCode(21)}" th:text="${feedBrand.codeName}" th:value="${feedBrand.codeSeq}"></option>

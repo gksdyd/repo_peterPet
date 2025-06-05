@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -140,9 +141,15 @@ public class ElasticController {
 		ObjectMapper objectMapper = new ObjectMapper();
 		JsonNode docNode = objectMapper.readTree(responseBody).path("hits").path("hits");
 
-		model.addAttribute("index", dto.getIndex());
 		model.addAttribute("num", docNode.size() + 1);
-		return "/xdm/elastic/ElasticXdmLoveIs";
+		
+		if (dto.getIndex().equals("loveis")) {
+			return "/xdm/elastic/ElasticXdmLoveIs";			
+		} else if (dto.getIndex().equals("peterpet")) {
+			return "/xdm/elastic/ElasticXdmPeterPet";
+		}
+		
+		return "";
 	}
 	
 	@ResponseBody
@@ -151,10 +158,18 @@ public class ElasticController {
 			throws JsonMappingException, JsonProcessingException {
 		String url = Constants.LOCAL_ADDRESS + dto.getIndex() + "/_doc/" + dto.getId();
 		
-		String json = "{\"id\":\"" + dto.getId() + 
-				"\", \"name\":\"" + dto.getName() + 
-				"\", \"engName\":\"" + dto.getEngName() + 
-				"\", \"url\":\"" + dto.getUrl() + "\"}";
+		String json = null;
+		if (dto.getIndex().equals("loveis")) {
+			json = "{\"id\":\"" + dto.getId() + 
+					"\", \"name\":\"" + dto.getName() + 
+					"\", \"engName\":\"" + dto.getEngName() + 
+					"\", \"url\":\"" + dto.getUrl() + "\"}";			
+		} else if (dto.getIndex().equals("peterpet")) {
+			json = "{\"id\":\"" + dto.getId() + 
+					"\", \"name\":\"" + dto.getName() + 
+					"\", \"type\":\"" + dto.getType() + 
+					"\", \"brand\":\"" + dto.getBrand() + "\"}";
+		}
 
 		HttpHeaders headers = new HttpHeaders();
 	    headers.setContentType(MediaType.APPLICATION_JSON);
@@ -236,5 +251,11 @@ public class ElasticController {
 	    );
 	    
 	    System.out.println("Response: " + response.getBody());
+	}
+	
+	@RequestMapping(value = "/ElasticXdmTypeBrand")
+	public String elasticXdmTypeBrand(@RequestParam(value = "type") int type, Model model) {
+		model.addAttribute("type", type);
+		return "xdm/elastic/ElasticXdmBrand";
 	}
 }

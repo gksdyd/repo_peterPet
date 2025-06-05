@@ -9,10 +9,10 @@
         <label class="form-label-JHY" for="name">name<span style="color: red;">*</span></label>
     </div>
     <div class="col-3">
-        <label class="form-label-JHY" for="engName">engName<span style="color: red;">*</span></label>
+        <label class="form-label-JHY" for="type">type<span style="color: red;">*</span></label>
     </div>
     <div class="col-3">
-        <label class="form-label-JHY" for="url">URL<span style="color: red;">*</span></label>
+        <label class="form-label-JHY" for="brand">브랜드<span style="color: red;">*</span></label>
     </div>
 </div>
 <div class="mb-3 row g-3">
@@ -23,9 +23,14 @@
         <input class="form-control-JHY" id="name" name="name" type="text" />
     </div>
     <div class="col-3">
-        <input class="form-control-JHY" id="engName" name="engName" type="text" />
+        <select class="form-select-JHY" name="type" id="type" onchange="typeChange(this)">
+            <option th:each="productType : ${@codeService.selectListCachedCode(1)}" th:text="${productType.codeName}" th:value="${productType.codeSeq}"></option>
+        </select>
     </div>
     <div class="col-3">
-        <input class="form-control-JHY" id="url" name="url" type="text" />
+        <select class="form-select-JHY" id="brand" name="brand">
+            <option value="">브랜드</option>
+            <option th:each="feedBrand : ${@codeService.selectListCachedCode(7)}" th:text="${feedBrand.codeName}" th:value="${feedBrand.codeSeq}"></option>
+        </select>
     </div>
 </div>
