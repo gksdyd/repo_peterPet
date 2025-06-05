@@ -119,8 +119,10 @@ public class ElasticController {
 			if (i == 0) {
 				index = dto.getContents().indexOf("index");
 			} else {
-				dto.setIndex(dto.getContents().get(index));
-				dtos.add(dto);
+				if (dto.getContents().get(index).contains("peter")) {
+					dto.setIndex(dto.getContents().get(index));
+					dtos.add(dto);					
+				}
 			}
 		}
 		
@@ -141,15 +143,10 @@ public class ElasticController {
 		ObjectMapper objectMapper = new ObjectMapper();
 		JsonNode docNode = objectMapper.readTree(responseBody).path("hits").path("hits");
 
+		model.addAttribute("index", dto.getIndex());
 		model.addAttribute("num", docNode.size() + 1);
 		
-		if (dto.getIndex().equals("loveis")) {
-			return "/xdm/elastic/ElasticXdmLoveIs";			
-		} else if (dto.getIndex().equals("peterpet")) {
-			return "/xdm/elastic/ElasticXdmPeterPet";
-		}
-		
-		return "";
+		return "/xdm/elastic/ElasticXdmPeterPet";
 	}
 	
 	@ResponseBody
@@ -158,19 +155,11 @@ public class ElasticController {
 			throws JsonMappingException, JsonProcessingException {
 		String url = Constants.LOCAL_ADDRESS + dto.getIndex() + "/_doc/" + dto.getId();
 		
-		String json = null;
-		if (dto.getIndex().equals("loveis")) {
-			json = "{\"id\":\"" + dto.getId() + 
-					"\", \"name\":\"" + dto.getName() + 
-					"\", \"engName\":\"" + dto.getEngName() + 
-					"\", \"url\":\"" + dto.getUrl() + "\"}";			
-		} else if (dto.getIndex().equals("peterpet")) {
-			json = "{\"id\":\"" + dto.getId() + 
-					"\", \"name\":\"" + dto.getName() + 
-					"\", \"type\":\"" + dto.getType() + 
-					"\", \"brand\":\"" + dto.getBrand() + "\"}";
-		}
-
+		String json = "{\"id\":\"" + dto.getId() + 
+				"\", \"name\":\"" + dto.getName() + 
+				"\", \"type\":\"" + dto.getType() + 
+				"\", \"brand\":\"" + dto.getBrand() + "\"}";
+		
 		HttpHeaders headers = new HttpHeaders();
 	    headers.setContentType(MediaType.APPLICATION_JSON);
 	    
