@@ -2,39 +2,6 @@
 <html data-bs-theme="light" lang="ko" dir="ltr" xmlns:th="http://www.thymeleaf.org">
 
 <th:block th:fragment="document">
-	<div class="card-body p-0" th:if="${vo.index == 'loveis'}">
-        <div class="table-responsive scrollbar">
-            <table class="table mb-0 data-table fs-10 align-middle-JHY" data-datatables="data-datatables">
-                <thead class="bg-200">
-                    <tr>
-                        <th>
-                            <div class="form-check fs-9 mb-0 d-flex align-items-center">
-                              <input class="form-check-input" id="checkbox-bulk" type="checkbox" onchange="elasticAllCheck(this)" />
-                            </div>
-                        </th>
-                        <th class="text-900 white-nowrap"> id</th>
-                        <th class="text-900 white-nowrap"> name</th>
-                        <th class="text-900 white-nowrap"> engName</th>
-                        <th class="text-900 white-nowrap"> url</th>
-                    </tr>
-                </thead>
-                <tbody class="list" id="table-customers-body">
-                    <tr class="btn-reveal-trigger" th:each="dto : ${dtos}">
-                        <td>
-                            <div class="form-check fs-9 mb-0 d-flex align-items-center">
-                              <input class="form-check-input listCheckBox" type="checkbox" id="customer-0" data-bulk-select-row="data-bulk-select-row" />
-                            </div>
-                        </td>
-                        <td class="documentId" th:text="${dto.id}"></td>
-                        <td th:text="${dto.name}"></td>
-                        <td th:text="${dto.engName}"></td>
-                        <td><a th:href="${'http://43.201.16.176:8070' + dto.url}" th:text="${'http://43.201.16.176:8070' + dto.url}"></a></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
     <div class="card-body p-0" th:if="${vo.index == 'peterpet'}">
         <div class="table-responsive scrollbar">
             <table class="table mb-0 data-table fs-10 align-middle-JHY" data-datatables="data-datatables">

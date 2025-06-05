@@ -44,8 +44,10 @@ public class ElasticController {
 			if (i == 0) {
 				index = dto.getContents().indexOf("index");
 			} else {
-				dto.setIndex(dto.getContents().get(index));
-				dtos.add(dto);
+				if (dto.getContents().get(index).contains("peter")) {
+					dto.setIndex(dto.getContents().get(index));
+					dtos.add(dto);
+				}
 			}
 		}
 		
@@ -95,8 +97,6 @@ public class ElasticController {
 			
 			dto.setId(docContentsNode.path("id").asText());
 			dto.setName(docContentsNode.path("name").asText());
-			dto.setEngName(docContentsNode.path("engName").asText());
-			dto.setUrl(docContentsNode.path("url").asText());
 			dto.setType(docContentsNode.path("type").asText());
 			dto.setBrand(docContentsNode.path("brand").asText());
 			dto.setPet(docContentsNode.path("pet").asText());
