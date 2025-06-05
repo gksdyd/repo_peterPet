@@ -96,7 +96,20 @@ public class ElasticController {
 			dto.setUrl(docContentsNode.path("url").asText());
 			dto.setType(docContentsNode.path("type").asText());
 			dto.setBrand(docContentsNode.path("brand").asText());
-			dtos.add(dto);
+			
+			if (dtos.size() == 0) {
+				dtos.add(dto);
+			} else {
+				for (int j = 0; j < dtos.size(); j++) {
+					if (Integer.parseInt(dtos.get(j).getId()) > Integer.parseInt(dto.getId())) {
+						dtos.add(j, dto);
+						break;
+					} else if (j == dtos.size() - 1) {
+						dtos.add(dto);
+						break;
+					}
+				}				
+			}
 		}
 		
 		model.addAttribute("index", index);
