@@ -39,11 +39,17 @@
     <div class="col-3">
         <label class="form-label-JHY" for="pet">반려동물 유형<span style="color: red;">*</span></label>
     </div>
+    <div class="col-3">
+        <label class="form-label-JHY" for="seq">seq<span style="color: red;">*</span></label>
+    </div>
 </div>
 <div class="mb-3 row g-3">
     <div class="col-3">
         <select class="form-select-JHY" name="pet" id="pet">
             <option th:each="productPetType : ${@codeService.selectListCachedCode(26)}" th:text="${productPetType.codeName}" th:value="${productPetType.codeSeq}" th:selected="${item.pet == productPetType.codeSeq}"></option>
         </select>
+    </div>
+    <div class="col-3">
+        <input class="form-control-JHY" id="seq" name="seq" type="text" th:value="${item.seq}" />
     </div>
 </div>

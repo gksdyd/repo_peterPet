@@ -100,6 +100,7 @@ public class ElasticController {
 			dto.setType(docContentsNode.path("type").asText());
 			dto.setBrand(docContentsNode.path("brand").asText());
 			dto.setPet(docContentsNode.path("pet").asText());
+			dto.setSeq(docContentsNode.path("seq").asText());
 			
 			dtos.add(dto);
 		}
@@ -164,6 +165,7 @@ public class ElasticController {
 				"\", \"name\":\"" + dto.getName() + 
 				"\", \"type\":\"" + dto.getType() + 
 				"\", \"pet\":\"" + dto.getPet() + 
+				"\", \"seq\":\"" + dto.getSeq() + 
 				"\", \"brand\":\"" + dto.getBrand() + "\"}";
 		
 		HttpHeaders headers = new HttpHeaders();
@@ -271,6 +273,7 @@ public class ElasticController {
 		dto.setType(docNode.path("type").asText());
 		dto.setBrand(docNode.path("brand").asText());
 		dto.setPet(docNode.path("pet").asText());
+		dto.setSeq(docNode.path("seq").asText());
 		
 		return "/xdm/elastic/ElasticXdmPeterPet";
 	}

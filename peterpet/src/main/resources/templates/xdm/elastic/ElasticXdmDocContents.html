@@ -46,6 +46,7 @@
                             </div>
                         </th>
                         <th class="text-900 white-nowrap"> id</th>
+                        <th class="text-900 white-nowrap"> seq</th>
                         <th class="text-900 white-nowrap"> name</th>
                         <th class="text-900 white-nowrap"> type</th>
                         <th class="text-900 white-nowrap"> brand</th>
@@ -60,6 +61,7 @@
                             </div>
                         </td>
                         <td class="documentId" th:text="${dto.id}"></td>
+                        <td th:text="${dto.seq}"></td>
                         <td><a th:href="@{/elastic/xdm/ElasticXdmForm(index=peterpet, id=${dto.id})}" th:text="${dto.name}"></a></td>
                         <td th:text="${@codeService.selectOneCachedCode(dto.type)}"></td>
                         <td th:text="${dto.brand} != '' ? ${@codeService.selectOneCachedCode(dto.brand)} : ''"></td>

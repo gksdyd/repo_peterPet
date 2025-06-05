@@ -104,7 +104,7 @@ function elasticDoc() {
         ,type: "post"
         ,url: "/elastic/xdm/ElasticXdmDocRegister"
         ,data: { "index" : $("#index").val(), "id" : $("#id").val(), "name" : $("#name").val(), "type" : $("#type").val(), "brand" : $("#brand").val(),
-            "pet" : $("#pet").val() }
+            "pet" : $("#pet").val(), "seq" : $("#seq").val() }
         ,success: function(response) {
             window.location.href = "/elastic/xdm/ElasticXdmList";
         }
