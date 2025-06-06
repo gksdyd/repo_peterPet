@@ -46,7 +46,10 @@ public class WebMvcConfigurerImpl implements WebMvcConfigurer {
 				"/naver/xdm/NaverXdmCallback",
 				"/naver/xdm/NaverXdmToken",
 				"/kakao/xdm/KakaoXdmCallback",
-				"/kakao/xdm/KakaoXdmGetToken"
+				"/kakao/xdm/KakaoXdmGetToken",
+				"/elastic/xdm/ElasticXdmIndexSearch",
+				"/elastic/xdm/ElasticXdmDocSearch",
+				"/elastic/xdm/ElasticXdmIndexChange"
 		);
 	}
 
