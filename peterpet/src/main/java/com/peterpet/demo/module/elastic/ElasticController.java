@@ -139,7 +139,7 @@ public class ElasticController {
 	}
 	
 	@RequestMapping(value = "/ElasticXdmIndexChange")
-	public String elasticXdmIndexChange(@ModelAttribute("item") ElasticDto dto) 
+	public String elasticXdmIndexChange(@ModelAttribute("item") ElasticDto dto, Model model) 
 			throws JsonMappingException, JsonProcessingException {
 		String url = Constants.LOCAL_ADDRESS + dto.getIndex() + "/_search?pretty";
 
@@ -150,6 +150,7 @@ public class ElasticController {
 		
 		ObjectMapper objectMapper = new ObjectMapper();
 
+		model.addAttribute("index", dto.getIndex());
 		dto.setId((objectMapper.readTree(responseBody).path("hits").path("total").path("value").asInt() + 1 + ""));
 		
 		return "/xdm/elastic/ElasticXdmPeterPet";
