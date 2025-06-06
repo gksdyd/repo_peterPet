@@ -9,6 +9,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      TZ: Asia/Seoul
+      
     steps:
     - uses: actions/checkout@v4
 
@@ -17,6 +20,10 @@ jobs:
       with:
         java-version: '21'
         distribution: 'temurin'
+
+    - name: Get current date (KST)
+      id: date
+      run: echo "date=$(date +'%Y%m%d')" >> "$GITHUB_OUTPUT"
 
     - name: Add execute permission to gradlew
       run: chmod +x ./peterpet/gradlew
@@ -31,13 +38,11 @@ jobs:
     - name: Build Docker image
       working-directory: peterpet
       run: |
-        DATE=$(date +'%Y%m%d')
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/peterpet:peterpet_$DATE .
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/peterpet:peterpet_${{ steps.date.outputs.date }} .
 
     - name: Push Docker image
       run: |
-        DATE=$(date +'%Y%m%d')
-        docker push ${{ secrets.DOCKER_USERNAME }}/peterpet:peterpet_$DATE
+        docker push ${{ secrets.DOCKER_USERNAME }}/peterpet:peterpet_${{ steps.date.outputs.date }}
 
     - name: Deploy to Remote Server via SSH
       uses: appleboy/ssh-action@v1.0.0
@@ -46,10 +51,18 @@ jobs:
         username: ${{ secrets.SSH_USER }}
         key: ${{ secrets.SSH_KEY }}
         script: |
-          DATE=$(date +'%Y%m%d')
-          docker pull ${{ secrets.DOCKER_USERNAME }}/peterpet:peterpet_$DATE
+          # Cleanup old dangling or unused images
+          docker image prune -af || true
+
+          # Remove existing container
           docker stop peterpet || true
           docker rm peterpet || true
+
+          # Remove existing image with same tag if exists
+          docker rmi ${{ secrets.DOCKER_USERNAME }}/peterpet:peterpet_${{ steps.date.outputs.date }} || true
+
+          # Pull and run new container
+          docker pull ${{ secrets.DOCKER_USERNAME }}/peterpet:peterpet_${{ steps.date.outputs.date }}
           docker run -d --name peterpet -p 8080:8080 \
             -e MYSQL_MAIN_JDBC_URL="${{ secrets.MYSQL_MAIN_JDBC_URL }}" \
             -e MYSQL_MAIN_USERNAME="${{ secrets.MYSQL_MAIN_USERNAME }}" \
@@ -66,4 +79,4 @@ jobs:
             -e DELIVERY_KEY="${{ secrets.DELIVERY_KEY }}" \
             -e CLIENT_ID="${{ secrets.CLIENT_ID }}" \
             -e CLIENT_SECRET="${{ secrets.CLIENT_SECRET }}" \
-            ${{ secrets.DOCKER_USERNAME }}/peterpet:peterpet_$DATE
+            ${{ secrets.DOCKER_USERNAME }}/peterpet:peterpet_${{ steps.date.outputs.date }}
