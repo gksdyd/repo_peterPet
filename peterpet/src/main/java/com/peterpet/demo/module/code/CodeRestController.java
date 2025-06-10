@@ -51,6 +51,14 @@ public class CodeRestController {
 		return Integer.parseInt(dto.getCodeSeq());
 	}
 	
+	@PostMapping(value = "/RestXdmDelete")
+	public int restXdmDelete(CodeDto dto) throws JsonMappingException, JsonProcessingException {
+		if (!validationToken(getToken())) {
+			return 0;
+		}
+		return codeService.delete(dto);
+	}
+	
 	public String getToken() throws JsonMappingException, JsonProcessingException {
 		String url = "http://3.38.103.31:3000/getToken";
 		

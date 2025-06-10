@@ -26,6 +26,7 @@ public class WebMvcConfigurerImpl implements WebMvcConfigurer {
 				"/xdm/code/RestXdmList",
 				"/xdm/code/RestXdmOneSelect",
 				"/xdm/code/RestXdmInsert",
+				"/xdm/code/RestXdmDelete",
 				"/peter/member/LoginPeterForm",
 				"/peter/member/SignupPeterForm",
 				"/peter/index/IndexPeterView",
