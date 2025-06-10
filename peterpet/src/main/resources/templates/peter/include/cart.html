@@ -2,37 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <th:block th:fragment="cart">
-    <div class="col-6 col-sm-6 col-md-3 col-lg-3 item position-relative" th:each="list : ${cart}">
-        <input type="checkbox" style="float: left;" class="cartCheckBox" th:value="${list.prodSeq}">
-        <button type="button" class="btn remove-icon close-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove" th:onclick="removeCookie(/*[[${list.prodSeq}]]*/'')"><i class="icon an an-times-r"></i></button>
-        <!-- Product Image -->
-        <div class="product-image">
-            <!--Start Product Image-->
-            <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${list.prodType})}">
-                <img class="blur-up lazyload" th:src="${list.path}">
-                <!-- product label -->
-                <!-- <div class="product-labels"><span class="lbl on-sale rounded">최저가도전!</span></div> -->
-                <!-- End product label -->
-            </a>
-            <!--End Product Image-->
-        </div>
-        <!--End Product Image-->
-        <!--Start Product Details-->
-        <div class="product-details text-center">
-            <!--Product Name-->
-            <div class="product-name text-uppercase">
-                <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${list.prodType})}" th:if="${list.funcName} == null and ${list.infoWeight} == 0" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName}"></a>
-                <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${list.prodType})}" th:if="${list.funcName} != null and ${list.infoWeight} == 0" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName} + ' ' + ${@codeService.selectOneCachedCode(list.funcName)}"></a>
-                <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${list.prodType})}" th:if="${list.funcName} == null and ${list.infoWeight} != 0" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName} + ' ' + ${list.infoWeight} + 'kg'"></a>
-                <a th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${list.prodType})}" th:if="${list.funcName} != null and ${list.infoWeight} != 0" th:text="${@codeService.selectOneCachedCode(list.feedBrand)} + ' ' + ${list.prodName} + ' ' + ${list.infoWeight} + 'kg' + ' ' + ${@codeService.selectOneCachedCode(list.funcName)}"></a>
+    <!--MiniCart Drawer-->
+    <div class="minicart-right-drawer modal right fade" id="minicart-drawer">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div id="cart-drawer" class="block block-cart">
+                </div>
             </div>
-            <!--End Product Name-->
-            <!--Product Price-->
-            <div class="product-price">
-                <span class="price" th:text="${#numbers.formatInteger(list.infoPrice,3,'COMMA')} + '원'"></span>
-            </div>
-            <!--End Product Price-->
         </div>
-        <!--End Product Details-->
     </div>
 </th:block>

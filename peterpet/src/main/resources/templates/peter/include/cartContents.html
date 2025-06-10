@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div class="minicart-header">
+    <a href="javascript:void(0);" class="close-cart" data-bs-dismiss="modal" aria-label="Close"><i class="an an-times-r" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left" title="Close"></i></a>
+    <h4 class="fs-6 text-black" th:text="'Your cart (' + ${count} + ' Items)'"></h4>
+</div>
+<div class="minicart-content">
+    <ul class="m-0 clearfix">
+        <li class="item d-flex justify-content-center align-items-center" th:each="list : ${cart}">
+            <a class="product-image" th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${list.prodType})}">
+                <img class="blur-up lazyload" th:src="${list.path}" th:data-src="${list.path}" alt="image" title="">
+            </a>
+            <div class="product-details">
+                <a class="product-title" th:href="@{/peter/shop/ShopPeterView(prodSeq=${list.prodSeq}, prodType=${list.prodType})}" th:text="${list.prodName}"></a>
+                <div class="variant-cart mb-1" th:text="${@codeService.selectOneCachedCode(list.feedBrand)}"></div>
+                <div class="priceRow">
+                    <div class="product-price">
+                        <span class="money" th:text="${list.infoWeight} + 'kg, ' + ${#numbers.formatInteger(list.infoPrice,3,'COMMA')} + '원'"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="qtyDetail">
+                <div class="wrapQtyBtn text-center">
+                    <div class="qtyField">
+                        <a class="qtyBtn minus" href="javascript:void(0);"><i class="icon an an-minus-r" aria-hidden="true"></i></a>
+                        <input type="text" name="quantity" th:value="${list.infoCount}" class="qty rounded-0">
+                        <a class="qtyBtn plus" href="javascript:void(0);"><i class="icon an an-plus-l" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+                <div style="text-align: right;">
+                    <a href="#" class="remove"><i class="an an-times-r" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"></i></a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="minicart-bottom text-black">
+    <div class="shipinfo text-center mb-3 text-uppercase">
+        <p class="freeShipMsg"><i class="an an-truck fs-5 me-2 align-middle"></i>배송비 : <b>2,500원</b></p>
+    </div>
+    <div class="subtotal">
+        <span>Total:</span>
+        <span class="product-price" th:text="${#numbers.formatInteger(totalPrice,3,'COMMA')} + '원'"></span>
+    </div>
+    <a href="checkout-style2.html" class="w-100 px-2 my-2 btn lh-base btn-outline-primary proceed-to-checkout">구매하기</a>
+</div>

@@ -46,7 +46,7 @@ function getCookie() {
         ,url: "/peter/wishlist/CartPeterProc"
         ,data: { "products" : products, "counts" : counts, "weights" : weights, "prices" : prices }
         ,success: function(response) {
-            $("#cartPage").html(response);
+            $("#cart-drawer").html(response);
         }
         ,error : function(jqXHR){
             alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);

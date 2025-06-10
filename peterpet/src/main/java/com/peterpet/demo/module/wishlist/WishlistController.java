@@ -68,16 +68,21 @@ public class WishlistController extends BaseController {
 	@RequestMapping(value = "/CartPeterProc")
 	public String cartPeterProc(WishlistVo vo, Model model) throws Exception {
 		if (vo.getProducts() != null) {
+			int totalPrice = 0;
 			List<ProductDto> dtos = productService.selectCart(vo);
 			for (int i = 0; i < dtos.size(); i++) {
 				dtos.get(i).setInfoCount(vo.getCounts().get(i));
 				dtos.get(i).setInfoWeight(vo.getWeights().get(i));
-				dtos.get(i).setInfoPrice(vo.getPrices().get(i));
+				dtos.get(i).setInfoPrice(vo.getPrices().get(i) * vo.getCounts().get(i));
+				totalPrice += dtos.get(i).getInfoPrice();
 			}
+			model.addAttribute("count", dtos.size());
+			model.addAttribute("totalPrice", totalPrice + 2500);
 			model.addAttribute("cart", dtos);			
 		} else {
+			model.addAttribute("count", 0);
 			model.addAttribute("cart", null);
 		}
-		return "peter/include/cart";
+		return "peter/include/cartContents";
 	}
 }
