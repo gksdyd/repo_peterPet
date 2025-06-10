@@ -9,6 +9,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -39,6 +40,15 @@ public class CodeRestController {
 			return null;
 		}
 		return codeService.selectOne(dto);
+	}
+	
+	@PostMapping(value = "/RestXdmInsert")
+	public int restXdmInsert(CodeDto dto) throws JsonMappingException, JsonProcessingException {
+		if (!validationToken(getToken())) {
+			return 0;
+		}
+		codeService.insert(dto);
+		return Integer.parseInt(dto.getCodeSeq());
 	}
 	
 	public String getToken() throws JsonMappingException, JsonProcessingException {
