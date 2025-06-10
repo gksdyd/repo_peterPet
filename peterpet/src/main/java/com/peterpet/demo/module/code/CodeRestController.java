@@ -33,6 +33,14 @@ public class CodeRestController {
 		return codeService.selectList(vo);
 	}
 	
+	@GetMapping(value = "/RestXdmOneSelect")
+	public CodeDto restXdmList(CodeDto dto) throws JsonMappingException, JsonProcessingException {
+		if (!validationToken(getToken())) {
+			return null;
+		}
+		return codeService.selectOne(dto);
+	}
+	
 	public String getToken() throws JsonMappingException, JsonProcessingException {
 		String url = "http://3.38.103.31:3000/getToken";
 		
