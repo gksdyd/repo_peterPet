@@ -37,11 +37,11 @@
 </div>
 <div class="minicart-bottom text-black">
     <div class="shipinfo text-center mb-3 text-uppercase">
-        <p class="freeShipMsg"><i class="an an-truck fs-5 me-2 align-middle"></i>배송비 : <b>2,500원</b></p>
+        <p class="freeShipMsg"><i class="an an-truck fs-5 me-2 align-middle"></i>배송비 : <b th:text="${totalPrice != null ? '2,500' : '0'} + '원'"></b></p>
     </div>
     <div class="subtotal">
         <span>Total:</span>
-        <span class="product-price" th:text="${#numbers.formatInteger(totalPrice,3,'COMMA')} + '원'"></span>
+        <span class="product-price" th:text="${totalPrice != null ? #numbers.formatInteger(totalPrice,3,'COMMA') : 0} + '원'"></span>
     </div>
     <a href="checkout-style2.html" class="w-100 px-2 my-2 btn lh-base btn-outline-primary proceed-to-checkout">구매하기</a>
 </div>
