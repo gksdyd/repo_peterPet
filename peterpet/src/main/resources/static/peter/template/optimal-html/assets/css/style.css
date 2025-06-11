@@ -503,7 +503,7 @@ body:not(.searchact) .header-main:not(.sticky-header) { background:none; box-sha
 .search-drawer .label { border:0; clip:rect(0,0,0,0); height:1px; margin:-1px; overflow:hidden; padding:0; position:absolute; width:1px; }
 .search-drawer .control { border-bottom:0; }
 .search-drawer .input-text { color:#050000; font-size:13px; padding:5px 35px; background:none; border:0; }
-.search-drawer .action.search { font-size:18px; position:absolute; left:0; border:0; margin-top:3px; background:none; cursor:pointer; height:38px; }
+.search-drawer .action.search { font-size:18px; left:0; border:0; margin-top:3px; background:none; cursor:pointer; height:38px; }
 .search-drawer .action.search:hover { color:#000000; }
 .search-drawer .closeSearch { color:#050000; font-size:18px; position:absolute; top:7px; right:0; z-index:10; cursor:pointer; width:25px; height:25px; line-height:25px; text-align:center; }
 .search-drawer .searchField { display:flex; align-items:center; width:100%; }
