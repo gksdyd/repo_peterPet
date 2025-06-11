@@ -3,7 +3,7 @@
 
 <div class="minicart-header">
     <a href="javascript:void(0);" class="close-cart" data-bs-dismiss="modal" aria-label="Close"><i class="an an-times-r" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left" title="Close"></i></a>
-    <h4 class="fs-6 text-black" th:text="'Your cart (' + ${count} + ' Items)'"></h4>
+    <h4 class="fs-6 text-black" th:text="'Your cart (' + ${session.sessCartPeter != null ? session.sessCartPeter : 0} + ' Items)'"></h4>
 </div>
 <div class="minicart-content">
     <ul class="m-0 clearfix">

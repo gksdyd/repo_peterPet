@@ -80,7 +80,7 @@
                             <!--Minicart Drawer-->
                             <div class="header-cart iconset">
                                 <a href="cart-style1.html" class="site-header__cart btn-minicart" data-bs-toggle="modal" data-bs-target="#minicart-drawer">
-                                    <i class="icon an an-sq-bag"></i><span class="site-cart-count counter d-flex-center justify-content-center position-absolute translate-middle rounded-circle">2</span><span class="tooltip-label">Cart</span>
+                                    <i class="icon an an-sq-bag"></i><span class="site-cart-count counter d-flex-center justify-content-center position-absolute translate-middle rounded-circle" th:text="${session.sessCartPeter != null ? session.sessCartPeter : 0}"></span><span class="tooltip-label">Cart</span>
                                 </a>
                             </div>
                             <!--End Minicart Drawer-->

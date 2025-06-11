@@ -223,6 +223,7 @@ public class MemberPeterController extends BaseController {
 		httpSession.setAttribute("sessIdPeter", null);
 		httpSession.setAttribute("sessNamePeter", null);
 		httpSession.setAttribute("sessWishPeter", null);
+		httpSession.setAttribute("sessCartPeter", null);
 		returnMap.put("rt", "success");
 		return returnMap;
 	}
