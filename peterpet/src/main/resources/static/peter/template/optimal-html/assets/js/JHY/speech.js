@@ -1,28 +1,12 @@
 let chunks = [];
 let media = null;
 let recorder = null;
-let initFlag = 1;
-let flag = 0;
-let counter = 1;
 
-function searchMic() {
-    //마이크 지원여부
-    if (initFlag == 1) {
-        if(navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia) {
-            recodeInit();
-            initFlag = 0;
-            flag = 1;
-        }
-        else {
-            alert("Mic not available");
-        }
-    } else {
-        if (flag == 0) {
-            startRecode();
-        } else {
-            stopRecode();
-        }
-    }
+if(navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia) {
+    recodeInit();
+}
+else {
+    alert("Mic not available");
 }
 
 function recodeInit() {
@@ -45,36 +29,46 @@ function recodeInit() {
             makeLink();
           }
         };
-        startRecode();
         console.log('got media successfully');
       }).catch(err => console.log(err));
 }
 
 function makeLink(){
-    let blob = new Blob(chunks, {type: media.type })
-      , url = URL.createObjectURL(blob)
-      , hf = document.createElement('a')
-    ;
+    let blob = new Blob(chunks, {type: media.type });
 
-    hf.href = url;
-    hf.download = `${counter++}${media.ext}`;
-    hf.style.display = 'none';
-    document.body.appendChild(hf);
-    hf.click();
+    const formData = new FormData();
+    formData.append('uploadImg1', blob, `recordFile${media.ext}`);
 
-    document.body.removeChild(hf);
-    URL.revokeObjectURL(url);
+    $.ajax({
+        async: true 
+        ,cache: false
+        ,type: "post"
+        ,url: "/speech/peter/SpeechPeterInsert"
+        ,data: formData
+        ,processData: false
+        ,contentType: false
+        ,success: function(response) {
+            alert(response);
+        }
+        ,error : function(jqXHR){
+            alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+        }
+    });
   }
 
   function startRecode() {
-    $("#searchMic i").attr('style', "color:red");
-    flag = 1;
+    $("#micON").removeClass("d-none");
+    $("#micOff").addClass("d-none");
+    $("#btnStart").addClass("disabled");
+    $("#btnStop").removeClass("disabled");
     chunks=[];
     recorder.start();
   }
 
   function stopRecode() {
-    $("#searchMic i").attr('style', "");
-    flag = 0;
+    $("#micON").addClass("d-none");
+    $("#micOff").removeClass("d-none");
+    $("#btnStart").removeClass("disabled");
+    $("#btnStop").addClass("disabled");
     recorder.stop();
   }

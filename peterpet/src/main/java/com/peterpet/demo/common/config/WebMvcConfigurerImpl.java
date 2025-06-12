@@ -54,7 +54,9 @@ public class WebMvcConfigurerImpl implements WebMvcConfigurer {
 				"/kakao/xdm/KakaoXdmGetToken",
 				"/elastic/xdm/ElasticXdmIndexSearch",
 				"/elastic/xdm/ElasticXdmDocSearch",
-				"/elastic/xdm/ElasticXdmIndexChange"
+				"/elastic/xdm/ElasticXdmIndexChange",
+				"/speech/peter/SpeechPeterForm",
+				"/speech/peter/SpeechPeterInsert"
 		);
 	}
 

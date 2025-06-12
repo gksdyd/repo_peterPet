@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en-US" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <!--Required Meta Tags-->
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="description">
+        <!-- Title Of Site -->
+        <title>Speech</title>
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="/peter/template/optimal-html/assets/images/micOn.png" />
+        <!-- Plugins CSS -->
+        <link rel="stylesheet" href="/peter/template/optimal-html/assets/css/plugins.css" />
+        <!-- Main Style CSS -->
+        <link rel="stylesheet" href="/peter/template/optimal-html/assets/css/style.css" />
+        <link rel="stylesheet" href="/peter/template/optimal-html/assets/css/responsive.css" />
+    </head>
+    <body>
+        <!--Body Container-->
+        <div id="page-content">   
+            <!--Collection Banner-->
+            <div class="collection-header">
+                <div class="collection-hero">
+                    <div class="collection-hero__image"></div>
+                    <div class="collection-hero__title-wrapper container">
+                        <h1 class="collection-hero__title">Speech Test</h1>
+                    </div>
+                </div>
+            </div>
+            <!--End Collection Banner-->
+
+            <!--Container-->
+            <div class="container">
+                <!--Category Empty-->
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                        <p><img src="/peter/template/optimal-html/assets/images/micOff.png" alt="" id="micOff" /></p>
+                        <p><img class="d-none" src="/peter/template/optimal-html/assets/images/micOn.png" alt="" id="micON" /></p>
+                        <p>
+                            <a href="javascript:void(0);" onclick="startRecode()" class="btn btn-outline-primary rounded mb-2 me-2" id="btnStart">START</a>
+                            <a href="javascript:void(0);" onclick="stopRecode()" class="btn rounded mb-2 text-capitalize disabled" id="btnStop">STOP</a>
+                        </p>
+                    </div>
+                </div>
+                <!--End Category Empty-->
+            </div>
+            <!--End Container-->
+        </div>
+        <!--End Body Container-->
+
+        <!--Scoll Top-->
+        <span id="site-scroll"><i class="icon an an-chevron-up"></i></span>
+        <!--End Scoll Top-->
+
+        <div th:replace="~{peter/include/cart :: cart}"></div>
+        <div th:replace="~{peter/include/includePeterOriginal :: includePeterOriginal}"></div>
+        <div th:replace="~{peter/include/includePeterCommon :: includePeterCommon}"></div>
+        <!--End Page Wrapper-->
+        <script src="/peter/template/optimal-html/assets/js/JHY/speech.js"></script>
+    </body>
+</html>
