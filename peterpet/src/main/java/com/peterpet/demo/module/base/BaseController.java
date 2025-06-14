@@ -5,9 +5,19 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.core.JacksonException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.peterpet.demo.module.util.UtilDateTime;
 
 public class BaseController {
@@ -97,5 +107,32 @@ public class BaseController {
 		vo.setDiffHour(ChronoUnit.HOURS.between(startDateTime, endDateTime) % 24);
 		vo.setDiffMinute(ChronoUnit.MINUTES.between(startDateTime, endDateTime) % 60);
 		vo.setDiffSecond(ChronoUnit.SECONDS.between(startDateTime, endDateTime) % 60);		
+	}
+	
+	public String speechToTextResponse(byte[] wavData) throws JacksonException {
+		String url = "http://epretx.etri.re.kr:8000/api/WiseASR_Recognition";
+		
+		String base64Audio = Base64.getEncoder().encodeToString(wavData);
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+	    headers.set("Authorization", "adad211a-9cd3-493a-82f7-8ddfcf1c1232");
+	    
+	    Map<String, Object> argument = new HashMap<>();
+	    argument.put("language_code", "korean");
+	    argument.put("audio", String.valueOf(base64Audio));
+	    
+	    Map<String, Object> requestBody = new HashMap<>();
+	    requestBody.put("request_id", "reserved field");  // 고정 문구
+	    requestBody.put("argument", argument);
+	    
+	    HttpEntity<Map<String, Object>> entity = new HttpEntity<>(requestBody, headers);
+	    RestTemplate restTemplate = new RestTemplate();
+	    ResponseEntity<String> response = restTemplate.postForEntity(url, entity, String.class);
+	    System.out.println("Response: " + response.getBody());
+	    
+	    ObjectMapper objectMapper = new ObjectMapper();
+		
+	    return objectMapper.readTree(response.getBody()).path("return_object").path("recognized").asText();
 	}
 }

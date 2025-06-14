@@ -5,9 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.peterpet.demo.module.base.BaseController;
+import com.peterpet.demo.module.util.UtilWav;
+
 @Controller
 @RequestMapping(value = "/speech/peter")
-public class SpeechController {
+public class SpeechController extends BaseController {
 
 	@Autowired
 	SpeechService speechService;
@@ -21,6 +24,6 @@ public class SpeechController {
 	@RequestMapping(value = "/SpeechPeterInsert")
 	public String speechPeterInsert(SpeechDto dto) throws Exception {
 		speechService.SpeechPeterInsert(dto);
-		return dto.getPath();
+		return speechToTextResponse(UtilWav.getWavData(UtilWav.multipartFileToFile(dto.getUploadImg1()[0])));
 	}
 }
