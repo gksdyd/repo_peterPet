@@ -242,9 +242,12 @@
   </script>
 
 <script>
+  var url = window.location.href;
+  var domain = url.match(/^https?:\/\/([^\/?#]+)(?:[\/?#]|$)/i)[1];
+
   function loginWithKakao() {
     Kakao.Auth.authorize({
-      redirectUri: 'http://localhost:8080/kakao/xdm/KakaoXdmCallback',  // 앱에 등록된 카카오 로그인에서 사용할 Redirect URI 입력
+      redirectUri: 'http://' + domain + '/kakao/xdm/KakaoXdmCallback',  // 앱에 등록된 카카오 로그인에서 사용할 Redirect URI 입력
     });
   }
 </script>
