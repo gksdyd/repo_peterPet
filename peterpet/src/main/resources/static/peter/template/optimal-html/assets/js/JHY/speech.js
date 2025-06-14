@@ -48,7 +48,7 @@ function makeLink(){
         ,processData: false
         ,contentType: false
         ,success: function(response) {
-            alert(response);
+            $(".col").append("<p>" + response + "</p>");
         }
         ,error : function(jqXHR){
             alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
