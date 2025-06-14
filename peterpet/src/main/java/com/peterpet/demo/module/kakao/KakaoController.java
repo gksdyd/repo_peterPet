@@ -48,8 +48,7 @@ public class KakaoController {
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("grant_type", "authorization_code");
         params.add("client_id", "8c65df96425b66a2004460d521dbb912");
-//        params.add("redirect_uri", "http://localhost:8080/kakao/xdm/KakaoXdmCallback");
-        params.add("redirect_uri", "http://43.201.16.176:8080/kakao/xdm/KakaoXdmCallback");
+        params.add("redirect_uri", "http://" + httpServletRequest.getServerName() + ":8080/kakao/xdm/KakaoXdmCallback");
         params.add("code", dto.getCode());
 
         HttpHeaders headers = new HttpHeaders();
