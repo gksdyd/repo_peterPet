@@ -17,7 +17,7 @@ public class SpeechController extends BaseController {
 	
 	@RequestMapping(value = "/SpeechPeterForm")
 	public String speechPeterForm() {
-		return "peter/speech/speech";
+		return "peter/speech/Speech";
 	}
 	
 	@ResponseBody
