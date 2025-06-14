@@ -226,9 +226,12 @@
     <div th:replace="~{xdm/include/includeXdmForm :: includeXdmForm}"></div>
 
     <script type="text/javascript">
+      var url = window.location.href;
+      var domain = url.match(/^https?:\/\/([^\/?#]+)(?:[\/?#]|$)/i)[1];
+
       function naverLogin() {
         const clientId = "l2LBJPseHaUsiRBqlepc";
-        const redirectUri = encodeURIComponent("http://localhost:8080/naver/xdm/NaverXdmCallback");
+        const redirectUri = encodeURIComponent("http://" + domain + "/naver/xdm/NaverXdmCallback");
         const state = generateRandomString();
         const loginUrl = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&state=${state}`;
 
@@ -239,18 +242,13 @@
       function generateRandomString() {
         return Math.random().toString(36).substring(2, 15);
       }
-  </script>
 
-<script>
-  var url = window.location.href;
-  var domain = url.match(/^https?:\/\/([^\/?#]+)(?:[\/?#]|$)/i)[1];
-
-  function loginWithKakao() {
-    Kakao.Auth.authorize({
-      redirectUri: 'http://' + domain + '/kakao/xdm/KakaoXdmCallback',  // 앱에 등록된 카카오 로그인에서 사용할 Redirect URI 입력
-    });
-  }
-</script>
+      function loginWithKakao() {
+        Kakao.Auth.authorize({
+          redirectUri: 'http://' + domain + '/kakao/xdm/KakaoXdmCallback',  // 앱에 등록된 카카오 로그인에서 사용할 Redirect URI 입력
+        });
+      }
+    </script>
   </body>
 
 </html>
