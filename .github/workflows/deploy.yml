@@ -67,6 +67,7 @@ jobs:
           # Pull and run new container
           docker pull ${{ secrets.DOCKER_USERNAME }}/peterpet:peterpet_${{ steps.date.outputs.date }}
           docker run -d --name peterpet -p 8080:8080 \
+            -v /root/peterpetforu/keystore.p12:/root/peterpetforu/keystore.p12 \
             -e MYSQL_MAIN_JDBC_URL="${{ secrets.MYSQL_MAIN_JDBC_URL }}" \
             -e MYSQL_MAIN_USERNAME="${{ secrets.MYSQL_MAIN_USERNAME }}" \
             -e MYSQL_MAIN_PASSWORD="${{ secrets.MYSQL_MAIN_PASSWORD }}" \
