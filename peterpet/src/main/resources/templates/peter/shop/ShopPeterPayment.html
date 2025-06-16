@@ -212,8 +212,8 @@
                         },
                         orderId: serialNum, // 고유 주문번호
                         orderName: orderName,
-                        successUrl: "http://43.201.16.176:8080/success", // 결제 요청이 성공하면 리다이렉트되는 URL
-                        failUrl: "http://43.201.16.176:8080/fail", // 결제 요청이 실패하면 리다이렉트되는 URL
+                        successUrl: window.location.origin + "/success", // 결제 요청이 성공하면 리다이렉트되는 URL
+                        failUrl: window.location.origin + "/fail", // 결제 요청이 실패하면 리다이렉트되는 URL
                         customerEmail: email,
                         customerName: userName,
                         customerMobilePhone: userPhone.replace(/-/g, ""),
