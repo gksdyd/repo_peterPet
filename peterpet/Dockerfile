@@ -22,4 +22,4 @@ RUN mkdir /${project}
 COPY build/libs/*.jar /${project}/${project}.jar
 
 # JAR 실행
-ENTRYPOINT ["java", "-jar", "/peterpet/peterpet.jar"]
+ENTRYPOINT ["sh", "-c", "java -jar /${project}/${project}.jar"]
