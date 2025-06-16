@@ -51,6 +51,9 @@ jobs:
         username: ${{ secrets.SSH_USER }}
         key: ${{ secrets.SSH_KEY }}
         script: |
+          mkdir -p /peterpetforu
+          echo "${{ secrets.KEYSTORE_P12_B64 }}" | base64 -d > /peterpetforu/keystore.p12
+          
           # Cleanup old dangling or unused images
           docker image prune -af || true
 
