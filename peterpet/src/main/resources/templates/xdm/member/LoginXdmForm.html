@@ -231,7 +231,7 @@
 
       function naverLogin() {
         const clientId = "l2LBJPseHaUsiRBqlepc";
-        const redirectUri = encodeURIComponent("http://" + domain + "/naver/xdm/NaverXdmCallback");
+        const redirectUri = encodeURIComponent(window.location.origin + "/naver/xdm/NaverXdmCallback");
         const state = generateRandomString();
         const loginUrl = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&state=${state}`;
 
@@ -245,7 +245,7 @@
 
       function loginWithKakao() {
         Kakao.Auth.authorize({
-          redirectUri: 'http://' + domain + '/kakao/xdm/KakaoXdmCallback',  // 앱에 등록된 카카오 로그인에서 사용할 Redirect URI 입력
+          redirectUri: window.location.origin + '/kakao/xdm/KakaoXdmCallback',  // 앱에 등록된 카카오 로그인에서 사용할 Redirect URI 입력
         });
       }
     </script>
