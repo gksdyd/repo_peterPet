@@ -81,4 +81,5 @@ jobs:
             -e CLIENT_ID="${{ secrets.CLIENT_ID }}" \
             -e CLIENT_SECRET="${{ secrets.CLIENT_SECRET }}" \
             -e KEY_PATH="${{ secrets.KEY_PATH }}" \
+            -e SSL_ENABLE="${{ secrets.SSL_ENABLE }}" \
             ${{ secrets.DOCKER_USERNAME }}/peterpet:peterpet_${{ steps.date.outputs.date }}
