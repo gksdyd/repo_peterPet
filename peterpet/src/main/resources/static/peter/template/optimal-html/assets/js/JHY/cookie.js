@@ -21,10 +21,8 @@ function setCookie(value) {
 }
 
 function geterCookie() {
-    console.log("3");
     let cookies = document.cookie;
 
-    console.log("5");
     let cart = cookies.replace(/\s/g, "").split(";");
     let products = [];
     let counts = [];
@@ -46,7 +44,6 @@ function geterCookie() {
             }
         }
     }
-    console.log("6");
     $.ajax({
         async: true 
         ,cache: false
@@ -54,9 +51,7 @@ function geterCookie() {
         ,url: "/peter/wishlist/CartPeterProc"
         ,data: { "products" : products, "counts" : counts, "weights" : weights, "prices" : prices }
         ,success: function(response) {
-            console.log("7");
             $("#cart-drawer").html(response);
-            console.log("8");
         }
         ,error : function(jqXHR){
             alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
@@ -65,13 +60,11 @@ function geterCookie() {
  }
 
  function removeCookie(value) {
-    console.log("1");
     document.cookie = "id" + value + "=; path=/peter; max-age=0";
     document.cookie = "product" + value + "=; path=/peter; max-age=0";
     document.cookie = "count" + value + "=; path=/peter; max-age=0";
     document.cookie = "weight" + value + "=; path=/peter; max-age=0";
     document.cookie = "price" + value + "=; path=/peter; max-age=0";
-    console.log("2");
     geterCookie();
  }
 
