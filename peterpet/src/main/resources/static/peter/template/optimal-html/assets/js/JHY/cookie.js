@@ -23,10 +23,7 @@ function setCookie(value) {
 function geterCookie() {
     console.log("3");
     let cookies = document.cookie;
-    if (cookies === "") {
-        console.log("4");
-        return;
-    }
+
     console.log("5");
     let cart = cookies.replace(/\s/g, "").split(";");
     let products = [];
