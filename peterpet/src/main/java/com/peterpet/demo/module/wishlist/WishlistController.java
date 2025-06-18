@@ -62,7 +62,7 @@ public class WishlistController extends BaseController {
 		}
 		model.addAttribute("wishlists", dtos);
 		httpSession.setAttribute("sessWishPeter", (Integer) httpSession.getAttribute("sessWishPeter") - 1);
-		return "/peter/include/wishlist";
+		return "peter/include/wishlist";
 	}
 	
 	@RequestMapping(value = "/CartPeterProc")
