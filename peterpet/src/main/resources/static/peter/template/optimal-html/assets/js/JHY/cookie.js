@@ -17,14 +17,17 @@ function setCookie(value) {
         $("#cartMessage").fadeOut(1000); // 천천히 사라지게 (1초)
     }, 300) // 300ms 후 사라지기 시작
 
-    getCookie();
+    geterCookie();
 }
 
-function getCookie() {  
+function geterCookie() {
+    console.log("3");
     let cookies = document.cookie;
     if (cookies === "") {
+        console.log("4");
         return;
     }
+    console.log("5");
     let cart = cookies.replace(/\s/g, "").split(";");
     let products = [];
     let counts = [];
@@ -46,7 +49,7 @@ function getCookie() {
             }
         }
     }
-    
+    console.log("6");
     $.ajax({
         async: true 
         ,cache: false
@@ -54,7 +57,9 @@ function getCookie() {
         ,url: "/peter/wishlist/CartPeterProc"
         ,data: { "products" : products, "counts" : counts, "weights" : weights, "prices" : prices }
         ,success: function(response) {
+            console.log("7");
             $("#cart-drawer").html(response);
+            console.log("8");
         }
         ,error : function(jqXHR){
             alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
@@ -63,12 +68,14 @@ function getCookie() {
  }
 
  function removeCookie(value) {
+    console.log("1");
     document.cookie = "id" + value + "=; path=/peter; max-age=0";
     document.cookie = "product" + value + "=; path=/peter; max-age=0";
     document.cookie = "count" + value + "=; path=/peter; max-age=0";
     document.cookie = "weight" + value + "=; path=/peter; max-age=0";
     document.cookie = "price" + value + "=; path=/peter; max-age=0";
-    getCookie();
+    console.log("2");
+    geterCookie();
  }
 
  function putBascket(seq) {

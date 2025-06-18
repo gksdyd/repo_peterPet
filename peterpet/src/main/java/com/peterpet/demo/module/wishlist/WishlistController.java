@@ -67,7 +67,9 @@ public class WishlistController extends BaseController {
 	
 	@RequestMapping(value = "/CartPeterProc")
 	public String cartPeterProc(WishlistVo vo, Model model, HttpSession httpSession) throws Exception {
+		System.out.println("1");
 		if (vo.getProducts() != null) {
+			System.out.println("2");
 			int totalPrice = 0;
 			List<ProductDto> dtos = productService.selectCart(vo);
 			for (int i = 0; i < dtos.size(); i++) {
@@ -80,8 +82,10 @@ public class WishlistController extends BaseController {
 			model.addAttribute("totalPrice", totalPrice + 2500);
 			model.addAttribute("cart", dtos);			
 		} else {
+			System.out.println("3");
 			model.addAttribute("cart", null);
 		}
+		System.out.println("4");
 		return "peter/include/cartContents";
 	}
 }
