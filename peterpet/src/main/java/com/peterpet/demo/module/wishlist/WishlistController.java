@@ -80,6 +80,7 @@ public class WishlistController extends BaseController {
 			model.addAttribute("totalPrice", totalPrice + 2500);
 			model.addAttribute("cart", dtos);			
 		} else {
+			httpSession.setAttribute("sessCartPeter", null);
 			model.addAttribute("cart", null);
 		}
 		return "peter/include/cartContents";

@@ -44,6 +44,7 @@ function geterCookie() {
             }
         }
     }
+
     $.ajax({
         async: true 
         ,cache: false
@@ -52,6 +53,7 @@ function geterCookie() {
         ,data: { "products" : products, "counts" : counts, "weights" : weights, "prices" : prices }
         ,success: function(response) {
             $("#cart-drawer").html(response);
+            $(".site-cart-count").text(products.length);
         }
         ,error : function(jqXHR){
             alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
