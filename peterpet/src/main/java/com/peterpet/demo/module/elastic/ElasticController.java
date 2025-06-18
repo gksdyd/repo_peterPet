@@ -153,7 +153,7 @@ public class ElasticController {
 		model.addAttribute("index", dto.getIndex());
 		dto.setId((objectMapper.readTree(responseBody).path("hits").path("total").path("value").asInt() + 1 + ""));
 		
-		return "/xdm/elastic/ElasticXdmPeterPet";
+		return "xdm/elastic/ElasticXdmPeterPet";
 	}
 	
 	@ResponseBody
@@ -276,6 +276,6 @@ public class ElasticController {
 		dto.setPet(docNode.path("pet").asText());
 		dto.setSeq(docNode.path("seq").asText());
 		
-		return "/xdm/elastic/ElasticXdmPeterPet";
+		return "xdm/elastic/ElasticXdmPeterPet";
 	}
 }
