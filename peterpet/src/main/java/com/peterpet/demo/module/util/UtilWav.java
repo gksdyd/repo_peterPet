@@ -23,7 +23,8 @@ public class UtilWav {
 	}
 	
 	public static byte[] getWavData(File file) throws IOException, InterruptedException {
-		return changeFormat(AudioToByte(file));
+//		return changeFormat(AudioToByte(file));
+		return AudioToByte(file);
 	}
 	
 	public static byte[] changeFormat(byte[] audioFileContent)
