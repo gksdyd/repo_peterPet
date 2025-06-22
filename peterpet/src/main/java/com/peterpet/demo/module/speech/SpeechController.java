@@ -30,7 +30,7 @@ public class SpeechController extends BaseController {
 	@ResponseBody
 	@RequestMapping(value = "/SpeechPeterInsert")
 	public String speechPeterInsert(SpeechDto dto) throws Exception {		
-		String url = "http://127.0.0.1:8000/speechApi/";
+		String url = "http://3.38.103.31:8000/speechApi/";
         
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
