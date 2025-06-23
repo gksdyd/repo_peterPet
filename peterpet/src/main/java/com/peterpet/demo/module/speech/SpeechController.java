@@ -31,8 +31,15 @@ public class SpeechController extends BaseController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/SpeechPeterInsert")
-	public String speechPeterInsert(SpeechDto dto, HttpServletRequest request) throws Exception {		
-		String url = request.getScheme() + "://" + request.getServerName() + ":8000/speechApi/";
+	public String speechPeterInsert(SpeechDto dto, HttpServletRequest request) throws Exception {
+		String scheme = request.getScheme();
+		String url = null;
+		
+		if (scheme.equals("https")) {
+			url = scheme + "://3.38.103.31:8000/speechApi/";
+		} else if (scheme.equals("http")) {
+			url = scheme + "://" + request.getServerName() + ":8000/speechApi/";
+		}
         
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
