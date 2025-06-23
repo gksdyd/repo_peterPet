@@ -15,6 +15,8 @@ import org.springframework.web.client.RestTemplate;
 
 import com.peterpet.demo.module.base.BaseController;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @Controller
 @RequestMapping(value = "/speech/peter")
 public class SpeechController extends BaseController {
@@ -29,8 +31,8 @@ public class SpeechController extends BaseController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/SpeechPeterInsert")
-	public String speechPeterInsert(SpeechDto dto) throws Exception {		
-		String url = "http://3.38.103.31:8000/speechApi/";
+	public String speechPeterInsert(SpeechDto dto, HttpServletRequest request) throws Exception {		
+		String url = request.getScheme() + "://" + request.getServerName() + ":8000/speechApi/";
         
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
