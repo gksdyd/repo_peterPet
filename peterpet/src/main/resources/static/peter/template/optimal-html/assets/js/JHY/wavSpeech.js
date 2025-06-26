@@ -121,7 +121,10 @@ function makeLink(blob, filename) {
     processData: false,
     contentType: false,
     success: function(response) {
-      $(".col").append("<p>" + response + "</p>");
+      console.log(response.length);
+      for (let i = 0; i < response.length; i++) {
+        $(".col").append("<p>화자 " + response[i][0] + ": " + response[i][1] + "</p>");
+      }
     },
     error: function(jqXHR){
       alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);

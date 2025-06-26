@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.peterpet.demo.module.base.BaseController;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,7 +32,7 @@ public class SpeechController extends BaseController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/SpeechPeterInsert")
-	public String speechPeterInsert(SpeechDto dto, HttpServletRequest request) throws Exception {
+	public String[][] speechPeterInsert(SpeechDto dto, HttpServletRequest request) throws Exception {
 		String scheme = request.getScheme();
 		String url = null;
 		
@@ -56,8 +57,11 @@ public class SpeechController extends BaseController {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
         
+        ObjectMapper mapper = new ObjectMapper();
+        String[][] arr = mapper.readValue(response.getBody(), String[][].class);
+        
         System.out.println("Response from FastAPI: " + response.getBody());
         
-		return response.getBody();
+		return arr;
 	}
 }
