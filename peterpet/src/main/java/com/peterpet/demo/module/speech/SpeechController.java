@@ -37,7 +37,7 @@ public class SpeechController extends BaseController {
 		String url = null;
 		
 		if (scheme.equals("https")) {
-			url = "http://3.38.103.31:8000/speechApi/";
+			url = "http://43.201.39.94:8000/speechApi/";
 		} else if (scheme.equals("http")) {
 			url = scheme + "://" + request.getServerName() + ":8000/speechApi/";
 		}
